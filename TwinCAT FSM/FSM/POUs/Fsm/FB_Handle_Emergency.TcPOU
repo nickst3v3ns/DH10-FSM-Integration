@@ -4,6 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Handle_Emergency
 VAR_INPUT
     execute: 				BOOL;
+	CriticalFailure:		BOOL;
+	BasicFailure:			BOOL;
 END_VAR
 VAR_OUTPUT
     busy: 					BOOL;
@@ -15,7 +17,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT execute THEN
+      <ST><![CDATA[//What is happening here?
+IF execute <> TRUE THEN
     state := 0;
     busy := FALSE;
     tonDelay(IN := FALSE);

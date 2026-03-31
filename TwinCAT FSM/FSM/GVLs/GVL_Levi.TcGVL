@@ -6,7 +6,7 @@ VAR_GLOBAL
 	levitation_active:		BOOL;
 	levitation_fault: 		BOOL;
 	//DC link voltages
-	drive_voltages: INT;
+	drive_voltages: REAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

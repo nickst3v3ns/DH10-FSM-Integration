@@ -8,10 +8,12 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CheckCritical := 
+      <ST><![CDATA[//CheckCritical
+
+CheckCritical := 
     NOT GVL_FSM.sdc_closed OR
     GVL_PT.ERROR_STATUS <> 0 OR
-    GVL_PT.MAX_TEMP > GVL_FSM.critical_temp OR
+    GVL_PT.MAX_TEMP > GVL_FSM.critical_temp_PT OR 
     GVL_Levi.levitation_fault OR
     GVL_Prop.propulsion_fault;]]></ST>
     </Implementation>

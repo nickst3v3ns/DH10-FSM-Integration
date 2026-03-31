@@ -3,11 +3,56 @@
   <GVL Name="GVL_PT" Id="{c13a7a8c-c8d8-41ce-a220-df2a506caa64}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	HVAL_STATUS:			USINT;
-	ERROR_STATUS: 			USINT;
-	MAX_TEMP: 				UINT;
-	emergency_shutdown: 	BOOL;
-	total_voltage: UINT;
-END_VAR]]></Declaration>
+	//PTC STATUS
+	HVAL_STATUS:			USINT; //Status for the High Voltage Active Light / Not sure if the PLC needs this
+	ERROR_STATUS: 			USINT; //Error status from the Powertrain Controller
+	PTC_STATE:				USINT;
+	IMD_WARNINGS:			USINT;
+	FAIL_REASON:			USINT;
+	
+	//HV STATUS
+	ISO_RES:				UINT; //Isolation resistance IMD
+	IVT_CURRENT:			DWORD; //Isabellehutte current
+	
+	//BMS_LOG_A : from the BMS
+	MAX_VOLTAGE:			UINT;
+	MIN_VOLTAGE:			UINT;
+	MAX_TEMP: 				UINT; //Maximum temperature measured by BMS  
+	MIN_TEMP:				UINT;
+	
+	//BMS_LOG_B : from the BMS but total?
+	TOTAL_VOLTAGE:			UINT;
+	PACK_CURRENT:			UINT;
+	DC_LINK_VOLTAGE:		DWORD;
+	
+END_VAR
+
+
+//typedef enum {
+//    ERROR_NONE              = 0x00,
+//    ERROR_SDC_TRIGGERED     = 0x01,  // Bit 0
+//    ERROR_IMD_TRIGGERED     = 0x02,  // Bit 1
+//    ERROR_CONTACT_MISMATCH  = 0x04,  // Bit 2
+//    ERROR_PRECHARGE_FAILURE = 0x08,  // Bit 3
+//    ERROR_FDCAN_FAILED      = 0x10,  // Bit 4
+//    ERROR_OVERVOLTAGE       = 0x20,  // Bit 5
+//    ERROR_BMS_FAIL            = 0x40   // Bit 6
+//}
+//from BMS code for ERROR_STATUS
+
+//FAIL_REASON
+//Nummer	Reden
+//0	x
+//1	Correct number of slaves not found
+//2	No current sense slave found
+//3	Mux test failed
+//4	Cell ADC test failed
+//5	AUX ADC test failed
+//6	STAT ADC test failed
+//7	N consecutive PEC failures
+//8	N consecutive timeouts
+//9	Open wire
+//10	Open wire read fail
+]]></Declaration>
   </GVL>
 </TcPlcObject>

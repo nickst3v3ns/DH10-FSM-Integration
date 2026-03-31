@@ -4,16 +4,11 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	main_fsm	: FB_Main_FSM;
-	main_tests	: FB_Test_MainFSM;
 	
-	tests_on	: BOOL	:= TRUE;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF tests_on THEN
-	TcUnit.RUN();
-ELSE
-	main_fsm();
-END_IF]]></ST>
+      <ST><![CDATA[
+//main_fsm(currentCmd := //filled in by )]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

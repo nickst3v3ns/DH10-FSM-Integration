@@ -3,20 +3,23 @@
   <GVL Name="GVL_FSM" Id="{e9f32245-b0fa-4870-9fb8-012882e1d02d}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	enable_heartbeat:		BOOL;
-	heartbeat_OK: 			BOOL;
-	precharge:				BOOL;
-	engage_brakes:			BOOL;
-	brakes_engaged:			BOOL;
+	enable_heartbeat:		BOOL; //for groundstation output
+	heartbeat_OK: 			BOOL; //for groundstation evaluation
+	precharge:				BOOL; 
+	engage_brakes:			BOOL; //Done through twinsafe i guess? OUTPUT
+	brakes_engaged:			BOOL; //Done through twinsafe I guess? INPUT
 	enable_levi_checks: 	BOOL;
 	enable_prop_checks: 	BOOL;
 	enable_temp_checks: 	BOOL;
-	safety_inputs_valid: 	BOOL;
-	can_bus_ok: 			BOOL;
-	ethercat_ready: 		BOOL;
-	sdc_closed: 			BOOL;
-	critical_temp: 			INT;
-	open_SDC: 				BOOL	:= TRUE;
+	safety_inputs_valid: 	BOOL; //done through twinsafe PLC-TWINSAFE
+	can_bus_ok: 			BOOL; 
+	nMasterDevState AT %I* : UINT; 
+	ethercat_ready:  		BOOL;
+	sdc_closed: 			BOOL; //done through twinsafe INPUT
+	critical_temp_prop: 			REAL; //maximum allowable temperature for propulsion
+	critical_temp_levi: 			REAL; //maximum allowable temperature for levitation
+	critical_temp_PT:				REAL; //maximum allowable temperature for powertrain
+	open_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT
 	enable_telemetry: BOOL;
 	enable_PT_checks: BOOL;
 	trigger_EL: BOOL;

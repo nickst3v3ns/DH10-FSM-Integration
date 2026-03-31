@@ -6,14 +6,14 @@
 {attribute 'to_string'}
 TYPE E_Command :
 (
-	CMD_NONE := 0,
-    CMD_TO_IDLE,
-    CMD_TO_HV_ACTIVE,
-    CMD_TO_DEMO,
-    CMD_TO_LEVITATION,
-    CMD_TO_MOVEMENT,
-    CMD_TO_MAINTENANCE,
-    CMD_EMERGENCY
+	CMD_NONE := 0, //might not want to give this 0 if none means the same as emergency in a different context
+    CMD_TO_IDLE := 10,
+    CMD_TO_HV_ACTIVE := 20,
+    CMD_TO_DEMO := 30,
+    CMD_TO_LEVITATION := 40,
+    CMD_TO_MOVEMENT := 50,
+    CMD_TO_MAINTENANCE := 60,
+    CMD_EMERGENCY := 70
 );
 END_TYPE
 ]]></Declaration>

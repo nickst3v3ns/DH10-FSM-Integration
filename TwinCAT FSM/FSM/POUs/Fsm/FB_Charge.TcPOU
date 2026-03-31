@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[//Send command to PT to trigger precharge ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

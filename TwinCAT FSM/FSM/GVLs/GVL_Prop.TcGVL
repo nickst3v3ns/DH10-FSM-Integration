@@ -3,14 +3,14 @@
   <GVL Name="GVL_Prop" Id="{50abe306-50cd-40fe-9fcd-ded7060b0d4e}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	speed:					INT;
-	target_speed:			INT;
+	speed:					REAL;
+	target_speed:			REAL;
 	accelerating:			BOOL;
 	braking:				BOOL;
 	propulsion_fault: 		BOOL;
-	propulsion_enable: 		BOOL;
+	propulsion_enable: 		BOOL; //Ours to control and allows for a complete shutdown or activation of the Propulsion system
 	propulsion_active: 		BOOL;
-	drive_voltages: INT;
+	drive_voltages: 		REAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

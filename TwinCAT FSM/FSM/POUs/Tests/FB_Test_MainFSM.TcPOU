@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Test_MainFSM" Id="{d73df427-cc73-4c5c-8bd4-affee78edae7}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_Test_MainFSM EXTENDS TcUnit.FB_TestSuite
-VAR
-	main_fsm : FB_Main_FSM;
-END_VAR
-]]></Declaration>
+    <Declaration><![CDATA[]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Boot_To_Sync();
-Emergency_Command();]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Boot_To_Sync" Id="{90e1571a-c972-4c67-8c2c-de9b5672896b}">
       <Declaration><![CDATA[METHOD Boot_To_Sync : REFERENCE TO FB_Test
