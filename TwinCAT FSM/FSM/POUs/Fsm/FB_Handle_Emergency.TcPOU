@@ -27,17 +27,17 @@ END_IF
 
 busy := TRUE;
 CASE state OF
-    0:  GVL_FSM.trigger_EL := TRUE;
-		GVL_FSM.open_SDC := TRUE;
-        GVL_FSM.engage_brakes := TRUE;
+    0:  GVL_FSM.btrigger_EL := TRUE;
+		GVL_FSM.bopen_SDC := TRUE;
+        GVL_FSM.bengage_brakes := TRUE;
         GVL_Prop.propulsion_enable := FALSE;
         GVL_Levi.levitation_active := FALSE;
         GVL_PT.emergency_shutdown := TRUE;
         state := 1;
         
     1:  allActionsComplete := 
-            NOT GVL_FSM.sdc_closed AND
-            GVL_FSM.brakes_engaged AND
+            NOT GVL_FSM.bsdc_closed AND
+            GVL_FSM.bbrakes_engaged AND
             NOT GVL_Prop.propulsion_active AND
             NOT GVL_Levi.levitation_active;
         
@@ -47,7 +47,7 @@ CASE state OF
         
     2:	tonDelay(IN := TRUE, PT := T#200MS);
         IF tonDelay.Q THEN
-			GVL_FSM.trigger_EL := FALSE;
+			GVL_FSM.btrigger_EL := FALSE;
             busy := FALSE;
 			execute := FALSE;
         END_IF

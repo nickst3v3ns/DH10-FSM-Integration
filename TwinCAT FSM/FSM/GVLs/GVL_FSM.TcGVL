@@ -3,26 +3,39 @@
   <GVL Name="GVL_FSM" Id="{e9f32245-b0fa-4870-9fb8-012882e1d02d}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	enable_heartbeat:		BOOL; //for groundstation output
-	heartbeat_OK: 			BOOL; //for groundstation evaluation
-	precharge:				BOOL; 
-	engage_brakes:			BOOL; //Done through twinsafe i guess? OUTPUT
-	brakes_engaged:			BOOL; //Done through twinsafe I guess? INPUT
-	enable_levi_checks: 	BOOL;
-	enable_prop_checks: 	BOOL;
-	enable_temp_checks: 	BOOL;
-	safety_inputs_valid: 	BOOL; //done through twinsafe PLC-TWINSAFE
-	can_bus_ok: 			BOOL; 
-	nMasterDevState AT %I* : UINT; 
-	ethercat_ready:  		BOOL;
-	sdc_closed: 			BOOL; //done through twinsafe INPUT
-	critical_temp_prop: 			REAL; //maximum allowable temperature for propulsion
-	critical_temp_levi: 			REAL; //maximum allowable temperature for levitation
-	critical_temp_PT:				REAL; //maximum allowable temperature for powertrain
-	open_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT
-	enable_telemetry: BOOL;
-	enable_PT_checks: BOOL;
-	trigger_EL: BOOL;
+//Heartbeat
+	benable_heartbeat:		BOOL; //for groundstation output
+	bheartbeat_OK: 			BOOL; //for groundstation evaluation
+	
+	bprecharge:				BOOL;
+ 
+	bengage_brakes:			BOOL; //Done through twinsafe i guess? OUTPUT
+	bbrakes_engaged:			BOOL; //Done through twinsafe I guess? INPUT
+	bsafety_inputs_valid: 	BOOL; //done through twinsafe PLC-TWINSAFE
+	bsdc_closed: 			BOOL; //done through twinsafe INPUT	
+	bopen_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT
+	btrigger_EL: 			BOOL;
+	
+	
+	
+	benable_temp_checks: 	BOOL;
+	benable_telemetry: 		BOOL;
+	benable_PT_checks: 		BOOL;
+
+	bcan_bus_ok: 			BOOL; 
+	nMasterDevState AT %I*: UINT; 
+	bethercat_ready:  		BOOL;
+	
+	
+	
+	
+	rcritical_temp_prop: 	REAL := 100.0; //maximum allowable temperature for propulsion. STILL A GUESS
+	rcritical_temp_HEMS: 	REAL := 40.0; //maximum allowable temperature for levitation HEMS
+	rcritical_temp_EMS:		REAL := 60.0; //maximum allowable temperature for levitation EMS
+	rcritical_temp_watercooling:	REAL;
+	rcritical_temp_PT:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
+	
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

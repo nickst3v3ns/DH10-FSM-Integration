@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_THERMAL" Id="{dfd323d1-9596-473d-978f-734bbaaa8d3e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//EMS
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -12,9 +12,9 @@ END_VAR
 
 
 IF GVL_FSM.nMasterDevState = 0 THEN
-	GVL_FSM.ethercat_ready := TRUE;
+	GVL_FSM.bethercat_ready := TRUE;
 ELSE 
-	GVL_FSM.ethercat_ready := FALSE;
+	GVL_FSM.bethercat_ready := FALSE;
 	
 	
 END_IF
@@ -22,9 +22,9 @@ END_IF
 
 
 BasicChecks := 
-    GVL_FSM.ethercat_ready AND
-    GVL_FSM.safety_inputs_valid AND
-    GVL_FSM.can_bus_ok.]]></ST>
+    GVL_FSM.bethercat_ready AND
+    GVL_FSM.bsafety_inputs_valid AND
+    GVL_FSM.bcan_bus_ok.]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

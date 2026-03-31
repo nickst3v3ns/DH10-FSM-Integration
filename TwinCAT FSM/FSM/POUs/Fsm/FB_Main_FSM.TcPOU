@@ -14,12 +14,13 @@ END_VAR
 VAR
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
 	
-	criticalFault:				BOOL; //Set to True once Emergency State, how does this become False again?
+	criticalFault:				BOOL; 
 	charging_in_progress:		BOOL; 
 	discharging_in_progress:	BOOL;
 	fbTimerPrechargeCommand: 	TON;
 	
 	fb_handle_emergency:		FB_Handle_Emergency;
+	
 	fb_discharge:				FB_Discharge;
 	fb_charge:					FB_Charge;
 END_VAR
@@ -28,6 +29,7 @@ END_VAR
       <ST><![CDATA[//Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
 IF currentCmd = E_Command.CMD_EMERGENCY OR ((CheckCritical() OR BasicChecks() <> TRUE) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0 THEN
+	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
 	fb_handle_emergency(execute := TRUE, CriticalFailure := CheckCritical(), BasicFailure := BasicChecks());
@@ -39,21 +41,23 @@ IF currentCmd = E_Command.CMD_EMERGENCY OR ((CheckCritical() OR BasicChecks() <>
 //		currentState := E_PodState.STATE_LEVITATION;
 		
 //In what situation does this happen? Only when brakes are activated manually? we are not allowed to touch the pod when HV ON. Seems like it would be caught by the first eval too?
-ELSIF currentState = E_PodState.STATE_DEMO AND GVL_FSM.brakes_engaged THEN
-    currentState := E_PodState.STATE_EMERGENCY;
+//ELSIF currentState = E_PodState.STATE_DEMO AND GVL_FSM.brakes_engaged THEN
+//    currentState := E_PodState.STATE_EMERGENCY;
 	//why? ask this to teodor? PTC crash?
+	
 END_IF
 
 
 
 
 CASE currentState OF
+	
 //EMERGENCY
 	E_PodState.STATE_EMERGENCY:
 		IF criticalFault THEN
 			fb_handle_emergency(busy => criticalFault);
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
-			GVL_FSM.engage_brakes := FALSE;
+			GVL_FSM.bengage_brakes := FALSE;
 			currentState := E_PodState.STATE_MAINTENANCE;
 		END_IF
 		
@@ -65,18 +69,16 @@ CASE currentState OF
 		//Have some resettting functions here for some autonomous troobleshooting
 //IDLE	
 	E_PodState.STATE_SYNC:
-		GVL_FSM.enable_heartbeat := TRUE; //Enables the connection to the grounstation
-		IF GVL_FSM.heartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND BasicChecks() THEN
+		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
+		IF GVL_FSM.bheartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND BasicChecks() THEN
 			currentState := E_PodState.STATE_IDLE;
 		END_IF
 		
 //IDLE
 	E_PodState.STATE_IDLE:
-	
-		// maybe basic checks again WC state = 8
-		//GVL_FSM.enable_PT_checks := TRUE; //I believe if canbus is okay it should be good to go
-		GVL_FSM.enable_temp_checks := TRUE; //Except checking for errors not much to do
-		GVL_FSM.enable_telemetry := TRUE;//
+		
+		GVL_FSM.benable_temp_checks := TRUE; //Except checking for errors not much to do
+		GVL_FSM.benable_telemetry := TRUE;//
 		
 		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND BasicChecks() THEN
 			
@@ -92,20 +94,20 @@ CASE currentState OF
 			END_IF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
-			GVL_FSM.engage_brakes := FALSE;
+			GVL_FSM.bengage_brakes := FALSE;
 			currentState := E_PodState.STATE_MAINTENANCE;
 		END_IF
 		
 		
 	E_PodState.STATE_HV_ACTIVE:
-		GVL_FSM.enable_levi_checks := TRUE; //specificallly, what does this mean?
-		GVL_FSM.enable_prop_checks := TRUE; //specifically, what does this mean?
+		GVL_Levi.enable_levi_checks := TRUE; //specificallly, what does this mean?
+		GVL_Prop.enable_prop_checks := TRUE; //specifically, what does this mean?
 				
 		IF currentCmd = E_Command.CMD_TO_DEMO AND CheckCritical() <> TRUE THEN
-			GVL_FSM.engage_brakes := FALSE;
+			GVL_FSM.bengage_brakes := FALSE;
 			currentState := E_PodState.STATE_DEMO;
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
-			GVL_FSM.open_SDC := TRUE;
+			GVL_FSM.bopen_SDC := TRUE;
 			FB_Discharge();
 			IF GVL_PT.HVAL_STATUS = 0 AND GVL_Levi.drive_voltages = 0 AND GVL_Prop.drive_voltages = 0 THEN
 				currentState := E_PodState.STATE_IDLE;
@@ -113,14 +115,14 @@ CASE currentState OF
 		END_IF
 		
 	E_PodState.STATE_DEMO:
-		IF GVL_FSM.brakes_engaged THEN
-			GVL_FSM.engage_brakes := FALSE;
+		IF GVL_FSM.bbrakes_engaged THEN
+			GVL_FSM.bengage_brakes := FALSE;
 		
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
-			GVL_FSM.engage_brakes := TRUE;
-			GVL_FSM.open_SDC := TRUE;
+			GVL_FSM.bengage_brakes := TRUE;
+			GVL_FSM.bopen_SDC := TRUE;
 			FB_Discharge();
-			IF GVL_FSM.brakes_engaged AND GVL_PT.PTC_STATE = 0 THEN
+			IF GVL_FSM.bbrakes_engaged AND GVL_PT.PTC_STATE = 0 THEN
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION THEN
@@ -142,8 +144,8 @@ CASE currentState OF
 		
 	E_PodState.STATE_MAINTENANCE:
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN
-			GVL_FSM.engage_brakes := TRUE;
-			IF GVL_FSM.brakes_engaged THEN
+			GVL_FSM.bengage_brakes := TRUE;
+			IF GVL_FSM.bbrakes_engaged THEN
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		END_IF
