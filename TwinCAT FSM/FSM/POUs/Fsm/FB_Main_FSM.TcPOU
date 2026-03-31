@@ -107,9 +107,11 @@ CASE currentState OF
 			GVL_FSM.bengage_brakes := FALSE;
 			currentState := E_PodState.STATE_DEMO;
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
+			
 			GVL_FSM.bopen_SDC := TRUE;
 			FB_Discharge();
-			IF GVL_PT.HVAL_STATUS = 0 AND GVL_Levi.drive_voltages = 0 AND GVL_Prop.drive_voltages = 0 THEN
+			
+			IF GVL_PT.HVAL_STATUS = 0 AND GVL_Levi.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		END_IF

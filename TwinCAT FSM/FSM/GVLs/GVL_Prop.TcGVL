@@ -21,6 +21,8 @@ VAR_GLOBAL
 	drive_voltages2 AT %I*:	REAL;
 	drive_voltages3 AT %I*:	REAL;
 	drive_voltages4 AT %I*:	REAL;
+	
+	DC_LINK_SAFE			:BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

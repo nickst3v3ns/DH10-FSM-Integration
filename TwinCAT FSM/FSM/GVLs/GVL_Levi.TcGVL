@@ -24,7 +24,7 @@ VAR_GLOBAL
 	drive_voltage_EMS3	AT %I*	:REAL;
 	drive_voltage_EMS4	AT %I*	:REAL;
 	
-	
+	DC_LINK_SAFE				:BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

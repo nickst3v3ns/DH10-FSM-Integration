@@ -24,7 +24,7 @@ END_IF
 BasicChecks := 
     GVL_FSM.bethercat_ready AND
     GVL_FSM.bsafety_inputs_valid AND
-    GVL_FSM.bcan_bus_ok.]]></ST>
+    GVL_FSM.bcan_bus_ok;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

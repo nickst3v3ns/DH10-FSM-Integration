@@ -25,6 +25,8 @@ VAR_GLOBAL
 	PACK_CURRENT:			UINT;
 	DC_LINK_VOLTAGE:		DWORD;
 	
+	emergency_shutdown:		BOOL; //might need to be reworked
+	
 END_VAR
 
 
