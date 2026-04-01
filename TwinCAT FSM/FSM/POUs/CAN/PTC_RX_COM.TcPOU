@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PTC_RX_COM" Id="{4d778e1c-c04b-4095-bcb6-a923efd7ffab}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PTC_RX_COM
+VAR
+	send_message : PTC_Send_Message;
+	receive_messages : PTC_Receive_Messages;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[receive_messages(CAN_OUTPUTS := PTC_CAN_GVL.CAN_OUTPUS, CAN_INPUTS := PTC_CAN_GVL.CAN_INPUTS);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

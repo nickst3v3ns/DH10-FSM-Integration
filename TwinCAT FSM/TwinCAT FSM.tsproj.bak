@@ -37,6 +37,101 @@
 				<Elements>6</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO" TcBaseType="true" HideType="true">EXTCANQUEUE</Name>
+			<BitSize>112</BitSize>
+			<SubItem>
+				<Name>length</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>cobId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>data</Name>
+				<Type GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO">CANMESSAGE</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Name>
+			<BitSize>3632</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfRxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxMessages</Name>
+				<Type GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO">EXTCANQUEUE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>32</Elements>
+				</ArrayInfo>
+				<BitSize>3584</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Name>
+			<BitSize>3632</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfTxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TxMessages</Name>
+				<Type GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO">EXTCANQUEUE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>32</Elements>
+				</ArrayInfo>
+				<BitSize>3584</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
 	</DataTypes>
 	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="192.168.1.11.1.1" Target64Bit="true" ShowHideConfigurations="#x2c7">
 		<System>
@@ -50,6 +145,18 @@
 				</Task>
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>HeartBeat</Name>
+				</Task>
+				<Task Id="5" Priority="2" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>Thermal_Task</Name>
+				</Task>
+				<Task Id="6" Priority="3" CycleTime="100000" AmsPort="353" AdtTasks="true">
+					<Name>Levi_Fast_Task_Vertical</Name>
+				</Task>
+				<Task Id="7" Priority="4" CycleTime="100000" AmsPort="354" AdtTasks="true">
+					<Name>Levi_Fast_Task_Horizontal</Name>
+				</Task>
+				<Task Id="8" Priority="5" CycleTime="100000" AmsPort="355" AdtTasks="true">
+					<Name>PTC_CAN_RX_Task</Name>
 				</Task>
 			</Tasks>
 		</System>
@@ -194,6 +301,84 @@
 					<Name>Image</Name>
 				</Image>
 				<EtherCAT/>
+			</Device>
+			<Device Id="2" DevType="87" AmsPort="28674" AmsNetId="145.94.254.134.3.1" RemoteName="Device 2 (EL6751)">
+				<Name>Device 2 (EL6751)</Name>
+				<AddressInfo>
+					<Ecat>
+						<EtherCATDeviceId>0</EtherCATDeviceId>
+					</Ecat>
+				</AddressInfo>
+				<Image Id="3" AddrType="4" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="5051">
+					<Name>Box 1 (CAN Interface)</Name>
+					<ImageId>3</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>RxQueue</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var BoxStateVariable="true">
+							<Name>NodeState</Name>
+							<Comment><![CDATA[Master- and Slave-Mode:
+   0 = No error
+
+Master-Mode:
+   1 = Node deactivated
+   2 = Node not found
+   4 = SDO syntax error at StartUp
+   5 = SDO data mismatch at StartUp
+   8 = Node StartUp in progress
+  11 = CAN-Controller is Bus-OFF
+  12 = Pre-Operational
+  13 = Server bus fault
+  14 = Guarding: toggle error
+  20 = TxPDO too short
+  22 = Expected TxPDO is missing
+  23 = Node is Operational but not all TxPDOs were received
+  31 = only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+  +64 = startup of slave is finished 
+
+Slave-Mode:
+ 128 = Node is Operational but not all RxPDOs were received
+ 129 = Node is Pre-Operational
+ 130 = Node is Stopped
+]]></Comment>
+							<Type>USINT</Type>
+							<BitOffs>3632</BitOffs>
+						</Var>
+						<Var BoxStateVariable="true">
+							<Name>DiagFlag</Name>
+							<Comment><![CDATA[0 = Diagnosis Data unchanged
+1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
+							<Type>BIT</Type>
+							<BitOffs>3681</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>TxQueue</Name>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
+					<CanOpen>
+						<CanQueue TxQueue="32" RxQueue="32" Flags="1">
+							<RxFilter EndCobId="536870911"/>
+						</CanQueue>
+					</CanOpen>
+				</Box>
+				<CanOpen>
+					<Fcxxxx>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915efe860301" FifoSize="5" CycleDivider="1"/>
+						<DevParameter InputShift="60"/>
+						<EquiParameter RelationShiftCycle="0"/>
+					</Fcxxxx>
+					<BusParameter NodeId="127" Baudrate="2" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt1="28" TimerTick="3" BusActiveDivider="119" TxBusyTime="1000" TimeIntegral="2000" WdTimeoutInCycleTime="50000"/>
+				</CanOpen>
 			</Device>
 		</Io>
 	</Project>

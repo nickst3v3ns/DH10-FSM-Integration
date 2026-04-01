@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PTC_RX_ID" Id="{c6d9583e-0611-40e2-b79b-aa5382b092a2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE PTC_RX_ID :
+(
+	Status_Log := 16#4E3,
+	HV_Log := 16#4E4,
+	BMS_Log_A := 16#4E5,
+	BMS_Log_B := 16#4E6
+)UINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

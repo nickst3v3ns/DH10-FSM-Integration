@@ -100,7 +100,7 @@ CASE currentState OF
 		
 		
 	E_PodState.STATE_HV_ACTIVE:
-		GVL_Levi.enable_levi_checks := TRUE; //specificallly, what does this mean?
+		LEVI_GVL.enable_levi_checks := TRUE; //specificallly, what does this mean?
 		GVL_Prop.enable_prop_checks := TRUE; //specifically, what does this mean?
 				
 		IF currentCmd = E_Command.CMD_TO_DEMO AND CheckCritical() <> TRUE THEN
@@ -111,7 +111,7 @@ CASE currentState OF
 			GVL_FSM.bopen_SDC := TRUE;
 			FB_Discharge();
 			
-			IF GVL_PT.HVAL_STATUS = 0 AND GVL_Levi.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
+			IF GVL_PT.HVAL_STATUS = 0 AND LEVI_GVL.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		END_IF
@@ -128,17 +128,17 @@ CASE currentState OF
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION THEN
-			GVL_Levi.levitation_active := TRUE;
+			LEVI_GVL.levitation_active := TRUE;
 			currentState := E_PodState.STATE_LEVITATION;
 		END_IF
 		
 	E_PodState.STATE_LEVITATION:
 		IF currentCmd = E_Command.CMD_TO_DEMO THEN
-			GVL_Levi.levitation_active := FALSE;
+			LEVI_GVL.levitation_active := FALSE;
 			currentState := E_PodState.STATE_DEMO;
 		ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
 			currentState := E_PodState.STATE_MOVEMENT;
-			Handle_movement();
+			Handle_movement();  //do we not want to wait specifically for State movement
 		END_IF
 		
 	E_PodState.STATE_MOVEMENT:

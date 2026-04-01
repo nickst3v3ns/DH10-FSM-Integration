@@ -14,7 +14,7 @@ CheckCritical :=
     NOT GVL_FSM.bsdc_closed OR
     GVL_PT.ERROR_STATUS <> 0 OR
     GVL_PT.MAX_TEMP > GVL_FSM.rcritical_temp_PT OR 
-    GVL_Levi.levitation_fault OR
+    LEVI_GVL.levitation_fault OR
     GVL_Prop.propulsion_fault;]]></ST>
     </Implementation>
   </POU>

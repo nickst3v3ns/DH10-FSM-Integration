@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_NTCLE" Id="{016e6a52-5f4e-431c-a5b7-741f994aab92}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NTCLE
+VAR_OUTPUT
+
+	temp_11			:REAL;
+	temp_12			:REAL;
+	temp_13			:REAL;
+	temp_14			:REAL;
+	
+	temp_21			:REAL;
+	temp_22			:REAL;
+	temp_23			:REAL;
+	temp_24			:REAL;
+
+	temp_31			:REAL;
+	temp_32			:REAL;
+	temp_33			:REAL;
+	temp_34			:REAL;
+	
+	temp_41			:REAL;
+	temp_42			:REAL;
+	temp_43			:REAL;
+	temp_44			:REAL;
+	
+	
+END_VAR
+
+VAR
+	temp_raw11 AT %I*	:INT;
+	temp_raw12 AT %I*	:INT;
+	temp_raw13 AT %I*	:INT;
+	temp_raw14 AT %I*	:INT;
+	
+	temp_raw21 AT %I*	:INT;
+	temp_raw22 AT %I*	:INT;
+	temp_raw23 AT %I*	:INT;
+	temp_raw24 AT %I*	:INT;
+	
+	temp_raw31 AT %I*	:INT;
+	temp_raw32 AT %I*	:INT;
+	temp_raw33 AT %I*	:INT;
+	temp_raw34 AT %I*	:INT;
+	
+	temp_raw41 AT %I*	:INT;
+	temp_raw42 AT %I*	:INT;
+	temp_raw43 AT %I*	:INT;
+	temp_raw44 AT %I*	:INT;
+	
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[temp_11 := INT_TO_REAL(temp_raw11)/100.0;
+temp_12 := INT_TO_REAL(temp_raw12)/100.0;
+temp_13 := INT_TO_REAL(temp_raw13)/100.0;
+temp_14 := INT_TO_REAL(temp_raw14)/100.0;
+
+
+temp_21 := INT_TO_REAL(temp_raw21)/100.0;
+temp_22 := INT_TO_REAL(temp_raw22)/100.0;
+temp_23 := INT_TO_REAL(temp_raw23)/100.0;
+temp_24 := INT_TO_REAL(temp_raw24)/100.0;
+
+
+temp_31 := INT_TO_REAL(temp_raw31)/100.0;
+temp_32 := INT_TO_REAL(temp_raw32)/100.0;
+temp_33 := INT_TO_REAL(temp_raw33)/100.0;
+temp_34 := INT_TO_REAL(temp_raw34)/100.0;
+
+
+temp_41 := INT_TO_REAL(temp_raw41)/100.0;
+temp_42 := INT_TO_REAL(temp_raw42)/100.0;
+temp_43 := INT_TO_REAL(temp_raw43)/100.0;
+temp_44 := INT_TO_REAL(temp_raw44)/100.0;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

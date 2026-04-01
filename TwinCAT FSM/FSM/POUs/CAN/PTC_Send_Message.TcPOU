@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PTC_Send_Message" Id="{e60d68ee-3e13-4f23-ba89-873dfa6ce69a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PTC_Send_Message
+VAR_INPUT
+	ID : PTC_TX_ID;
+	Command : PTC_TX_Command;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+VAR 
+	Message : EXTCANQUEUE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF CAN_OUTPUTS.TxCounter = CAN_INPUTS.TxCounter THEN
+	Message.cobId := ID;
+	Message.length := 1;
+	Message.data[0] := Command;
+	CAN_OUTPUTS.TxMessages[0] := Message;
+	CAN_OUTPUTS.NoOfTxMessages := 1;
+	CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

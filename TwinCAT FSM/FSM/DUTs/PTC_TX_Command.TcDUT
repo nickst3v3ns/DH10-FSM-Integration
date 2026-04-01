@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PTC_TX_Command" Id="{afee7328-5fc0-40c4-8b32-845ce91942a8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE PTC_TX_Command :
+(
+	HV_ON := 16#04,
+	HV_OFF := 16#0B,
+	PreCharge_Reset := 16#03,
+	Clear_PreCharge_Failure := 16#01
+)BYTE;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -9,10 +9,10 @@ VAR_GLOBAL
 	
 	bprecharge:				BOOL;
  
-	bengage_brakes:			BOOL; //Done through twinsafe i guess? OUTPUT
-	bbrakes_engaged:			BOOL; //Done through twinsafe I guess? INPUT
-	bsafety_inputs_valid: 	BOOL; //done through twinsafe PLC-TWINSAFE
-	bsdc_closed: 			BOOL; //done through twinsafe INPUT	
+	bengage_brakes AT %Q*:			BOOL; //Done through twinsafe i guess? OUTPUT
+	bbrakes_engaged AT %I*:			BOOL; //Done through twinsafe I guess? INPUT
+	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
+	bsdc_closed AT %I*: 			BOOL; //done through twinsafe INPUT	
 	bopen_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT
 	btrigger_EL: 			BOOL;
 	

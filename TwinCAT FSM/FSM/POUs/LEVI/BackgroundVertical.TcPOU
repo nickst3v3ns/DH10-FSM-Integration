@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="BackgroundVertical" Id="{cfcb48c3-b967-4455-868d-4d2addd09d66}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM BackgroundVertical
+VAR
+	(* background communication with the EL6021 terminal *)
+	fbEL6021Ctrl_1		: SerialLineControl;
+	fbEL6021Ctrl_2		: SerialLineControl;
+	fbEL6021Ctrl_3		: SerialLineControl;
+	fbEL6021Ctrl_4		: SerialLineControl;
+	fbEL6021Ctrl_5		: SerialLineControl;
+	fbEL6021Ctrl_6		: SerialLineControl;
+	
+	bEL6021CtrlError	: BOOL;
+	eEL6021CtrlErrorID	: ComError_t;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbEL6021Ctrl_1(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_1), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_1), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_1), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_1, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_1 );
+
+fbEL6021Ctrl_2(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_2), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_2), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_2), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_2, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_2 );
+	
+fbEL6021Ctrl_3(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_3), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_3), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_3), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_3, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_3 );
+
+fbEL6021Ctrl_4(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_4), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_4), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_4), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_4, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_4 );
+
+fbEL6021Ctrl_5(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_5), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_5), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_5), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_5, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_5 );
+	
+fbEL6021Ctrl_6(
+	Mode:= SERIALLINEMODE_EL6_22B, 
+	pComIn:= ADR(LEVI_GVL.stIn_EL6021_6), 
+	pComOut:= ADR(LEVI_GVL.stOut_EL6021_6), 
+	SizeComIn:= SIZEOF(LEVI_GVL.stIn_EL6021_6), 
+	ErrorID => eEL6021CtrlErrorID, 
+	TxBuffer:= LEVI_GVL.TxBufferEL_6, 
+	RxBuffer:= LEVI_GVL.RxBufferEL_6 );]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

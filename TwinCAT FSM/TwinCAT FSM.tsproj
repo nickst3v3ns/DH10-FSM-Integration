@@ -2,15 +2,6 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
-			<BitSize>96</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
 			<BitSize>256</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
@@ -37,6 +28,160 @@
 				<Elements>6</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
+			<BitSize>96</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6inData22B</Name>
+			<Comment><![CDATA[ This data type is corresponding to the
+   EL-6xxx data structure used in the
+   TwinCAT SystemManager
+   (EL-6xxx version using 22 data bytes) 
+]]></Comment>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Status</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO" TcBaseType="true" HideType="true">EXTCANQUEUE</Name>
+			<BitSize>112</BitSize>
+			<SubItem>
+				<Name>length</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>cobId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>data</Name>
+				<Type GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO">CANMESSAGE</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Name>
+			<BitSize>3632</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfRxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxMessages</Name>
+				<Type GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO">EXTCANQUEUE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>32</Elements>
+				</ArrayInfo>
+				<BitSize>3584</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
+			<Comment><![CDATA[ This data type is corresponding to the
+   EL-6xxx data structure used in the
+   TwinCAT SystemManager
+   (EL-6xxx version using 22 data bytes) 
+]]></Comment>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Ctrl</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Name>
+			<BitSize>3632</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfTxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TxMessages</Name>
+				<Type GUID="{097EA4EA-7ACD-4562-9D25-EE45E0B0C673}" Namespace="IO">EXTCANQUEUE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>32</Elements>
+				</ArrayInfo>
+				<BitSize>3584</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
 	</DataTypes>
 	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="192.168.1.11.1.1" Target64Bit="true" ShowHideConfigurations="#x2c7">
 		<System>
@@ -51,89 +196,100 @@
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>HeartBeat</Name>
 				</Task>
+				<Task Id="5" Priority="2" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>Thermal_Task</Name>
+				</Task>
+				<Task Id="6" Priority="3" CycleTime="100000" AmsPort="353" AdtTasks="true">
+					<Name>Levi_Fast_Task_Vertical</Name>
+				</Task>
+				<Task Id="7" Priority="4" CycleTime="100000" AmsPort="354" AdtTasks="true">
+					<Name>Levi_Fast_Task_Horizontal</Name>
+				</Task>
+				<Task Id="8" Priority="5" CycleTime="100000" AmsPort="355" AdtTasks="true">
+					<Name>PTC_CAN_RX_Task</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{D827E84A-5616-8C5B-3AFA-B118D19E7243}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{89C08B01-CE32-716B-A8B2-A4FA00E8D9B7}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL_FSM.bengage_brakes</Name>
+							<Comment><![CDATA[Done through twinsafe i guess? OUTPUT]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_1</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_2</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_3</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_4</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_5</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_6</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_7</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_8</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_9</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_10</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_11</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_12</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>PTC_CAN_GVL.CAN_OUTPUS</Name>
+							<Comment><![CDATA[CAN INTERFACE]]></Comment>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>GVL_FSM.nMasterDevState</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.TEST</Name>
-							<Type GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}">ARRAY [0..5] OF UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS1</Name>
-							<Comment><![CDATA[DC link voltages]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS2</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS3</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS4</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS5</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS6</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS7</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_HEMS8</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_EMS1</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_EMS2</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_EMS3</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Levi.drive_voltage_EMS4</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages1</Name>
-							<Comment><![CDATA[DC-Link voltages]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages2</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages3</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages4</Name>
-							<Type>REAL</Type>
-						</Var>
 						<Var>
 							<Name>GVL_THERMAL.T_EMS</Name>
 							<Type GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}">ARRAY [0..7] OF REAL</Type>
@@ -161,6 +317,159 @@
 						<Var>
 							<Name>GVL_THERMAL.T_FLOW</Name>
 							<Type GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}">ARRAY [0..5] OF REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages1</Name>
+							<Comment><![CDATA[DC-Link voltages]]></Comment>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages2</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages3</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages4</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bbrakes_engaged</Name>
+							<Comment><![CDATA[Done through twinsafe I guess? INPUT]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bsafety_inputs_valid</Name>
+							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bsdc_closed</Name>
+							<Comment><![CDATA[done through twinsafe INPUT	]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.TEST</Name>
+							<Type GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}">ARRAY [0..5] OF UINT</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS1</Name>
+							<Comment><![CDATA[DC link voltages]]></Comment>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS2</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS3</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS4</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS5</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS6</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS7</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_HEMS8</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_EMS1</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_EMS2</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_EMS3</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.drive_voltage_EMS4</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_1</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_2</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_3</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_4</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_5</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_6</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_7</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_8</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_9</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_10</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_11</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_12</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager ]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -194,6 +503,84 @@
 					<Name>Image</Name>
 				</Image>
 				<EtherCAT/>
+			</Device>
+			<Device Id="2" DevType="87" AmsPort="28674" AmsNetId="145.94.254.134.3.1" RemoteName="Device 2 (EL6751)">
+				<Name>Device 2 (EL6751)</Name>
+				<AddressInfo>
+					<Ecat>
+						<EtherCATDeviceId>0</EtherCATDeviceId>
+					</Ecat>
+				</AddressInfo>
+				<Image Id="3" AddrType="4" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="5051">
+					<Name>Box 1 (CAN Interface)</Name>
+					<ImageId>3</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>RxQueue</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var BoxStateVariable="true">
+							<Name>NodeState</Name>
+							<Comment><![CDATA[Master- and Slave-Mode:
+   0 = No error
+
+Master-Mode:
+   1 = Node deactivated
+   2 = Node not found
+   4 = SDO syntax error at StartUp
+   5 = SDO data mismatch at StartUp
+   8 = Node StartUp in progress
+  11 = CAN-Controller is Bus-OFF
+  12 = Pre-Operational
+  13 = Server bus fault
+  14 = Guarding: toggle error
+  20 = TxPDO too short
+  22 = Expected TxPDO is missing
+  23 = Node is Operational but not all TxPDOs were received
+  31 = only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+  +64 = startup of slave is finished 
+
+Slave-Mode:
+ 128 = Node is Operational but not all RxPDOs were received
+ 129 = Node is Pre-Operational
+ 130 = Node is Stopped
+]]></Comment>
+							<Type>USINT</Type>
+							<BitOffs>3632</BitOffs>
+						</Var>
+						<Var BoxStateVariable="true">
+							<Name>DiagFlag</Name>
+							<Comment><![CDATA[0 = Diagnosis Data unchanged
+1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
+							<Type>BIT</Type>
+							<BitOffs>3681</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>TxQueue</Name>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
+					<CanOpen>
+						<CanQueue TxQueue="32" RxQueue="32" Flags="1">
+							<RxFilter EndCobId="536870911"/>
+						</CanQueue>
+					</CanOpen>
+				</Box>
+				<CanOpen>
+					<Fcxxxx>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915efe860301" FifoSize="5" CycleDivider="1"/>
+						<DevParameter InputShift="60"/>
+						<EquiParameter RelationShiftCycle="0"/>
+					</Fcxxxx>
+					<BusParameter NodeId="127" Baudrate="2" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt1="28" TimerTick="3" BusActiveDivider="119" TxBusyTime="1000" TimeIntegral="2000" WdTimeoutInCycleTime="50000"/>
+				</CanOpen>
 			</Device>
 		</Io>
 	</Project>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PTC_Receive_Messages" Id="{c95af876-a3a3-404f-a633-402a564767b1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PTC_Receive_Messages
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS : CANRXQUEUESTRUCT_E_32;
+END_VAR
+VAR
+	i : UINT;
+	MessagesReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	Data : ARRAY[0..7] OF USINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF CAN_OUTPUTS.RxCounter <> CAN_INPUTS.RxCounter THEN
+	FOR i := 0 TO (CAN_INPUTS.NoOfRxMessages - 1) DO
+		MessagesReceived[i] := CAN_INPUTS.RxMessages[i];
+	END_FOR
+	CAN_OUTPUTS.RxCounter := CAN_INPUTS.RxCounter;
+	Interpret_Messages();
+END_IF]]></ST>
+    </Implementation>
+    <Action Name="Interpret_Messages" Id="{45a06cf5-1016-4451-a7f6-bc81fa828447}">
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO (CAN_INPUTS.NoOfRxMessages - 1) DO
+	Data := MessagesReceived[i].data;
+	CASE MessagesReceived[i].cobId OF
+		PTC_RX_ID.Status_Log:
+			PTC_CAN_GVL.PTC_STATE := Data[0];
+			PTC_CAN_GVL.HVAL_STATUS := Data[1];
+			PTC_CAN_GVL.IMD_WARNINGS := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
+			PTC_CAN_GVL.ERROR_STATUS := Data[4];
+			PTC_CAN_GVL.FAIL_REASON := Data[6];
+		PTC_RX_ID.HV_Log:
+			PTC_CAN_GVL.ISO_RES := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
+			PTC_CAN_GVL.IVT_CURRENT := SHL(TO_DWORD(Data[2]), 24) OR 
+							SHL(TO_DWORD(Data[3]), 16) OR 
+							SHL(TO_DWORD(Data[4]), 8) OR 
+							TO_DWORD(Data[5]);
+		PTC_RX_ID.BMS_Log_A:
+			PTC_CAN_GVL.MAX_VOLTAGE := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
+			PTC_CAN_GVL.MIN_VOLTAGE := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
+			PTC_CAN_GVL.MAX_TEMP := SHL(TO_UINT(Data[4]), 8) OR TO_UINT(Data[5]);
+			PTC_CAN_GVL.MIN_TEMP := SHL(TO_UINT(Data[6]), 8) OR TO_UINT(Data[7]);
+		PTC_RX_ID.BMS_Log_B:
+			PTC_CAN_GVL.TOTAL_VOLTAGE := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
+			PTC_CAN_GVL.PACK_CURRENT := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
+			PTC_CAN_GVL.DC_LINK_VOLTAGE := SHL(TO_DWORD(Data[4]), 24) OR 
+							SHL(TO_DWORD(Data[5]), 16) OR 
+							SHL(TO_DWORD(Data[6]), 8) OR 
+							TO_DWORD(Data[7]);
+	END_CASE
+END_FOR]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

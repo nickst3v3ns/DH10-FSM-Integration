@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="LEVI_GVL" Id="{d4dca03b-650a-425c-b19f-85a72034f677}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//First Levi Checks
+	enable_levi_checks: 	BOOL;
+	
+	levitation_active:		BOOL;
+	levitation_fault: 		BOOL; //fatal levitation error
+	
+	//DC link voltages
+	drive_voltage_HEMS1	AT %I*	:REAL;
+	drive_voltage_HEMS2	AT %I*	:REAL;
+	drive_voltage_HEMS3	AT %I*	:REAL;
+	drive_voltage_HEMS4	AT %I*	:REAL;
+	drive_voltage_HEMS5	AT %I*	:REAL;
+	drive_voltage_HEMS6	AT %I*	:REAL;
+	drive_voltage_HEMS7	AT %I*	:REAL;
+	drive_voltage_HEMS8	AT %I*	:REAL;
+	
+	drive_voltage_EMS1	AT %I*	:REAL;
+	drive_voltage_EMS2	AT %I*	:REAL;
+	drive_voltage_EMS3	AT %I*	:REAL;
+	drive_voltage_EMS4	AT %I*	:REAL;
+	
+	DC_LINK_SAFE				:BOOL;
+	
+	//FOR laser Sensors
+	RxBufferEL				: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL				: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_1			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_1			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_2			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_2			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_3			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_3			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_4			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_4			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_5			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_5			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_6			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_6			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	
+	//Lateral
+	RxBufferEL_7			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_7			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_8			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_8			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_9			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_9			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_10			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_10			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_11			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_11			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_12			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_12			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	
+	(* 	I/O variables for a EL6021 terminal*)
+	stIn_EL6021_1 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_1 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_2 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_2 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_3 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_3 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_4 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_4 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_5 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_5 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_6 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_6 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	
+	//Lateral
+	stIn_EL6021_7 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_7 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_8 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_8 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_9 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_9 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_10 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_10 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_11 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_11 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_12 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
+	stOut_EL6021_12 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

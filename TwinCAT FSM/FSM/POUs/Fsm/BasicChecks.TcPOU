@@ -15,9 +15,9 @@ IF GVL_FSM.nMasterDevState = 0 THEN
 	GVL_FSM.bethercat_ready := TRUE;
 ELSE 
 	GVL_FSM.bethercat_ready := FALSE;
-	
-	
 END_IF
+
+
 
 
 

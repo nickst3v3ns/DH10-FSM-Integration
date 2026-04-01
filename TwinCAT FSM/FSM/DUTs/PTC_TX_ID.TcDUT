@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="PTC_TX_ID" Id="{4d7c4aac-d1df-4c3f-9743-e2e23c7beca3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE PTC_TX_ID :
+(
+	MAIN_FSM := 16#190,
+	Reset := 16#1AB
+)UINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

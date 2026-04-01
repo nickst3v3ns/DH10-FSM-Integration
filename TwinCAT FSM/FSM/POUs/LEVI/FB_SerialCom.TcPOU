@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SerialCom" Id="{11b4fdc9-c4cc-4d79-b9a5-8ab9e7b63df4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SerialCom
+VAR_IN_OUT
+	TxBuffer	: ComBuffer;
+	RxBuffer	: ComBuffer;
+END_VAR
+VAR
+	Timer		: TON := (PT:=T#0.0015S);
+	fbSend		: SendData;
+	bSendBusy	: BOOL;
+	eSendErrorID: ComError_t;
+
+	fbReceive		: ReceiveData;
+	sReceivedData	: ARRAY[1..4] OF BYTE;
+	sLastScaledResult: REAL := 25.0;
+	bDataReceived	: BOOL;
+	bReceiveBusy	: BOOL;
+	bReceiveError	: BOOL;
+	eReceiveErrorID	: ComError_t;
+	bReceiveTimeout	: BOOL;
+	nReceiveCounter	: UDINT;
+	
+	//new
+	nLastReceiveCounter : UDINT;
+	fbPPS_Timer : TON;
+	bDATAVALID : BOOL;
+	
+	TxData : ARRAY[1..2] OF BYTE;
+	
+	fClearBuffer : ClearComBuffer;
+	
+	i : UINT;
+	strHex_Raw : ARRAY[1..4] OF STRING;
+	strResult_HexR : STRING;
+	strResult_HexL : STRING;
+	strResult_Hex : STRING;
+	strResult_Hex16 : STRING;
+	iResult :DINT;
+	
+END_VAR
+
+VAR_OUTPUT
+	fResult_scaled : REAL;
+	nPacketsPerSecond : UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Call the send block every second to repeat the transmission.
+// Also call the block as long as it is busy to finish a transmission.
+fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
+IF fbPPS_Timer.Q THEN
+    nPacketsPerSecond   := nReceiveCounter - nLastReceiveCounter;
+    nLastReceiveCounter := nReceiveCounter;
+END_IF
+
+Timer(IN:=TRUE);
+IF Timer.Q OR fbSend.Busy THEN
+	Timer(IN:=FALSE); (* reset timer *)
+	TxData[1] := 16#01;
+	TxData[2] := 16#86;
+	//TxBuffer.Buffer[0] := 16#01;
+	//TxBuffer.Buffer[1] := 16#87;
+	fbSend(	pSendData:= ADR (TxData),
+			length := 2,
+			TXbuffer:= TxBuffer,
+			Busy=> bSendBusy,
+			Error=> );
+	//fClearBuffer(Buffer := TxBuffer);
+	IF fbSend.Error <> COMERROR_NOERROR THEN
+		eSendErrorID := fbSend.Error;
+	END_IF
+END_IF
+
+
+fbReceive(
+	Timeout:= T#0.0015S,
+	pReceiveData:= ADR(sReceivedData),
+	SizeReceiveData := SIZEOF(sReceivedData),
+	RXbuffer:= RxBuffer,
+	DataReceived => bDataReceived,
+	Busy=> bReceiveBusy,
+	Error=> ,
+	RxTimeout=> bReceiveTimeout );
+IF fbReceive.Error <> COMERROR_NOERROR THEN
+	eReceiveErrorID := fbReceive.Error;
+	//fClearBuffer(Buffer := RxBuffer);
+END_IF
+
+IF bDataReceived THEN
+	nReceiveCounter := nReceiveCounter + 1;
+		
+	iResult := SHL(BYTE_TO_DINT(sReceivedData[4] AND 16#0F), 12) OR
+                   SHL(BYTE_TO_DINT(sReceivedData[3] AND 16#0F), 8)  OR
+                   SHL(BYTE_TO_DINT(sReceivedData[2] AND 16#0F), 4)  OR
+                   (BYTE_TO_DINT(sReceivedData[1] AND 16#0F));
+                         
+        (* C. SCALING [cite: 973] *)
+        (* Formula: X = D * Range / 16384 *)
+        (* Assuming 25mm range + 25mm offset based on your previous code *)
+		fResult_scaled := (DINT_TO_REAL(iResult) * 25 /16384.0) + 25.0;
+		sLastScaledResult := fResult_scaled;
+	//fClearBuffer(Buffer := RxBuffer);
+END_IF
+
+
+(*
+FOR i := 1 TO 4 DO
+	strHex_Raw[i] := right(STR := BYTE_TO_HEXSTR(IN := sReceivedData[i], iPrecision := 2, bLoCase := FALSE), 1);
+END_FOR
+
+strResult_HexL := CONCAT(strHex_Raw[4], strHex_Raw[3]);
+strResult_HexR := CONCAT(strHex_Raw[2], strHex_Raw[1]);
+strResult_Hex := CONCAT(strResult_HexL, strResult_HexR);
+strResult_Hex16 := CONCAT('16#', strResult_Hex);
+iResult := STRING_TO_DINT(strResult_Hex16);
+
+ iResult := SHL(BYTE_TO_DINT(sReceivedData[4] AND 16#0F), 12) OR
+                      SHL(BYTE_TO_DINT(sReceivedData[3] AND 16#0F), 8)  OR
+                      SHL(BYTE_TO_DINT(sReceivedData[2] AND 16#0F), 4)  OR
+                         (BYTE_TO_DINT(sReceivedData[1] AND 16#0F));
+                         
+        (* C. SCALING [cite: 973] *)
+        (* Formula: X = D * Range / 16384 *)
+        (* Assuming 25mm range + 25mm offset based on your previous code *)
+fResult_scaled := (DINT_TO_REAL(iResult) * 25 /16384.0) + 25.0;
+*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
