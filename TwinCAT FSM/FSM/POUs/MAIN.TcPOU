@@ -7,8 +7,7 @@ VAR
 	
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-//main_fsm(currentCmd := //filled in by )]]></ST>
+      <ST><![CDATA[main_fsm();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

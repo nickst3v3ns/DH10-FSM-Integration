@@ -4,8 +4,6 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Handle_Emergency
 VAR_INPUT
     execute: 				BOOL;
-	CriticalFailure:		BOOL;
-	BasicFailure:			BOOL;
 END_VAR
 VAR_OUTPUT
     busy: 					BOOL;

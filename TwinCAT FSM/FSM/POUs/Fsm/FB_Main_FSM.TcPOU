@@ -14,9 +14,14 @@ END_VAR
 VAR
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
 	
+	
+	
 	criticalFault:				BOOL; 
+	basicOK:					BOOL;
+	
 	charging_in_progress:		BOOL; 
 	discharging_in_progress:	BOOL;
+	
 	fbTimerPrechargeCommand: 	TON;
 	
 	fb_handle_emergency:		FB_Handle_Emergency;
@@ -32,7 +37,7 @@ IF currentCmd = E_Command.CMD_EMERGENCY OR ((CheckCritical() OR BasicChecks() <>
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
-	fb_handle_emergency(execute := TRUE, CriticalFailure := CheckCritical(), BasicFailure := BasicChecks());
+	fb_handle_emergency(execute := TRUE);
 
 	
 //This would lock out propulsion on a standstill moment -> MOV to LEV only via GS command? COmmented it out for now!
