@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_NTCLE_MOTOR" Id="{016e6a52-5f4e-431c-a5b7-741f994aab92}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NTCLE_MOTOR
+VAR_OUTPUT
+	i:					USINT;
+	TEMP: ARRAY[0..3] OF REAL;
+	bcritical:			BOOL := FALSE;
+	icriticalindex:		SINT := -1;
+	
+END_VAR
+
+VAR
+	
+	temp_raw11 AT %I*	:INT;
+	temp_raw12 AT %I*	:INT;
+	temp_raw13 AT %I*	:INT;
+	temp_raw14 AT %I*	:INT;
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bcritical := FALSE;
+icriticalindex := -1;
+
+TEMP[0] := INT_TO_REAL(temp_raw11)/100.0;
+TEMP[1] := INT_TO_REAL(temp_raw12)/100.0;
+TEMP[2] := INT_TO_REAL(temp_raw13)/100.0;
+TEMP[3] := INT_TO_REAL(temp_raw14)/100.0;
+
+FOR i := 0 TO 3 DO
+	IF TEMP[i] > GVL_FSM.rcritical_temp_prop THEN
+		bcritical := TRUE;
+		GVL_THERMAL.bMOTOROVERHEAT := TRUE;
+		icriticalindex := i;
+	END_IF
+END_FOR
+
+
+
+
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

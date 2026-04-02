@@ -37,7 +37,7 @@ CASE state OF
             NOT GVL_FSM.bsdc_closed AND
             GVL_FSM.bbrakes_engaged AND
             NOT GVL_Prop.propulsion_active AND
-            NOT LEVI_GVL.levitation_active;
+            NOT LEVI_GVL.levitation_active AND BasicChecks();
         
         IF allActionsComplete THEN
             state := 2;

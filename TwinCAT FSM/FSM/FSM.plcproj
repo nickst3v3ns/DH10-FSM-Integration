@@ -102,7 +102,19 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_NTCLE.TcPOU">
+    <Compile Include="POUs\THERMAL\FB_NTCLE_MOTOR.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\THERMAL\FB_NTCLE_HEMS.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\THERMAL\FB_NTCLE_EMS.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\THERMAL\FB_NTCLE_FLOW.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

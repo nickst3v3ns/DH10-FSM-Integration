@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="THERMAL_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM THERMAL_MAIN
+VAR
+	//8 channels
+	EMS_T_LEFT : FB_NTCLE_EMS();
+	EMS_T_RIGHT : FB_NTCLE_EMS();
+	
+	//8 channels
+	HEMS_T_LEFT : FB_NTCLE_HEMS();
+	HEMS_T_RIGHT : FB_NTCLE_HEMS();
+	
+	//36 channels
+	MOTOR_T1 : FB_NTCLE_MOTOR();
+	MOTOR_T2 : FB_NTCLE_MOTOR();
+	MOTOR_T3 : FB_NTCLE_MOTOR();
+	MOTOR_T4 : FB_NTCLE_MOTOR();
+	MOTOR_T5 : FB_NTCLE_MOTOR();
+	MOTOR_T6 : FB_NTCLE_MOTOR();
+	MOTOR_T7 : FB_NTCLE_MOTOR();
+	MOTOR_T8 : FB_NTCLE_MOTOR();
+	MOTOR_T9 : FB_NTCLE_MOTOR();
+	
+	//8 channels
+	FLOW_T_1 : FB_NTCLE_FLOW();
+	FLOW_T_2 : FB_NTCLE_FLOW();
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//8 channels
+EMS_T_LEFT();
+EMS_T_RIGHT();
+
+//IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
+IF ((EMS_T_LEFT.bcritical AND EMS_T_RIGHT.bcritical) = FALSE) AND GVL_THERMAL.bEMSOVERHEAT THEN
+	GVL_THERMAL.bEMSOVERHEAT := FALSE;
+END_IF
+
+//8 channels
+HEMS_T_LEFT();
+HEMS_T_RIGHT();
+
+//IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
+IF ((HEMS_T_LEFT.bcritical AND HEMS_T_RIGHT.bcritical) = FALSE) AND GVL_THERMAL.bHEMSOVERHEAT THEN
+	GVL_THERMAL.bHEMSOVERHEAT := FALSE;
+END_IF
+
+//36 channels
+MOTOR_T1();
+MOTOR_T2();
+MOTOR_T3();
+MOTOR_T4();
+MOTOR_T5();
+MOTOR_T6();
+MOTOR_T7();
+MOTOR_T8();
+MOTOR_T9();
+
+//IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
+IF ((MOTOR_T1.bcritical AND MOTOR_T2.bcritical AND MOTOR_T3.bcritical AND MOTOR_T4.bcritical AND MOTOR_T5.bcritical AND MOTOR_T6.bcritical AND MOTOR_T7.bcritical AND MOTOR_T8.bcritical AND MOTOR_T9.bcritical) = FALSE) AND GVL_THERMAL.bMOTOROVERHEAT THEN
+	GVL_THERMAL.bMOTOROVERHEAT := FALSE;
+END_IF
+
+//8 channels
+FLOW_T_1();
+FLOW_T_2();
+
+IF ((FLOW_T_1.bcritical AND FLOW_T_2.bcritical) = FALSE) AND GVL_THERMAL.bFLOWOVERHEAT THEN
+	GVL_THERMAL.bFLOWOVERHEAT := FALSE;
+END_IF
+
+
+//here the full documentation for which temperature corresponds to which variable
+	
+	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
