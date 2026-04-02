@@ -13,7 +13,7 @@ VAR
     tonDelay: 				TON;
 	
 	allActionsCompleteShutdown:		BOOL;
-	allOK:							BOOL;
+	RecoveryToMaintenance:							BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -48,7 +48,7 @@ CASE state OF
             state := 2;
         END_IF
 		
-    2:	allOK := 
+    2:	RecoveryToMaintenance := 
 	
 		NOT GVL_Prop.propulsion_fault AND
 		NOT LEVI_GVL.levitation_fault AND
@@ -59,6 +59,10 @@ CASE state OF
 		NOT GVL_THERMAL.bHEMSOVERHEAT AND
 		NOT GVL_THERMAL.bEMSOVERHEAT AND
 		NOT GVL_THERMAL.bFLOWOVERHEAT;
+		
+		IF RecoveryToMaintenance THEN
+			state := 3;
+		END_IF
 		    
     3:	tonDelay(IN := TRUE, PT := T#5S);
         IF tonDelay.Q THEN

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
@@ -34,6 +34,33 @@
 				<BitSize>176</BitSize>
 				<BitOffs>16</BitOffs>
 			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{DEDAF3E6-FB21-A71C-024E-9F5B5A322F40}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..8] OF REAL</Name>
+			<BitSize>288</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>9</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF REAL</Name>
+			<BitSize>192</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
@@ -97,33 +124,6 @@
 				<BitSize>3584</BitSize>
 				<BitOffs>48</BitOffs>
 			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
-			<BitSize>256</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{DEDAF3E6-FB21-A71C-024E-9F5B5A322F40}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..8] OF REAL</Name>
-			<BitSize>288</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>9</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF REAL</Name>
-			<BitSize>192</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
@@ -192,7 +192,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
 			<BitSize>4</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -214,7 +214,7 @@
 			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="200000" AmsPort="350" AdtTasks="true">
-					<Name>PlcTask</Name>
+					<Name>FSM_MAIN</Name>
 				</Task>
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>HeartBeat</Name>
@@ -235,10 +235,10 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{AA20F4D0-C552-DB6C-5492-245C32898B95}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{34904172-6ADB-B272-EA16-33BA12A1087A}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="2" AreaNo="1">
+					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>GVL_FSM.bengage_brakes</Name>
@@ -311,7 +311,7 @@
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1">
+					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>GVL_FSM.bbrakes_engaged</Name>
@@ -463,10 +463,6 @@
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
 							<Name>GVL_THERMAL.T_EMS</Name>
 							<Type GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}">ARRAY [0..7] OF REAL</Type>
 						</Var>
@@ -494,10 +490,266 @@
 							<Name>GVL_THERMAL.T_FLOW</Name>
 							<Type GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}">ARRAY [0..5] OF REAL</Type>
 						</Var>
+						<Var>
+							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1">
+						<Name>Thermal_Task Inputs</Name>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_LEFT.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_LEFT.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_LEFT.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_LEFT.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_RIGHT.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_RIGHT.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_RIGHT.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.EMS_T_RIGHT.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_LEFT.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_LEFT.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_LEFT.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_LEFT.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_RIGHT.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_RIGHT.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_RIGHT.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.HEMS_T_RIGHT.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T1.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T1.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T1.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T1.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T2.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T2.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T2.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T2.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T3.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T3.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T3.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T3.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T4.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T4.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T4.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T4.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T5.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T5.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T5.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T5.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T6.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T6.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T6.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T6.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T7.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T7.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T7.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T7.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T8.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T8.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T8.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T8.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T9.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T9.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T9.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.MOTOR_T9.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_1.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_1.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_1.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_1.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_2.temp_raw11</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_2.temp_raw12</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_2.temp_raw13</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>THERMAL_MAIN.FLOW_T_2.temp_raw14</Name>
+							<Type>INT</Type>
+						</Var>
 					</Vars>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
+							<Name>Thermal_Task</Name>
+							<ManualConfig>
+								<OTCID>#x02010050</OTCID>
+							</ManualConfig>
+							<Priority>2</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id>1</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -507,6 +759,7 @@
 						</Context>
 					</Contexts>
 					<TaskPouOids>
+						<TaskPouOid Prio="2" OTCID="#x08502002"/>
 						<TaskPouOid Prio="20" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
@@ -876,7 +1129,7 @@
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500820000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0120-500820000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^FSM^FSM Instance">
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevState" VarB="Inputs^DevState"/>
