@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.20">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
@@ -34,33 +34,6 @@
 				<BitSize>176</BitSize>
 				<BitOffs>16</BitOffs>
 			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
-			<BitSize>256</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{DEDAF3E6-FB21-A71C-024E-9F5B5A322F40}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..8] OF REAL</Name>
-			<BitSize>288</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>9</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF REAL</Name>
-			<BitSize>192</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
@@ -124,6 +97,33 @@
 				<BitSize>3584</BitSize>
 				<BitOffs>48</BitOffs>
 			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{DEDAF3E6-FB21-A71C-024E-9F5B5A322F40}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..8] OF REAL</Name>
+			<BitSize>288</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>9</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF REAL</Name>
+			<BitSize>192</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
@@ -225,7 +225,7 @@
 				<Task Id="6" Priority="3" CycleTime="100000" AmsPort="353" AdtTasks="true">
 					<Name>Levi_Fast_Task_Vertical</Name>
 				</Task>
-				<Task Id="7" Priority="4" CycleTime="100000" AmsPort="354" AdtTasks="true">
+				<Task Id="7" Priority="4" CycleTime="50000" AmsPort="354" AdtTasks="true">
 					<Name>Levi_Fast_Task_Horizontal</Name>
 				</Task>
 				<Task Id="8" Priority="5" CycleTime="100000" AmsPort="355" AdtTasks="true">
@@ -235,7 +235,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6B581951-D4C3-9DA5-7751-67F82B710A38}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{AA20F4D0-C552-DB6C-5492-245C32898B95}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -463,6 +463,10 @@
 							<Type>REAL</Type>
 						</Var>
 						<Var>
+							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
 							<Name>GVL_THERMAL.T_EMS</Name>
 							<Type GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}">ARRAY [0..7] OF REAL</Type>
 						</Var>
@@ -489,10 +493,6 @@
 						<Var>
 							<Name>GVL_THERMAL.T_FLOW</Name>
 							<Type GUID="{32E64174-DFC6-6C97-290B-BD3A1EC3D2ED}">ARRAY [0..5] OF REAL</Type>
-						</Var>
-						<Var>
-							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -561,7 +561,7 @@
 							<BootStrapData>0010f400f410f400</BootStrapData>
 							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000020030100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365642900000000000000000000000000000000000000000020030100000000000000000001000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365000000000000000000000000000000000000000000000020030100000000000000000001000000000000000000000000000000000000000000</DcMode>
 							<MBoxUserCmdData>02000300090000000000000003000000000000000000000000000000000000002082f001010000000000</MBoxUserCmdData>
 							<Pdo Name="Inputs" Index="#x1a00" Flags="#x0010">
 								<ExcludePdo>#x1a01</ExcludePdo>

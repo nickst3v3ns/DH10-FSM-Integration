@@ -117,6 +117,9 @@
     <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Thermal_Task.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />

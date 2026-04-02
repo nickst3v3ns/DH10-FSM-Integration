@@ -11,7 +11,9 @@ END_VAR
 VAR
     state: 					INT := 0;
     tonDelay: 				TON;
-	allActionsComplete:		BOOL;
+	
+	allActionsCompleteShutdown:		BOOL;
+	allOK:							BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -27,23 +29,38 @@ busy := TRUE;
 CASE state OF
     0:  GVL_FSM.btrigger_EL := TRUE;
 		GVL_FSM.bopen_SDC := TRUE;
+		
         GVL_FSM.bengage_brakes := TRUE;
+		
         GVL_Prop.propulsion_enable := FALSE;
         LEVI_GVL.levitation_active := FALSE;
-        GVL_PT.emergency_shutdown := TRUE;
+		
+		
+        GVL_PT.emergency_shutdown := TRUE; //not necessary, they should immediately see it on the SDC
         state := 1;
         
-    1:  allActionsComplete := 
-            NOT GVL_FSM.bsdc_closed AND
-            GVL_FSM.bbrakes_engaged AND
-            NOT GVL_Prop.propulsion_active AND
-            NOT LEVI_GVL.levitation_active AND BasicChecks();
-        
-        IF allActionsComplete THEN
+    1:	allActionsCompleteShutdown := 
+	
+		NOT GVL_FSM.bsdc_closed AND
+		GVL_FSM.bbrakes_engaged;
+	
+        IF allActionsCompleteShutdown THEN
             state := 2;
         END_IF
-        
-    2:	tonDelay(IN := TRUE, PT := T#200MS);
+		
+    2:	allOK := 
+	
+		NOT GVL_Prop.propulsion_fault AND
+		NOT LEVI_GVL.levitation_fault AND
+		
+		BasicChecks() AND 
+		
+		NOT GVL_THERMAL.bMOTOROVERHEAT AND 
+		NOT GVL_THERMAL.bHEMSOVERHEAT AND
+		NOT GVL_THERMAL.bEMSOVERHEAT AND
+		NOT GVL_THERMAL.bFLOWOVERHEAT;
+		    
+    3:	tonDelay(IN := TRUE, PT := T#5S);
         IF tonDelay.Q THEN
 			GVL_FSM.btrigger_EL := FALSE;
             busy := FALSE;

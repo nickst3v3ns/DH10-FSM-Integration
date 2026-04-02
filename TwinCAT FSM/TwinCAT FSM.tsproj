@@ -214,7 +214,7 @@
 			</Settings>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="200000" AmsPort="350" AdtTasks="true">
-					<Name>PlcTask</Name>
+					<Name>FSM_MAIN</Name>
 				</Task>
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>HeartBeat</Name>
@@ -225,7 +225,7 @@
 				<Task Id="6" Priority="3" CycleTime="100000" AmsPort="353" AdtTasks="true">
 					<Name>Levi_Fast_Task_Vertical</Name>
 				</Task>
-				<Task Id="7" Priority="4" CycleTime="100000" AmsPort="354" AdtTasks="true">
+				<Task Id="7" Priority="4" CycleTime="50000" AmsPort="354" AdtTasks="true">
 					<Name>Levi_Fast_Task_Horizontal</Name>
 				</Task>
 				<Task Id="8" Priority="5" CycleTime="100000" AmsPort="355" AdtTasks="true">
@@ -235,7 +235,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{9042AA82-994E-E134-FD83-8B7E62B9927D}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{AA20F4D0-C552-DB6C-5492-245C32898B95}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
