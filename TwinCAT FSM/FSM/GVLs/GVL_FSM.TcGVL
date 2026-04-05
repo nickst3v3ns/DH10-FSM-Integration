@@ -22,18 +22,28 @@ VAR_GLOBAL
 	benable_telemetry: 		BOOL;
 	benable_PT_checks: 		BOOL;
 
+
+	
 	bcan_bus_ok: 			BOOL; 
 	nMasterDevState AT %I*: UINT; 
 	bethercat_ready:  		BOOL;
 	
 	
 	
-	
+	//Critical Temperatures for Shutdown
 	rcritical_temp_prop: 	REAL := 100.0; //maximum allowable temperature for propulsion. STILL A GUESS!!!!!
 	rcritical_temp_HEMS: 	REAL := 40.0; //maximum allowable temperature for levitation HEMS
 	rcritical_temp_EMS:		REAL := 60.0; //maximum allowable temperature for levitation EMS
 	rcritical_temp_watercooling:	REAL;
 	rcritical_temp_PT:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
+	
+	
+	//Temperatures to re enable after cooldown
+	rcritical_temp_prop_coolDown: 	REAL := 95.0; //maximum allowable temperature for propulsion. STILL A GUESS!!!!!
+	rcritical_temp_HEMS_coolDown: 	REAL := 35.0; //maximum allowable temperature for levitation HEMS
+	rcritical_temp_EMS_coolDown:		REAL := 55.0; //maximum allowable temperature for levitation EMS
+	rcritical_temp_watercooling_coolDown:	REAL;
+	rcritical_temp_PT_coolDown:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
 	
 	
 	TEST AT %I*: ARRAY[0..5] OF UINT;

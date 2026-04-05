@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="Levi_Fast_Task_Vertical" Id="{d2278262-9bd2-4410-80c6-1dd113cfb172}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>3</Priority>
+    <TaskFBGuid>{6500543e-b33c-4528-b47f-788dba481214}</TaskFBGuid>
+    <Fb_init>{b13c3bf0-ca65-4518-a770-918b6baa699c}</Fb_init>
+    <Fb_exit>{b99961b2-f81e-48fd-9233-805a9fc90c63}</Fb_exit>
+    <CycleUpdate>{e70b2595-acd7-4eba-9f26-43ff94d2e3e6}</CycleUpdate>
+    <PostCycleUpdate>{69992bf2-1dae-4b07-9300-ba931120af00}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

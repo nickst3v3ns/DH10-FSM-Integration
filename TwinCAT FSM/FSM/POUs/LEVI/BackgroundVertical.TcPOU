@@ -16,7 +16,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbEL6021Ctrl_1(
+      <ST><![CDATA[//Vertical
+fbEL6021Ctrl_1(
 	Mode:= SERIALLINEMODE_EL6_22B, 
 	pComIn:= ADR(LEVI_GVL.stIn_EL6021_1), 
 	pComOut:= ADR(LEVI_GVL.stOut_EL6021_1), 

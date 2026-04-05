@@ -7,6 +7,7 @@ TYPE PTC_TX_ID :
 (
 	MAIN_FSM := 16#190,
 	Reset := 16#1AB
+	
 )UINT;
 END_TYPE
 ]]></Declaration>

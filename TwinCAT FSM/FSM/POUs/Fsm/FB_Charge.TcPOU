@@ -7,10 +7,20 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+		send_message : PTC_Send_Message;
+		fbTimer : TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Send command to PT to trigger precharge ]]></ST>
+      <ST><![CDATA[// Call the timer first
+fbTimer(IN := NOT fbTimer.Q, PT := T#1S);
+
+// Use the .Q output directly in your logic
+IF fbTimer.Q THEN
+    // Put the code you want to execute every 1 second here
+    send_message(ID := PTC_TX_ID.MAIN_FSM, Command := PTC_TX_COMMAND.HV_ON, CAN_OUTPUts := PTC_CAN_GVL.CAN_OUTPUTS, CAN_INPUTS := PTC_CAN_GVL.CAN_INPUTS);
+END_IF
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

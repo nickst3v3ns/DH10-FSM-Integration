@@ -27,8 +27,10 @@ VAR_GLOBAL
 	DC_LINK_SAFE				:BOOL;
 	
 	//FOR laser Sensors
-	RxBufferEL				: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	RxBufferEL				: ComBuffer;	(* Receive data buffer; used with all receive function blocks *) 
 	TxBufferEL				: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	
+	//Vertical
 	RxBufferEL_1			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
 	TxBufferEL_1			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	RxBufferEL_2			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
@@ -57,32 +59,32 @@ VAR_GLOBAL
 	TxBufferEL_12			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	
 	(* 	I/O variables for a EL6021 terminal*)
-	stIn_EL6021_1 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_1 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_2 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_2 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_3 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_3 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_4 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_4 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_5 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_5 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_6 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_6 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_1 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
+	stOut_EL6021_1 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
+	stIn_EL6021_2 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle*)
+	stOut_EL6021_2 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle*)
+	stIn_EL6021_3 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
+	stOut_EL6021_3 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
+	stIn_EL6021_4 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack*)
+	stOut_EL6021_4 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack*)
+	stIn_EL6021_5 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle*)
+	stOut_EL6021_5 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle*)
+	stIn_EL6021_6 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront*)
+	stOut_EL6021_6 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront*)
 	
 	//Lateral
-	stIn_EL6021_7 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_7 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_8 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_8 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_9 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_9 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_10 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_10 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_11 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_11 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
-	stIn_EL6021_12 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager *)
-	stOut_EL6021_12 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager *)
+	stIn_EL6021_7 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightBack*)
+	stOut_EL6021_7 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightBack*)
+	stIn_EL6021_8 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightMiddle*)
+	stOut_EL6021_8 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightMiddle*)
+	stIn_EL6021_9 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront*)
+	stOut_EL6021_9 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront*)
+	stIn_EL6021_10 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
+	stOut_EL6021_10 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
+	stIn_EL6021_11 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle*)
+	stOut_EL6021_11 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle*)
+	stIn_EL6021_12 AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
+	stOut_EL6021_12 AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	
 END_VAR]]></Declaration>
   </GVL>

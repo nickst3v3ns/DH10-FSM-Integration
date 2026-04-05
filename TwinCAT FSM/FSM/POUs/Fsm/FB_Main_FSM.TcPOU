@@ -144,6 +144,7 @@ CASE currentState OF
 		ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
 			currentState := E_PodState.STATE_MOVEMENT;
 			Handle_movement();  //do we not want to wait specifically for State movement
+			GVL_Prop.propulsion_enable := TRUE;
 		END_IF
 		
 	E_PodState.STATE_MOVEMENT:

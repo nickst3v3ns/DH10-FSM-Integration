@@ -57,6 +57,12 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="Levi_Fast_Task_Horizontal.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Levi_Fast_Task_Vertical.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -115,6 +121,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PTC_CAN_RX_Task.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Thermal_Task.TcTTO">

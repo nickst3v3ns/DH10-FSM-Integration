@@ -4,9 +4,9 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_NTCLE_EMS
 VAR_OUTPUT
 	
-	bcritical			:BOOL := FALSE;
+	bcriticalCoolDown			:BOOL := FALSE;
 	i:					USINT;
-	TEMP: ARRAY[0..3] OF REAL;
+	TEMP: ARRAY[0..7] OF REAL;
 	icriticalindex:		SINT := -1;
 	
 END_VAR
@@ -17,22 +17,35 @@ VAR
 	temp_raw12 AT %I*	:INT;
 	temp_raw13 AT %I*	:INT;
 	temp_raw14 AT %I*	:INT;
+	temp_raw15 AT %I*	:INT;
+	temp_raw16 AT %I*	:INT;
+	temp_raw17 AT %I*	:INT;
+	temp_raw18 AT %I*	:INT;
 	
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[bcritical := FALSE;
+      <ST><![CDATA[bcriticalCoolDown := FALSE;
 icriticalindex := -1;
 
 TEMP[0] := INT_TO_REAL(temp_raw11)/100.0;
 TEMP[1] := INT_TO_REAL(temp_raw12)/100.0;
 TEMP[2] := INT_TO_REAL(temp_raw13)/100.0;
 TEMP[3] := INT_TO_REAL(temp_raw14)/100.0;
+TEMP[5] := INT_TO_REAL(temp_raw16)/100.0;
+TEMP[6] := INT_TO_REAL(temp_raw17)/100.0;
+TEMP[7] := INT_TO_REAL(temp_raw18)/100.0;
 
-FOR i := 0 TO 3 DO
+FOR i := 0 TO 7 DO
 	IF TEMP[i] > GVL_FSM.rcritical_temp_EMS  THEN
-		bcritical := TRUE;
+
 		GVL_THERMAL.bEMSOVERHEAT := TRUE;
 		icriticalindex := i;
+		
+	END_IF
+	IF TEMP[i] > GVL_FSM.rcritical_temp_EMS_coolDown THEN
+		
+		bcriticalCoolDown := TRUE;
+		
 	END_IF
 END_FOR
 
