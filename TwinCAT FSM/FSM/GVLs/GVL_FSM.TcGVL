@@ -11,12 +11,17 @@ VAR_GLOBAL
  
 	bengage_brakes AT %Q*:			BOOL; //Done through twinsafe i guess? OUTPUT
 	bbrakes_engaged AT %I*:			BOOL; //Done through twinsafe I guess? INPUT
+	
+	
 	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
 	bsdc_closed AT %I*: 			BOOL; //done through twinsafe INPUT	
-	bopen_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT
-	btrigger_EL: 			BOOL;
+	bopen_SDC: 				BOOL	:= TRUE; //done through Twinsafe INPUT, this input is normally high and drops down to false during emergencies, might switch this later
+	btrigger_EL AT %Q*: 			BOOL := TRUE; //NC System
+	bEstopError AT %I*:			BOOL;
+	bEstopRestart AT %Q*:			BOOL;
 	
 	
+
 	
 	benable_temp_checks: 	BOOL;
 	benable_telemetry: 		BOOL;
@@ -25,7 +30,8 @@ VAR_GLOBAL
 
 	
 	bcan_bus_ok: 			BOOL; 
-	nMasterDevState AT %I*: UINT; 
+	nMasterDevStateCouplers AT %I*: UINT; 
+	nMasterDevStatePLC AT %I*: UINT; 
 	bethercat_ready:  		BOOL;
 	
 	

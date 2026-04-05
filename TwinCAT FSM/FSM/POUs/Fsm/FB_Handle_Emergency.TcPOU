@@ -63,6 +63,7 @@ CASE state OF
 		IF RecoveryToMaintenance THEN
 			state := 3;
 		END_IF
+	//not sure if we dont get the same error with the brakes and SDC resetting that we go into a maintenance to emergency loop. Since the maintenance command is explciti the FSM might have time to reset.
 		    
     3:	tonDelay(IN := TRUE, PT := T#5S);
         IF tonDelay.Q THEN

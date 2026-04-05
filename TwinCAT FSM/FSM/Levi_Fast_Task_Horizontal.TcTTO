@@ -4,6 +4,9 @@
     <!--CycleTime in micro seconds.-->
     <CycleTime>5000</CycleTime>
     <Priority>4</Priority>
+    <PouCall>
+      <Name>BackgroundLateral</Name>
+    </PouCall>
     <TaskFBGuid>{ea5650a0-2c75-4949-b42d-434925f9f525}</TaskFBGuid>
     <Fb_init>{4de67f75-3277-4ae5-a499-9e3801bcaea6}</Fb_init>
     <Fb_exit>{8eb49f9f-59b7-41da-8dd1-a96617323ab5}</Fb_exit>

@@ -108,6 +108,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\SAFETY\SAFETY_MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\THERMAL\FB_NTCLE_MOTOR.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +139,7 @@
     <Folder Include="POUs\FSM" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
+    <Folder Include="POUs\SAFETY" />
     <Folder Include="POUs\THERMAL" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

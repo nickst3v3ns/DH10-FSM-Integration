@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="SAFETY_MAIN" Id="{b6f5d991-137b-4625-ad53-4d4b654d8ae8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SAFETY_MAIN
+VAR
+	//INPUTS
+	SafetyResetButton AT %I*		:BOOL;
+	
+	//INTERNAL VARIABLE
+	SafetyResetButton_RT 			:R_TRIG;
+
+	//OUTPUTS
+	SafetyRunCommand AT %Q*			:BOOL;
+	SafetyErrorAcknowledge AT %Q*	:BOOL;	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Safety RUN/STOP command, should always be running TRUE.
+SafetyRunCommand := TRUE;
+
+
+//Safety Error should be anknowledged when the resetbutton is pressed
+SafetyResetButton_RT(CLK := SafetyResetButton);
+SafetyErrorAcknowledge := SafetyResetButton_RT.Q;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

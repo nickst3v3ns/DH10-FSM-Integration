@@ -2,15 +2,6 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
-			<BitSize>96</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6inData22B</Name>
 			<Comment><![CDATA[ This data type is corresponding to the
    EL-6xxx data structure used in the
@@ -34,6 +25,40 @@
 				<BitSize>176</BitSize>
 				<BitOffs>16</BitOffs>
 			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
+			<Comment><![CDATA[ This data type is corresponding to the
+   EL-6xxx data structure used in the
+   TwinCAT SystemManager
+   (EL-6xxx version using 22 data bytes) 
+]]></Comment>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Ctrl</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{A4D755F2-9C07-8B98-9C7E-2BC1A07A8FC9}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF UINT</Name>
+			<BitSize>96</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
@@ -99,31 +124,6 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
-			<Comment><![CDATA[ This data type is corresponding to the
-   EL-6xxx data structure used in the
-   TwinCAT SystemManager
-   (EL-6xxx version using 22 data bytes) 
-]]></Comment>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>Ctrl</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>22</Elements>
-				</ArrayInfo>
-				<BitSize>176</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
 			<Name GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Name>
 			<BitSize>3632</BitSize>
 			<SubItem>
@@ -182,14 +182,72 @@
 				<Elements>7</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety" TcBaseType="true">FSOE_6</Name>
+			<BitSize>48</BitSize>
+			<SubItem>
+				<Name>FSoE CMD</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE Data</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE CRC_0</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE ConnID</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000010}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BYTE</Name>
+			<BitSize>16</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000008}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BYTE</Name>
+			<BitSize>8</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>1</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000C}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..11] OF BIT</Name>
+			<BitSize>12</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>12</Elements>
+			</ArrayInfo>
+		</DataType>
 	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080808080808080c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c00000ffc0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c00000ffc0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c000ff00c0c0c0c0c0c0c0c0c0808080ff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ff</ImageData>
 		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1003">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1005">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1006">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff008066008099008066008099008066ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffff00000000ffff000000008099ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffff00ffff00ffff00ffff008066ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffff00ffff00ffff00ffff008099ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffff00000000ffff000000008066ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffffff000000ffffff0000008099ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00ffff00ffff00ffff00ffff008066ff00ffff00ffff00ffff00ffff00ff66009999006666009999006666009999006600ffff00000000ffff000000008099ff00ffff00ffff00ffff00ffff00ff99006666009999006666009999006666009900ffff0000ff00ffff0000ff008066ff00ffff00ffff00ffff00ffff00ff66009999006666009999006666009999006600ffff00ffff00ffff00ffff008099ff00ffff00ffff00ffff00ffff00ff99006666009999006666009999006666009900ffff00000000ffff000000008066ff00ffff00ffff00ffff00ffff00ff66009999006666009999006666009999006600ffff00ffff00ffff00ffff008099ff00ffff00ffff00ffff00ffff00ff99006666009999006666009999006666009900ffff00800000ffff008000008066ff00ffff00ffff00ffff00ffff00ff66009999006666009999006666009999006600ffff00ffff00ffff00ffff008099ff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="192.168.1.11.1.1" Target64Bit="true" ShowHideConfigurations="#x2c7">
+	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="192.168.1.11.1.1" Target64Bit="true" ShowHideConfigurations="#x347">
 		<System>
 			<Settings MaxCpus="2">
 				<Cpu CpuId="1"/>
@@ -214,88 +272,62 @@
 				<Task Id="8" Priority="5" CycleTime="100000" AmsPort="355" AdtTasks="true">
 					<Name>PTC_CAN_RX_Task</Name>
 				</Task>
+				<Task Id="9" Priority="6" CycleTime="100000" AmsPort="356" AdtTasks="true">
+					<Name>SC_Enable_Task</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{912306E6-1CEA-8D84-E15B-E494E214F78B}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C981E0CF-8CFC-2218-A12E-3D8E38FD4A92}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.btwinsafetest</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>GVL_FSM.bengage_brakes</Name>
 							<Comment><![CDATA[Done through twinsafe i guess? OUTPUT]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_1</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+							<Name>GVL_FSM.btrigger_EL</Name>
+							<Comment><![CDATA[NC System]]></Comment>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_2</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_3</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_4</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_5</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_6</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_7</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightBack]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_8</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightMiddle]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_9</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_10</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_11</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_GVL.stOut_EL6021_12</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack]]></Comment>
-							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+							<Name>GVL_FSM.bEstopRestart</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>PTC_CAN_GVL.CAN_OUTPUTS</Name>
 							<Comment><![CDATA[CAN INTERFACE]]></Comment>
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
 						</Var>
+						<Var>
+							<Name>MAIN.main_fsm.btwinsafe</Name>
+							<Type>BOOL</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyResetButton</Name>
+							<Comment><![CDATA[INPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>GVL_FSM.bbrakes_engaged</Name>
 							<Comment><![CDATA[Done through twinsafe I guess? INPUT]]></Comment>
@@ -312,7 +344,15 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.nMasterDevState</Name>
+							<Name>GVL_FSM.bEstopError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevStatePLC</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
@@ -369,35 +409,62 @@
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_1</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>GVL_Prop.drive_voltages1</Name>
+							<Comment><![CDATA[DC-Link voltages]]></Comment>
+							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_2</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>GVL_Prop.drive_voltages2</Name>
+							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_3</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>GVL_Prop.drive_voltages3</Name>
+							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_4</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>GVL_Prop.drive_voltages4</Name>
+							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_5</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
+						<Name>Levi_Fast_Task_Horizontal Outputs</Name>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_7</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightBack]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>LEVI_GVL.stIn_EL6021_6</Name>
-							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront]]></Comment>
-							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+							<Name>LEVI_GVL.stOut_EL6021_8</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightMiddle]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_9</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_10</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_11</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_12</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
+						<Name>Levi_Fast_Task_Horizontal Inputs</Name>
 						<Var>
 							<Name>LEVI_GVL.stIn_EL6021_7</Name>
 							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightBack]]></Comment>
@@ -428,26 +495,71 @@
 							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack]]></Comment>
 							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
 						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
+						<Name>Levi_Fast_Task_Vertical Outputs</Name>
 						<Var>
-							<Name>GVL_Prop.drive_voltages1</Name>
-							<Comment><![CDATA[DC-Link voltages]]></Comment>
-							<Type>REAL</Type>
+							<Name>LEVI_GVL.stOut_EL6021_1</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.drive_voltages2</Name>
-							<Type>REAL</Type>
+							<Name>LEVI_GVL.stOut_EL6021_2</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.drive_voltages3</Name>
-							<Type>REAL</Type>
+							<Name>LEVI_GVL.stOut_EL6021_3</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.drive_voltages4</Name>
-							<Type>REAL</Type>
+							<Name>LEVI_GVL.stOut_EL6021_4</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>PTC_CAN_GVL.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+							<Name>LEVI_GVL.stOut_EL6021_5</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stOut_EL6021_6</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront]]></Comment>
+							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
+						<Name>Levi_Fast_Task_Vertical Inputs</Name>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_1</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_2</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_3</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_4</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_5</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightMiddle]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_GVL.stIn_EL6021_6</Name>
+							<Comment><![CDATA[ linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightFront]]></Comment>
+							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
@@ -750,39 +862,41 @@
 				</Instance>
 			</Project>
 		</Plc>
+		<Safety>
+			<Project GUID="{5FAD3986-4EF4-43A9-BD16-3CC415658D9D}" Name="Safety_SC_Enable" PrjFilePath="Safety_SC_Enable\Safety_SC_Enable.splcproj" TmcFilePath="Safety_SC_Enable\Safety_SC_Enable.tmc" GeneralArchiveSettings="#x000f" TargetArchiveSettings="#x0007" FileArchiveSettings="#x000e">
+				<Instance Id="#x01010010" KeepUnrestoredLinks="2">
+					<Name>Safety_SC_Enable Instance</Name>
+					<TmcDesc GUID="{72A6D5B8-E98C-4604-8B90-09D1F8AB38A9}">
+						<Name>Safety</Name>
+						<InitSequence>PO</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>1</Id>
+								<Name>Default</Name>
+							</Context>
+						</Contexts>
+					</TmcDesc>
+				</Instance>
+			</Project>
+		</Safety>
 		<Io>
 			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.11.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="3">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
-					<Ccat>
-						<Address>-251658240</Address>
-						<Offset>131072</Offset>
-						<Size>8192</Size>
-						<BaseAddr>0</BaseAddr>
-						<BusNo>3</BusNo>
-						<SlotNo>0</SlotNo>
-						<VendorId>5612</VendorId>
-						<DeviceId>20480</DeviceId>
-						<Dma>
-							<Address>0</Address>
-							<Offset>4096</Offset>
-							<Size>256</Size>
-							<BaseAddr>2</BaseAddr>
-							<RxChn>0</RxChn>
-							<TxChn>1</TxChn>
-						</Dma>
-						<Identification>
-							<Value>-1775005300</Value>
-							<Version>1</Version>
-							<Size>512</Size>
-						</Identification>
-					</Ccat>
+					<Pnp>
+						<DeviceDesc>X000 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
+						<DeviceName>\DEVICE\{9FD49681-BE95-4E1A-B6F1-9A3BAD0BB8FA}</DeviceName>
+						<DeviceData>000105848dc7</DeviceData>
+					</Pnp>
 				</AddressInfo>
 				<Image Id="2" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
 				<Image Id="1" AddrType="10" ImageType="3">
 					<Name>Image-2</Name>
+				</Image>
+				<Image Id="6" AddrType="10" ImageType="3">
+					<Name>Image-3</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>CouplerLeftBack</Name>
@@ -5750,6 +5864,11 @@
 							<CoeProfile ProfileNo="20976521"/>
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
+					</Box>
+					<Box Id="36" BoxType="9099">
+						<Name>Term 36 (EL9011)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000009"/>
 					</Box>
 				</Box>
 				<Box Id="10" BoxType="9099">
@@ -10719,6 +10838,11 @@
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
+					<Box Id="37" BoxType="9099">
+						<Name>Term 37 (EL9011)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000012"/>
+					</Box>
 				</Box>
 				<Box Id="19" BoxType="9099">
 					<Name>CouplerRightFront</Name>
@@ -15687,6 +15811,11 @@
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
+					<Box Id="39" BoxType="9099">
+						<Name>Term 39 (EL9011)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100001b"/>
+					</Box>
 				</Box>
 				<Box Id="28" BoxType="9099">
 					<Name>CouplerLeftFront</Name>
@@ -20509,155 +20638,486 @@
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
+					<Box Id="38" BoxType="9099">
+						<Name>Term 38 (EL9011)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000023"/>
+					</Box>
+				</Box>
+				<EtherCAT/>
+			</Device>
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.1.11.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="5">
+				<Name>Device 1 (EtherCAT)</Name>
+				<AddressInfo>
+					<Ccat>
+						<Address>-251658240</Address>
+						<Offset>131072</Offset>
+						<Size>8192</Size>
+						<BaseAddr>0</BaseAddr>
+						<BusNo>3</BusNo>
+						<SlotNo>0</SlotNo>
+						<VendorId>5612</VendorId>
+						<DeviceId>20480</DeviceId>
+						<Dma>
+							<Address>0</Address>
+							<Offset>4096</Offset>
+							<Size>28672</Size>
+							<BaseAddr>2</BaseAddr>
+							<RxChn>0</RxChn>
+							<TxChn>1</TxChn>
+						</Dma>
+						<TimeSize>128</TimeSize>
+						<TimeOffs>1024</TimeOffs>
+						<GpioSize>32</GpioSize>
+						<GpioOffs>768</GpioOffs>
+						<EepromSize>128</EepromSize>
+						<EepromOffs>512</EepromOffs>
+						<IntCtrlSize>16</IntCtrlSize>
+						<IntCtrlOffs>640</IntCtrlOffs>
+						<Identification>
+							<Value>510335738</Value>
+							<Version>1</Version>
+							<Size>512</Size>
+						</Identification>
+					</Ccat>
+				</AddressInfo>
+				<Image Id="4" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="71" BoxType="9099">
+					<Name>Term 36 (EK1200)</Name>
+					<ImageId>1005</ImageId>
+					<EtherCAT PdiType="#x0100" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b02c52" RevisionNo="#x00001388" InfoDataState="false" PortPhys="49" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1200-5000 EtherCAT Power supply (2A E-Bus)" Desc="EK1200" PortABoxInfo="#x00ffffff"/>
+					<Box Id="72" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 72 (EL6910)</Name>
+						<ImageId>1006</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x1afe3052" RevisionNo="#x00150000" BIC="1P135389SBTNsee COE!1KEL6910                        Q1    " InfoDataAddr="true" RepeatSupport="true" TimeoutStateChange1="5000" TimeoutMailbox2="10000" TComSupport="true" PortPhys="51" DebugMemory="8" SafetyLogicSupported="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6910, TwinSAFE PLC" Desc="EL6910" PortABoxInfo="#x01000047">
+							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
+							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
+							<SyncMan>00120f002400010003000000000000000200001224010000</SyncMan>
+							<SyncMan>001d0f002000010004000000000000000200001d20010000</SyncMan>
+							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
+							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
+							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
+							<Fmmu>0000000000000000001d00010100000002000000060000000300000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000000000020000000001000000060000000400010000000000</Fmmu>
+							<Fmmu>0000000000000000000000010000000002000000060000000500010000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<MBoxUserCmdData>004003000a0000001f000000030010000000000000000000000000000000000020f31005020000000100456e61626c6520446961674d65737361676520617320656d657267656e637900</MBoxUserCmdData>
+							<Pdo Name="ConnectionInputs" Index="#x1a00" Flags="#x2011" SyncMan="3">
+								<Entry Name="TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 TxPDO" Index="#x7000" Sub="#x01">
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 TxPDO" Index="#x7000" Sub="#x02">
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="ConnectionOutputs" Index="#x1600" InOut="1" Flags="#x2011" SyncMan="2">
+								<Entry Name="TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 RxPDO" Index="#x6000" Sub="#x01">
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 RxPDO" Index="#x6000" Sub="#x02">
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="StandardInputs" Index="#x1bf0" Flags="#x2011" SyncMan="3">
+								<Entry Name="TwinSafeGroup1.ESTOP(OUT)_7" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.SDCSense(OUT)_8" Index="#x7000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.ErrorEstopOutPLC(OUT)_9" Index="#x7000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.VALIDTWINSAFE(OUT)_10" Index="#x7000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">
+								<Entry Name="TwinSafeGroup1.ErrorAcknowledgement_1" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.Run_2" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.PLCConfirm(IN)_5" Index="#x6000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.PLCRestart(IN)1_6" Index="#x6000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FSLOGIC Inputs" Index="#x1bff" Flags="#x0011" SyncMan="3">
+								<Entry Name="Safe Logic State" Index="#xf100" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="Cycle Counter" Index="#xf100" Sub="#x02">
+									<Type>USINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FSLOGIC Outputs" Index="#x17ff" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000010}">ARRAY [0..1] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="5001"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="73" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 73 (EL1904)</Name>
+						<ImageId>118</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x07703052" RevisionNo="#x00130000" BIC="1P070931SBTNsee COE!1KEL1904                        Q1    " InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="1" Type="EL1904, 4 Ch. Safety Input 24V, TwinSAFE" Desc="EL1904" PortABoxInfo="#x01000048">
+							<SyncMan>001000012600010001000000400000010001001026010000</SyncMan>
+							<SyncMan>001100012200010002000000400000010001001122010000</SyncMan>
+							<SyncMan>001206002400010003000000000000000600001224010000</SyncMan>
+							<SyncMan>001906002000010004000000000000000600001920010000</SyncMan>
+							<Fmmu>0000000000000000001200020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000001900010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<Pdo Name="TxPDO" Index="#x1a00" Flags="#x0090" SyncMan="3">
+								<Entry Name="FSOE__FSoE Slave CMD" Index="#x6000" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="FSOE__InputChannel1" Index="#x6001" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__InputChannel2" Index="#x6001" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__InputChannel3" Index="#x6001" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__InputChannel4" Index="#x6001" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__">
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Slave CRC_0" Index="#x6000" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Slave ConnID" Index="#x6000" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RxPDO" Index="#x1600" InOut="1" Flags="#x0090" SyncMan="2">
+								<Entry Name="FSOE__FSoE Master CMD" Index="#x7000" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="FSOE__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Master CRC_0" Index="#x7000" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Master ConnID" Index="#x7000" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="5001"/>
+							<Slot Name="">
+								<SlotData>0000010001000400000000000000000000000000000000000000000000000000</SlotData>
+								<ModuleIdent>190</ModuleIdent>
+								<Module Id="#x03090001" Type="FSOES" Class="190">
+									<Name>Module 1 (FSOES)</Name>
+									<ImageId>118</ImageId>
+									<ModuleData>02000000be00000000000c000000000000000000000000000000000000000000</ModuleData>
+									<PdoIndex>6656</PdoIndex>
+									<PdoIndex>5632</PdoIndex>
+									<CoeProfile ProfileNo="#x00001389"/>
+								</Module>
+							</Slot>
+						</EtherCAT>
+					</Box>
+					<Box Id="74" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 74 (EL2904)</Name>
+						<ImageId>118</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0b583052" RevisionNo="#x00130000" BIC="1P070933SBTNsee COE!1KEL2904                        Q1    " InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="2" Type="EL2904, 4 Ch. Safety Output 24V, 0.5A, TwinSAFE" Desc="EL2904" PortABoxInfo="#x01000049">
+							<SyncMan>001000012600010001000000400000010001001026010000</SyncMan>
+							<SyncMan>001100012200010002000000400000010001001122010000</SyncMan>
+							<SyncMan>001208002400010003000000000000000800001224010000</SyncMan>
+							<SyncMan>001906002000010004000000000000000600001920010000</SyncMan>
+							<Fmmu>0000000000000000001200020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000001900010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0018f400f418f400</BootStrapData>
+							<Pdo Name="TxPDO" Index="#x1a00" Flags="#x0090" SyncMan="3">
+								<Entry Name="FSOE__FSoE Slave CMD" Index="#x6000" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="FSOE__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Slave CRC_0" Index="#x6000" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Slave ConnID" Index="#x6000" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RxPDO" Index="#x1600" InOut="1" Flags="#x0090" SyncMan="2">
+								<Entry Name="FSOE__FSoE Master CMD" Index="#x7000" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="FSOE__OutputChannel1" Index="#x7001" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__OutputChannel2" Index="#x7001" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__OutputChannel3" Index="#x7001" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__OutputChannel4" Index="#x7001" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__">
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Master CRC_0" Index="#x7000" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="FSOE__FSoE Master ConnID" Index="#x7000" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RxPDO" Index="#x1601" InOut="1" Flags="#x0090" SyncMan="2">
+								<Entry Name="Output Channel 1" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Output Channel 2" Index="#x7010" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Output Channel 3" Index="#x7010" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Output Channel 4" Index="#x7010" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000C}">ARRAY [0..11] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="5001"/>
+							<CoeProfile ProfileNo="13112201"/>
+							<Slot Name="">
+								<SlotData>0000010001000400000000000000000000000000000000000000000000000000</SlotData>
+								<ModuleIdent>290</ModuleIdent>
+								<Module Id="#x03090002" Type="FSOES" Class="290">
+									<Name>Module 1 (FSOES)</Name>
+									<ImageId>118</ImageId>
+									<ModuleData>020000002201000000000c000000000000000000000000000000000000000000</ModuleData>
+									<PdoIndex>6656</PdoIndex>
+									<PdoIndex>5632</PdoIndex>
+									<CoeProfile ProfileNo="#x00001389"/>
+								</Module>
+							</Slot>
+							<Slot Name="">
+								<SlotData>0000010001000400000000000000000000000000000000000000000000000000</SlotData>
+								<ModuleIdent>200</ModuleIdent>
+								<Module Id="#x03090003" Type="DO" Class="200">
+									<Name>Module 2 (DO)</Name>
+									<ImageId>118</ImageId>
+									<ModuleData>02000000c8000000000004000000000000000000000000000000000000000000</ModuleData>
+									<PdoIndex>5633</PdoIndex>
+								</Module>
+							</Slot>
+						</EtherCAT>
+					</Box>
+					<Box Id="75" BoxType="9099">
+						<Name>Term 40 (EL9011)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100004a"/>
+					</Box>
 				</Box>
 				<EtherCAT/>
 			</Device>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0420-500811000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0420-500840000403}" Id="#x02030060"/>
 		<MappingInfo Identifier="{00000000-2002-0850-0020-500820000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0120-500811000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-2004-0850-0220-500862000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{08502001-0060-0304-0020-500860000403}" Id="#x02030040" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{03040040-0040-0304-4000-040340000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
+		<OwnerA Name="TIID^Device 1 (EtherCAT)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 72 (EL6910)">
+				<Link VarA="Term 36 (EK1200)^Term 73 (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 TxPDO"/>
+				<Link VarA="Term 36 (EK1200)^Term 73 (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 RxPDO"/>
+				<Link VarA="Term 36 (EK1200)^Term 74 (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 TxPDO"/>
+				<Link VarA="Term 36 (EK1200)^Term 74 (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 RxPDO"/>
+			</OwnerB>
+		</OwnerA>
 		<OwnerA Name="TIPC^FSM^FSM Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)">
+				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStatePLC" VarB="Inputs^DevState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 72 (EL6910)">
+				<Link VarA="PlcTask Inputs^GVL_FSM.bEstopError" VarB="StandardInputs^TwinSafeGroup1.ErrorEstopOutPLC(OUT)_9"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.bbrakes_engaged" VarB="StandardInputs^TwinSafeGroup1.ESTOP(OUT)_7"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.bsafety_inputs_valid" VarB="StandardInputs^TwinSafeGroup1.VALIDTWINSAFE(OUT)_10"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.bsdc_closed" VarB="StandardInputs^TwinSafeGroup1.SDCSense(OUT)_8"/>
+				<Link VarA="PlcTask Outputs^GVL_FSM.bEstopRestart" VarB="StandardOutputs^TwinSafeGroup1.PLCRestart(IN)1_6"/>
+				<Link VarA="PlcTask Outputs^GVL_FSM.btrigger_EL" VarB="StandardOutputs^TwinSafeGroup1.PLCConfirm(IN)_5"/>
+				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyErrorAcknowledge" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>
+				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyRunCommand" VarB="StandardOutputs^TwinSafeGroup1.Run_2"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
-				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevState" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^LaSeVerticalLeftBack">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_3^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_3^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^LaSeVerticalLeftFront">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_1^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_1^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^LaSeVerticalLeftMiddle">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_2^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_2^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^Temp1MotorLeftBack3Flow">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw11" VarB="RTD Inputs Channel 2^Value"/>
@@ -20684,142 +21144,148 @@
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_LEFTBACK_T.temp_raw18" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftFront^LaSeHorizontalLeftBack">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_12^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_12^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftFront^LaSeHorizontalLeftFront">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_10^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_10^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftFront^LaSeHorizontalLeftMiddle">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_11^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_11^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftFront^TempHEMSandEMSLeftFront">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbEMS_T.temp_raw11" VarB="RTD Inputs Channel 3^Value"/>
@@ -20840,142 +21306,148 @@
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_LEFTFRONT_T.temp_raw18" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightBack^LaSeVerticalRightBack">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_4^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_4^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightBack^LaSeVerticalRightFront">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_6^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_6^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightBack^LaSeVerticalRightMiddle">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Vertical Inputs^LEVI_GVL.stIn_EL6021_5^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Vertical Outputs^LEVI_GVL.stOut_EL6021_5^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightBack^Temp1MotorRightBack3Flow">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw14" VarB="RTD Inputs Channel 2^Value"/>
@@ -21002,142 +21474,148 @@
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw18" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^LaSeHorizontalRightBack">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_7^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_7^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^LaSeHorizontalRightFront">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_9^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_9^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^LaSeHorizontalRightMiddle">
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Inputs^LEVI_GVL.stIn_EL6021_8^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="Levi_Fast_Task_Horizontal Outputs^LEVI_GVL.stOut_EL6021_8^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^Temp2MotorRight2Flow">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw17" VarB="RTD Inputs Channel 3^Value"/>

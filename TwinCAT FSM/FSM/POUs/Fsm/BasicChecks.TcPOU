@@ -11,7 +11,7 @@ END_VAR
       <ST><![CDATA[//BasicChecks performs all needed checks for the System to be safe for operation.
 
 
-IF GVL_FSM.nMasterDevState = 0 THEN
+IF GVL_FSM.nMasterDevStateCouplers = 0 THEN
 	GVL_FSM.bethercat_ready := TRUE;
 ELSE 
 	GVL_FSM.bethercat_ready := FALSE;
