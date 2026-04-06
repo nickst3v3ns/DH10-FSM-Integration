@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <GVL Name="LEVI_GVL" Id="{d4dca03b-650a-425c-b19f-85a72034f677}">
+  <GVL Name="GVL_LEVI" Id="{d4dca03b-650a-425c-b19f-85a72034f677}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	//First Levi Checks

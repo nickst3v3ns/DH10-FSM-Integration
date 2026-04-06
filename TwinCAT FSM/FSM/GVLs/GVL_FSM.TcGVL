@@ -9,17 +9,17 @@ VAR_GLOBAL
 	
 	bprecharge:				BOOL;
  
-	bengage_brakes AT %Q*:			BOOL := FALSE; //Done through twinsafe i guess? OUTPUT
-	bCLKTrigger AT %Q*:				BOOL := FALSE;
-	bbrakes_engaged AT %I*:			BOOL; //Done through twinsafe I guess? INPUT
+	bengage_brakes AT %Q*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bCLKTrigger AT %Q*:				BOOL := FALSE; 
+	bbrakes_engaged AT %I*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	
 	
 	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
-	bsdc_closed AT %I*: 			BOOL; //done through twinsafe INPUT	
+	bsdc_closed AT %I*: 			BOOL; //Normally Closed system
 	
 	btrigger_EL AT %Q*: 			BOOL := TRUE; //NC System
 	
-	bEstopError AT %I*:			BOOL;
+	bEstopError AT %I*:				BOOL; //Used to restart the Estop from the PLC side
 	bEstopRestart AT %Q*:			BOOL := FALSE;
 	
 	
@@ -52,9 +52,6 @@ VAR_GLOBAL
 	rcritical_temp_EMS_coolDown:		REAL := 55.0; //maximum allowable temperature for levitation EMS
 	rcritical_temp_watercooling_coolDown:	REAL;
 	rcritical_temp_PT_coolDown:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
-	
-	
-	TEST AT %I*: ARRAY[0..5] OF UINT;
 	
 
 END_VAR]]></Declaration>

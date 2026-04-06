@@ -30,24 +30,22 @@ CASE state OF
     0:  GVL_FSM.btrigger_EL := FALSE;
 		
         GVL_Prop.propulsion_enable := FALSE;
-        LEVI_GVL.levitation_enable := FALSE;
+        GVL_LEVI.levitation_enable := FALSE;
 		
-		
-        GVL_PT.emergency_shutdown := TRUE; //not necessary, they should immediately see it on the SDC
         state := 1;
         
     1:	allActionsCompleteShutdown := 
 	
 		NOT GVL_FSM.bsdc_closed; //There should be something added here?
 	
-        IF allActionsCompleteShutdown AND NOT LEVI_GVL.levitation_active AND NOT GVL_Prop.propulsion_enable THEN
+        IF allActionsCompleteShutdown AND NOT GVL_LEVI.levitation_active AND NOT GVL_Prop.propulsion_enable THEN
             state := 2;
         END_IF
 		
     2:	RecoveryToMaintenance := 
 	
 		NOT GVL_Prop.propulsion_fault AND
-		NOT LEVI_GVL.levitation_fault AND
+		NOT GVL_LEVI.levitation_fault AND
 		
 		BasicChecks() AND 
 		
