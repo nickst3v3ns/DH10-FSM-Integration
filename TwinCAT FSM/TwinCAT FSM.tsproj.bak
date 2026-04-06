@@ -254,7 +254,7 @@
 				<Debugger Priority="61"/>
 			</Settings>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="200000" AmsPort="350" AdtTasks="true">
+				<Task Id="3" Priority="10" CycleTime="200000" AmsPort="350" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
 				</Task>
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
@@ -279,13 +279,13 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C981E0CF-8CFC-2218-A12E-3D8E38FD4A92}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{89A833E0-9C1A-7D81-C769-A0C87B193C31}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>MAIN.btwinsafetest</Name>
+							<Name>MAIN.main_fsm.btwinsafe</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -315,10 +315,6 @@
 							<Name>PTC_CAN_GVL.CAN_OUTPUTS</Name>
 							<Comment><![CDATA[CAN INTERFACE]]></Comment>
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.main_fsm.btwinsafe</Name>
-							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
@@ -848,7 +844,7 @@
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
-							<Priority>20</Priority>
+							<Priority>10</Priority>
 							<CycleTime>20000000</CycleTime>
 						</Context>
 					</Contexts>
@@ -857,7 +853,7 @@
 						<TaskPouOid Prio="3" OTCID="#x08502003"/>
 						<TaskPouOid Prio="4" OTCID="#x08502004"/>
 						<TaskPouOid Prio="5" OTCID="#x08502005"/>
-						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+						<TaskPouOid Prio="10" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>
@@ -20951,11 +20947,13 @@
 		<MappingInfo Identifier="{08502001-0060-0304-0020-500860000403}" Id="#x02030040" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{03040040-0040-0304-4000-040340000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 72 (EL6910)">
-				<Link VarA="Term 36 (EK1200)^Term 73 (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 TxPDO"/>
-				<Link VarA="Term 36 (EK1200)^Term 73 (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 RxPDO"/>
-				<Link VarA="Term 36 (EK1200)^Term 74 (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 TxPDO"/>
-				<Link VarA="Term 36 (EK1200)^Term 74 (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 RxPDO"/>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 73 (EL1904)">
+				<Link VarA="Term 36 (EK1200)^Term 72 (EL6910)^ConnectionInputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 36 (EK1200)^Term 72 (EL6910)^ConnectionOutputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 74 (EL2904)">
+				<Link VarA="Term 36 (EK1200)^Term 72 (EL6910)^ConnectionInputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 36 (EK1200)^Term 72 (EL6910)^ConnectionOutputs^TwinSafeGroup1.Term 74 (EL2904) - Module 1 (FSOES)_4 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^FSM^FSM Instance">
@@ -20968,7 +20966,7 @@
 				<Link VarA="PlcTask Inputs^GVL_FSM.bsafety_inputs_valid" VarB="StandardInputs^TwinSafeGroup1.VALIDTWINSAFE(OUT)_10"/>
 				<Link VarA="PlcTask Inputs^GVL_FSM.bsdc_closed" VarB="StandardInputs^TwinSafeGroup1.SDCSense(OUT)_8"/>
 				<Link VarA="PlcTask Outputs^GVL_FSM.bEstopRestart" VarB="StandardOutputs^TwinSafeGroup1.PLCRestart(IN)1_6"/>
-				<Link VarA="PlcTask Outputs^MAIN.btwinsafetest" VarB="StandardOutputs^TwinSafeGroup1.PLCConfirm(IN)_5"/>
+				<Link VarA="PlcTask Outputs^GVL_FSM.btrigger_EL" VarB="StandardOutputs^TwinSafeGroup1.PLCConfirm(IN)_5"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyErrorAcknowledge" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyRunCommand" VarB="StandardOutputs^TwinSafeGroup1.Run_2"/>
 			</OwnerB>
