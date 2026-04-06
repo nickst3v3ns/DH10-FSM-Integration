@@ -2,8 +2,11 @@
 <TcPlcObject Version="1.1.0.1">
   <Task Name="PTC_CAN_RX_Task" Id="{9bb6b502-c68c-49a6-af84-6105f1878825}">
     <!--CycleTime in micro seconds.-->
-    <CycleTime>10000</CycleTime>
-    <Priority>5</Priority>
+    <CycleTime>1000</CycleTime>
+    <Priority>8</Priority>
+    <PouCall>
+      <Name>PTC_RX_COM</Name>
+    </PouCall>
     <TaskFBGuid>{753f8a0d-84af-4387-aa40-c7c6f3dff7a7}</TaskFBGuid>
     <Fb_init>{3871e116-2b99-4c31-8ff3-eec403fedf71}</Fb_init>
     <Fb_exit>{c80d802a-71f9-4f39-bba8-bfedabdf5389}</Fb_exit>

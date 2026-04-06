@@ -3,7 +3,7 @@
   <Task Name="Thermal_Task" Id="{24027357-b942-46e9-bec6-6268c5189914}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>10000</CycleTime>
-    <Priority>2</Priority>
+    <Priority>14</Priority>
     <PouCall>
       <Name>THERMAL_MAIN</Name>
     </PouCall>

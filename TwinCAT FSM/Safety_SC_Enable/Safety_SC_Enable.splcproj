@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Crc="4258445824" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project Crc="3556538793" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
@@ -16,7 +16,7 @@
     <IntProjName>Safety_SC_Enable</IntProjName>
     <IsNewCreated>false</IsNewCreated>
     <SPlcProjVersion>1.8.0.0</SPlcProjVersion>
-    <NextSdsId>11</NextSdsId>
+    <NextSdsId>14</NextSdsId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -28,13 +28,15 @@
     <None Include="TargetSystemConfig.xml">
       <Visible>false</Visible>
     </None>
+    <None Include="TwinSafeGroup1\Alias Devices\Braking PCB\PLCEngageBrakes%28IN%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Braking PCB\PLC_CLK_Trigger%28IN%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Emergency Line\ErrorEstopOutPLC%28OUT%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Emergency Line\ESTOP%28OUT%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Emergency Line\PLCConfirm%28IN%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Emergency Line\PLCRestart%28IN%291.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Emergency Line\SDCSense%28OUT%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\ErrorAcknowledgement.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\ErrorEstopOutPLC%28OUT%29.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\ESTOP%28OUT%29.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\PLCConfirm%28IN%29.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\PLCRestart%28IN%291.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Run.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\SDCSense%28OUT%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Term 73 %28EL1904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Term 74 %28EL2904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\VALIDTWINSAFE%28OUT%29.sds" />
@@ -47,5 +49,7 @@
   <ItemGroup>
     <Folder Include="TwinSafeGroup1" />
     <Folder Include="TwinSafeGroup1\Alias Devices" />
+    <Folder Include="TwinSafeGroup1\Alias Devices\Braking PCB" />
+    <Folder Include="TwinSafeGroup1\Alias Devices\Emergency Line" />
   </ItemGroup>
 </Project>

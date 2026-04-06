@@ -6,6 +6,7 @@ VAR_GLOBAL
 	//First Levi Checks
 	enable_levi_checks: 	BOOL;
 	
+	levitation_enable:		BOOL;
 	levitation_active:		BOOL;
 	levitation_fault: 		BOOL; //fatal levitation error
 	
