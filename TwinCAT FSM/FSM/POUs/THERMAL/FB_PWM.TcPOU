@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PWM" Id="{bbe5de1f-55c0-467b-bc68-55e58dfb3f42}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PWM
+VAR_INPUT
+    fTargetDutyCycle : REAL;    // Target: 0.0 to 100.0
+    fRampTime        : TIME := T#3s;    // Time to go from 0 to 100% (e.g., T#5s)
+    nPeriodCycles    : INT := 10; // 20ms period / 2ms cycle
+END_VAR
+VAR_OUTPUT
+    bOut             : BOOL;    // Map to EL2008
+    fCurrentDutyCycle: REAL;    // The actual "ramping" value
+END_VAR
+VAR
+    nCounter         : INT;
+    nThreshold       : INT;
+    fStepSize        : REAL;    // How much to change per PLC cycle
+    fCycleTimeSeconds: REAL := 0.002; // 2ms in seconds
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// --- 1. RAMP LOGIC ---
+// Calculate how much to change the duty cycle every 2ms cycle
+// Formula: (100% / RampTime in seconds) * CycleTime in seconds
+IF fRampTime > T#0s THEN
+    fStepSize := (100.0 / (TIME_TO_REAL(fRampTime) / 1000.0)) * fCycleTimeSeconds;
+ELSE
+    fStepSize := 100.0; // Instant jump if RampTime is 0
+END_IF
+
+// Move Current toward Target
+IF fCurrentDutyCycle < fTargetDutyCycle THEN
+    fCurrentDutyCycle := fCurrentDutyCycle + fStepSize;
+    IF fCurrentDutyCycle > fTargetDutyCycle THEN fCurrentDutyCycle := fTargetDutyCycle; END_IF
+ELSIF fCurrentDutyCycle > fTargetDutyCycle THEN
+    fCurrentDutyCycle := fCurrentDutyCycle - fStepSize;
+    IF fCurrentDutyCycle < fTargetDutyCycle THEN fCurrentDutyCycle := fTargetDutyCycle; END_IF
+END_IF
+
+
+// --- 2. PWM LOGIC ---
+// Calculate threshold based on the ramping duty cycle
+nThreshold := REAL_TO_INT((fCurrentDutyCycle / 100.0) * INT_TO_REAL(nPeriodCycles));
+
+nCounter := nCounter + 1;
+IF nCounter >= nPeriodCycles THEN
+    nCounter := 0;
+END_IF
+
+// Set physical output
+IF fCurrentDutyCycle <= 0.0 THEN
+    bOut := FALSE;
+ELSIF fCurrentDutyCycle >= 100.0 THEN
+    bOut := TRUE;
+ELSE
+    bOut := (nCounter < nThreshold);
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

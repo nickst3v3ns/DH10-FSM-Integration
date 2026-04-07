@@ -27,6 +27,11 @@ VAR_GLOBAL
 	bEMSOVERHEAT			:BOOL;
 	bMOTOROVERHEAT			:BOOL;
 	bFLOWOVERHEAT			:BOOL;
+	
+	
+//PWM CONTROL
+	fDutyCycle_PROP			:REAL := 0;
+	fDutyCycle_LEVI			:REAL := 0;
 END_VAR
 
 (*	HEMS / EMS indexing -> specifically for index to placement mapping of temperature sensors
