@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <Task Name="Levi_Fast_Task_Horizontal" Id="{0ed8ebb2-b773-4c68-b2ec-f568e30d343b}">
     <!--CycleTime in micro seconds.-->
-    <CycleTime>1000</CycleTime>
+    <CycleTime>300</CycleTime>
     <Priority>6</Priority>
     <PouCall>
       <Name>BackgroundLateral</Name>

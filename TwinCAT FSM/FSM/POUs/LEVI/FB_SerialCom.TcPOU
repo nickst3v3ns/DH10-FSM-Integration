@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_SerialCom" Id="{11b4fdc9-c4cc-4d79-b9a5-8ab9e7b63df4}" SpecialFunc="None">
+  <POU Name="FB_SerialCom" Id="{8dddadaf-93a2-47ea-8a10-3127b2a0a119}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SerialCom
 VAR_IN_OUT
 	TxBuffer	: ComBuffer;
 	RxBuffer	: ComBuffer;
 END_VAR
 VAR
-	Timer		: TON := (PT:=T#0.0015S);
+	bTest 		: BOOL := FALSE;
+	qTest       : BOOL := FALSE;
+	Timer		: TON := (PT:=T#0.002S);
 	fbSend		: SendData;
 	bSendBusy	: BOOL;
 	eSendErrorID: ComError_t;
@@ -25,9 +27,12 @@ VAR
 	//new
 	nLastReceiveCounter : UDINT;
 	fbPPS_Timer : TON;
-	bDATAVALID : BOOL;
+	bDATAVALID : BOOL := TRUE;
+	resetCounter : UDINT := 0;
 	
-	TxData : ARRAY[1..2] OF BYTE;
+	TxData : ARRAY[1..2] OF BYTE := [16#01, 16#86];
+	TurnOff : ARRAY[1..6] OF BYTE := [16#01, 16#83, 16#80, 16#80, 16#80, 16#80];
+	TurnOn : ARRAY[1..6] OF BYTE := [16#01, 16#83, 16#80, 16#80, 16#81, 16#80];
 	
 	fClearBuffer : ClearComBuffer;
 	
@@ -39,15 +44,40 @@ VAR
 	strResult_Hex16 : STRING;
 	iResult :DINT;
 	
+	SensorOn : BOOL := TRUE;
+	
+	aBuffer         : ARRAY[0..1999] OF LREAL;
+    nIndex          : UINT := 0;
+    nCount          : UINT := 0;
+    index               : UINT;
+    fSum            : LREAL;
+    fSumSqDiff      : LREAL;
+    nSize           : UINT := 2000;
+	
 END_VAR
 
 VAR_OUTPUT
 	fResult_scaled : REAL;
 	nPacketsPerSecond : UDINT;
+	
+	fVariance       : LREAL;     // The calculated variance
+    fMean           : LREAL;     // The calculated average (mean)
+    bBufferFull     : BOOL;      // True once we have 1000 samples
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Call the send block every second to repeat the transmission.
+      <ST><![CDATA[IF SensorOn = FALSE THEN
+	fbSend(	pSendData:= ADR (TurnOn),
+				length := 6,
+				TXbuffer:= TxBuffer,
+				Busy=> bSendBusy,
+				Error=> );
+	IF fbSend.Busy = FALSE THEN
+		SensorOn := TRUE;
+	END_IF	
+END_IF
+
+// Call the send block every second to repeat the transmission.
 // Also call the block as long as it is busy to finish a transmission.
 fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
 IF fbPPS_Timer.Q THEN
@@ -56,7 +86,13 @@ IF fbPPS_Timer.Q THEN
 END_IF
 
 Timer(IN:=TRUE);
-IF Timer.Q OR fbSend.Busy THEN
+IF fbSend.Busy THEN
+	bTest := TRUE;
+END_IF
+IF Timer.Q THEN
+	qTest := TRUE;
+END_IF
+IF (Timer.Q OR fbSend.Busy) AND bDATAVALID THEN
 	Timer(IN:=FALSE); (* reset timer *)
 	TxData[1] := 16#01;
 	TxData[2] := 16#86;
@@ -75,9 +111,9 @@ END_IF
 
 
 fbReceive(
-	Timeout:= T#0.0015S,
+	Timeout:= T#0.002S,
 	pReceiveData:= ADR(sReceivedData),
-	SizeReceiveData := SIZEOF(sReceivedData),
+	SizeReceiveData := 4,
 	RXbuffer:= RxBuffer,
 	DataReceived => bDataReceived,
 	Busy=> bReceiveBusy,
@@ -100,9 +136,28 @@ IF bDataReceived THEN
         (* Formula: X = D * Range / 16384 *)
         (* Assuming 25mm range + 25mm offset based on your previous code *)
 		fResult_scaled := (DINT_TO_REAL(iResult) * 25 /16384.0) + 25.0;
+		IF (sReceivedData[1] AND 16#30) = (sReceivedData[2] AND 16#30) AND
+			(sReceivedData[2] AND 16#30) = (sReceivedData[3] AND 16#30) AND
+			(sReceivedData[3] AND 16#30) = (sReceivedData[4] AND 16#30) THEN
+				bDATAVALID := TRUE;
+		END_IF
+		IF (sReceivedData[1] AND 16#30) <> (sReceivedData[2] AND 16#30) OR
+			(sReceivedData[2] AND 16#30) <> (sReceivedData[3] AND 16#30) OR
+			(sReceivedData[3] AND 16#30) <> (sReceivedData[4] AND 16#30) THEN
+				bDATAVALID := FALSE;
+		END_IF
 		sLastScaledResult := fResult_scaled;
-	//fClearBuffer(Buffer := RxBuffer);
+		
 END_IF
+
+IF NOT bDATAVALID THEN
+	fClearBuffer(Buffer := RxBuffer);
+	bDATAVALID := TRUE;
+	resetCounter := resetCounter + 1;
+	
+END_IF
+
+
 
 
 (*
