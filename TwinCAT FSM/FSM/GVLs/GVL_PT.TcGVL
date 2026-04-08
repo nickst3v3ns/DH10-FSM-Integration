@@ -32,6 +32,10 @@ VAR_GLOBAL
 	DC_LINK_VOLTAGE : DWORD;
 	
 	emergency_shutdown:		BOOL; //might need to be reworked
+	
+	
+//LVBAT
+	CAN_NODE_STATE_LV AT %I*:		USINT;
 END_VAR
 
 //typedef enum {
