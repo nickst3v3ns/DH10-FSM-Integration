@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LEVI_MAIN_TEST" Id="{d65ed62a-347e-4ddd-ac75-dddaa3b0f61d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM LEVI_MAIN_TEST
+VAR
+	fb_serial1 : FB_SerialCom;
+	fb_serial2 : FB_SerialCom;
+	fb_serial3 : FB_SerialCom;
+	fb_serial4 : FB_SerialCom;
+	fb_serial5 : FB_SerialCom;
+	fb_serial6 : FB_SerialCom;
+	fb_serial7 : FB_SerialCom;
+	fb_serial8 : FB_SerialCom;
+	fb_serial9 : FB_SerialCom;
+	fb_serial10 : FB_SerialCom;
+	fb_serial11 : FB_SerialCom;
+	fb_serial12 : FB_SerialCom;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fb_serial1(TxBuffer := GVL_LEVI.TxBufferEL_1, RxBuffer := GVL_LEVI.RxBufferEL_1);
+fb_serial2(TxBuffer := GVL_LEVI.TxBufferEL_2, RxBuffer := GVL_LEVI.RxBufferEL_2);
+fb_serial3(TxBuffer := GVL_LEVI.TxBufferEL_3, RxBuffer := GVL_LEVI.RxBufferEL_3);
+fb_serial4(TxBuffer := GVL_LEVI.TxBufferEL_4, RxBuffer := GVL_LEVI.RxBufferEL_4);
+fb_serial5(TxBuffer := GVL_LEVI.TxBufferEL_5, RxBuffer := GVL_LEVI.RxBufferEL_5);
+fb_serial6(TxBuffer := GVL_LEVI.TxBufferEL_6, RxBuffer := GVL_LEVI.RxBufferEL_6);
+fb_serial7(TxBuffer := GVL_LEVI.TxBufferEL_7, RxBuffer := GVL_LEVI.RxBufferEL_7);
+fb_serial8(TxBuffer := GVL_LEVI.TxBufferEL_8, RxBuffer := GVL_LEVI.RxBufferEL_8);
+fb_serial9(TxBuffer := GVL_LEVI.TxBufferEL_9, RxBuffer := GVL_LEVI.RxBufferEL_9);
+fb_serial10(TxBuffer := GVL_LEVI.TxBufferEL_10, RxBuffer := GVL_LEVI.RxBufferEL_10);
+fb_serial11(TxBuffer := GVL_LEVI.TxBufferEL_11, RxBuffer := GVL_LEVI.RxBufferEL_11);
+fb_serial12(TxBuffer := GVL_LEVI.TxBufferEL_12, RxBuffer := GVL_LEVI.RxBufferEL_12);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

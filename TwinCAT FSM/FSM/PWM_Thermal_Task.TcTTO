@@ -3,7 +3,7 @@
   <Task Name="PWM_Thermal_Task" Id="{5207e2bc-87d3-4da9-a6d3-f583d143f0d0}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>2000</CycleTime>
-    <Priority>10</Priority>
+    <Priority>12</Priority>
     <PouCall>
       <Name>PWM_CTRL</Name>
     </PouCall>

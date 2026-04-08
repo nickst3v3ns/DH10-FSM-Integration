@@ -62,6 +62,9 @@
     <Compile Include="Levi_Fast_Task_Vertical.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LEVI_TEST_TASK.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +108,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\FB_SerialCom.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">

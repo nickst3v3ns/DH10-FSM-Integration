@@ -52,6 +52,59 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}" AutoDeleteType="true">ST_FMB_BatteryData</Name>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>nPackSOC</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nVoltageRaw</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nPackSOCActive</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nBatteryState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 181, 216, 224]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>40</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nActualCurrent</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000003}">SINT</Type>
+				<Comment><![CDATA[ [cite: 216, 224] (SINT for signed 8-bit)]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fActualVoltage</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<Comment><![CDATA[ Raw / 1024 ]]></Comment>
+				<BitSize>64</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fActualTemp</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<Comment><![CDATA[ Raw - 55 [cite: 224]]]></Comment>
+				<BitSize>64</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
 			<BitSize>64</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
@@ -112,59 +165,6 @@
 				</ArrayInfo>
 				<BitSize>3584</BitSize>
 				<BitOffs>48</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}" AutoDeleteType="true">ST_FMB_BatteryData</Name>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>nPackSOC</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nVoltageRaw</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
-				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nPackSOCActive</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nBatteryState</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<Comment><![CDATA[ [cite: 181, 216, 224]]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>40</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nActualCurrent</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000003}">SINT</Type>
-				<Comment><![CDATA[ [cite: 216, 224] (SINT for signed 8-bit)]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>48</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>fActualVoltage</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<Comment><![CDATA[ Raw / 1024 ]]></Comment>
-				<BitSize>64</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>fActualTemp</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<Comment><![CDATA[ Raw - 55 [cite: 224]]]></Comment>
-				<BitSize>64</BitSize>
-				<BitOffs>128</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -346,16 +346,16 @@
 				<Cpu CpuId="2" BaseTime="1000"/>
 				<Cpu CpuId="3" BaseTime="1000"/>
 				<Debugger Priority="61"/>
-				<IoIdleTask Priority="12"/>
+				<IoIdleTask Priority="14"/>
 			</Settings>
 			<Tasks>
-				<Task Id="3" Priority="16" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="3" Priority="18" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
 				</Task>
-				<Task Id="4" Priority="14" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="4" Priority="16" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
 					<Name>HeartBeat</Name>
 				</Task>
-				<Task Id="5" Priority="18" CycleTime="1000000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Priority="20" CycleTime="1000000" AmsPort="352" AdtTasks="true">
 					<Name>Thermal_Task</Name>
 				</Task>
 				<Task Id="6" Priority="4" CycleTime="3000" AmsPort="353" Affinity="#x00000004" AdtTasks="true">
@@ -367,24 +367,27 @@
 				<Task Id="8" Priority="8" CycleTime="10000" AmsPort="355" Affinity="#x00000004" AdtTasks="true">
 					<Name>PTC_CAN_RX_Task</Name>
 				</Task>
-				<Task Id="9" Priority="10" CycleTime="20000" AmsPort="356" AdtTasks="true">
+				<Task Id="9" Priority="12" CycleTime="20000" AmsPort="356" AdtTasks="true">
 					<Name>PWM_Thermal_Task</Name>
+				</Task>
+				<Task Id="10" Priority="10" CycleTime="15000" AmsPort="357" Affinity="#x00000004" AdtTasks="true">
+					<Name>LEVI_TEST_TASK</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{8780663C-6E0B-75A9-24B6-BED3B98E4F37}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{9C6E6C9D-DF74-B99C-8D25-FE29DA342202}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
+					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
 						<Name>Thermal_Task Outputs</Name>
 						<Var>
 							<Name>GVL_FSM.bEstopRestart</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
+					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
 						<Name>Thermal_Task Inputs</Name>
 						<Var>
 							<Name>THERMAL_MAIN.fbEMS_T.temp_raw11</Name>
@@ -703,7 +706,7 @@
 							<Type>REAL</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
+					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
@@ -729,7 +732,7 @@
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
+					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>SAFETY_MAIN.SafetyResetButton</Name>
@@ -760,7 +763,7 @@
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="3" AreaNo="49">
+					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PWM_Thermal_Task Outputs</Name>
 						<Var>
 							<Name>PWM_CTRL.bOutput_PWM_LEVI</Name>
@@ -782,12 +785,12 @@
 					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 						<Name>PTC_CAN_RX_Task Inputs</Name>
 						<Var>
-							<Name>GVL_PT.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
 							<Name>PTC_RX_COM.LV_BAT_Par.stBattery1</Name>
 							<Type GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}">ST_FMB_BatteryData</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PT.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
@@ -1122,39 +1125,49 @@
 						</Context>
 						<Context>
 							<Id>3</Id>
+							<Name>LEVI_TEST_TASK</Name>
+							<ManualConfig>
+								<OTCID>#x020100a0</OTCID>
+							</ManualConfig>
+							<Priority>10</Priority>
+							<CycleTime>1500000</CycleTime>
+						</Context>
+						<Context>
+							<Id>4</Id>
 							<Name>PWM_Thermal_Task</Name>
 							<ManualConfig>
 								<OTCID>#x02010090</OTCID>
 							</ManualConfig>
-							<Priority>10</Priority>
+							<Priority>12</Priority>
 							<CycleTime>2000000</CycleTime>
 						</Context>
 						<Context>
-							<Id>4</Id>
+							<Id>5</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
-							<Priority>16</Priority>
+							<Priority>18</Priority>
 							<CycleTime>10000000</CycleTime>
 						</Context>
 						<Context>
-							<Id>5</Id>
+							<Id>6</Id>
 							<Name>Thermal_Task</Name>
 							<ManualConfig>
 								<OTCID>#x02010050</OTCID>
 							</ManualConfig>
-							<Priority>18</Priority>
+							<Priority>20</Priority>
 							<CycleTime>100000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
-						<TaskPouOid Prio="4" OTCID="#x08502004"/>
-						<TaskPouOid Prio="6" OTCID="#x08502009"/>
-						<TaskPouOid Prio="8" OTCID="#x08502003"/>
-						<TaskPouOid Prio="10" OTCID="#x08502006"/>
-						<TaskPouOid Prio="16" OTCID="#x08502002"/>
+						<TaskPouOid Prio="4" OTCID="#x0850200b"/>
+						<TaskPouOid Prio="6" OTCID="#x08502003"/>
+						<TaskPouOid Prio="8" OTCID="#x08502008"/>
+						<TaskPouOid Prio="10" OTCID="#x0850200a"/>
+						<TaskPouOid Prio="12" OTCID="#x08502009"/>
 						<TaskPouOid Prio="18" OTCID="#x08502005"/>
+						<TaskPouOid Prio="20" OTCID="#x08502002"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>
@@ -22175,9 +22188,9 @@
 						<EtherCAT SlaveType="5" AdsServerAddress="05a1e30a05010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100002c">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
-							<SyncMan>001828002600010003000000000000000000001826010000</SyncMan>
-							<SyncMan>002428002200010004000000000000000000002422010000</SyncMan>
-							<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
+							<SyncMan>001800002600000003000000000000000000001826010000</SyncMan>
+							<SyncMan>002418002200010004000000000000000000002422010000</SyncMan>
+							<Fmmu>0000000000000000000000020000000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010140200181402</BootStrapData>
@@ -22192,29 +22205,6 @@
 									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
 								</Entry>
 								<Entry Name="TxPDO_3" Index="#x6000" Sub="#x03" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TxPDO_4" Index="#x6000" Sub="#x04" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TxPDO_5" Index="#x6000" Sub="#x05" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="CAN_NODE_LV_BAT_OUT" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
-								<Entry Name="RxPDO_1" Index="#x7000" Sub="#x01" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_2" Index="#x7000" Sub="#x02" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_3" Index="#x7000" Sub="#x03" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_4" Index="#x7000" Sub="#x04" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_5" Index="#x7000" Sub="#x05" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
 								</Entry>
 							</Pdo>
@@ -22382,14 +22372,14 @@ Slave-Mode:
  130 = Node is Stopped
 ]]></Comment>
 							<Type>USINT</Type>
-							<BitOffs>264</BitOffs>
+							<BitOffs>136</BitOffs>
 						</Var>
 						<Var BoxStateVariable="true">
 							<Name>DiagFlag</Name>
 							<Comment><![CDATA[0 = Diagnosis Data unchanged
 1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
 							<Type>BIT</Type>
-							<BitOffs>313</BitOffs>
+							<BitOffs>185</BitOffs>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
@@ -22526,245 +22516,12 @@ Slave-Mode:
 								</Var>
 							</Vars>
 						</TxPdo>
-						<TxPdo TX="true" CobId="1167" TransType="254" Flags="3" PdoStartAddress="17">
-							<Name>TxPDO 4</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>136</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>152</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>168</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>184</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<TxPdo TX="true" CobId="448" TransType="254" Flags="3" PdoStartAddress="25">
-							<Name>TxPDO 5</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>200</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>216</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>232</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>248</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<RxPdo CobId="527" TransType="245" Flags="3">
-							<Name>RxPDO 1</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-								</Var>
-								<Var>
-									<Name>2.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>8</BitOffs>
-									<ExternalAddress>1</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>16</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>24</BitOffs>
-									<ExternalAddress>3</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>5.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>32</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>6.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>40</BitOffs>
-									<ExternalAddress>5</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>7.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>48</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>8.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>56</BitOffs>
-									<ExternalAddress>7</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="783" TransType="245" Flags="3" PdoStartAddress="8">
-							<Name>RxPDO 2</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>64</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>80</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>96</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>112</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="1039" TransType="254" Flags="3" PdoStartAddress="16">
-							<Name>RxPDO 3</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>128</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>144</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>160</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>176</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="1295" TransType="254" Flags="3" PdoStartAddress="24">
-							<Name>RxPDO 4</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>192</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>208</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>224</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>240</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="576" TransType="254" Flags="3" PdoStartAddress="32">
-							<Name>RxPDO 5</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>256</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>272</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>288</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>304</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
 					</CanOpen>
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="05a1e30a0501" FifoSize="5" CycleDivider="1"/>
-						<DevParameter CycleTime="100000" InputShift="60"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="05a1e30a0501" EquiCycleTime="10000" FifoSize="5" CycleDivider="1"/>
+						<DevParameter CycleTime="10000" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter NodeId="127" Baudrate="3" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt0="1" Bt1="28" TimerTick="4" BusActiveDivider="125" TxBusyTime="2000" TimeIntegral="4000" WdTimeoutInCycleTime="100000"/>
@@ -22773,13 +22530,14 @@ Slave-Mode:
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2002-0850-0420-500891000403}" Id="#x02030060"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0220-500870000403}" Id="#x02030080"/>
-		<MappingInfo Identifier="{00000000-2004-0850-0020-500820000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-2005-0850-0520-500862000403}" Id="#x02030040"/>
-		<MappingInfo Identifier="{00000000-2009-0850-0120-500811000403}" Id="#x02030020"/>
-		<MappingInfo Identifier="{08502002-0060-0304-0020-500860000403}" Id="#x02030030" Watchdog="00000000000000000000000000000000"/>
-		<MappingInfo Identifier="{08502005-0090-0304-0020-500890000403}" Id="#x02030070" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{00000000-2002-0850-0620-500862000403}" Id="#x02030040"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0120-500811000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-2005-0850-0520-500891000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{00000000-2008-0850-0220-500870000403}" Id="#x02030080"/>
+		<MappingInfo Identifier="{00000000-2008-0850-0220-500880000403}" Id="#x02030090"/>
+		<MappingInfo Identifier="{00000000-200B-0850-0020-500820000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{08502002-0090-0304-0020-500890000403}" Id="#x02030070" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{08502005-0060-0304-0020-500860000403}" Id="#x02030030" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{03040090-0090-0304-9000-040390000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="LEVI_TEST_TASK" Id="{72358abd-7913-400d-a8c1-e210d0719b69}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>1500</CycleTime>
+    <Priority>10</Priority>
+    <PouCall>
+      <Name>LEVI_MAIN_TEST</Name>
+    </PouCall>
+    <TaskFBGuid>{b74b4849-0b12-4967-be09-2092133ecbfe}</TaskFBGuid>
+    <Fb_init>{a1cc5636-c053-4337-b5ed-05c6ae4677e2}</Fb_init>
+    <Fb_exit>{800c5434-524c-42e5-a02f-297a4b7b7563}</Fb_exit>
+    <CycleUpdate>{720c2bf3-ccae-438c-b24a-1befeb0e95b8}</CycleUpdate>
+    <PostCycleUpdate>{7d5a2536-6408-47b1-9465-5bc9bf814ec5}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>
