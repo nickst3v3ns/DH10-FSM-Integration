@@ -115,6 +115,59 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}" AutoDeleteType="true">ST_FMB_BatteryData</Name>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>nPackSOC</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nVoltageRaw</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nPackSOCActive</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 216, 223]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nBatteryState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ [cite: 181, 216, 224]]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>40</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nActualCurrent</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000003}">SINT</Type>
+				<Comment><![CDATA[ [cite: 216, 224] (SINT for signed 8-bit)]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fActualVoltage</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<Comment><![CDATA[ Raw / 1024 ]]></Comment>
+				<BitSize>64</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fActualTemp</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<Comment><![CDATA[ Raw - 55 [cite: 224]]]></Comment>
+				<BitSize>64</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Name>
 			<BitSize>3632</BitSize>
 			<SubItem>
@@ -321,7 +374,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{F50B9742-4482-46AE-970D-B81409FE35F1}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{8780663C-6E0B-75A9-24B6-BED3B98E4F37}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
@@ -574,11 +627,6 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bEstopError</Name>
-							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL_LEVI.drive_voltage_HEMS1</Name>
 							<Comment><![CDATA[DC link voltages]]></Comment>
 							<Type>REAL</Type>
@@ -628,6 +676,16 @@
 							<Type>REAL</Type>
 						</Var>
 						<Var>
+							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
+							<Comment><![CDATA[LVBAT]]></Comment>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bEstopError</Name>
+							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_Prop.drive_voltages1</Name>
 							<Comment><![CDATA[DC-Link voltages]]></Comment>
 							<Type>REAL</Type>
@@ -643,11 +701,6 @@
 						<Var>
 							<Name>GVL_Prop.drive_voltages4</Name>
 							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
-							<Comment><![CDATA[LVBAT]]></Comment>
-							<Type>USINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
@@ -731,6 +784,10 @@
 						<Var>
 							<Name>GVL_PT.CAN_INPUTS</Name>
 							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
+							<Name>PTC_RX_COM.LV_BAT_Par.stBattery1</Name>
+							<Type GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}">ST_FMB_BatteryData</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
@@ -22118,8 +22175,8 @@
 						<EtherCAT SlaveType="5" AdsServerAddress="05a1e30a05010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100002c">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
-							<SyncMan>001828002600010003000000000000000000001826010000</SyncMan>
-							<SyncMan>00242f002200010004000000000000000000002422010000</SyncMan>
+							<SyncMan>001800002600000003000000000000000000001826010000</SyncMan>
+							<SyncMan>002418002200010004000000000000000000002422010000</SyncMan>
 							<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -22132,32 +22189,9 @@
 									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
 								</Entry>
 								<Entry Name="TxPDO_2" Index="#x6000" Sub="#x02" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
 								</Entry>
 								<Entry Name="TxPDO_3" Index="#x6000" Sub="#x03" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TxPDO_4" Index="#x6000" Sub="#x04" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TxPDO_5" Index="#x6000" Sub="#x05" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="CAN_NODE_LV_BAT_OUT" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
-								<Entry Name="RxPDO_1" Index="#x7000" Sub="#x01" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_2" Index="#x7000" Sub="#x02" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_3" Index="#x7000" Sub="#x03" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_4" Index="#x7000" Sub="#x04" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
-								</Entry>
-								<Entry Name="RxPDO_5" Index="#x7000" Sub="#x05" Flags="#x00000100">
 									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
 								</Entry>
 							</Pdo>
@@ -22325,14 +22359,14 @@ Slave-Mode:
  130 = Node is Stopped
 ]]></Comment>
 							<Type>USINT</Type>
-							<BitOffs>320</BitOffs>
+							<BitOffs>136</BitOffs>
 						</Var>
 						<Var BoxStateVariable="true">
 							<Name>DiagFlag</Name>
 							<Comment><![CDATA[0 = Diagnosis Data unchanged
 1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
 							<Type>BIT</Type>
-							<BitOffs>369</BitOffs>
+							<BitOffs>185</BitOffs>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
@@ -22345,17 +22379,17 @@ Slave-Mode:
 							<Vars VarGrpType="1" InsertType="2">
 								<Name>Inputs</Name>
 								<Var>
-									<Name>1.digital 8 bit input block</Name>
+									<Name>nPackSOC</Name>
 									<Type>USINT</Type>
 								</Var>
 								<Var>
-									<Name>2.digital 8 bit input block</Name>
+									<Name>nVoltageRawByte0</Name>
 									<Type>USINT</Type>
 									<BitOffs>8</BitOffs>
 									<ExternalAddress>1</ExternalAddress>
 								</Var>
 								<Var>
-									<Name>3.digital 8 bit input block</Name>
+									<Name>nVoltageRawByte1</Name>
 									<Type>USINT</Type>
 									<BitOffs>16</BitOffs>
 									<ExternalAddress>2</ExternalAddress>
@@ -22398,31 +22432,48 @@ Slave-Mode:
 							<Vars VarGrpType="1" InsertType="2">
 								<Name>Inputs</Name>
 								<Var>
-									<Name>1. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
+									<Name>nBatteryState</Name>
+									<Type>USINT</Type>
 									<BitOffs>64</BitOffs>
 								</Var>
 								<Var>
-									<Name>2. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>80</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
+									<Name>nActualCurrent</Name>
+									<Type>SINT</Type>
+									<BitOffs>64</BitOffs>
 								</Var>
 								<Var>
-									<Name>3. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>96</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
+									<Name>Var 3650</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
 								</Var>
 								<Var>
-									<Name>4. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>112</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
+									<Name>Var 3652</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
+								</Var>
+								<Var>
+									<Name>Var 3842</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
+								</Var>
+								<Var>
+									<Name>Var 3843</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
+								</Var>
+								<Var>
+									<Name>Var 3844</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
+								</Var>
+								<Var>
+									<Name>Var 3845</Name>
+									<Type>BYTE</Type>
+									<BitOffs>64</BitOffs>
 								</Var>
 							</Vars>
 						</TxPdo>
-						<TxPdo TX="true" CobId="911" TransType="254" Flags="3" PdoStartAddress="16">
+						<TxPdo TX="true" CobId="911" TransType="254" Flags="3" PdoStartAddress="9">
 							<Name>TxPDO 3</Name>
 							<ImageId>82</ImageId>
 							<Vars VarGrpType="1" InsertType="2">
@@ -22430,267 +22481,34 @@ Slave-Mode:
 								<Var>
 									<Name>1. analogue 2 byte input channel</Name>
 									<Type>UINT</Type>
-									<BitOffs>128</BitOffs>
+									<BitOffs>72</BitOffs>
 								</Var>
 								<Var>
 									<Name>2. analogue 2 byte input channel</Name>
 									<Type>UINT</Type>
-									<BitOffs>144</BitOffs>
+									<BitOffs>88</BitOffs>
 									<ExternalAddress>2</ExternalAddress>
 								</Var>
 								<Var>
 									<Name>3. analogue 2 byte input channel</Name>
 									<Type>UINT</Type>
-									<BitOffs>160</BitOffs>
+									<BitOffs>104</BitOffs>
 									<ExternalAddress>4</ExternalAddress>
 								</Var>
 								<Var>
 									<Name>4. analogue 2 byte input channel</Name>
 									<Type>UINT</Type>
-									<BitOffs>176</BitOffs>
+									<BitOffs>120</BitOffs>
 									<ExternalAddress>6</ExternalAddress>
 								</Var>
 							</Vars>
 						</TxPdo>
-						<TxPdo TX="true" CobId="1167" TransType="254" Flags="3" PdoStartAddress="24">
-							<Name>TxPDO 4</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>192</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>208</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>224</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>240</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<TxPdo TX="true" CobId="448" TransType="254" Flags="3" PdoStartAddress="32">
-							<Name>TxPDO 5</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>256</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>272</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>288</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte input channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>304</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<RxPdo CobId="527" TransType="245" Flags="3">
-							<Name>RxPDO 1</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-								</Var>
-								<Var>
-									<Name>2.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>8</BitOffs>
-									<ExternalAddress>1</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>16</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>24</BitOffs>
-									<ExternalAddress>3</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>5.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>32</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>6.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>40</BitOffs>
-									<ExternalAddress>5</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>7.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>48</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>8.digital 8 bit output block</Name>
-									<Type>USINT</Type>
-									<BitOffs>56</BitOffs>
-									<ExternalAddress>7</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="783" TransType="245" Flags="3" PdoStartAddress="8">
-							<Name>RxPDO 2</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>64</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>80</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>96</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>112</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="1039" TransType="254" Flags="3" PdoStartAddress="16">
-							<Name>RxPDO 3</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>128</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>144</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>160</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>176</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="1295" TransType="254" Flags="3" PdoStartAddress="24">
-							<Name>RxPDO 4</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>192</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>208</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>224</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>240</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="576" TransType="254" Flags="3" PdoStartAddress="32">
-							<Name>RxPDO 5</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-								<Var>
-									<Name>1. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>256</BitOffs>
-								</Var>
-								<Var>
-									<Name>2. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>272</BitOffs>
-									<ExternalAddress>2</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>3. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>288</BitOffs>
-									<ExternalAddress>4</ExternalAddress>
-								</Var>
-								<Var>
-									<Name>4. analogue 2 byte output channel</Name>
-									<Type>UINT</Type>
-									<BitOffs>304</BitOffs>
-									<ExternalAddress>6</ExternalAddress>
-								</Var>
-							</Vars>
-						</RxPdo>
 					</CanOpen>
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="05a1e30a0501" FifoSize="5" CycleDivider="1"/>
-						<DevParameter CycleTime="100000" InputShift="60"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="05a1e30a0501" EquiCycleTime="10000" FifoSize="5" CycleDivider="1"/>
+						<DevParameter CycleTime="10000" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter NodeId="127" Baudrate="3" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt0="1" Bt1="28" TimerTick="4" BusActiveDivider="125" TxBusyTime="2000" TimeIntegral="4000" WdTimeoutInCycleTime="100000"/>
@@ -22701,6 +22519,7 @@ Slave-Mode:
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2002-0850-0420-500891000403}" Id="#x02030060"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0220-500870000403}" Id="#x02030080"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0220-500880000403}" Id="#x02030090"/>
 		<MappingInfo Identifier="{00000000-2004-0850-0020-500820000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{00000000-2005-0850-0520-500862000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{00000000-2009-0850-0120-500811000403}" Id="#x02030020"/>
@@ -23405,6 +23224,14 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw16" VarB="RTD Inputs Channel 2^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw16"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw17" VarB="RTD Inputs Channel 3^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw17"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw18" VarB="RTD Inputs Channel 4^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw18"/>
+			</OwnerB>
+			<OwnerB Name="TIID^LV_BAT_gateway^CAN_NODE_LV_BAT">
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nActualCurrent" VarB="TxPDO 2^Inputs^nActualCurrent"/>
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nBatteryState" VarB="TxPDO 2^Inputs^nBatteryState"/>
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nPackSOC" VarB="TxPDO 1^Inputs^nPackSOC"/>
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nPackSOCActive" VarB="TxPDO 1^Inputs^4.digital 8 bit input block"/>
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nVoltageRaw" VarB="TxPDO 1^Inputs^nVoltageRawByte0"/>
+				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nVoltageRaw" VarB="TxPDO 1^Inputs^nVoltageRawByte1" Size="8" OffsA="8"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_FMB_BatteryData" Id="{8a3fe3d5-b08a-44ec-9c4e-6e5bd8cc3250}">
+    <Declaration><![CDATA[TYPE ST_FMB_BatteryData :
+STRUCT
+    (* Data from TxPDO 1: 0x18F *)
+    nPackSOC        : BYTE;      // [cite: 216, 223]
+    nVoltageRaw     : UINT;      // [cite: 216, 223]
+    nPackSOCActive  : BYTE;      // [cite: 216, 223]
+    
+    (* Data from TxPDO 2: 0x28F *)
+    nBatteryState   : BYTE;      // [cite: 181, 216, 224]
+    nActualCurrent  : SINT;      // [cite: 216, 224] (SINT for signed 8-bit)
+    
+    (* Calculated Values *)
+    fActualVoltage  : LREAL;     // Raw / 1024 
+    fActualTemp     : LREAL;     // Raw - 55 [cite: 224]
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
