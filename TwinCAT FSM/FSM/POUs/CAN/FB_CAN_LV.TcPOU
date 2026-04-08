@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_CAN_LV" Id="{3a661af8-15ae-4798-b6ff-82d9d1802389}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CAN_LV
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	stBattery1 AT %I* : ST_FMB_BatteryData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

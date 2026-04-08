@@ -5,11 +5,12 @@
 VAR
 	send_message : PTC_Send_Message;
 	receive_messages : PTC_Receive_Messages;
+	LV_BAT_Par : FB_CAN_LV;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[receive_messages(CAN_OUTPUTS := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
-]]></ST>
+LV_BAT_Par();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
