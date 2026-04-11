@@ -116,6 +116,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\SAFETY\FB_DCLINK.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\SAFETY\SAFETY_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>

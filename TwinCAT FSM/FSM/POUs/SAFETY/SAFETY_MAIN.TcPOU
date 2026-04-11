@@ -13,6 +13,15 @@ VAR
 	SafetyRunCommand AT %Q*			:BOOL;
 	SafetyErrorAcknowledge AT %Q*	:BOOL;	
 
+	bEstopError AT %I*:				BOOL; 
+	bEstopRestart AT %Q*:			BOOL := FALSE; //Used to restart the Estop from the PLC side
+	
+	bsdc_closed AT %I*:				BOOL;
+	
+	
+	
+	fbdclink						:FB_DCLINK;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,9 +29,18 @@ END_VAR
 SafetyRunCommand := TRUE;
 
 
-//Safety Error should be anknowledged when the resetbutton is pressed
+//Safety Error should be anknowledged when the resetbutton is pressed -> not sure if we are gonna have a reset button
 SafetyResetButton_RT(CLK := SafetyResetButton);
-SafetyErrorAcknowledge := SafetyResetButton_RT.Q;]]></ST>
+SafetyErrorAcknowledge := SafetyResetButton_RT.Q;
+
+
+
+//DC-LINK
+fbdclink(DC_LINK_SAFE_LEVI => GVL_LEVI.DC_LINK_SAFE, DC_LINK_SAFE_PROP => GVL_Prop.DC_LINK_SAFE); 
+
+GVL_FSM.bEstopError := bEstopError;
+GVL_FSM.bEstopRestart := bEstopRestart;
+GVL_FSM.bsdc_closed := bsdc_closed;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

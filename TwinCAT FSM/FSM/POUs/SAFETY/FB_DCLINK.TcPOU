@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_DCLINK" Id="{0fb4be52-4f9e-4920-af05-61e385489610}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_DCLINK
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	DC_LINK_SAFE_LEVI:		BOOL;
+	DC_LINK_SAFE_PROP:		BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//DC-LINK LEVI
+IF GVL_LEVI.drive_voltage_EMS1 < 60.0 
+AND GVL_LEVI.drive_voltage_EMS2 < 60.0 
+AND GVL_LEVI.drive_voltage_EMS3 < 60.0
+AND GVL_LEVI.drive_voltage_EMS4 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS1 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS2 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS3 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS4 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS5 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS6 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS7 < 60.0
+AND GVL_LEVI.drive_voltage_HEMS8 < 60.0 THEN
+
+	DC_LINK_SAFE_LEVI := TRUE;
+	
+END_IF
+
+
+//DC-LINK PROP
+IF GVL_Prop.drive_voltages1 < 60.0 
+AND GVL_Prop.drive_voltages2 < 60.0
+AND GVL_Prop.drive_voltages3 < 60.0
+AND GVL_Prop.drive_voltages4 < 60.0 THEN
+	
+	DC_LINK_SAFE_PROP := TRUE;
+
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -8,33 +8,27 @@ VAR_GLOBAL
 	bheartbeat_OK: 			BOOL; //for groundstation evaluation
 	
 	bprecharge:				BOOL;
+	
+	
+	bsdc_closed:				BOOL;
  
 	bengage_brakes AT %Q*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	bCLKTrigger AT %Q*:				BOOL := FALSE; 
 	bbrakes_engaged AT %I*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	
-	
 	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
-	bsdc_closed AT %I*: 			BOOL; //Normally Closed system
 	
 	btrigger_EL AT %Q*: 			BOOL := TRUE; //NC System
-	
-	bEstopError AT %I*:				BOOL; //Used to restart the Estop from the PLC side
-	bEstopRestart AT %Q*:			BOOL := FALSE;
-	
-	
 
+	bEstopError:				BOOL; 
+	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC side
 	
-	benable_temp_checks: 	BOOL;
 	benable_telemetry: 		BOOL;
-	benable_PT_checks: 		BOOL;
-
-
 	
 	bcan_bus_ok: 			BOOL; 
 	nMasterDevStateCouplers AT %I*: UINT; 
 	nMasterDevStatePLC AT %I*: UINT; 
-	bethercat_ready:  		BOOL;
+	bethercat_ready:  		BOOL; 
 	
 	
 	
@@ -43,7 +37,7 @@ VAR_GLOBAL
 	rcritical_temp_HEMS: 	REAL := 40.0; //maximum allowable temperature for levitation HEMS
 	rcritical_temp_EMS:		REAL := 60.0; //maximum allowable temperature for levitation EMS
 	rcritical_temp_watercooling:	REAL;
-	rcritical_temp_PT:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
+	//rcritical_temp_PT:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
 	
 	
 	//Temperatures to re enable after cooldown

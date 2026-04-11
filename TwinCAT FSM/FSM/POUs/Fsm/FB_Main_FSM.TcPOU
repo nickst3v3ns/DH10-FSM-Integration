@@ -28,17 +28,26 @@ VAR
 	
 	
 	fbCLKTrigger:				TP;
+	
+	bBasicChecksOk:				BOOL;
+	bCriticalFaultActive:			BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Emergency Handling : outside FSM
+      <ST><![CDATA[//still need to do a heartbeat check switch TODO + Forced RESET and relaiton to gs connection + last check FSM + assess corect links safety
+
+
+
+bBasicChecksOk := BasicChecks();
+bCriticalFaultActive := CheckCritical();
+
+
+//Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF currentCmd = E_Command.CMD_EMERGENCY OR ((CheckCritical() OR BasicChecks() <> TRUE) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0 THEN
+IF currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0 THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
-	fb_handle_emergency(execute := TRUE);
-
 	
 //This would lock out propulsion on a standstill moment -> MOV to LEV only via GS command? COmmented it out for now!
 //ELSIF currentState = E_PodState.STATE_MOVEMENT AND 
@@ -59,38 +68,62 @@ CASE currentState OF
 	
 //EMERGENCY
 	E_PodState.STATE_EMERGENCY:
+		
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
+	
 		IF criticalFault THEN
+			
+		
+			
 			fb_handle_emergency(busy => criticalFault);
+			
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
 			
-			GVL_FSM.bengage_brakes := TRUE; //still not sure if we are allowed to do this
-			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 			currentState := E_PodState.STATE_MAINTENANCE;
 			
 		END_IF
 		
 //BOOT		
 	E_PodState.STATE_BOOT:  
-		IF BasicChecks() THEN
+	
+		GVL_FSM.benable_telemetry := FALSE;
+		GVL_FSM.benable_heartbeat := FALSE;
+		
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
+	
+		IF bBasicChecksOk THEN
+			
 			currentState := E_PodState.STATE_SYNC;
+			
 		END_IF
+		
 		//Have some resettting functions here for some autonomous troobleshooting
 //IDLE	
 	E_PodState.STATE_SYNC:
+
 		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
-		IF GVL_FSM.bheartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND BasicChecks() THEN
+		
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
+	
+		IF GVL_FSM.bheartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOk THEN
+			
 			currentState := E_PodState.STATE_IDLE;
+			
 		END_IF
 		
 //IDLE
 	E_PodState.STATE_IDLE:
 	
-		GVL_FSM.btrigger_EL := TRUE;		
+		GVL_FSM.benable_telemetry := TRUE;
+		GVL_FSM.benable_heartbeat := TRUE;
 		
-		GVL_FSM.benable_temp_checks := TRUE; //Except checking for errors not much to do
-		GVL_FSM.benable_telemetry := TRUE;//
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;	
 		
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND BasicChecks() AND NOT CheckCritical() THEN
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive THEN
 			
 			fbcharge();
 			charging_in_progress := TRUE;
@@ -113,11 +146,11 @@ CASE currentState OF
 		
 //HV_ACTIVE		
 	E_PodState.STATE_HV_ACTIVE:
-	
-		GVL_LEVI.enable_levi_checks := TRUE; //specificallly, what does this mean?
-		GVL_Prop.enable_prop_checks := TRUE; //specifically, what does this mean?
+		
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
 				
-		IF currentCmd = E_Command.CMD_TO_DEMO <> TRUE THEN
+		IF currentCmd = E_Command.CMD_TO_DEMO THEN
 			
 			GVL_FSM.bengage_brakes := TRUE; //retract brakes
 			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
@@ -141,6 +174,9 @@ CASE currentState OF
 		
 //DEMO		
 	E_PodState.STATE_DEMO:
+	
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
 		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
@@ -153,9 +189,9 @@ CASE currentState OF
 				currentState := E_PodState.STATE_IDLE;
 				
 			END_IF
+			
 		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION THEN
 			
-			GVL_LEVI.levitation_active := TRUE;
 			currentState := E_PodState.STATE_LEVITATION;
 			
 		END_IF
@@ -163,28 +199,40 @@ CASE currentState OF
 //LEVITATION		
 	E_PodState.STATE_LEVITATION:
 	
+		GVL_LEVI.levitation_enable := TRUE;
+		GVL_Prop.propulsion_enable := FALSE;
+		
 		IF currentCmd = E_Command.CMD_TO_DEMO THEN
 			
-			GVL_LEVI.levitation_active := FALSE;
 			currentState := E_PodState.STATE_DEMO;
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
 			
 			currentState := E_PodState.STATE_MOVEMENT;
-			Handle_movement();  //do we not want to wait specifically for State movement
-			GVL_Prop.propulsion_enable := TRUE;
 			
 		END_IF
 
 //MOVEMENT		
 	E_PodState.STATE_MOVEMENT: //bit empty innit
+	
+		GVL_LEVI.levitation_enable := TRUE;
+		GVL_Prop.propulsion_enable := TRUE;
+		
 		Handle_movement();
 
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE:
+	
+		GVL_LEVI.levitation_enable := FALSE;
+		GVL_Prop.propulsion_enable := FALSE;
+	
+		GVL_FSM.bengage_brakes := TRUE;
+		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN
-			GVL_FSM.bengage_brakes := TRUE;
-			IF GVL_FSM.bbrakes_engaged THEN
+			
+			GVL_FSM.bengage_brakes := FALSE;
+			
+			IF NOT GVL_FSM.bbrakes_engaged THEN
 				currentState := E_PodState.STATE_IDLE;
 			END_IF
 		END_IF
@@ -195,19 +243,20 @@ ELSE
 	//should fill with other important things.
 	
 		
-END_CASE]]></ST>
-    </Implementation>
-    <Method Name="SetState" Id="{ce851b79-228a-46cb-beb5-752507e7ca60}">
-      <Declaration><![CDATA[METHOD SetState
-VAR_INPUT
-	newState	: E_PodState;
-END_VAR
+END_CASE
 
-//What is this method used for in the FSM?
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[currentState := newState;]]></ST>
-      </Implementation>
-    </Method>
+//Unconditional calls
+IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bengage_brakes THEN
+	
+	fbCLKTrigger(IN := TRUE, PT := T#2S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
+
+END_IF
+
+GVL_FSM.bCLKTrigger := fbCLKTrigger.Q;
+
+
+
+]]></ST>
+    </Implementation>
   </POU>
 </TcPlcObject>

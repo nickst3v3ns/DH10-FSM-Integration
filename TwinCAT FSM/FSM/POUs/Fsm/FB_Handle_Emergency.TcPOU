@@ -19,14 +19,18 @@ END_VAR
     <Implementation>
       <ST><![CDATA[//What is happening here?
 IF execute <> TRUE THEN
+	
     state := 0;
     busy := FALSE;
     tonDelay(IN := FALSE);
+	
     RETURN;
 END_IF
 
 busy := TRUE;
+
 CASE state OF
+	
     0:  GVL_FSM.btrigger_EL := FALSE;
 		
         GVL_Prop.propulsion_enable := FALSE;
@@ -34,12 +38,16 @@ CASE state OF
 		
         state := 1;
         
-    1:	allActionsCompleteShutdown := 
+    1:	allActionsCompleteShutdown := NOT GVL_LEVI.levitation_active 
+		AND NOT GVL_Prop.propulsion_active 
+		AND GVL_Levi.DC_LINK_SAFE 
+		AND GVL_Prop.DC_LINK_SAFE 
+		AND GVL_FSM.bbrakes_engaged; 
 	
-		NOT GVL_FSM.bsdc_closed; //There should be something added here?
-	
-        IF allActionsCompleteShutdown AND NOT GVL_LEVI.levitation_active AND NOT GVL_Prop.propulsion_enable THEN
-            state := 2;
+        IF allActionsCompleteShutdown THEN
+			
+			  state := 2;
+		
         END_IF
 		
     2:	RecoveryToMaintenance := 
