@@ -75,7 +75,7 @@ CASE state OF
         IF tonDelay.Q AND GVL_FSM.bsdc_closed THEN
 			
             busy := FALSE;
-			execute := FALSE;
+			execute := FALSE; //
         END_IF
 END_CASE]]></ST>
     </Implementation>

@@ -36,10 +36,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//still need to do a heartbeat check switch TODO + Forced RESET and relaiton to gs connection + last check FSM + assess corect links safety
-
-
-
+      <ST><![CDATA[
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
@@ -66,7 +63,7 @@ CASE currentState OF
 	
 		IF criticalFault THEN
 			
-			fb_handle_emergency(busy => criticalFault);
+			fb_handle_emergency(execute := criticalFault, busy => criticalFault);
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
 			
@@ -131,7 +128,6 @@ CASE currentState OF
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
 			
 			GVL_FSM.bengage_brakes := TRUE; //retract brakes
-			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
 			currentCmd := E_Command.CMD_NONE;
@@ -147,7 +143,6 @@ CASE currentState OF
 		IF currentCmd = E_Command.CMD_TO_DEMO THEN
 			
 			GVL_FSM.bengage_brakes := TRUE; //retract brakes
-			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 			
 			IF GVL_FSM.bbrakes_engaged THEN
 				
@@ -261,7 +256,7 @@ GVL_FSM.bCLKTrigger := fbCLKTrigger.Q;
 
 //Forced Reset to Emergency if the Heartbeat fails
 
-fbHeartBeatFailReset(IN := (NOT GVL_FSM.benable_heartbeat) AND currentState >= 3, PT := T#100MS);
+fbHeartBeatFailReset(IN := (NOT GVL_FSM.bheartbeat_OK) AND currentState >= 3, PT := T#100MS);
 
 IF fbHeartBeatFailReset.Q THEN
 	
