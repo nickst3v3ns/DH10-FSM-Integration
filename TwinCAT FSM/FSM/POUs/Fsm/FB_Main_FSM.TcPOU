@@ -13,7 +13,7 @@ END_VAR
 
 VAR
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
-	
+	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
 	
 	
 	criticalFault:				BOOL; 
@@ -29,6 +29,8 @@ VAR
 	
 	fbCLKTrigger:				TP;
 	
+	fbHeartBeatFailReset:		TON;
+	
 	bBasicChecksOk:				BOOL;
 	bCriticalFaultActive:			BOOL;
 END_VAR
@@ -39,7 +41,7 @@ END_VAR
 
 
 bBasicChecksOk := BasicChecks();
-bCriticalFaultActive := CheckCritical();
+bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 
 //Emergency Handling : outside FSM
@@ -48,16 +50,6 @@ IF currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicC
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
-	
-//This would lock out propulsion on a standstill moment -> MOV to LEV only via GS command? COmmented it out for now!
-//ELSIF currentState = E_PodState.STATE_MOVEMENT AND 
-//    GVL_Prop.speed = 0 AND GVL_Prop.target_speed = 0 THEN
-//		currentState := E_PodState.STATE_LEVITATION;
-		
-//In what situation does this happen? Only when brakes are activated manually? we are not allowed to touch the pod when HV ON. Seems like it would be caught by the first eval too?
-//ELSIF currentState = E_PodState.STATE_DEMO AND GVL_FSM.brakes_engaged THEN
-//    currentState := E_PodState.STATE_EMERGENCY;
-	//why? ask this to teodor? PTC crash?
 	
 END_IF
 
@@ -74,13 +66,12 @@ CASE currentState OF
 	
 		IF criticalFault THEN
 			
-		
-			
 			fb_handle_emergency(busy => criticalFault);
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
+			currentCmd := E_Command.CMD_NONE;
 			
 		END_IF
 		
@@ -102,7 +93,7 @@ CASE currentState OF
 		//Have some resettting functions here for some autonomous troobleshooting
 //IDLE	
 	E_PodState.STATE_SYNC:
-
+		
 		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
 		
 		GVL_LEVI.levitation_enable := FALSE;
@@ -111,6 +102,7 @@ CASE currentState OF
 		IF GVL_FSM.bheartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOk THEN
 			
 			currentState := E_PodState.STATE_IDLE;
+			currentCmd := E_Command.CMD_NONE;
 			
 		END_IF
 		
@@ -132,6 +124,7 @@ CASE currentState OF
 				
 				charging_in_progress := FALSE;
 				currentState := E_PodState.STATE_HV_ACTIVE;
+				currentCmd := E_Command.CMD_NONE;
 				
 			END_IF
 			
@@ -141,6 +134,7 @@ CASE currentState OF
 			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
+			currentCmd := E_Command.CMD_NONE;
 			
 		END_IF
 		
@@ -156,7 +150,10 @@ CASE currentState OF
 			fbCLKTrigger(IN:=NOT GVL_FSM.bbrakes_engaged, PT := T#1S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 			
 			IF GVL_FSM.bbrakes_engaged THEN
+				
 				currentState := E_PodState.STATE_DEMO;
+				currentCmd := E_Command.CMD_NONE;
+				
 			END_IF
 				
 			
@@ -168,6 +165,7 @@ CASE currentState OF
 			IF GVL_PT.PTC_STATE = 0 AND GVL_LEVI.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
 				
 				currentState := E_PodState.STATE_IDLE;
+				currentCmd := E_Command.CMD_NONE;
 				
 			END_IF
 		END_IF
@@ -187,12 +185,14 @@ CASE currentState OF
 			IF NOT GVL_FSM.bbrakes_engaged AND GVL_PT.PTC_STATE = 0 THEN
 				
 				currentState := E_PodState.STATE_IDLE;
+				currentCmd := E_Command.CMD_NONE;
 				
 			END_IF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION THEN
 			
 			currentState := E_PodState.STATE_LEVITATION;
+			currentCmd := E_Command.CMD_NONE;
 			
 		END_IF
 		
@@ -205,10 +205,12 @@ CASE currentState OF
 		IF currentCmd = E_Command.CMD_TO_DEMO THEN
 			
 			currentState := E_PodState.STATE_DEMO;
+			currentCmd := E_Command.CMD_NONE;
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
 			
 			currentState := E_PodState.STATE_MOVEMENT;
+			currentCmd := E_Command.CMD_NONE;
 			
 		END_IF
 
@@ -233,7 +235,10 @@ CASE currentState OF
 			GVL_FSM.bengage_brakes := FALSE;
 			
 			IF NOT GVL_FSM.bbrakes_engaged THEN
+				
 				currentState := E_PodState.STATE_IDLE;
+				currentCmd := E_Command.CMD_NONE;
+				
 			END_IF
 		END_IF
 		
@@ -254,8 +259,16 @@ END_IF
 
 GVL_FSM.bCLKTrigger := fbCLKTrigger.Q;
 
+//Forced Reset to Emergency if the Heartbeat fails
 
+fbHeartBeatFailReset(IN := (NOT GVL_FSM.benable_heartbeat) AND currentState >= 3, PT := T#100MS);
 
+IF fbHeartBeatFailReset.Q THEN
+	
+	
+	currentState := E_PodState.STATE_EMERGENCY;
+	
+END_IF
 ]]></ST>
     </Implementation>
   </POU>

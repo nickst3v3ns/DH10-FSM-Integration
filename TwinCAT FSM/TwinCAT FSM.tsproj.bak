@@ -377,7 +377,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E6DE1E3A-4482-6FD5-0D47-40FDF6437E43}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{939BB79C-89D8-E2C3-B495-1F815AA3FBCB}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
@@ -671,6 +671,28 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>SAFETY_MAIN.bsdc_closed</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bbrakes_engaged</Name>
+							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bsafety_inputs_valid</Name>
+							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevStatePLC</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_LEVI.drive_voltage_HEMS1</Name>
 							<Comment><![CDATA[DC link voltages]]></Comment>
 							<Type>REAL</Type>
@@ -735,28 +757,6 @@
 						<Var>
 							<Name>GVL_Prop.drive_voltages4</Name>
 							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.bbrakes_engaged</Name>
-							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.bsafety_inputs_valid</Name>
-							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.nMasterDevStatePLC</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bsdc_closed</Name>
-							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
