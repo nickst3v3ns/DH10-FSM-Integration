@@ -200,6 +200,15 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{FE565D85-927B-2D08-1043-124F5F921E35}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BYTE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
 			<BitSize>1</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
@@ -349,13 +358,13 @@
 				<IoIdleTask Priority="14"/>
 			</Settings>
 			<Tasks>
-				<Task Id="3" Priority="18" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
 				</Task>
-				<Task Id="4" Priority="16" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="4" Priority="18" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
 					<Name>HeartBeat</Name>
 				</Task>
-				<Task Id="5" Priority="20" CycleTime="1000000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Priority="22" CycleTime="1000000" AmsPort="352" AdtTasks="true">
 					<Name>Thermal_Task</Name>
 				</Task>
 				<Task Id="6" Priority="4" CycleTime="3000" AmsPort="353" Affinity="#x00000004" AdtTasks="true">
@@ -373,13 +382,23 @@
 				<Task Id="10" Priority="10" CycleTime="15000" AmsPort="357" Affinity="#x00000004" AdtTasks="true">
 					<Name>LEVI_TEST_TASK</Name>
 				</Task>
+				<Task Id="11" Priority="16" CycleTime="100000" AmsPort="358" AdtTasks="true">
+					<Name>Barcode_Task</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0ECB007E-B64A-EA0E-DFDD-52FFE8331DAA}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{9E9B4944-019B-119C-5A1A-FAF95EBF4E98}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
+						<Name>Thermal_Task Outputs</Name>
+						<Var>
+							<Name>GVL_PROP_BARCODE.OutputData</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+					</Vars>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
 						<Name>Thermal_Task Inputs</Name>
 						<Var>
@@ -626,6 +645,22 @@
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
 							<Comment><![CDATA[LVBAT]]></Comment>
 							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE.InputData1</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE.InputData2</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE.InputData3</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE.state</Name>
+							<Type>UINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
@@ -1157,7 +1192,7 @@
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
-							<Priority>18</Priority>
+							<Priority>20</Priority>
 							<CycleTime>10000000</CycleTime>
 						</Context>
 						<Context>
@@ -1166,7 +1201,7 @@
 							<ManualConfig>
 								<OTCID>#x02010050</OTCID>
 							</ManualConfig>
-							<Priority>20</Priority>
+							<Priority>22</Priority>
 							<CycleTime>100000000</CycleTime>
 						</Context>
 					</Contexts>
@@ -1176,8 +1211,8 @@
 						<TaskPouOid Prio="8" OTCID="#x08502008"/>
 						<TaskPouOid Prio="10" OTCID="#x0850200a"/>
 						<TaskPouOid Prio="12" OTCID="#x08502009"/>
-						<TaskPouOid Prio="18" OTCID="#x08502002"/>
-						<TaskPouOid Prio="20" OTCID="#x08502005"/>
+						<TaskPouOid Prio="20" OTCID="#x08502004"/>
+						<TaskPouOid Prio="22" OTCID="#x08502002"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>
@@ -22540,13 +22575,13 @@ Slave-Mode:
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2002-0850-0520-500891000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{00000000-2002-0850-0620-500862000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0120-500811000403}" Id="#x02030020"/>
-		<MappingInfo Identifier="{00000000-2005-0850-0620-500862000403}" Id="#x02030040"/>
+		<MappingInfo Identifier="{00000000-2004-0850-0520-500891000403}" Id="#x02030060"/>
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500870000403}" Id="#x02030080"/>
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500880000403}" Id="#x02030090"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0020-500820000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{08502002-0060-0304-0020-500860000403}" Id="#x02030030" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{08502004-0060-0304-0020-500860000403}" Id="#x02030030" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{03040090-0090-0304-9000-040390000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">

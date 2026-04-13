@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="EHWCheckRange" Id="{3685a3cf-2272-4ad8-a733-400df0e57c98}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EHWCheckRange
+VAR_INPUT
+	rBarcodeReading : REAL; // current relative reading
+	tsTrack : Track_Segment; // current track segment
+END_VAR
+VAR_OUTPUT
+	bResult : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bResult := FALSE;
+
+IF tsTrack.rStart < tsTrack.rEnd THEN
+	IF rBarcodeReading >= tsTrack.rStart + 0.05 AND rBarcodeReading <= tsTrack.rEnd - 0.05 THEN
+		bResult := TRUE;
+	END_IF
+ELSE
+	IF rBarcodeReading <= tsTrack.rStart - 0.05 AND rBarcodeReading >= tsTrack.rEnd + 0.05 THEN
+		bResult := TRUE;
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

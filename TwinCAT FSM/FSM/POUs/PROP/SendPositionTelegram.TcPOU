@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="SendPositionTelegram" Id="{7779ff91-0c80-4f59-a9d1-894e19b27f89}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SendPositionTelegram
+VAR_INPUT
+	fbConnect : FB_SocketConnect;
+	sSrvNetId : T_AmsNetId := '';
+	sRemoteHost : T_IPv4Addr := '';
+	nRemotePort : UDINT;
+	bExecute : BOOL;
+	tTimeout : TIME := T#45S;
+END_VAR
+VAR_OUTPUT
+	bBusy : BOOL;
+	bError : BOOL;
+	nErrId : UDINT;
+	hSocket : T_HSOCKET;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbConnect(
+	sSrvNetId := sSrvNetId,
+	sRemoteHost := sRemoteHost,
+	nRemotePort := nRemotePort,
+	bExecute := bExecute,
+	tTimeout := tTimeout
+	);
+	
+bBusy := fbConnect.bBusy;
+bError := fbConnect.bError;
+nErrId := fbConnect.nErrId;
+hSocket := hSocket.handle;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

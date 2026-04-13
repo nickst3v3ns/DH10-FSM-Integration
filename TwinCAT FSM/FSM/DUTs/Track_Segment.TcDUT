@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="Track_Segment" Id="{0d8d06af-89ea-472f-bd49-85dc9ba4a40c}">
+    <Declaration><![CDATA[TYPE Track_Segment :			// all values formatted from Track_Segment_Raw
+STRUCT
+	iID : INT;					// track number
+	rStart : REAL;				// local start of barcode
+	rEnd : REAL;				// local end of barcode
+	rAbsoluteStart : REAL;		// x_position
+	rAbsoluteEnd : REAL;		// x_position + length
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

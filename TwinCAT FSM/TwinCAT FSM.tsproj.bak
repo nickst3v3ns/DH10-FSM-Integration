@@ -349,13 +349,13 @@
 				<IoIdleTask Priority="14"/>
 			</Settings>
 			<Tasks>
-				<Task Id="3" Priority="18" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
 				</Task>
-				<Task Id="4" Priority="16" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
+				<Task Id="4" Priority="18" CycleTime="100000" AmsPort="351" Affinity="#x00000001" AdtTasks="true">
 					<Name>HeartBeat</Name>
 				</Task>
-				<Task Id="5" Priority="20" CycleTime="1000000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Priority="22" CycleTime="1000000" AmsPort="352" AdtTasks="true">
 					<Name>Thermal_Task</Name>
 				</Task>
 				<Task Id="6" Priority="4" CycleTime="3000" AmsPort="353" Affinity="#x00000004" AdtTasks="true">
@@ -373,11 +373,14 @@
 				<Task Id="10" Priority="10" CycleTime="15000" AmsPort="357" Affinity="#x00000004" AdtTasks="true">
 					<Name>LEVI_TEST_TASK</Name>
 				</Task>
+				<Task Id="11" Priority="16" CycleTime="100000" AmsPort="358" AdtTasks="true">
+					<Name>Barcode_Task</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{76D02132-456A-F0AC-BA94-309230AB80B8}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0ECB007E-B64A-EA0E-DFDD-52FFE8331DAA}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
@@ -1157,7 +1160,7 @@
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
-							<Priority>18</Priority>
+							<Priority>20</Priority>
 							<CycleTime>10000000</CycleTime>
 						</Context>
 						<Context>
@@ -1166,7 +1169,7 @@
 							<ManualConfig>
 								<OTCID>#x02010050</OTCID>
 							</ManualConfig>
-							<Priority>20</Priority>
+							<Priority>22</Priority>
 							<CycleTime>100000000</CycleTime>
 						</Context>
 					</Contexts>
@@ -1176,8 +1179,9 @@
 						<TaskPouOid Prio="8" OTCID="#x08502008"/>
 						<TaskPouOid Prio="10" OTCID="#x0850200a"/>
 						<TaskPouOid Prio="12" OTCID="#x08502009"/>
-						<TaskPouOid Prio="18" OTCID="#x08502002"/>
-						<TaskPouOid Prio="20" OTCID="#x08502005"/>
+						<TaskPouOid Prio="20" OTCID="#x08502004"/>
+						<TaskPouOid Prio="22" OTCID="#x08502002"/>
+						<TaskPouOid Prio="65558" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>

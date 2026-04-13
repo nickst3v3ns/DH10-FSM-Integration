@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="EHWCheckValid" Id="{254c733d-6fa6-4074-b39e-0df2fec2ab4c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EHWCheckValid
+VAR_INPUT
+	rBarcodeReading : REAL;  	// current barcode reading
+	tsTrack : Track_Segment; 	// current track segment
+END_VAR
+VAR_OUTPUT
+	bResult : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bResult := FALSE;
+
+IF tsTrack.rStart < tsTrack.rEnd THEN
+	IF rBarcodeReading >= tsTrack.rStart + 0.2 AND rBarcodeReading <= tsTrack.rEnd - 0.2 THEN
+		bResult := TRUE;
+	END_IF
+ELSE
+	IF rBarcodeReading <= tsTrack.rStart - 0.2 AND rBarcodeReading >= tsTrack.rEnd + 0.2 THEN
+		bResult := TRUE;
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
