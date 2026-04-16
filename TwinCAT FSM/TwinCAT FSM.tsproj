@@ -385,22 +385,15 @@
 					<Name>LEVI_TEST_TASK</Name>
 				</Task>
 				<Task Id="11" Priority="16" CycleTime="100000" AmsPort="358" AdtTasks="true">
-					<Name>Barcode_Task</Name>
+					<Name>10ms (Barcode+FastFlow)</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0F93B4C6-15B4-B63B-33A0-6724BF779F07}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A3D6DDD2-4661-6E19-BB71-AF027CC09D08}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
-						<Name>Thermal_Task Outputs</Name>
-						<Var>
-							<Name>GVL_PROP_BARCODE.OutputData</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-					</Vars>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
 						<Name>Thermal_Task Inputs</Name>
 						<Var>
@@ -648,14 +641,6 @@
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE.InputData1</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE.InputData2</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_PROP_BARCODE.InputData3</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -663,6 +648,47 @@
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
 							<Comment><![CDATA[LVBAT]]></Comment>
 							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor1</Name>
+							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor8</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor9</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor10</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
@@ -797,14 +823,21 @@
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
-						<Name>PWM_Thermal_Task Outputs</Name>
+						<Name>PlcTask_10ms_Barcode_FastFlow_ Outputs</Name>
 						<Var>
-							<Name>PWM_CTRL.bOutput_PWM_LEVI</Name>
-							<Type>BOOL</Type>
+							<Name>GVL_PROP_BARCODE.OutputData</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
+						<Name>PlcTask_10ms_Barcode_FastFlow_ Inputs</Name>
+						<Var>
+							<Name>GVL_PROP_BARCODE.InputData1</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>PWM_CTRL.bOutput_PWM_PROP</Name>
-							<Type>BOOL</Type>
+							<Name>GVL_PROP_BARCODE.InputData2</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
@@ -1181,12 +1214,12 @@
 						</Context>
 						<Context>
 							<Id>4</Id>
-							<Name>PWM_Thermal_Task</Name>
+							<Name>PlcTask_10ms_Barcode_FastFlow_</Name>
 							<ManualConfig>
-								<OTCID>#x02010090</OTCID>
+								<OTCID>#x020100b0</OTCID>
 							</ManualConfig>
-							<Priority>12</Priority>
-							<CycleTime>2000000</CycleTime>
+							<Priority>16</Priority>
+							<CycleTime>10000000</CycleTime>
 						</Context>
 						<Context>
 							<Id>5</Id>
@@ -1212,7 +1245,7 @@
 						<TaskPouOid Prio="6" OTCID="#x08502003"/>
 						<TaskPouOid Prio="8" OTCID="#x08502008"/>
 						<TaskPouOid Prio="10" OTCID="#x0850200a"/>
-						<TaskPouOid Prio="12" OTCID="#x08502009"/>
+						<TaskPouOid Prio="16" OTCID="#x08502001"/>
 						<TaskPouOid Prio="20" OTCID="#x08502004"/>
 						<TaskPouOid Prio="22" OTCID="#x08502002"/>
 					</TaskPouOids>
@@ -11593,22 +11626,22 @@
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6000" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor1" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor2" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6020" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor3" Index="#x6020" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6030" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor4" Index="#x6030" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -21441,32 +21474,32 @@
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6000" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor5" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor6" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6020" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor7" Index="#x6020" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6030" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor8" Index="#x6030" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6040" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor9" Index="#x6040" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6050" Sub="#x01">
+								<Entry Name="GVL_FLOW.bFlowSensor10" Index="#x6050" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -22757,6 +22790,12 @@ Slave-Mode:
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>
 			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^FlowLeft">
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor1" VarB="Channel 1^GVL_FLOW.bFlowSensor1"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor2" VarB="Channel 2^GVL_FLOW.bFlowSensor2"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor3" VarB="Channel 3^GVL_FLOW.bFlowSensor3"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor4" VarB="Channel 4^GVL_FLOW.bFlowSensor4"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerLeftBack^LaSeVerticalLeftBack">
 				<Link VarA="Levi_Fast_Task_Vertical Inputs^GVL_LEVI.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
 				<Link VarA="Levi_Fast_Task_Vertical Inputs^GVL_LEVI.stIn_EL6021_6^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
@@ -23260,6 +23299,14 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw16" VarB="RTD Inputs Channel 2^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw16"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw17" VarB="RTD Inputs Channel 3^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw17"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw18" VarB="RTD Inputs Channel 4^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw18"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^FlowRight">
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor10" VarB="Channel 6^GVL_FLOW.bFlowSensor10"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor5" VarB="Channel 1^GVL_FLOW.bFlowSensor5"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor6" VarB="Channel 2^GVL_FLOW.bFlowSensor6"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor7" VarB="Channel 3^GVL_FLOW.bFlowSensor7"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor8" VarB="Channel 4^GVL_FLOW.bFlowSensor8"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor9" VarB="Channel 5^GVL_FLOW.bFlowSensor9"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerRightFront^LaSeHorizontalRightBack">
 				<Link VarA="Levi_Fast_Task_Horizontal Inputs^GVL_LEVI.stIn_EL6021_10^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>

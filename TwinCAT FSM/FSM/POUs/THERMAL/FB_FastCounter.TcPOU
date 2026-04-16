@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_FastCounter" Id="{e3335d9d-e004-497a-b538-416b95187f0d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FastCounter
+VAR_IN_OUT
+	PulseCount : UDINT;
+END_VAR
+VAR_INPUT
+	FlowSensor : BOOL;
+END_VAR
+VAR
+	rtPulse : R_TRIG; // Edge detection
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Look for the "False -> True" transition
+rtPulse(CLK := FlowSensor);
+
+// If edge detected, increment the global counter
+IF rtPulse.Q THEN
+    PulseCount := PulseCount + 1;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

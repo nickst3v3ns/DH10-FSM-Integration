@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FastCounter" Id="{660e4be3-0a03-478f-982f-8eb2a370d61b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM FastCounter
+VAR
+	counter1 : FB_Fastcounter;
+	counter2 : FB_Fastcounter;
+	counter3 : FB_Fastcounter;
+	counter4 : FB_Fastcounter;
+	counter5 : FB_Fastcounter;
+	counter6 : FB_Fastcounter;
+	counter7 : FB_Fastcounter;
+	counter8 : FB_Fastcounter;
+	counter9 : FB_Fastcounter;
+	counter10 : FB_Fastcounter;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[counter1(PulseCount := GVL_FLOW.udiPulseCount1, FlowSensor := GVL_FLOW.bFlowSensor1);
+counter2(PulseCount := GVL_FLOW.udiPulseCount2, FlowSensor := GVL_FLOW.bFlowSensor2);
+counter3(PulseCount := GVL_FLOW.udiPulseCount3, FlowSensor := GVL_FLOW.bFlowSensor3);
+counter4(PulseCount := GVL_FLOW.udiPulseCount4, FlowSensor := GVL_FLOW.bFlowSensor4);
+counter5(PulseCount := GVL_FLOW.udiPulseCount5, FlowSensor := GVL_FLOW.bFlowSensor5);
+counter6(PulseCount := GVL_FLOW.udiPulseCount6, FlowSensor := GVL_FLOW.bFlowSensor6);
+counter7(PulseCount := GVL_FLOW.udiPulseCount7, FlowSensor := GVL_FLOW.bFlowSensor7);
+counter8(PulseCount := GVL_FLOW.udiPulseCount8, FlowSensor := GVL_FLOW.bFlowSensor8);
+counter9(PulseCount := GVL_FLOW.udiPulseCount9, FlowSensor := GVL_FLOW.bFlowSensor9);
+counter10(PulseCount := GVL_FLOW.udiPulseCount10, FlowSensor := GVL_FLOW.bFlowSensor10);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

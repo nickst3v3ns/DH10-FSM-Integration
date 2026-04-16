@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Flow" Id="{6094154f-51b2-4a1c-afea-43579c923f83}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Flow
+VAR_INPUT
+	PulseCount : UDINT;
+END_VAR
+VAR
+    // Settings
+    constPulsesPerLiter : REAL := 660.0; 
+    
+    // Snapshot variables
+    udiCurrentCount     : UDINT;
+    udiLastCount        : UDINT;
+    udiDiff             : UDINT;
+    
+   
+    constAlpha          : REAL := 0.1; // 0.1 = Heavy smoothing, 1.0 = No smoothing
+    
+    // Timing (To calculate rate accurately regardless of task jitter)
+    fbTimer             : TON;
+    bCalcTrigger        : BOOL;
+END_VAR
+VAR_OUTPUT
+	 // Flow Calculation
+    fFlowRate_L_Min     : REAL;
+    fTotalVolume_L      : REAL;
+    
+    // Smoothing (Optional: Simple First-Order Filter)
+    fFlowSmoothed       : REAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ---------------------------------------------------------
+// LOGIC: Calculate Flow every 100ms (10 cycles)
+// ---------------------------------------------------------
+
+// We calculate every 100ms to get a stable average rather than every 10ms
+
+IF fbTimer.Q THEN
+    
+    // 1. Take a snapshot of the fast counter (Atomic read)
+    udiCurrentCount := PulseCount;
+    
+    // 2. Calculate how many pulses happened in the last 100ms
+    // Handle UDINT overflow (Wrap-around) automatically
+    udiDiff := udiCurrentCount - udiLastCount;
+    
+    // 3. Update Last Count
+    udiLastCount := udiCurrentCount;
+    
+    // 4. Calculate Flow Rate (L/min)
+    // Formula: (Pulses / 660) * (60 sec / 0.1 sec window)
+    // Simplified: (Pulses / 660) * 600
+    fFlowRate_L_Min := (UDINT_TO_REAL(udiDiff) / constPulsesPerLiter) * 600.0;
+    
+    // 5. Apply Smoothing (Removes "jitter" from the reading)
+    fFlowSmoothed := (fFlowRate_L_Min * constAlpha) + (fFlowSmoothed * (1.0 - constAlpha));
+    
+END_IF
+
+// ---------------------------------------------------------
+// LOGIC: Total Volume (Always Active)
+// ---------------------------------------------------------
+// Total L = Total Pulses / 660
+fTotalVolume_L := UDINT_TO_REAL(PulseCount) / constPulsesPerLiter;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

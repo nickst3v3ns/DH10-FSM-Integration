@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_FLOW" Id="{83d2550e-87e1-46d9-b8f0-30a2cf130781}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    // Hardware Input (Link this to EL1008 Channel 1)
+    bFlowSensor1 AT %I* : BOOL;
+	bFlowSensor2 AT %I* : BOOL;
+	bFlowSensor3 AT %I* : BOOL;
+	bFlowSensor4 AT %I* : BOOL;
+	bFlowSensor5 AT %I* : BOOL;
+	bFlowSensor6 AT %I* : BOOL;
+	bFlowSensor7 AT %I* : BOOL;
+	bFlowSensor8 AT %I* : BOOL;
+	bFlowSensor9 AT %I* : BOOL;
+	bFlowSensor10 AT %I* : BOOL;
+
+    // The raw counter (Written by Fast Task, Read by Main Task)
+    udiPulseCount1 : UDINT := 0;
+	udiPulseCount2 : UDINT := 0;
+	udiPulseCount3 : UDINT := 0;
+	udiPulseCount4 : UDINT := 0;
+	udiPulseCount5 : UDINT := 0;
+	udiPulseCount6 : UDINT := 0;
+	udiPulseCount7 : UDINT := 0;
+	udiPulseCount8 : UDINT := 0;
+	udiPulseCount9 : UDINT := 0;
+	udiPulseCount10 : UDINT := 0; 
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
