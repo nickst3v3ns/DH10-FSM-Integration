@@ -2,9 +2,14 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{B388C193-491B-1287-B84E-EA18EDCCF8D7}</SystemId>
-		<IssueTime>2026-04-08T20:44:00</IssueTime>
-		<ExpireTime>2026-04-16T00:00:00</ExpireTime>
-		<LicenseKey>c0d0cb273d63752e977d68dbc59c2f7f4dd1075853acef0c9f98fa4e03f4ddf06f39f881b6449149733058c5eacadf8596c898e5e18c89de217efa05c48b9d863805c4286c868d98c6d2c73499198b969e3744a39f1089c38dcdfcd7e898055ccd31186b0ff4a3188dddba03ec6bd4eb2e086e053c7e1854dece129be7212489f9e433dbc1feb37bae604485490067a01bb2d48a13ea16f9aa4b40a985783167c8c39920eedaacdffd00a665c9dc782694c8ae89902dd2047bef06e16be7de4ed6cd9442ca413e7690da1284a9ef46f4f0026011403d2697ee6a694d215404691039c29371047e724603c98271b4bb5a491ef7b396476e06b299cc50c66cd2ec</LicenseKey>
+		<IssueTime>2026-04-16T09:27:00</IssueTime>
+		<ExpireTime>2026-04-24T00:00:00</ExpireTime>
+		<LicenseKey>043c907f0e2a7f3afb360e9aa11ff59185870af47e54296fad5a907dd2ec9cc16a1916da9136fa809edba6b14c80c7c85e147f4b8f32a36a5f2f3bea9edc7188793251de5d4cf2ed8dcd8b830f72bac2f86eab7f35698189ddabbbeb3ff4494d5a2f725ddd755fc7314f735a1f60936eeefda5e21d62490ccdb57fec95d74989592efe93b6103b9644f07836273c64580339c23725167c3b58ea003b8617e0f8a753ef56d6db7514f5cf4c5c50a278a369ad13fc6a90f1eaec4b8e40d8ef1d231de522ad8c3162c12c8cc25085c714d0b73ebc679239be49c7e91d81d563a6261857d9d4b36255d5e9d4731fff3c2fd4b41f9a848aa42bdd5402c0e5d0e651ac</LicenseKey>
+		<License>
+			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
+			<Name>TC3 Serial-Communication</Name>
+			<OrderNo>TF6340</OrderNo>
+		</License>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>
@@ -19,11 +24,6 @@
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
 			<Name>TC3 PLC</Name>
 			<OrderNo>TC1200</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
-			<Name>TC3 Serial-Communication</Name>
-			<OrderNo>TF6340</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>
