@@ -3,22 +3,14 @@
   <POU Name="PWM_CTRL" Id="{e9a4000a-2bdc-4fc2-aaff-9895c02a3521}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PWM_CTRL
 VAR
-    fbPWM_LEVI : FB_PWM;
+	
 	fbPWM_PROP : FB_PWM;
 	
-    bOutput_PWM_LEVI AT %Q* : BOOL;
 	bOutput_PWM_PROP AT %Q* : BOOL;
 
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Call the block with a 3-second ramp
-fbPWM_LEVI(
-    fTargetDutyCycle := GVL_THERMAL.fDutyCycle_LEVI, nPeriodCycles := 10, 
-    fRampTime := T#3s, 
-    bOut => bOutput_PWM_LEVI
-);
-
-// Call the block with a 3-second ramp
 fbPWM_PROP(
     fTargetDutyCycle := GVL_THERMAL.fDutyCycle_PROP, nPeriodCycles := 10,
     fRampTime := T#3s, 

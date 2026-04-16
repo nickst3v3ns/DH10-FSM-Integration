@@ -391,9 +391,16 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{4F4018CC-3A86-D67D-2BD6-21C228EBC6AB}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{50B6F74F-4AC4-E638-BB08-60387C7FCB8F}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
+						<Name>Thermal_Task Outputs</Name>
+						<Var>
+							<Name>SAFETY_MAIN.bRearmNormallyOpen</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<Vars VarGrpType="1" ContextId="7" AreaNo="112">
 						<Name>Thermal_Task Inputs</Name>
 						<Var>
@@ -843,10 +850,6 @@
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PWM_Thermal_Task Outputs</Name>
 						<Var>
-							<Name>PWM_CTRL.bOutput_PWM_LEVI</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>PWM_CTRL.bOutput_PWM_PROP</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -1265,7 +1268,7 @@
 						<TaskPouOid Prio="6" OTCID="#x08502003"/>
 						<TaskPouOid Prio="8" OTCID="#x08502008"/>
 						<TaskPouOid Prio="10" OTCID="#x0850200a"/>
-						<TaskPouOid Prio="12" OTCID="#x08502009"/>
+						<TaskPouOid Prio="12" OTCID="#x08502005"/>
 						<TaskPouOid Prio="16" OTCID="#x08502001"/>
 						<TaskPouOid Prio="20" OTCID="#x08502004"/>
 						<TaskPouOid Prio="22" OTCID="#x08502002"/>
@@ -1309,6 +1312,9 @@
 				</Image>
 				<Image Id="6" AddrType="10" ImageType="3">
 					<Name>Image-3</Name>
+				</Image>
+				<Image Id="10" AddrType="10" ImageType="3">
+					<Name>Image-4</Name>
 				</Image>
 				<Box Id="42" BoxType="9099" BoxFlags="#x00000020">
 					<Name>Drive 42 (AX5206-0000-0215)</Name>
@@ -21933,7 +21939,7 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="52" BoxType="9099">
-					<Name>Term 52 (EK1100)</Name>
+					<Name>CouplerThermalCorner</Name>
 					<ImageId>1001</ImageId>
 					<EtherCAT SlaveType="1" PdiType="#x0d00" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044c2c52" RevisionNo="#x00120000" PortPhys="305" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1100 EtherCAT Coupler (2A E-Bus)" Desc="EK1100" PortABoxInfo="#x0100005b"/>
 					<Box Id="53" BoxType="9099">
@@ -21943,7 +21949,7 @@
 							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
+								<Entry Name="PWM_CTRL.bOutput_PWM_PROP" Index="#x7000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -22770,13 +22776,14 @@ Slave-Mode:
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2002-0850-0720-500862000403}" Id="#x02030040"/>
+		<MappingInfo Identifier="{00000000-2002-0850-0720-5008A3000403}" Id="#x02030070"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0120-500811000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-2004-0850-0620-500891000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{00000000-2005-0850-0420-500862000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500870000403}" Id="#x02030080"/>
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500880000403}" Id="#x02030090"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0020-500820000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{08502004-0060-0304-0020-500860000403}" Id="#x02030030" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{08502004-00A0-0304-0020-5008A0000403}" Id="#x02030040" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{03040090-0090-0304-9000-040390000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">
@@ -23490,6 +23497,9 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw16" VarB="RTD Inputs Channel 2^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw16"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw17" VarB="RTD Inputs Channel 3^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw17"/>
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw18" VarB="RTD Inputs Channel 4^THERMAL_MAIN.fbMOTOR_RIGHTFRONT_T.temp_raw18"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerThermalCorner^DIGITALOUTPUT">
+				<Link VarA="PWM_Thermal_Task Outputs^PWM_CTRL.bOutput_PWM_PROP" VarB="Channel 1^PWM_CTRL.bOutput_PWM_PROP"/>
 			</OwnerB>
 			<OwnerB Name="TIID^LV_BAT_gateway^CAN_NODE_LV_BAT">
 				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nActualCurrent" VarB="TxPDO 2^Inputs^nActualCurrent"/>

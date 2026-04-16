@@ -8,6 +8,9 @@ VAR
 	
 	//INTERNAL VARIABLE
 	SafetyResetButton_RT 			:R_TRIG;
+	
+	
+	bRearmNormallyOpen AT %Q*		:BOOL;
 
 	//OUTPUTS
 	SafetyRunCommand AT %Q*			:BOOL;

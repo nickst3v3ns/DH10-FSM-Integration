@@ -202,6 +202,9 @@
     <Compile Include="PTC_CAN_RX_Task.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PWM_Thermal_Task.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Thermal_Task.TcTTO">
       <SubType>Code</SubType>
     </Compile>
