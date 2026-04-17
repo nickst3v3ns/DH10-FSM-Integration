@@ -1317,8 +1317,141 @@
 					<Name>Image-4</Name>
 				</Image>
 				<Box Id="42" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 42 (AX5206-0000-0215)</Name>
+					<Name>VBR2 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>0</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR2 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>42</ItemId>
+								<ObjectId>#x0302002a</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VBR2 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x00ffffff">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1335,12 +1468,18 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000c0000001a000000000000000000000000000000000000000000000003405d800000000000000000436f6e66696775726564206368616e6e656c2063757272656e7400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000c0000001a000000000000000000000000000000000000000000000023405d800000000000000000436f6e66696775726564206368616e6e656c2063757272656e7400</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -1382,8 +1521,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="43" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 43 (AX5206-0000-0215)</Name>
+					<Name>VBR1 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>1</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR1 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>43</ItemId>
+								<ObjectId>#x0302002b</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VBR1 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBR1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0100002a">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1400,12 +1672,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -1447,8 +1723,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="46" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 46 (AX5206-0000-0215)</Name>
+					<Name>LBR (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>2</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^LBR (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>46</ItemId>
+								<ObjectId>#x0302002e</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>LBR (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LBR (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LBR (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0100002b">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1465,12 +1874,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -1512,8 +1925,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="47" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 47 (AX5206-0000-0215)</Name>
+					<Name>LBF (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>3</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^LBF (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>47</ItemId>
+								<ObjectId>#x0302002f</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>LBF (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LBF (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LBF (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0100002e">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1530,12 +2076,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -1577,8 +2127,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="48" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 48 (AX5206-0000-0215)</Name>
+					<Name>VBL1 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>4</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL1 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>48</ItemId>
+								<ObjectId>#x03020030</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VBL1 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0100002f">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1595,12 +2278,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -1642,8 +2329,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="49" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 49 (AX5206-0000-0215)</Name>
+					<Name>VBL2 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>5</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL2 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>49</ItemId>
+								<ObjectId>#x03020031</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VBL2 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VBL2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x01000030">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -1660,12 +2480,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21549,8 +22373,141 @@
 					</Box>
 				</Box>
 				<Box Id="86" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 86 (AX5206-0000-0215)</Name>
+					<Name>LFR (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>6</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^LFR (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>86</ItemId>
+								<ObjectId>#x03020056</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>LFR (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LFR (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LFR (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0200001c">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21567,12 +22524,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21614,8 +22575,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="87" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 87 (AX5206-0000-0215)</Name>
+					<Name>VFR2 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>7</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR2 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>87</ItemId>
+								<ObjectId>#x03020057</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VFR2 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x01000056">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21632,12 +22726,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21679,8 +22777,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="88" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 88 (AX5206-0000-0215)</Name>
+					<Name>VFR1 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>8</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR1 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>88</ItemId>
+								<ObjectId>#x03020058</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VFR1 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFR1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x01000057">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21697,12 +22928,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21744,8 +22979,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="89" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 89 (AX5206-0000-0215)</Name>
+					<Name>VFL1 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>9</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL1 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>89</ItemId>
+								<ObjectId>#x03020059</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VFL1 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL1 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x01000058">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21762,12 +23130,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21809,8 +23181,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="90" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 90 (AX5206-0000-0215)</Name>
+					<Name>VFL2 (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>10</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL2 (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>90</ItemId>
+								<ObjectId>#x0302005a</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>VFL2 (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^VFL2 (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x01000059">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21827,12 +23332,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21874,8 +23383,141 @@
 					</EtherCAT>
 				</Box>
 				<Box Id="91" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Drive 91 (AX5206-0000-0215)</Name>
+					<Name>LFL (AX5206-0000-0215)</Name>
 					<ImageId>1000</ImageId>
+					<Xml>
+						<TcDMDrive>
+							<SortId>11</SortId>
+							<DriveModuleType>31</DriveModuleType>
+							<TcLink ProtocalType="1">
+								<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+								<IoItemPathName>TIID^Device 2 (EtherCAT)^LFL (AX5206-0000-0215)</IoItemPathName>
+								<ItemId>91</ItemId>
+								<ObjectId>#x0302005b</ObjectId>
+							</TcLink>
+							<OrderCode>AX5206-0000-02xx</OrderCode>
+							<Name>LFL (AX5206-0000-0215)</Name>
+							<ProductRevision>AX5206-0000-0215</ProductRevision>
+							<Infeed>
+								<PowerSupplyMains>
+									<Name>InfeedTypePowerSupplyMains</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>PowerSupplyType</PropertyName>
+										<Value>1</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MainVoltage</PropertyName>
+										<Value>480</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UTolerancePositive</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UToleranceNegative</PropertyName>
+										<Value>10</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>369.792847415955</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>875</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>UmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>LongFilterForUmainsPhaseErrDetection</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</PowerSupplyMains>
+							</Infeed>
+							<Inverter>
+								<Device>
+									<Name>DMInverterTypeDevice</Name>
+									<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+									<Parameter>
+										<PropertyName>MaxAllowedMainVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MinDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+									<Parameter>
+										<PropertyName>MaxDcLinkVoltage</PropertyName>
+										<Value>0</Value>
+									</Parameter>
+								</Device>
+								<Channel ChnId="0">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LFL (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+								<Channel ChnId="1">
+									<TcLink>
+										<TcPrjPath>..\TwinCAT FSM.tsproj</TcPrjPath>
+										<IoItemPathName>TIID^Device 2 (EtherCAT)^LFL (AX5206-0000-0215)</IoItemPathName>
+									</TcLink>
+									<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
+									<Block Id="0">
+										<Controller/>
+									</Block>
+									<Block Id="1">
+										<Controller/>
+									</Block>
+									<Block Id="2">
+										<Controller/>
+									</Block>
+									<Block Id="3">
+										<Controller/>
+									</Block>
+									<Block Id="4">
+										<Controller/>
+									</Block>
+									<Block Id="5">
+										<Controller/>
+									</Block>
+									<Block Id="6">
+										<Controller/>
+									</Block>
+									<Block Id="7">
+										<Controller/>
+									</Block>
+								</Channel>
+							</Inverter>
+						</TcDMDrive>
+					</Xml>
 					<EtherCAT SlaveType="2" PdiType="#x0c08" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" FoeType="1" SoeChannels="2" VendorId="#x00000002" ProductCode="#x14566012" RevisionNo="#x00d70000" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange2="20000" TimeoutStateChange3="10000" TimeoutStateChange4="500" AutoRestoreAfterWcOk="true" CheckRevisionNoType="4" PortPhys="12305" IdentificationAdo="308" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="AX5206-0000-0215 EtherCAT Drive (SoE, 2 Ch.)" Desc="AX5206-0000-0215" PortABoxInfo="#x0100005a">
 						<SyncMan>001880002600010001000000800080008000001826010000</SyncMan>
 						<SyncMan>001a80002200010002000000800080008000001a22010000</SyncMan>
@@ -21892,12 +23534,16 @@
 						<DcData>3007000090d0030000000000000000000000ffff000000000000000000000000</DcData>
 						<DcMode>446353796e633235300000000000000053796e63206379636c652074696d653a20323530c2b57300000000000000000090d003000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
 						<DcMode>446353796e633132350000000000000053796e63206379636c652074696d653a20313235c2b57300000000000000000048e801000000000000000000ffff30070000000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>00400500100000000d000000030000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001500000003000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000001700000003000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000003400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>00400500100000000d000000000000000000000000000000000000000000000023400a8000000000fe7ff907000000004665617475726520666c61677300</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340010000000000a086546e637963202d204e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001700000000000000000000000000000000000000000000000340020000000000a0865473637963202d20436f6d6d206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000000000000000000000000000000000000000000023402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001d00000000000000000000000000000000000000000000000340cc8000000000010c506f776572206d616e6167656d656e7420636f6e74726f6c20776f726400</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000001500000000000000000000000000000000000000000000000340c98000000000c0124e6f6d696e616c206d61696e7320766f6c7461676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340cb800000000064004d61696e7320766f6c74616765206e6567617469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000002600000000000000000000000000000000000000000000000340ca800000000064004d61696e7320766f6c7461676520706f73697469766520746f6c6572616e63652072616e676500</MBoxUserCmdData>
 						<Pdo Name="AT 1" Index="#x0010" Flags="#x0001" SyncMan="3">
 							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
 								<Type>UINT</Type>
@@ -21954,7 +23600,7 @@
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
+								<Entry Name="SAFETY_MAIN.bRearmNormallyOpen" Index="#x7010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -22783,6 +24429,7 @@ Slave-Mode:
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500870000403}" Id="#x02030080"/>
 		<MappingInfo Identifier="{00000000-2008-0850-0220-500880000403}" Id="#x02030090"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0020-500820000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{08502002-0060-0304-0020-500860000403}" Id="#x020300a0" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502004-00A0-0304-0020-5008A0000403}" Id="#x02030040" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{03040090-0090-0304-9000-040390000403}" Id="#x02030050" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
@@ -23500,6 +25147,7 @@ Slave-Mode:
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^CouplerThermalCorner^DIGITALOUTPUT">
 				<Link VarA="PWM_Thermal_Task Outputs^PWM_CTRL.bOutput_PWM_PROP" VarB="Channel 1^PWM_CTRL.bOutput_PWM_PROP"/>
+				<Link VarA="Thermal_Task Outputs^SAFETY_MAIN.bRearmNormallyOpen" VarB="Channel 2^SAFETY_MAIN.bRearmNormallyOpen"/>
 			</OwnerB>
 			<OwnerB Name="TIID^LV_BAT_gateway^CAN_NODE_LV_BAT">
 				<Link VarA="PTC_CAN_RX_Task Inputs^PTC_RX_COM.LV_BAT_Par.stBattery1^nActualCurrent" VarB="TxPDO 2^Inputs^nActualCurrent"/>

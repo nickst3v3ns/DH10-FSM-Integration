@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="9720e83a-0dc5-4f23-bffc-80a51a9855a8">THERMAL_MAIN</Type>
+      <From>THERMAL_MAIN</From>
+      <To>TEMP_MAIN</To>
+    </RenamedType>
+  </Renames>
+</Refactors>

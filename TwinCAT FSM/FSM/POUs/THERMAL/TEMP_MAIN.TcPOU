@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="THERMAL_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM THERMAL_MAIN
+  <POU Name="TEMP_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TEMP_MAIN
 VAR
 	//8 channels
 	fbEMS_T : FB_NTCLE_EMS();

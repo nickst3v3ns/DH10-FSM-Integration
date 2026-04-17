@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Name>Drive Manager 2</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{d193f6c0-67d4-485e-8ee6-6f6e0491ddd9}</ProjectGuid>
+    <TcPath>..\TwinCAT FSM.tsproj</TcPath>
+    <AssemblyName>TwinCAT Drive Manager 2 DRIVES</AssemblyName>
+    <RootNamespace>TwinCAT Drive Manager 2 DRIVES</RootNamespace>
+    <SaveDriveDataAsFiles>False</SaveDriveDataAsFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="LBF %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^LBF (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="LBR %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^LBR (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="LFL %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^LFL (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="LFR %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^LFR (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VBL1 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VBL1 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VBL2 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VBL2 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VBR1 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VBR1 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VBR2 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VBR2 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VFL1 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VFL1 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VFL2 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VFL2 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VFR1 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VFR1 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+    <Content Include="VFR2 %28AX5206-0000-0215%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 2 (EtherCAT)^VFR2 (AX5206-0000-0215)</IoItemPathName>
+    </Content>
+  </ItemGroup>
+</Project>
