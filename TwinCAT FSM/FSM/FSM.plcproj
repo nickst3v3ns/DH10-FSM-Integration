@@ -88,9 +88,6 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PlcTask_10ms_Barcode_FastFlow_.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -190,19 +187,10 @@
     <Compile Include="POUs\THERMAL\FB_PWM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FLOW_MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\THERMAL\PWM_CTRL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\TEMP_MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PTC_CAN_RX_Task.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PWM_Thermal_Task.TcTTO">
+    <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Thermal_Task.TcTTO">

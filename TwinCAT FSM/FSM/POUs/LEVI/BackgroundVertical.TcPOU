@@ -19,57 +19,57 @@ END_VAR
       <ST><![CDATA[//Vertical
 fbEL6021Ctrl_1(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_1), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_1), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_1), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VBR), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VBR), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VBR), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_1, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_1 );
+	TxBuffer:= GVL_LEVI.TxBufferEL_VBR, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VBR );
 
 fbEL6021Ctrl_2(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_2), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_2), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_2), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VMR), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VMR), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VMR), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_2, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_2 );
+	TxBuffer:= GVL_LEVI.TxBufferEL_VMR, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VMR );
 	
 fbEL6021Ctrl_3(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_3), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_3), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_3), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VFR), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VFR), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VFR), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_3, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_3 );
+	TxBuffer:= GVL_LEVI.TxBufferEL_VFR, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VFR );
 
 fbEL6021Ctrl_4(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_4), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_4), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_4), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VFL), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VFL), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VFL), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_4, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_4 );
+	TxBuffer:= GVL_LEVI.TxBufferEL_VFL, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VFL );
 
 fbEL6021Ctrl_5(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_5), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_5), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_5), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VML), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VML), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VML), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_5, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_5 );
+	TxBuffer:= GVL_LEVI.TxBufferEL_VML, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VML );
 	
 fbEL6021Ctrl_6(
 	Mode:= SERIALLINEMODE_EL6_22B, 
-	pComIn:= ADR(GVL_LEVI.stIn_EL6021_6), 
-	pComOut:= ADR(GVL_LEVI.stOut_EL6021_6), 
-	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_6), 
+	pComIn:= ADR(GVL_LEVI.stIn_EL6021_VBL), 
+	pComOut:= ADR(GVL_LEVI.stOut_EL6021_VBL), 
+	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_VBL), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_6, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_6 );]]></ST>
+	TxBuffer:= GVL_LEVI.TxBufferEL_VBL, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_VBL );]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

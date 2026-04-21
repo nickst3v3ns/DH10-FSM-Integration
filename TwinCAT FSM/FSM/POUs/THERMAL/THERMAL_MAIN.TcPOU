@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="TEMP_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM TEMP_MAIN
+  <POU Name="THERMAL_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM THERMAL_MAIN
 VAR
 	//8 channels
 	fbEMS_T : FB_NTCLE_EMS();
@@ -17,6 +17,19 @@ VAR
 	
 	//8 channels
 	fbFLOW_T : FB_NTCLE_FLOW();
+	
+	//Flow sensors instances
+	FLOWCount1 : FB_Flow;
+	FLOWCount2 : FB_Flow;
+	FLOWCount3 : FB_Flow;
+	FLOWCount4 : FB_Flow;
+	FLOWCount5 : FB_Flow;
+	FLOWCount6 : FB_Flow;
+	FLOWCount7 : FB_Flow;
+	FLOWCount8 : FB_Flow;
+	FLOWCount9 : FB_Flow;
+	FLOWCount10 : FB_Flow;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -71,7 +84,17 @@ GVL_THERMAL.T_MOTOR_RIGHTFRONT := fbMOTOR_RIGHTFRONT_T.TEMP;
 GVL_THERMAL.T_FLOW := fbFLOW_T.TEMP;
 
 
-
+//FLOW Sensor Logic
+FLOWCount1(PulseCount := GVL_FLOW.udiPulseCount1, fFlowRate_L_Min => GVL_FLOW.fFLOWrate1);
+FLOWCount2(PulseCount := GVL_FLOW.udiPulseCount2, fFlowRate_L_Min => GVL_FLOW.fFLOWrate2);
+FLOWCount3(PulseCount := GVL_FLOW.udiPulseCount3, fFlowRate_L_Min => GVL_FLOW.fFLOWrate3);
+FLOWCount4(PulseCount := GVL_FLOW.udiPulseCount4, fFlowRate_L_Min => GVL_FLOW.fFLOWrate4);
+FLOWCount5(PulseCount := GVL_FLOW.udiPulseCount5, fFlowRate_L_Min => GVL_FLOW.fFLOWrate5);
+FLOWCount6(PulseCount := GVL_FLOW.udiPulseCount6, fFlowRate_L_Min => GVL_FLOW.fFLOWrate6);
+FLOWCount7(PulseCount := GVL_FLOW.udiPulseCount7, fFlowRate_L_Min => GVL_FLOW.fFLOWrate7);
+FLOWCount8(PulseCount := GVL_FLOW.udiPulseCount8, fFlowRate_L_Min => GVL_FLOW.fFLOWrate8);
+FLOWCount9(PulseCount := GVL_FLOW.udiPulseCount9, fFlowRate_L_Min => GVL_FLOW.fFLOWrate9);
+FLOWCount10(PulseCount := GVL_FLOW.udiPulseCount10, fFlowRate_L_Min => GVL_FLOW.fFLOWrate10);
 
 
 //here the full documentation for which temperature corresponds to which variable

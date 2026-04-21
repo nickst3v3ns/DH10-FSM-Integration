@@ -5,7 +5,7 @@
     <CycleTime>100000</CycleTime>
     <Priority>22</Priority>
     <PouCall>
-      <Name>TEMP_MAIN</Name>
+      <Name>THERMAL_MAIN</Name>
     </PouCall>
     <TaskFBGuid>{9a9ac1e5-06d8-4eef-9d38-c2fb6b8d1546}</TaskFBGuid>
     <Fb_init>{c0549b61-84df-4d74-8e95-059fb9b18332}</Fb_init>

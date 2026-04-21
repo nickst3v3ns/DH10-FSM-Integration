@@ -26,6 +26,18 @@ VAR_GLOBAL
 	udiPulseCount8 : UDINT := 0;
 	udiPulseCount9 : UDINT := 0;
 	udiPulseCount10 : UDINT := 0; 
+	
+	fFLOWrate1 : REAL;
+	fFLOWrate2 : REAL;
+	fFLOWrate3 : REAL;
+	fFLOWrate4 : REAL;
+	fFLOWrate5 : REAL;
+	fFLOWrate6 : REAL;
+	fFLOWrate7 : REAL;
+	fFLOWrate8 : REAL;
+	fFLOWrate9 : REAL;
+	fFLOWrate10 : REAL;
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

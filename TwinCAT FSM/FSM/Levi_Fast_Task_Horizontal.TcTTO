@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <Task Name="Levi_Fast_Task_Horizontal" Id="{0ed8ebb2-b773-4c68-b2ec-f568e30d343b}">
+  <Task Name="Levi_Fast_Task_Horizontal" Id="{2e007065-d309-49aa-a248-c04855a7e058}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>300</CycleTime>
     <Priority>6</Priority>
     <PouCall>
       <Name>BackgroundLateral</Name>
     </PouCall>
-    <TaskFBGuid>{ea5650a0-2c75-4949-b42d-434925f9f525}</TaskFBGuid>
-    <Fb_init>{4de67f75-3277-4ae5-a499-9e3801bcaea6}</Fb_init>
-    <Fb_exit>{8eb49f9f-59b7-41da-8dd1-a96617323ab5}</Fb_exit>
-    <CycleUpdate>{e7c12a5b-94dd-4cbc-9dc3-c59e0ef1aee2}</CycleUpdate>
-    <PostCycleUpdate>{37d512b1-2077-450a-aec9-fc9f11c1ced7}</PostCycleUpdate>
+    <TaskFBGuid>{77bce1eb-792c-4a62-9f79-5b65aab92bbf}</TaskFBGuid>
+    <Fb_init>{7beda501-9f38-42b0-b3db-07eae7488d3e}</Fb_init>
+    <Fb_exit>{7e74d2a0-0bca-40ae-96f1-513f584e3589}</Fb_exit>
+    <CycleUpdate>{c28050fb-ab58-4781-9237-89a88e05a40b}</CycleUpdate>
+    <PostCycleUpdate>{a7f451c4-9f3b-40cd-ba30-d5f1a47b4c58}</PostCycleUpdate>
   </Task>
 </TcPlcObject>

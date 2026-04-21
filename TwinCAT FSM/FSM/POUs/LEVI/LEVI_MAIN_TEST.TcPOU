@@ -3,34 +3,69 @@
   <POU Name="LEVI_MAIN_TEST" Id="{d65ed62a-347e-4ddd-ac75-dddaa3b0f61d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM LEVI_MAIN_TEST
 VAR
-	fb_serial1 : FB_SerialCom;
-	fb_serial2 : FB_SerialCom;
-	fb_serial3 : FB_SerialCom;
-	fb_serial4 : FB_SerialCom;
-	fb_serial5 : FB_SerialCom;
-	fb_serial6 : FB_SerialCom;
-	fb_serial7 : FB_SerialCom;
-	fb_serial8 : FB_SerialCom;
-	fb_serial9 : FB_SerialCom;
-	fb_serial10 : FB_SerialCom;
-	fb_serial11 : FB_SerialCom;
-	fb_serial12 : FB_SerialCom;
+	fb_serial_VBR : FB_SerialCom;
+	fb_serial_VMR : FB_SerialCom;
+	fb_serial_VFR : FB_SerialCom;
+	
+	fb_serial_VFL : FB_SerialCom;
+	fb_serial_VML : FB_SerialCom;
+	fb_serial_VBL : FB_SerialCom;
+	
+	fb_serial_LFL : FB_SerialCom;
+	fb_serial_LML : FB_SerialCom;
+	fb_serial_LBL : FB_SerialCom;
+	
+	fb_serial_LBR : FB_SerialCom;
+	fb_serial_LMR : FB_SerialCom;
+	fb_serial_LFR : FB_SerialCom;
+	
+	ArrayTest : ARRAY[0..11] OF REAL;
+	
+	ArrayTest2 : ARRAY[0..11] OF UDINT;
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fb_serial1(TxBuffer := GVL_LEVI.TxBufferEL_1, RxBuffer := GVL_LEVI.RxBufferEL_1);
-fb_serial2(TxBuffer := GVL_LEVI.TxBufferEL_2, RxBuffer := GVL_LEVI.RxBufferEL_2);
-fb_serial3(TxBuffer := GVL_LEVI.TxBufferEL_3, RxBuffer := GVL_LEVI.RxBufferEL_3);
-fb_serial4(TxBuffer := GVL_LEVI.TxBufferEL_4, RxBuffer := GVL_LEVI.RxBufferEL_4);
-fb_serial5(TxBuffer := GVL_LEVI.TxBufferEL_5, RxBuffer := GVL_LEVI.RxBufferEL_5);
-fb_serial6(TxBuffer := GVL_LEVI.TxBufferEL_6, RxBuffer := GVL_LEVI.RxBufferEL_6);
-fb_serial7(TxBuffer := GVL_LEVI.TxBufferEL_7, RxBuffer := GVL_LEVI.RxBufferEL_7);
-fb_serial8(TxBuffer := GVL_LEVI.TxBufferEL_8, RxBuffer := GVL_LEVI.RxBufferEL_8);
-fb_serial9(TxBuffer := GVL_LEVI.TxBufferEL_9, RxBuffer := GVL_LEVI.RxBufferEL_9);
-fb_serial10(TxBuffer := GVL_LEVI.TxBufferEL_10, RxBuffer := GVL_LEVI.RxBufferEL_10);
-fb_serial11(TxBuffer := GVL_LEVI.TxBufferEL_11, RxBuffer := GVL_LEVI.RxBufferEL_11);
-fb_serial12(TxBuffer := GVL_LEVI.TxBufferEL_12, RxBuffer := GVL_LEVI.RxBufferEL_12);]]></ST>
+      <ST><![CDATA[fb_serial_VBR(TxBuffer := GVL_LEVI.TxBufferEL_VBR, RxBuffer := GVL_LEVI.RxBufferEL_VBR);
+fb_serial_VMR(TxBuffer := GVL_LEVI.TxBufferEL_VMR, RxBuffer := GVL_LEVI.RxBufferEL_VMR);
+fb_serial_VFR(TxBuffer := GVL_LEVI.TxBufferEL_VFR, RxBuffer := GVL_LEVI.RxBufferEL_VFR);
+fb_serial_VFL(TxBuffer := GVL_LEVI.TxBufferEL_VFL, RxBuffer := GVL_LEVI.RxBufferEL_VFL);
+fb_serial_VML(TxBuffer := GVL_LEVI.TxBufferEL_VML, RxBuffer := GVL_LEVI.RxBufferEL_VML);
+fb_serial_VBL(TxBuffer := GVL_LEVI.TxBufferEL_VBL, RxBuffer := GVL_LEVI.RxBufferEL_VBL);
+fb_serial_LFL(TxBuffer := GVL_LEVI.TxBufferEL_LFL, RxBuffer := GVL_LEVI.RxBufferEL_LFL);
+fb_serial_LML(TxBuffer := GVL_LEVI.TxBufferEL_LML, RxBuffer := GVL_LEVI.RxBufferEL_LML);
+fb_serial_LBL(TxBuffer := GVL_LEVI.TxBufferEL_LBL, RxBuffer := GVL_LEVI.RxBufferEL_LBL);
+fb_serial_LBR(TxBuffer := GVL_LEVI.TxBufferEL_LBR, RxBuffer := GVL_LEVI.RxBufferEL_LBR);
+fb_serial_LMR(TxBuffer := GVL_LEVI.TxBufferEL_LMR, RxBuffer := GVL_LEVI.RxBufferEL_LMR);
+fb_serial_LFR(TxBuffer := GVL_LEVI.TxBufferEL_LBF, RxBuffer := GVL_LEVI.RxBufferEL_LBF);
+
+ArrayTest[0] := fb_serial_VBR.fResult_scaled;
+ArrayTest[1] := fb_serial_VMR.fResult_scaled;
+ArrayTest[2] := fb_serial_VFR.fResult_scaled;
+ArrayTest[3] := fb_serial_VFL.fResult_scaled;
+ArrayTest[4] := fb_serial_VML.fResult_scaled;
+ArrayTest[5] := fb_serial_VBL.fResult_scaled;
+ArrayTest[6] := fb_serial_LFL.fResult_scaled;
+ArrayTest[7] := fb_serial_LML.fResult_scaled;
+ArrayTest[8] := fb_serial_LBL.fResult_scaled;
+ArrayTest[9] := fb_serial_LBR.fResult_scaled;
+ArrayTest[10] := fb_serial_LMR.fResult_scaled;
+ArrayTest[11] := fb_serial_LFR.fResult_scaled;
+
+ArrayTest2[0] := fb_serial_VBR.nPacketsPerSecond;
+ArrayTest2[1] := fb_serial_VMR.nPacketsPerSecond;
+ArrayTest2[2] := fb_serial_VFR.nPacketsPerSecond;
+ArrayTest2[3] := fb_serial_VFL.nPacketsPerSecond;
+ArrayTest2[4] := fb_serial_VML.nPacketsPerSecond;
+ArrayTest2[5] := fb_serial_VBL.nPacketsPerSecond;
+ArrayTest2[6] := fb_serial_LFL.nPacketsPerSecond;
+ArrayTest2[7] := fb_serial_LML.nPacketsPerSecond;
+ArrayTest2[8] := fb_serial_LBL.nPacketsPerSecond;
+ArrayTest2[9] := fb_serial_LBR.nPacketsPerSecond;
+ArrayTest2[10] := fb_serial_LMR.nPacketsPerSecond;
+ArrayTest2[11] := fb_serial_LFR.nPacketsPerSecond;
+
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

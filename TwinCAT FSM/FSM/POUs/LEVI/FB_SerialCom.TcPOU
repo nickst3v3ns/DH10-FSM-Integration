@@ -134,7 +134,7 @@ IF bDataReceived THEN
                          
         (* C. SCALING [cite: 973] *)
         (* Formula: X = D * Range / 16384 *)
-        (* Assuming 25mm range + 25mm offset based on your previous code *)
+		
 		fResult_scaled := (DINT_TO_REAL(iResult) * 25 /16384.0) + 25.0;
 		IF (sReceivedData[1] AND 16#30) = (sReceivedData[2] AND 16#30) AND
 			(sReceivedData[2] AND 16#30) = (sReceivedData[3] AND 16#30) AND

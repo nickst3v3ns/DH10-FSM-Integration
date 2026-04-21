@@ -15,7 +15,9 @@ fbPWM_PROP(
     fTargetDutyCycle := GVL_THERMAL.fDutyCycle_PROP, nPeriodCycles := 10,
     fRampTime := T#3s, 
     bOut => bOutput_PWM_PROP
-);]]></ST>
+);
+
+//probably some PID]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
