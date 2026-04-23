@@ -64,6 +64,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="GVLs\GVL_PropCAN.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\GVL_PROP_BARCODE.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -136,25 +139,40 @@
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\EHWCalculatePosition.TcPOU">
+    <Compile Include="POUs\PROP\FB_ReceiveCurrent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\EHWCheckRange.TcPOU">
+    <Compile Include="POUs\PROP\FB_ReceiveTemp.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\EHWCheckValid.TcPOU">
+    <Compile Include="POUs\PROP\FB_SendPosVelocity.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\EHWConverter.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\EHWFindPosition.TcPOU">
+    <Compile Include="POUs\PROP\PROP_BARCODE_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP\PROP_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\SendPositionTelegram.TcPOU">
+    <Compile Include="POUs\PROP_EHW\EHWCalculatePosition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\EHWCheckRange.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\EHWCheckValid.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\EHWConverter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\EHWFindPosition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\PROP_MAIN_EHW.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_EHW\SendPositionTelegram.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\SAFETY\FB_DCLINK.TcPOU">
@@ -204,6 +222,7 @@
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
     <Folder Include="POUs\PROP" />
+    <Folder Include="POUs\PROP_EHW" />
     <Folder Include="POUs\SAFETY" />
     <Folder Include="POUs\THERMAL" />
     <Folder Include="POUs" />

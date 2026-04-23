@@ -1,28 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="PROP_MAIN" Id="{cbb3f160-0a8d-4cbb-ad41-c16c29389b18}" SpecialFunc="None">
+  <POU Name="PROP_MAIN" Id="{6203b0f5-9def-42aa-a1a3-50bbae11de91}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PROP_MAIN
 VAR
-	fbConnect : FB_SocketConnect;
-	fbSend : FB_SocketSend;
-	
-	address : STRING := '145.94.170.219';
-	port : UDINT := 8080;
-	handle : T_HSOCKET;	
-
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;
 	
 	positionValues : ARRAY[0..3] OF BYTE;
 	velocityValues : ARRAY[0..1] OF BYTE; 
 	
-	position : REAL;
+	position : DINT;
 	velocity : DINT;
 	quality : INT;
 	
-	bError : BOOL;
-	
 	start : BOOL := FALSE;
+	
+	Send_CAN_Command : FB_SendPosVelocity;
+	Receive_CAN_Current : FB_ReceiveCurrent;
+	Receive_CAN_Temp : FB_ReceiveTemp;
+	
+	Id_ref : LREAL;
+	Iq_ref : LREAL;
+	Id_filtered : LREAL;
+	Iq_filtered : LREAL;
+	
+	Temp_a_gd : LREAL;
+	Temp_b_gd : LREAL;
+	Temp_c_gd : LREAL;
+	
 END_VAR
 
 VAR CONSTANT
@@ -39,38 +44,18 @@ END_VAR]]></Declaration>
 	E_Barcode_State.INIT:
 	
 		IF start THEN
-			barcodeState := E_BARCODE_STATE.ESTABLISH_CONNECTION;
-		END_IF
-		
-	E_Barcode_State.ESTABLISH_CONNECTION:
-		fbConnect(
-			sSrvNetId := '',
-			sRemoteHost := address,
-			nRemotePort := port,
-			bExecute := TRUE,
-			tTimeout := T#5S
-		);
-		
-		barcodeState := E_Barcode_State.WAIT_CONNECTION;
-		
-	E_Barcode_State.WAIT_CONNECTION:
-		IF NOT fbConnect.bBusy THEN
-			IF fbConnect.bError THEN
-				barcodeState := E_Barcode_State.ERROR;
-			ELSE
-				barcodeState := E_Barcode_State.SEND_POS_VEL_COMMAND;
-			END_IF
+			barcodeState := E_BARCODE_STATE.SEND_POS_VEL_COMMAND;
 		END_IF
 		
 	E_Barcode_State.SEND_POS_VEL_COMMAND:
 		
-		positionValues[0] := GVL_PROP_BARCODE.InputData1[4];
-		positionValues[1] := GVL_PROP_BARCODE.InputData1[5];
-		positionValues[2] := GVL_PROP_BARCODE.InputData1[6];
-		positionValues[3] := GVL_PROP_BARCODE.InputData1[7];
+		positionValues[0] := GVL_PROP.InputData1_Front[4];
+		positionValues[1] := GVL_PROP.InputData1_Front[5];
+		positionValues[2] := GVL_PROP.InputData1_Front[6];
+		positionValues[3] := GVL_PROP.InputData1_Front[7];
 		
-		velocityValues[0] := GVL_PROP_BARCODE.InputData2[0];
-		velocityValues[1] := GVL_PROP_BARCODE.InputData2[1];
+		velocityValues[0] := GVL_PROP.InputData2_Front[0];
+		velocityValues[1] := GVL_PROP.InputData2_Front[1];
 		
 		IF velocityValues[0] > 128 THEN
 			velocity := (256 * 256 - (256 * velocityValues[0] + velocityValues[1]));
@@ -88,26 +73,46 @@ END_VAR]]></Declaration>
 		
 		newData := newData XOR 16#80;
 		
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := SEND_POS_VEL;
+		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData[2] := SEND_POS_VEL;
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := 16#00;
-		GVL_PROP_BARCODE.OutputData[3] := SEND_DIAG;
+		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData[2] := 16#00;
+		GVL_PROP.OutputData[3] := SEND_DIAG;
 		
 	E_Barcode_State.SEND_MARKER_INFO_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := 16#00;
-		GVL_PROP_BARCODE.OutputData[3] := SEND_MARKER_INFO;
+		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData[2] := 16#00;
+		GVL_PROP.OutputData[3] := SEND_MARKER_INFO;
 		
 	E_Barcode_State.ERROR:
-		bError := TRUE;
+		barcodeState := E_Barcode_State.INIT;
+		start := FALSE;
 	
+END_CASE
+
+Send_CAN_Command(Position := position,
+	Velocity := velocity, 
+	CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+	CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+
+Receive_CAN_Current(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
 	
-END_CASE]]></ST>
+Id_ref := Receive_CAN_Current.Id_ref;
+Iq_ref := Receive_CAN_Current.Iq_ref;
+Id_filtered := Receive_CAN_Current.Id_filtered;
+Iq_filtered := Receive_CAN_Current.Iq_filtered;	
+
+Receive_CAN_Temp(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Temp_a_gd := Receive_CAN_Temp.Temp_a_gd;
+Temp_b_gd := Receive_CAN_Temp.Temp_b_gd;
+Temp_c_gd := Receive_CAN_Temp.Temp_c_gd;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

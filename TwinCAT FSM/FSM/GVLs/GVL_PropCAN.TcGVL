@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_PropCAN" Id="{674e1022-9ed6-40c0-848d-af13ab364493}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	CAN_OUTPUTS AT %Q* : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS AT %I* : CANRXQUEUESTRUCT_E_32;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

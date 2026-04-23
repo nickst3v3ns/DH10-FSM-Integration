@@ -4,6 +4,21 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	//First propulsion checks
+	
+	//barcode 
+	
+	OutputData AT %Q*: ARRAY[0..7] OF BYTE;
+	
+	InputData1_Front AT %I*: ARRAY[0..7] OF BYTE;
+	InputData2_Front AT %I*: ARRAY[0..7] OF BYTE;
+	InputData3_Front AT %I*: ARRAY[0..7] OF BYTE;
+	
+	InputData1_Back AT %I*: ARRAY[0..7] OF BYTE;
+	InputData2_Back AT %I*: ARRAY[0..7] OF BYTE;
+	InputData3_Back AT %I*: ARRAY[0..7] OF BYTE;
+	
+	//drives
+	
 	enable_prop_checks: 	BOOL;
 	
 	speed:					REAL;

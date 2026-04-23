@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceiveCurrent" Id="{a408e55c-2e96-443d-807e-962246ef4cb4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceiveCurrent
+VAR_IN_OUT
+	Inputs : CANRXQUEUESTRUCT_E_32;
+	Outputs : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	Id_ref : LREAL;
+	Iq_ref : LREAL;
+	Id_filtered : LREAL;
+	Iq_filtered : LREAL;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Outputs.RxCounter <> Inputs.RxCounter THEN        // check if new data is in the buffer
+   for i := 0 to (Inputs.NoOfRxMessages-1) do        // start the LOOP and check how much data
+                                                     // is in the buffer
+       	MessageReceived[i] := Inputs.RxMessages[i];   // copy the CAN message
+   END_FOR
+   Outputs.RxCounter := Inputs.RxCounter;            // set equal: the CAN interface then knows,
+                                                     // that you have copied the CAN data
+	FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+                                                     // is in the buffer
+	   IF MessageReceived[i].cobId = 900 THEN 
+	   	Id_ref := (SHL(MessageReceived[i].data[0], 8) OR MessageReceived[i].data[1]) / 100.0; 
+	   	Iq_ref := (SHL(MessageReceived[i].data[2], 8) OR MessageReceived[i].data[3]) / 100.0; 
+	   	Id_filtered := (SHL(MessageReceived[i].data[4], 8) OR MessageReceived[i].data[5]) / 100.0; 
+	   	Iq_filtered := (SHL(MessageReceived[i].data[6], 8) OR MessageReceived[i].data[7]) / 100.0;
+	   END_IF
+   End_for
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
