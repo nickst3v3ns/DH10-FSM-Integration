@@ -7,7 +7,8 @@ VAR_GLOBAL
 	
 	//barcode 
 	
-	OutputData AT %Q*: ARRAY[0..7] OF BYTE;
+	OutputData_Front AT %Q*: ARRAY[0..7] OF BYTE;
+	OutputData_Back AT %Q*: ARRAY[0..7] OF BYTE;
 	
 	InputData1_Front AT %I*: ARRAY[0..7] OF BYTE;
 	InputData2_Front AT %I*: ARRAY[0..7] OF BYTE;

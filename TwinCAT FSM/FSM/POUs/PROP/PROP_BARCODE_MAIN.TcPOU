@@ -5,7 +5,8 @@
 VAR
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	
-	newData : BYTE := 16#00;
+	newData_Front : BYTE := 16#00;
+	newData_Back : BYTE := 16#00;
 	
 	positionValues_Front : ARRAY[0..3] OF BYTE;
 	velocityValues_Front : ARRAY[0..1] OF BYTE; 
@@ -13,9 +14,11 @@ VAR
 	positionValues_Back : ARRAY[0..3] OF BYTE;
 	velocityValues_Back : ARRAY[0..1] OF BYTE; 
 	
-	position : DINT;
-	velocity : DINT;
-	quality : INT;
+	position_Front : DINT;
+	position_Back : DINT;
+	
+	velocity_Front : DINT;
+	velocity_BacK : DINT;
 	
 	start : BOOL := FALSE;
 END_VAR
@@ -46,36 +49,86 @@ END_VAR]]></Declaration>
 		velocityValues_Front[0] := GVL_PROP.InputData2_Front[0];
 		velocityValues_Front[1] := GVL_PROP.InputData2_Front[1];
 		
+//-----------------------
+		
+		positionValues_Back[0] := GVL_PROP.InputData1_Front[4];
+		positionValues_Back[1] := GVL_PROP.InputData1_Front[5];
+		positionValues_Back[2] := GVL_PROP.InputData1_Front[6];
+		positionValues_Back[3] := GVL_PROP.InputData1_Front[7];
+		
+		velocityValues_Back[0] := GVL_PROP.InputData2_Front[0];
+		velocityValues_Back[1] := GVL_PROP.InputData2_Front[1];
+		
+//-----------------------		
+
 		IF velocityValues_Front[0] > 128 THEN
-			velocity := (256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
+			velocity_Front := (256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
 		ELSE
-			velocity := 256 * velocityValues_Front[0] + velocityValues_Front[1];	
+			velocity_Front := 256 * velocityValues_Front[0] + velocityValues_Front[1];	
 		END_IF
 		
-		position := 
+		position_Front := 
 			256 * 256 * 256 * positionValues_Front[0]
 			+ 256 * 256 * positionValues_Front[1]
 			+ 256 * positionValues_Front[2]
 			+ positionValues_Front[3];
 			
-		position := position / SCALE_FACTOR - BARCODE_START;
+		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
 		
-		newData := newData XOR 16#80;
+//------------------------		
+
+		IF velocityValues_Back[0] > 128 THEN
+			velocity_Back := (256 * 256 - (256 * velocityValues_Back[0] + velocityValues_Back[1]));
+		ELSE
+			velocity_Back := 256 * velocityValues_Back[0] + velocityValues_Back[1];	
+		END_IF
 		
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := SEND_POS_VEL;
+		position_Back := 
+			256 * 256 * 256 * positionValues_Back[0]
+			+ 256 * 256 * positionValues_Back[1]
+			+ 256 * positionValues_Back[2]
+			+ positionValues_Back[3];
+			
+		position_Back := position_Back / SCALE_FACTOR - BARCODE_START;
 		
+		newData_Back := newData_Back XOR 16#80;
+		
+		GVL_PROP.OutputData_Back[0] := newData_Back OR SET_COMMAND;
+		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;
+		
+//unsure what this is used for 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
-		newData := newData XOR 16#80;
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := 16#00;
-		GVL_PROP.OutputData[3] := SEND_DIAG;
+	
+		newData_Front := newData_Front XOR 16#80;
 		
+		GVL_PROP.OutputData_Front[0] := newData_Front OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_DIAG;
+
+//-------------------------
+		
+		newData_Back := newData_Back XOR 16#80;
+		
+		GVL_PROP.OutputData_Back[0] := newData_Back OR SET_COMMAND;
+		GVL_PROP.OutputData_Back[2] := 16#00;
+		GVL_PROP.OutputData_Back[3] := SEND_DIAG;
+
+	
+//unsure what this is used for 		
 	E_Barcode_State.SEND_MARKER_INFO_COMMAND:
-		newData := newData XOR 16#80;
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := 16#00;
-		GVL_PROP.OutputData[3] := SEND_MARKER_INFO;
+	
+		newData_Front := newData_Front XOR 16#80;
+		GVL_PROP.OutputData_Front[0] := newData_Front OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_MARKER_INFO;
+		
+//------------------------
+		
+		newData_Back := newData_Back XOR 16#80;
+		GVL_PROP.OutputData_Back[0] := newData_Front OR SET_COMMAND;
+		GVL_PROP.OutputData_Back[2] := 16#00;
+		GVL_PROP.OutputData_Back[3] := SEND_MARKER_INFO;
+
 		
 	E_Barcode_State.ERROR:
 		barcodeState := E_Barcode_State.INIT;

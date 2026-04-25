@@ -73,20 +73,20 @@ END_VAR]]></Declaration>
 		
 		newData := newData XOR 16#80;
 		
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := SEND_POS_VEL;
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := SEND_POS_VEL;
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := 16#00;
-		GVL_PROP.OutputData[3] := SEND_DIAG;
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_DIAG;
 		
 	E_Barcode_State.SEND_MARKER_INFO_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP.OutputData[2] := 16#00;
-		GVL_PROP.OutputData[3] := SEND_MARKER_INFO;
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_MARKER_INFO;
 		
 	E_Barcode_State.ERROR:
 		barcodeState := E_Barcode_State.INIT;

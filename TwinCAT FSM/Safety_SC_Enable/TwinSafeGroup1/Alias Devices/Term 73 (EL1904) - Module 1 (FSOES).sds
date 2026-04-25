@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SafetyDeviceDesc Crc="3990362253" FileFormatVersion="1.9">
+<SafetyDeviceDesc Crc="2754290380" FileFormatVersion="1.9">
   <AliasDeviceType>
     <Type>4</Type>
     <SubType>190</SubType>
@@ -24,7 +24,7 @@
       <Param Index="4320" SubIndex="1">0000</Param>
       <Param Index="4320" SubIndex="2">0000</Param>
       <Param Index="32768" SubIndex="1">0000</Param>
-      <Param Index="32769" SubIndex="1">00</Param>
+      <Param Index="32769" SubIndex="1">01</Param>
       <Param Index="32769" SubIndex="2">00</Param>
       <Param Index="32769" SubIndex="3">00</Param>
       <Param Index="32769" SubIndex="4">00</Param>
