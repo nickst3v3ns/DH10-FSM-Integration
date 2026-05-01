@@ -3,8 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#Stop tracking ~u files
+#Stop tracking temporary TwinCat files
 *.~u
+*.tmcRefac
 
 # User-specific files
 *.rsuser
