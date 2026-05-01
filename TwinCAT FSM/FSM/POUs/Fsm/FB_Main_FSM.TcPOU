@@ -61,11 +61,9 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 	
-		IF criticalFault THEN
+		fb_handle_emergency(execute := criticalFault, busy => criticalFault);
 			
-			fb_handle_emergency(execute := criticalFault, busy => criticalFault);
-			
-		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
+		IF currentCmd = E_Command.CMD_TO_MAINTENANCE AND NOT criticalFault THEN
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
 			currentCmd := E_Command.CMD_NONE;
@@ -154,7 +152,7 @@ CASE currentState OF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
 			
-			GVL_FSM.btrigger_EL := FALSE;
+			GVL_FSM.btrigger_EL := TRUE;
 			fbdischarge();
 			
 			IF GVL_PT.PTC_STATE = 0 AND GVL_LEVI.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
@@ -173,7 +171,7 @@ CASE currentState OF
 		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
-			GVL_FSM.btrigger_EL := FALSE; //should we do this though?
+			GVL_FSM.btrigger_EL := TRUE; //should we do this though?
 		
 			fbdischarge();
 			
