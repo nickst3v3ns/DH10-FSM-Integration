@@ -337,7 +337,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{12E487B7-4C24-D2FF-CD4D-CA7F8BB48619}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{2A357E9D-460F-21B5-2636-7AD92B1C01FD}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
@@ -669,6 +669,11 @@ barcode ]]></Comment>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
+							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
+							<Comment><![CDATA[LVBAT]]></Comment>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_PROP_BARCODE.InputData1</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -683,11 +688,6 @@ barcode ]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE.state</Name>
 							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
-							<Comment><![CDATA[LVBAT]]></Comment>
-							<Type>USINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="3" AreaNo="49">
@@ -752,11 +752,11 @@ barcode ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.nMasterDevStatePLC</Name>
+							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
+							<Name>GVL_FSM.nMasterDevStatePLC</Name>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
@@ -25079,7 +25079,7 @@ barcode ]]></Comment>
 								<Entry Name="TwinSafeGroup1.PLCConfirm(IN)_5" Index="#x6000" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="TwinSafeGroup1.PLCRestart(IN)1_6" Index="#x6000" Sub="#x04">
+								<Entry Name="TwinSafeGroup1.PLCRestart(IN)_6" Index="#x6000" Sub="#x04">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="TwinSafeGroup1.PLCEngageBrakes(IN)_12" Index="#x6000" Sub="#x05">
@@ -25792,7 +25792,7 @@ Slave-Mode:
 				<Link VarA="PlcTask Outputs^GVL_FSM.btrigger_EL" VarB="StandardOutputs^TwinSafeGroup1.PLCConfirm(IN)_5"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyErrorAcknowledge" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyRunCommand" VarB="StandardOutputs^TwinSafeGroup1.Run_2"/>
-				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bEstopRestart" VarB="StandardOutputs^TwinSafeGroup1.PLCRestart(IN)1_6"/>
+				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bEstopRestart" VarB="StandardOutputs^TwinSafeGroup1.PLCRestart(IN)_6"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>

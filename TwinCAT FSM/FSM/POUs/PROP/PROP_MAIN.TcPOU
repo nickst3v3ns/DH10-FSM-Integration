@@ -6,11 +6,21 @@ VAR
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;
 	
-	positionValues : ARRAY[0..3] OF BYTE;
-	velocityValues : ARRAY[0..1] OF BYTE; 
+	positionValues_Front : ARRAY[0..3] OF BYTE;
+	velocityValues_Front : ARRAY[0..1] OF BYTE; 
 	
-	position : DINT;
-	velocity : DINT;
+	positionValues_Back : ARRAY[0..3] OF BYTE;
+	velocityValues_Back : ARRAY[0..1] OF BYTE; 
+	
+	position_Front : DINT;
+	velocity_Front : DINT;
+	
+	position_Back : DINT;
+	velocity_Back : DINT;
+	
+	positionDelft_Front : DINT;
+	positionDelft_Back	: DINT;
+	
 	quality : INT;
 	
 	start : BOOL := FALSE;
@@ -28,6 +38,7 @@ VAR
 	Temp_b_gd : LREAL;
 	Temp_c_gd : LREAL;
 	
+	delft_converter : FB_PositionConverter;
 END_VAR
 
 VAR CONSTANT
@@ -37,6 +48,8 @@ VAR CONSTANT
 	SEND_POS_VEL : BYTE := 16#80;
 	SEND_DIAG : BYTE := 16#08;
 	SEND_MARKER_INFO : BYTE := 16#02;
+	OFFSET_FRONT	: DINT;
+	OFFSET_BACK		: DINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE barcodeState OF
@@ -49,32 +62,65 @@ END_VAR]]></Declaration>
 		
 	E_Barcode_State.SEND_POS_VEL_COMMAND:
 		
-		positionValues[0] := GVL_PROP.InputData1_Front[4];
-		positionValues[1] := GVL_PROP.InputData1_Front[5];
-		positionValues[2] := GVL_PROP.InputData1_Front[6];
-		positionValues[3] := GVL_PROP.InputData1_Front[7];
+		positionValues_Front[0] := GVL_PROP.InputData1_Front[4];
+		positionValues_Front[1] := GVL_PROP.InputData1_Front[5];
+		positionValues_Front[2] := GVL_PROP.InputData1_Front[6];
+		positionValues_Front[3] := GVL_PROP.InputData1_Front[7];
 		
-		velocityValues[0] := GVL_PROP.InputData2_Front[0];
-		velocityValues[1] := GVL_PROP.InputData2_Front[1];
+		velocityValues_Front[0] := GVL_PROP.InputData2_Front[0];
+		velocityValues_Front[1] := GVL_PROP.InputData2_Front[1];
 		
-		IF velocityValues[0] > 128 THEN
-			velocity := (256 * 256 - (256 * velocityValues[0] + velocityValues[1]));
+		IF velocityValues_Front[0] > 128 THEN
+			velocity_Front := (256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
 		ELSE
-			velocity := 256 * velocityValues[0] + velocityValues[1];	
+			velocity_Front := 256 * velocityValues_Front[0] + velocityValues_Front[1];	
 		END_IF
 		
-		position := 
-			256 * 256 * 256 * positionValues[0]
-			+ 256 * 256 * positionValues[1]
-			+ 256 * positionValues[2]
-			+ positionValues[3];
+		position_Front := 
+			256 * 256 * 256 * positionValues_Front[0]
+			+ 256 * 256 * positionValues_Front[1]
+			+ 256 * positionValues_Front[2]
+			+ positionValues_Front[3];
 			
-		position := position / SCALE_FACTOR - BARCODE_START;
+		delft_converter(diReadValue := position_Front, diPosition => positionDelft_Front);
 		
-		newData := newData XOR 16#80;
+		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
+		
+		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
 		
 		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
 		GVL_PROP.OutputData_Front[2] := SEND_POS_VEL;
+		
+		//-------------------------------------------
+
+		positionValues_Back[0] := GVL_PROP.InputData1_Front[4];
+		positionValues_Back[1] := GVL_PROP.InputData1_Front[5];
+		positionValues_Back[2] := GVL_PROP.InputData1_Front[6];
+		positionValues_Back[3] := GVL_PROP.InputData1_Front[7];
+		
+		velocityValues_Back[0] := GVL_PROP.InputData2_Back[0];
+		velocityValues_Back[1] := GVL_PROP.InputData2_Back[1];
+		
+		IF velocityValues_Back[0] > 128 THEN
+			velocity_Back := (256 * 256 - (256 * velocityValues_Back[0] + velocityValues_Back[1]));
+		ELSE
+			velocity_Back := 256 * velocityValues_Back[0] + velocityValues_Back[1];	
+		END_IF
+		
+		position_Back := 
+			256 * 256 * 256 * positionValues_Back[0]
+			+ 256 * 256 * positionValues_Back[1]
+			+ 256 * positionValues_Back[2]
+			+ positionValues_Back[3];
+			
+		delft_converter(diReadValue := position_Back, diPosition => positionDelft_Back);
+			
+		position_Back := position_Back / SCALE_FACTOR - BARCODE_START;;
+		
+		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;		
+		
+		
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
@@ -94,8 +140,8 @@ END_VAR]]></Declaration>
 	
 END_CASE
 
-Send_CAN_Command(Position := position,
-	Velocity := velocity, 
+Send_CAN_Command(Position := position_Front,
+	Velocity := velocity_Front, 
 	CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
 	CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
 

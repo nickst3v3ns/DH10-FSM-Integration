@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK EHWCheckValid
 VAR_INPUT
 	rBarcodeReading : REAL;  	// current barcode reading
-	tsTrack : Track_Segment; 	// current track segment
+	tsTrack : Track_Segment_EHC; 	// current track segment
 END_VAR
 VAR_OUTPUT
 	bResult : BOOL;

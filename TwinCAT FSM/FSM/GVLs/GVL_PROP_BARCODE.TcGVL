@@ -4,13 +4,14 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	OutputData AT %Q*: ARRAY[0..7] OF BYTE;
+	
 	InputData1 AT %I*: ARRAY[0..7] OF BYTE;
 	InputData2 AT %I*: ARRAY[0..7] OF BYTE;
 	InputData3 AT %I*: ARRAY[0..7] OF BYTE;
 	state AT %I* : UINT;
 	
 	EHWTable1XML : STRING[6000];
-	TrackSegmentsRaw1 : ARRAY[0..29] OF Track_Segment_Raw:= [
+	TrackSegmentsRaw1 : ARRAY[0..29] OF Track_Segment_Raw_EHC:= [
 		(iTrackNumber := 1, iXPosition := 0, sType := "straight", sBatch := "B", iId := 61, iLength := 4, rStartValue := 640.0, rEndValue := 644.0),
 (iTrackNumber := 2, iXPosition := 4, sType := "straight", sBatch := "B", iId := 58, iLength := 4, rStartValue := 628.0, rEndValue := 632.0),
 (iTrackNumber := 3, iXPosition := 8, sType := "straight", sBatch := "B", iId := 60, iLength := 4, rStartValue := 636.0, rEndValue := 640.0),

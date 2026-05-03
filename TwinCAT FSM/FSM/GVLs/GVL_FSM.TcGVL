@@ -21,7 +21,8 @@ VAR_GLOBAL
 	btrigger_EL AT %Q*: 			BOOL := TRUE; //NC System
 
 	bEstopError:				BOOL; 
-	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC side
+	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC 
+	bEstopRestartTracker:	BOOL := FALSE;
 	
 	benable_telemetry: 		BOOL;
 	

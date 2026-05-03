@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_TrackSection" Id="{b882b903-4671-4917-86ee-b4a4c071dca5}">
+    <Declaration><![CDATA[TYPE ST_TrackSection :
+STRUCT
+    nTrackNumber : INT;
+    fXPosition   : LREAL; (* Starting X position of this track [m] *)
+    fLength      : LREAL; (* Length of track [m] *)
+    fStartValue  : LREAL; (* Read value at start of track [cm] *)
+    fEndValue    : LREAL; (* Read value at end of track [cm] *)
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

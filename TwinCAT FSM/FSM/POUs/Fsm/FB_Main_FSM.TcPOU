@@ -80,8 +80,14 @@ CASE currentState OF
 		
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
-	
-		IF bBasicChecksOk THEN
+		
+		IF GVL_FSM.bsafety_inputs_valid AND NOT GVL_FSM.bsdc_closed AND NOT (GVL_FSM.bEstopRestart < GVL_FSM.bEstopRestartTracker) THEN
+			GVL_FSM.bEstopRestartTracker := GVL_FSM.bEstopRestartTracker;
+			GVL_FSM.bEstopRestart := NOT GVL_FSM.bEstopRestart;
+		END_IF
+			
+		
+		IF bBasicChecksOk AND GVL_FSM.bsdc_closed THEN
 			
 			currentState := E_PodState.STATE_SYNC;
 			

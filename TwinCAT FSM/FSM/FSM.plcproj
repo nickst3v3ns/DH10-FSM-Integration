@@ -42,10 +42,13 @@
     <Compile Include="DUTs\ST_FMB_BatteryData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment.TcDUT">
+    <Compile Include="DUTs\ST_TrackSection.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment_Raw.TcDUT">
+    <Compile Include="DUTs\Track_Segment_EHC.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Track_Segment_Raw_EHC.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL_FLOW.TcGVL">
@@ -139,6 +142,9 @@
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP\FB_PositionConverter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP\FB_ReceiveCurrent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -146,9 +152,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP\FB_SendPosVelocity.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\PROP_BARCODE_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP\PROP_MAIN.TcPOU">

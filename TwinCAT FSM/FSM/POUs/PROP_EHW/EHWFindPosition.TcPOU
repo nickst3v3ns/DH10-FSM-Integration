@@ -3,7 +3,7 @@
   <POU Name="EHWFindPosition" Id="{c2d9b504-724f-4cc3-8928-26141fa464a2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK EHWFindPosition
 VAR_IN_OUT
-	aTrackSegments : ARRAY[*] OF Track_Segment;
+	aTrackSegments : ARRAY[*] OF Track_Segment_EHC;
 END_VAR
 VAR_INPUT
 	rBarcode : REAL;
@@ -22,9 +22,9 @@ VAR
 	iTrackIdCurrent : INT;
 	iTrackIdOther : INT;
 	
-	tsTrackPrev : Track_Segment;
-	tsTrackNext : Track_Segment;
-	tsTrackCurrent : Track_Segment;
+	tsTrackPrev : Track_Segment_EHC;
+	tsTrackNext : Track_Segment_EHC;
+	tsTrackCurrent : Track_Segment_EHC;
 	
 	rDistancePrev : REAL;
 	rDistanceNext : REAL;
