@@ -27,16 +27,22 @@
     <Compile Include="DUTs\E_EmergencyReason.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\E_LeviState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\E_Levi_Command.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_PodState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_RX_ID.TcDUT">
+    <Compile Include="DUTs\E_PTC_RX_ID.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_TX_Command.TcDUT">
+    <Compile Include="DUTs\E_PTC_TX_Command.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_TX_ID.TcDUT">
+    <Compile Include="DUTs\E_PTC_TX_ID.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_FMB_BatteryData.TcDUT">
@@ -45,10 +51,10 @@
     <Compile Include="DUTs\ST_TrackSection.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment_EHC.TcDUT">
+    <Compile Include="DUTs\ST_Track_Segment_EHC.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment_Raw_EHC.TcDUT">
+    <Compile Include="DUTs\ST_Track_Segment_Raw_EHC.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL_FLOW.TcGVL">
@@ -121,9 +127,6 @@
     <Compile Include="POUs\FSM\FB_Handle_Emergency.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FSM\Handle_Movement.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FSM\FB_Main_FSM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -137,6 +140,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\FB_SerialCom.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\LEVI_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
@@ -184,31 +190,31 @@
     <Compile Include="POUs\SAFETY\SAFETY_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FastCounter.TcPOU">
+    <Compile Include="POUs\THERMAL\FLOW\FastCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_FastCounter.TcPOU">
+    <Compile Include="POUs\THERMAL\FLOW\FB_FastCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_Flow.TcPOU">
+    <Compile Include="POUs\THERMAL\FLOW\FB_Flow.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_NTCLE_MOTOR.TcPOU">
+    <Compile Include="POUs\THERMAL\PUMP\FB_PWM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_NTCLE_HEMS.TcPOU">
+    <Compile Include="POUs\THERMAL\PUMP\PWM_CTRL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_NTCLE_EMS.TcPOU">
+    <Compile Include="POUs\THERMAL\TEMPERATURE\FB_NTCLE_EMS.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_NTCLE_FLOW.TcPOU">
+    <Compile Include="POUs\THERMAL\TEMPERATURE\FB_NTCLE_FLOW.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\FB_PWM.TcPOU">
+    <Compile Include="POUs\THERMAL\TEMPERATURE\FB_NTCLE_HEMS.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\THERMAL\PWM_CTRL.TcPOU">
+    <Compile Include="POUs\THERMAL\TEMPERATURE\FB_NTCLE_MOTOR.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
@@ -229,6 +235,9 @@
     <Folder Include="POUs\SAFETY" />
     <Folder Include="POUs\THERMAL" />
     <Folder Include="POUs" />
+    <Folder Include="POUs\THERMAL\FLOW" />
+    <Folder Include="POUs\THERMAL\PUMP" />
+    <Folder Include="POUs\THERMAL\TEMPERATURE" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_EtherCAT">
@@ -270,8 +279,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -347,14 +356,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

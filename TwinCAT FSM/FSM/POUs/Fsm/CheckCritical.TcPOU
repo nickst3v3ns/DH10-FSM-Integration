@@ -23,11 +23,7 @@ IF NOT GVL_FSM.bsdc_closed OR //is this gonna create some weird loops?
 	EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
 	CheckCritical := TRUE;
 END_IF
-
-
-	
-	
-	]]></ST>
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

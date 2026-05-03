@@ -44,7 +44,9 @@ fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_L
 
 GVL_FSM.bEstopError := bEstopError;
 GVL_FSM.bEstopRestart := bEstopRestart;
-GVL_FSM.bsdc_closed := bsdc_closed;]]></ST>
+GVL_FSM.bsdc_closed := bsdc_closed;
+
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

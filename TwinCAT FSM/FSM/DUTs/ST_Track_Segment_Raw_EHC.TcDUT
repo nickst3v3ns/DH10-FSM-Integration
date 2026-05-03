@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="Track_Segment_Raw_EHC" Id="{2999b19f-7f35-48cb-b71e-6c5cb6a00b49}">
-    <Declaration><![CDATA[TYPE Track_Segment_Raw_EHC :			// all data extracted directly from EHW Center specification
+  <DUT Name="ST_Track_Segment_Raw_EHC" Id="{2999b19f-7f35-48cb-b71e-6c5cb6a00b49}">
+    <Declaration><![CDATA[TYPE ST_Track_Segment_Raw_EHC :			// all data extracted directly from EHW Center specification
 STRUCT
 	iTrackNumber: INT;				// track_number
 	iXPosition: REAL;				// absolte start

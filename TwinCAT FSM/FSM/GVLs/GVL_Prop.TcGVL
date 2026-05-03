@@ -28,15 +28,15 @@ VAR_GLOBAL
 	accelerating:			BOOL;
 	braking:				BOOL;
 	
-	propulsion_fault: 		BOOL;
+	propulsion_fault: 		BOOL := FALSE;
 	propulsion_enable: 		BOOL;
 	propulsion_active: 		BOOL;
 	
 	//DC-Link voltages
-	drive_voltages1 AT %I*:	REAL;
-	drive_voltages2 AT %I*:	REAL;
-	drive_voltages3 AT %I*:	REAL;
-	drive_voltages4 AT %I*:	REAL;
+	drive_voltages1 AT %I*:	REAL := 0;
+	drive_voltages2 AT %I*:	REAL := 0;
+	drive_voltages3 AT %I*:	REAL := 0;
+	drive_voltages4 AT %I*:	REAL := 0;
 	
 	DC_LINK_SAFE			:BOOL;
 END_VAR]]></Declaration>

@@ -3,7 +3,7 @@
   <POU Name="EHWConverter" Id="{ff5e6ca6-64a0-4cd2-8805-6b3158f4a0c0}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK EHWConverter
 VAR_IN_OUT
-	aTrackSegments : ARRAY[*] OF Track_Segment_EHC;
+	aTrackSegments : ARRAY[*] OF ST_Track_Segment_EHC;
 END_VAR
 VAR_INPUT
 	rBarcode : REAL;
@@ -12,7 +12,7 @@ VAR_INPUT
 	iVelocity : REAL;
 	// rVehicle : ???;
 	bReset : BOOL;
-	tsTrack : Track_Segment_EHC;
+	tsTrack : ST_Track_Segment_EHC;
 	iTrackN : INT;
 END_VAR
 VAR_OUTPUT

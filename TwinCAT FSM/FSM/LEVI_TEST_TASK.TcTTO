@@ -5,7 +5,7 @@
     <CycleTime>1500</CycleTime>
     <Priority>10</Priority>
     <PouCall>
-      <Name>LEVI_MAIN_TEST</Name>
+      <Name>LEVI_MAIN</Name>
     </PouCall>
     <TaskFBGuid>{b74b4849-0b12-4967-be09-2092133ecbfe}</TaskFBGuid>
     <Fb_init>{a1cc5636-c053-4337-b5ed-05c6ae4677e2}</Fb_init>

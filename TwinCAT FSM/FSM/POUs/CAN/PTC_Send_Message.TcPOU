@@ -3,8 +3,8 @@
   <POU Name="PTC_Send_Message" Id="{e60d68ee-3e13-4f23-ba89-873dfa6ce69a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PTC_Send_Message
 VAR_INPUT
-	ID : PTC_TX_ID;
-	Command : PTC_TX_Command;
+	ID : E_PTC_TX_ID;
+	Command : E_PTC_TX_Command;
 END_VAR
 VAR_OUTPUT
 END_VAR

@@ -45,15 +45,6 @@ VAR
 	iResult :DINT;
 	
 	SensorOn : BOOL := TRUE;
-	
-	aBuffer         : ARRAY[0..1999] OF LREAL;
-    nIndex          : UINT := 0;
-    nCount          : UINT := 0;
-    index               : UINT;
-    fSum            : LREAL;
-    fSumSqDiff      : LREAL;
-    nSize           : UINT := 2000;
-	
 END_VAR
 
 VAR_OUTPUT

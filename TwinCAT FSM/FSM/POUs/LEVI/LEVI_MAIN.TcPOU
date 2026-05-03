@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LEVI_MAIN" Id="{d65ed62a-347e-4ddd-ac75-dddaa3b0f61d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM LEVI_MAIN
+VAR
+	fb_serial_VBR : FB_SerialCom;
+	fb_serial_VMR : FB_SerialCom;
+	fb_serial_VFR : FB_SerialCom;
+	
+	fb_serial_VFL : FB_SerialCom;
+	fb_serial_VML : FB_SerialCom;
+	fb_serial_VBL : FB_SerialCom;
+	
+	fb_serial_LFL : FB_SerialCom;
+	fb_serial_LML : FB_SerialCom;
+	fb_serial_LBL : FB_SerialCom;
+	
+	fb_serial_LBR : FB_SerialCom;
+	fb_serial_LMR : FB_SerialCom;
+	fb_serial_LFR : FB_SerialCom;
+	
+	ALaserOffset : ARRAY[0..11] OF REAL;
+	
+	ALaserPacketSpeed : ARRAY[0..11] OF UDINT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fb_serial_VBR(TxBuffer := GVL_LEVI.TxBufferEL_VBR, RxBuffer := GVL_LEVI.RxBufferEL_VBR);
+fb_serial_VMR(TxBuffer := GVL_LEVI.TxBufferEL_VMR, RxBuffer := GVL_LEVI.RxBufferEL_VMR);
+fb_serial_VFR(TxBuffer := GVL_LEVI.TxBufferEL_VFR, RxBuffer := GVL_LEVI.RxBufferEL_VFR);
+fb_serial_VFL(TxBuffer := GVL_LEVI.TxBufferEL_VFL, RxBuffer := GVL_LEVI.RxBufferEL_VFL);
+fb_serial_VML(TxBuffer := GVL_LEVI.TxBufferEL_VML, RxBuffer := GVL_LEVI.RxBufferEL_VML);
+fb_serial_VBL(TxBuffer := GVL_LEVI.TxBufferEL_VBL, RxBuffer := GVL_LEVI.RxBufferEL_VBL);
+fb_serial_LFL(TxBuffer := GVL_LEVI.TxBufferEL_LFL, RxBuffer := GVL_LEVI.RxBufferEL_LFL);
+fb_serial_LML(TxBuffer := GVL_LEVI.TxBufferEL_LML, RxBuffer := GVL_LEVI.RxBufferEL_LML);
+fb_serial_LBL(TxBuffer := GVL_LEVI.TxBufferEL_LBL, RxBuffer := GVL_LEVI.RxBufferEL_LBL);
+fb_serial_LBR(TxBuffer := GVL_LEVI.TxBufferEL_LBR, RxBuffer := GVL_LEVI.RxBufferEL_LBR);
+fb_serial_LMR(TxBuffer := GVL_LEVI.TxBufferEL_LMR, RxBuffer := GVL_LEVI.RxBufferEL_LMR);
+fb_serial_LFR(TxBuffer := GVL_LEVI.TxBufferEL_LBF, RxBuffer := GVL_LEVI.RxBufferEL_LBF);
+
+ALaserOffset[0] := fb_serial_VBR.fResult_scaled;
+ALaserOffset[1] := fb_serial_VMR.fResult_scaled;
+ALaserOffset[2] := fb_serial_VFR.fResult_scaled;
+ALaserOffset[3] := fb_serial_VFL.fResult_scaled;
+ALaserOffset[4] := fb_serial_VML.fResult_scaled;
+ALaserOffset[5] := fb_serial_VBL.fResult_scaled;
+ALaserOffset[6] := fb_serial_LFL.fResult_scaled;
+ALaserOffset[7] := fb_serial_LML.fResult_scaled;
+ALaserOffset[8] := fb_serial_LBL.fResult_scaled;
+ALaserOffset[9] := fb_serial_LBR.fResult_scaled;
+ALaserOffset[10] := fb_serial_LMR.fResult_scaled;
+ALaserOffset[11] := fb_serial_LFR.fResult_scaled;
+
+ALaserPacketSpeed[0] := fb_serial_VBR.nPacketsPerSecond;
+ALaserPacketSpeed[1] := fb_serial_VMR.nPacketsPerSecond;
+ALaserPacketSpeed[2] := fb_serial_VFR.nPacketsPerSecond;
+ALaserPacketSpeed[3] := fb_serial_VFL.nPacketsPerSecond;
+ALaserPacketSpeed[4] := fb_serial_VML.nPacketsPerSecond;
+ALaserPacketSpeed[5] := fb_serial_VBL.nPacketsPerSecond;
+ALaserPacketSpeed[6] := fb_serial_LFL.nPacketsPerSecond;
+ALaserPacketSpeed[7] := fb_serial_LML.nPacketsPerSecond;
+ALaserPacketSpeed[8] := fb_serial_LBL.nPacketsPerSecond;
+ALaserPacketSpeed[9] := fb_serial_LBR.nPacketsPerSecond;
+ALaserPacketSpeed[10] := fb_serial_LMR.nPacketsPerSecond;
+ALaserPacketSpeed[11] := fb_serial_LFR.nPacketsPerSecond;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,71 +1,113 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="LEVI_MAIN_TEST" Id="{d65ed62a-347e-4ddd-ac75-dddaa3b0f61d}" SpecialFunc="None">
+  <POU Name="LEVI_MAIN_TEST" Id="{13294695-0383-464d-ad1f-a3cd0c71b3e0}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM LEVI_MAIN_TEST
 VAR
-	fb_serial_VBR : FB_SerialCom;
-	fb_serial_VMR : FB_SerialCom;
-	fb_serial_VFR : FB_SerialCom;
+	//Vertical sensors
+	fb_serial1 : FB_SerialCom;
+	fb_serial2 : FB_SerialCom;
+	fb_serial3 : FB_SerialCom;
+	fb_serial4 : FB_SerialCom;
+	fb_serial5 : FB_SerialCom;
+	fb_serial6 : FB_SerialCom;
 	
-	fb_serial_VFL : FB_SerialCom;
-	fb_serial_VML : FB_SerialCom;
-	fb_serial_VBL : FB_SerialCom;
+	//Lateral sensors
+	fb_serial7 : FB_SerialCom;
+	fb_serial8 : FB_SerialCom;
+	fb_serial9 : FB_SerialCom;
+	fb_serial10 : FB_SerialCom;
+	fb_serial11 : FB_SerialCom;
+	fb_serial12 : FB_SerialCom;
 	
-	fb_serial_LFL : FB_SerialCom;
-	fb_serial_LML : FB_SerialCom;
-	fb_serial_LBL : FB_SerialCom;
+	//Simulink Sensor Setup
+	FB_sensor_init: ST_FB_sensors_full_TcCom_InitStruct :=  (noid:=16#01010010);
+	FB_sensor: FB_sensors_full_TcCom_InitStruct(FB_sensor_init);
 	
-	fb_serial_LBR : FB_SerialCom;
-	fb_serial_LMR : FB_SerialCom;
-	fb_serial_LFR : FB_SerialCom;
+	Sensor_model_input: ST_sensors_full_U_T;
+	Sensor_model_output: ST_sensors_full_Y_T;
+	Sensor_parameters: ST_P_sensors_full_T := FB_sensor.stsensors_full_P;
 	
-	ArrayTest : ARRAY[0..11] OF REAL;
+	sSensorDataArray : ARRAY[0..11] OF REAL;
 	
-	ArrayTest2 : ARRAY[0..11] OF UDINT;
+	z: LREAL;
+	Phi: LREAL;
+	Theta: LREAL;
+	Num_rejected_vert: LREAL;
+	
+	y: LREAL;
+	Psi: LREAL;
+	
+	Current_levi_state : E_LeviState;
+	
+	Control_word AT %Q* : UINT;
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fb_serial_VBR(TxBuffer := GVL_LEVI.TxBufferEL_VBR, RxBuffer := GVL_LEVI.RxBufferEL_VBR);
-fb_serial_VMR(TxBuffer := GVL_LEVI.TxBufferEL_VMR, RxBuffer := GVL_LEVI.RxBufferEL_VMR);
-fb_serial_VFR(TxBuffer := GVL_LEVI.TxBufferEL_VFR, RxBuffer := GVL_LEVI.RxBufferEL_VFR);
-fb_serial_VFL(TxBuffer := GVL_LEVI.TxBufferEL_VFL, RxBuffer := GVL_LEVI.RxBufferEL_VFL);
-fb_serial_VML(TxBuffer := GVL_LEVI.TxBufferEL_VML, RxBuffer := GVL_LEVI.RxBufferEL_VML);
-fb_serial_VBL(TxBuffer := GVL_LEVI.TxBufferEL_VBL, RxBuffer := GVL_LEVI.RxBufferEL_VBL);
-fb_serial_LFL(TxBuffer := GVL_LEVI.TxBufferEL_LFL, RxBuffer := GVL_LEVI.RxBufferEL_LFL);
-fb_serial_LML(TxBuffer := GVL_LEVI.TxBufferEL_LML, RxBuffer := GVL_LEVI.RxBufferEL_LML);
-fb_serial_LBL(TxBuffer := GVL_LEVI.TxBufferEL_LBL, RxBuffer := GVL_LEVI.RxBufferEL_LBL);
-fb_serial_LBR(TxBuffer := GVL_LEVI.TxBufferEL_LBR, RxBuffer := GVL_LEVI.RxBufferEL_LBR);
-fb_serial_LMR(TxBuffer := GVL_LEVI.TxBufferEL_LMR, RxBuffer := GVL_LEVI.RxBufferEL_LMR);
-fb_serial_LFR(TxBuffer := GVL_LEVI.TxBufferEL_LBF, RxBuffer := GVL_LEVI.RxBufferEL_LBF);
+      <ST><![CDATA[//Vertical sensors
+fb_serial1(TxBuffer := GVL_LEVI.TxBufferEL_1, RxBuffer := GVL_LEVI.RxBufferEL_1);
+fb_serial2(TxBuffer := GVL_LEVI.TxBufferEL_2, RxBuffer := GVL_LEVI.RxBufferEL_2);
+fb_serial3(TxBuffer := GVL_LEVI.TxBufferEL_3, RxBuffer := GVL_LEVI.RxBufferEL_3);
+fb_serial4(TxBuffer := GVL_LEVI.TxBufferEL_4, RxBuffer := GVL_LEVI.RxBufferEL_4);
+fb_serial5(TxBuffer := GVL_LEVI.TxBufferEL_5, RxBuffer := GVL_LEVI.RxBufferEL_5);
+fb_serial6(TxBuffer := GVL_LEVI.TxBufferEL_6, RxBuffer := GVL_LEVI.RxBufferEL_6);
 
-ArrayTest[0] := fb_serial_VBR.fResult_scaled;
-ArrayTest[1] := fb_serial_VMR.fResult_scaled;
-ArrayTest[2] := fb_serial_VFR.fResult_scaled;
-ArrayTest[3] := fb_serial_VFL.fResult_scaled;
-ArrayTest[4] := fb_serial_VML.fResult_scaled;
-ArrayTest[5] := fb_serial_VBL.fResult_scaled;
-ArrayTest[6] := fb_serial_LFL.fResult_scaled;
-ArrayTest[7] := fb_serial_LML.fResult_scaled;
-ArrayTest[8] := fb_serial_LBL.fResult_scaled;
-ArrayTest[9] := fb_serial_LBR.fResult_scaled;
-ArrayTest[10] := fb_serial_LMR.fResult_scaled;
-ArrayTest[11] := fb_serial_LFR.fResult_scaled;
+//Lateral sensors
+fb_serial7(TxBuffer := GVL_LEVI.TxBufferEL_7, RxBuffer := GVL_LEVI.RxBufferEL_7);
+fb_serial8(TxBuffer := GVL_LEVI.TxBufferEL_8, RxBuffer := GVL_LEVI.RxBufferEL_8);
+fb_serial9(TxBuffer := GVL_LEVI.TxBufferEL_9, RxBuffer := GVL_LEVI.RxBufferEL_9);
+fb_serial10(TxBuffer := GVL_LEVI.TxBufferEL_10, RxBuffer := GVL_LEVI.RxBufferEL_10);
+fb_serial11(TxBuffer := GVL_LEVI.TxBufferEL_11, RxBuffer := GVL_LEVI.RxBufferEL_11);
+fb_serial12(TxBuffer := GVL_LEVI.TxBufferEL_12, RxBuffer := GVL_LEVI.RxBufferEL_12);
 
-ArrayTest2[0] := fb_serial_VBR.nPacketsPerSecond;
-ArrayTest2[1] := fb_serial_VMR.nPacketsPerSecond;
-ArrayTest2[2] := fb_serial_VFR.nPacketsPerSecond;
-ArrayTest2[3] := fb_serial_VFL.nPacketsPerSecond;
-ArrayTest2[4] := fb_serial_VML.nPacketsPerSecond;
-ArrayTest2[5] := fb_serial_VBL.nPacketsPerSecond;
-ArrayTest2[6] := fb_serial_LFL.nPacketsPerSecond;
-ArrayTest2[7] := fb_serial_LML.nPacketsPerSecond;
-ArrayTest2[8] := fb_serial_LBL.nPacketsPerSecond;
-ArrayTest2[9] := fb_serial_LBR.nPacketsPerSecond;
-ArrayTest2[10] := fb_serial_LMR.nPacketsPerSecond;
-ArrayTest2[11] := fb_serial_LFR.nPacketsPerSecond;
+//Combining the sensor measurements into an array
+//Vertical
+sSensorDataArray[0] := fb_serial1.sLastScaledResult; //VFL
+sSensorDataArray[1] := fb_serial2.sLastScaledResult; //VFR
+sSensorDataArray[2] := fb_serial3.sLastScaledResult; //VML
+sSensorDataArray[3] := fb_serial4.sLastScaledResult; //VMR
+sSensorDataArray[4] := fb_serial5.sLastScaledResult; //VBL
+sSensorDataArray[5] := fb_serial6.sLastScaledResult; //VBR
 
-]]></ST>
+//Lateral
+sSensorDataArray[6] := fb_serial7.sLastScaledResult; //LFL
+sSensorDataArray[7] := fb_serial8.sLastScaledResult; //LFR
+sSensorDataArray[8] := fb_serial9.sLastScaledResult; //LML
+sSensorDataArray[9] := fb_serial10.sLastScaledResult; //LMR
+sSensorDataArray[10] := fb_serial11.sLastScaledResult; //LBL
+sSensorDataArray[11] := fb_serial12.sLastScaledResult; //LBR
+
+FOR i:=0 TO 11 DO
+	sensor_model_input.aAirgaps[i] := sSensorDataArray[i];
+END_FOR
+
+FB_sensor(stsensors_full_u := Sensor_model_input, stsensors_full_y => Sensor_model_output);
+		
+z := Sensor_model_output.fz_avg;
+roll := Sensor_model_output.froll;
+pitch := Sensor_model_output.fpitch;
+Num_rejected_vert := Sensor_model_output.fn_rejected_vertical;
+
+y := Sensor_model_output.fy_avg;
+jaw := Sensor_model_output.fjaw;
+lat_nom := Sensor_model_output.alat_nom;
+		
+CASE Current_Levi_state OF
+	E_LeviState.LEVI_IDLE:
+		Control_word := 0;
+		
+	E_LeviState.LEVI_INIT:
+
+		IF init THEN 
+			count_cycles_liftoff := count_cycles_liftoff + 1;
+			
+			IF count_cycles_liftoff > 1000 THEN
+				z_liftoff := z;
+				init := FALSE;	
+				count_cycles_liftoff := 0;
+			END_IF
+		END_IF
+END_CASE]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

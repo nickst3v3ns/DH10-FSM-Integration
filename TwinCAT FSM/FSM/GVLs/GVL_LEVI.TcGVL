@@ -11,19 +11,19 @@ VAR_GLOBAL
 	levitation_fault: 		BOOL; //fatal levitation error
 	
 	//DC link voltages
-	drive_voltage_HEMS1	AT %I*	:REAL;
-	drive_voltage_HEMS2	AT %I*	:REAL;
-	drive_voltage_HEMS3	AT %I*	:REAL;
-	drive_voltage_HEMS4	AT %I*	:REAL;
-	drive_voltage_HEMS5	AT %I*	:REAL;
-	drive_voltage_HEMS6	AT %I*	:REAL;
-	drive_voltage_HEMS7	AT %I*	:REAL;
-	drive_voltage_HEMS8	AT %I*	:REAL;
+	drive_voltage_HEMS1	AT %I*	:REAL := 0;
+	drive_voltage_HEMS2	AT %I*	:REAL := 0;
+	drive_voltage_HEMS3	AT %I*	:REAL := 0;
+	drive_voltage_HEMS4	AT %I*	:REAL := 0;
+	drive_voltage_HEMS5	AT %I*	:REAL := 0;
+	drive_voltage_HEMS6	AT %I*	:REAL := 0;
+	drive_voltage_HEMS7	AT %I*	:REAL := 0;
+	drive_voltage_HEMS8	AT %I*	:REAL := 0;
 	
-	drive_voltage_EMS1	AT %I*	:REAL;
-	drive_voltage_EMS2	AT %I*	:REAL;
-	drive_voltage_EMS3	AT %I*	:REAL;
-	drive_voltage_EMS4	AT %I*	:REAL;
+	drive_voltage_EMS1	AT %I*	:REAL := 0;
+	drive_voltage_EMS2	AT %I*	:REAL := 0;
+	drive_voltage_EMS3	AT %I*	:REAL := 0;
+	drive_voltage_EMS4	AT %I*	:REAL := 0;
 	
 	DC_LINK_SAFE				:BOOL;
 	
