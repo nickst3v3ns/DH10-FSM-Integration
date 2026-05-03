@@ -31,7 +31,7 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.btrigger_EL := FALSE;
+    0:  GVL_FSM.btrigger_EL := TRUE;
 		
         GVL_Prop.propulsion_enable := FALSE;
         GVL_LEVI.levitation_enable := FALSE;
@@ -64,7 +64,7 @@ CASE state OF
 		
 		IF RecoveryToMaintenance THEN
 			
-			GVL_FSM.btrigger_EL := TRUE;
+			GVL_FSM.btrigger_EL := FALSE;
 			
 			state := 3;
 			
@@ -75,7 +75,9 @@ CASE state OF
         IF tonDelay.Q AND GVL_FSM.bsdc_closed THEN
 			
             busy := FALSE;
-			execute := FALSE; //
+			execute := FALSE;
+			state := 0;
+			tonDelay(IN := FALSE);
         END_IF
 END_CASE]]></ST>
     </Implementation>

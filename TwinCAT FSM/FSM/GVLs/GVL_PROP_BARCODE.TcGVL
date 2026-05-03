@@ -11,6 +11,7 @@ VAR_GLOBAL
 	state AT %I* : UINT;
 	
 	EHWTable1XML : STRING[6000];
+
 	TrackSegmentsRaw1 : ARRAY[0..29] OF Track_Segment_Raw_EHC:= [
 		(iTrackNumber := 1, iXPosition := 0, sType := "straight", sBatch := "B", iId := 61, iLength := 4, rStartValue := 640.0, rEndValue := 644.0),
 (iTrackNumber := 2, iXPosition := 4, sType := "straight", sBatch := "B", iId := 58, iLength := 4, rStartValue := 628.0, rEndValue := 632.0),
