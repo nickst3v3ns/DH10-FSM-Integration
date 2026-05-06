@@ -340,7 +340,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1088BA6C-C66A-9158-BBDD-400D74939130}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1CEB6B7E-5A57-2E90-5AF3-B2DDA3B2B346}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
@@ -619,18 +619,6 @@ barcode ]]></Comment>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.InputData1</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData2</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
 							<Type>BOOL</Type>
@@ -675,6 +663,30 @@ barcode ]]></Comment>
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
 							<Comment><![CDATA[LVBAT]]></Comment>
 							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData1_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData2_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData1_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData2_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="3" AreaNo="49">

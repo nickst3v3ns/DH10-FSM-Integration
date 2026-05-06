@@ -139,6 +139,18 @@
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Control.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Dropdown.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Init.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Pullup.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP\FB_ReceiveCurrent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -228,6 +240,14 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="lateral_levitation_control">
+      <DefaultResolution>lateral_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>lateral_levitation_control</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Sensor_model">
+      <DefaultResolution>Sensor_model, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>Sensor_model</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_EtherCAT">
       <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_EtherCAT</Namespace>
@@ -253,6 +273,10 @@
       <Namespace>Tc3_Module</Namespace>
       <SystemLibrary>true</SystemLibrary>
     </PlaceholderReference>
+    <PlaceholderReference Include="vertical_levitation_control">
+      <DefaultResolution>vertical_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>vertical_levitation_control</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Hello_world.tmc">
@@ -267,8 +291,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -344,14 +368,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

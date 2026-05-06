@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Init" Id="{a6d5702d-fda8-45bc-a488-6e606797af23}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Init
+
+VAR_INPUT
+	z: INT;
+END_VAR
+
+VAR_OUTPUT
+	z_liftoff: LREAL;
+END_VAR
+
+VAR
+	//Finished : BOOL := FALSE;
+	count_cycles_liftoff: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[count_cycles_liftoff := count_cycles_liftoff + 1;
+
+	IF count_cycles_liftoff > 750 THEN
+		z_liftoff := z;
+		count_cycles_liftoff := 0;
+	END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

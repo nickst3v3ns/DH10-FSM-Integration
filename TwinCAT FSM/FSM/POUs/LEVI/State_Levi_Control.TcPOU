@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Control" Id="{08c4e169-07da-43da-aae8-a1a0c4b789a7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Control
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

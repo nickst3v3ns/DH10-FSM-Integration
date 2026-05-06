@@ -27,13 +27,14 @@ END_VAR]]></Declaration>
       <ST><![CDATA[bcriticalCoolDown := FALSE;
 icriticalindex := -1;
 
-TEMP[0] := INT_TO_REAL(temp_raw11)/100.0;
-TEMP[1] := INT_TO_REAL(temp_raw12)/100.0;
-TEMP[2] := INT_TO_REAL(temp_raw13)/100.0;
-TEMP[3] := INT_TO_REAL(temp_raw14)/100.0;
-TEMP[5] := INT_TO_REAL(temp_raw16)/100.0;
-TEMP[6] := INT_TO_REAL(temp_raw17)/100.0;
-TEMP[7] := INT_TO_REAL(temp_raw18)/100.0;
+TEMP[0] := INT_TO_REAL(temp_raw11)/100.0; //LFL1
+TEMP[1] := INT_TO_REAL(temp_raw12)/100.0; //LFL2
+TEMP[2] := INT_TO_REAL(temp_raw13)/100.0; //LFR1
+TEMP[3] := INT_TO_REAL(temp_raw14)/100.0; //LFR2
+TEMP[4] := INT_TO_REAL(temp_raw16)/100.0; //LBL1
+TEMP[5] := INT_TO_REAL(temp_raw16)/100.0; //LBL2
+TEMP[6] := INT_TO_REAL(temp_raw17)/100.0; //LBR1
+TEMP[7] := INT_TO_REAL(temp_raw18)/100.0; //LBR2
 
 FOR i := 0 TO 7 DO
 	IF TEMP[i] > GVL_FSM.rcritical_temp_EMS  THEN

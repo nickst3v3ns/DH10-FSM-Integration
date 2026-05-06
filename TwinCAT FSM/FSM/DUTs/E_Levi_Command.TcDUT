@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_Levi_Command" Id="{bebd9281-c3e3-41c8-b75e-c03d62d1a048}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_Levi_Command :
+(
+	LEVI_IDLE := 0,
+	LEVI_INIT := 1,
+	LEVI_PULLUP := 2,
+	LEVI_DROPDOWN := 3,
+	LEVI_CONTROL := 4,
+	LEVI_ERROR := 5,
+	LEVI_DRIVERESET := 6,
+	LEVI_SYSTEM_CHECK := 7,
+	LEVI_HARD_RESET := 8
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -11,19 +11,8 @@ VAR_GLOBAL
 	levitation_fault: 		BOOL; //fatal levitation error
 	
 	//DC link voltages
-	drive_voltage_HEMS1	AT %I*	:REAL;
-	drive_voltage_HEMS2	AT %I*	:REAL;
-	drive_voltage_HEMS3	AT %I*	:REAL;
-	drive_voltage_HEMS4	AT %I*	:REAL;
-	drive_voltage_HEMS5	AT %I*	:REAL;
-	drive_voltage_HEMS6	AT %I*	:REAL;
-	drive_voltage_HEMS7	AT %I*	:REAL;
-	drive_voltage_HEMS8	AT %I*	:REAL;
-	
-	drive_voltage_EMS1	AT %I*	:REAL;
-	drive_voltage_EMS2	AT %I*	:REAL;
-	drive_voltage_EMS3	AT %I*	:REAL;
-	drive_voltage_EMS4	AT %I*	:REAL;
+	drive_voltage_HEMS AT %I*: ARRAY[0..15] OF UINT;
+	drive_voltage_EMS AT %I*: ARRAY[0..7] OF UINT;
 	
 	DC_LINK_SAFE				:BOOL;
 	
@@ -31,13 +20,13 @@ VAR_GLOBAL
 	RxBufferEL				: ComBuffer;	(* Receive data buffer; used with all receive function blocks *) 
 	TxBufferEL				: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	
-	//Vertical
-	RxBufferEL_VBR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
-	TxBufferEL_VBR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
-	RxBufferEL_VMR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
-	TxBufferEL_VMR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	//Vertical right
 	RxBufferEL_VFR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
 	TxBufferEL_VFR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_VMR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_VMR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_VBR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_VBR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	
 	//vertical left
 	RxBufferEL_VFL			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
@@ -56,20 +45,20 @@ VAR_GLOBAL
 	TxBufferEL_LBL			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	
 	//lateral right
-	RxBufferEL_LBR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
-	TxBufferEL_LBR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_LFR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_LFR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	RxBufferEL_LMR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
 	TxBufferEL_LMR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
-	RxBufferEL_LBF			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
-	TxBufferEL_LBF			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
+	RxBufferEL_LBR			: ComBuffer;	(* Receive data buffer; used with all receive function blocks *)
+	TxBufferEL_LBR			: ComBuffer;	(* Transmit data buffer; used with all receive function blocks *)
 	
 	(* 	I/O variables for a EL6021 terminal*)
-	stIn_EL6021_VBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
-	stOut_EL6021_VBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
+	stIn_EL6021_VFR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
+	stOut_EL6021_VFR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftFront*)
 	stIn_EL6021_VMR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle*)
 	stOut_EL6021_VMR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftMiddle*)
-	stIn_EL6021_VFR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
-	stOut_EL6021_VFR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
+	stIn_EL6021_VBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
+	stOut_EL6021_VBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalLeftBack*)
 	
 	stIn_EL6021_VFL AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack*)
 	stOut_EL6021_VFL AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeVerticalRightBack*)
@@ -86,12 +75,12 @@ VAR_GLOBAL
 	stIn_EL6021_LBL AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront*)
 	stOut_EL6021_LBL AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalRightFront*)
 	
-	stIn_EL6021_LBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
-	stOut_EL6021_LBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
+	stIn_EL6021_LFR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
+	stOut_EL6021_LFR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftFront*)
 	stIn_EL6021_LMR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle*)
 	stOut_EL6021_LMR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftMiddle*)
-	stIn_EL6021_LFR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
-	stOut_EL6021_LFR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
+	stIn_EL6021_LBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
+	stOut_EL6021_LBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	
 END_VAR]]></Declaration>
   </GVL>
