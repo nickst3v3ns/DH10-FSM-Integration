@@ -127,12 +127,7 @@ roll := Sensor_model_output.froll;
 pitch := Sensor_model_output.fpitch;
 
 y := Sensor_model_output.fy;
-yaw := Sensor_model_output.fyaw;
-
-CASE 
-	
-	FB_Levi_Init(z := z, z_liftoff => z_liftoff);
-END_CASE]]></ST>
+yaw := Sensor_model_output.fyaw;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

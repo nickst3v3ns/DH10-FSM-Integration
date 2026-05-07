@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Testing_Separate" Id="{ac532a27-55be-4c53-8776-155af2a2c6e5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Testing_Separate
+VAR_INPUT
+	configured_peak_current: LREAL;
+	
+	TestVFL1 : LREAL;
+	TestVFL2 : LREAL;
+	TestVBL1 : LREAL;
+	TestVBL2 : LREAL;
+	TestVFR1 : LREAL;
+	TestVFR2 : LREAL;
+	TestVBR1 : LREAL;
+	TestVBR2: LREAL;
+	TestLF1 : LREAL;
+	TestLF2 : LREAL;
+	TestLB1 : LREAL;
+	TestLB2 : LREAL;
+END_VAR
+
+VAR_OUTPUT
+	force_values : ARRAY[0..11] OF INT;
+END_VAR
+
+VAR
+	count_cycles: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[	force_values[0] := LREAL_TO_INT((TestVFL1 * 1000.0)/ configured_peak_current);
+	force_values[1] := LREAL_TO_INT((TestVFL2 * 1000.0)/ configured_peak_current);
+	
+	force_values[2] := LREAL_TO_INT((TestVFR1 * 1000.0)/ configured_peak_current);
+	force_values[3] := LREAL_TO_INT((TestVFR2 * 1000.0)/ configured_peak_current);
+	
+	force_values[4] := LREAL_TO_INT((TestVBL1 * 1000.0)/ configured_peak_current);
+	force_values[5] := LREAL_TO_INT((TestVBL2 * 1000.0)/ configured_peak_current);
+	
+	force_values[6] := LREAL_TO_INT((TestVBR1 * 1000.0)/ configured_peak_current);
+	force_values[7] := LREAL_TO_INT((TestVBR2 * 1000.0)/ configured_peak_current);
+	
+	force_values[8] := 0;
+	force_values[9] := 0;
+	
+	force_values[10] := 0;
+	force_values[11] := 0;
+	
+	count_cycles := count_cycles + 1;
+	
+	IF count_cycles > 1000 THEN
+		count_cycles := 0;
+	END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

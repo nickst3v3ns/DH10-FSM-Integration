@@ -142,13 +142,13 @@
     <Compile Include="POUs\LEVI\State_Levi_Control.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\LEVI\State_Levi_Dropdown.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Init.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\LEVI\State_Levi_Pullup.TcPOU">
+    <Compile Include="POUs\LEVI\State_Levi_Pullup_and_Dropdown.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Testing_Separate.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP\FB_ReceiveCurrent.TcPOU">
