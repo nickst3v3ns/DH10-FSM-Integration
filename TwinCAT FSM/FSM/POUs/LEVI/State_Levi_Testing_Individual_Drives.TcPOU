@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="State_Levi_Testing_Separate" Id="{ac532a27-55be-4c53-8776-155af2a2c6e5}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Testing_Separate
+  <POU Name="State_Levi_Testing_Individual_Drives" Id="{ac532a27-55be-4c53-8776-155af2a2c6e5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Testing_Individual_Drives
 VAR_INPUT
-	configured_peak_current: LREAL;
-	
+	configured_peak_current: LREAL;	
+END_VAR
+
+VAR_OUTPUT
+	force_values : ARRAY[0..11] OF INT;
+END_VAR
+
+VAR
 	TestVFL1 : LREAL;
 	TestVFL2 : LREAL;
 	TestVBL1 : LREAL;
@@ -17,13 +23,7 @@ VAR_INPUT
 	TestLF2 : LREAL;
 	TestLB1 : LREAL;
 	TestLB2 : LREAL;
-END_VAR
-
-VAR_OUTPUT
-	force_values : ARRAY[0..11] OF INT;
-END_VAR
-
-VAR
+	
 	count_cycles: INT;
 END_VAR
 ]]></Declaration>

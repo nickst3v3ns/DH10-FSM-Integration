@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Init
 
 VAR_INPUT
-	z: INT;
+	z: LREAL;
 END_VAR
 
 VAR_OUTPUT
@@ -12,7 +12,6 @@ VAR_OUTPUT
 END_VAR
 
 VAR
-
 	count_cycles: INT;
 END_VAR
 ]]></Declaration>

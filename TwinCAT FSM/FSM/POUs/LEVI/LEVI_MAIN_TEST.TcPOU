@@ -9,27 +9,30 @@ VAR
 //	Sensors
 
 //----------------------------------------------------------------------------------------------------
-
+	
+	//Initialising the vertical sensor function blocks
+	fb_serial_VFL : FB_SerialCom;
+	fb_serial_VML : FB_SerialCom;
+	fb_serial_VBL : FB_SerialCom;
 	fb_serial_VFR : FB_SerialCom;
 	fb_serial_VMR : FB_SerialCom;
 	fb_serial_VBR : FB_SerialCom;
 	
-	fb_serial_VFL : FB_SerialCom;
-	fb_serial_VML : FB_SerialCom;
-	fb_serial_VBL : FB_SerialCom;
-	
+	//Initialising the lateral sensor function blocks
 	fb_serial_LFL : FB_SerialCom;
 	fb_serial_LML : FB_SerialCom;
 	fb_serial_LBL : FB_SerialCom;
-	
 	fb_serial_LFR : FB_SerialCom;
 	fb_serial_LMR : FB_SerialCom;
 	fb_serial_LBR : FB_SerialCom;
 	
+	//Saving data in array 
+	//Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR
 	SensorDataArray : ARRAY[0..11] OF REAL;
 	SensorData_Packets_Array : ARRAY[0..11] OF UDINT;
 
 	//Simulink Sensor Setup
+	//Initialising the tccom object
 	FB_sensor_init: ST_FB_Sensor_model_TcCom_InitStruct :=  (noid:=16#01010010);
 	FB_sensor: FB_Sensor_model_TcCom_InitStruct(FB_sensor_init);
 	
@@ -37,6 +40,7 @@ VAR
 	Sensor_model_output: ST_Sensor_model_Y_T;
 	Sensor_parameters: ST_P_Sensor_model_T := FB_sensor.stSensor_model_P;
 	
+	//outputs
 	z: LREAL; //mm
 	roll: LREAL; //rad
 	pitch: LREAL; //rad
@@ -46,34 +50,60 @@ VAR
 	
 //----------------------------------------------------------------------------------------------------
 
-//	Drive Inputs
+//	Drive Inputs (Inputs into PLC, drive feedback)
 
 //----------------------------------------------------------------------------------------------------
 	
+	//Order if 12 long: VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2, LF1, LF2, LB1, LB2
+	//Order if 24 long: VFL1_1, VFL1_2, VFL2_1, VFL2_2, VFR1_1, VFR1_2, VFR2_1, VFR2_2, VBL1_1, VBL1_2, VBL2_1, VBL2_2, VBR1_1, VBR1_2, VBR2_1, VBR2_2, LF1_1, LF1_2, LF2_1, LF2_2, LB1_1, LB1_2, LB2_1, LB2_2
+	//Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) 
+	
 	Drive_status AT %I*: ARRAY[0..23] OF UINT; 
 	Drive_Diagnostic AT %I*: ARRAY[0..23] OF UINT;
+	
+	Drive_current_V AT %I*: ARRAY[0..23] OF INT;
+	Drive_current_W AT %I*: ARRAY[0..23] OF INT;
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
-	Requested_currents : ARRAY[0..11] OF LREAL; //VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2, LF1, LF2, LB1, LB2
-	Requested_force_values AT %Q*: ARRAY[0..11] OF INT;
+	
+	DC_bus_voltage AT %I*: ARRAY[0..23] OF UINT;
+	DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
+	External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
+	Mains_voltage AT %I*: ARRAY[0..23] OF INT;
+	Periphery_voltage AT %I*: ARRAY[0..23] OF UINT;
+
 	
 	i: INT;
 	
 //----------------------------------------------------------------------------------------------------
 
-//	Drive Outputs
+//	Drive Outputs (Outputs from PLC, drive commands)
 
 //----------------------------------------------------------------------------------------------------
 
+	//Order if 12 long: VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2, LF1, LF2, LB1, LB2
+	//Order if 24 long: VFL1_1, VFL1_2, VFL2_1, VFL2_2, VFR1_1, VFR1_2, VFR2_1, VFR2_2, VBL1_1, VBL1_2, VBL2_1, VBL2_2, VBR1_1, VBR1_2, VBR2_1, VBR2_2, LF1_1, LF1_2, LF2_1, LF2_2, LB1_1, LB1_2, LB2_1, LB2_2
+	//Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) 
+	
+	Requested_currents : ARRAY[0..11] OF LREAL;
+	Requested_force_values AT %Q*: ARRAY[0..11] OF INT;
+	
+	Control_word AT %Q* : ARRAY[0..23] OF UINT;
 //----------------------------------------------------------------------------------------------------
 
 //	States
 
 //----------------------------------------------------------------------------------------------------
-
-	FB_Levi_Init : State_Levi_Init;
 	
-	z_liftoff: INT;
+	//Initialising the state function blocks
+	FB_Levi_Idle : State_Levi_Idle;
+	FB_Levi_Init : State_Levi_Init;
+	FB_Levi_Ready : State_Levi_Ready;
+	FB_Levi_Pullup : State_Levi_Pullup;
+	FB_Levi_Dropdown : State_Levi_Dropdown;
+	FB_Levi_Control : State_Levi_Control;
+	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -127,7 +157,9 @@ roll := Sensor_model_output.froll;
 pitch := Sensor_model_output.fpitch;
 
 y := Sensor_model_output.fy;
-yaw := Sensor_model_output.fyaw;]]></ST>
+yaw := Sensor_model_output.fyaw;
+
+CASE ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

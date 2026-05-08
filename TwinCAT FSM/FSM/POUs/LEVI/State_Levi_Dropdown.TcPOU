@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Dropdown" Id="{2ad43b60-0717-4b07-88ee-06a40ca8fdd4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Dropdown
+VAR_INPUT
+	configured_peak_current: LREAL;
+END_VAR
+
+VAR_OUTPUT
+	force_values : ARRAY[0..11] OF INT;
+END_VAR
+
+VAR
+	current_dropdown : LREAL := -2.5;
+	count_cycles: INT;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[	force_values[0] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	force_values[1] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	
+	force_values[2] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	force_values[3] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	
+	force_values[4] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	force_values[5] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	
+	force_values[6] := LREAL_TO_INT((current_dropdown* 1000.0)/ configured_peak_current);
+	force_values[7] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+	
+	force_values[8] := 0;
+	force_values[9] := 0;
+	
+	force_values[10] := 0;
+	force_values[11] := 0;
+	
+	count_cycles := count_cycles + 1;
+	
+	IF count_cycles > 1000 THEN
+		count_cycles := 0;
+	END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

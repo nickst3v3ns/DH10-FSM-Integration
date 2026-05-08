@@ -10,10 +10,6 @@ VAR_GLOBAL
 	levitation_active:		BOOL;
 	levitation_fault: 		BOOL; //fatal levitation error
 	
-	//DC link voltages
-	drive_voltage_HEMS AT %I*: ARRAY[0..15] OF UINT;
-	drive_voltage_EMS AT %I*: ARRAY[0..7] OF UINT;
-	
 	DC_LINK_SAFE				:BOOL;
 	
 	//FOR laser Sensors
