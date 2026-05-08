@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Check_drives" Id="{4789beb1-aea2-443e-98ea-1606578dc73f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Check_drives : BOOL
+//This function will output as TRUE if errors are detected
+
+VAR_INPUT
+	//Drive status words (S-0-0135)
+	drive_status: ARRAY[0..23] OF UINT;
+	
+	//Class 1 Diagnostics (S-0-0011)
+	error_specifics: ARRAY[0..23] OF UINT;
+END_VAR
+
+VAR_OUTPUT
+	//Number of warns detected
+	n_warns: UINT := 0;
+	
+	//Number of errors found
+	n_errors: UINT := 0;
+	
+	//What the errors found are
+	errors: ARRAY[0..23] OF Drive_error_mapping;
+	
+END_VAR
+
+VAR
+	i: INT := 0;
+	j: INT := 0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Check_drives := FALSE;
+
+FOR i:=0 TO 23 DO
+	//Check for errors
+	IF drive_status[i].13 = 1 THEN
+		Check_drives := TRUE;
+		n_errors := n_errors + 1;
+		
+		//Find what the error is
+		FOR j:=0 TO 12 DO
+			//Have to use bit shift as you can't dynamically access bits and we want to check the first 13
+			IF error_specifics[i].15= 1 THEN
+				errors[i] := j;
+			END_IF
+			
+			//Shift all the bits left 1
+			error_specifics[i] := SHL(error_specifics[i], 1);
+		END_FOR
+	
+	ELSIF drive_status[i].12 = 1 THEN
+		n_warns := n_warns + 1;
+ 	
+	END_IF
+	
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

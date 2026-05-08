@@ -107,6 +107,7 @@ VAR
 	FB_Levi_Dropdown : State_Levi_Dropdown;
 	FB_Levi_Control : State_Levi_Control;
 	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
+	FB_Levi_Error : State_Levi_Error;
 
 END_VAR
 ]]></Declaration>
@@ -166,7 +167,6 @@ yaw := Sensor_model_output.fyaw;
 CASE Levi_Command OF
 	
 	E_Levi_Command.LEVI_IDLE:
-		Levi_State := 0;
 	
 	E_Levi_Command.LEVI_INIT:
 	
@@ -179,6 +179,8 @@ CASE Levi_Command OF
 	E_Levi_Command.LEVI_CONTROL:
 	
 	E_Levi_Command.LEVI_TESTING_INDIVIDUAL_DRIVES:
+	
+	E_Levi_Command.LEVI_ERROR:
 		
 END_CASE]]></ST>
     </Implementation>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Error" Id="{fcdb7141-f670-49a1-a027-6668088d7a58}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Error
+
+VAR_INPUT
+END_VAR
+
+VAR_OUTPUT
+	State : E_Levi_State;
+END_VAR
+
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[State := 7;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

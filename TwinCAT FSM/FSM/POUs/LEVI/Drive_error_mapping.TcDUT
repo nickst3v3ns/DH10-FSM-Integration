@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="Drive_error_mapping" Id="{9ee6572c-5032-46c2-b837-de7ffdd79493}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'to_string'}
+//All of the CAN IDs and what they correspond to
+
+TYPE Drive_error_mapping :
+(
+	Motor_overload := 0,
+	Heatsink_overtemp := 1,
+	Motor_overtemp := 2,
+	Drive_overtemp := 3,
+	Control_voltage := 4,
+	Feedback := 5,
+	Commutation := 6,
+	Overcurrent := 7,
+	Overvoltage := 8,
+	Undervoltage := 9,
+	Supply_phase := 10,
+	Psn_dev := 11,
+	Comms := 12,
+	Overtravel := 13,
+	none := -1
+)INT := none;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

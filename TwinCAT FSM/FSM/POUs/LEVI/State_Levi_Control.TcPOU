@@ -4,17 +4,29 @@
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Control
 
 VAR_INPUT
+	drive_status: ARRAY [0..23] OF UINT;
+	drive_diagnostics: ARRAY [0..23] OF UINT;
 END_VAR
 
 VAR_OUTPUT
 	State : E_Levi_State;
+	Error: BOOL;
 END_VAR
 
 VAR
+	n_drive_warnings: UINT;
+	n_drive_errors: UINT;
+	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 5;]]></ST>
+      <ST><![CDATA[State := 5;
+
+Error := Check_drives(drive_status := drive_status, 
+					error_specifics := drive_diagnostics, 
+					n_warns => n_drive_warnings, 
+					n_errors => n_drive_errors, 
+					errors => error_specifics);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
