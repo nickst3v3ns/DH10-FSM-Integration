@@ -94,7 +94,11 @@ VAR
 //	States
 
 //----------------------------------------------------------------------------------------------------
-	
+	//Levi_command is where you tell the pod to which state you want to switch. The code will then check if you are allowed to switch to that state.
+	//Levi_state tells you and the code your current state.
+	Levi_command : E_Levi_Command;
+	Levi_State : E_Levi_State;
+
 	//Initialising the state function blocks
 	FB_Levi_Idle : State_Levi_Idle;
 	FB_Levi_Init : State_Levi_Init;
@@ -159,7 +163,24 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
-CASE ]]></ST>
+CASE Levi_Command OF
+	
+	E_Levi_Command.LEVI_IDLE:
+		Levi_State := 0;
+	
+	E_Levi_Command.LEVI_INIT:
+	
+	E_Levi_Command.LEVI_READY:
+	
+	E_Levi_Command.LEVI_PULLUP:
+	
+	E_Levi_Command.LEVI_DROPDOWN:
+	
+	E_Levi_Command.LEVI_CONTROL:
+	
+	E_Levi_Command.LEVI_TESTING_INDIVIDUAL_DRIVES:
+		
+END_CASE]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

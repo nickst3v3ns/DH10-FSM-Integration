@@ -7,6 +7,7 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
+	State : E_Levi_State;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
@@ -17,7 +18,9 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[	force_values[0] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+      <ST><![CDATA[State := 4;
+
+	force_values[0] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
 	force_values[1] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
 	
 	force_values[2] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);

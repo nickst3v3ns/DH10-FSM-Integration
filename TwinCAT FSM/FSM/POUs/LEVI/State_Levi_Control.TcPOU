@@ -2,15 +2,19 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="State_Levi_Control" Id="{08c4e169-07da-43da-aae8-a1a0c4b789a7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Control
+
 VAR_INPUT
 END_VAR
+
 VAR_OUTPUT
+	State : E_Levi_State;
 END_VAR
+
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[State := 5;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
