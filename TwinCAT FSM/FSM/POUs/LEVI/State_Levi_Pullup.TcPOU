@@ -6,12 +6,17 @@ VAR_INPUT
 	configured_peak_current: LREAL;
 	drive_status: ARRAY [0..23] OF UINT;
 	drive_diagnostics: ARRAY [0..23] OF UINT;
+	State : E_Levi_States;
+	Force_feedback_value : ARRAY[0..23] OF INT;
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_State;
-	force_values : ARRAY[0..11] OF INT;
 	Error: BOOL;
+END_VAR
+
+VAR_IN_OUT
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
 VAR
@@ -24,37 +29,42 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 3;
-
+      <ST><![CDATA[//Check if there are errors
 Error := Check_drives(drive_status := drive_status, 
-					error_specifics := drive_diagnostics, 
+					drive_diagnostics := drive_diagnostics, 
+					drive_last_request_value := force_values,
+					drive_last_feedback_value := Force_feedback_value,
+					drive_feedback_timeouts := drive_feedback_timeouts,
+					State := State,
 					n_warns => n_drive_warnings, 
 					n_errors => n_drive_errors, 
 					errors => error_specifics);
 
-	force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	force_values[1] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	
-	force_values[2] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	force_values[3] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	
-	force_values[4] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	force_values[5] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	
-	force_values[6] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	force_values[7] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
-	
-	force_values[8] := 0;
-	force_values[9] := 0;
-	
-	force_values[10] := 0;
-	force_values[11] := 0;
-	
-	count_cycles := count_cycles + 1;
-	
-	IF count_cycles > 1000 THEN
-		count_cycles := 0;
-	END_IF]]></ST>
+
+
+force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+force_values[1] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+
+force_values[2] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+force_values[3] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+
+force_values[4] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+force_values[5] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+
+force_values[6] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+force_values[7] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
+
+force_values[8] := 0;
+force_values[9] := 0;
+
+force_values[10] := 0;
+force_values[11] := 0;
+
+count_cycles := count_cycles + 1;
+
+IF count_cycles > 1000 THEN
+	count_cycles := 0;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

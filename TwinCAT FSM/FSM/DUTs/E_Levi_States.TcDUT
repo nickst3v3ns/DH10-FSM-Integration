@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="E_Levi_State" Id="{4d8c88c9-363a-4885-aa20-1dd9d673ad95}">
+  <DUT Name="E_Levi_States" Id="{4d8c88c9-363a-4885-aa20-1dd9d673ad95}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
 {attribute 'to_string'}
-TYPE E_Levi_State :
+TYPE E_Levi_States :
 (
 	LEVI_IDLE 						:= 0,
 	LEVI_INIT 						:= 1,
@@ -13,7 +13,7 @@ TYPE E_Levi_State :
 	LEVI_DROPDOWN 					:= 4,
 	LEVI_CONTROL 					:= 5,
 	LEVI_TESTING_INDIVIDUAL_DRIVES 	:= 6, 
-	LEVI_ERROR						:= 7
+	LEVI_ERROR						:= -1
 );
 END_TYPE
 ]]></Declaration>

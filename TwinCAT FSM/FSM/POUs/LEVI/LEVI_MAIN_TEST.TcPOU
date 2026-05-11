@@ -41,11 +41,11 @@ VAR
 	Sensor_parameters: ST_P_Sensor_model_T := FB_sensor.stSensor_model_P;
 	
 	//outputs
-	z: LREAL; //mm
+	z: LREAL; //m
 	roll: LREAL; //rad
 	pitch: LREAL; //rad
 	
-	y: LREAL; //mm
+	y: LREAL; //m
 	yaw: LREAL;	//rad
 	
 //----------------------------------------------------------------------------------------------------
@@ -73,8 +73,6 @@ VAR
 	Periphery_voltage AT %I*: ARRAY[0..23] OF UINT;
 
 	
-	i: INT;
-	
 //----------------------------------------------------------------------------------------------------
 
 //	Drive Outputs (Outputs from PLC, drive commands)
@@ -96,8 +94,8 @@ VAR
 //----------------------------------------------------------------------------------------------------
 	//Levi_command is where you tell the pod to which state you want to switch. The code will then check if you are allowed to switch to that state.
 	//Levi_state tells you and the code your current state.
-	Levi_command : E_Levi_Command;
-	Levi_State : E_Levi_State;
+	Levi_command : E_Levi_States;
+	Levi_State : E_Levi_States;
 
 	//Initialising the state function blocks
 	FB_Levi_Idle : State_Levi_Idle;
@@ -108,11 +106,56 @@ VAR
 	FB_Levi_Control : State_Levi_Control;
 	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
 	FB_Levi_Error : State_Levi_Error;
+	
+
+//----------------------------------------------------------------------------------------------------
+
+//	Error handling
+
+//----------------------------------------------------------------------------------------------------
+	//Initialising drive references for resetting drive errors
+	PLC_drive_refs AT %I*: ARRAY[0..23] OF ST_PLCDriveRef;
+	drive_refs: ARRAY[0..23] OF ST_DriveRef;
+	
+	//resetting drive errors
+	reset_busy : BOOL;
+	reset_error : BOOL;
+	
+	//error handling
+	n_drive_warnings : UINT;
+	n_drive_errors : UINT;
+	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	
+//----------------------------------------------------------------------------------------------------
+
+//	Control parameters
+
+//----------------------------------------------------------------------------------------------------
+
+	z_liftoff : LREAL; //m
+	Levi_ready : BOOL;
+	
+//----------------------------------------------------------------------------------------------------
+
+//	Other variables
+
+//----------------------------------------------------------------------------------------------------
+
+	minimum_dc_bus_voltage : UINT := 312; //V	
+
+	i: INT;
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fb_serial_VFL(TxBuffer := GVL_LEVI.TxBufferEL_VFL, RxBuffer := GVL_LEVI.RxBufferEL_VFL);
+      <ST><![CDATA[//----------------------------------------------------------------------------------------------------
+
+//	Sensors will always run
+
+//----------------------------------------------------------------------------------------------------
+
+fb_serial_VFL(TxBuffer := GVL_LEVI.TxBufferEL_VFL, RxBuffer := GVL_LEVI.RxBufferEL_VFL);
 fb_serial_VML(TxBuffer := GVL_LEVI.TxBufferEL_VML, RxBuffer := GVL_LEVI.RxBufferEL_VML);
 fb_serial_VBL(TxBuffer := GVL_LEVI.TxBufferEL_VBL, RxBuffer := GVL_LEVI.RxBufferEL_VBL);
 fb_serial_VFR(TxBuffer := GVL_LEVI.TxBufferEL_VFR, RxBuffer := GVL_LEVI.RxBufferEL_VFR);
@@ -164,24 +207,82 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
+
+
+//----------------------------------------------------------------------------------------------------
+
+//	FSM
+
+//----------------------------------------------------------------------------------------------------
+
 CASE Levi_Command OF
 	
-	E_Levi_Command.LEVI_IDLE:
+	//------------------------------------------------------------------------------------------------
 	
-	E_Levi_Command.LEVI_INIT:
+	E_Levi_States.LEVI_IDLE:
 	
-	E_Levi_Command.LEVI_READY:
-	
-	E_Levi_Command.LEVI_PULLUP:
-	
-	E_Levi_Command.LEVI_DROPDOWN:
-	
-	E_Levi_Command.LEVI_CONTROL:
-	
-	E_Levi_Command.LEVI_TESTING_INDIVIDUAL_DRIVES:
-	
-	E_Levi_Command.LEVI_ERROR:
+		Levi_State := 0;
+		FB_Levi_Idle(	Control_word_array => Control_word,
+						force_values => Requested_force_values);
+						
+	//------------------------------------------------------------------------------------------------	
 		
+	E_Levi_States.LEVI_INIT:
+		
+		Levi_state := 1;
+		FB_Levi_Init(	z := z,
+						z_liftoff => z_liftoff,
+						Control_word_array => Control_word,
+						drive_refs => drive_refs,
+						PLC_drive_refs => PLC_drive_refs,
+						force_values => Requested_force_values);
+		
+	//------------------------------------------------------------------------------------------------	
+						
+	E_Levi_States.LEVI_READY:
+	
+		Levi_state := 2;
+		FB_Levi_Ready(	drive_status := Drive_status,
+						drive_diagnostics := Drive_Diagnostic,
+						Force_feedback_value := Force_feedback_value,
+						drive_feedback_timeouts := drive_feedback_timeouts,
+						force_values := Requested_force_values,
+						DC_bus_voltage := DC_bus_voltage,
+						minimum_dc_bus_voltage := minimum_dc_bus_voltage,
+						drive_refs := drive_refs,
+						PLC_drive_refs := PLC_drive_refs,
+						State := Levi_state,
+						reset_busy => reset_busy,
+						reset_error => reset_error,
+						n_drive_warnings => n_drive_warnings,
+						n_drive_errors => n_drive_errors,
+						error_specifics => error_specifics,
+						Control_word_array => Control_word,
+						Levi_ready => Levi_ready,
+						Go_error_state => Levi_command);
+						
+	//------------------------------------------------------------------------------------------------					
+	
+	E_Levi_States.LEVI_PULLUP:
+		Levi_state := 3;
+	
+	//------------------------------------------------------------------------------------------------
+	
+	E_Levi_States.LEVI_DROPDOWN:
+	
+	//------------------------------------------------------------------------------------------------
+	
+	E_Levi_States.LEVI_CONTROL:
+	
+	//------------------------------------------------------------------------------------------------
+	
+	E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES:
+	
+	//------------------------------------------------------------------------------------------------
+	
+	E_Levi_States.LEVI_ERROR:
+	
+	//------------------------------------------------------------------------------------------------	
 END_CASE]]></ST>
     </Implementation>
   </POU>

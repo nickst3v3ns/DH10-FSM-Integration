@@ -9,7 +9,7 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_State;
+	State : E_Levi_States;
 	Error: BOOL;
 END_VAR
 

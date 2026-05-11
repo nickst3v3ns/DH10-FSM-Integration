@@ -7,6 +7,7 @@
 
 TYPE Drive_error_mapping :
 (
+	none := -1,
 	Motor_overload := 0,
 	Heatsink_overtemp := 1,
 	Motor_overtemp := 2,
@@ -20,8 +21,9 @@ TYPE Drive_error_mapping :
 	Supply_phase := 10,
 	Psn_dev := 11,
 	Comms := 12,
-	Overtravel := 13,
-	none := -1
+	Overtravel := 13
+	
+	
 )INT := none;
 END_TYPE
 ]]></Declaration>

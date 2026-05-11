@@ -8,9 +8,11 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_State;
 	z_liftoff: LREAL;
 	Control_word_array : ARRAY[0..23] OF UINT;
+	drive_refs : ARRAY[0..23] OF ST_DriveRef;
+	PLC_drive_refs : ARRAY[0..23] OF ST_PLCDriveRef;
+	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
 VAR
@@ -19,18 +21,53 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 1;
-
+      <ST><![CDATA[//Initialising drive reset commands
 FOR i:=0 TO 23 DO
-	Control_word_array[i] := 0;
+	IF i.0 = 1 THEN
+		PLC_drive_refs[i].aNetId := PLC_drive_refs[i-1].aNetId;
+		PLC_drive_refs[i].nSlaveAddr := PLC_drive_refs[i-1].nSlaveAddr;
+	END_IF
+	drive_refs[i].sNetId := F_CreateAmsNetID(PLC_drive_refs[i].aNetId);
+	drive_refs[i].nSlaveAddr := PLC_drive_refs[i].nSlaveAddr;
+	drive_refs[i].nDriveNo := PLC_drive_refs[i].nDriveNo;
 END_FOR
 
+
+
+
+//Setting the liftoff airgap
 count_cycles := count_cycles + 1;
 
 	IF count_cycles > 750 THEN
 		z_liftoff := z;
 		count_cycles := 0;
-	END_IF]]></ST>
+	END_IF
+
+
+
+
+//Making sure no drives are giving an output
+FOR i:=0 TO 23 DO
+	Control_word_array[i] := 0;
+END_FOR
+
+force_values[0] := 0;
+force_values[1] := 0;
+
+force_values[2] := 0;
+force_values[3] := 0;
+
+force_values[4] := 0;
+force_values[5] := 0;
+
+force_values[6] := 0;
+force_values[7] := 0;
+
+force_values[8] := 0;
+force_values[9] := 0;
+
+force_values[10] := 0;
+force_values[11] := 0;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

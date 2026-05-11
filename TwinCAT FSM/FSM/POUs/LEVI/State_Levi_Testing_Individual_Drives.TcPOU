@@ -7,7 +7,7 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_State;
+	State : E_Levi_States;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
 

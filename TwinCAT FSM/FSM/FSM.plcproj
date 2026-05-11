@@ -27,10 +27,7 @@
     <Compile Include="DUTs\E_EmergencyReason.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\E_Levi_Command.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Levi_State.TcDUT">
+    <Compile Include="DUTs\E_Levi_States.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\E_PodState.TcDUT">
@@ -271,6 +268,10 @@
     <PlaceholderReference Include="Sensor_model">
       <DefaultResolution>Sensor_model, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>Sensor_model</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Drive">
+      <DefaultResolution>Tc2_Drive, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Drive</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_EtherCAT">
       <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
