@@ -4,20 +4,59 @@
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Idle
 
 VAR_INPUT
+	drive_status : ARRAY[0..23] OF UINT;
+	drive_diagnostics : ARRAY[0..23] OF UINT;
+	Force_feedback_value : ARRAY[0..23] OF INT;
+	State : E_Levi_States;
 END_VAR
 
 VAR_OUTPUT
 	Control_word_array : ARRAY[0..23] OF UINT;
+	Go_error_state: BOOL;
+END_VAR
+
+VAR_IN_OUT
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
 VAR
+	Error : BOOL;
+	reset_error : BOOL;
+	n_drive_warnings : UINT;
+	n_drive_errors : UINT;	
+	error_specifics : ARRAY[0..23] OF Drive_error_mapping;	
+
 	i : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FOR i:=0 TO 23 DO
 	Control_word_array[i] := 0;
+END_FOR
+
+GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
+GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
+GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
+GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+
+//Check if there are errors
+Error := Check_drives(drive_status := drive_status, 
+					drive_diagnostics := drive_diagnostics, 
+					drive_last_request_value := force_values,
+					drive_last_feedback_value := Force_feedback_value,
+					drive_feedback_timeouts := drive_feedback_timeouts,
+					State := State,
+					n_warns => n_drive_warnings, 
+					n_errors => n_drive_errors, 
+					errors => error_specifics);
+					
+Go_error_state := FALSE;
+
+FOR i:=0 TO 23 DO
+	IF ERROR AND error_specifics[i] = Drive_error_mapping.Undervoltage = FALSE THEN
+		Go_error_state := TRUE;
+	END_IF	
 END_FOR
 
 force_values[0] := 0;

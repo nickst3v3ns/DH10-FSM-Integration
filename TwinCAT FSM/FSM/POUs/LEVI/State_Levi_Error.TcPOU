@@ -4,17 +4,18 @@
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Error
 
 VAR_INPUT
+	State : E_Levi_States;
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_States;
+	
 END_VAR
 
 VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 7;]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

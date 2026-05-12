@@ -78,6 +78,21 @@ VAR_GLOBAL
 	stIn_EL6021_LBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	stOut_EL6021_LBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	
+	//Vertical control setup
+	FB_control_vert_init: ST_FB_vertical_levitation_control_TcCom_InitStruct := (noid:=16#01010020);
+	FB_control_vert: FB_vertical_levitation_control_TcCom_InitStruct(FB_control_vert_init);
+	
+	Control_vert_inputs: ST_vertical_levitation_control_U_T;
+	Control_vert_outputs: ST_vertical_levitation_control_Y_T;
+	Control_vert_parameters: ST_P_vertical_levitation_control_T := FB_control_vert.stvertical_levitation_control_P;
+	
+	//Lateral control setup
+	FB_control_lat_init: ST_FB_lateral_levitation_control_TcCom_InitStruct := (noid:=16#01010030);
+	FB_control_lat: FB_lateral_levitation_control_TcCom_InitStruct(FB_control_lat_init);
+	
+	Control_lat_inputs: ST_lateral_levitation_control_U_T;
+	Control_lat_outputs: ST_lateral_levitation_control_Y_T;
+	Control_lat_parameters: ST_P_lateral_levitation_control_T := FB_control_lat.stlateral_levitation_control_P;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

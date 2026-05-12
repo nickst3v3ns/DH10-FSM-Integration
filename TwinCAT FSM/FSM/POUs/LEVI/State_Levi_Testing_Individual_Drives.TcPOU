@@ -3,33 +3,116 @@
   <POU Name="State_Levi_Testing_Individual_Drives" Id="{ac532a27-55be-4c53-8776-155af2a2c6e5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Testing_Individual_Drives
 VAR_INPUT
-	configured_peak_current: LREAL;	
+	configured_peak_current: LREAL;
+	drive_status: ARRAY [0..23] OF UINT;
+	drive_diagnostics: ARRAY [0..23] OF UINT;
+	State : E_Levi_States;
+	Force_feedback_value : ARRAY[0..23] OF INT;
 END_VAR
 
 VAR_OUTPUT
-	State : E_Levi_States;
+	Error: BOOL;
+END_VAR
+
+VAR_IN_OUT
+	Control_word_array : ARRAY[0..23] OF UINT;
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
 VAR
+	count_cycles: INT;
+	n_drive_warnings: UINT;
+	n_drive_errors: UINT;
+	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
+	
+	Control_word_VFL1_N : UINT;
+	Control_word_VFL1_S : UINT;
+	Control_word_VFL2_N : UINT;
+	Control_word_VFL2_S : UINT;
+	Control_word_VFR1_N : UINT;
+	Control_word_VFR1_S : UINT;
+	Control_word_VFR2_N : UINT;
+	Control_word_VFR2_S : UINT;
+	Control_word_VBL1_N : UINT;
+	Control_word_VBL1_S : UINT;
+	Control_word_VBL2_N : UINT;
+	Control_word_VBL2_S : UINT;
+	Control_word_VBR1_N : UINT;
+	Control_word_VBR1_S : UINT;
+	Control_word_VBR2_N : UINT;
+	Control_word_VBR2_S : UINT;
+	Control_word_LF1_N : UINT;
+	Control_word_LF1_S : UINT;
+	Control_word_LF2_N : UINT;
+	Control_word_LF2_S : UINT;
+	Control_word_LB1_N : UINT;
+	Control_word_LB1_S : UINT;
+	Control_word_LB2_N : UINT;
+	Control_word_LB2_S : UINT;
+	
 	TestVFL1 : LREAL;
 	TestVFL2 : LREAL;
-	TestVBL1 : LREAL;
-	TestVBL2 : LREAL;
 	TestVFR1 : LREAL;
 	TestVFR2 : LREAL;
-	TestVBR1 : LREAL;
+	TestVBL1 : LREAL;
+	TestVBL2 : LREAL;	
+	TestVBR1 : LREAL;	
 	TestVBR2: LREAL;
 	TestLF1 : LREAL;
 	TestLF2 : LREAL;
 	TestLB1 : LREAL;
 	TestLB2 : LREAL;
 	
-	count_cycles: INT;
+	Switch_on_individual_test : BOOL;
+	
+	i: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 6;
+      <ST><![CDATA[Control_word_array[0] := Control_word_VFL1_N;
+Control_word_array[1] := Control_word_VFL1_S;
+Control_word_array[2] := Control_word_VFL2_N;
+Control_word_array[3] := Control_word_VFL2_S;
+Control_word_array[4] := Control_word_VFR1_N;
+Control_word_array[5] := Control_word_VFR1_S;
+Control_word_array[6] := Control_word_VFR2_N;
+Control_word_array[7] := Control_word_VFR2_S;
+Control_word_array[8] := Control_word_VBL1_N;
+Control_word_array[9] := Control_word_VBL1_S;
+Control_word_array[10] := Control_word_VBL2_N;
+Control_word_array[11] := Control_word_VBL2_S;
+Control_word_array[12] := Control_word_VBR1_N;
+Control_word_array[13] := Control_word_VBR1_S;
+Control_word_array[14] := Control_word_VBR2_N;
+Control_word_array[15] := Control_word_VBR2_S;
+
+Control_word_array[16] := Control_word_LF1_N;
+Control_word_array[17] := Control_word_LF1_S;
+Control_word_array[18] := Control_word_LF2_N;
+Control_word_array[19] := Control_word_LF2_S;
+Control_word_array[20] := Control_word_LB1_N;
+Control_word_array[21] := Control_word_LB1_S;
+Control_word_array[22] := Control_word_LB2_N;
+Control_word_array[23] := Control_word_LB2_S;
+
+GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
+GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
+GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
+GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+
+//Check if there are errors
+Error := Check_drives(drive_status := drive_status, 
+					drive_diagnostics := drive_diagnostics, 
+					drive_last_request_value := force_values,
+					drive_last_feedback_value := Force_feedback_value,
+					drive_feedback_timeouts := drive_feedback_timeouts,
+					State := State,
+					n_warns => n_drive_warnings, 
+					n_errors => n_drive_errors, 
+					errors => error_specifics);
+
+IF Switch_on_individual_test = TRUE THEN
 
 	force_values[0] := LREAL_TO_INT((TestVFL1 * 1000.0)/ configured_peak_current);
 	force_values[1] := LREAL_TO_INT((TestVFL2 * 1000.0)/ configured_peak_current);
@@ -43,17 +126,35 @@ END_VAR
 	force_values[6] := LREAL_TO_INT((TestVBR1 * 1000.0)/ configured_peak_current);
 	force_values[7] := LREAL_TO_INT((TestVBR2 * 1000.0)/ configured_peak_current);
 	
+	force_values[8] := LREAL_TO_INT((TestLF1 * 1000.0)/ configured_peak_current);
+	force_values[9] := LREAL_TO_INT((TestLF2 * 1000.0)/ configured_peak_current);
+	
+	force_values[10] := LREAL_TO_INT((TestLB1 * 1000.0)/ configured_peak_current);
+	force_values[11] := LREAL_TO_INT((TestLB2 * 1000.0)/ configured_peak_current);
+	
+ELSIF Switch_on_individual_test = FALSE THEN
+	
+	force_values[0] := 0;
+	force_values[1] := 0;
+	
+	force_values[2] := 0;
+	force_values[3] := 0;
+	
+	force_values[4] := 0;
+	force_values[5] := 0;
+	
+	force_values[6] := 0;
+	force_values[7] := 0;
+	
 	force_values[8] := 0;
 	force_values[9] := 0;
 	
 	force_values[10] := 0;
 	force_values[11] := 0;
-	
-	count_cycles := count_cycles + 1;
-	
-	IF count_cycles > 1000 THEN
-		count_cycles := 0;
-	END_IF]]></ST>
+
+END_IF
+
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

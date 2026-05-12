@@ -127,6 +127,15 @@ VAR
 	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	
+	Error : BOOL;
+	
+//----------------------------------------------------------------------------------------------------
+
+//	Initialising control models
+
+//----------------------------------------------------------------------------------------------------
+	
+
 //----------------------------------------------------------------------------------------------------
 
 //	Control parameters
@@ -141,7 +150,8 @@ VAR
 //	Other variables
 
 //----------------------------------------------------------------------------------------------------
-
+	
+	configured_peak_current : LREAL := 13; //A
 	minimum_dc_bus_voltage : UINT := 312; //V	
 
 	i: INT;
@@ -222,20 +232,32 @@ CASE Levi_Command OF
 	E_Levi_States.LEVI_IDLE:
 	
 		Levi_State := 0;
-		FB_Levi_Idle(	Control_word_array => Control_word,
-						force_values => Requested_force_values);
+		FB_Levi_Idle(	drive_status := Drive_status,
+						drive_diagnostics := Drive_Diagnostic,
+						Force_feedback_value := Force_feedback_value,
+						State := Levi_state,
+						drive_feedback_timeouts := drive_feedback_timeouts,
+						force_values := Requested_force_values,
+						Control_word_array => Control_word,
+						Go_error_state => Error);
 						
 	//------------------------------------------------------------------------------------------------	
 		
 	E_Levi_States.LEVI_INIT:
 		
 		Levi_state := 1;
-		FB_Levi_Init(	z := z,
+		FB_Levi_Init(	drive_status := Drive_status,
+						drive_diagnostics := Drive_Diagnostic,
+						Force_feedback_value := Force_feedback_value,
+						State := Levi_state,
+						z := z,
+						drive_feedback_timeouts := drive_feedback_timeouts,
+						force_values := Requested_force_values,
 						z_liftoff => z_liftoff,
 						Control_word_array => Control_word,
 						drive_refs => drive_refs,
 						PLC_drive_refs => PLC_drive_refs,
-						force_values => Requested_force_values);
+						Go_error_state => Error);
 		
 	//------------------------------------------------------------------------------------------------	
 						
@@ -247,28 +269,41 @@ CASE Levi_Command OF
 						Force_feedback_value := Force_feedback_value,
 						drive_feedback_timeouts := drive_feedback_timeouts,
 						force_values := Requested_force_values,
-						DC_bus_voltage := DC_bus_voltage,
-						minimum_dc_bus_voltage := minimum_dc_bus_voltage,
 						drive_refs := drive_refs,
 						PLC_drive_refs := PLC_drive_refs,
 						State := Levi_state,
+						Control_word_array := Control_word,
 						reset_busy => reset_busy,
-						reset_error => reset_error,
-						n_drive_warnings => n_drive_warnings,
-						n_drive_errors => n_drive_errors,
-						error_specifics => error_specifics,
-						Control_word_array => Control_word,
 						Levi_ready => Levi_ready,
-						Go_error_state => Levi_command);
+						Go_error_state => Error);
 						
 	//------------------------------------------------------------------------------------------------					
 	
 	E_Levi_States.LEVI_PULLUP:
 		Levi_state := 3;
-	
+		FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
+						drive_status := Drive_status,
+						drive_diagnostics := Drive_Diagnostic,
+						State := Levi_State,
+						Force_feedback_value := Force_feedback_value,
+						drive_feedback_timeouts := drive_feedback_timeouts,
+						force_values := Requested_force_values,
+						Control_word_array := Control_word,
+						Error => Error);
+						
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_DROPDOWN:
+		Levi_state := 4;
+		FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
+							drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							State := Levi_State,
+							Force_feedback_value := Force_feedback_value,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							Control_word_array := Control_word,
+							Error => Error);		
 	
 	//------------------------------------------------------------------------------------------------
 	
@@ -277,7 +312,17 @@ CASE Levi_Command OF
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES:
-	
+		Levi_state := 6;
+		FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
+											drive_status := Drive_status,
+											drive_diagnostics := Drive_Diagnostic,
+											State := Levi_State,
+											Force_feedback_value := Force_feedback_value,
+											drive_feedback_timeouts := drive_feedback_timeouts,
+											force_values := Requested_force_values,
+											Control_word_array := Control_word,
+											Error => Error);	
+						
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_ERROR:

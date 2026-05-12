@@ -15,21 +15,33 @@ VAR_OUTPUT
 END_VAR
 
 VAR_IN_OUT
+	Control_word_array : ARRAY[0..23] OF UINT;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
 
 VAR
-	current_pullup : LREAL := 2.5;
+	current_pullup : LREAL := 2.5; //A
 	count_cycles: INT;
 	n_drive_warnings: UINT;
 	n_drive_errors: UINT;
 	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
+	
+	i: INT;
 END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Check if there are errors
+      <ST><![CDATA[FOR i:=0 TO 23 DO
+	Control_word_array[i] := 16#E000;
+END_FOR
+
+GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
+GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
+GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
+GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+
+//Check if there are errors
 Error := Check_drives(drive_status := drive_status, 
 					drive_diagnostics := drive_diagnostics, 
 					drive_last_request_value := force_values,
@@ -39,8 +51,6 @@ Error := Check_drives(drive_status := drive_status,
 					n_warns => n_drive_warnings, 
 					n_errors => n_drive_errors, 
 					errors => error_specifics);
-
-
 
 force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
 force_values[1] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);

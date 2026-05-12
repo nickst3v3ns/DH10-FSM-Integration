@@ -7,8 +7,6 @@ VAR_INPUT
 	drive_status : ARRAY[0..23] OF UINT;
 	drive_diagnostics : ARRAY[0..23] OF UINT;
 	Force_feedback_value : ARRAY[0..23] OF INT;
-	DC_bus_voltage : ARRAY[0..23] OF UINT;
-	minimum_dc_bus_voltage : UINT;
 	drive_refs : ARRAY[0..23] OF ST_DriveRef;
 	PLC_drive_refs : ARRAY[0..23] OF ST_PLCDriveRef;
 	State : E_Levi_States;
@@ -16,16 +14,12 @@ END_VAR
 
 VAR_OUTPUT
 	reset_busy : BOOL;
-	reset_error : BOOL;
-	n_drive_warnings : UINT;
-	n_drive_errors : UINT;	
-	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
-	Control_word_array : ARRAY[0..23] OF UINT;
 	Levi_ready: BOOL;
-	Go_error_state : E_Levi_States;
+	Go_error_state : BOOL;
 END_VAR
 
 VAR_IN_OUT
+	Control_word_array : ARRAY[0..23] OF UINT;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
 END_VAR
@@ -37,14 +31,26 @@ VAR
 	reset_error_timeout: TIME := T#10S;
 	Drive_undervoltage : BOOL;
 	Error : BOOL;
+	reset_error : BOOL;
+	n_drive_warnings : UINT;
+	n_drive_errors : UINT;	
+	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
 	
 	i : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[State := 2;
+      <ST><![CDATA[reset_busy := FALSE;
+Drive_undervoltage := FALSE;
 
-reset_busy := FALSE;
+FOR i:=0 TO 23 DO
+	Control_word_array[i] := 16#E000;
+END_FOR
+
+GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
+GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
+GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
+GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
 
 //Check if there are errors
 Error := Check_drives(drive_status := drive_status, 
@@ -60,7 +66,7 @@ Error := Check_drives(drive_status := drive_status,
 //Try to reset any errors if there are undervoltage errors.
 //Those are probably left over from switching on the high voltage and can be reset safely		
 FOR i:=0 TO 23 DO
-	IF error_specifics[i] = Drive_error_mapping.Undervoltage AND DC_bus_voltage[i] > minimum_dc_bus_voltage*10 THEN
+	IF error_specifics[i] = Drive_error_mapping.Undervoltage THEN
 		reset_FBs[i](stDriveRef := drive_refs[i], nIdn := reset_command, bExecute := TRUE, tTimeout := reset_error_timeout);
 		reset_busy := TRUE;
 		Drive_undervoltage := TRUE;
@@ -77,10 +83,6 @@ END_FOR
 
 
 //Switching on drives but no output
-FOR i:=0 TO 23 DO
-	Control_word_array[i] := 16#E000;
-END_FOR
-
 force_values[0] := 0;
 force_values[1] := 0;
 
@@ -105,7 +107,7 @@ force_values[11] := 0;
 IF reset_busy = FALSE AND ERROR = FALSE AND reset_error = FALSE THEN
 	Levi_ready := TRUE;
 ELSIF ERROR AND Drive_undervoltage = FALSE OR reset_error THEN
-	Go_error_state := -1;
+	Go_error_state := TRUE;
 END_IF]]></ST>
     </Implementation>
   </POU>
