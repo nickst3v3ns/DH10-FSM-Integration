@@ -17,6 +17,11 @@ VAR_INPUT
 	
 	y: LREAL; //m
 	yaw: LREAL;	//rad
+	
+	motor_thrust_l : LREAL;
+	motor_thrust_r : LREAL;
+	motor_lift_l : LREAL;
+	motor_lift_r : LREAL;
 END_VAR
 
 VAR_OUTPUT
@@ -211,6 +216,10 @@ GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_ver
 
 GVL_LEVI.Control_lat_inputs.fy := y;
 GVL_LEVI.Control_lat_inputs.fyaw := yaw;
+GVL_LEVI.Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
+GVL_LEVI.Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
+GVL_LEVI.Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
+GVL_LEVI.Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
 
 GVL_LEVI.FB_Control_lat(stlateral_levitation_control_U := GVL_LEVI.Control_lat_inputs, stlateral_levitation_control_Y => GVL_LEVI.Control_lat_outputs);
 
@@ -222,6 +231,8 @@ GVL_LEVI.Control_vert_inputs.fz_avg := z;
 GVL_LEVI.Control_vert_inputs.froll_measured := roll;
 GVL_LEVI.Control_vert_inputs.fpitch_measured := pitch;
 GVL_LEVI.Control_vert_inputs.fems_roll := tau_x_ems;
+GVL_LEVI.Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
+GVL_LEVI.Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
 
 GVL_LEVI.FB_Control_vert(stvertical_levitation_control_U := GVL_LEVI.Control_vert_inputs, stvertical_levitation_control_Y => GVL_LEVI.Control_vert_outputs);
 

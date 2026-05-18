@@ -12,6 +12,7 @@ END_VAR
 
 VAR_OUTPUT
 	Error: BOOL;
+	Back_to_ready : E_Levi_States;
 END_VAR
 
 VAR_IN_OUT
@@ -32,10 +33,14 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FOR i:=0 TO 23 DO
+      <ST><![CDATA[Back_to_ready := E_Levi_States.LEVI_PULLUP;
+
+//Keeping the drives active
+FOR i:=0 TO 23 DO
 	Control_word_array[i] := 16#E000;
 END_FOR
 
+//Making sure the control models are off
 GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
 GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
 GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
@@ -52,6 +57,7 @@ Error := Check_drives(drive_status := drive_status,
 					n_errors => n_drive_errors, 
 					errors => error_specifics);
 
+//Giving a constant positive current to the HEMS, and keeping the EMS off
 force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
 force_values[1] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);
 
@@ -70,10 +76,12 @@ force_values[9] := 0;
 force_values[10] := 0;
 force_values[11] := 0;
 
+//A short clock to only give a pulse
 count_cycles := count_cycles + 1;
 
 IF count_cycles > 1000 THEN
 	count_cycles := 0;
+	Back_to_ready := E_Levi_States.LEVI_READY;
 END_IF]]></ST>
     </Implementation>
   </POU>

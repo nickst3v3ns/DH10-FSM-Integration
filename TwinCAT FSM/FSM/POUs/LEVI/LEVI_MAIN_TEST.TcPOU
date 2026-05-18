@@ -106,6 +106,7 @@ VAR
 	FB_Levi_Control : State_Levi_Control;
 	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
 	FB_Levi_Error : State_Levi_Error;
+	FB_Levi_Reset_Drives : State_Levi_Reset_Drives;
 	
 
 //----------------------------------------------------------------------------------------------------
@@ -120,6 +121,7 @@ VAR
 	//resetting drive errors
 	reset_busy : BOOL;
 	reset_error : BOOL;
+	First_reset_run : BOOL;
 	
 	//error handling
 	n_drive_warnings : UINT;
@@ -128,13 +130,18 @@ VAR
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	
 	Error : BOOL;
+	error_resettable : BOOL;
 	
 //----------------------------------------------------------------------------------------------------
 
-//	Initialising control models
+//	Motor forces
 
 //----------------------------------------------------------------------------------------------------
 	
+	motor_thrust_l : LREAL;
+	motor_thrust_r : LREAL;
+	motor_lift_l : LREAL;
+	motor_lift_r : LREAL;
 
 //----------------------------------------------------------------------------------------------------
 
@@ -218,84 +225,100 @@ y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
 
-
 //----------------------------------------------------------------------------------------------------
 
 //	FSM
 
 //----------------------------------------------------------------------------------------------------
 
+//The command asks to switch state. For each command it is then evaluated if you are currently allowed to switch to that state.
+//If yes, the state is updated and the corresponding function block is ran.
 CASE Levi_Command OF
 	
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_IDLE:
-	
-		Levi_State := 0;
-		FB_Levi_Idle(	drive_status := Drive_status,
-						drive_diagnostics := Drive_Diagnostic,
-						Force_feedback_value := Force_feedback_value,
-						State := Levi_state,
-						drive_feedback_timeouts := drive_feedback_timeouts,
-						force_values := Requested_force_values,
-						Control_word_array => Control_word,
-						Go_error_state => Error);
-						
+		IF 	(Levi_state = E_Levi_States.LEVI_IDLE OR 
+			Levi_state = E_Levi_States.LEVI_INIT OR
+			Levi_state = E_Levi_States.LEVI_READY OR 
+			Levi_state = E_Levi_States.LEVI_PULLUP OR 
+			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
+			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
+			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_ERROR OR
+			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
+			reset_busy = FALSE THEN
+			
+			Levi_State := 0;
+			FB_Levi_Idle(	drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							Force_feedback_value := Force_feedback_value,
+							State := Levi_state,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							Control_word_array => Control_word,
+							Go_error_state => Error);
+							
+		END_IF				
 	//------------------------------------------------------------------------------------------------	
 		
 	E_Levi_States.LEVI_INIT:
+		IF 	(Levi_state = E_Levi_States.LEVI_IDLE OR 
+			Levi_state = E_Levi_States.LEVI_INIT OR
+			Levi_state = E_Levi_States.LEVI_READY OR 
+			Levi_state = E_Levi_States.LEVI_PULLUP OR 
+			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
+			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
+			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := 1;
+			FB_Levi_Init(	drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							Force_feedback_value := Force_feedback_value,
+							State := Levi_state,
+							z := z,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							z_liftoff => z_liftoff,
+							Control_word_array => Control_word,
+							drive_refs => drive_refs,
+							PLC_drive_refs => PLC_drive_refs,
+							Go_error_state => Error);
 		
-		Levi_state := 1;
-		FB_Levi_Init(	drive_status := Drive_status,
-						drive_diagnostics := Drive_Diagnostic,
-						Force_feedback_value := Force_feedback_value,
-						State := Levi_state,
-						z := z,
-						drive_feedback_timeouts := drive_feedback_timeouts,
-						force_values := Requested_force_values,
-						z_liftoff => z_liftoff,
-						Control_word_array => Control_word,
-						drive_refs => drive_refs,
-						PLC_drive_refs => PLC_drive_refs,
-						Go_error_state => Error);
-		
+		END_IF
 	//------------------------------------------------------------------------------------------------	
 						
 	E_Levi_States.LEVI_READY:
+		IF 	(Levi_state = E_Levi_States.LEVI_INIT OR
+			Levi_state = E_Levi_States.LEVI_READY) THEN
 	
-		Levi_state := 2;
-		FB_Levi_Ready(	drive_status := Drive_status,
-						drive_diagnostics := Drive_Diagnostic,
-						Force_feedback_value := Force_feedback_value,
-						drive_feedback_timeouts := drive_feedback_timeouts,
-						force_values := Requested_force_values,
-						drive_refs := drive_refs,
-						PLC_drive_refs := PLC_drive_refs,
-						State := Levi_state,
-						Control_word_array := Control_word,
-						reset_busy => reset_busy,
-						Levi_ready => Levi_ready,
-						Go_error_state => Error);
-						
+			Levi_state := 2;
+			FB_Levi_Ready(	drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							Force_feedback_value := Force_feedback_value,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							drive_refs := drive_refs,
+							PLC_drive_refs := PLC_drive_refs,
+							State := Levi_state,
+							Control_word_array := Control_word,
+							reset_busy => reset_busy,
+							Levi_ready => Levi_ready,
+							Go_error_state => Error);
+							
+		END_IF		
 	//------------------------------------------------------------------------------------------------					
 	
 	E_Levi_States.LEVI_PULLUP:
-		Levi_state := 3;
-		FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
-						drive_status := Drive_status,
-						drive_diagnostics := Drive_Diagnostic,
-						State := Levi_State,
-						Force_feedback_value := Force_feedback_value,
-						drive_feedback_timeouts := drive_feedback_timeouts,
-						force_values := Requested_force_values,
-						Control_word_array := Control_word,
-						Error => Error);
-						
-	//------------------------------------------------------------------------------------------------
-	
-	E_Levi_States.LEVI_DROPDOWN:
-		Levi_state := 4;
-		FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
+		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
+			Levi_state = E_Levi_States.LEVI_PULLUP) AND 
+			Levi_ready AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := 3;
+			FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
 							drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							State := Levi_State,
@@ -303,32 +326,138 @@ CASE Levi_Command OF
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
 							Control_word_array := Control_word,
-							Error => Error);		
+							Error => Error,
+							Back_to_ready => Levi_command);
+							
+		END_IF			
+	//------------------------------------------------------------------------------------------------
 	
+	E_Levi_States.LEVI_DROPDOWN:
+		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
+			Levi_state = E_Levi_States.LEVI_DROPDOWN) AND 
+			Levi_ready AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := 4;
+			FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
+								drive_status := Drive_status,
+								drive_diagnostics := Drive_Diagnostic,
+								State := Levi_State,
+								Force_feedback_value := Force_feedback_value,
+								drive_feedback_timeouts := drive_feedback_timeouts,
+								force_values := Requested_force_values,
+								Control_word_array := Control_word,
+								Error => Error,
+								Back_to_ready => Levi_command);
+								
+		END_IF		
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_CONTROL:
-	
+		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
+			Levi_state = E_Levi_States.LEVI_CONTROL) AND 
+			Levi_ready AND 
+			z_liftoff < -0.020 AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := 5;
+			FB_Levi_Control(	configured_peak_current := configured_peak_current,
+								drive_status := Drive_status,
+								drive_diagnostics := Drive_Diagnostic,
+								State := Levi_State,
+								Force_feedback_value := Force_feedback_value,
+								z_liftoff := z_liftoff,
+								z := z,
+								roll := roll,
+								pitch := pitch,
+								y := y,
+								yaw := yaw,
+								motor_thrust_l := motor_thrust_l,
+								motor_thrust_r := motor_thrust_r,
+								motor_lift_l := motor_lift_l,
+								motor_lift_r := motor_lift_r,
+								Control_word_array := Control_word,
+								drive_feedback_timeouts := drive_feedback_timeouts,
+								force_values := Requested_force_values,
+								Error => Error);
+								
+		END_IF					
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES:
-		Levi_state := 6;
-		FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
-											drive_status := Drive_status,
-											drive_diagnostics := Drive_Diagnostic,
-											State := Levi_State,
-											Force_feedback_value := Force_feedback_value,
-											drive_feedback_timeouts := drive_feedback_timeouts,
-											force_values := Requested_force_values,
-											Control_word_array := Control_word,
-											Error => Error);	
-						
+		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
+			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES) AND 
+			Levi_ready AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := 6;
+			FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
+												drive_status := Drive_status,
+												drive_diagnostics := Drive_Diagnostic,
+												State := Levi_State,
+												Force_feedback_value := Force_feedback_value,
+												drive_feedback_timeouts := drive_feedback_timeouts,
+												force_values := Requested_force_values,
+												Control_word_array := Control_word,
+												Error => Error);	
+												
+		END_IF
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_ERROR:
-	
+		IF 	(Levi_state = E_Levi_States.LEVI_IDLE OR 
+			Levi_state = E_Levi_States.LEVI_INIT OR
+			Levi_state = E_Levi_States.LEVI_READY OR 
+			Levi_state = E_Levi_States.LEVI_PULLUP OR 
+			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
+			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
+			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_ERROR OR
+			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
+			reset_busy = FALSE THEN
+			
+			Levi_state := -1;
+			FB_Levi_Error(	drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							State := Levi_State,
+							Force_feedback_value := Force_feedback_value,
+							Control_word_array := Control_word,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							Error => Error,
+							error_resettable => error_resettable,
+							First_reset_run => First_reset_run);
+						
+		END_IF
 	//------------------------------------------------------------------------------------------------	
-END_CASE]]></ST>
+	
+	E_Levi_States.LEVI_RESET_DRIVES:
+		IF 	(Levi_state = E_Levi_States.LEVI_ERROR OR
+			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND error_resettable = TRUE THEN		
+	
+			Levi_state := -2;
+			FB_Levi_Reset_Drives(	drive_status := Drive_status,
+									drive_diagnostics := Drive_Diagnostic,
+									State := Levi_State,
+									Force_feedback_value := Force_feedback_value,
+									drive_refs := drive_refs,
+									PLC_drive_refs := PLC_drive_refs,
+									First_reset_run := First_reset_run,
+									Control_word_array := Control_word,
+									drive_feedback_timeouts := drive_feedback_timeouts,
+									force_values := Requested_force_values,
+									reset_busy => reset_busy,
+									Error => Error,
+									reset_error => reset_error,
+									Go_next_state => Levi_command);
+									
+		END_IF
+	//------------------------------------------------------------------------------------------------	
+END_CASE
+
+IF ERROR THEN
+	Levi_command := E_Levi_States.LEVI_ERROR;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

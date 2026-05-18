@@ -13,7 +13,8 @@ TYPE E_Levi_States :
 	LEVI_DROPDOWN 					:= 4,
 	LEVI_CONTROL 					:= 5,
 	LEVI_TESTING_INDIVIDUAL_DRIVES 	:= 6, 
-	LEVI_ERROR						:= -1
+	LEVI_ERROR						:= -1,
+	LEVI_RESET_DRIVES				:= -2
 );
 END_TYPE
 ]]></Declaration>

@@ -31,7 +31,13 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FOR i:=0 TO 23 DO
+      <ST><![CDATA[//----------------------------------------------------------------------------------------------------
+
+//	Keeping everything off
+
+//----------------------------------------------------------------------------------------------------
+
+FOR i:=0 TO 23 DO
 	Control_word_array[i] := 0;
 END_FOR
 
@@ -39,25 +45,6 @@ GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
 GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
 GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
 GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
-
-//Check if there are errors
-Error := Check_drives(drive_status := drive_status, 
-					drive_diagnostics := drive_diagnostics, 
-					drive_last_request_value := force_values,
-					drive_last_feedback_value := Force_feedback_value,
-					drive_feedback_timeouts := drive_feedback_timeouts,
-					State := State,
-					n_warns => n_drive_warnings, 
-					n_errors => n_drive_errors, 
-					errors => error_specifics);
-					
-Go_error_state := FALSE;
-
-FOR i:=0 TO 23 DO
-	IF ERROR AND error_specifics[i] = Drive_error_mapping.Undervoltage = FALSE THEN
-		Go_error_state := TRUE;
-	END_IF	
-END_FOR
 
 force_values[0] := 0;
 force_values[1] := 0;
@@ -76,7 +63,7 @@ force_values[9] := 0;
 
 force_values[10] := 0;
 force_values[11] := 0;
-]]></ST>
+//------------------------------------------------------------------------------------------------]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

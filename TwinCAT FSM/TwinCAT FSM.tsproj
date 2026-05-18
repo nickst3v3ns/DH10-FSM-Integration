@@ -2431,7 +2431,7 @@
 		<ImageData Id="1012">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c080808000bfff00bfff00bfff00bfff00bfffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1013">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ffffffffffffffffffffffffffffffc4c5c3f8f9f9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8f7fbfafafcffffffcfcfe11e1979a19ee08f92a2fefffaffffffffffffffffffffffffffffffffffffffffffffffff8581c91a09cc7672c40e076e1002bf1100c51001c0554ed1d6d5f1fdfdfbfdfdfdfffffffefefeffffffffffffffffff817dc71405c80700990c018d0f01bf1100c51000c30d00c50600c51205b0544fbf6e70a6fffffdfffffffefefeffffff817dc80a00cc0d029a0c018d1000c20f00c91100c61100c60f00c91000c90f00c80e00cb1409b1fbfbfbffffffffffffcfcbeb463ada0d039a0c018c1002c41000cb1000cb1000cb1000cb1000cc1000c81000ca0100c9ffffffffffffffffff8581c9372bcf0e029d0c018c1001c71100cd1200cf1200cf1100cf1200cf1100ce1100cd0100c9fffffffffeffffffff7f7acb0c00d30e02a10d018c0f00cb1100cf1000cf1000cf1000d01100d91100d71100d00100ccfffffffefffeffffff7e78ca1404d20d02a80b0092221bb01000d41000d31100d31000d90e0959100c510f03960000cfffffffffffffffffffb1abe40c00da0c00b91918d70d0fe60c08e40d03dc1100d81000dc16115d1517111f1e210000c9fffffefffffffefefefffffffffffdc5c1f7857df24a45ed120cea0300eb0808ec0d08e90e05e00c04a4120a6f0500c4f8f8f9fffffffffffffffffffffffffffffffffffffffffffffffcb9b4f55045eb1309ea0e0bec0c0af00c0af01c15dafbfbfafffffffffffffffffffffffffffffffffffffefefefffffffffffffffffff7f6fccac6f89892f25249ea382ad8fffffffefefefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffefefefffffffffffffffffffefefeffffff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="192.168.1.11.1.1" Target64Bit="true" AutoPrioManagement="true" ShowHideConfigurations="#x347">
+	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" Target64Bit="true" AutoPrioManagement="true" ShowHideConfigurations="#x347">
 		<System>
 			<Settings MaxCpus="4" NonWinCpus="2">
 				<Cpu BaseTime="1000"/>
@@ -10011,7 +10011,7 @@ barcode ]]></Comment>
 			</Project>
 		</Safety>
 		<Io>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.1.11.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="3">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="145.94.133.116.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="3">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -33792,7 +33792,7 @@ barcode ]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3"/>
 			</Device>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.1.11.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="5">
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="145.94.133.116.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="5">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -34088,7 +34088,7 @@ barcode ]]></Comment>
 					<Box Id="44" BoxType="9094" BoxFlags="#x00000020">
 						<Name>Term 10 (EL6751)</Name>
 						<ImageId>1011</ImageId>
-						<EtherCAT SlaveType="5" AdsServerAddress="915e857404010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100004a">
+						<EtherCAT SlaveType="5" AdsServerAddress="c0a8010b04010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100004a">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
 							<SyncMan>0018c6012600010003000000000000000000001826010000</SyncMan>
@@ -34237,7 +34237,7 @@ barcode ]]></Comment>
 					<Box Id="45" BoxType="9094" BoxFlags="#x00000020">
 						<Name>Term 11 (EL6751)</Name>
 						<ImageId>1011</ImageId>
-						<EtherCAT SlaveType="5" AdsServerAddress="915e857405010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100002c">
+						<EtherCAT SlaveType="5" AdsServerAddress="c0a8010b05010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100002c">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
 							<SyncMan>001800002600000003000000000000000000001826010000</SyncMan>
@@ -34364,7 +34364,7 @@ barcode ]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="3" DevType="87" AmsPort="28675" AmsNetId="192.168.1.11.4.1" RemoteName="CAN_PTC_gateway">
+			<Device Id="3" DevType="87" AmsPort="28675" AmsNetId="145.94.133.116.4.1" RemoteName="CAN_PTC_gateway">
 				<Name>CAN_PTC_gateway</Name>
 				<AddressInfo>
 					<Ecat>
@@ -34436,14 +34436,14 @@ Slave-Mode:
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740401" EquiCycleTime="100000" FifoSize="5" CycleDivider="1"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="c0a8010b0401" EquiCycleTime="100000" FifoSize="5" CycleDivider="1"/>
 						<DevParameter CycleTime="100000" WatchDog="100" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter NodeId="127" Baudrate="2" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100"/>
 				</CanOpen>
 			</Device>
-			<Device Id="4" DevType="87" AmsPort="28676" AmsNetId="192.168.1.11.5.1" RemoteName="LV_BAT_gateway">
+			<Device Id="4" DevType="87" AmsPort="28676" AmsNetId="145.94.133.116.5.1" RemoteName="LV_BAT_gateway">
 				<Name>LV_BAT_gateway</Name>
 				<AddressInfo>
 					<Ecat>
@@ -34624,7 +34624,7 @@ Slave-Mode:
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740501" EquiCycleTime="10000" FifoSize="5" CycleDivider="1"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="c0a8010b0501" EquiCycleTime="10000" FifoSize="5" CycleDivider="1"/>
 						<DevParameter CycleTime="100000" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>

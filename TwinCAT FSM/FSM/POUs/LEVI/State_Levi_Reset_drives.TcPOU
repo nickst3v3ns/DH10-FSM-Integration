@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Reset_drives" Id="{805ce6e1-a45e-4420-ae6b-7586795fe1a4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Reset_drives
+VAR_INPUT
+	drive_status: ARRAY [0..23] OF UINT;
+	drive_diagnostics: ARRAY [0..23] OF UINT;
+	State : E_Levi_States;
+	Force_feedback_value : ARRAY[0..23] OF INT;
+	drive_refs : ARRAY[0..23] OF ST_DriveRef;
+	PLC_drive_refs : ARRAY[0..23] OF ST_PLCDriveRef;
+	First_reset_run : BOOL;
+END_VAR
+
+VAR_OUTPUT
+	reset_busy : BOOL;
+	reset_error : BOOL;
+	Go_next_state : E_Levi_States;
+END_VAR
+
+VAR_IN_OUT
+	Control_word_array : ARRAY[0..23] OF UINT;
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	force_values : ARRAY[0..11] OF INT;
+END_VAR
+
+VAR
+	i: INT;
+	
+	//For errors, this way we can reset all the drives at once
+	reset_FBs: ARRAY[0..23] OF FB_SoEExecuteCommand_ByDriveRef;
+	reset_command: WORD := S_0_IDN + 99;
+	reset_error_timeout: TIME := T#10S;
+	reset_command_active : ARRAY[0..23] OF BOOL;
+	n_drive_warnings: UINT;
+	n_drive_errors: UINT;
+	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
+	ERROR : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i:=0 TO 23 DO
+	Control_word_array[i] := 0;
+END_FOR
+
+force_values[0] := 0;
+force_values[1] := 0;
+
+force_values[2] := 0;
+force_values[3] := 0;
+
+force_values[4] := 0;
+force_values[5] := 0;
+
+force_values[6] := 0;
+force_values[7] := 0;
+
+force_values[8] := 0;
+force_values[9] := 0;
+
+force_values[10] := 0;
+force_values[11] := 0;
+
+GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
+GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
+GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
+GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+
+//Check if there are errors
+Error := Check_drives(drive_status := drive_status, 
+					drive_diagnostics := drive_diagnostics, 
+					drive_last_request_value := force_values,
+					drive_last_feedback_value := Force_feedback_value,
+					drive_feedback_timeouts := drive_feedback_timeouts,
+					State := State,
+					n_warns => n_drive_warnings, 
+					n_errors => n_drive_errors, 
+					errors => error_specifics);
+
+Reset_busy := FALSE;
+
+//Setup for first run to enable all resets
+IF first_reset_run THEN
+	first_reset_run := FALSE;
+	
+	//Are there any errors in the first place?
+	IF Error = FALSE THEN
+		FOR i:= 0 TO 23 DO
+			reset_command_active[i] := FALSE;
+		END_FOR
+		reset_error := FALSE;
+	
+	ELSE
+	//Assuming yes reset the ones in error
+		FOR i:= 0 TO 23 DO
+			
+			IF (error_specifics[i] <> Drive_error_mapping.none) THEN
+				reset_command_active[i] := TRUE;
+			//This should be unnecessary so just in case weird interrupts happen
+			ELSE
+				reset_command_active[i] := FALSE;
+			END_IF
+			
+		END_FOR
+		reset_error := FALSE;
+		reset_busy := TRUE;	
+	END_IF
+END_IF
+
+//Run command for all drives
+FOR i:=0 TO 23 DO
+	
+	//Only keep running if it hasn't completed yet, command can take up to 10s depending on the error
+	IF reset_command_active[i] THEN
+		reset_FBs[i](stDriveRef := drive_refs[i], nIdn := reset_command, bExecute := TRUE, tTimeout := reset_error_timeout);
+		reset_busy := TRUE;
+		
+		//Turn off when done
+		IF NOT reset_FBs[i].bBusy THEN
+			reset_FBs[i](stDriveRef := drive_refs[i], nIdn := reset_command, bExecute := FALSE, tTimeout := reset_error_timeout);
+			reset_command_active[i] := FALSE;
+			//Keep track of any errors
+			reset_error := reset_error OR reset_FBs[i].bError;
+		END_IF
+		
+	END_IF
+	
+END_FOR
+
+IF reset_busy = FALSE AND reset_error = TRUE THEN
+	Go_next_state := E_Levi_States.LEVI_ERROR;
+	
+ELSIF reset_busy = FALSE AND ERROR = FALSE AND reset_error = FALSE THEN
+	Go_next_state := E_Levi_States.LEVI_INIT;
+
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
