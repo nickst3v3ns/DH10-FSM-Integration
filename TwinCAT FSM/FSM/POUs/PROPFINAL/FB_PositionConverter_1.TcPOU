@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PositionConverter_1" Id="{4a5c080f-fe2d-4d79-8075-b1f576470277}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PositionConverter
+VAR_INPUT
+    diReadValue   : DINT; (* Raw value from the scanner [mm] *)
+    bSensorValid : BOOL := TRUE;  (* TRUE if scanner sees a barcode, FALSE if dropped out *)
+    fDeltaTime   : LREAL := 0.01; (* PLC task cycle time in seconds (e.g., 0.01 for 10ms) *)
+END_VAR
+
+VAR_OUTPUT
+    diPosition      : LREAL; (* The calculated true X position [m] *)
+    bValid         : BOOL;  (* TRUE if we have a valid position (read or estimated) *)
+    bExtrapolating : BOOL;  (* TRUE if running on estimated speed due to sensor loss *)
+    nTrackFound    : INT;   (* Outputs which track the read value belongs to *)
+END_VAR
+
+VAR
+    (* Directly initialize the array of structs here *)
+    aTracks : ARRAY[1..5] OF ST_TrackSection := [
+        (nTrackNumber := 1, fXPosition := 0.0,  fLength := 3.4,  fStartValue := 1255160.0, fEndValue := 1258560.0),
+        (nTrackNumber := 2, fXPosition := 3.4,  fLength := 4.0,  fStartValue := 0.0,       fEndValue := 4000.0),
+        (nTrackNumber := 3, fXPosition := 7.4,  fLength := 4.0,  fStartValue := 4000.0,    fEndValue := 8000.0),
+        (nTrackNumber := 4, fXPosition := 11.4, fLength := 3.96, fStartValue := 8000.0,    fEndValue := 11960.0),
+        (nTrackNumber := 5, fXPosition := 15.4, fLength := 4.0,  fStartValue := 1267000.0, fEndValue := 1271000.0)
+    ];
+
+    i             : INT;
+    fRatio        : LREAL;
+    
+    (* Extrapolation variables *)
+    fLastPosition : LREAL;
+    fVelocity     : LREAL; 
+    bFirstCycle   : BOOL := TRUE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* --- Main Logic: Read or Extrapolate --- *)
+IF bSensorValid THEN
+    (* Sensor is reading fine. Calculate actual position. *)
+    bValid := FALSE;
+    bExtrapolating := FALSE;
+    
+    FOR i := 1 TO 5 DO
+        IF (diReadValue >= aTracks[i].fStartValue AND diReadValue <= aTracks[i].fEndValue) OR
+           (diReadValue <= aTracks[i].fStartValue AND diReadValue >= aTracks[i].fEndValue) THEN 
+
+            IF (aTracks[i].fEndValue - aTracks[i].fStartValue) <> 0.0 THEN
+                fRatio := (diReadValue - aTracks[i].fStartValue) / (aTracks[i].fEndValue - aTracks[i].fStartValue);
+                diPosition := aTracks[i].fXPosition + (fRatio * aTracks[i].fLength);
+                
+                bValid := TRUE;
+                nTrackFound := aTracks[i].nTrackNumber;
+                EXIT; 
+            END_IF
+        END_IF
+    END_FOR
+
+    (* Calculate current velocity for future extrapolation *)
+    IF bValid AND NOT bFirstCycle AND fDeltaTime > 0.0 THEN
+        fVelocity := (diPosition - fLastPosition) / fDeltaTime;
+    END_IF
+    
+    (* Save current position for the next cycle *)
+    IF bValid THEN
+        fLastPosition := diPosition;
+        bFirstCycle := FALSE;
+    END_IF
+
+ELSE
+    (* Sensor dropout! Extrapolate based on last known velocity. *)
+    IF NOT bFirstCycle AND fDeltaTime > 0.0 THEN
+        (* New Position = Old Position + (Velocity * Time) *)
+        diPosition := fLastPosition + (fVelocity * fDeltaTime);
+        
+        (* Update last position so we keep moving forward next cycle if sensor is still dead *)
+        fLastPosition := diPosition;
+        
+        bValid := TRUE;        
+        bExtrapolating := TRUE;
+    ELSE
+        (* If it drops out on the very first cycle, we have no baseline to extrapolate from *)
+        bValid := FALSE;
+    END_IF
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

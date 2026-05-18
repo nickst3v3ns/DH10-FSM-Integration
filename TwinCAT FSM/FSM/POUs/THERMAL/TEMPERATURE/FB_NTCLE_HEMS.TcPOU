@@ -3,7 +3,7 @@
   <POU Name="FB_NTCLE_HEMS" Id="{ee1d995b-5148-438f-8601-254add3f9ff9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_NTCLE_HEMS
 VAR_OUTPUT
-	i:					USINT;
+	i:					SINT;
 	TEMP: ARRAY[0..7] OF REAL;
 	bcriticalCoolDown:			BOOL := TRUE;
 	icriticalindex:		SINT := -1;

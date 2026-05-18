@@ -5,7 +5,7 @@
 
 VAR_OUTPUT
 	bcriticalCoolDown:			BOOL := FALSE;
-	i:					USINT;
+	i:					SINT;
 	TEMP: ARRAY[0..7] OF REAL;
 	icriticalindex:		SINT := -1;
 	

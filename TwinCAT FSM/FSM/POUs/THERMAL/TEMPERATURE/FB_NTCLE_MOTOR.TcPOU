@@ -3,7 +3,7 @@
   <POU Name="FB_NTCLE_MOTOR" Id="{016e6a52-5f4e-431c-a5b7-741f994aab92}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_NTCLE_MOTOR
 VAR_OUTPUT
-	i:					USINT;
+	i:					SINT;
 	TEMP: ARRAY[0..8] OF REAL;
 	bcriticalCoolDown:			BOOL := FALSE;
 	icriticalindex:		SINT := -1;

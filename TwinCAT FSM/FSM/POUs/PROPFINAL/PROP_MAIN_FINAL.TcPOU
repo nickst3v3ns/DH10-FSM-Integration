@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PROP_MAIN_FINAL" Id="{a45349c2-4849-4594-9abf-23290984c9ec}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PROP_MAIN_FINAL
+VAR
+	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
+	newData : BYTE := 16#00;
+	
+	positionValues_Front : ARRAY[0..3] OF BYTE;
+	velocityValues_Front : ARRAY[0..1] OF BYTE; 
+	
+	positionValues_Back : ARRAY[0..3] OF BYTE;
+	velocityValues_Back : ARRAY[0..1] OF BYTE; 
+	
+	position_Front : DINT;
+	velocity_Front : DINT;
+	
+	position_Back : DINT;
+	velocity_Back : DINT;
+	
+	positionDelft_Front : LREAL;
+	positionDelft_Back	: LREAL;
+	Center_OFFSET : LREAL;
+	
+	quality : INT;
+	
+	positionDelft : LREAL;
+	VelocityDelft : LREAL;
+	CurrentAngle : LREAL;
+	Iamp : LREAL;
+	PositionOffset : LREAL;
+	PodState : INT;
+	PropFlag : INT;
+	
+	check : INT := 0;
+	check_1 : INT := 0;
+	start : BOOL := FALSE;
+	
+	Send_CAN_PosVelocity : FB_SendPosVelocity;
+	Send_CAN_CurrentAngle : FB_SendCurrentAngle;
+	Send_CAN_Iamp : FB_SendIamp;
+	Send_CAN_PodState : FB_SendPodState;
+	Send_CAN_PositionOffset : FB_SendPositionOffset;
+	Send_CAN_PropFlag : FB_SendPropFlag;
+	
+	Send_CAN_PosVelocity_1 : FB_SendPosVelocity_1;
+	Send_CAN_CurrentAngle_1 : FB_SendCurrentAngle_1;
+	Send_CAN_Iamp_1 : FB_SendIamp_1;
+	Send_CAN_PodState_1 : FB_SendPodState_1;
+	Send_CAN_PositionOffset_1 : FB_SendPositionOffset_1;
+	Send_CAN_PropFlag_1 : FB_SendPropFlag_1;
+	
+	Receive_CAN_abcCurrent : FB_ReceiveabcCurrent;
+	Receive_CAN_dqCurrent : FB_ReceivedqCurrent;
+	Receive_CAN_gdTemp : FB_ReceivegdTemp;
+	Receive_CAN_dqVoltages : FB_ReceivedqVoltages;
+	Receive_CAN_FAULT : FB_ReceiveFAULT;
+	Receive_CAN_PropState : FB_ReceivePROPSTATEs;
+	Receive_CAN_Vbus : FB_ReceiveVbus;
+	
+	Receive_CAN_abcCurrent_1 : FB_ReceiveabcCurrent_1;
+	Receive_CAN_dqCurrent_1 : FB_ReceivedqCurrent_1;
+	Receive_CAN_gdTemp_1 : FB_ReceivegdTemp_1;
+	Receive_CAN_dqVoltages_1 : FB_ReceivedqVoltages_1;
+	Receive_CAN_FAULT_1 : FB_ReceiveFAULT_1;
+	Receive_CAN_PropState_1 : FB_ReceivePROPSTATEs_1;
+	Receive_CAN_Vbus_1 : FB_ReceiveVbus_1;
+	
+	Id_ref : LREAL;
+	Iq_ref : LREAL;
+	Id_filtered : LREAL;
+	Iq_filtered : LREAL;
+	
+	Id_ref_1 : LREAL;
+	Iq_ref_1 : LREAL;
+	Id_filtered_1 : LREAL;
+	Iq_filtered_1 : LREAL;
+	
+	Temp_a_gd : LREAL;
+	Temp_b_gd : LREAL;
+	Temp_c_gd : LREAL;
+	
+	Temp_a_gd_1 : LREAL;
+	Temp_b_gd_1 : LREAL;
+	Temp_c_gd_1 : LREAL;
+	
+	Ia : LREAL;
+	Ib : LREAL;
+	Ic : LREAL; 
+	
+	Ia_1 : LREAL;
+	Ib_1 : LREAL;
+	Ic_1 : LREAL; 
+	
+	Vd : LREAL;
+	Vq : LREAL;
+	
+	Vd_1 : LREAL;
+	Vq_1 : LREAL;
+	
+	FAULT : LREAL;
+
+	FAULT_1 : LREAL;
+	
+	PropState : LREAL;
+	
+	PropState_1 : LREAL;
+	
+	Vbus : LREAL;
+	
+	Vbus_1 : LREAL;
+	
+	delft_converter_front : FB_PositionConverter;
+	delft_converter_back  : FB_PositionConverter;
+END_VAR
+
+VAR CONSTANT
+	time_step : LREAL := 10; // in ms 
+	alpha : LREAL := 0.05;
+	SCALE : LREAL := 1000;
+	
+	SCALE_FACTOR : INT := 100;
+	BARCODE_START : DINT := 0;
+	SET_COMMAND : BYTE := 16#01;
+	SEND_POS_VEL : BYTE := 16#80;
+	SEND_DIAG : BYTE := 16#08;
+	SEND_MARKER_INFO : BYTE := 16#02;
+	OFFSET_FRONT : DINT;
+	OFFSET_BACK : DINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE barcodeState OF
+	
+	E_Barcode_State.INIT:
+	
+		IF start THEN
+			barcodeState := E_BARCODE_STATE.SEND_POS_VEL_COMMAND;
+		END_IF
+		
+	E_Barcode_State.SEND_POS_VEL_COMMAND:
+		
+		positionValues_Front[0] := GVL_PROP.InputData1_Front[4];
+		positionValues_Front[1] := GVL_PROP.InputData1_Front[5];
+		positionValues_Front[2] := GVL_PROP.InputData1_Front[6];
+		positionValues_Front[3] := GVL_PROP.InputData1_Front[7];
+		
+		velocityValues_Front[0] := GVL_PROP.InputData2_Front[0];
+		velocityValues_Front[1] := GVL_PROP.InputData2_Front[1];
+		
+			IF velocityValues_Front[0] > 128 THEN
+			velocity_Front := (256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
+		ELSE
+			velocity_Front := 256 * velocityValues_Front[0] + velocityValues_Front[1];	
+		END_IF
+		
+		position_Front := 
+			256 * 256 * 256 * positionValues_Front[0]
+			+ 256 * 256 * positionValues_Front[1]
+			+ 256 * positionValues_Front[2]
+			+ positionValues_Front[3];
+		
+		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
+		
+		delft_converter_front(diReadValue := position_Front, diPosition => positionDelft_Front);
+		
+		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
+		
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := SEND_POS_VEL;
+		
+		//-------------------------------------------
+
+		positionValues_Back[0] := GVL_PROP.InputData1_Back[4];
+		positionValues_Back[1] := GVL_PROP.InputData1_Back[5];
+		positionValues_Back[2] := GVL_PROP.InputData1_Back[6];
+		positionValues_Back[3] := GVL_PROP.InputData1_Back[7];
+		
+		velocityValues_Back[0] := GVL_PROP.InputData2_Back[0];
+		velocityValues_Back[1] := GVL_PROP.InputData2_Back[1];
+		
+		IF velocityValues_Back[0] > 128 THEN
+			velocity_Back := (256 * 256 - (256 * velocityValues_Back[0] + velocityValues_Back[1]));
+		ELSE
+			velocity_Back := 256 * velocityValues_Back[0] + velocityValues_Back[1];	
+		END_IF
+		
+		position_Back := 
+			256 * 256 * 256 * positionValues_Back[0]
+			+ 256 * 256 * positionValues_Back[1]
+			+ 256 * positionValues_Back[2]
+			+ positionValues_Back[3];
+			
+		position_Back := position_Back / SCALE_FACTOR - BARCODE_START;
+		
+		delft_converter_back(diReadValue := position_Back, diPosition => positionDelft_Back);
+		
+		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
+	
+		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
+		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		VelocityDelft := DINT_TO_LREAL(velocity_Front);
+	
+	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
+		newData := newData XOR 16#80;
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_DIAG;
+		
+	E_Barcode_State.SEND_MARKER_INFO_COMMAND:
+		newData := newData XOR 16#80;
+		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+		GVL_PROP.OutputData_Front[2] := 16#00;
+		GVL_PROP.OutputData_Front[3] := SEND_MARKER_INFO;
+		
+	E_Barcode_State.ERROR:
+		barcodeState := E_Barcode_State.INIT;
+		start := FALSE;
+END_CASE
+
+
+IF GVL_PropCAN.CAN_OUTPUTS.TxCounter = GVL_PropCAN.CAN_INPUTS.TxCounter THEN
+	
+	// Drive 0
+
+	Send_CAN_PosVelocity(positionDelft := positionDelft,
+		VelocityDelft := VelocityDelft, 
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_CurrentAngle(CurrentAngle := CurrentAngle,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_Iamp(Iamp := Iamp,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_PodState(PodState := PodState,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_PositionOffset(PositionOffset := PositionOffset,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_PropFlag(PropFlag := PropFlag,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	GVL_PropCAN.CAN_OUTPUTS.NoOfTxMessages := 6;
+	GVL_PropCAN.CAN_OUTPUTS.TxCounter := GVL_PropCAN.CAN_INPUTS.TxCounter + 1;
+	check := check +1;
+END_IF
+		
+		
+IF GVL_PropCAN.CAN_OUTPUTS_1.TxCounter = GVL_PropCAN.CAN_INPUTS_1.TxCounter THEN	
+	
+// Drive 1
+		
+	Send_CAN_PosVelocity_1(positionDelft := positionDelft,
+		VelocityDelft := VelocityDelft, 
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_CurrentAngle_1(CurrentAngle := CurrentAngle,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_Iamp_1(Iamp := Iamp,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_PodState_1(PodState := PodState,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_PositionOffset_1(PositionOffset := PositionOffset,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_PropFlag_1(PropFlag := PropFlag,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+
+	
+	GVL_PropCAN.CAN_OUTPUTS_1.NoOfTxMessages := 6;
+	GVL_PropCAN.CAN_OUTPUTS_1.TxCounter := GVL_PropCAN.CAN_INPUTS_1.TxCounter + 1;
+	check_1 := check_1 +1;
+END_IF
+
+(*
+CAN_OUTPUTS.NoOfTxMessages := 6;
+CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+*)
+
+// Drive 0 
+
+Receive_CAN_dqCurrent(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Id_ref := Receive_CAN_dqCurrent.Id_ref;
+Iq_ref := Receive_CAN_dqCurrent.Iq_ref;
+Id_filtered := Receive_CAN_dqCurrent.Id_filtered;
+Iq_filtered := Receive_CAN_dqCurrent.Iq_filtered;	
+
+Receive_CAN_gdTemp(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Temp_a_gd := Receive_CAN_gdTemp.Temp_a_gd;
+Temp_b_gd := Receive_CAN_gdTemp.Temp_b_gd;
+Temp_c_gd := Receive_CAN_gdTemp.Temp_c_gd;
+
+Receive_CAN_abcCurrent(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Ia := Receive_CAN_abcCurrent.Ia;
+Ib := Receive_CAN_abcCurrent.Ib;
+Ic := Receive_CAN_abcCurrent.Ic;
+
+Receive_CAN_dqVoltages(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Vq := Receive_CAN_dqVoltages.Vq;
+Vd := Receive_CAN_dqVoltages.Vd;
+
+Receive_CAN_FAULT(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Fault := Receive_CAN_FAULT.Fault;
+
+Receive_CAN_PropState(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+PropState := Receive_CAN_PropState.PropState;
+
+Receive_CAN_Vbus(Inputs := GVL_PropCAN.CAN_INPUTS, 
+	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+	
+Vbus := Receive_CAN_Vbus.Vbus;
+
+// Drive 1
+
+Receive_CAN_dqCurrent_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Id_ref_1 := Receive_CAN_dqCurrent_1.Id_ref_1;
+Iq_ref_1 := Receive_CAN_dqCurrent_1.Iq_ref_1;
+Id_filtered_1 := Receive_CAN_dqCurrent_1.Id_filtered_1;
+Iq_filtered_1 := Receive_CAN_dqCurrent_1.Iq_filtered_1;	
+
+Receive_CAN_gdTemp_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Temp_a_gd_1 := Receive_CAN_gdTemp_1.Temp_a_gd_1;
+Temp_b_gd_1 := Receive_CAN_gdTemp_1.Temp_b_gd_1;
+Temp_c_gd_1 := Receive_CAN_gdTemp_1.Temp_c_gd_1;
+
+Receive_CAN_abcCurrent_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Ia_1 := Receive_CAN_abcCurrent_1.Ia_1;
+Ib_1 := Receive_CAN_abcCurrent_1.Ib_1;
+Ic_1 := Receive_CAN_abcCurrent_1.Ic_1;
+
+Receive_CAN_dqVoltages_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Vq_1 := Receive_CAN_dqVoltages_1.Vq_1;
+Vd_1 := Receive_CAN_dqVoltages_1.Vd_1;
+
+Receive_CAN_FAULT_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Fault_1 := Receive_CAN_FAULT_1.Fault_1;
+
+Receive_CAN_PropState_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+PropState_1 := Receive_CAN_PropState_1.PropState_1;
+
+Receive_CAN_Vbus_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
+	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+	
+Vbus_1 := Receive_CAN_Vbus_1.Vbus_1;
+
+
+
+
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

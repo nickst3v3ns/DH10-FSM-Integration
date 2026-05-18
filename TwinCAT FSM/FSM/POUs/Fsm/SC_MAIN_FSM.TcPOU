@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{ee0ed416-3c8e-41d0-b63e-3e0aab4b08ba}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="SC_MAIN_FSM" Id="{ee0ed416-3c8e-41d0-b63e-3e0aab4b08ba}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SC_MAIN_FSM
 VAR
 	main_fsm	: FB_Main_FSM;
 END_VAR]]></Declaration>

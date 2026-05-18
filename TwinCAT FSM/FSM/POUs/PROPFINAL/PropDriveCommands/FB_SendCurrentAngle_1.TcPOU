@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendCurrentAngle_1" Id="{6139a979-8572-4383-acf8-f0fb5f99f81c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendCurrentAngle_1
+VAR_INPUT
+	CurrentAngle : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	CurrentAngle_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_1 : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_1 : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CurrentAngle_Values[1] := INT_TO_BYTE(LREAL_TO_INT(CurrentAngle) AND 16#FF);
+CurrentAngle_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(CurrentAngle), 8) AND 16#FF);
+
+
+TxMessage.cobId := 1100;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := CurrentAngle_Values[i];
+END_FOR
+CAN_OUTPUTS_1.TxMessages[0] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+
+
+(*
+TxMessage.cobId := 1100;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+			TxMessage.data[i] := CurrentAngle_Values[i];
+END_FOR
+CAN_OUTPUTS.TxMessages[0] := TxMessage;
+CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

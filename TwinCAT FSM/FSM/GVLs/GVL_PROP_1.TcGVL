@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_PROP_1" Id="{797fda80-b1b1-4b45-a2f7-e481f9bd4faa}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//barcode 
+	
+	OutputData_Front AT %Q*: ARRAY[0..7] OF BYTE;
+	OutputData_Back AT %Q*: ARRAY[0..7] OF BYTE;
+	
+	InputData1_Front AT %I*: ARRAY[0..7] OF BYTE;
+	InputData2_Front AT %I*: ARRAY[0..7] OF BYTE;
+	InputData3_Front AT %I*: ARRAY[0..7] OF BYTE;
+	
+	InputData1_Back AT %I*: ARRAY[0..7] OF BYTE;
+	InputData2_Back AT %I*: ARRAY[0..7] OF BYTE;
+	InputData3_Back AT %I*: ARRAY[0..7] OF BYTE;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
