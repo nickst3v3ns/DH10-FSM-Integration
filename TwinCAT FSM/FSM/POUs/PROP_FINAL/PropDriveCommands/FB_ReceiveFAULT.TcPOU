@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceiveFAULT" Id="{5fbc4310-78fa-48c6-ab3d-02388a48df5d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceiveFAULT
+VAR_IN_OUT
+	Inputs : CANRXQUEUESTRUCT_E_32;
+	Outputs : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	Fault : UINT;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+IF Outputs.RxCounter <> Inputs.RxCounter THEN        // check if new data is in the buffer
+   FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+                                                     // is in the buffer
+       	MessageReceived[i] := Inputs.RxMessages[i];   // copy the CAN message
+   END_FOR
+   Outputs.RxCounter := Inputs.RxCounter;            // set equal: the CAN interface then knows,
+                                                     // that you have copied the CAN data
+	FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+                                                     // is in the buffer
+	   IF MessageReceived[i].cobId = 200 THEN 
+	       Fault := MessageReceived[i].data[0];
+	   END_IF
+   END_FOR
+END_IF
+*)
+
+FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO
+    IF Inputs.RxMessages[i].cobId = 200 THEN 
+        Fault := Inputs.RxMessages[i].data[0];
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

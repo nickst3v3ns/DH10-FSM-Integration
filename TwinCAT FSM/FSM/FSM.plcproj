@@ -211,6 +211,90 @@
     <Compile Include="POUs\PROP_EHW\SendPositionTelegram.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\MAIN_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\SAFETY\FB_DCLINK.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -257,8 +341,10 @@
     <Folder Include="POUs\FSM" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
+    <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP" />
     <Folder Include="POUs\PROP_EHW" />
+    <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />
     <Folder Include="POUs\SAFETY" />
     <Folder Include="POUs\THERMAL" />
     <Folder Include="POUs" />

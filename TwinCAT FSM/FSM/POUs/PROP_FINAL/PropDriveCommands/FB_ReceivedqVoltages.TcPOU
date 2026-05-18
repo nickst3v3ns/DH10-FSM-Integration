@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceivedqVoltages" Id="{59a315d7-a65f-42f5-a7d5-b1dcf5eaebb6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceivedqVoltages
+VAR_IN_OUT
+	Inputs : CANRXQUEUESTRUCT_E_32;
+	Outputs : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	Vq : LREAL;
+	Vd : LREAL;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//IF Outputs.RxCounter <> Inputs.RxCounter THEN        // check if new data is in the buffer
+//   for i := 0 to (Inputs.NoOfRxMessages-1) do        // start the LOOP and check how much data
+//                                                     // is in the buffer
+//       	MessageReceived[i] := Inputs.RxMessages[i];   // copy the CAN message
+//   END_FOR
+//   Outputs.RxCounter := Inputs.RxCounter;            // set equal: the CAN interface then knows,
+//                                                     // that you have copied the CAN data
+//	FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+//                                                     // is in the buffer
+//	   IF MessageReceived[i].cobId = 1400 THEN 
+//	   	Vq := (SHL(MessageReceived[i].data[0], 8) OR MessageReceived[i].data[1]) / 100.0; 
+//	   	Vd := (SHL(MessageReceived[i].data[2], 8) OR MessageReceived[i].data[3]) / 100.0; 
+//	   END_IF
+//   End_for
+//END_IF
+
+FOR i := 0 TO (Inputs.NoOfRxMessages-1) DO
+    IF Inputs.RxMessages[i].cobId = 1400 THEN 
+        Vq := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs.RxMessages[i].data[1]))) / 100.0; 
+        Vd := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs.RxMessages[i].data[2]), 8) OR USINT_TO_UINT(Inputs.RxMessages[i].data[3]))) / 100.0; 
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

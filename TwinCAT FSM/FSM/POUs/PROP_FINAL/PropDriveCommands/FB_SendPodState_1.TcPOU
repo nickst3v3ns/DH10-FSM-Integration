@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendPodState_1" Id="{8c034535-73f8-4e4a-baff-4b0e5d6fa2f5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendPodState_1
+VAR_INPUT
+	PodState : INT;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_1 : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_1 : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+TxMessage.cobId := 110;
+TxMessage.length := 1;
+TxMessage.data[0] :=  INT_TO_BYTE(PodState AND 16#FF);
+CAN_OUTPUTS_1.TxMessages[2] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+
+
+(*
+TxMessage.cobId := 110;
+TxMessage.length := 1;
+TxMessage.data[0] :=  INT_TO_BYTE(PodState AND 16#FF);
+CAN_OUTPUTS.TxMessages[2] := TxMessage;
+CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

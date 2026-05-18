@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendPositionOffset_1" Id="{9c36d427-7dab-44be-bf34-2c542f55ca36}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendPositionOffset_1
+VAR_INPUT
+	PositionOffset : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	PositionOffset_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_1 : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_1 : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[PositionOffset_Values[1] := INT_TO_BYTE(LREAL_TO_INT(PositionOffset * 1000) AND 16#FF);
+PositionOffset_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(PositionOffset * 1000), 8) AND 16#FF);
+
+TxMessage.cobId := 1300;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := PositionOffset_Values[i];
+END_FOR
+CAN_OUTPUTS_1.TxMessages[3] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+
+(*
+TxMessage.cobId := 1300;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := PositionOffset_Values[i];
+END_FOR
+CAN_OUTPUTS.TxMessages[3] := TxMessage;
+CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
