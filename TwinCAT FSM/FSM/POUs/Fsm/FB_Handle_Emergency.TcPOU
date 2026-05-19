@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_Handle_Emergency" Id="{5e0fb178-c06f-42de-8ba0-d84d3592dd6b}" SpecialFunc="None">
+  <POU Name="FB_Handle_Emergency" Id="{c9496110-d11d-4302-9a6c-ffe68320ab68}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Handle_Emergency
 VAR_INPUT
     execute: 				BOOL;
@@ -31,7 +31,7 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.btrigger_EL := TRUE;
+    0:  GVL_FSM.b_EmergencyLine := FALSE;
 		
         GVL_Prop.propulsion_enable := FALSE;
         GVL_LEVI.levitation_enable := FALSE;
@@ -64,7 +64,7 @@ CASE state OF
 		
 		IF RecoveryToMaintenance THEN
 			
-			GVL_FSM.btrigger_EL := FALSE;
+			GVL_FSM.b_EmergencyLine := TRUE;
 			
 			state := 3;
 			

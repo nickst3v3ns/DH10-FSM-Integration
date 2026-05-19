@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="PlcTask_10ms_Barcode_" Id="{f06f2fd1-70a9-4346-a905-944453f8d3fe}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>16</Priority>
+    <PouCall>
+      <Name>PROP_MAIN_Delft</Name>
+    </PouCall>
+    <TaskFBGuid>{22747fc4-f76c-4286-ac69-108c1c7f8f72}</TaskFBGuid>
+    <Fb_init>{7fa6dce6-04e0-4f12-a910-fccfafd57aad}</Fb_init>
+    <Fb_exit>{d068740a-292d-4d5f-be87-24f03f1b1d4e}</Fb_exit>
+    <CycleUpdate>{ab452171-4215-4c55-9c5a-b8752bbe1b46}</CycleUpdate>
+    <PostCycleUpdate>{0ea02b31-f135-4a15-a198-090634c6a547}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_Discharge" Id="{9b334204-e1f0-4f77-8568-487de87d10d1}" SpecialFunc="None">
+  <POU Name="FB_Discharge" Id="{9e10a34e-039c-4453-affc-a15673b4fdc1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Discharge
 VAR_INPUT
 END_VAR
@@ -16,7 +16,7 @@ END_VAR
 fbTimer(IN := NOT fbTimer.Q, PT := T#1S);
 
 IF fbTimer.Q THEN
-    send_message(ID := PTC_TX_ID.MAIN_FSM, Command := PTC_TX_COMMAND.HV_OFF, CAN_OUTPUts := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
+    send_message(ID := E_PTC_TX_ID.MAIN_FSM, Command := E_PTC_TX_Command.HV_OFF, CAN_OUTPUts := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
 END_IF
 ]]></ST>
     </Implementation>

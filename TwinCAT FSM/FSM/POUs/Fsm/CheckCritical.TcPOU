@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="CheckCritical" Id="{b7f02efc-5073-4782-bdb4-49dadea447fc}" SpecialFunc="None">
+  <POU Name="CheckCritical" Id="{4818a2fe-f388-4981-bf75-3e36f6f937b1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION CheckCritical : BOOL
 VAR_IN_OUT
 	EmergencyReason : E_EmergencyReason;
@@ -23,11 +23,7 @@ IF NOT GVL_FSM.bsdc_closed OR //is this gonna create some weird loops?
 	EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
 	CheckCritical := TRUE;
 END_IF
-
-
-	
-	
-	]]></ST>
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

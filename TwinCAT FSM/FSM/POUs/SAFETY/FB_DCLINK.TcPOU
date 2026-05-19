@@ -10,26 +10,24 @@ VAR_OUTPUT
 	DC_LINK_SAFE_PROP:		BOOL;
 END_VAR
 VAR
+	i: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//DC-LINK LEVI
-IF GVL_LEVI.drive_voltage_EMS1 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_EMS2 < fTresholdVoltage 
-AND GVL_LEVI.drive_voltage_EMS3 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_EMS4 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS1 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS2 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS3 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS4 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS5 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS6 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS7 < fTresholdVoltage
-AND GVL_LEVI.drive_voltage_HEMS8 < fTresholdVoltage THEN
+DC_LINK_SAFE_LEVI := TRUE;
 
-	DC_LINK_SAFE_LEVI := TRUE;
-	
-END_IF
+FOR i:=0 TO 15 DO
+	IF GVL_LEVI.DC_link_voltage_HEMS[i] > fTresholdVoltage THEN
+		DC_LINK_SAFE_LEVI := FALSE;
+	END_IF
+END_FOR
+
+FOR i:=0 TO 7 DO
+	IF GVL_LEVI.DC_link_voltage_EMS[i] > fTresholdVoltage THEN
+		DC_LINK_SAFE_LEVI := FALSE;
+	END_IF
+END_FOR
 
 
 //DC-LINK PROP

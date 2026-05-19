@@ -22,6 +22,7 @@ VAR_GLOBAL
 
 	bEstopError:				BOOL; 
 	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC side
+	bEstopRestartTracker:	BOOL := FALSE;
 	
 	benable_telemetry: 		BOOL;
 	

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN_1" Id="{a45349c2-4849-4594-9abf-23290984c9ec}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+  <POU Name="PROP_MAIN_Delft" Id="{a45349c2-4849-4594-9abf-23290984c9ec}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PROP_MAIN_Delft
 VAR
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;

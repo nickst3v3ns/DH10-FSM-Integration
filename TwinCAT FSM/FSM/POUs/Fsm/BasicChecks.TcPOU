@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="BasicChecks" Id="{bf1c1cc0-8eba-4f0b-a034-ca17c8939d6d}" SpecialFunc="None">
+  <POU Name="BasicChecks" Id="{7b08a907-5a8a-406b-9256-4508aedfc6df}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION BasicChecks : BOOL
 VAR_INPUT
 END_VAR

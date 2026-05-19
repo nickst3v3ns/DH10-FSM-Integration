@@ -3,12 +3,22 @@
   <GVL Name="GVL_LEVI" Id="{d4dca03b-650a-425c-b19f-85a72034f677}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	//First Levi Checks
-	enable_levi_checks: 	BOOL;
 	
 	levitation_enable:		BOOL;
 	levitation_active:		BOOL;
 	levitation_fault: 		BOOL; //fatal levitation error
+	levitation_state:		E_Levi_States;
+	
+	//DC link voltages
+	DC_link_voltage_HEMS : ARRAY[0..15] OF UINT;
+	DC_link_voltage_EMS : ARRAY[0..7] OF UINT;
+	
+	//Levi currents
+	HEMS_real_current : ARRAY[0..15] OF LREAL;
+	HEMS_requested_current : ARRAY[0..7] OF LREAL;
+	EMS_real_current : ARRAY[0..7] OF LREAL;
+	EMS_requested_current : ARRAY[0..3] OF LREAL;
+
 	
 	DC_LINK_SAFE				:BOOL;
 	

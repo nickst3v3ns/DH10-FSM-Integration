@@ -61,15 +61,15 @@ VAR
 	Drive_status AT %I*: ARRAY[0..23] OF UINT; 
 	Drive_Diagnostic AT %I*: ARRAY[0..23] OF UINT;
 	
-	Drive_current_V AT %I*: ARRAY[0..23] OF INT;
-	Drive_current_W AT %I*: ARRAY[0..23] OF INT;
+	//Drive_current_V AT %I*: ARRAY[0..23] OF INT;
+	//Drive_current_W AT %I*: ARRAY[0..23] OF INT;
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
 	
 	DC_bus_voltage AT %I*: ARRAY[0..23] OF UINT;
-	DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
-	External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
-	Mains_voltage AT %I*: ARRAY[0..23] OF INT;
+	//DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
+	//External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
+	//Mains_voltage AT %I*: ARRAY[0..23] OF INT;
 	Periphery_voltage AT %I*: ARRAY[0..23] OF UINT;
 
 	
@@ -281,11 +281,12 @@ CASE Levi_Command OF
 							z := z,
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
+							drive_refs := drive_refs,
+							PLC_drive_refs := PLC_drive_refs,
 							z_liftoff => z_liftoff,
 							Control_word_array => Control_word,
-							drive_refs => drive_refs,
-							PLC_drive_refs => PLC_drive_refs,
 							Go_error_state => Error);
+		
 		
 		END_IF
 	//------------------------------------------------------------------------------------------------	
@@ -447,7 +448,6 @@ CASE Levi_Command OF
 									drive_feedback_timeouts := drive_feedback_timeouts,
 									force_values := Requested_force_values,
 									reset_busy => reset_busy,
-									Error => Error,
 									reset_error => reset_error,
 									Go_next_state => Levi_command);
 									
@@ -455,9 +455,49 @@ CASE Levi_Command OF
 	//------------------------------------------------------------------------------------------------	
 END_CASE
 
+
 IF ERROR THEN
 	Levi_command := E_Levi_States.LEVI_ERROR;
-END_IF]]></ST>
+END_IF
+
+FOR i:=0 TO 23 DO
+	Real_currents[i] := (INT_TO_LREAL(Force_feedback_value[i]) * configured_peak_current) / 1000.0;
+END_FOR
+
+FOR i:=0 TO 11 DO
+	Requested_currents[i] := (INT_TO_LREAL(Requested_force_values[i]) * configured_peak_current) / 1000.0;
+END_FOR
+
+
+//----------------------------------------------------------------------------------------------------
+
+//	Making copies for global variables
+
+//----------------------------------------------------------------------------------------------------
+
+FOR i:=0 TO 15 DO
+	GVL_LEVI.DC_link_voltage_HEMS[i] := DC_bus_voltage[i];
+	GVL_LEVI.HEMS_real_current[i] := real_currents[i];
+END_FOR
+
+FOR i:=0 TO 7 DO
+	GVL_LEVI.DC_link_voltage_EMS[i] := DC_bus_voltage[i+16];
+	GVL_LEVI.EMS_real_current[i] := real_currents[i+16];
+	GVL_LEVI.HEMS_requested_current[i] := requested_currents[i];
+END_FOR
+
+FOR i:=0 TO 3 DO
+	GVL_LEVI.EMS_requested_current[i] := requested_currents[i+8];
+END_FOR
+
+GVL_LEVI.levitation_state := Levi_state;
+
+IF Levi_state = E_Levi_States.LEVI_ERROR THEN
+	GVL_LEVI.levitation_fault := TRUE;
+ELSE
+	GVL_LEVI.levitation_fault := FALSE;
+END_IF
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

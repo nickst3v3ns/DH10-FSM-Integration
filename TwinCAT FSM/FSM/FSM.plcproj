@@ -18,6 +18,9 @@
     <LibraryReferences>{a0174ccd-e1c7-4336-844e-25062a3daf29}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\Track_Segment_Delft.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_Barcode_State.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -70,7 +73,7 @@
     <Compile Include="GVLs\GVL_PropCAN.TcGVL">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GVLs\GVL_PROP_BARCODE.TcGVL">
+    <Compile Include="GVLs\GVL_PROP_BARCODE_EHW.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -92,6 +95,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PlcTask_10ms_Barcode_.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
@@ -121,13 +127,10 @@
     <Compile Include="POUs\FSM\FB_Handle_Emergency.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FSM\Handle_Movement.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FSM\FB_Main_FSM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FSM\MAIN.TcPOU">
+    <Compile Include="POUs\FSM\SC_MAIN_FSM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\BackgroundLateral.TcPOU">
@@ -175,21 +178,6 @@
     <Compile Include="POUs\LEVI\State_Levi_Testing_Individual_Drives.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP\FB_ReceiveCurrent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\FB_ReceiveTemp.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\FB_SendPosVelocity.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\PROP_BARCODE_MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP\PROP_MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\PROP_EHW\EHWCalculatePosition.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -214,7 +202,7 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\MAIN_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PROP_MAIN_Delft.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent.TcPOU">
@@ -283,10 +271,10 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag.TcPOU">
@@ -342,7 +330,6 @@
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
     <Folder Include="POUs\PROP_FINAL" />
-    <Folder Include="POUs\PROP" />
     <Folder Include="POUs\PROP_EHW" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />
     <Folder Include="POUs\SAFETY" />
@@ -405,8 +392,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -482,14 +469,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

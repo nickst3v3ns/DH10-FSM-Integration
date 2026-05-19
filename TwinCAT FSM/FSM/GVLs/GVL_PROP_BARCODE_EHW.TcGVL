@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <GVL Name="GVL_PROP_BARCODE" Id="{dacfeddd-689b-44e3-a4fb-78e29b4ae552}">
+  <GVL Name="GVL_PROP_BARCODE_EHW" Id="{dacfeddd-689b-44e3-a4fb-78e29b4ae552}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	OutputData AT %Q*: ARRAY[0..7] OF BYTE;

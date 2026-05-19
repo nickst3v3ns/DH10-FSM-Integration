@@ -5,7 +5,7 @@
     <CycleTime>10000</CycleTime>
     <Priority>20</Priority>
     <PouCall>
-      <Name>MAIN</Name>
+      <Name>PROP_MAIN_Delft</Name>
     </PouCall>
     <PouCall>
       <Name>SAFETY_MAIN</Name>

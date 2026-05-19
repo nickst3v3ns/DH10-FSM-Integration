@@ -12,28 +12,28 @@ END_VAR
 
 VAR
 	
-	temp_raw11 AT %I*	:INT;
-	temp_raw12 AT %I*	:INT;
-	temp_raw13 AT %I*	:INT;
-	temp_raw14 AT %I*	:INT;
-	temp_raw15 AT %I*	:INT;
-	temp_raw16 AT %I*	:INT;
-	temp_raw17 AT %I*	:INT;
-	temp_raw18 AT %I*	:INT;
+	temp_rawVFL1 AT %I*	:INT;
+	temp_rawVFL2 AT %I*	:INT;
+	temp_rawVFR1 AT %I*	:INT;
+	temp_rawVFR2 AT %I*	:INT;
+	temp_rawVBL1 AT %I*	:INT;
+	temp_rawVBL2 AT %I*	:INT;
+	temp_rawVBR1 AT %I*	:INT;
+	temp_rawVBR2 AT %I*	:INT;
 	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[bcriticalCoolDown := FALSE;
 icriticalindex := -1;
 
-TEMP[0] := INT_TO_REAL(temp_raw11)/100.0; //VFL1
-TEMP[1] := INT_TO_REAL(temp_raw12)/100.0; //VFL2
-TEMP[2] := INT_TO_REAL(temp_raw13)/100.0; //VFR1
-TEMP[3] := INT_TO_REAL(temp_raw14)/100.0; //VFR2
-TEMP[4] := INT_TO_REAL(temp_raw15)/100.0; //VBL1
-TEMP[5] := INT_TO_REAL(temp_raw16)/100.0; //VBL2
-TEMP[6] := INT_TO_REAL(temp_raw17)/100.0; //VBR1
-TEMP[7] := INT_TO_REAL(temp_raw18)/100.0; //VBR2
+TEMP[0] := INT_TO_REAL(temp_rawVFL1)/100.0; //VFL1
+TEMP[1] := INT_TO_REAL(temp_rawVFL2)/100.0; //VFL2
+TEMP[2] := INT_TO_REAL(temp_rawVFR1)/100.0; //VFR1
+TEMP[3] := INT_TO_REAL(temp_rawVFR2)/100.0; //VFR2
+TEMP[4] := INT_TO_REAL(temp_rawVBL1)/100.0; //VBL1
+TEMP[5] := INT_TO_REAL(temp_rawVBL2)/100.0; //VBL2
+TEMP[6] := INT_TO_REAL(temp_rawVBR1)/100.0; //VBR1
+TEMP[7] := INT_TO_REAL(temp_rawVBR2)/100.0; //VBR2
 
 FOR i := 0 TO 7 DO
 	IF TEMP[i] > GVL_FSM.rcritical_temp_HEMS THEN

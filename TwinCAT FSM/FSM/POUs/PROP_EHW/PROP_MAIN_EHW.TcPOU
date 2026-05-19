@@ -64,13 +64,13 @@ END_VAR]]></Declaration>
 		
 	E_Barcode_State.SEND_POS_VEL_COMMAND:
 		
-		positionValues[0] := GVL_PROP_BARCODE.InputData1[4];
-		positionValues[1] := GVL_PROP_BARCODE.InputData1[5];
-		positionValues[2] := GVL_PROP_BARCODE.InputData1[6];
-		positionValues[3] := GVL_PROP_BARCODE.InputData1[7];
+		positionValues[0] := GVL_PROP_BARCODE_EHW.InputData1[4];
+		positionValues[1] := GVL_PROP_BARCODE_EHW.InputData1[5];
+		positionValues[2] := GVL_PROP_BARCODE_EHW.InputData1[6];
+		positionValues[3] := GVL_PROP_BARCODE_EHW.InputData1[7];
 		
-		velocityValues[0] := GVL_PROP_BARCODE.InputData2[0];
-		velocityValues[1] := GVL_PROP_BARCODE.InputData2[1];
+		velocityValues[0] := GVL_PROP_BARCODE_EHW.InputData2[0];
+		velocityValues[1] := GVL_PROP_BARCODE_EHW.InputData2[1];
 		
 		IF velocityValues[0] > 128 THEN
 			velocity := (256 * 256 - (256 * velocityValues[0] + velocityValues[1]));
@@ -88,20 +88,20 @@ END_VAR]]></Declaration>
 		
 		newData := newData XOR 16#80;
 		
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := SEND_POS_VEL;
+		GVL_PROP_BARCODE_EHW.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP_BARCODE_EHW.OutputData[2] := SEND_POS_VEL;
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := 16#00;
-		GVL_PROP_BARCODE.OutputData[3] := SEND_DIAG;
+		GVL_PROP_BARCODE_EHW.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP_BARCODE_EHW.OutputData[2] := 16#00;
+		GVL_PROP_BARCODE_EHW.OutputData[3] := SEND_DIAG;
 		
 	E_Barcode_State.SEND_MARKER_INFO_COMMAND:
 		newData := newData XOR 16#80;
-		GVL_PROP_BARCODE.OutputData[0] := newData OR SET_COMMAND;
-		GVL_PROP_BARCODE.OutputData[2] := 16#00;
-		GVL_PROP_BARCODE.OutputData[3] := SEND_MARKER_INFO;
+		GVL_PROP_BARCODE_EHW.OutputData[0] := newData OR SET_COMMAND;
+		GVL_PROP_BARCODE_EHW.OutputData[2] := 16#00;
+		GVL_PROP_BARCODE_EHW.OutputData[3] := SEND_MARKER_INFO;
 		
 	E_Barcode_State.ERROR:
 		bError := TRUE;

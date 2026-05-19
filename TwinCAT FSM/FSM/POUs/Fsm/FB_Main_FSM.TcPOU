@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_Main_FSM" Id="{c43d7473-544d-4a51-9089-3cf1a0f943c6}" SpecialFunc="None">
+  <POU Name="FB_Main_FSM" Id="{db5af827-1362-457f-b641-eef356196825}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Main_FSM
 
 VAR_INPUT
@@ -78,8 +78,14 @@ CASE currentState OF
 		
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
-	
-		IF bBasicChecksOk THEN
+		
+		IF GVL_FSM.bsafety_inputs_valid AND NOT GVL_FSM.bsdc_closed AND NOT (GVL_FSM.bEstopRestart < GVL_FSM.bEstopRestartTracker) THEN
+			GVL_FSM.bEstopRestartTracker := GVL_FSM.bEstopRestartTracker;
+			GVL_FSM.bEstopRestart := NOT GVL_FSM.bEstopRestart;
+		END_IF
+			
+		
+		IF bBasicChecksOk AND GVL_FSM.bsdc_closed THEN
 			
 			currentState := E_PodState.STATE_SYNC;
 			
@@ -152,7 +158,7 @@ CASE currentState OF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
 			
-			GVL_FSM.btrigger_EL := TRUE;
+			GVL_FSM.b_EmergencyLine := TRUE;
 			fbdischarge();
 			
 			IF GVL_PT.PTC_STATE = 0 AND GVL_LEVI.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
@@ -171,7 +177,7 @@ CASE currentState OF
 		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
-			GVL_FSM.btrigger_EL := TRUE; //should we do this though?
+			GVL_FSM.b_EmergencyLine := TRUE; //should we do this though?
 		
 			fbdischarge();
 			
@@ -212,8 +218,6 @@ CASE currentState OF
 	
 		GVL_LEVI.levitation_enable := TRUE;
 		GVL_Prop.propulsion_enable := TRUE;
-		
-		Handle_movement();
 
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE:
@@ -246,7 +250,7 @@ END_CASE
 //Unconditional calls
 IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bengage_brakes THEN
 	
-	fbCLKTrigger(IN := TRUE, PT := T#2S, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
+	fbCLKTrigger(IN := TRUE, PT := T#100mS, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 
 END_IF
 
@@ -254,7 +258,7 @@ GVL_FSM.bCLKTrigger := fbCLKTrigger.Q;
 
 //Forced Reset to Emergency if the Heartbeat fails
 
-fbHeartBeatFailReset(IN := (NOT GVL_FSM.bheartbeat_OK) AND currentState >= 3, PT := T#100MS);
+fbHeartBeatFailReset(IN := (NOT GVL_FSM.bheartbeat_OK) AND currentState >= 3, PT := T#1S);
 
 IF fbHeartBeatFailReset.Q THEN
 	

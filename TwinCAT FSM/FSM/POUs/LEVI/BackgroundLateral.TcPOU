@@ -68,8 +68,8 @@ fbEL6021Ctrl_12(
 	pComOut:= ADR(GVL_LEVI.stOut_EL6021_LFR), 
 	SizeComIn:= SIZEOF(GVL_LEVI.stIn_EL6021_LFR), 
 	ErrorID => eEL6021CtrlErrorID, 
-	TxBuffer:= GVL_LEVI.TxBufferEL_LBF, 
-	RxBuffer:= GVL_LEVI.RxBufferEL_LBF );]]></ST>
+	TxBuffer:= GVL_LEVI.TxBufferEL_LFR, 
+	RxBuffer:= GVL_LEVI.RxBufferEL_LFR );]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
