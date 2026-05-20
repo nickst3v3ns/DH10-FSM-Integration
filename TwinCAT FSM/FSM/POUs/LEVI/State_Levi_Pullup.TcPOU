@@ -19,6 +19,7 @@ VAR_IN_OUT
 	Control_word_array : ARRAY[0..23] OF UINT;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
+	Drive_current_error : ARRAY[0..23] OF BOOL;
 END_VAR
 
 VAR
@@ -55,7 +56,8 @@ Error := Check_drives(drive_status := drive_status,
 					State := State,
 					n_warns => n_drive_warnings, 
 					n_errors => n_drive_errors, 
-					errors => error_specifics);
+					errors => error_specifics,
+					Drive_current_error => Drive_current_error);
 
 //Giving a constant positive current to the HEMS, and keeping the EMS off
 force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);

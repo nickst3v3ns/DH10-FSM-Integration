@@ -27,6 +27,7 @@ VAR_OUTPUT
 	//What the errors found are
 	errors: ARRAY[0..23] OF Drive_error_mapping;
 	
+	Drive_current_error : ARRAY[0..23] OF BOOL;
 END_VAR
 
 VAR_IN_OUT
@@ -88,10 +89,17 @@ IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR S
 		END_IF
 		
 		//Shut off if we get a bunch of disconnection errors
-		IF drive_feedback_timeouts[2*i] > 1000  OR drive_feedback_timeouts[2*i+1] > 1000 THEN
+		IF drive_feedback_timeouts[2*i] > 1000 THEN
 			Check_drives := TRUE;
-			
+			Drive_current_error[i] := TRUE;
 		END_IF
+		
+		//Shut off if we get a bunch of disconnection errors
+		IF drive_feedback_timeouts[2*i+1] > 1000 THEN
+			Check_drives := TRUE;
+			Drive_current_error[i] := TRUE;
+		END_IF
+		
 	END_FOR
 	
 ELSE

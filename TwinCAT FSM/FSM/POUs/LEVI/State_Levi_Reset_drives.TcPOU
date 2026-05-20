@@ -22,6 +22,7 @@ VAR_IN_OUT
 	Control_word_array : ARRAY[0..23] OF UINT;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
+	Drive_current_error : ARRAY[0..23] OF BOOL;
 END_VAR
 
 VAR
@@ -75,7 +76,8 @@ Error := Check_drives(drive_status := drive_status,
 					State := State,
 					n_warns => n_drive_warnings, 
 					n_errors => n_drive_errors, 
-					errors => error_specifics);
+					errors => error_specifics,
+					Drive_current_error => Drive_current_error);
 
 Reset_busy := FALSE;
 
@@ -130,9 +132,12 @@ END_FOR
 IF reset_busy = FALSE AND reset_error = TRUE THEN
 	Go_next_state := E_Levi_States.LEVI_ERROR;
 	
-ELSIF reset_busy = FALSE AND ERROR = FALSE AND reset_error = FALSE THEN
+ELSIF reset_busy = FALSE AND ERROR = FALSE AND reset_error = FALSE AND GVL_LEVI.levitation_enable = TRUE THEN
 	Go_next_state := E_Levi_States.LEVI_INIT;
-
+	
+ELSIF reset_busy = FALSE AND ERROR = FALSE AND reset_error = FALSE AND GVL_LEVI.levitation_enable = FALSE THEN
+	Go_next_state := E_Levi_States.LEVI_IDLE;
+	
 END_IF]]></ST>
     </Implementation>
   </POU>

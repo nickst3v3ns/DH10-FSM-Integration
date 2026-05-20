@@ -13,6 +13,7 @@ END_VAR
 VAR_OUTPUT
 	Control_word_array : ARRAY[0..23] OF UINT;
 	Go_error_state: BOOL;
+	error_resettable : BOOL := TRUE;
 END_VAR
 
 VAR_IN_OUT
@@ -63,7 +64,10 @@ force_values[9] := 0;
 
 force_values[10] := 0;
 force_values[11] := 0;
-//------------------------------------------------------------------------------------------------]]></ST>
+//------------------------------------------------------------------------------------------------
+
+error_resettable := TRUE;
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

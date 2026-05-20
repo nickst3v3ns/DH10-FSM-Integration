@@ -128,9 +128,12 @@ VAR
 	n_drive_errors : UINT;
 	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	Drive_current_error : ARRAY[0..23] OF BOOL;
 	
 	Error : BOOL;
 	error_resettable : BOOL;
+	error_emergency : BOOL;
+	error_non_emergency : BOOL;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -271,7 +274,9 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_CONTROL OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
-			reset_busy = FALSE THEN
+			reset_busy = FALSE AND
+			error_resettable = TRUE AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := 1;
 			FB_Levi_Init(	drive_status := Drive_status,
@@ -283,6 +288,7 @@ CASE Levi_Command OF
 							force_values := Requested_force_values,
 							drive_refs := drive_refs,
 							PLC_drive_refs := PLC_drive_refs,
+							Drive_current_error := Drive_current_error,
 							z_liftoff => z_liftoff,
 							Control_word_array => Control_word,
 							Go_error_state => Error);
@@ -293,7 +299,8 @@ CASE Levi_Command OF
 						
 	E_Levi_States.LEVI_READY:
 		IF 	(Levi_state = E_Levi_States.LEVI_INIT OR
-			Levi_state = E_Levi_States.LEVI_READY) THEN
+			Levi_state = E_Levi_States.LEVI_READY) AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 	
 			Levi_state := 2;
 			FB_Levi_Ready(	drive_status := Drive_status,
@@ -305,6 +312,7 @@ CASE Levi_Command OF
 							PLC_drive_refs := PLC_drive_refs,
 							State := Levi_state,
 							Control_word_array := Control_word,
+							Drive_current_error := Drive_current_error,
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
 							Go_error_state => Error);
@@ -316,7 +324,8 @@ CASE Levi_Command OF
 		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
 			Levi_state = E_Levi_States.LEVI_PULLUP) AND 
 			Levi_ready AND
-			reset_busy = FALSE THEN
+			reset_busy = FALSE AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := 3;
 			FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
@@ -327,6 +336,7 @@ CASE Levi_Command OF
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
 							Control_word_array := Control_word,
+							Drive_current_error := Drive_current_error,
 							Error => Error,
 							Back_to_ready => Levi_command);
 							
@@ -337,7 +347,8 @@ CASE Levi_Command OF
 		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
 			Levi_state = E_Levi_States.LEVI_DROPDOWN) AND 
 			Levi_ready AND
-			reset_busy = FALSE THEN
+			reset_busy = FALSE AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := 4;
 			FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
@@ -348,6 +359,7 @@ CASE Levi_Command OF
 								drive_feedback_timeouts := drive_feedback_timeouts,
 								force_values := Requested_force_values,
 								Control_word_array := Control_word,
+								Drive_current_error := Drive_current_error,
 								Error => Error,
 								Back_to_ready => Levi_command);
 								
@@ -359,7 +371,8 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_CONTROL) AND 
 			Levi_ready AND 
 			z_liftoff < -0.020 AND
-			reset_busy = FALSE THEN
+			reset_busy = FALSE AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := 5;
 			FB_Levi_Control(	configured_peak_current := configured_peak_current,
@@ -380,6 +393,7 @@ CASE Levi_Command OF
 								Control_word_array := Control_word,
 								drive_feedback_timeouts := drive_feedback_timeouts,
 								force_values := Requested_force_values,
+								Drive_current_error := Drive_current_error,
 								Error => Error);
 								
 		END_IF					
@@ -389,7 +403,8 @@ CASE Levi_Command OF
 		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES) AND 
 			Levi_ready AND
-			reset_busy = FALSE THEN
+			reset_busy = FALSE AND
+			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := 6;
 			FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
@@ -400,6 +415,7 @@ CASE Levi_Command OF
 												drive_feedback_timeouts := drive_feedback_timeouts,
 												force_values := Requested_force_values,
 												Control_word_array := Control_word,
+												Drive_current_error := Drive_current_error,
 												Error => Error);	
 												
 		END_IF
@@ -425,6 +441,7 @@ CASE Levi_Command OF
 							Control_word_array := Control_word,
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
+							Drive_current_error := Drive_current_error,
 							Error => Error,
 							error_resettable => error_resettable,
 							First_reset_run => First_reset_run);
@@ -447,6 +464,7 @@ CASE Levi_Command OF
 									Control_word_array := Control_word,
 									drive_feedback_timeouts := drive_feedback_timeouts,
 									force_values := Requested_force_values,
+									Drive_current_error := Drive_current_error,
 									reset_busy => reset_busy,
 									reset_error => reset_error,
 									Go_next_state => Levi_command);
@@ -456,8 +474,13 @@ CASE Levi_Command OF
 END_CASE
 
 
-IF ERROR THEN
+IF ERROR AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
 	Levi_command := E_Levi_States.LEVI_ERROR;
+	
+	//Making sure no drives are giving an output
+	FOR i:=0 TO 23 DO
+		Control_word[i] := 0;
+	END_FOR
 END_IF
 
 FOR i:=0 TO 23 DO
@@ -476,12 +499,12 @@ END_FOR
 //----------------------------------------------------------------------------------------------------
 
 FOR i:=0 TO 15 DO
-	GVL_LEVI.DC_link_voltage_HEMS[i] := DC_bus_voltage[i];
+	GVL_LEVI.DC_link_voltage_HEMS[i] := DC_bus_voltage[i]/10;
 	GVL_LEVI.HEMS_real_current[i] := real_currents[i];
 END_FOR
 
 FOR i:=0 TO 7 DO
-	GVL_LEVI.DC_link_voltage_EMS[i] := DC_bus_voltage[i+16];
+	GVL_LEVI.DC_link_voltage_EMS[i] := DC_bus_voltage[i+16]/10;
 	GVL_LEVI.EMS_real_current[i] := real_currents[i+16];
 	GVL_LEVI.HEMS_requested_current[i] := requested_currents[i];
 END_FOR
