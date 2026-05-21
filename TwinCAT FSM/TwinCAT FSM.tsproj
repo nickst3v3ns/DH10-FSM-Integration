@@ -9100,7 +9100,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{2F4F54E6-6D2F-3097-6859-B3BCCFF96398}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B9072068-849C-B886-398A-C75AE46FD5DE}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
@@ -9124,13 +9124,13 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.OutputData</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_PT.CAN_OUTPUTS</Name>
 							<Comment><![CDATA[CAN INTERFACE]]></Comment>
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.OutputData</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
@@ -10177,33 +10177,18 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
 							<AreaNo>#x00000023</AreaNo>
 							<Data>03000000</Data>
-							<Properties>
-								<Property>
-									<Name>GlobalType</Name>
-								</Property>
-							</Properties>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>GVL_LEVI.FB_control_vert.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
 							<AreaNo>#x00000023</AreaNo>
 							<Data>03000000</Data>
-							<Properties>
-								<Property>
-									<Name>GlobalType</Name>
-								</Property>
-							</Properties>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>GVL_LEVI.FB_control_lat.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
 							<AreaNo>#x00000023</AreaNo>
 							<Data>03000000</Data>
-							<Properties>
-								<Property>
-									<Name>GlobalType</Name>
-								</Property>
-							</Properties>
 						</InitSymbol>
 					</InitSymbols>
 					<TaskPouOids>

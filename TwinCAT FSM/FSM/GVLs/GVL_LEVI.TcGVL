@@ -5,7 +5,6 @@
 VAR_GLOBAL
 	
 	levitation_enable:		BOOL;
-	levitation_active:		BOOL;
 	levitation_fault: 		BOOL; //fatal levitation error
 	levitation_state:		E_Levi_States;
 	

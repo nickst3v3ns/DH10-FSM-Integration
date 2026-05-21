@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.22">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18EE5ABB-CCAE-9158-92DC-B5FF107F0665}">ITcSensor_model</Name>
@@ -2258,7 +2258,7 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name IecBaseType="true">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Name>
+			<Name GUID="{4A09EE85-C846-8596-B7BE-27A5C1C3D419}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Name>
 			<Comment><![CDATA[----------------------------------------------------------------------------------------------------
 	Error handling
 ----------------------------------------------------------------------------------------------------
@@ -2402,7 +2402,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
 			<BitSize>7</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -2565,10 +2565,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 				</Task>
 			</Tasks>
 			<Modules>
-				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.20">
+				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.25">
 					<Name>Object1 (Sensor_model)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.20">
+					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.25">
 						<Name>Sensor_model</Name>
 						<CLSID ClassFactory="Sensor_model" RealTimeInstantiable="true">{01781D84-B470-A997-DC4F-062608A9D221}</CLSID>
 						<Info>
@@ -2805,11 +2805,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Default>
 									<SubItem>
 										<Name>.Laser_magnet_offset_EMS</Name>
-										<Data>4FAF946588639D3F9F3C2CD49AE69D3F865AD3BCE3149D3F423EE8D9ACFA9C3FEFC9C342AD699E3F4FAF946588639D3F</Data>
+										<Data>58E71890BDDE9D3F9F3C2CD49AE69D3F865AD3BCE3149D3F423EE8D9ACFA9C3FEFC9C342AD699E3F4FAF946588639D3F</Data>
 									</SubItem>
 									<SubItem>
 										<Name>.Laser_magnet_offset_HEMS</Name>
-										<Data>E4839ECDAACF953F7B14AE47E17A943F44696FF085C9943F44696FF085C9943FD712F241CF66953FCBA145B6F3FD943F</Data>
+										<Data>2C9D0FCF1264943F7B14AE47E17A943F44696FF085C9943F44696FF085C9943F5437177FDB13943FCBA145B6F3FD943F</Data>
 									</SubItem>
 									<SubItem>
 										<Name>.airgap_nominal_ems</Name>
@@ -2879,7 +2879,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
 								<Name>Sensor_model_Y</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>144</ByteSize>
+								<ByteSize>152</ByteSize>
 								<Symbol>
 									<Name>z</Name>
 									<BitSize>64</BitSize>
@@ -2902,39 +2902,46 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<BitOffs>128</BitOffs>
 								</Symbol>
 								<Symbol>
-									<Name>n_rejected</Name>
+									<Name>y</Name>
 									<BitSize>64</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<PTCID>#x81000018</PTCID>
 									<BitOffs>192</BitOffs>
 								</Symbol>
 								<Symbol>
-									<Name>y</Name>
+									<Name>yaw</Name>
 									<BitSize>64</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<PTCID>#x81000020</PTCID>
 									<BitOffs>256</BitOffs>
 								</Symbol>
 								<Symbol>
-									<Name>yaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000028</PTCID>
-									<BitOffs>320</BitOffs>
-								</Symbol>
-								<Symbol>
 									<Name>offset_airgaps</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000030</PTCID>
-									<BitOffs>384</BitOffs>
+									<PTCID>#x81000028</PTCID>
+									<BitOffs>320</BitOffs>
 								</Symbol>
 								<Symbol>
 									<Name>offset_airgaps_ems</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000060</PTCID>
-									<BitOffs>768</BitOffs>
+									<PTCID>#x81000058</PTCID>
+									<BitOffs>704</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_vertical_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_lateral_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000090</PTCID>
+									<BitOffs>1152</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
@@ -3037,7 +3044,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_EMS[0]</Name>
-								<Value>0.0287</Value>
+								<Value>0.02917</Value>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_EMS[1]</Name>
@@ -3061,7 +3068,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[0]</Name>
-								<Value>0.0213</Value>
+								<Value>0.019913</Value>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[1]</Name>
@@ -3077,7 +3084,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[4]</Name>
-								<Value>0.0209</Value>
+								<Value>0.019607</Value>
 							</Value>
 							<Value>
 								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[5]</Name>
@@ -3226,10 +3233,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.26">
+				<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.28">
 					<Name>Object2 (vertical_levitation_control)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{8EAE5102-2B5F-C83F-28AE-EA53474F7CF3}" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.26">
+					<TmcDesc GUID="{8EAE5102-2B5F-C83F-28AE-EA53474F7CF3}" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.28">
 						<Name>vertical_levitation_control</Name>
 						<CLSID ClassFactory="vertical_levitation_control" RealTimeInstantiable="true">{8EAE5102-2B5F-C83F-28AE-EA53474F7CF3}</CLSID>
 						<Info>
@@ -3574,7 +3581,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 									</SubItem>
 									<SubItem>
 										<Name>.m</Name>
-										<Value>1587</Value>
+										<Value>1690</Value>
 									</SubItem>
 									<SubItem>
 										<Name>.notch_damp</Name>
@@ -4125,7 +4132,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
 								<Name>vertical_levitation_control_U</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>96</ByteSize>
+								<ByteSize>104</ByteSize>
 								<Symbol>
 									<Name>z_avg</Name>
 									<BitSize>64</BitSize>
@@ -4182,12 +4189,19 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<PTCID>#x80000058</PTCID>
 									<BitOffs>704</BitOffs>
 								</Symbol>
+								<Symbol>
+									<Name>Feedback_current_hems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x80000060</PTCID>
+									<BitOffs>768</BitOffs>
+								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
 								<Name>vertical_levitation_control_Y</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>248</ByteSize>
+								<ByteSize>264</ByteSize>
 								<Symbol>
 									<Name>I_VFL</Name>
 									<BitSize>128</BitSize>
@@ -4271,6 +4285,20 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
 									<PTCID>#x810000d8</PTCID>
 									<BitOffs>1728</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_total_hems_current</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x810000f8</PTCID>
+									<BitOffs>1984</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_current_hems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000100</PTCID>
+									<BitOffs>2048</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
@@ -6271,7 +6299,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Value>
 							<Value>
 								<Name>vertical_levitation_control_P.m</Name>
-								<Value>1587</Value>
+								<Value>1690</Value>
 							</Value>
 							<Value>
 								<Name>vertical_levitation_control_P.notch_damp</Name>
@@ -6840,10 +6868,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.8">
+				<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.10">
 					<Name>Object3 (lateral_levitation_control)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{F87518E2-4113-640C-BFC5-E677387FE878}" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.8">
+					<TmcDesc GUID="{F87518E2-4113-640C-BFC5-E677387FE878}" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.10">
 						<Name>lateral_levitation_control</Name>
 						<CLSID ClassFactory="lateral_levitation_control" RealTimeInstantiable="true">{F87518E2-4113-640C-BFC5-E677387FE878}</CLSID>
 						<Info>
@@ -7403,7 +7431,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
 								<Name>lateral_levitation_control_U</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>48</ByteSize>
+								<ByteSize>56</ByteSize>
 								<Symbol>
 									<Name>y</Name>
 									<BitSize>64</BitSize>
@@ -7446,12 +7474,19 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<PTCID>#x80000028</PTCID>
 									<BitOffs>320</BitOffs>
 								</Symbol>
+								<Symbol>
+									<Name>Feedback_current_ems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x80000030</PTCID>
+									<BitOffs>384</BitOffs>
+								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
 								<Name>lateral_levitation_control_Y</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>136</ByteSize>
+								<ByteSize>152</ByteSize>
 								<Symbol>
 									<Name>F_latreq</Name>
 									<BitSize>128</BitSize>
@@ -7500,6 +7535,20 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<PTCID>#x81000080</PTCID>
 									<BitOffs>1024</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_total_ems_current</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_current_ems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000090</PTCID>
+									<BitOffs>1152</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>

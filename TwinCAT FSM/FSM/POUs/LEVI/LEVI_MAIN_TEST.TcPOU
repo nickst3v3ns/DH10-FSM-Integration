@@ -162,12 +162,14 @@ VAR
 //----------------------------------------------------------------------------------------------------
 	
 	configured_peak_current : LREAL := 13; //A
-	minimum_dc_bus_voltage : UINT := 312; //V	
+	minimum_dc_bus_voltage : UINT := 313; //V	
 	
 	Run_z_liftoff_calc : BOOL;
+	All_drives_high_voltage: BOOL;
 
 	i: INT;
 
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -236,6 +238,14 @@ IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR
 	Levi_command := E_Levi_States.LEVI_IDLE;
 END_IF
 
+All_drives_high_voltage := TRUE;
+
+FOR i:=0 TO 23 DO
+	IF DC_bus_voltage[i] < (minimum_dc_bus_voltage*10) THEN
+		All_drives_high_voltage := FALSE;
+	END_IF
+END_FOR
+
 
 //----------------------------------------------------------------------------------------------------
 
@@ -270,6 +280,9 @@ CASE Levi_Command OF
 							force_values := Requested_force_values,
 							Control_word_array => Control_word,
 							Go_error_state => Error);
+		
+		ELSE
+			Levi_command := Levi_state;
 							
 		END_IF				
 	//------------------------------------------------------------------------------------------------	
@@ -303,6 +316,8 @@ CASE Levi_Command OF
 							Control_word_array => Control_word,
 							Go_error_state => Error);
 		
+		ELSE
+			Levi_command := Levi_state;
 		
 		END_IF
 	//------------------------------------------------------------------------------------------------	
@@ -310,7 +325,8 @@ CASE Levi_Command OF
 	E_Levi_States.LEVI_READY:
 		IF 	(Levi_state = E_Levi_States.LEVI_INIT OR
 			Levi_state = E_Levi_States.LEVI_READY) AND
-			GVL_LEVI.levitation_enable = TRUE THEN
+			GVL_LEVI.levitation_enable = TRUE AND
+			All_drives_high_voltage = TRUE THEN
 	
 			Levi_state := 2;
 			FB_Levi_Ready(	drive_status := Drive_status,
@@ -328,7 +344,10 @@ CASE Levi_Command OF
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
 							Go_error_state => Error);
-							
+		
+		ELSE
+			Levi_command := Levi_state;		
+					
 		END_IF		
 	//------------------------------------------------------------------------------------------------					
 	
@@ -352,7 +371,10 @@ CASE Levi_Command OF
 							Error => Error,
 							Back_to_ready => Levi_command,
 							Run_z_liftoff_calc => Run_z_liftoff_calc);
-							
+
+		ELSE
+			Levi_command := Levi_state;		
+	
 		END_IF			
 	//------------------------------------------------------------------------------------------------
 	
@@ -376,7 +398,10 @@ CASE Levi_Command OF
 								Error => Error,
 								Back_to_ready => Levi_command,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);
-								
+		
+		ELSE
+			Levi_command := Levi_state;
+						
 		END_IF		
 	//------------------------------------------------------------------------------------------------
 	
@@ -410,7 +435,10 @@ CASE Levi_Command OF
 								Drive_current_error := Drive_current_error,
 								Error => Error,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);
-								
+		
+		ELSE
+			Levi_command := Levi_state;
+						
 		END_IF					
 	//------------------------------------------------------------------------------------------------
 	
@@ -433,7 +461,10 @@ CASE Levi_Command OF
 												Drive_current_error := Drive_current_error,
 												Error => Error,
 												Run_z_liftoff_calc => Run_z_liftoff_calc);	
-												
+		
+		ELSE
+			Levi_command := Levi_state;
+										
 		END_IF
 	//------------------------------------------------------------------------------------------------
 	
@@ -461,7 +492,10 @@ CASE Levi_Command OF
 							Error => Error,
 							error_resettable => error_resettable,
 							First_reset_run => First_reset_run);
-						
+		
+		ELSE
+			Levi_command := Levi_state;
+				
 		END_IF
 	//------------------------------------------------------------------------------------------------	
 	
@@ -485,10 +519,15 @@ CASE Levi_Command OF
 									reset_busy => reset_busy,
 									reset_error => reset_error,
 									Go_next_state => Levi_command);
-									
+
+		ELSE
+			Levi_command := Levi_state;		
+							
 		END_IF
 	//------------------------------------------------------------------------------------------------	
 END_CASE
+
+
 
 IF ERROR AND Levi_state <> E_Levi_States.LEVI_IDLE AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
 	Levi_command := E_Levi_States.LEVI_ERROR;
