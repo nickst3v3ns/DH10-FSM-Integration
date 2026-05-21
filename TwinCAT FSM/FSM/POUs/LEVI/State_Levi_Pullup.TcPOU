@@ -13,6 +13,7 @@ END_VAR
 VAR_OUTPUT
 	Error: BOOL;
 	Back_to_ready : E_Levi_States;
+	Run_z_liftoff_calc : BOOL;
 END_VAR
 
 VAR_IN_OUT
@@ -34,7 +35,9 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Back_to_ready := E_Levi_States.LEVI_PULLUP;
+      <ST><![CDATA[Run_z_liftoff_calc := FALSE;
+
+Back_to_ready := E_Levi_States.LEVI_PULLUP;
 
 //Keeping the drives active
 FOR i:=0 TO 23 DO

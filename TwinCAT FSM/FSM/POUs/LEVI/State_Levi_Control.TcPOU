@@ -26,6 +26,7 @@ END_VAR
 
 VAR_OUTPUT
 	Error: BOOL;
+	Run_z_liftoff_calc : BOOL;
 END_VAR
 
 VAR_IN_OUT
@@ -113,7 +114,9 @@ VAR
 	
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FOR i:=0 TO 23 DO
+      <ST><![CDATA[Run_z_liftoff_calc := FALSE;
+
+FOR i:=0 TO 23 DO
 	Control_word_array[i] := 16#E000;
 END_FOR
 

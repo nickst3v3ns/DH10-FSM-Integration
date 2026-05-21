@@ -163,6 +163,8 @@ VAR
 	
 	configured_peak_current : LREAL := 13; //A
 	minimum_dc_bus_voltage : UINT := 312; //V	
+	
+	Run_z_liftoff_calc : BOOL;
 
 	i: INT;
 
@@ -228,6 +230,13 @@ y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
 
+//Falling edge trigger for when sensecon disables levitation.
+//This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
+IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
+	Levi_command := E_Levi_States.LEVI_IDLE;
+END_IF
+
+
 //----------------------------------------------------------------------------------------------------
 
 //	FSM
@@ -284,6 +293,7 @@ CASE Levi_Command OF
 							Force_feedback_value := Force_feedback_value,
 							State := Levi_state,
 							z := z,
+							Run_z_liftoff_calc := Run_z_liftoff_calc,
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
 							drive_refs := drive_refs,
@@ -311,6 +321,8 @@ CASE Levi_Command OF
 							drive_refs := drive_refs,
 							PLC_drive_refs := PLC_drive_refs,
 							State := Levi_state,
+							Run_z_liftoff_calc := Run_z_liftoff_calc,
+							z := z,
 							Control_word_array := Control_word,
 							Drive_current_error := Drive_current_error,
 							reset_busy => reset_busy,
@@ -338,7 +350,8 @@ CASE Levi_Command OF
 							Control_word_array := Control_word,
 							Drive_current_error := Drive_current_error,
 							Error => Error,
-							Back_to_ready => Levi_command);
+							Back_to_ready => Levi_command,
+							Run_z_liftoff_calc => Run_z_liftoff_calc);
 							
 		END_IF			
 	//------------------------------------------------------------------------------------------------
@@ -361,7 +374,8 @@ CASE Levi_Command OF
 								Control_word_array := Control_word,
 								Drive_current_error := Drive_current_error,
 								Error => Error,
-								Back_to_ready => Levi_command);
+								Back_to_ready => Levi_command,
+								Run_z_liftoff_calc => Run_z_liftoff_calc);
 								
 		END_IF		
 	//------------------------------------------------------------------------------------------------
@@ -394,7 +408,8 @@ CASE Levi_Command OF
 								drive_feedback_timeouts := drive_feedback_timeouts,
 								force_values := Requested_force_values,
 								Drive_current_error := Drive_current_error,
-								Error => Error);
+								Error => Error,
+								Run_z_liftoff_calc => Run_z_liftoff_calc);
 								
 		END_IF					
 	//------------------------------------------------------------------------------------------------
@@ -416,7 +431,8 @@ CASE Levi_Command OF
 												force_values := Requested_force_values,
 												Control_word_array := Control_word,
 												Drive_current_error := Drive_current_error,
-												Error => Error);	
+												Error => Error,
+												Run_z_liftoff_calc => Run_z_liftoff_calc);	
 												
 		END_IF
 	//------------------------------------------------------------------------------------------------
@@ -451,7 +467,8 @@ CASE Levi_Command OF
 	
 	E_Levi_States.LEVI_RESET_DRIVES:
 		IF 	(Levi_state = E_Levi_States.LEVI_ERROR OR
-			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND error_resettable = TRUE THEN		
+			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND 
+			error_resettable = TRUE THEN		
 	
 			Levi_state := -2;
 			FB_Levi_Reset_Drives(	drive_status := Drive_status,
@@ -473,8 +490,7 @@ CASE Levi_Command OF
 	//------------------------------------------------------------------------------------------------	
 END_CASE
 
-
-IF ERROR AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
+IF ERROR AND Levi_state <> E_Levi_States.LEVI_IDLE AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
 	Levi_command := E_Levi_States.LEVI_ERROR;
 	
 	//Making sure no drives are giving an output

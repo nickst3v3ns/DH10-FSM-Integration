@@ -10,12 +10,15 @@ VAR_INPUT
 	drive_refs : ARRAY[0..23] OF ST_DriveRef;
 	PLC_drive_refs : ARRAY[0..23] OF ST_PLCDriveRef;
 	State : E_Levi_States;
+	Run_z_liftoff_calc : BOOL;
+	z: LREAL;
 END_VAR
 
 VAR_OUTPUT
 	reset_busy : BOOL;
 	Levi_ready: BOOL;
 	Go_error_state : BOOL;
+	z_liftoff: LREAL;
 END_VAR
 
 VAR_IN_OUT
@@ -36,6 +39,8 @@ VAR
 	n_drive_warnings : UINT;
 	n_drive_errors : UINT;	
 	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
+	
+	count_cycles: INT;
 	
 	i : INT;
 END_VAR
@@ -82,7 +87,16 @@ FOR i:=0 TO 23 DO
 	END_IF
 END_FOR
 
-
+IF Run_z_liftoff_calc = FALSE THEN
+	//Setting the liftoff airgap
+	count_cycles := count_cycles + 1;
+	
+		IF count_cycles > 750 THEN
+			z_liftoff := z;
+			count_cycles := 0;
+			Run_z_liftoff_calc := TRUE;
+		END_IF
+END_IF
 
 //Switching on drives but no output
 force_values[0] := 0;
