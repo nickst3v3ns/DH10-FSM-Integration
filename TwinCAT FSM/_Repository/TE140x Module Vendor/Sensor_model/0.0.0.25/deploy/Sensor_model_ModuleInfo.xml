@@ -1,0 +1,2898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TctGeneratedModules>
+   <ModuleInfo CLSID="{01781D84-B470-A997-DC4F-062608A9D221}" GUID="{01781D84-B470-A997-DC4F-062608A9D221}" LibraryId="TE140x Module Vendor|Sensor_model|0.0.0.25" TmcHash="{8E30C639-F654-461C-850D-0A9527456BE4}">
+      <BlockDiagram>
+         <Name>Sensor_model</Name>
+         <Identifier>&lt;Root&gt;</Identifier>
+         <Type>root</Type>
+         <Position h="0" w="0" x="0" y="0"/>
+         <BlockDesign/>
+         <Block>
+            <Name>New sensor airgaps</Name>
+            <Identifier>&lt;Root&gt;/New sensor airgaps</Identifier>
+            <Type>Inport</Type>
+            <Position h="14" w="30" x="-250" y="223"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="1"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="-215" y="230"/>
+               <Name>New sensor airgaps</Name>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="-215" y="230"/>
+                  <Point x="-90" y="230"/>
+               </Line>
+               <Signal Category="Input" Name="Newsensorairgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_U.Newsensorairgaps</GlobalName>
+                  <AdsIdxOffs>#x80000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Convert_to_meters</Name>
+            <Identifier>&lt;Root&gt;/Convert_to_meters</Identifier>
+            <Type>Gain</Type>
+            <Position h="30" w="40" x="185" y="245"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Gain" Value="1e-3"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="170" y="260"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/MATLAB Function</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="corrected_airgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.corrected_airgaps</GlobalName>
+                  <AdsIdxOffs>#x820000C0</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="230" y="260"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="230" y="260"/>
+                  <Point x="305" y="260"/>
+               </Line>
+               <Signal Category="Output" Name="Convert_to_meters" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.Convert_to_meters</GlobalName>
+                  <AdsIdxOffs>#x82000060</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Parameter Category="Parameters" Name="Gain">
+               <GlobalName>Sensor_model_P.Convert_to_meters_Gain</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Demux</Name>
+            <Identifier>&lt;Root&gt;/Demux</Identifier>
+            <Type>Demux</Type>
+            <Position h="38" w="5" x="310" y="241"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="295" y="260"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Convert_to_meters</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="Convert_to_meters" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.Convert_to_meters</GlobalName>
+                  <AdsIdxOffs>#x82000060</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="320" y="250"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="320" y="250"/>
+                  <Point x="358" y="250"/>
+                  <Point x="358" y="205"/>
+                  <Point x="395" y="205"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="2">Outport</Type>
+               <Position x="320" y="270"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="320" y="270"/>
+                  <Point x="358" y="270"/>
+                  <Point x="358" y="335"/>
+                  <Point x="395" y="335"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Lateral line fit</Name>
+            <Identifier>&lt;Root&gt;/Lateral line fit</Identifier>
+            <Type>SubSystem</Type>
+            <Position h="116" w="215" x="400" y="277"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="385" y="335"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Demux</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>2</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="620" y="295"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="295"/>
+                  <Point x="635" y="295"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="2">Outport</Type>
+               <Position x="620" y="335"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="335"/>
+                  <Point x="635" y="335"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="3">Outport</Type>
+               <Position x="620" y="375"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="375"/>
+                  <Point x="635" y="375"/>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Laser_magnet_offset_EMS">
+               <GlobalName>Sensor_model_P.Laser_magnet_offset_EMS</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="airgap_nominal_ems">
+               <GlobalName>Sensor_model_P.airgap_nominal_ems</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="coords_lat_sensors">
+               <GlobalName>Sensor_model_P.coords_lat_sensors</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Annotation>
+               <Text>function</Text>
+               <Position x="80" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> [</Text>
+               <Position x="141.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>y</Text>
+               <Position x="156" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="169.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>yaw</Text>
+               <Position x="184" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="217.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="232" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>] = Lateral_line_fit(</Text>
+               <Position x="338.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="477.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="610.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>Laser_magnet_offset_EMS</Text>
+               <Position x="625.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="825.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_lat_sensors</Text>
+               <Position x="840" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="984" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>airgap_nominal_ems</Text>
+               <Position x="998.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>)</Text>
+               <Position x="1150.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% Tried 3 different methods for this, but this method seemed to be the</Text>
+               <Position x="104" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="48"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% most accurate. Here a line is fitted for the left and the right</Text>
+               <Position x="104" y="48"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% sensors separately, and the average gradient and offset is taking as</Text>
+               <Position x="104" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="76"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% the total pod line.</Text>
+               <Position x="104" y="76"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% Code for the other two methods is shown below the function</Text>
+               <Position x="104" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="104" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = </Text>
+               <Position x="210.6667" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="234.6667" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>.' - </Text>
+               <Position x="368" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>Laser_magnet_offset_EMS</Text>
+               <Position x="396" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>;</Text>
+               <Position x="596" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    offset_airgaps_L = </Text>
+               <Position x="80" y="160"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="241.3333" y="160"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(1:2:end);</Text>
+               <Position x="348" y="160"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    y_points_L = </Text>
+               <Position x="80" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>airgap_nominal_ems</Text>
+               <Position x="200" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>*[1 1 1] - offset_airgaps_L;</Text>
+               <Position x="352" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    x_points_L = </Text>
+               <Position x="80" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_lat_sensors</Text>
+               <Position x="200" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(1,1:2:end);</Text>
+               <Position x="344" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    offset_airgaps_R = </Text>
+               <Position x="80" y="216"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="244" y="216"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(2:2:end);</Text>
+               <Position x="350.6667" y="216"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    y_points_R = offset_airgaps_R - </Text>
+               <Position x="80" y="230"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>airgap_nominal_ems</Text>
+               <Position x="338.6667" y="230"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>*[1 1 1];</Text>
+               <Position x="490.6667" y="230"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    x_points_R = </Text>
+               <Position x="80" y="244"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_lat_sensors</Text>
+               <Position x="202.6667" y="244"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(1,2:2:end);</Text>
+               <Position x="346.6667" y="244"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="272"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% Sensor rejection</Text>
+               <Position x="104" y="272"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    indices_correct_sensors_L = offset_airgaps_L &gt; 0;</Text>
+               <Position x="80" y="286"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    y_points_L = y_points_L(indices_correct_sensors_L);</Text>
+               <Position x="80" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    x_points_L = x_points_L(indices_correct_sensors_L);</Text>
+               <Position x="80" y="314"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    indices_correct_sensors_R = offset_airgaps_R &gt; 0;</Text>
+               <Position x="80" y="342"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    y_points_R = y_points_R(indices_correct_sensors_R);</Text>
+               <Position x="80" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    x_points_R = x_points_R(indices_correct_sensors_R);</Text>
+               <Position x="80" y="370"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="398"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>% Fitting left and right lines</Text>
+               <Position x="104" y="398"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    cL = polyfit(x_points_L, y_points_L, 1);</Text>
+               <Position x="80" y="412"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    cR = polyfit(x_points_R, y_points_R, 1);</Text>
+               <Position x="80" y="426"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>%calculating an average line</Text>
+               <Position x="104" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    c = [0.5*(cL(1)+cR(1)) 0.5*(cL(2)+cR(2))];</Text>
+               <Position x="80" y="468"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>y</Text>
+               <Position x="104" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = c(2);</Text>
+               <Position x="117.3333" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    v = [1 c(1) 0];</Text>
+               <Position x="80" y="524"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="538"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>yaw</Text>
+               <Position x="104" y="538"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = -acos(dot(v, [0 1 0])/norm(v)) + pi/2;</Text>
+               <Position x="137.3333" y="538"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="80" y="552"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>% Method 2</Text>
+               <Position x="80" y="580"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%y_points = airgap_nominal_ems*[1 -1 1 -1 1 -1] - offset_airgaps*[1 -1 1 -1 1 -1]</Text>
+               <Position x="80" y="594"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%c = polyfit(coords_lat_sensors(1,:), y_points, 1)</Text>
+               <Position x="80" y="608"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>% Method 3</Text>
+               <Position x="80" y="636"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%y_points = airgap_nominal_ems*[1 -1 1 -1 1 -1] - offset_airgaps*[1 -1 1 -1 1 -1]</Text>
+               <Position x="80" y="650"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%y_points = [0.5*(y_points(1)+y_points(2)) y_points(3) y_points(4) 0.5*(y_points(5)+y_points(6))];</Text>
+               <Position x="80" y="664"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%x_points2 = [x_points(1) x_points(3) x_points(4) x_points(5)];</Text>
+               <Position x="80" y="678"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>%c = polyfit(x_points2, y_points2, 1)</Text>
+               <Position x="80" y="706"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+         </Block>
+         <Block>
+            <Name>MATLAB Function</Name>
+            <Identifier>&lt;Root&gt;/MATLAB Function</Identifier>
+            <Type>SubSystem</Type>
+            <Position h="116" w="195" x="-85" y="202"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="-100" y="230"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/New sensor airgaps</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Input" Name="Newsensorairgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_U.Newsensorairgaps</GlobalName>
+                  <AdsIdxOffs>#x80000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="-100" y="290"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Unit Delay</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="UnitDelay" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.UnitDelay</GlobalName>
+                  <AdsIdxOffs>#x82000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="115" y="220"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="115" y="220"/>
+                  <Point x="134" y="220"/>
+                  <Point x="134" y="260"/>
+                  <Line>
+                     <Point x="134" y="260"/>
+                     <Point x="134" y="342"/>
+                     <Point x="-214" y="342"/>
+                     <Point x="-214" y="290"/>
+                     <Point x="-195" y="290"/>
+                  </Line>
+                  <Line>
+                     <Point x="134" y="260"/>
+                     <Point x="180" y="260"/>
+                  </Line>
+               </Line>
+               <Signal Category="Output" Name="corrected_airgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.corrected_airgaps</GlobalName>
+                  <AdsIdxOffs>#x820000C0</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="2">Outport</Type>
+               <Position x="115" y="260"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="115" y="260"/>
+                  <Point x="124" y="260"/>
+                  <Point x="124" y="350"/>
+                  <Point x="180" y="350"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="3">Outport</Type>
+               <Position x="115" y="300"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="115" y="300"/>
+                  <Point x="120" y="300"/>
+                  <Point x="120" y="385"/>
+                  <Point x="180" y="385"/>
+               </Line>
+            </Port>
+            <Block>
+               <Name>corrected_airgaps</Name>
+               <Type>MCodeDisplayBlock</Type>
+               <Position h="12" w="55" x="289.3333" y="20"/>
+               <BlockDesign>
+                  <Image>
+                     <Placeholder Name="Name" Value="---"/>
+                  </Image>
+               </BlockDesign>
+               <State Name="corrected_airgaps" ReadOnly="0">
+                  <GlobalName>Sensor_model_B.corrected_airgaps</GlobalName>
+                  <AdsIdxOffs>#x820000C0</AdsIdxOffs>
+               </State>
+            </Block>
+            <Block>
+               <Name>corrected_airgaps</Name>
+               <Type>MCodeDisplayBlock</Type>
+               <Position h="12" w="55" x="237.3333" y="356"/>
+               <BlockDesign>
+                  <Image>
+                     <Placeholder Name="Name" Value="---"/>
+                  </Image>
+               </BlockDesign>
+               <State Name="corrected_airgaps" ReadOnly="0">
+                  <GlobalName>Sensor_model_B.corrected_airgaps</GlobalName>
+                  <AdsIdxOffs>#x820000C0</AdsIdxOffs>
+               </State>
+            </Block>
+            <Annotation>
+               <Text>function</Text>
+               <Position x="80" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> [</Text>
+               <Position x="141.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="156" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="344.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_vertical_sensors_rejected</Text>
+               <Position x="359" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="563" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_lateral_sensors_rejected</Text>
+               <Position x="577.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>] = correcting_airgaps(</Text>
+               <Position x="773.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="940.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="1035" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>prev_corrected_airgaps</Text>
+               <Position x="1049.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>)</Text>
+               <Position x="1223" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_vertical_sensors_rejected</Text>
+               <Position x="104" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = 0;</Text>
+               <Position x="308" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="48"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_lateral_sensors_rejected</Text>
+               <Position x="104" y="48"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = 0;</Text>
+               <Position x="300" y="48"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="76"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>%Reject airgaps &lt;25.5 (sensor out of range) or &gt;50 (sensor being weird)</Text>
+               <Position x="104" y="76"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>for</Text>
+               <Position x="104" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> i = 1:12</Text>
+               <Position x="128" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>        </Text>
+               <Position x="80" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>if</Text>
+               <Position x="124" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> </Text>
+               <Position x="137.3333" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="148" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) &lt; 25.5 || </Text>
+               <Position x="242.6667" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="330.6667" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) &gt; 50</Text>
+               <Position x="425.3333" y="104"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>if</Text>
+               <Position x="142.6667" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> i &lt; 7</Text>
+               <Position x="156" y="132"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>                </Text>
+               <Position x="80" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_vertical_sensors_rejected</Text>
+               <Position x="162.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = </Text>
+               <Position x="366.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_vertical_sensors_rejected</Text>
+               <Position x="390.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> + 1;</Text>
+               <Position x="594.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>else</Text>
+               <Position x="142.6667" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>                </Text>
+               <Position x="80" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_lateral_sensors_rejected</Text>
+               <Position x="162.6667" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = </Text>
+               <Position x="358.6667" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_lateral_sensors_rejected</Text>
+               <Position x="382.6667" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> + 1;</Text>
+               <Position x="578.6667" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="216"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="142.6667" y="216"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="244"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>%accept previous reading if valid</Text>
+               <Position x="142.6667" y="244"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF228B22</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>if</Text>
+               <Position x="142.6667" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> </Text>
+               <Position x="156" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>prev_corrected_airgaps</Text>
+               <Position x="166.6667" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) &lt; 25.5 || </Text>
+               <Position x="340" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>prev_corrected_airgaps</Text>
+               <Position x="428" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) &gt; 50</Text>
+               <Position x="601.3333" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>                </Text>
+               <Position x="80" y="272"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="162.6667" y="272"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) = 0;</Text>
+               <Position x="257.3333" y="272"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="286"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>else</Text>
+               <Position x="142.6667" y="286"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>                </Text>
+               <Position x="80" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="162.6667" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i) = </Text>
+               <Position x="257.3333" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>prev_corrected_airgaps</Text>
+               <Position x="296" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(i);</Text>
+               <Position x="469.3333" y="300"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>            </Text>
+               <Position x="80" y="314"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="142.6667" y="314"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>        </Text>
+               <Position x="80" y="328"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="124" y="328"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="342"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="104" y="342"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="104" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = </Text>
+               <Position x="292.3333" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>new_airgaps</Text>
+               <Position x="316.3333" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>;</Text>
+               <Position x="411" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+         </Block>
+         <Block>
+            <Name>Unit Delay</Name>
+            <Identifier>&lt;Root&gt;/Unit Delay</Identifier>
+            <Type>UnitDelay</Type>
+            <Position h="34" w="35" x="-190" y="273"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="-205" y="290"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/MATLAB Function</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="corrected_airgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.corrected_airgaps</GlobalName>
+                  <AdsIdxOffs>#x820000C0</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="-150" y="290"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="-150" y="290"/>
+                  <Point x="-90" y="290"/>
+               </Line>
+               <Signal Category="Output" Name="UnitDelay" ReadOnly="true">
+                  <GlobalName>Sensor_model_B.UnitDelay</GlobalName>
+                  <AdsIdxOffs>#x82000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Parameter Category="Parameters" Name="InitialCondition">
+               <GlobalName>Sensor_model_P.UnitDelay_InitialCondition</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Vertical plane fit</Name>
+            <Identifier>&lt;Root&gt;/Vertical plane fit</Identifier>
+            <Type>SubSystem</Type>
+            <Position h="111" w="215" x="400" y="147"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="385" y="205"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Demux</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="620" y="165"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="165"/>
+                  <Point x="635" y="165"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="2">Outport</Type>
+               <Position x="620" y="190"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="190"/>
+                  <Point x="635" y="190"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="3">Outport</Type>
+               <Position x="620" y="215"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="215"/>
+                  <Point x="635" y="215"/>
+               </Line>
+            </Port>
+            <Port>
+               <Type No="4">Outport</Type>
+               <Position x="620" y="240"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="620" y="240"/>
+                  <Point x="635" y="240"/>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Laser_magnet_offset_HEMS">
+               <GlobalName>Sensor_model_P.Laser_magnet_offset_HEMS</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="coords_vert_sensors">
+               <GlobalName>Sensor_model_P.coords_vert_sensors</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="n_sensors_v">
+               <GlobalName>Sensor_model_P.n_sensors_v</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="z_com">
+               <GlobalName>Sensor_model_P.z_com</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Annotation>
+               <Text>function</Text>
+               <Position x="80" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> [</Text>
+               <Position x="141.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>z</Text>
+               <Position x="156" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>,</Text>
+               <Position x="169.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>roll</Text>
+               <Position x="180" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="206.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>pitch</Text>
+               <Position x="221.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="260" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="274.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>] = Vertical_plane_fit(</Text>
+               <Position x="381.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="537.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="670.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_vert_sensors</Text>
+               <Position x="685.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="840" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_sensors_v</Text>
+               <Position x="854.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="950.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>z_com</Text>
+               <Position x="965.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, </Text>
+               <Position x="1017.3333" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>Laser_magnet_offset_HEMS</Text>
+               <Position x="1032" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>)</Text>
+               <Position x="1242.6667" y="20"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="104" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = </Text>
+               <Position x="210.6667" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>corrected_airgaps</Text>
+               <Position x="234.6667" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> - </Text>
+               <Position x="368" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>Laser_magnet_offset_HEMS</Text>
+               <Position x="388" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>.';</Text>
+               <Position x="598.6667" y="34"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_vert_sensors</Text>
+               <Position x="104" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>(3, :) = zeros(1, </Text>
+               <Position x="258.6667" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_sensors_v</Text>
+               <Position x="381.3333" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>);</Text>
+               <Position x="477.3333" y="62"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    coords_on_plane = (</Text>
+               <Position x="80" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>coords_vert_sensors</Text>
+               <Position x="250.6667" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> + [zeros(</Text>
+               <Position x="405.3333" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_sensors_v</Text>
+               <Position x="480" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, 1) zeros(</Text>
+               <Position x="576" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_sensors_v</Text>
+               <Position x="654.6667" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>, 1) -</Text>
+               <Position x="750.6667" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>offset_airgaps</Text>
+               <Position x="790.6667" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>].').';</Text>
+               <Position x="897.3333" y="90"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    coords_after_rejection = coords_on_plane(coords_on_plane(:, 3) &lt; 0, :);</Text>
+               <Position x="80" y="118"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    n_rejected = </Text>
+               <Position x="80" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>n_sensors_v</Text>
+               <Position x="198.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> - size(coords_after_rejection,1);</Text>
+               <Position x="294.6667" y="146"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>if</Text>
+               <Position x="104" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text> size(coords_after_rejection,1) &lt; 3</Text>
+               <Position x="117.3333" y="174"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>        coords_after_rejection = coords_on_plane;</Text>
+               <Position x="80" y="188"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="202"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>end</Text>
+               <Position x="104" y="202"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+               <FontColor>#FF0000FF</FontColor>
+            </Annotation>
+            <Annotation>
+               <Text>    coords_average = mean(coords_after_rejection,1);</Text>
+               <Position x="80" y="230"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    coords_reduced = bsxfun(@minus,coords_after_rejection,coords_average);</Text>
+               <Position x="80" y="258"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    A = coords_reduced'*coords_reduced;</Text>
+               <Position x="80" y="286"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    [V,~] = eig(A);</Text>
+               <Position x="80" y="314"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    r_normal = real(V(:,1));</Text>
+               <Position x="80" y="342"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    r_normal = r_normal*sign(r_normal(3));</Text>
+               <Position x="80" y="356"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="384"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>roll</Text>
+               <Position x="104" y="384"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = acos(dot(r_normal, [0 1 0])/norm(r_normal)) - pi/2;</Text>
+               <Position x="130.6667" y="384"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="412"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>pitch</Text>
+               <Position x="104" y="412"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = -acos(dot(r_normal, [1 0 0])/norm(r_normal)) + pi/2;</Text>
+               <Position x="142.6667" y="412"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    x = -sin(</Text>
+               <Position x="80" y="440"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>roll</Text>
+               <Position x="162.6667" y="440"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>)*</Text>
+               <Position x="189.3333" y="440"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>z_com</Text>
+               <Position x="206.6667" y="440"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>;</Text>
+               <Position x="258.6667" y="440"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    y = -sin(</Text>
+               <Position x="80" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>pitch</Text>
+               <Position x="162.6667" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>)*</Text>
+               <Position x="201.3333" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>z_com</Text>
+               <Position x="218.6667" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>;</Text>
+               <Position x="270.6667" y="454"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    d = sum(r_normal.*coords_average');</Text>
+               <Position x="80" y="482"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>    </Text>
+               <Position x="80" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text>z</Text>
+               <Position x="104" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+            <Annotation>
+               <Text> = (d - r_normal(1).*x - r_normal(2).*y)/r_normal(3);</Text>
+               <Position x="117.3333" y="496"/>
+               <Alignment H="left" V="top"/>
+               <FontName>Arial</FontName>
+               <FontSize>12</FontSize>
+            </Annotation>
+         </Block>
+         <Block>
+            <Name>z</Name>
+            <Identifier>&lt;Root&gt;/z</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="158"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="1"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="165"/>
+               <Name>z</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Vertical plane fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="z" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.z</GlobalName>
+                  <AdsIdxOffs>#x81000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>roll</Name>
+            <Identifier>&lt;Root&gt;/roll</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="183"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="2"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="190"/>
+               <Name>roll</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Vertical plane fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>2</PortNo>
+               </Source>
+               <Signal Category="Output" Name="roll" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.roll</GlobalName>
+                  <AdsIdxOffs>#x81000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>pitch</Name>
+            <Identifier>&lt;Root&gt;/pitch</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="208"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="3"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="215"/>
+               <Name>pitch</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Vertical plane fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>3</PortNo>
+               </Source>
+               <Signal Category="Output" Name="pitch" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.pitch</GlobalName>
+                  <AdsIdxOffs>#x81000010</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>y</Name>
+            <Identifier>&lt;Root&gt;/y</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="288"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="4"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="295"/>
+               <Name>y</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Lateral line fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="y" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.y</GlobalName>
+                  <AdsIdxOffs>#x81000018</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>yaw</Name>
+            <Identifier>&lt;Root&gt;/yaw</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="328"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="5"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="335"/>
+               <Name>yaw</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Lateral line fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>2</PortNo>
+               </Source>
+               <Signal Category="Output" Name="yaw" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.yaw</GlobalName>
+                  <AdsIdxOffs>#x81000020</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>offset_airgaps</Name>
+            <Identifier>&lt;Root&gt;/offset_airgaps</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="233"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="6"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="240"/>
+               <Name>offset_airgaps</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Vertical plane fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>4</PortNo>
+               </Source>
+               <Signal Category="Output" Name="offset_airgaps" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.offset_airgaps</GlobalName>
+                  <AdsIdxOffs>#x81000028</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>offset_airgaps_ems</Name>
+            <Identifier>&lt;Root&gt;/offset_airgaps_ems</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="640" y="368"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="7"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="625" y="375"/>
+               <Name>offset_airgaps_ems</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Lateral line fit</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>3</PortNo>
+               </Source>
+               <Signal Category="Output" Name="offset_airgaps_ems" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.offset_airgaps_ems</GlobalName>
+                  <AdsIdxOffs>#x81000058</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>n_vertical_sensors_rejected</Name>
+            <Identifier>&lt;Root&gt;/n_vertical_sensors_rejected</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="185" y="343"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="8"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="170" y="350"/>
+               <Name>n_vertical_sensors_rejected</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/MATLAB Function</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>2</PortNo>
+               </Source>
+               <Signal Category="Output" Name="n_vertical_sensors_rejected" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.n_vertical_sensors_rejected</GlobalName>
+                  <AdsIdxOffs>#x81000088</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>n_lateral_sensors_rejected</Name>
+            <Identifier>&lt;Root&gt;/n_lateral_sensors_rejected</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="185" y="378"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="9"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="170" y="385"/>
+               <Name>n_lateral_sensors_rejected</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/MATLAB Function</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>3</PortNo>
+               </Source>
+               <Signal Category="Output" Name="n_lateral_sensors_rejected" ReadOnly="true">
+                  <GlobalName>Sensor_model_Y.n_lateral_sensors_rejected</GlobalName>
+                  <AdsIdxOffs>#x81000090</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Annotation>
+            <Text>Do we keep this in? Holding constant airgap can give problems if we are oscillating as we go over a thermal gap</Text>
+            <Position x="-110" y="168"/>
+            <Alignment H="left" V="top"/>
+            <FontName>auto</FontName>
+            <FontSize>-1</FontSize>
+            <FontWeight>auto</FontWeight>
+         </Annotation>
+         <SubsystemHierarchy>
+            <Subsystem>
+               <ID>&lt;Root&gt;</ID>
+            </Subsystem>
+         </SubsystemHierarchy>
+         <DebugInfo>
+            <SourceFile>
+               <Name>Sensor_model.cpp</Name>
+               <Path>C:\Users\LeviL\Documents\MATLAB\DH10-Levi-MATLAB\Sensor_model_tcgrt\Sensor_model.cpp</Path>
+               <CodeSection CommentStartLine="1883" EndLine="2095" Method="std::abs" StartLine="1884">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2096" EndLine="2130" Method="sizeof" StartLine="2097">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2131" EndLine="2405" Method="sizeof" StartLine="2132">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2406" EndLine="2440" Method="sizeof" StartLine="2407">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2441" EndLine="2519" Method="sizeof" StartLine="2442">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2520" EndLine="2551" Method="sizeof" StartLine="2521">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2552" EndLine="2583" Method="sizeof" StartLine="2553">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2584" EndLine="2628" Method="sizeof" StartLine="2585">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2629" EndLine="2971" Method="sizeof" StartLine="2630">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="2972" EndLine="3362" Method="sizeof" StartLine="2973">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3363" EndLine="3402" Method="sizeof" StartLine="3364">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3403" EndLine="3437" Method="sizeof" StartLine="3404">
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3438" EndLine="3760" Method="sizeof" StartLine="3439">
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3761" EndLine="3781" Method="sizeof" StartLine="3762">
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3820" EndLine="3823" Method="Sensor_model_step" StartLine="3821">
+                  <Block>&lt;Root&gt;/MATLAB Function</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3824" EndLine="3826" Method="Sensor_model_step" StartLine="3825">
+                  <Block>&lt;Root&gt;/Unit Delay</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3827" EndLine="3829" Method="Sensor_model_step" StartLine="3828">
+                  <Block>&lt;Root&gt;/Unit Delay</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3830" EndLine="3849" Method="Sensor_model_step" StartLine="3833">
+                  <Block>&lt;Root&gt;/MATLAB Function</Block>
+                  <Block>&lt;Root&gt;/Unit Delay</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3850" EndLine="3856" Method="Sensor_model_step" StartLine="3853">
+                  <Block>&lt;Root&gt;/Convert_to_meters</Block>
+                  <Block>&lt;Root&gt;/MATLAB Function</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3857" EndLine="3861" Method="Sensor_model_step" StartLine="3860">
+                  <Block>&lt;Root&gt;/n_vertical_sensors_rejected</Block>
+                  <Block>&lt;Root&gt;/MATLAB Function</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3862" EndLine="3866" Method="Sensor_model_step" StartLine="3865">
+                  <Block>&lt;Root&gt;/n_lateral_sensors_rejected</Block>
+                  <Block>&lt;Root&gt;/MATLAB Function</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3867" EndLine="3870" Method="Sensor_model_step" StartLine="3868">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3871" EndLine="3876" Method="sizeof" StartLine="3874">
+                  <Block>&lt;Root&gt;/offset_airgaps</Block>
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3877" EndLine="3880" Method="sizeof" StartLine="3878">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3881" EndLine="3985" Method="sizeof" StartLine="3884">
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+                  <Block>&lt;Root&gt;/offset_airgaps</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3986" EndLine="3993" Method="sizeof" StartLine="3989">
+                  <Block>&lt;Root&gt;/z</Block>
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3994" EndLine="3998" Method="sizeof" StartLine="3997">
+                  <Block>&lt;Root&gt;/roll</Block>
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="3999" EndLine="4003" Method="sizeof" StartLine="4002">
+                  <Block>&lt;Root&gt;/pitch</Block>
+                  <Block>&lt;Root&gt;/Vertical plane fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4004" EndLine="4010" Method="sizeof" StartLine="4007">
+                  <Block>&lt;Root&gt;/offset_airgaps_ems</Block>
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4011" EndLine="4070" Method="sizeof" StartLine="4014">
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+                  <Block>&lt;Root&gt;/offset_airgaps_ems</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4071" EndLine="4075" Method="sizeof" StartLine="4074">
+                  <Block>&lt;Root&gt;/y</Block>
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4076" EndLine="4087" Method="sizeof" StartLine="4077">
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4088" EndLine="4094" Method="sizeof" StartLine="4091">
+                  <Block>&lt;Root&gt;/yaw</Block>
+                  <Block>&lt;Root&gt;/Lateral line fit</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4103" EndLine="4108" Method="Sensor_model_initialize" StartLine="4104">
+                  <Block>&lt;Root&gt;/Unit Delay</Block>
+               </CodeSection>
+               <CodeSection CommentStartLine="4109" EndLine="4112" Method="Sensor_model_initialize" StartLine="4110">
+                  <Block>&lt;Root&gt;/Unit Delay</Block>
+               </CodeSection>
+            </SourceFile>
+         </DebugInfo>
+      </BlockDiagram>
+      <DefaultValues>
+         <Value>
+            <Name>TaskOid</Name>
+            <Value>00000000</Value>
+         </Value>
+         <Value>
+            <Name>TaskPriority</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskCycleTimeNs</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskPort</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskSortOrder</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TraceLevelMax</Name>
+            <EnumText>tlInfo</EnumText>
+         </Value>
+         <Value>
+            <Name>ModuleCaller</Name>
+            <EnumText>CyclicTask</EnumText>
+         </Value>
+         <Value>
+            <Name>CallerVerification</Name>
+            <EnumText>Default</EnumText>
+         </Value>
+         <Value>
+            <Name>StepSizeAdaptation</Name>
+            <EnumText>RequireMatchingTaskCycleTime</EnumText>
+         </Value>
+         <Value>
+            <Name>ExecutionSequence</Name>
+            <EnumText>UpdateBeforeOutputMapping</EnumText>
+         </Value>
+         <Value>
+            <Name>Execute</Name>
+            <EnumText>TRUE</EnumText>
+         </Value>
+         <Value>
+            <Name>AccessLockState</Name>
+            <EnumText>TCOM_STATE_OP</EnumText>
+         </Value>
+         <Value>
+            <Name>InitExceptionHandling</Name>
+            <EnumText>CallerExceptions</EnumText>
+         </Value>
+         <Value>
+            <Name>UpdateExceptionHandling</Name>
+            <EnumText>CallerExceptions</EnumText>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P_Sharing</Name>
+            <EnumText>Define</EnumText>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[0]</Name>
+            <Value>0.02917</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[1]</Name>
+            <Value>0.0292</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[2]</Name>
+            <Value>0.0284</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[3]</Name>
+            <Value>0.0283</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[4]</Name>
+            <Value>0.0297</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_EMS[5]</Name>
+            <Value>0.0287</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[0]</Name>
+            <Value>0.019913</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[1]</Name>
+            <Value>0.02</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[2]</Name>
+            <Value>0.0203</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[3]</Name>
+            <Value>0.0203</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[4]</Name>
+            <Value>0.019607</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Laser_magnet_offset_HEMS[5]</Name>
+            <Value>0.0205</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.airgap_nominal_ems</Name>
+            <Value>0.008</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[0]</Name>
+            <Value>0.8879802</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[1]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[2]</Name>
+            <Value>0.8879802</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[3]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[4]</Name>
+            <Value>0.0147302</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[5]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[6]</Name>
+            <Value>0.0147302</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[7]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[8]</Name>
+            <Value>-0.8585197999999999</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[9]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[10]</Name>
+            <Value>-0.8585197999999999</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_lat_sensors[11]</Name>
+            <Value>0.0045598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[0]</Name>
+            <Value>0.8879802</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[1]</Name>
+            <Value>0.3635598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[2]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[3]</Name>
+            <Value>0.8879802</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[4]</Name>
+            <Value>-0.3544402</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[5]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[6]</Name>
+            <Value>0.1997302</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[7]</Name>
+            <Value>0.3785598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[8]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[9]</Name>
+            <Value>-0.1702698</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[10]</Name>
+            <Value>-0.3694402</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[11]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[12]</Name>
+            <Value>-0.8585197999999999</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[13]</Name>
+            <Value>0.3635598</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[14]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[15]</Name>
+            <Value>-0.8585197999999999</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[16]</Name>
+            <Value>-0.3544402</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.coords_vert_sensors[17]</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.n_sensors_v</Name>
+            <Value>6.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.z_com</Name>
+            <Value>0.5706599999999999</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.UnitDelay_InitialCondition</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>Sensor_model_P.Convert_to_meters_Gain</Name>
+            <Value>0.001</Value>
+         </Value>
+      </DefaultValues>
+      <ModuleParameters>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>CallBy</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>ExecutionSequence</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>StepSizeAdaptation</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>Initialized</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>CycleUpdateExecuted</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="" StartupValueAccess="">
+            <Name>ModuleInfo</Name>
+            <Category>Module identification</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>ModuleBuildInfo</Name>
+            <Category>Module identification</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="WRITE" StartupValueAccess="WRITE">
+            <Name>Execute</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>SimulinkTime</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>AccessLockState</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+      </ModuleParameters>
+      <BlockDesigns>
+         <BlockDesign>
+            <Type>Inport</Type>
+            <Border>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-1022.3622)">
+                     <rect height="28.121166" id="rect2996" ry="14.060583" style="fill:none;stroke:#000000;stroke-width:1.87883461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="58.121166" x="0.9394173" y="1023.3016"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <text id="text3010" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="30" xml:space="preserve" y="15"><tspan id="tspan3012" x="30" y="15">Block::Port</tspan></text></svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Gain</Type>
+            <Border>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-952.36218)">
+                     <path d="M 0,100 0,0 100,50 0,100" id="path3005" style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" transform="translate(0,952.36218)"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text2991" style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="5" xml:space="preserve" y="50"><tspan id="tspan2993" x="5" y="50">ADS::Gain Block::Gain</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Demux</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-952.36218)">
+                     <rect height="99.910004" id="rect2991" style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" transform="translate(0,952.36218)" width="100" x="0" y="0.090000004"/>
+                  </g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type SubType="Compare To Constant">SubSystem</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text3001" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan3003" x="50" y="50">Block::Operator</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>MCodeDisplayBlock</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text3001" style="font-size:6px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000FF;fill-opacity:1;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan3003" x="50" y="50">ADS::Name</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>UnitDelay</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <text id="text2989" style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:50%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans" x="50.045456" xml:space="preserve" y="45.090908"><tspan id="tspan2991" x="50.045456" y="45.090908">1</tspan><tspan id="tspan2993" x="50.045456" y="62.545456">-</tspan><tspan id="tspan2995" x="50.045456" y="80">z</tspan></text></svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Outport</Type>
+            <Border>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-1022.3622)">
+                     <rect height="28.121166" id="rect2996" ry="14.060583" style="fill:none;stroke:#000000;stroke-width:1.87883461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="58.121166" x="0.9394173" y="1023.3016"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <text id="text3010" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="30" xml:space="preserve" y="15"><tspan id="tspan3012" x="30" y="15">Block::Port</tspan></text></svg>
+            </Image>
+         </BlockDesign>
+      </BlockDesigns>
+   </ModuleInfo>
+</TctGeneratedModules>

@@ -2184,6 +2184,15 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF UINT</Name>
+			<BitSize>384</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>24</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{73DAE879-CC73-2D89-B68D-1F18A50A0FD3}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF INT</Name>
 			<BitSize>384</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
@@ -2193,9 +2202,69 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF UINT</Name>
-			<BitSize>384</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+			<Format>
+				<Printf>%d.%d.%d.%d.%d.%d</Printf>
+				<Parameter>[0]</Parameter>
+				<Parameter>[1]</Parameter>
+				<Parameter>[2]</Parameter>
+				<Parameter>[3]</Parameter>
+				<Parameter>[4]</Parameter>
+				<Parameter>[5]</Parameter>
+			</Format>
+		</DataType>
+		<DataType>
+			<Name GUID="{3BD42FCA-85FC-C899-2F71-A9346CD54EAB}" Namespace="Tc2_System" AutoDeleteType="true">T_AmsNetIdArr</Name>
+			<Comment><![CDATA[ TwinCAT AMS netID address bytes. ]]></Comment>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</BaseType>
+		</DataType>
+		<DataType>
+			<Name GUID="{AF33319A-EDFA-B2D2-9FB8-D62638409ADE}" Namespace="Tc2_EtherCAT" AutoDeleteType="true">ST_PlcDriveRef</Name>
+			<BitSize>80</BitSize>
+			<SubItem>
+				<Name>aNetId</Name>
+				<Type GUID="{3BD42FCA-85FC-C899-2F71-A9346CD54EAB}" Namespace="Tc2_System">T_AmsNetIdArr</Type>
+				<Comment><![CDATA[ AmsNetId of the EtherCAT master device.]]></Comment>
+				<BitSize>48</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nSlaveAddr</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<Comment><![CDATA[ Address of the slave device.]]></Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nDriveNo</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ Drive number]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>nDriveType</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Comment><![CDATA[ Drive type]]></Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>72</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name IecBaseType="true">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Name>
+			<Comment><![CDATA[----------------------------------------------------------------------------------------------------
+	Error handling
+----------------------------------------------------------------------------------------------------
+Initialising drive references for resetting drive errors]]></Comment>
+			<BitSize>1920</BitSize>
+			<BaseType GUID="{AF33319A-EDFA-B2D2-9FB8-D62638409ADE}" Namespace="Tc2_EtherCAT">ST_PlcDriveRef</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>24</Elements>
@@ -2313,75 +2382,6 @@
 				<BitSize>3584</BitSize>
 				<BitOffs>48</BitOffs>
 			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
-			<BitSize>48</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-			<Format>
-				<Printf>%d.%d.%d.%d.%d.%d</Printf>
-				<Parameter>[0]</Parameter>
-				<Parameter>[1]</Parameter>
-				<Parameter>[2]</Parameter>
-				<Parameter>[3]</Parameter>
-				<Parameter>[4]</Parameter>
-				<Parameter>[5]</Parameter>
-			</Format>
-		</DataType>
-		<DataType>
-			<Name GUID="{3BD42FCA-85FC-C899-2F71-A9346CD54EAB}" Namespace="Tc2_System" AutoDeleteType="true">T_AmsNetIdArr</Name>
-			<Comment><![CDATA[ TwinCAT AMS netID address bytes. ]]></Comment>
-			<BitSize>48</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000041}">AMSNETID</BaseType>
-		</DataType>
-		<DataType>
-			<Name GUID="{AF33319A-EDFA-B2D2-9FB8-D62638409ADE}" Namespace="Tc2_EtherCAT" AutoDeleteType="true">ST_PlcDriveRef</Name>
-			<BitSize>80</BitSize>
-			<SubItem>
-				<Name>aNetId</Name>
-				<Type GUID="{3BD42FCA-85FC-C899-2F71-A9346CD54EAB}" Namespace="Tc2_System">T_AmsNetIdArr</Type>
-				<Comment><![CDATA[ AmsNetId of the EtherCAT master device.]]></Comment>
-				<BitSize>48</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nSlaveAddr</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
-				<Comment><![CDATA[ Address of the slave device.]]></Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>48</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nDriveNo</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<Comment><![CDATA[ Drive number]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>nDriveType</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<Comment><![CDATA[ Drive type]]></Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>72</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name IecBaseType="true">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Name>
-			<Comment><![CDATA[----------------------------------------------------------------------------------------------------
-	Error handling
-----------------------------------------------------------------------------------------------------
-Initialising drive references for resetting drive errors]]></Comment>
-			<BitSize>1920</BitSize>
-			<BaseType GUID="{AF33319A-EDFA-B2D2-9FB8-D62638409ADE}" Namespace="Tc2_EtherCAT">ST_PlcDriveRef</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>24</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
@@ -9051,15 +9051,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0B7A78FC-455D-F47A-D2C7-0C2FEF892188}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{2F4F54E6-6D2F-3097-6859-B3BCCFF96398}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>Thermal_Task Outputs</Name>
-						<Var>
-							<Name>LEVI_MAIN_TEST.Control_word</Name>
-							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
-						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bRearmNormallyOpen</Name>
 							<Type>BOOL</Type>
@@ -9091,33 +9087,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
 						<Name>Thermal_Task Inputs</Name>
 						<Var>
-							<Name>LEVI_MAIN_TEST.Drive_status</Name>
-							<Comment><![CDATA[----------------------------------------------------------------------------------------------------
-	Drive Inputs (Inputs into PLC, drive feedback)
-----------------------------------------------------------------------------------------------------
-Order if 12 long: VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2, LF1, LF2, LB1, LB2
-Order if 24 long: VFL1_1, VFL1_2, VFL2_1, VFL2_2, VFR1_1, VFR1_2, VFR2_1, VFR2_2, VBL1_1, VBL1_2, VBL2_1, VBL2_2, VBR1_1, VBR1_2, VBR2_1, VBR2_2, LF1_1, LF1_2, LF2_1, LF2_2, LB1_1, LB1_2, LB2_1, LB2_2
-Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) ]]></Comment>
-							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_MAIN_TEST.Drive_Diagnostic</Name>
-							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
-						</Var>
-						<Var>
 							<Name>LEVI_MAIN_TEST.Periphery_voltage</Name>
 							<Comment><![CDATA[DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
 External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
 Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
-						</Var>
-						<Var>
-							<Name>LEVI_MAIN_TEST.PLC_drive_refs</Name>
-							<Comment><![CDATA[----------------------------------------------------------------------------------------------------
-	Error handling
-----------------------------------------------------------------------------------------------------
-Initialising drive references for resetting drive errors]]></Comment>
-							<Type GUID="{4A09EE85-C846-8596-B7BE-27A5C1C3D419}">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Type>
 						</Var>
 						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
@@ -9556,9 +9530,27 @@ barcode ]]></Comment>
 							<Name>LEVI_MAIN_TEST.Requested_force_values</Name>
 							<Type GUID="{AAE159D8-6AED-101F-7CCC-72342F0046E4}">ARRAY [0..11] OF INT</Type>
 						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Control_word</Name>
+							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 						<Name>LEVI_TEST_TASK Inputs</Name>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Drive_status</Name>
+							<Comment><![CDATA[----------------------------------------------------------------------------------------------------
+	Drive Inputs (Inputs into PLC, drive feedback)
+----------------------------------------------------------------------------------------------------
+Order if 12 long: VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2, LF1, LF2, LB1, LB2
+Order if 24 long: VFL1_1, VFL1_2, VFL2_1, VFL2_2, VFR1_1, VFR1_2, VFR2_1, VFR2_2, VBL1_1, VBL1_2, VBL2_1, VBL2_2, VBR1_1, VBR1_2, VBR2_1, VBR2_2, LF1_1, LF1_2, LF2_1, LF2_2, LB1_1, LB1_2, LB2_1, LB2_2
+Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) ]]></Comment>
+							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Drive_Diagnostic</Name>
+							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
+						</Var>
 						<Var>
 							<Name>LEVI_MAIN_TEST.Force_feedback_value</Name>
 							<Comment><![CDATA[Drive_current_V AT %I*: ARRAY[0..23] OF INT;
@@ -9568,6 +9560,14 @@ Drive_current_W AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 						<Var>
 							<Name>LEVI_MAIN_TEST.DC_bus_voltage</Name>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.PLC_drive_refs</Name>
+							<Comment><![CDATA[----------------------------------------------------------------------------------------------------
+	Error handling
+----------------------------------------------------------------------------------------------------
+Initialising drive references for resetting drive errors]]></Comment>
+							<Type GUID="{4A09EE85-C846-8596-B7BE-27A5C1C3D419}">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
