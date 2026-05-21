@@ -17,7 +17,7 @@ END_VAR
 
 VAR
     (* Directly initialize the array of structs here *)
-    aTracks : ARRAY[1..5] OF Track_Segment_Delft := [
+    aTracks : ARRAY[1..5] OF ST_Track_Segment_Delft := [
         (nTrackNumber := 1, fXPosition := 0.0,  fLength := 3.4,  fStartValue := 1255160.0, fEndValue := 1258560.0),
         (nTrackNumber := 2, fXPosition := 3.4,  fLength := 4.0,  fStartValue := 0.0,       fEndValue := 4000.0),
         (nTrackNumber := 3, fXPosition := 7.4,  fLength := 4.0,  fStartValue := 4000.0,    fEndValue := 8000.0),

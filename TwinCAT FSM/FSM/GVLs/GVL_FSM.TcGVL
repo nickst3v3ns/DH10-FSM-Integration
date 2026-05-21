@@ -5,10 +5,11 @@
 VAR_GLOBAL
 //Heartbeat
 	benable_heartbeat:		BOOL; //for groundstation output
-	bheartbeat_OK: 			BOOL; //for groundstation evaluation
+	bheartbeat_OK: 			BOOL := TRUE; //for groundstation evaluation
 	
 	bprecharge:				BOOL;
 	
+	E_PodStateGlobal : E_PodState;
 	
 	bsdc_closed:				BOOL;
  
@@ -18,7 +19,7 @@ VAR_GLOBAL
 	
 	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
 	
-	btrigger_EL AT %Q*: 			BOOL := TRUE; //NC System
+	b_EmergencyLine AT %Q*: 			BOOL := TRUE; //NC System
 
 	bEstopError:				BOOL; 
 	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC side
@@ -26,10 +27,10 @@ VAR_GLOBAL
 	
 	benable_telemetry: 		BOOL;
 	
-	bcan_bus_ok: 			BOOL; 
+	bcan_bus_ok: 			BOOL := TRUE; 
 	nMasterDevStateCouplers AT %I*: UINT; 
 	nMasterDevStatePLC AT %I*: UINT; 
-	bethercat_ready:  		BOOL; 
+	bethercat_ready:  		BOOL := TRUE; 
 	
 	
 	

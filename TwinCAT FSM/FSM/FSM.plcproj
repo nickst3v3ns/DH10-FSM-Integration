@@ -18,7 +18,7 @@
     <LibraryReferences>{a0174ccd-e1c7-4336-844e-25062a3daf29}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\Track_Segment_Delft.TcDUT">
+    <Compile Include="DUTs\ST_Track_Segment_Delft.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\E_Barcode_State.TcDUT">
@@ -36,22 +36,22 @@
     <Compile Include="DUTs\E_PodState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_RX_ID.TcDUT">
+    <Compile Include="DUTs\E_PTC_RX_ID.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_TX_Command.TcDUT">
+    <Compile Include="DUTs\E_PTC_TX_Command.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PTC_TX_ID.TcDUT">
+    <Compile Include="DUTs\E_PTC_TX_ID.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_FMB_BatteryData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment.TcDUT">
+    <Compile Include="DUTs\ST_Track_Segment.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Track_Segment_Raw.TcDUT">
+    <Compile Include="DUTs\ST_Track_Segment_Raw.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL_FLOW.TcGVL">
@@ -197,6 +197,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_EHW\SendPositionTelegram.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\Calculate_Thrust_Lift.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
@@ -392,8 +395,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -469,14 +472,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Calculate_Thrust_Lift" Id="{8cb84926-7776-4b0d-ab47-202b2693f36c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Calculate_Thrust_Lift : ARRAY[0..1] OF LREAL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

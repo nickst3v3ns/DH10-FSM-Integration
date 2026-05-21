@@ -3,6 +3,7 @@
   <POU Name="PROP_MAIN_Delft" Id="{a45349c2-4849-4594-9abf-23290984c9ec}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PROP_MAIN_Delft
 VAR
+	
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;
 	
@@ -29,7 +30,7 @@ VAR
 	CurrentAngle : LREAL;
 	Iamp : LREAL;
 	PositionOffset : LREAL;
-	PodState : INT;
+	PodState: E_PodState;
 	PropFlag : INT;
 	
 	check : INT := 0;
@@ -129,7 +130,11 @@ VAR CONSTANT
 	OFFSET_BACK : DINT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE barcodeState OF
+      <ST><![CDATA[
+PodState := GVL_FSM.E_PodStateGlobal;
+
+
+CASE barcodeState OF
 	
 	E_Barcode_State.INIT:
 	

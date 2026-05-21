@@ -49,42 +49,42 @@ VAR
 	y_on : BOOL := TRUE;
 	yaw_on : BOOL := TRUE;	
 	
-	z_manual_target : LREAL := -0.0155; //m
+	z_manual_target : LREAL := -0.0167; //m
 	pitch_target : LREAL := 0; //rad
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
 	yaw_target : LREAL := 0; //rad
 	enable_manual_z_target : BOOL  := TRUE;
 	
-	K_P_tot : LREAL := 400000;
-	K_I_tot : LREAL := 100000;
-	K_D_tot : LREAL := 30000;
-	K_F_tot : LREAL := 100;
-	K_I_tot_initial : LREAL := 13041;
+	K_P_tot: LREAL := 300000;
+	K_I_tot: LREAL := 100000;
+	K_D_tot: LREAL := 30000;
+	K_F_tot: LREAL := 100;
+	K_I_tot_initial: LREAL := 13552;
 	
-	K_P_pitch : LREAL := 60000;
-	K_I_pitch : LREAL := 40000;
-	K_D_pitch : LREAL := 15000;
-	K_F_pitch : LREAL := 250;
-	K_I_pitch_initial : LREAL := 450;
+	K_P_pitch: LREAL := 60000;
+	K_I_pitch: LREAL := 100000;
+	K_D_pitch: LREAL := 15000;
+	K_F_pitch: LREAL := 250;
+	K_I_pitch_initial: LREAL := -44;
 	
-	K_P_roll : LREAL := 150000;
-	K_I_roll : LREAL := 70000;
-	K_D_roll : LREAL := 10000;
-	K_F_roll : LREAL := 120;
-	K_I_roll_initial : LREAL := -300;
+	K_P_roll: LREAL := 150000;
+	K_I_roll: LREAL := 100000;
+	K_D_roll: LREAL := 10000;
+	K_F_roll: LREAL := 120;
+	K_I_roll_initial: LREAL := 12;
 	
 	K_P_lat: LREAL := 120000;
 	K_I_lat: LREAL := 30000;
 	K_D_lat: LREAL := 10000;
 	K_F_lat: LREAL := 120;
-	K_I_lat_initial: LREAL := -130;
+	K_I_lat_initial: LREAL := -117;
 
 	K_P_yaw: LREAL := 50000;
 	K_I_yaw: LREAL := 50000;
 	K_D_yaw: LREAL := 5000;
 	K_F_yaw: LREAL := 120;
-	K_I_yaw_initial: LREAL := -15;	
+	K_I_yaw_initial: LREAL := -1;	
 	
 	Lift_off_enabled : BOOL := FALSE;
 	Mismatch_enabled : BOOL := FALSE;
@@ -103,7 +103,6 @@ VAR
 	I_VBL: vertical_levitation_control.T_matrix2xdouble;	
 	I_VBR: vertical_levitation_control.T_matrix2xdouble;
 	
-	count_cycles: INT;
 	n_drive_warnings: UINT;
 	n_drive_errors: UINT;
 	error_specifics: ARRAY [0..23] OF Drive_error_mapping;

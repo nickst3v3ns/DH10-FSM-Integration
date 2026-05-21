@@ -33,7 +33,7 @@ VAR
 
 	//Simulink Sensor Setup
 	//Initialising the tccom object
-	FB_sensor_init: ST_FB_Sensor_model_TcCom_InitStruct :=  (noid:=16#01010010);
+	FB_sensor_init: ST_FB_Sensor_model_TcCom_InitStruct :=  (noid:=16#01010020);
 	FB_sensor: FB_Sensor_model_TcCom_InitStruct(FB_sensor_init);
 	
 	Sensor_model_input: ST_Sensor_model_U_T;
@@ -245,7 +245,17 @@ FOR i:=0 TO 23 DO
 		All_drives_high_voltage := FALSE;
 	END_IF
 END_FOR
-
+(*
+//Initialising drive reset commands
+FOR i:=0 TO 23 DO
+	IF i.0 = 1 THEN
+		PLC_drive_refs[i].aNetId := PLC_drive_refs[i-1].aNetId;
+		PLC_drive_refs[i].nSlaveAddr := PLC_drive_refs[i-1].nSlaveAddr;
+	END_IF
+	drive_refs[i].sNetId := F_CreateAmsNetID(PLC_drive_refs[i].aNetId);
+	drive_refs[i].nSlaveAddr := PLC_drive_refs[i].nSlaveAddr;
+	drive_refs[i].nDriveNo := PLC_drive_refs[i].nDriveNo;
+END_FOR*)
 
 //----------------------------------------------------------------------------------------------------
 
@@ -279,7 +289,8 @@ CASE Levi_Command OF
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
 							Control_word_array => Control_word,
-							Go_error_state => Error);
+							Go_error_state => Error,
+							error_resettable => error_resettable);
 		
 		ELSE
 			Levi_command := Levi_state;
@@ -324,7 +335,11 @@ CASE Levi_Command OF
 						
 	E_Levi_States.LEVI_READY:
 		IF 	(Levi_state = E_Levi_States.LEVI_INIT OR
-			Levi_state = E_Levi_States.LEVI_READY) AND
+			Levi_state = E_Levi_States.LEVI_READY OR 
+			Levi_state = E_Levi_States.LEVI_PULLUP OR
+			Levi_state = E_Levi_States.LEVI_DROPDOWN OR
+			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
+			Levi_state = E_Levi_States.LEVI_CONTROL) AND
 			GVL_LEVI.levitation_enable = TRUE AND
 			All_drives_high_voltage = TRUE THEN
 	
@@ -529,7 +544,7 @@ END_CASE
 
 
 
-IF ERROR AND Levi_state <> E_Levi_States.LEVI_IDLE AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
+IF (ERROR OR GVL_LEVI.levitation_fault) AND Levi_state <> E_Levi_States.LEVI_IDLE AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
 	Levi_command := E_Levi_States.LEVI_ERROR;
 	
 	//Making sure no drives are giving an output

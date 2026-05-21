@@ -2,13 +2,13 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{B388C193-491B-1287-B84E-EA18EDCCF8D7}</SystemId>
-		<IssueTime>2026-04-20T14:10:00</IssueTime>
-		<ExpireTime>2026-04-28T00:00:00</ExpireTime>
-		<LicenseKey>63d7dbf452f6db76f039e0350f10804c540c265daec8b197049b7b99810f10cc185d6cebe2f054ee1b89c2f1283bae3610a8d50abd12b0e7f3a27ad8b91f8c5f3ecb52a1f456156e82cb90f59ed48e3b278a68bfab27b09499f5cc1ed968b41970dc0b776607ffa68b370d61ab6218911e024b61d92a39d14cff7b1b49b2ceb05d3b84040e0449526b6d86e07c6b74ab33393e9b4a5e640a65f1f40671a6e45b4e522fd01a5557960444579ba6739ed9d2872f639afe1e3f2b63da9874929d4a62d764bad20572618553291f5fa53a5de17be15e364826f77e99223551ff15520bfb7a048d22dbf0e571575b5d747767abb9ba379e2f3ac4d9b3cb72ded04141</LicenseKey>
+		<IssueTime>2026-05-21T20:57:00</IssueTime>
+		<ExpireTime>2026-05-29T00:00:00</ExpireTime>
+		<LicenseKey>a68d0926361aa9e97860618cecb80f3b1eb6a30a97cf80f4dd760dcaa6648b3116e3556cc2cc43efb460632e7637ded59aae8d39813a0366cf099461309f2bda5c2fddd5b688ac7292fdf4ea6ee988529d348cf0e54779eda7b9cc38302950d1302f70831258d357d5d1f2c97170ef2cdd148357b4036bc76a310704fc2ba45c301316ccb618720697262ac51fe4758603e4f9db3c40da9e5999fa14dfe1fe58333fe0e956f222999a89ad9b4776aefa80512e32d27547ea1f130d816273d6de88b5f9f3e258861b51085169ee01c86af900c6e2385b1724ad315944d483ce4bd10ba0cc58bacd0a182ca65b0e3234eb7484faf0c5303521f2876daf1b0bf57c</LicenseKey>
 		<License>
-			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
-			<Name>TC3 Serial-Communication</Name>
-			<OrderNo>TF6340</OrderNo>
+			<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
+			<Name>Runtime for MATLAB / Simulink</Name>
+			<OrderNo>TF1400</OrderNo>
 		</License>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
@@ -21,9 +21,19 @@
 			<OrderNo>TC1100</OrderNo>
 		</License>
 		<License>
+			<LicenseId>{304D006A-8299-4560-AB79-438534B50288}</LicenseId>
+			<Name>TC3 C++</Name>
+			<OrderNo>TC1300</OrderNo>
+		</License>
+		<License>
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
 			<Name>TC3 PLC</Name>
 			<OrderNo>TC1200</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
+			<Name>TC3 Serial-Communication</Name>
+			<OrderNo>TF6340</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

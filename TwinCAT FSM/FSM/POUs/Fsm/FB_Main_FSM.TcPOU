@@ -15,6 +15,7 @@ VAR
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
 	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
 	
+	bTESTSTATE : BOOL := TRUE;
 	
 	criticalFault:				BOOL; 
 	
@@ -43,11 +44,11 @@ bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0 THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
-	
+//if statement adapetd for testing purposes	
 END_IF
 
 
@@ -57,17 +58,26 @@ CASE currentState OF
 	
 //EMERGENCY
 	E_PodState.STATE_EMERGENCY:
+	//uncommented for testing purposes	
+//		GVL_LEVI.levitation_enable := FALSE;
+//		GVL_Prop.propulsion_enable := FALSE;
 		
-		GVL_LEVI.levitation_enable := FALSE;
-		GVL_Prop.propulsion_enable := FALSE;
-	
-		fb_handle_emergency(execute := criticalFault, busy => criticalFault);
+		IF NOT bTESTSTATE THEN //if placed here for testing purposes
+				fb_handle_emergency(execute := criticalFault, busy => criticalFault);	
+		END_IF
+
 			
 		IF currentCmd = E_Command.CMD_TO_MAINTENANCE AND NOT criticalFault THEN
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
 			currentCmd := E_Command.CMD_NONE;
 			
+		END_IF
+		
+		// for testing purposes
+		IF currentCmd = E_Command.CMD_TO_MOVEMENT AND bTESTSTATE THEN
+			currentState := E_PodState.STATE_MOVEMENT;
+			currentCmd := E_Command.CMD_NONE;
 		END_IF
 		
 //BOOT		
@@ -82,6 +92,13 @@ CASE currentState OF
 		IF GVL_FSM.bsafety_inputs_valid AND NOT GVL_FSM.bsdc_closed AND NOT (GVL_FSM.bEstopRestart < GVL_FSM.bEstopRestartTracker) THEN
 			GVL_FSM.bEstopRestartTracker := GVL_FSM.bEstopRestartTracker;
 			GVL_FSM.bEstopRestart := NOT GVL_FSM.bEstopRestart;
+		END_IF
+		
+		
+		// for testing purposes
+		IF currentCmd = E_Command.CMD_TO_MOVEMENT AND bTESTSTATE THEN
+			currentState := E_PodState.STATE_MOVEMENT;
+			currentCmd := E_Command.CMD_NONE;
 		END_IF
 			
 		
@@ -266,6 +283,10 @@ IF fbHeartBeatFailReset.Q THEN
 	currentState := E_PodState.STATE_EMERGENCY;
 	
 END_IF
+
+
+GVL_FSM.E_PodStateGlobal := currentState;
+
 ]]></ST>
     </Implementation>
   </POU>

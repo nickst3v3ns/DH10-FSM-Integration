@@ -38,7 +38,7 @@ CASE state OF
 		
         state := 1;
         
-    1:	allActionsCompleteShutdown := NOT GVL_LEVI.levitation_active 
+    1:	allActionsCompleteShutdown := NOT GVL_LEVI.levitation_enable
 		AND NOT GVL_Prop.propulsion_active 
 		AND GVL_Levi.DC_LINK_SAFE 
 		AND GVL_Prop.DC_LINK_SAFE 

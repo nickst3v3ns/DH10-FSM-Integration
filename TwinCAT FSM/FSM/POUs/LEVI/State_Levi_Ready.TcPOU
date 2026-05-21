@@ -91,7 +91,7 @@ IF Run_z_liftoff_calc = FALSE THEN
 	//Setting the liftoff airgap
 	count_cycles := count_cycles + 1;
 	
-		IF count_cycles > 750 THEN
+		IF count_cycles > 3000 THEN
 			z_liftoff := z;
 			count_cycles := 0;
 			Run_z_liftoff_calc := TRUE;
