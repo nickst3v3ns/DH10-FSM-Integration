@@ -85,11 +85,13 @@ IF Run_z_liftoff_calc = FALSE THEN
 		END_IF
 END_IF
 
+(*
 //Making sure the control models are switched off
 GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
 GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
 GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
 GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+*)
 
 //making sure all outputs are off
 force_values[0] := 0;

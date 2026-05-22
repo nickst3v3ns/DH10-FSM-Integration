@@ -42,10 +42,12 @@ FOR i:=0 TO 23 DO
 	Control_word_array[i] := 0;
 END_FOR
 
+(*
 GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
 GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
 GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
 GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+*)
 
 force_values[0] := 0;
 force_values[1] := 0;

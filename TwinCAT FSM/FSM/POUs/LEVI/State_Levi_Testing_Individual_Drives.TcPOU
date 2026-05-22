@@ -100,10 +100,12 @@ Control_word_array[21] := Control_word_LB1_S;
 Control_word_array[22] := Control_word_LB2_N;
 Control_word_array[23] := Control_word_LB2_S;
 
+(*
 GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
 GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
 GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
 GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
+*)
 
 //Check if there are errors
 Error := Check_drives(drive_status := drive_status, 
