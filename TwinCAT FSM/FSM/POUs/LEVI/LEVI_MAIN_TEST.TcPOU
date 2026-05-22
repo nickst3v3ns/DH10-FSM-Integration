@@ -358,7 +358,8 @@ CASE Levi_Command OF
 							Drive_current_error := Drive_current_error,
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
-							Go_error_state => Error);
+							Go_error_state => Error,
+							z_liftoff => z_liftoff);
 		
 		ELSE
 			Levi_command := Levi_state;		

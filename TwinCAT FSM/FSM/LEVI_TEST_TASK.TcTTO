@@ -3,7 +3,7 @@
   <Task Name="LEVI_TEST_TASK" Id="{72358abd-7913-400d-a8c1-e210d0719b69}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>1500</CycleTime>
-    <Priority>10</Priority>
+    <Priority>4</Priority>
     <PouCall>
       <Name>LEVI_MAIN_TEST</Name>
     </PouCall>

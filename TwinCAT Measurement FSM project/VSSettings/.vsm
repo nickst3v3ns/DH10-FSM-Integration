@@ -572,12 +572,6 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Requested_currents[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
                   <Title>Requested_currents[1]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
@@ -718,6 +712,12 @@
                 </Node>
                 <Node>
                   <Title>Real_currents[15]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>Requested_currents[0]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

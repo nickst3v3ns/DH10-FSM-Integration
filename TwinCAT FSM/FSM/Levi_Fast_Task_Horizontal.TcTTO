@@ -3,7 +3,7 @@
   <Task Name="Levi_Fast_Task_Horizontal" Id="{2e007065-d309-49aa-a248-c04855a7e058}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>300</CycleTime>
-    <Priority>6</Priority>
+    <Priority>8</Priority>
     <PouCall>
       <Name>BackgroundLateral</Name>
     </PouCall>
