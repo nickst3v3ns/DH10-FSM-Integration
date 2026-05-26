@@ -21,6 +21,7 @@ VAR_IN_OUT
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
 	force_values : ARRAY[0..11] OF INT;
 	Drive_current_error : ARRAY[0..23] OF BOOL;
+	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
 END_VAR
 
 VAR
@@ -28,7 +29,6 @@ VAR
 	count_cycles: INT;
 	n_drive_warnings: UINT;
 	n_drive_errors: UINT;
-	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
 	
 	i: INT;
 END_VAR
@@ -59,10 +59,10 @@ Error := Check_drives(drive_status := drive_status,
 					drive_last_feedback_value := Force_feedback_value,
 					drive_feedback_timeouts := drive_feedback_timeouts,
 					State := State,
+					errors := error_specifics,
+					Drive_current_error := Drive_current_error,
 					n_warns => n_drive_warnings, 
-					n_errors => n_drive_errors, 
-					errors => error_specifics,
-					Drive_current_error => Drive_current_error);
+					n_errors => n_drive_errors);
 
 //Giving a constant positive current to the HEMS, and keeping the EMS off
 force_values[0] := LREAL_TO_INT((current_pullup * 1000.0)/ configured_peak_current);

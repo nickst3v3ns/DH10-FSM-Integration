@@ -24,14 +24,13 @@ VAR_OUTPUT
 	//Number of errors found
 	n_errors: UINT := 0;
 	
-	//What the errors found are
-	errors: ARRAY[0..23] OF Drive_error_mapping;
-	
-	Drive_current_error : ARRAY[0..23] OF BOOL;
 END_VAR
 
 VAR_IN_OUT
 	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	Drive_current_error : ARRAY[0..23] OF BOOL;
+	//What the errors found are
+	errors: ARRAY[0..23] OF Drive_error_mapping;
 END_VAR
 
 VAR

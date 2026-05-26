@@ -410,6 +410,7 @@ CASE Levi_Command OF
 							drive_refs := drive_refs,
 							PLC_drive_refs := PLC_drive_refs,
 							Drive_current_error := Drive_current_error,
+							error_specifics := error_specifics,
 							z_liftoff => z_liftoff,
 							Control_word_array => Control_word,
 							Go_error_state => Error);
@@ -448,6 +449,7 @@ CASE Levi_Command OF
 							z := z,
 							Control_word_array := Control_word,
 							Drive_current_error := Drive_current_error,
+							error_specifics := error_specifics,
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
 							Go_error_state => Error,
@@ -481,6 +483,7 @@ CASE Levi_Command OF
 							force_values := Requested_force_values,
 							Control_word_array := Control_word,
 							Drive_current_error := Drive_current_error,
+							error_specifics := error_specifics,
 							Error => Error,
 							Back_to_ready => Levi_command,
 							Run_z_liftoff_calc => Run_z_liftoff_calc);
@@ -513,6 +516,7 @@ CASE Levi_Command OF
 								force_values := Requested_force_values,
 								Control_word_array := Control_word,
 								Drive_current_error := Drive_current_error,
+								error_specifics := error_specifics,
 								Error => Error,
 								Back_to_ready => Levi_command,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);
@@ -574,8 +578,8 @@ CASE Levi_Command OF
 								State := Levi_State,
 								n_warns => n_drive_warnings, 
 								n_errors => n_drive_errors, 
-								errors => error_specifics,
-								Drive_current_error => Drive_current_error);
+								errors := error_specifics,
+								Drive_current_error := Drive_current_error);
 			
 			//Setting motor feed forward parameters
 			IF Motor_on THEN
@@ -732,6 +736,7 @@ CASE Levi_Command OF
 												force_values := Requested_force_values,
 												Control_word_array := Control_word,
 												Drive_current_error := Drive_current_error,
+												error_specifics := error_specifics,
 												Error => Error,
 												Run_z_liftoff_calc => Run_z_liftoff_calc);	
 
@@ -767,6 +772,7 @@ CASE Levi_Command OF
 							drive_feedback_timeouts := drive_feedback_timeouts,
 							force_values := Requested_force_values,
 							Drive_current_error := Drive_current_error,
+							error_specifics := error_specifics,
 							Error => Error,
 							error_resettable => error_resettable,
 							First_reset_run => First_reset_run);
@@ -799,6 +805,7 @@ CASE Levi_Command OF
 									drive_feedback_timeouts := drive_feedback_timeouts,
 									force_values := Requested_force_values,
 									Drive_current_error := Drive_current_error,
+									error_specifics := error_specifics,
 									reset_busy => reset_busy,
 									reset_error => reset_error,
 									Go_next_state => Levi_command);
