@@ -6,12 +6,16 @@ VAR
 	
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;
-	
+	testbool : BOOL := TRUE;
 	positionValues_Front : ARRAY[0..3] OF BYTE;
 	velocityValues_Front : ARRAY[0..1] OF BYTE; 
 	
 	positionValues_Back : ARRAY[0..3] OF BYTE;
 	velocityValues_Back : ARRAY[0..1] OF BYTE; 
+	
+	counter_1 : INT := 0;
+	counter_2 : INT := 0;
+	
 	
 	position_Front : DINT;
 	velocity_Front : DINT;
@@ -167,10 +171,13 @@ CASE barcodeState OF
 		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
 		
 		delft_converter_front(diReadValue := position_Front, diPosition => positionDelft_Front);
-		
+		counter_1 := counter_1 +1;
 		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
+		testbool := NOT testbool;
+
 		
 		GVL_PROP.OutputData_Front[0] := newData OR SET_COMMAND;
+
 		GVL_PROP.OutputData_Front[2] := SEND_POS_VEL;
 		
 		//-------------------------------------------
@@ -200,6 +207,7 @@ CASE barcodeState OF
 		delft_converter_back(diReadValue := position_Back, diPosition => positionDelft_Back);
 		
 		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
+		counter_2 := counter_2 + 1;
 		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
 	
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;

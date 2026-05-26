@@ -10,6 +10,8 @@ VAR
 	//INTERNAL VARIABLE
 	SafetyResetButton_RT 			:R_TRIG;
 	
+	testbooltoggle : BOOL := FALSE;
+	
 	
 	bRearmNormallyOpen AT %Q*		:BOOL;
 
@@ -44,7 +46,9 @@ fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_L
 
 GVL_FSM.bEstopError := bEstopError;
 GVL_FSM.bEstopRestart := bEstopRestart;
-GVL_FSM.bsdc_closed := bsdc_closed;]]></ST>
+GVL_FSM.bsdc_closed := bsdc_closed;
+
+testbooltoggle := NOT testbooltoggle;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

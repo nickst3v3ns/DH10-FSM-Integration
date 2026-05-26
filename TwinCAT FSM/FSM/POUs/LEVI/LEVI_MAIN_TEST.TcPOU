@@ -183,7 +183,7 @@ VAR
 	y_on : BOOL := TRUE;
 	yaw_on : BOOL := TRUE;	
 	
-	z_manual_target : LREAL := -0.0167; //m
+	z_manual_target : LREAL := -0.01635; //m
 	pitch_target : LREAL := 0; //rad
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
@@ -251,8 +251,8 @@ VAR
 
 	i: INT;
 
-	
 END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//----------------------------------------------------------------------------------------------------

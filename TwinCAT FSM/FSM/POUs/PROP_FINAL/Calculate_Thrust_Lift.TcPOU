@@ -3,12 +3,32 @@
   <POU Name="Calculate_Thrust_Lift" Id="{8cb84926-7776-4b0d-ab47-202b2693f36c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION Calculate_Thrust_Lift : ARRAY[0..1] OF LREAL
 VAR_INPUT
+	Ia              : REAL;
+    Ib              : REAL;
+    Ic              : REAL;
+    airgap   	    : REAL;
+    position 	    : REAL;
+    currentangle    : REAL;
 END_VAR
+
+VAR_OUTPUT
+	thrust          : REAL;
+    lift            : REAL;
+    torque	        : REAL;
+END_VAR
+
 VAR
+	current         : REAL;
+	PI : REAL := 3.14159265358979323846;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[current := SQRT(Ia*Ia + Ib*Ib + Ic*Ic);
+
+//Thrust :=  current/101.82337649086286((-2.71444834e+02 *  SINE(PI*currentangle/180 + 2*PI*-1.13342567e+01/200) + 1.64599854e-01)*(-3.30732756e+03 * EXPT(airgap,-9.92971373e-01))/-269.32518584269127);
+
+//Lift := current**2 / 101.82337649086286**2((700.43884012 *  SINE(PI*currentangle/180 + 2*PI*78.20145859/200) -1018.85968232)*(-5.51114275e+04* EXPT(airgap,-1.58045446))/-1017.713037265408);
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
