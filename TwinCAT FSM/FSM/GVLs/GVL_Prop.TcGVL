@@ -19,6 +19,7 @@ VAR_GLOBAL
 	InputData3_Back AT %I*: ARRAY[0..7] OF BYTE;
 	
 	//drives
+	position:				REAL;
 	
 	speed:					REAL;
 	target_speed:			REAL;

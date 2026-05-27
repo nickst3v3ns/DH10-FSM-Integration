@@ -27,7 +27,7 @@ TxMessage.length := 2;
 FOR i := 0 TO 1 DO 
 		TxMessage.data[i] := PositionOffset_Values[i];
 END_FOR
-CAN_OUTPUTS.TxMessages[3] := TxMessage;
+CAN_OUTPUTS.TxMessages[4] := TxMessage;
 //CAN_OUTPUTS.NoOfTxMessages := 1;
 
 (*

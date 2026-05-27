@@ -2076,8 +2076,8 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{27230DFB-546B-6320-0DA0-08A545D5444B}">P_Sensor_model_T</Name>
-			<BitSize>3008</BitSize>
+			<Name GUID="{08C8B2B1-3F30-36CE-C44C-A37039ACE23E}">P_Sensor_model_T</Name>
+			<BitSize>2944</BitSize>
 			<SubItem>
 				<Name>Laser_magnet_offset_EMS</Name>
 				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
@@ -2121,26 +2121,11 @@
 				<BitOffs>2816</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>UnitDelay_InitialCondition</Name>
+				<Name>Convert_to_meters_Gain</Name>
 				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
 				<BitSize>64</BitSize>
 				<BitOffs>2880</BitOffs>
 			</SubItem>
-			<SubItem>
-				<Name>Convert_to_meters_Gain</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2944</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{39207FF8-B772-B910-E6D3-48A6D2F1212D}">matrix12xlogical</Name>
-			<BitSize>96</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>12</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF UINT</Name>
@@ -2534,9 +2519,9 @@ Initialising drive references for resetting drive errors]]></Comment>
 		<ImageData Id="1010">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1011">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ff000000000000ff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ff000000000000ff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="5.161.227.10.1.1" Target64Bit="true" ShowHideConfigurations="#x347">
+	<Project ProjectGUID="{42320C87-6F30-3A2E-500C-E28252ED5320}" TargetNetId="5.161.227.10.1.1" Target64Bit="true" RelativeTargetNetId="true" RelativeIpAddresses="true" ShowHideConfigurations="#x347">
 		<System>
-			<Settings MaxCpus="4" NonWinCpus="2">
+			<Settings MaxCpus="4" NonWinCpus="2" MaxStackSize="128">
 				<Cpu BaseTime="1000"/>
 				<Cpu CpuId="1" BaseTime="1000"/>
 				<Cpu CpuId="2" BaseTime="1000"/>
@@ -8437,10 +8422,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.29">
+				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.31">
 					<Name>Object1 (Sensor_model)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.29">
+					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.31">
 						<Name>Sensor_model</Name>
 						<CLSID ClassFactory="Sensor_model" RealTimeInstantiable="true">{01781D84-B470-A997-DC4F-062608A9D221}</CLSID>
 						<Info>
@@ -8672,8 +8657,8 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Parameter>
 							<Parameter CreateSymbol="true">
 								<Name>Sensor_model_P</Name>
-								<BitSize>3008</BitSize>
-								<BaseType GUID="{27230DFB-546B-6320-0DA0-08A545D5444B}">P_Sensor_model_T</BaseType>
+								<BitSize>2944</BitSize>
+								<BaseType GUID="{08C8B2B1-3F30-36CE-C44C-A37039ACE23E}">P_Sensor_model_T</BaseType>
 								<Default>
 									<SubItem>
 										<Name>.Laser_magnet_offset_EMS</Name>
@@ -8702,10 +8687,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<SubItem>
 										<Name>.z_com</Name>
 										<Value>0.5706599999999999</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.UnitDelay_InitialCondition</Name>
-										<Value>0</Value>
 									</SubItem>
 									<SubItem>
 										<Name>.Convert_to_meters_Gain</Name>
@@ -8820,34 +8801,20 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
 								<Name>Sensor_model_B</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>304</ByteSize>
+								<ByteSize>192</ByteSize>
 								<Symbol>
-									<Name>UnitDelay</Name>
+									<Name>Convert_to_meters</Name>
 									<BitSize>768</BitSize>
 									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
 									<PTCID>#x82000000</PTCID>
 									<BitOffs>0</BitOffs>
 								</Symbol>
 								<Symbol>
-									<Name>Convert_to_meters</Name>
+									<Name>corrected_airgaps</Name>
 									<BitSize>768</BitSize>
 									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
 									<PTCID>#x82000060</PTCID>
 									<BitOffs>768</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>corrected_airgaps</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x820000c0</PTCID>
-									<BitOffs>1536</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>valid_mask</Name>
-									<BitSize>96</BitSize>
-									<BaseType GUID="{39207FF8-B772-B910-E6D3-48A6D2F1212D}">matrix12xlogical</BaseType>
-									<PTCID>#x82000120</PTCID>
-									<BitOffs>2304</BitOffs>
 								</Symbol>
 							</DataArea>
 						</DataAreas>
@@ -9102,10 +9069,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Value>0.57066</Value>
 							</Value>
 							<Value>
-								<Name>Sensor_model_P.UnitDelay_InitialCondition</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
 								<Name>Sensor_model_P.Convert_to_meters_Gain</Name>
 								<Value>0.001</Value>
 							</Value>
@@ -9116,7 +9079,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{8CBF51E2-8F95-5B89-8A25-302F688AEC3D}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1BD73835-02AE-C809-BEF0-276CC935A9E9}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
@@ -9142,14 +9105,6 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FLOW.bFlowSensor2</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FLOW.bFlowSensor3</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -9393,6 +9348,14 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_FLOW.bFlowSensor2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FLOW.bFlowSensor3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_FLOW.bFlowSensor4</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -9453,12 +9416,12 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
-							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -9610,6 +9573,42 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 						<Name>PlcTask_10ms_Barcode_ Outputs</Name>
 						<Var>
+							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ia_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ib_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ic_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.currentangle_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ia_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ib_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Ic_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.currentangle_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_Prop.OutputData_Front</Name>
 							<Comment><![CDATA[First propulsion checks
 barcode ]]></Comment>
@@ -9734,6 +9733,42 @@ barcode ]]></Comment>
 					</Vars>
 					<Vars VarGrpType="1">
 						<Name>LEVI_TEST_TASK Inputs</Name>
+						<Var>
+							<Name>LEVI_MAIN_TEST.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ia_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ib_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ic_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.currentangle_for_levi_left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ia_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ib_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.Ic_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.currentangle_for_levi_right</Name>
+							<Type>LREAL</Type>
+						</Var>
 						<Var>
 							<Name>LEVI_MAIN_TEST.Drive_status</Name>
 							<Comment><![CDATA[----------------------------------------------------------------------------------------------------
@@ -10131,6 +10166,16 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2026-05-27T23:37:50">
+						<OwnerA Name="InputDst" Prefix="TIPC^FSM^FSM Instance" Type="1">
+							<OwnerB Name="TIPC^FSM^FSM Instance">
+								<Link VarA="LEVI_MAIN_TEST.Ia_for_levi" TypeA="LREAL" InOutA="0" GuidA="{18071995-0000-0000-0000-00000000000E}" VarB="Thermal_Task Outputs^PROP_MAIN_Delft.Ia_for_levi" RestoreInfo="ANotFound"/>
+								<Link VarA="LEVI_MAIN_TEST.Ib_for_levi" TypeA="LREAL" InOutA="0" GuidA="{18071995-0000-0000-0000-00000000000E}" VarB="Thermal_Task Outputs^PROP_MAIN_Delft.Ib_for_levi" RestoreInfo="ANotFound"/>
+								<Link VarA="LEVI_MAIN_TEST.Ic_for_levi" TypeA="LREAL" InOutA="0" GuidA="{18071995-0000-0000-0000-00000000000E}" VarB="Thermal_Task Outputs^PROP_MAIN_Delft.Ic_for_levi" RestoreInfo="ANotFound"/>
+								<Link VarA="LEVI_MAIN_TEST.currentangle_for_levi" TypeA="LREAL" InOutA="0" GuidA="{18071995-0000-0000-0000-00000000000E}" VarB="Thermal_Task Outputs^PROP_MAIN_Delft.currentangle_for_levi" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
@@ -10243,7 +10288,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Pnp>
 						<DeviceDesc>X001 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit))</DeviceDesc>
 						<DeviceName>\DEVICE\{837B678C-16FE-4180-8FD4-A18B90D73B93}</DeviceName>
-						<DeviceData>000105a1e30b</DeviceData>
+						<DeviceData>000000000000</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="2" AddrType="9" ImageType="3">
@@ -50116,6 +50161,7 @@ Slave-Mode:
 		<MappingInfo Identifier="{08502002-00A0-0304-0020-5008A0000403}" Id="#x02030050" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00B0-0304-0020-5008B0000403}" Id="#x020300b0" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
+		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="18000000040000000400000004000000"/>
 		<MappingInfo Identifier="{030400C0-00C0-0304-C000-0403C0000403}" Id="#x02030070" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">
@@ -51046,6 +51092,17 @@ Slave-Mode:
 			<OwnerB Name="TIID^Device 6 (EL6751)^Box 5 (CAN Interface)">
 				<Link VarA="PlcTask_10ms_Barcode_ Inputs^GVL_PropCAN.CAN_INPUTS" VarB="Inputs^RxQueue"/>
 				<Link VarA="PlcTask_10ms_Barcode_ Outputs^GVL_PropCAN.CAN_OUTPUTS" VarB="Outputs^TxQueue"/>
+			</OwnerB>
+			<OwnerB Name="TIPC^FSM^FSM Instance">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ia_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ia_for_levi_left"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ia_for_levi_right" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ia_for_levi_right"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ib_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ib_for_levi_left"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ib_for_levi_right" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ib_for_levi_right"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ic_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ic_for_levi_left"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ic_for_levi_right" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ic_for_levi_right"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.currentangle_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.currentangle_for_levi_left"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.currentangle_for_levi_right" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.currentangle_for_levi_right"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.motor_on_for_levi" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.motor_on_for_levi"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

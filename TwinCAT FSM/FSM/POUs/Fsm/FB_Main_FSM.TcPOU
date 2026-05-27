@@ -34,6 +34,10 @@ VAR
 	
 	bBasicChecksOk:				BOOL;
 	bCriticalFaultActive:			BOOL;
+	
+	
+	rLowerBoundSoftStop:			REAL := 3;
+	rUpperBoundSoftStop:			REAL := 16;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -233,8 +237,15 @@ CASE currentState OF
 //MOVEMENT		
 	E_PodState.STATE_MOVEMENT: //bit empty innit
 	
-		GVL_LEVI.levitation_enable := TRUE;
-		GVL_Prop.propulsion_enable := TRUE;
+		IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
+			GVL_LEVI.levitation_enable := FALSE;
+			GVL_PROP.propulsion_enable := FALSE;
+			
+			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+		ELSE
+			GVL_LEVI.levitation_enable := TRUE;
+			GVL_Prop.propulsion_enable := TRUE;
+		END_IF
 
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE:

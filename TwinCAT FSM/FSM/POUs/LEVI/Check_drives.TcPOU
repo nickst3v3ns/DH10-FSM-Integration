@@ -80,10 +80,10 @@ IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR S
 	
 		END_IF
 		
-		IF ABS(drive_last_request_value[i]) > 100 AND ABS(drive_last_feedback_value[2*i+1]) < 50 THEN //AND FALSE THEN
+		IF ABS(drive_last_request_value[i]) > 100 AND ABS(drive_last_feedback_value[2*i+1]) < 50 AND (i <> 8) THEN //AND FALSE THEN
 			drive_feedback_timeouts[2*i+1] := drive_feedback_timeouts[2*i+1] + 1;
 			
-		ELSIF ABS(drive_last_request_value[i]) > 100 AND ABS(drive_last_feedback_value[2*i+1]) > 50 THEN
+		ELSIF ABS(drive_last_request_value[i]) > 100 AND ABS(drive_last_feedback_value[2*i+1]) > 50 AND (i <> 8) THEN
 			drive_feedback_timeouts[2*i+1] := 0;
 		END_IF
 		
@@ -93,13 +93,13 @@ IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR S
 			Drive_current_error[i] := TRUE;
 		END_IF
 		
-		(*
+		
 		//Shut off if we get a bunch of disconnection errors
 		IF drive_feedback_timeouts[2*i+1] > 1000 THEN
 			Check_drives := TRUE;
 			Drive_current_error[i] := TRUE;
 		END_IF
-		*)
+		
 		
 	END_FOR
 	

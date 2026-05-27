@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendCANDelay" Id="{5c4fd5b6-8fda-484c-a77e-fb8f4072ce54}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendCANDelay
+VAR_INPUT
+	CANDelay : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	CANDelay_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CANDelay_Values[1] := INT_TO_BYTE(LREAL_TO_INT(CANDelay) AND 16#FF);
+CANDelay_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(CANDelay), 8) AND 16#FF);
+
+
+TxMessage.cobId := 160;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := CANDelay_Values[i];
+END_FOR
+CAN_OUTPUTS.TxMessages[9] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+
+
+(*
+TxMessage.cobId := 1200;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := Iamp_Values[i];
+END_FOR
+CAN_OUTPUTS.TxMessages[1] := TxMessage;
+CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
+*)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

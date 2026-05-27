@@ -2,20 +2,32 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="PROP_MAIN_Delft" Id="{a45349c2-4849-4594-9abf-23290984c9ec}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PROP_MAIN_Delft
+
+VAR_OUTPUT
+	Ia_for_levi_left AT %Q* : LREAL;
+	Ib_for_levi_left AT %Q* : LREAL;
+	Ic_for_levi_left AT %Q* : LREAL;
+	currentangle_for_levi_left AT %Q* : LREAL;
+	
+	Ia_for_levi_right AT %Q* : LREAL;
+	Ib_for_levi_right AT %Q* : LREAL;
+	Ic_for_levi_right AT %Q* : LREAL;
+	currentangle_for_levi_right AT %Q* : LREAL;
+	
+	motor_on_for_levi AT %Q* : BOOL;
+END_VAR
+
 VAR
 	
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
 	newData : BYTE := 16#00;
 	testbool : BOOL := TRUE;
+	
 	positionValues_Front : ARRAY[0..3] OF BYTE;
-	velocityValues_Front : ARRAY[0..1] OF BYTE; 
+	velocityValues_Front : ARRAY[0..3] OF BYTE;
 	
 	positionValues_Back : ARRAY[0..3] OF BYTE;
-	velocityValues_Back : ARRAY[0..1] OF BYTE; 
-	
-	counter_1 : INT := 0;
-	counter_2 : INT := 0;
-	
+	velocityValues_Back : ARRAY[0..3] OF BYTE;
 	
 	position_Front : DINT;
 	velocity_Front : DINT;
@@ -31,15 +43,24 @@ VAR
 	
 	positionDelft : LREAL;
 	VelocityDelft : LREAL;
-	CurrentAngle : LREAL;
+	CurrentAngle : LREAL := 45;
 	Iamp : LREAL;
-	PositionOffset : LREAL;
+	PositionOffset : LREAL := 2.2;
 	PodState: E_PodState;
 	PropFlag : INT;
 	
 	check : INT := 0;
 	check_1 : INT := 0;
-	start : BOOL := FALSE;
+	start : BOOL := TRUE;
+	
+	CANDelay : LREAL := 0.04;
+	DriveReset : INT;
+	ProportionalGain : LREAL;
+	IntegralGain : LREAL;
+	TargetVelocity : LREAL;
+	VelocityError : REAL;
+	VelocityErrorIntegral : REAL;
+	InitialIntegralValue : LREAL;
 	
 	Send_CAN_PosVelocity : FB_SendPosVelocity;
 	Send_CAN_CurrentAngle : FB_SendCurrentAngle;
@@ -47,6 +68,10 @@ VAR
 	Send_CAN_PodState : FB_SendPodState;
 	Send_CAN_PositionOffset : FB_SendPositionOffset;
 	Send_CAN_PropFlag : FB_SendPropFlag;
+	Send_CAN_VelocityGains : FB_SendVelocityGains;
+	Send_CAN_DriveReset : FB_SendDriveReset;
+	Send_CAN_CANDelay : FB_SendCANDelay;
+	Send_CAN_TargetVelocity : FB_SendTargetVelocity;
 	
 	Send_CAN_PosVelocity_1 : FB_SendPosVelocity_1;
 	Send_CAN_CurrentAngle_1 : FB_SendCurrentAngle_1;
@@ -54,6 +79,10 @@ VAR
 	Send_CAN_PodState_1 : FB_SendPodState_1;
 	Send_CAN_PositionOffset_1 : FB_SendPositionOffset_1;
 	Send_CAN_PropFlag_1 : FB_SendPropFlag_1;
+	Send_CAN_VelocityGains_1 : FB_SendVelocityGains_1;
+	Send_CAN_DriveReset_1 : FB_SendDriveReset_1;
+	Send_CAN_CANDelay_1 : FB_SendCANDelay_1;
+	Send_CAN_TargetVelocity_1 : FB_SendTargetVelocity_1;
 	
 	Receive_CAN_abcCurrent : FB_ReceiveabcCurrent;
 	Receive_CAN_dqCurrent : FB_ReceivedqCurrent;
@@ -156,8 +185,8 @@ CASE barcodeState OF
 		velocityValues_Front[0] := GVL_PROP.InputData2_Front[0];
 		velocityValues_Front[1] := GVL_PROP.InputData2_Front[1];
 		
-			IF velocityValues_Front[0] > 128 THEN
-			velocity_Front := (256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
+			IF velocityValues_Front[0] >= 128 THEN
+			velocity_Front := -(256 * 256 - (256 * velocityValues_Front[0] + velocityValues_Front[1]));
 		ELSE
 			velocity_Front := 256 * velocityValues_Front[0] + velocityValues_Front[1];	
 		END_IF
@@ -171,7 +200,7 @@ CASE barcodeState OF
 		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
 		
 		delft_converter_front(diReadValue := position_Front, diPosition => positionDelft_Front);
-		counter_1 := counter_1 +1;
+		// counter_1 := counter_1 +1;
 		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
 		testbool := NOT testbool;
 
@@ -190,8 +219,8 @@ CASE barcodeState OF
 		velocityValues_Back[0] := GVL_PROP.InputData2_Back[0];
 		velocityValues_Back[1] := GVL_PROP.InputData2_Back[1];
 		
-		IF velocityValues_Back[0] > 128 THEN
-			velocity_Back := (256 * 256 - (256 * velocityValues_Back[0] + velocityValues_Back[1]));
+		IF velocityValues_Back[0] >= 128 THEN
+			velocity_Back := -(256 * 256 - (256 * velocityValues_Back[0] + velocityValues_Back[1]));
 		ELSE
 			velocity_Back := 256 * velocityValues_Back[0] + velocityValues_Back[1];	
 		END_IF
@@ -207,12 +236,16 @@ CASE barcodeState OF
 		delft_converter_back(diReadValue := position_Back, diPosition => positionDelft_Back);
 		
 		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
-		counter_2 := counter_2 + 1;
+		// counter_2 := counter_2 + 1;
 		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
 	
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
 		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
+		
+		GVL_PROP.speed := VelocityDelft;
+		GVL_PROP.position := positionDelft;
+		
 	
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
@@ -261,7 +294,24 @@ IF GVL_PropCAN.CAN_OUTPUTS.TxCounter = GVL_PropCAN.CAN_INPUTS.TxCounter THEN
 		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
 		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
 		
-	GVL_PropCAN.CAN_OUTPUTS.NoOfTxMessages := 6;
+	Send_CAN_VelocityGains(ProportionalGain := ProportionalGain,
+		IntegralGain := IntegralGain,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_TargetVelocity(TargetVelocity := TargetVelocity,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_DriveReset(DriveReset := DriveReset,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	Send_CAN_CANDelay(CANDelay := CANDelay,
+		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
+		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		
+	GVL_PropCAN.CAN_OUTPUTS.NoOfTxMessages := 10;
 	GVL_PropCAN.CAN_OUTPUTS.TxCounter := GVL_PropCAN.CAN_INPUTS.TxCounter + 1;
 	check := check +1;
 END_IF
@@ -295,9 +345,25 @@ IF GVL_PropCAN.CAN_OUTPUTS_1.TxCounter = GVL_PropCAN.CAN_INPUTS_1.TxCounter THEN
 	Send_CAN_PropFlag_1(PropFlag := PropFlag,
 		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
 		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
-
+		
+	Send_CAN_VelocityGains_1(ProportionalGain := ProportionalGain,
+		IntegralGain := IntegralGain,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_TargetVelocity_1(TargetVelocity := TargetVelocity,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_DriveReset_1(DriveReset := DriveReset,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		
+	Send_CAN_CANDelay_1(CANDelay := CANDelay,
+		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
+		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
 	
-	GVL_PropCAN.CAN_OUTPUTS_1.NoOfTxMessages := 6;
+	GVL_PropCAN.CAN_OUTPUTS_1.NoOfTxMessages := 10;
 	GVL_PropCAN.CAN_OUTPUTS_1.TxCounter := GVL_PropCAN.CAN_INPUTS_1.TxCounter + 1;
 	check_1 := check_1 +1;
 END_IF
@@ -397,10 +463,26 @@ Receive_CAN_Vbus_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1,
 	
 Vbus_1 := Receive_CAN_Vbus_1.Vbus_1;
 
+// Check and plot what should be the initial integral value of the velocity PI controller (Added by Roemer & Remi)
+VelocityError := TargetVelocity - VelocityDelft;
+VelocityErrorIntegral := VelocityErrorIntegral + (VelocityError * 0.01);
 
+//Send data to levi
+Ia_for_levi_left := Ia;
+Ib_for_levi_left := Ib;
+Ic_for_levi_left := Ic;
+currentangle_for_levi_left := CurrentAngle;
 
+Ia_for_levi_right := Ia_1;
+Ib_for_levi_right := Ib_1;
+Ic_for_levi_right := Ic_1;
+currentangle_for_levi_right := CurrentAngle;
 
-
+IF PropFlag = 1 THEN
+	motor_on_for_levi := TRUE;
+ELSE
+	motor_on_for_levi := FALSE;
+END_IF
 ]]></ST>
     </Implementation>
   </POU>

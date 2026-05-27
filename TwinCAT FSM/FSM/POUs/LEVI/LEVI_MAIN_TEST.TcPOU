@@ -2,6 +2,21 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="LEVI_MAIN_TEST" Id="{d65ed62a-347e-4ddd-ac75-dddaa3b0f61d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM LEVI_MAIN_TEST
+
+VAR_INPUT
+	Ia_for_levi_left AT %I* : LREAL;
+	Ib_for_levi_left AT %I* : LREAL;
+	Ic_for_levi_left AT %I* : LREAL;
+	currentangle_for_levi_left AT %I* : LREAL;
+	
+	Ia_for_levi_right AT %I* : LREAL;
+	Ib_for_levi_right AT %I* : LREAL;
+	Ic_for_levi_right AT %I* : LREAL;
+	currentangle_for_levi_right AT %I* : LREAL;
+	
+	motor_on_for_levi AT %I* : BOOL;
+END_VAR
+
 VAR
 	
 //----------------------------------------------------------------------------------------------------
@@ -582,11 +597,35 @@ CASE Levi_Command OF
 								Drive_current_error := Drive_current_error);
 			
 			//Setting motor feed forward parameters
-			IF Motor_on THEN
+			IF motor_on_for_levi THEN
+				
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
+										Ib := Ib_for_levi_left, 
+										Ic := Ic_for_levi_left,
+										airgap := (0.013 - y), 
+										currentangle := currentangle_for_levi_left,
+										thrust => motor_thrust_l,
+										lift => motor_lift_l);
+				
+								
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
+										Ib := Ib_for_levi_right, 
+										Ic := Ic_for_levi_right,
+										airgap := (0.013 + y), 
+										currentangle := currentangle_for_levi_right,
+										thrust => motor_thrust_r,
+										lift => motor_lift_r);
+ 
+				
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
 			ELSE
+				motor_thrust_l := 0;
+				motor_lift_l := 0;
+				motor_thrust_r := 0;
+				motor_lift_r := 0;
+				
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
@@ -870,7 +909,8 @@ IF Levi_state = E_Levi_States.LEVI_ERROR THEN
 ELSE
 	GVL_LEVI.levitation_fault := FALSE;
 END_IF
-]]></ST>
+
+Control_word[17] := 0;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -205,6 +205,30 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PROP_MAIN_Delft.TcPOU">
       <SubType>Code</SubType>
     </Compile>
