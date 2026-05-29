@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceivegdTemp_Left" Id="{9b8f56df-5c96-4d79-8905-f220eb2b1a1c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceivegdTemp_Left
+VAR_IN_OUT
+	Inputs_Left : CANRXQUEUESTRUCT_E_32;
+	Outputs_Left : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	Temp_a_gd_Left : LREAL;
+	Temp_b_gd_Left : LREAL;
+	Temp_c_gd_Left : LREAL;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO
+    IF Inputs_Left.RxMessages[i].cobId = 700 THEN 
+        Temp_a_gd_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Left.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs_Left.RxMessages[i].data[1]))) / 10.0; 
+        Temp_b_gd_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Left.RxMessages[i].data[2]), 8) OR USINT_TO_UINT(Inputs_Left.RxMessages[i].data[3]))) / 10.0; 
+        Temp_c_gd_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Left.RxMessages[i].data[4]), 8) OR USINT_TO_UINT(Inputs_Left.RxMessages[i].data[5]))) / 10.0; 
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

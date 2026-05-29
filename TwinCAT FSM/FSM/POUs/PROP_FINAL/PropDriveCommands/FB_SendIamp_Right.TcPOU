@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendIamp_Right" Id="{c2957a1e-ae52-4ea7-8158-7fe8c7c25d0b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendIamp_Right
+VAR_INPUT
+	Iamp : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	Iamp_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Right : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Right : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Iamp_Values[1] := INT_TO_BYTE(LREAL_TO_INT(Iamp) AND 16#FF);
+Iamp_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(Iamp), 8) AND 16#FF);
+
+
+TxMessage.cobId := 1200;
+TxMessage.length := 2;
+FOR i := 0 TO 1 DO 
+		TxMessage.data[i] := Iamp_Values[i];
+END_FOR
+CAN_OUTPUTS_Right.TxMessages[2] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceivedqCurrent_Left" Id="{f331f7a8-3bf3-4a10-ae9b-922289867a86}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceivedqCurrent_Left
+VAR_IN_OUT
+	Inputs_Left : CANRXQUEUESTRUCT_E_32;
+	Outputs_Left : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	Id_ref_Left : LREAL;
+	Iq_ref_Left : LREAL;
+	Id_filtered_Left : LREAL;
+	Iq_filtered_Left : LREAL;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Outputs_Left.RxCounter <> Inputs_Left.RxCounter THEN        // check if new data is in the buffer
+   FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+                                                     // is in the buffer
+       	MessageReceived[i] := Inputs_Left.RxMessages[i];   // copy the CAN message
+   END_FOR
+   Outputs_Left.RxCounter := Inputs_Left.RxCounter;            // set equal: the CAN interface then knows,
+                                                     // that you have copied the CAN data
+	FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO        // start the LOOP and check how much data
+                                                     // is in the buffer
+	   IF MessageReceived[i].cobId = 900 THEN 
+		Id_ref_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[0]), 8) OR USINT_TO_UINT(MessageReceived[i].data[1]))) / 100.0;
+		Iq_ref_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[2]), 8) OR USINT_TO_UINT(MessageReceived[i].data[3]))) / 100.0;
+		Id_filtered_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[4]), 8) OR USINT_TO_UINT(MessageReceived[i].data[5]))) / 100.0;
+		Iq_filtered_Left := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[6]), 8) OR USINT_TO_UINT(MessageReceived[i].data[7]))) / 100.0;
+	   END_IF
+   End_for
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

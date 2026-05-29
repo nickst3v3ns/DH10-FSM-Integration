@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendPosVelocity_Left" Id="{1e2439b8-4f57-48a6-932d-a201df6afe29}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendPosVelocity_Left
+VAR_INPUT
+	positionDelft : LREAL;
+	VelocityDelft : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	Position_Values : ARRAY[0..3] OF BYTE;
+	Velocity_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Left : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Left : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Position_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(positionDelft*100) AND 16#FF);
+Position_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100), 8) AND 16#FF);
+Position_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100), 16) AND 16#FF);
+Position_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100), 24) AND 16#FF);
+
+Velocity_Values[1] := INT_TO_BYTE(LREAL_TO_INT(VelocityDelft) AND 16#FF);
+Velocity_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(VelocityDelft), 8) AND 16#FF);
+
+TxMessage.cobId := 800;
+TxMessage.length := 6;
+FOR i := 0 TO 5 DO 
+	IF i < 4 THEN 
+		TxMessage.data[i] := Position_Values[i];
+	ELSE 
+		TxMessage.data[i] := Velocity_Values[i - 4];
+	END_IF
+END_FOR
+CAN_OUTPUTS_Left.TxMessages[0] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="PlcTask_1ms_PTC_CAN_RX_FastFlow_" Id="{542c72c0-a2ba-4a0e-837a-68294723d0db}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>1000</CycleTime>
+    <Priority>11</Priority>
+    <PouCall>
+      <Name>FastCounter</Name>
+    </PouCall>
+    <TaskFBGuid>{b7f5731c-bf16-4dc8-a3df-32d6bb87b4ee}</TaskFBGuid>
+    <Fb_init>{463799f2-cf38-4eff-8b84-ec4e1a7e0acf}</Fb_init>
+    <Fb_exit>{aebb237a-b950-423a-9dab-3a6a08840edf}</Fb_exit>
+    <CycleUpdate>{8997a838-dcba-49b8-a6c4-21bc046a247a}</CycleUpdate>
+    <PostCycleUpdate>{e3d31de2-fa90-4f9a-931c-e3c7d11f234d}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

@@ -9,9 +9,6 @@
     <Name>TwinCAT Measurement FSM project</Name>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="FSM scopes.tcscopex">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Levi.tcscopex">
       <SubType>Content</SubType>
     </Content>

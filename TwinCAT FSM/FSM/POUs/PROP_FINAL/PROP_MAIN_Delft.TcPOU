@@ -62,87 +62,87 @@ VAR
 	VelocityErrorIntegral : REAL;
 	InitialIntegralValue : LREAL;
 	
-	Send_CAN_PosVelocity : FB_SendPosVelocity;
-	Send_CAN_CurrentAngle : FB_SendCurrentAngle;
-	Send_CAN_Iamp : FB_SendIamp;
-	Send_CAN_PodState : FB_SendPodState;
-	Send_CAN_PositionOffset : FB_SendPositionOffset;
-	Send_CAN_PropFlag : FB_SendPropFlag;
-	Send_CAN_VelocityGains : FB_SendVelocityGains;
-	Send_CAN_DriveReset : FB_SendDriveReset;
-	Send_CAN_CANDelay : FB_SendCANDelay;
-	Send_CAN_TargetVelocity : FB_SendTargetVelocity;
+	Send_CAN_PosVelocity_Right : FB_SendPosVelocity_Right;
+	Send_CAN_CurrentAngle_Right : FB_SendCurrentAngle_Right;
+	Send_CAN_Iamp_Right : FB_SendIamp_Right;
+	Send_CAN_PodState_Right : FB_SendPodState_Right;
+	Send_CAN_PositionOffset_Right : FB_SendPositionOffset_Right;
+	Send_CAN_PropFlag_Right : FB_SendPropFlag_Right;
+	Send_CAN_VelocityGains_Right : FB_SendVelocityGains_Right;
+	Send_CAN_DriveReset_Right : FB_SendDriveReset_Right;
+	Send_CAN_CANDelay_Right : FB_SendCANDelay_Right;
+	Send_CAN_TargetVelocity_Right : FB_SendTargetVelocity_Right;
 	
-	Send_CAN_PosVelocity_1 : FB_SendPosVelocity_1;
-	Send_CAN_CurrentAngle_1 : FB_SendCurrentAngle_1;
-	Send_CAN_Iamp_1 : FB_SendIamp_1;
-	Send_CAN_PodState_1 : FB_SendPodState_1;
-	Send_CAN_PositionOffset_1 : FB_SendPositionOffset_1;
-	Send_CAN_PropFlag_1 : FB_SendPropFlag_1;
-	Send_CAN_VelocityGains_1 : FB_SendVelocityGains_1;
-	Send_CAN_DriveReset_1 : FB_SendDriveReset_1;
-	Send_CAN_CANDelay_1 : FB_SendCANDelay_1;
-	Send_CAN_TargetVelocity_1 : FB_SendTargetVelocity_1;
+	Send_CAN_PosVelocity_Left : FB_SendPosVelocity_Left;
+	Send_CAN_CurrentAngle_Left : FB_SendCurrentAngle_Left;
+	Send_CAN_Iamp_Left : FB_SendIamp_Left;
+	Send_CAN_PodState_Left : FB_SendPodState_Left;
+	Send_CAN_PositionOffset_Left : FB_SendPositionOffset_Left;
+	Send_CAN_PropFlag_Left : FB_SendPropFlag_Left;
+	Send_CAN_VelocityGains_Left : FB_SendVelocityGains_Left;
+	Send_CAN_DriveReset_Left : FB_SendDriveReset_Left;
+	Send_CAN_CANDelay_Left : FB_SendCANDelay_Left;
+	Send_CAN_TargetVelocity_Left : FB_SendTargetVelocity_Left;
 	
-	Receive_CAN_abcCurrent : FB_ReceiveabcCurrent;
-	Receive_CAN_dqCurrent : FB_ReceivedqCurrent;
-	Receive_CAN_gdTemp : FB_ReceivegdTemp;
-	Receive_CAN_dqVoltages : FB_ReceivedqVoltages;
-	Receive_CAN_FAULT : FB_ReceiveFAULT;
-	Receive_CAN_PropState : FB_ReceivePROPSTATEs;
-	Receive_CAN_Vbus : FB_ReceiveVbus;
+	Receive_CAN_abcCurrent_Right : FB_ReceiveabcCurrent_Right;
+	Receive_CAN_dqCurrent_Right : FB_ReceivedqCurrent_Right;
+	Receive_CAN_gdTemp_Right : FB_ReceivegdTemp_Right;
+	Receive_CAN_dqVoltages_Right : FB_ReceivedqVoltages_Right;
+	Receive_CAN_FAULT_Right : FB_ReceiveFAULT_Right;
+	Receive_CAN_PropState_Right : FB_ReceivePROPSTATES_Right;
+	Receive_CAN_Vbus_Right : FB_ReceiveVbus_Right;
 	
-	Receive_CAN_abcCurrent_1 : FB_ReceiveabcCurrent_1;
-	Receive_CAN_dqCurrent_1 : FB_ReceivedqCurrent_1;
-	Receive_CAN_gdTemp_1 : FB_ReceivegdTemp_1;
-	Receive_CAN_dqVoltages_1 : FB_ReceivedqVoltages_1;
-	Receive_CAN_FAULT_1 : FB_ReceiveFAULT_1;
-	Receive_CAN_PropState_1 : FB_ReceivePROPSTATEs_1;
-	Receive_CAN_Vbus_1 : FB_ReceiveVbus_1;
+	Receive_CAN_abcCurrent_Left : FB_ReceiveabcCurrent_Left;
+	Receive_CAN_dqCurrent_Left : FB_ReceivedqCurrent_Left;
+	Receive_CAN_gdTemp_Left : FB_ReceivegdTemp_Left;
+	Receive_CAN_dqVoltages_Left : FB_ReceivedqVoltages_Left;
+	Receive_CAN_FAULT_Left : FB_ReceiveFAULT_Left;
+	Receive_CAN_PropState_Left : FB_ReceivePROPSTATES_Left;
+	Receive_CAN_Vbus_Left : FB_ReceiveVbus_Left;
 	
-	Id_ref : LREAL;
-	Iq_ref : LREAL;
-	Id_filtered : LREAL;
-	Iq_filtered : LREAL;
+	Id_ref_Right : LREAL;
+	Iq_ref_Right : LREAL;
+	Id_filtered_Right : LREAL;
+	Iq_filtered_Right : LREAL;
 	
-	Id_ref_1 : LREAL;
-	Iq_ref_1 : LREAL;
-	Id_filtered_1 : LREAL;
-	Iq_filtered_1 : LREAL;
+	Id_ref_Left : LREAL;
+	Iq_ref_Left : LREAL;
+	Id_filtered_Left : LREAL;
+	Iq_filtered_Left : LREAL;
 	
-	Temp_a_gd : LREAL;
-	Temp_b_gd : LREAL;
-	Temp_c_gd : LREAL;
+	Temp_a_gd_Right : LREAL;
+	Temp_b_gd_Right : LREAL;
+	Temp_c_gd_Right : LREAL;
 	
-	Temp_a_gd_1 : LREAL;
-	Temp_b_gd_1 : LREAL;
-	Temp_c_gd_1 : LREAL;
+	Temp_a_gd_Left : LREAL;
+	Temp_b_gd_Left : LREAL;
+	Temp_c_gd_Left : LREAL;
 	
-	Ia : LREAL;
-	Ib : LREAL;
-	Ic : LREAL; 
+	Ia_Right : LREAL;
+	Ib_Right : LREAL;
+	Ic_Right : LREAL; 
 	
-	Ia_1 : LREAL;
-	Ib_1 : LREAL;
-	Ic_1 : LREAL; 
+	Ia_Left : LREAL;
+	Ib_Left : LREAL;
+	Ic_Left : LREAL; 
 	
-	Vd : LREAL;
-	Vq : LREAL;
+	Vd_Right : LREAL;
+	Vq_Right : LREAL;
 	
-	Vd_1 : LREAL;
-	Vq_1 : LREAL;
+	Vd_Left : LREAL;
+	Vq_Left : LREAL;
 	
-	FAULT : LREAL;
+	FAULT_Right : LREAL;
 
-	FAULT_1 : LREAL;
+	FAULT_Left : LREAL;
 	
-	PropState : LREAL;
+	PropState_Right : LREAL;
 	
-	PropState_1 : LREAL;
+	PropState_Left : LREAL;
 	
-	Vbus : LREAL;
+	Vbus_Right : LREAL;
 	
-	Vbus_1 : LREAL;
+	Vbus_Left : LREAL;
 	
 	delft_converter_front : FB_PositionConverter;
 	delft_converter_back  : FB_PositionConverter;
@@ -265,106 +265,106 @@ CASE barcodeState OF
 END_CASE
 
 
-IF GVL_PropCAN.CAN_OUTPUTS.TxCounter = GVL_PropCAN.CAN_INPUTS.TxCounter THEN
+IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN
 	
 	// Drive 0
 
-	Send_CAN_PosVelocity(positionDelft := positionDelft,
+	Send_CAN_PosVelocity_Right(positionDelft := positionDelft,
 		VelocityDelft := VelocityDelft, 
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_CurrentAngle(CurrentAngle := CurrentAngle,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_CurrentAngle_Right(CurrentAngle := CurrentAngle,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_Iamp(Iamp := Iamp,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_Iamp_Right(Iamp := Iamp,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_PodState(PodState := PodState,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_PodState_Right(PodState := PodState,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_PositionOffset(PositionOffset := PositionOffset,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_PositionOffset_Right(PositionOffset := PositionOffset,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_PropFlag(PropFlag := PropFlag,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_PropFlag_Right(PropFlag := PropFlag,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_VelocityGains(ProportionalGain := ProportionalGain,
+	Send_CAN_VelocityGains_Right(ProportionalGain := ProportionalGain,
 		IntegralGain := IntegralGain,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_TargetVelocity(TargetVelocity := TargetVelocity,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_TargetVelocity_Right(TargetVelocity := TargetVelocity,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_DriveReset(DriveReset := DriveReset,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_DriveReset_Right(DriveReset := DriveReset,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_CANDelay(CANDelay := CANDelay,
-		CAN_OUTPUTS := GVL_PropCAN.CAN_OUTPUTS, 
-		CAN_INPUTS := GVL_PropCAN.CAN_INPUTS);
+	Send_CAN_CANDelay_Right(CANDelay := CANDelay,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	GVL_PropCAN.CAN_OUTPUTS.NoOfTxMessages := 10;
-	GVL_PropCAN.CAN_OUTPUTS.TxCounter := GVL_PropCAN.CAN_INPUTS.TxCounter + 1;
+	GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := 10;
+	GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
 	check := check +1;
 END_IF
 		
 		
-IF GVL_PropCAN.CAN_OUTPUTS_1.TxCounter = GVL_PropCAN.CAN_INPUTS_1.TxCounter THEN	
+IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounter THEN	
 	
 // Drive 1
 		
-	Send_CAN_PosVelocity_1(positionDelft := positionDelft,
+	Send_CAN_PosVelocity_Left(positionDelft := positionDelft,
 		VelocityDelft := VelocityDelft, 
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_CurrentAngle_1(CurrentAngle := CurrentAngle,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_CurrentAngle_Left(CurrentAngle := CurrentAngle,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_Iamp_1(Iamp := Iamp,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_Iamp_Left(Iamp := Iamp,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_PodState_1(PodState := PodState,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_PodState_Left(PodState := PodState,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_PositionOffset_1(PositionOffset := PositionOffset,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_PositionOffset_Left(PositionOffset := PositionOffset,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_PropFlag_1(PropFlag := PropFlag,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_PropFlag_Left(PropFlag := PropFlag,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_VelocityGains_1(ProportionalGain := ProportionalGain,
+	Send_CAN_VelocityGains_Left(ProportionalGain := ProportionalGain,
 		IntegralGain := IntegralGain,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_TargetVelocity_1(TargetVelocity := TargetVelocity,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_TargetVelocity_Left(TargetVelocity := TargetVelocity,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_DriveReset_1(DriveReset := DriveReset,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_DriveReset_Left(DriveReset := DriveReset,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_CANDelay_1(CANDelay := CANDelay,
-		CAN_OUTPUTS_1 := GVL_PropCAN.CAN_OUTPUTS_1, 
-		CAN_INPUTS_1 := GVL_PropCAN.CAN_INPUTS_1);
+	Send_CAN_CANDelay_Left(CANDelay := CANDelay,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 	
-	GVL_PropCAN.CAN_OUTPUTS_1.NoOfTxMessages := 10;
-	GVL_PropCAN.CAN_OUTPUTS_1.TxCounter := GVL_PropCAN.CAN_INPUTS_1.TxCounter + 1;
+	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 10;
+	GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
 	check_1 := check_1 +1;
 END_IF
 
@@ -375,107 +375,107 @@ CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
 
 // Drive 0 
 
-Receive_CAN_dqCurrent(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_dqCurrent_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Id_ref := Receive_CAN_dqCurrent.Id_ref;
-Iq_ref := Receive_CAN_dqCurrent.Iq_ref;
-Id_filtered := Receive_CAN_dqCurrent.Id_filtered;
-Iq_filtered := Receive_CAN_dqCurrent.Iq_filtered;	
+Id_ref_Right := Receive_CAN_dqCurrent_Right.Id_ref_Right;
+Iq_ref_Right := Receive_CAN_dqCurrent_Right.Iq_ref_Right;
+Id_filtered_Right := Receive_CAN_dqCurrent_Right.Id_filtered_Right;
+Iq_filtered_Right := Receive_CAN_dqCurrent_Right.Iq_filtered_Right;	
 
-Receive_CAN_gdTemp(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_gdTemp_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Temp_a_gd := Receive_CAN_gdTemp.Temp_a_gd;
-Temp_b_gd := Receive_CAN_gdTemp.Temp_b_gd;
-Temp_c_gd := Receive_CAN_gdTemp.Temp_c_gd;
+Temp_a_gd_Right := Receive_CAN_gdTemp_Right.Temp_a_gd_Right;
+Temp_b_gd_Right := Receive_CAN_gdTemp_Right.Temp_b_gd_Right;
+Temp_c_gd_Right := Receive_CAN_gdTemp_Right.Temp_c_gd_Right;
 
-Receive_CAN_abcCurrent(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_abcCurrent_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Ia := Receive_CAN_abcCurrent.Ia;
-Ib := Receive_CAN_abcCurrent.Ib;
-Ic := Receive_CAN_abcCurrent.Ic;
+Ia_Right := Receive_CAN_abcCurrent_Right.Ia_Right;
+Ib_Right := Receive_CAN_abcCurrent_Right.Ib_Right;
+Ic_Right := Receive_CAN_abcCurrent_Right.Ic_Right;
 
-Receive_CAN_dqVoltages(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_dqVoltages_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Vq := Receive_CAN_dqVoltages.Vq;
-Vd := Receive_CAN_dqVoltages.Vd;
+Vq_Right := Receive_CAN_dqVoltages_Right.Vq_Right;
+Vd_Right := Receive_CAN_dqVoltages_Right.Vd_Right;
 
-Receive_CAN_FAULT(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_FAULT_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Fault := Receive_CAN_FAULT.Fault;
+Fault_Right := Receive_CAN_FAULT_Right.Fault_Right;
 
-Receive_CAN_PropState(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_PropState_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-PropState := Receive_CAN_PropState.PropState;
+PropState_Right := Receive_CAN_PropState_Right.PropState_Right;
 
-Receive_CAN_Vbus(Inputs := GVL_PropCAN.CAN_INPUTS, 
-	Outputs := GVL_PropCAN.CAN_OUTPUTS);
+Receive_CAN_Vbus_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
 	
-Vbus := Receive_CAN_Vbus.Vbus;
+Vbus_Right := Receive_CAN_Vbus_Right.Vbus_Right;
 
 // Drive 1
 
-Receive_CAN_dqCurrent_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_dqCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Id_ref_1 := Receive_CAN_dqCurrent_1.Id_ref_1;
-Iq_ref_1 := Receive_CAN_dqCurrent_1.Iq_ref_1;
-Id_filtered_1 := Receive_CAN_dqCurrent_1.Id_filtered_1;
-Iq_filtered_1 := Receive_CAN_dqCurrent_1.Iq_filtered_1;	
+Id_ref_Left := Receive_CAN_dqCurrent_Left.Id_ref_Left;
+Iq_ref_Left := Receive_CAN_dqCurrent_Left.Iq_ref_Left;
+Id_filtered_Left := Receive_CAN_dqCurrent_Left.Id_filtered_Left;
+Iq_filtered_Left := Receive_CAN_dqCurrent_Left.Iq_filtered_Left;	
 
-Receive_CAN_gdTemp_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_gdTemp_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Temp_a_gd_1 := Receive_CAN_gdTemp_1.Temp_a_gd_1;
-Temp_b_gd_1 := Receive_CAN_gdTemp_1.Temp_b_gd_1;
-Temp_c_gd_1 := Receive_CAN_gdTemp_1.Temp_c_gd_1;
+Temp_a_gd_Left := Receive_CAN_gdTemp_Left.Temp_a_gd_Left;
+Temp_b_gd_Left := Receive_CAN_gdTemp_Left.Temp_b_gd_Left;
+Temp_c_gd_Left := Receive_CAN_gdTemp_Left.Temp_c_gd_Left;
 
-Receive_CAN_abcCurrent_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_abcCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Ia_1 := Receive_CAN_abcCurrent_1.Ia_1;
-Ib_1 := Receive_CAN_abcCurrent_1.Ib_1;
-Ic_1 := Receive_CAN_abcCurrent_1.Ic_1;
+Ia_Left := Receive_CAN_abcCurrent_Left.Ia_Left;
+Ib_Left := Receive_CAN_abcCurrent_Left.Ib_Left;
+Ic_Left := Receive_CAN_abcCurrent_Left.Ic_Left;
 
-Receive_CAN_dqVoltages_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_dqVoltages_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Vq_1 := Receive_CAN_dqVoltages_1.Vq_1;
-Vd_1 := Receive_CAN_dqVoltages_1.Vd_1;
+Vq_Left := Receive_CAN_dqVoltages_Left.Vq_Left;
+Vd_Left := Receive_CAN_dqVoltages_Left.Vd_Left;
 
-Receive_CAN_FAULT_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_FAULT_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Fault_1 := Receive_CAN_FAULT_1.Fault_1;
+Fault_Left := Receive_CAN_FAULT_Left.Fault_Left;
 
-Receive_CAN_PropState_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_PropState_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-PropState_1 := Receive_CAN_PropState_1.PropState_1;
+PropState_Left := Receive_CAN_PropState_Left.PropState_Left;
 
-Receive_CAN_Vbus_1(Inputs_1 := GVL_PropCAN.CAN_INPUTS_1, 
-	Outputs_1 := GVL_PropCAN.CAN_OUTPUTS_1);
+Receive_CAN_Vbus_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
+	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 	
-Vbus_1 := Receive_CAN_Vbus_1.Vbus_1;
+Vbus_Left := Receive_CAN_Vbus_Left.Vbus_Left;
 
 // Check and plot what should be the initial integral value of the velocity PI controller (Added by Roemer & Remi)
 VelocityError := TargetVelocity - VelocityDelft;
 VelocityErrorIntegral := VelocityErrorIntegral + (VelocityError * 0.01);
 
 //Send data to levi
-Ia_for_levi_left := Ia;
-Ib_for_levi_left := Ib;
-Ic_for_levi_left := Ic;
+Ia_for_levi_left := Ia_Left;
+Ib_for_levi_left := Ib_Left;
+Ic_for_levi_left := Ic_Left;
 currentangle_for_levi_left := CurrentAngle;
 
-Ia_for_levi_right := Ia_1;
-Ib_for_levi_right := Ib_1;
-Ic_for_levi_right := Ic_1;
+Ia_for_levi_right := Ia_Right;
+Ib_for_levi_right := Ib_Right;
+Ic_for_levi_right := Ic_Right;
 currentangle_for_levi_right := CurrentAngle;
 
 IF PropFlag = 1 THEN

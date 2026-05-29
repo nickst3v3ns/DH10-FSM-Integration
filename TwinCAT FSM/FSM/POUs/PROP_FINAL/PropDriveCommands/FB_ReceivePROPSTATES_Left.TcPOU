@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceivePROPSTATES_Left" Id="{05e7a3bf-1bc6-4480-b472-45eb5dc9167e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceivePROPSTATES_Left
+VAR_IN_OUT
+	Inputs_Left : CANRXQUEUESTRUCT_E_32;
+	Outputs_Left : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	PropState_Left : UINT;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO
+    IF Inputs_Left.RxMessages[i].cobId = 100 THEN 
+        PropState_Left := Inputs_Left.RxMessages[i].data[0];
+    END_IF
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

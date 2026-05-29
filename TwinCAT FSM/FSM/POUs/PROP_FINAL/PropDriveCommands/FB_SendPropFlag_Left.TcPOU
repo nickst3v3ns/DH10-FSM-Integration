@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendPropFlag_Left" Id="{5cc47334-127e-4155-9039-cd987bb74302}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendPropFlag_Left
+VAR_INPUT
+	PropFlag : INT;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Left : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Left : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ 
+TxMessage.cobId := 120;
+TxMessage.length := 1;
+TxMessage.data[0] :=  INT_TO_BYTE(PropFlag AND 16#FF);
+CAN_OUTPUTS_Left.TxMessages[5] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

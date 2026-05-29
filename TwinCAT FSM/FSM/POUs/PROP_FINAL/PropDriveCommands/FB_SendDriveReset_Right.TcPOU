@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendDriveReset_Right" Id="{1175849d-ee68-4283-90bd-3fb54b7e7e4a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendDriveReset_Right
+VAR_INPUT
+	DriveReset : INT;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Right : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Right : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ 
+TxMessage.cobId := 150;
+TxMessage.length := 1;
+TxMessage.data[0] :=  INT_TO_BYTE(DriveReset AND 16#FF);
+CAN_OUTPUTS_Right.TxMessages[8] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

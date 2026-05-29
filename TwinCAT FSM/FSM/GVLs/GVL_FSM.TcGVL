@@ -16,6 +16,9 @@ VAR_GLOBAL
 	bengage_brakes AT %Q*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	bCLKTrigger AT %Q*:				BOOL := FALSE; 
 	bbrakes_engaged AT %I*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bbrakes_rearm AT %Q*:			BOOL := FALSE;
+	
+
 	
 	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
 	

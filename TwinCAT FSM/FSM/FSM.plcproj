@@ -100,6 +100,9 @@
     <Compile Include="PlcTask_10ms_Barcode_.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PlcTask_1ms_PTC_CAN_RX_FastFlow_.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -205,109 +208,109 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PROP_MAIN_Delft.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveabcCurrent_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqCurrent_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivedqVoltages_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveFAULT_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivegdTemp_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePROPSTATES_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVbus_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPositionOffset_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosVelocity_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag_1.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\SAFETY\FB_DCLINK.TcPOU">
@@ -419,8 +422,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -496,14 +499,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

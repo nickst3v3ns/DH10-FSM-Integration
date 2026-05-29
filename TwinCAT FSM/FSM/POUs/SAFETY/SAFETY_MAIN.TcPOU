@@ -7,6 +7,9 @@ VAR
 	//INPUTS
 	SafetyResetButton AT %I*		:BOOL;
 	
+	bRearm AT %Q*: BOOL;
+	bCLK AT %Q*: BOOL;
+	
 	//INTERNAL VARIABLE
 	SafetyResetButton_RT 			:R_TRIG;
 	
@@ -43,6 +46,7 @@ SafetyErrorAcknowledge := SafetyResetButton_RT.Q;
 
 //DC-LINK
 fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_LINK_SAFE, DC_LINK_SAFE_PROP => GVL_Prop.DC_LINK_SAFE); 
+
 
 GVL_FSM.bEstopError := bEstopError;
 GVL_FSM.bEstopRestart := bEstopRestart;

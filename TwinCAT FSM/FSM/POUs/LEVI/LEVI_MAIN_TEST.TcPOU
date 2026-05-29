@@ -17,6 +17,11 @@ VAR_INPUT
 	motor_on_for_levi AT %I* : BOOL;
 END_VAR
 
+VAR_OUTPUT
+	motor_airgap_left AT %Q* : LREAL;
+	motor_airgap_right AT %Q* : LREAL;
+END_VAR
+
 VAR
 	
 //----------------------------------------------------------------------------------------------------
@@ -328,6 +333,8 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
+motor_airgap_left := 0.013 - y;
+motor_airgap_right := 0.013 + y;
 
 //Falling edge trigger for when sensecon disables levitation.
 //This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
@@ -602,7 +609,7 @@ CASE Levi_Command OF
 				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
 										Ib := Ib_for_levi_left, 
 										Ic := Ic_for_levi_left,
-										airgap := (0.013 - y), 
+										airgap := motor_airgap_left, 
 										currentangle := currentangle_for_levi_left,
 										thrust => motor_thrust_l,
 										lift => motor_lift_l);
@@ -611,15 +618,20 @@ CASE Levi_Command OF
 				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
 										Ib := Ib_for_levi_right, 
 										Ic := Ic_for_levi_right,
-										airgap := (0.013 + y), 
+										airgap := motor_airgap_right, 
 										currentangle := currentangle_for_levi_right,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
  
-				
+				(*
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
+				*)
+				
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
 			ELSE
 				motor_thrust_l := 0;
 				motor_lift_l := 0;
@@ -909,8 +921,7 @@ IF Levi_state = E_Levi_States.LEVI_ERROR THEN
 ELSE
 	GVL_LEVI.levitation_fault := FALSE;
 END_IF
-
-Control_word[17] := 0;]]></ST>
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

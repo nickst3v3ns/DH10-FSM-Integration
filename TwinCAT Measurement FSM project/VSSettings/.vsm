@@ -4,3098 +4,6 @@
   <FileName></FileName>
   <Children>
     <Node>
-      <Title>FSM scopes</Title>
-      <Expanded>True</Expanded>
-      <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\FSM scopes.tcscopex</FileName>
-      <Children>
-        <Node>
-          <Title>DataPool</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>aintegral_terms[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegral_terms[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegral_terms[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegrals[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegrals[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aoffset_airgaps_ems[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[12]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[13]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[14]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[16]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[17]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[18]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[19]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[20]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[21]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[22]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Control_word[23]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[12]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[13]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[14]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[16]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[17]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[18]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[19]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[20]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[21]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[22]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>drive_feedback_timeouts[23]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[12]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[13]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[14]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[16]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[17]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[18]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[19]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[20]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[21]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[22]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Drive_status[23]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ia</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ia_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Iamp</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ib</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ib_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ic</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Ic_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Id_filtered</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Id_filtered_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Id_ref</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Id_ref_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Iq_filtered</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Iq_filtered_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Iq_ref</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Iq_ref_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>motor_lift_l</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>motor_lift_r</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>motor_thrust_l</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>motor_thrust_r</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>pitch</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>pitch_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>positionDelft</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[12]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[13]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[14]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[16]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[17]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[18]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[19]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[20]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[21]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[22]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Real_currents[23]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Requested_currents[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>roll</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>roll_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTBACK[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_LEFTFRONT[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTBACK[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_MOTOR_RIGHTFRONT[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>TargetVelocity</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_a_gd</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_a_gd_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_b_gd</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_b_gd_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_c_gd</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Temp_c_gd_1</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>VelocityDelft</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>VelocityErrorIntegral</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>y_target_airgap</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>yaw_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>z_manual_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[8]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[9]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[10]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>SensorDataArray[11]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_EMS[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[3]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[4]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[5]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[6]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>T_HEMS[7]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>y</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>yaw</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>z</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>HEMS currents</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Requested HEMS currents</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Requested_currents[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Real HEMS currents</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Real_currents[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[12]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[13]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[14]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[15]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>EMS currents</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Requested EMS currents</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Requested_currents[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Real EMS currents</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Real_currents[16]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[18]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[19]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[20]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[21]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[22]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[23]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Real_currents[17]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Vertical airgaps</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Vertical sensor airgaps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>SensorDataArray[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Vertical offset airgaps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aoffset_airgaps[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Lateral airgaps</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Lateral sensor airgaps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>SensorDataArray[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>SensorDataArray[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Lateral offset airgaps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aoffset_airgaps_ems[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps_ems[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps_ems[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps_ems[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps_ems[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aoffset_airgaps_ems[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Degrees of freedom</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Distances</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>z</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>y</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>z_manual_target</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>y_target_airgap</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Angles</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>pitch</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>roll</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>yaw</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>yaw_target</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>roll_target</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>pitch_target</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Integrals levi</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Vertical integrals</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aintegral_terms[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegral_terms[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegral_terms[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Lateral integrals</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aintegrals[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegrals[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Thermal</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>HEMS temps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_HEMS[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_HEMS[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>EMS temps</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_EMS[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_EMS[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Currents prop</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Ia</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Ib</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Ic</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Ia_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Ib_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Ic_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Id/Iq</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (8)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Id_filtered</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Id_filtered_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Id_ref</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Id_ref_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (9)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Iq_filtered</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Iq_filtered_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Iq_ref</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Iq_ref_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Position</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (16)</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>positionDelft</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>VelocityDelft</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>TargetVelocity</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Temperature prop drive</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (17)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Temp_a_gd</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Temp_a_gd_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Temp_b_gd</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Temp_b_gd_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Temp_c_gd</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Temp_c_gd_1</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Motor coil temperatures</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (3)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTBACK[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (4)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_LEFTFRONT[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (5)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTBACK[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (6)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Control words</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (10)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Control_word[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[12]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[13]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[14]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[15]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[16]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[17]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[18]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[19]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[20]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[21]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[22]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Control_word[23]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Drive status</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (11)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>Drive_status[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[12]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[13]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[14]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[15]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[16]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[17]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[18]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[19]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[20]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[21]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[22]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Drive_status[23]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Drive timeouts</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (12)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>drive_feedback_timeouts[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[3]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[4]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[5]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[6]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[8]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[9]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[10]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[11]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[12]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[13]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[14]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[15]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[16]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[17]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[18]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[19]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[20]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[21]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[22]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>drive_feedback_timeouts[23]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Integrals prop</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>velocity error</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>VelocityErrorIntegral</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>prop forces</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>thrust</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>motor_thrust_l</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>motor_thrust_r</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>lift</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>motor_lift_l</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>motor_lift_r</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Trigger</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children />
-        </Node>
-      </Children>
-    </Node>
-    <Node>
       <Title>Levi</Title>
       <Expanded>True</Expanded>
       <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\Levi.tcscopex</FileName>
@@ -3106,36 +14,6 @@
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>aintegral_terms[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegral_terms[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegral_terms[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegrals[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aintegrals[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
               <Title>aoffset_airgaps[0]</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -3478,24 +356,6 @@
               <Children />
             </Node>
             <Node>
-              <Title>y_target_airgap</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>yaw_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>z_manual_target</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
               <Title>SensorDataArray[5]</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -3640,13 +500,31 @@
               <Children />
             </Node>
             <Node>
+              <Title>y_target_airgap</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>yaw</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
+              <Title>yaw_target</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>z</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>z_manual_target</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -3701,12 +579,6 @@
                 </Node>
                 <Node>
                   <Title>Requested_currents[7]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[0]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -3810,6 +682,12 @@
                 </Node>
                 <Node>
                   <Title>Real_currents[15]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>Requested_currents[0]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4114,6 +992,12 @@
                   <Children />
                 </Node>
                 <Node>
+                  <Title>z_manual_target</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
                   <Title>y</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
@@ -4121,12 +1005,6 @@
                 </Node>
                 <Node>
                   <Title>y_target_airgap</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>z_manual_target</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4145,25 +1023,25 @@
                   <Children />
                 </Node>
                 <Node>
-                  <Title>roll</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>yaw</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
                   <Title>pitch_target</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
+                  <Title>roll</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
                   <Title>roll_target</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>yaw</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4185,47 +1063,15 @@
           <Children>
             <Node>
               <Title>Vertical integrals</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aintegral_terms[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegral_terms[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegral_terms[2]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
+              <Children />
             </Node>
             <Node>
               <Title>Lateral integrals</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aintegrals[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>aintegrals[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
+              <Children />
             </Node>
           </Children>
         </Node>
@@ -4365,85 +1211,85 @@
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>Ia</Title>
+              <Title>Ia_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Ia_1</Title>
+              <Title>Ia_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Ib</Title>
+              <Title>Ib_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Ib_1</Title>
+              <Title>Ib_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Ic</Title>
+              <Title>Ic_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Ic_1</Title>
+              <Title>Ic_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Id_filtered</Title>
+              <Title>Id_filtered_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Id_filtered_1</Title>
+              <Title>Id_filtered_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Id_ref</Title>
+              <Title>Id_ref_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Id_ref_1</Title>
+              <Title>Id_ref_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Iq_filtered</Title>
+              <Title>Iq_filtered_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Iq_filtered_1</Title>
+              <Title>Iq_filtered_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Iq_ref</Title>
+              <Title>Iq_ref_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Iq_ref_1</Title>
+              <Title>Iq_ref_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -4671,37 +1517,37 @@
               <Children />
             </Node>
             <Node>
-              <Title>Temp_a_gd</Title>
+              <Title>Temp_a_gd_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Temp_a_gd_1</Title>
+              <Title>Temp_a_gd_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Temp_b_gd</Title>
+              <Title>Temp_b_gd_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Temp_b_gd_1</Title>
+              <Title>Temp_b_gd_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Temp_c_gd</Title>
+              <Title>Temp_c_gd_Left</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Temp_c_gd_1</Title>
+              <Title>Temp_c_gd_Right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -4716,28 +1562,28 @@
         </Node>
         <Node>
           <Title>Currents prop</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Ia</Title>
+                  <Title>Ic_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Ib</Title>
+                  <Title>Ib_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Ic</Title>
+                  <Title>Ia_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4746,23 +1592,23 @@
             </Node>
             <Node>
               <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Ia_1</Title>
+                  <Title>Ia_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Ib_1</Title>
+                  <Title>Ib_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Ic_1</Title>
+                  <Title>Ic_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4773,34 +1619,34 @@
         </Node>
         <Node>
           <Title>Id/Iq</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (8)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Id_filtered</Title>
+                  <Title>Id_filtered_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Id_filtered_1</Title>
+                  <Title>Id_filtered_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Id_ref</Title>
+                  <Title>Id_ref_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Id_ref_1</Title>
+                  <Title>Id_ref_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4809,29 +1655,29 @@
             </Node>
             <Node>
               <Title>Axis Group (9)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Iq_filtered</Title>
+                  <Title>Iq_filtered_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Iq_filtered_1</Title>
+                  <Title>Iq_filtered_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Iq_ref</Title>
+                  <Title>Iq_ref_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Iq_ref_1</Title>
+                  <Title>Iq_ref_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4875,46 +1721,46 @@
         </Node>
         <Node>
           <Title>Temperature prop drive</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (17)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Temp_a_gd</Title>
+                  <Title>Temp_a_gd_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Temp_a_gd_1</Title>
+                  <Title>Temp_a_gd_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Temp_b_gd</Title>
+                  <Title>Temp_b_gd_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Temp_b_gd_1</Title>
+                  <Title>Temp_b_gd_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Temp_c_gd</Title>
+                  <Title>Temp_c_gd_Left</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Temp_c_gd_1</Title>
+                  <Title>Temp_c_gd_Right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -4925,12 +1771,12 @@
         </Node>
         <Node>
           <Title>Motor coil temperatures</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (3)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -4991,7 +1837,7 @@
             </Node>
             <Node>
               <Title>Axis Group (4)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -5052,7 +1898,7 @@
             </Node>
             <Node>
               <Title>Axis Group (5)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -5113,7 +1959,7 @@
             </Node>
             <Node>
               <Title>Axis Group (6)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
