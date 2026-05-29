@@ -173,12 +173,12 @@ VAR
 //----------------------------------------------------------------------------------------------------
 
 	//Vertical control setup
-	FB_control_vert_init: ST_FB_vertical_levitation_control_TcCom_InitStruct := (noid:=16#01010030);
-	FB_control_vert: FB_vertical_levitation_control_TcCom_InitStruct(FB_control_vert_init);
+	FB_control_vert_init: ST_FB_vertical_levitation_control_new_TcCom_InitStruct := (noid:=16#01010030);
+	FB_control_vert: FB_vertical_levitation_control_new_TcCom_InitStruct(FB_control_vert_init);
 	
-	Control_vert_inputs: ST_vertical_levitation_control_U_T;
-	Control_vert_outputs: ST_vertical_levitation_control_Y_T;
-	Control_vert_parameters: ST_P_vertical_levitation_control_T := FB_control_vert.stvertical_levitation_control_P;
+	Control_vert_inputs: ST_vertical_levitation_control_new_U_T;
+	Control_vert_outputs: ST_vertical_levitation_control_new_Y_T;
+	Control_vert_parameters: ST_P_vertical_levitation_control_new_T := FB_control_vert.stvertical_levitation_control_new_P;
 	
 	//Lateral control setup
 	FB_control_lat_init: ST_FB_lateral_levitation_control_TcCom_InitStruct := (noid:=16#01010040);
@@ -203,7 +203,7 @@ VAR
 	y_on : BOOL := TRUE;
 	yaw_on : BOOL := TRUE;	
 	
-	z_manual_target : LREAL := -0.01635; //m
+	z_manual_target : LREAL := -0.0165; //m
 	pitch_target : LREAL := 0; //rad
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
@@ -216,8 +216,8 @@ VAR
 	K_F_tot: LREAL := 100;
 	K_I_tot_initial: LREAL := 13552;
 	
-	K_P_pitch: LREAL := 60000;
-	K_I_pitch: LREAL := 100000;
+	K_P_pitch: LREAL := 400000;
+	K_I_pitch: LREAL := 200000;
 	K_D_pitch: LREAL := 15000;
 	K_F_pitch: LREAL := 250;
 	K_I_pitch_initial: LREAL := -44;
@@ -234,8 +234,8 @@ VAR
 	K_F_lat: LREAL := 120;
 	K_I_lat_initial: LREAL := -117;
 
-	K_P_yaw: LREAL := 50000;
-	K_I_yaw: LREAL := 50000;
+	K_P_yaw: LREAL := 100000;
+	K_I_yaw: LREAL := 100000;
 	K_D_yaw: LREAL := 5000;
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := -1;	
@@ -252,10 +252,10 @@ VAR
 	
 	I_EMS: lateral_levitation_control.T_matrix4xdouble;
 	
-	I_VFL: vertical_levitation_control.T_matrix2xdouble;	
-	I_VFR: vertical_levitation_control.T_matrix2xdouble;
-	I_VBL: vertical_levitation_control.T_matrix2xdouble;	
-	I_VBR: vertical_levitation_control.T_matrix2xdouble;
+	I_VFL: vertical_levitation_control_new.T_matrix2xdouble;	
+	I_VFR: vertical_levitation_control_new.T_matrix2xdouble;
+	I_VBL: vertical_levitation_control_new.T_matrix2xdouble;	
+	I_VBR: vertical_levitation_control_new.T_matrix2xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -399,7 +399,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			Levi_command := Levi_state;
@@ -440,7 +440,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 			
 		ELSE
 			Levi_command := Levi_state;
@@ -480,7 +480,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;		
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;		
 		
 		ELSE
 			Levi_command := Levi_state;		
@@ -513,7 +513,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 
 		ELSE
 			Levi_command := Levi_state;		
@@ -546,7 +546,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			Levi_command := Levi_state;
@@ -687,7 +687,7 @@ CASE Levi_Command OF
 			Control_vert_parameters.btotal_ON := Total_on; 
 			Control_vert_parameters.bpitch_ON := Pitch_on;
 			Control_vert_parameters.broll_ON := Roll_on;
-			Control_vert_parameters.blift_off_enabled := Lift_off_enabled;
+			//Control_vert_parameters.blift_off_enabled := Lift_off_enabled;
 			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
 			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
 			Control_vert_parameters.fK_P_tot := K_P_tot;
@@ -708,14 +708,14 @@ CASE Levi_Command OF
 			Control_vert_parameters.fK_F_roll := K_F_roll;
 			Control_vert_parameters.fK_I_init_roll := K_I_roll_initial;
 			
-			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
+			//Control_vert_parameters. := z_liftoff;
 			Control_vert_parameters.froll_target := roll_target;
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_manual_target;
-			Control_vert_parameters.benable_manual_z_target := enable_manual_z_target;
+			//Control_vert_parameters.benable_manual_z_target := enable_manual_z_target;
 			
 			//Uploading vertical parameters to the control model
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 			
 			
 			
@@ -739,7 +739,7 @@ CASE Levi_Command OF
 			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
 			
-			FB_Control_vert(stvertical_levitation_control_U := Control_vert_inputs, stvertical_levitation_control_Y => Control_vert_outputs);
+			FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stvertical_levitation_control_new_Y => Control_vert_outputs);
 			
 			I_VFL := Control_vert_outputs.aI_VFL;
 			I_VFR := Control_vert_outputs.aI_VFR;
@@ -794,7 +794,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			Levi_command := Levi_state;
@@ -831,7 +831,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			Levi_command := Levi_state;
@@ -864,7 +864,7 @@ CASE Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_P := Control_vert_parameters;
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 
 		ELSE
 			Levi_command := Levi_state;		

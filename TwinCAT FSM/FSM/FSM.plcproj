@@ -220,6 +220,12 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoDirectionFlag_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoDirectionFlag_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -404,9 +410,9 @@
       <Namespace>Tc3_Module</Namespace>
       <SystemLibrary>true</SystemLibrary>
     </PlaceholderReference>
-    <PlaceholderReference Include="vertical_levitation_control">
-      <DefaultResolution>vertical_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
-      <Namespace>vertical_levitation_control</Namespace>
+    <PlaceholderReference Include="vertical_levitation_control_new">
+      <DefaultResolution>vertical_levitation_control_new, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>vertical_levitation_control_new</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

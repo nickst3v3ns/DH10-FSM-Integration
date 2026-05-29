@@ -2,11 +2,11 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.22">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{18EE5ABB-CCAE-9158-92DC-B5FF107F0665}">ITcSensor_model</Name>
+			<Name GUID="{74F12B5E-BA63-FF4E-6812-DB8AD7649B43}">ITcvertical_levitation_control_new</Name>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
 			<Method>
-				<Name VTableIndex="0">Sensor_model_step</Name>
+				<Name VTableIndex="0">vertical_levitation_control_new_step</Name>
 				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
 				<ReturnBitSize>32</ReturnBitSize>
 			</Method>
@@ -386,369 +386,6 @@
 			</EnumInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Name>
-			<BitSize>384</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Name>
-			<BitSize>768</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>12</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Name>
-			<BitSize>1152</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>18</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{0C25F528-EB20-6408-08D9-A5D29C9B5A3C}">P_Sensor_model_T</Name>
-			<BitSize>3456</BitSize>
-			<SubItem>
-				<Name>Laser_magnet_offset_EMS</Name>
-				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
-				<BitSize>384</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Laser_magnet_offset_HEMS</Name>
-				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
-				<BitSize>384</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>airgap_nominal_ems</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>768</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>coords_lat_sensors</Name>
-				<Type GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Type>
-				<BitSize>768</BitSize>
-				<BitOffs>832</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>coords_vert_sensors</Name>
-				<Type GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Type>
-				<BitSize>1152</BitSize>
-				<BitOffs>1600</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>cycle_time</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2752</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>lateral_filter_window_cycles</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2816</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>n_sensors_v</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2880</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>vertical_filter_window_cycles</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2944</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>z_com</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3008</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UnitDelay_InitialCondition</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3072</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UnitDelay1_InitialCondition</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3136</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Convert_to_meters_Gain</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3200</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Integrator_IC</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3264</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Integrator1_IC</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3328</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Constant_Value</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3392</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk" CName="TcMgSdk::ExceptionInfo">ExceptionInfo</Name>
-			<BitSize>1376</BitSize>
-			<SubItem>
-				<Name>ExceptionCode</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TmxName</Name>
-				<Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
-				<BitSize>1024</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TmxVersion</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>4</Elements>
-				</ArrayInfo>
-				<BitSize>128</BitSize>
-				<BitOffs>1056</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>InstructionAddr</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>1184</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>ReturnAddr</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>4</Elements>
-				</ArrayInfo>
-				<BitSize>128</BitSize>
-				<BitOffs>1216</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>DumpCreated</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1344</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</Name>
-			<BitSize>192</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>3</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</Name>
-			<BitSize>128</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>2</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{3E8FF2F1-F294-E6C2-423E-20FFC4789EE8}">B_MovingAveragepitch_Sensor_model_T</Name>
-			<BitSize>64</BitSize>
-			<SubItem>
-				<Name>MovingAveragepitch</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{453C1D2D-9471-38D5-66A8-91FB247C14B4}">B_MovingAveragey_Sensor_model_T</Name>
-			<BitSize>64</BitSize>
-			<SubItem>
-				<Name>MovingAveragey</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Name>
-			<BitSize>256</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{7123452F-9AE7-F89F-7AA0-8102E55BD38E}">cell_wrap_Sensor_model_T</Name>
-			<BitSize>256</BitSize>
-			<SubItem>
-				<Name>f1</Name>
-				<Type GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Name>
-			<BitSize>576</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>9</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{3E463356-7FA9-4333-4D46-274D4A493C7C}">dsp_simulink_MovingAverage_Sensor_model_T</Name>
-			<BitSize>1216</BitSize>
-			<SubItem>
-				<Name>matlabCodegenIsDeleted</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>isInitialized</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>isSetupComplete</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TunablePropsChanged</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>72</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>inputVarSize</Name>
-				<Type GUID="{7123452F-9AE7-F89F-7AA0-8102E55BD38E}">cell_wrap_Sensor_model_T</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>96</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>NumChannels</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>352</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>FrameLength</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumSum</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>448</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumSumRev</Name>
-				<Type GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Type>
-				<BitSize>576</BitSize>
-				<BitOffs>512</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumRevIndex</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>1088</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pModValueRev</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>1152</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{BBFACC0C-F3E2-E18C-498D-E4B624F8B48C}">DW_MovingAveragepitch_Sensor_model_T</Name>
-			<BitSize>1280</BitSize>
-			<SubItem>
-				<Name>obj</Name>
-				<Type GUID="{3E463356-7FA9-4333-4D46-274D4A493C7C}">dsp_simulink_MovingAverage_Sensor_model_T</Type>
-				<BitSize>1216</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>objisempty</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1216</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{5C4721F0-C032-2250-E0B5-1CDB6A106C9E}">DW_MovingAveragey_Sensor_model_T</Name>
-			<BitSize>1280</BitSize>
-			<SubItem>
-				<Name>obj</Name>
-				<Type GUID="{3E463356-7FA9-4333-4D46-274D4A493C7C}">dsp_simulink_MovingAverage_Sensor_model_T</Type>
-				<BitSize>1216</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>objisempty</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1216</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{7C96C7D1-E238-BB86-5119-B8C749E25768}">ITcvertical_levitation_control</Name>
-			<BitSize X64="64">32</BitSize>
-			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
-			<Method>
-				<Name VTableIndex="0">vertical_levitation_control_step</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
-				<ReturnBitSize>32</ReturnBitSize>
-			</Method>
-			<Properties>
-				<Property>
-					<Name>TcComWrapper_GenerateGetter</Name>
-					<Value>FALSE</Value>
-				</Property>
-				<Property>
-					<Name>TcComWrapper_GenerateMethods</Name>
-					<Value>TRUE</Value>
-				</Property>
-			</Properties>
-		</DataType>
-		<DataType>
 			<Name GUID="{5F4B2074-C890-DD8C-3DD0-13534D9A6C4A}">matrix53xdouble</Name>
 			<BitSize>3392</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
@@ -785,6 +422,15 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</Name>
+			<BitSize>192</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</Name>
 			<BitSize>256</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
@@ -803,7 +449,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{9B89E4C1-6CA7-1288-4D29-DB868126F48E}">P_vertical_levitation_control_T</Name>
+			<Name GUID="{20EBDED5-657F-0DF6-1D04-630A8E50B035}">P_vertical_levitation_control_new_T</Name>
 			<BitSize>102592</BitSize>
 			<SubItem>
 				<Name>Airgaps_HEMS_DH10</Name>
@@ -1701,6 +1347,63 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk" CName="TcMgSdk::ExceptionInfo">ExceptionInfo</Name>
+			<BitSize>1376</BitSize>
+			<SubItem>
+				<Name>ExceptionCode</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TmxName</Name>
+				<Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+				<BitSize>1024</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TmxVersion</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>128</BitSize>
+				<BitOffs>1056</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>InstructionAddr</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>1184</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ReturnAddr</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>128</BitSize>
+				<BitOffs>1216</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>DumpCreated</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>1344</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</Name>
+			<BitSize>128</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</Name>
 			<BitSize>512</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
@@ -1737,7 +1440,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{99A6884B-56F2-CEC8-B7EB-AA0425AD1D15}">B_forcecurrent_BL_vertical_levitation_control_T</Name>
+			<Name GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</Name>
 			<BitSize>128</BitSize>
 			<SubItem>
 				<Name>current_reqf</Name>
@@ -1753,7 +1456,7 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{C93FD772-B9F9-DC69-B350-F1BD63EA83FE}">B_MATLABFunction_vertical_levitation_control_T</Name>
+			<Name GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</Name>
 			<BitSize>512</BitSize>
 			<SubItem>
 				<Name>y</Name>
@@ -2278,6 +1981,105 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{18EE5ABB-CCAE-9158-92DC-B5FF107F0665}">ITcSensor_model</Name>
+			<BitSize X64="64">32</BitSize>
+			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+			<Method>
+				<Name VTableIndex="0">Sensor_model_step</Name>
+				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+				<ReturnBitSize>32</ReturnBitSize>
+			</Method>
+			<Properties>
+				<Property>
+					<Name>TcComWrapper_GenerateGetter</Name>
+					<Value>FALSE</Value>
+				</Property>
+				<Property>
+					<Name>TcComWrapper_GenerateMethods</Name>
+					<Value>TRUE</Value>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Name>
+			<BitSize>384</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Name>
+			<BitSize>768</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>12</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Name>
+			<BitSize>1152</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>18</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{08C8B2B1-3F30-36CE-C44C-A37039ACE23E}">P_Sensor_model_T</Name>
+			<BitSize>2944</BitSize>
+			<SubItem>
+				<Name>Laser_magnet_offset_EMS</Name>
+				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Laser_magnet_offset_HEMS</Name>
+				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>airgap_nominal_ems</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>coords_lat_sensors</Name>
+				<Type GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>832</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>coords_vert_sensors</Name>
+				<Type GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Type>
+				<BitSize>1152</BitSize>
+				<BitOffs>1600</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>n_sensors_v</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2752</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>z_com</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2816</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Convert_to_meters_Gain</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2880</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF UINT</Name>
 			<BitSize>384</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
@@ -2709,12 +2511,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 				</Task>
 			</Tasks>
 			<Modules>
-				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.33">
-					<Name>Object1 (Sensor_model)</Name>
+				<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control_new|0.0.0.1">
+					<Name>Object2 (vertical_levitation_control_new)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.33">
-						<Name>Sensor_model</Name>
-						<CLSID ClassFactory="Sensor_model" RealTimeInstantiable="true">{01781D84-B470-A997-DC4F-062608A9D221}</CLSID>
+					<TmcDesc GUID="{D01E120F-3EB7-B08A-F3FB-D062E2A9097B}" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control_new|0.0.0.1">
+						<Name>vertical_levitation_control_new</Name>
+						<CLSID ClassFactory="vertical_levitation_control_new" RealTimeInstantiable="true">{D01E120F-3EB7-B08A-F3FB-D062E2A9097B}</CLSID>
 						<Info>
 							<ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
 							<TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}"/>
@@ -2762,7 +2564,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
 							</Interface>
 							<Interface>
-								<Type GUID="{18EE5ABB-CCAE-9158-92DC-B5FF107F0665}">ITcSensor_model</Type>
+								<Type GUID="{74F12B5E-BA63-FF4E-6812-DB8AD7649B43}">ITcvertical_levitation_control_new</Type>
 								<ContextId>0</ContextId>
 							</Interface>
 						</Interfaces>
@@ -2928,7 +2730,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<PTCID>#x00000010</PTCID>
 							</Parameter>
 							<Parameter CreateSymbol="true">
-								<Name>Sensor_model_P_Sharing</Name>
+								<Name>vertical_levitation_control_new_P_Sharing</Name>
 								<BitSize>32</BitSize>
 								<BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
 								<Default>
@@ -2937,967 +2739,15 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<PTCID>#x00000011</PTCID>
 							</Parameter>
 							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>Sensor_model_P_Definer</Name>
+								<Name>vertical_levitation_control_new_P_Definer</Name>
 								<BitSize>32</BitSize>
 								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
 								<PTCID>#x00000012</PTCID>
 							</Parameter>
 							<Parameter CreateSymbol="true">
-								<Name>Sensor_model_P</Name>
-								<BitSize>3456</BitSize>
-								<BaseType GUID="{0C25F528-EB20-6408-08D9-A5D29C9B5A3C}">P_Sensor_model_T</BaseType>
-								<Default>
-									<SubItem>
-										<Name>.Laser_magnet_offset_EMS</Name>
-										<Data>58E71890BDDE9D3F9F3C2CD49AE69D3F865AD3BCE3149D3F423EE8D9ACFA9C3FEFC9C342AD699E3F4FAF946588639D3F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.Laser_magnet_offset_HEMS</Name>
-										<Data>2C9D0FCF1264943F7B14AE47E17A943F44696FF085C9943F44696FF085C9943F5437177FDB13943FCBA145B6F3FD943F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.airgap_nominal_ems</Name>
-										<Value>0.008</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.coords_lat_sensors</Name>
-										<Data>75DBCF73556AEC3FFD5305FE4BAD723F75DBCF73556AEC3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.coords_vert_sensors</Name>
-										<Data>75DBCF73556AEC3FB0FAC8529044D73F000000000000000075DBCF73556AEC3F10D0D8F225AFD6BF00000000000000005503835AC290C93FA62325E2523AD83F0000000000000000078C3F9B66CBC5BF06F93482E8A4D7BF0000000000000000A1FDFE83FE78EBBFB0FAC8529044D73F0000000000000000A1FDFE83FE78EBBF10D0D8F225AFD6BF0000000000000000</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.cycle_time</Name>
-										<Value>0.0015</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.lateral_filter_window_cycles</Name>
-										<Value>10</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.n_sensors_v</Name>
-										<Value>6</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.vertical_filter_window_cycles</Name>
-										<Value>10</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.z_com</Name>
-										<Value>0.5706599999999999</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.UnitDelay_InitialCondition</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.UnitDelay1_InitialCondition</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Convert_to_meters_Gain</Name>
-										<Value>0.001</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Integrator_IC</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Integrator1_IC</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Constant_Value</Name>
-										<Value>1</Value>
-									</SubItem>
-								</Default>
-								<PTCID>#x00000013</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>SimulationTime</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-								<PTCID>#x00000014</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>CycleCount</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
-								<PTCID>#x00000015</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ExceptionCount</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
-								<PTCID>#x00000016</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ExceptionInfo</Name>
-								<BitSize>1376</BitSize>
-								<BaseType GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk">ExceptionInfo</BaseType>
-								<PTCID>#x00000017</PTCID>
-							</Parameter>
-						</Parameters>
-						<DataAreas>
-							<DataArea>
-								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
-								<Name>Sensor_model_U</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>96</ByteSize>
-								<Symbol>
-									<Name>Newsensorairgaps</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x80000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
-								<Name>Sensor_model_Y</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>152</ByteSize>
-								<Symbol>
-									<Name>z</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>roll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>pitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>y</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000018</PTCID>
-									<BitOffs>192</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>yaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000020</PTCID>
-									<BitOffs>256</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000028</PTCID>
-									<BitOffs>320</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps_ems</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000058</PTCID>
-									<BitOffs>704</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_vertical_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000088</PTCID>
-									<BitOffs>1088</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_lateral_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000090</PTCID>
-									<BitOffs>1152</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
-								<Name>Sensor_model_B</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>472</ByteSize>
-								<Symbol>
-									<Name>UnitDelay</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>UnitDelay1</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Convert_to_meters</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x82000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>z</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000070</PTCID>
-									<BitOffs>896</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>roll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000078</PTCID>
-									<BitOffs>960</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>pitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000080</PTCID>
-									<BitOffs>1024</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x82000088</PTCID>
-									<BitOffs>1088</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>corrected_airgaps</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x820000b8</PTCID>
-									<BitOffs>1472</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_vertical_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000118</PTCID>
-									<BitOffs>2240</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_lateral_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000120</PTCID>
-									<BitOffs>2304</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>trigger_vertical_filter</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000128</PTCID>
-									<BitOffs>2368</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>trigger_lateral_filter</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000130</PTCID>
-									<BitOffs>2432</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>y</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000138</PTCID>
-									<BitOffs>2496</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>yaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000140</PTCID>
-									<BitOffs>2560</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps_c</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x82000148</PTCID>
-									<BitOffs>2624</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Switch</Name>
-									<BitSize>192</BitSize>
-									<BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
-									<PTCID>#x82000178</PTCID>
-									<BitOffs>3008</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Switch1</Name>
-									<BitSize>128</BitSize>
-									<BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
-									<PTCID>#x82000190</PTCID>
-									<BitOffs>3200</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Integrator1</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x820001a0</PTCID>
-									<BitOffs>3328</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>RelationalOperator1</Name>
-									<BitSize>8</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<PTCID>#x820001a8</PTCID>
-									<BitOffs>3392</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragez</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{3E8FF2F1-F294-E6C2-423E-20FFC4789EE8}">B_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x820001b0</PTCID>
-									<BitOffs>3456</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageyaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{453C1D2D-9471-38D5-66A8-91FB247C14B4}">B_MovingAveragey_Sensor_model_T</BaseType>
-									<PTCID>#x820001b8</PTCID>
-									<BitOffs>3520</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragey</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{453C1D2D-9471-38D5-66A8-91FB247C14B4}">B_MovingAveragey_Sensor_model_T</BaseType>
-									<PTCID>#x820001c0</PTCID>
-									<BitOffs>3584</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageroll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{3E8FF2F1-F294-E6C2-423E-20FFC4789EE8}">B_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x820001c8</PTCID>
-									<BitOffs>3648</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragepitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{3E8FF2F1-F294-E6C2-423E-20FFC4789EE8}">B_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x820001d0</PTCID>
-									<BitOffs>3712</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
-								<Name>Sensor_model_X</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>16</ByteSize>
-								<Symbol>
-									<Name>Integrator_CSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x83000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Integrator1_CSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x83000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">4</AreaNo>
-								<Name>Sensor_model_DW</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>816</ByteSize>
-								<Symbol>
-									<Name>UnitDelay_DSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x84000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>UnitDelay1_DSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x84000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragez</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{BBFACC0C-F3E2-E18C-498D-E4B624F8B48C}">DW_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x84000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageyaw</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{5C4721F0-C032-2250-E0B5-1CDB6A106C9E}">DW_MovingAveragey_Sensor_model_T</BaseType>
-									<PTCID>#x840000b0</PTCID>
-									<BitOffs>1408</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragey</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{5C4721F0-C032-2250-E0B5-1CDB6A106C9E}">DW_MovingAveragey_Sensor_model_T</BaseType>
-									<PTCID>#x84000150</PTCID>
-									<BitOffs>2688</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageroll</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{BBFACC0C-F3E2-E18C-498D-E4B624F8B48C}">DW_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x840001f0</PTCID>
-									<BitOffs>3968</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragepitch</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{BBFACC0C-F3E2-E18C-498D-E4B624F8B48C}">DW_MovingAveragepitch_Sensor_model_T</BaseType>
-									<PTCID>#x84000290</PTCID>
-									<BitOffs>5248</BitOffs>
-								</Symbol>
-							</DataArea>
-						</DataAreas>
-						<Properties>
-							<Property>
-								<Name>CoderLicense</Name>
-								<Value>{73C71EBD-104A-4EE6-955D-ADE86A37EFC3}</Value>
-							</Property>
-						</Properties>
-						<Xml>
-							<GeneratedModuleInfoFile>Sensor_model_ModuleInfo.xml</GeneratedModuleInfoFile>
-						</Xml>
-						<ParameterValues>
-							<Value>
-								<Name>TaskOid</Name>
-								<Value>33620128</Value>
-							</Value>
-							<Value>
-								<Name>TaskPriority</Name>
-								<Value>4</Value>
-							</Value>
-							<Value>
-								<Name>TaskCycleTimeNs</Name>
-								<Value>1500000</Value>
-							</Value>
-							<Value>
-								<Name>TaskPort</Name>
-								<Value>357</Value>
-							</Value>
-							<Value>
-								<Name>TaskSortOrder</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>TraceLevelMax</Name>
-								<EnumText>tlInfo</EnumText>
-							</Value>
-							<Value>
-								<Name>ModuleCaller</Name>
-								<EnumText>Module</EnumText>
-							</Value>
-							<Value>
-								<Name>CallerVerification</Name>
-								<EnumText>Default</EnumText>
-							</Value>
-							<Value>
-								<Name>StepSizeAdaptation</Name>
-								<EnumText>RequireMatchingTaskCycleTime</EnumText>
-							</Value>
-							<Value>
-								<Name>ExecutionSequence</Name>
-								<EnumText>UpdateBeforeOutputMapping</EnumText>
-							</Value>
-							<Value>
-								<Name>Execute</Name>
-								<EnumText>TRUE</EnumText>
-							</Value>
-							<Value>
-								<Name>AccessLockState</Name>
-								<EnumText>TCOM_STATE_OP</EnumText>
-							</Value>
-							<Value>
-								<Name>InitExceptionHandling</Name>
-								<EnumText>CallerExceptions</EnumText>
-							</Value>
-							<Value>
-								<Name>UpdateExceptionHandling</Name>
-								<EnumText>CallerExceptions</EnumText>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P_Sharing</Name>
-								<EnumText>Define</EnumText>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[0]</Name>
-								<Value>0.02917</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[1]</Name>
-								<Value>0.0292</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[2]</Name>
-								<Value>0.0284</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[3]</Name>
-								<Value>0.0283</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[4]</Name>
-								<Value>0.0297</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_EMS[5]</Name>
-								<Value>0.0287</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[0]</Name>
-								<Value>0.019913</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[1]</Name>
-								<Value>0.02</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[2]</Name>
-								<Value>0.0203</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[3]</Name>
-								<Value>0.0203</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[4]</Name>
-								<Value>0.019607</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[5]</Name>
-								<Value>0.0205</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.airgap_nominal_ems</Name>
-								<Value>0.008</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[0]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[1]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[2]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[3]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[4]</Name>
-								<Value>0.0147302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[5]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[6]</Name>
-								<Value>0.0147302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[7]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[8]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[9]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[10]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_lat_sensors[11]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[0]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[1]</Name>
-								<Value>0.3635598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[2]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[3]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[4]</Name>
-								<Value>-0.3544402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[5]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[6]</Name>
-								<Value>0.1997302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[7]</Name>
-								<Value>0.3785598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[8]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[9]</Name>
-								<Value>-0.1702698</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[10]</Name>
-								<Value>-0.3694402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[11]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[12]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[13]</Name>
-								<Value>0.3635598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[14]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[15]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[16]</Name>
-								<Value>-0.3544402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.coords_vert_sensors[17]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.cycle_time</Name>
-								<Value>0.0015</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.lateral_filter_window_cycles</Name>
-								<Value>10</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.n_sensors_v</Name>
-								<Value>6</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.vertical_filter_window_cycles</Name>
-								<Value>10</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.z_com</Name>
-								<Value>0.57066</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.UnitDelay_InitialCondition</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.UnitDelay1_InitialCondition</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Convert_to_meters_Gain</Name>
-								<Value>0.001</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Integrator_IC</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Integrator1_IC</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_P.Constant_Value</Name>
-								<Value>1</Value>
-							</Value>
-						</ParameterValues>
-					</TmcDesc>
-				</Module>
-				<Module Id="#x01010030" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.32">
-					<Name>Object2 (vertical_levitation_control)</Name>
-					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{8EAE5102-2B5F-C83F-28AE-EA53474F7CF3}" ClassFactoryId="TE140x Module Vendor|vertical_levitation_control|0.0.0.32">
-						<Name>vertical_levitation_control</Name>
-						<CLSID ClassFactory="vertical_levitation_control" RealTimeInstantiable="true">{8EAE5102-2B5F-C83F-28AE-EA53474F7CF3}</CLSID>
-						<Info>
-							<ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
-							<TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}"/>
-						</Info>
-						<Licenses>
-							<License>
-								<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
-							</License>
-						</Licenses>
-						<InitSequence>PSO</InitSequence>
-						<Contexts>
-							<Context>
-								<Id>0</Id>
-								<Name>Context0 (1.5 ms)</Name>
-								<ManualConfig>
-									<OTCID>#x020100a0</OTCID>
-								</ManualConfig>
-								<Priority>4</Priority>
-								<CycleTime>1500000</CycleTime>
-							</Context>
-						</Contexts>
-						<Interfaces>
-							<Interface>
-								<Type GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000002-0000-0000-E000-000000000064}">ITcPersist</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000025-0000-0000-E000-000000000064}">ITcPostCyclic</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{7C96C7D1-E238-BB86-5119-B8C749E25768}">ITcvertical_levitation_control</Type>
-								<ContextId>0</ContextId>
-							</Interface>
-						</Interfaces>
-						<Parameters>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskOid</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
-								<PTCID>#x03002060</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskPriority</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x03002070</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskCycleTimeNs</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x03002080</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskPort</Name>
-								<BitSize>16</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
-								<PTCID>#x03002090</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskSortOrder</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x030020b0</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>TraceLevelMax</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
-								<Default>
-									<EnumText>tlInfo</EnumText>
-								</Default>
-								<PTCID>#x00000001</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>ModuleCaller</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk">ModuleCaller</BaseType>
-								<Default>
-									<EnumText>CyclicTask</EnumText>
-								</Default>
-								<PTCID>#x00000002</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>CallerVerification</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk">CallerVerification</BaseType>
-								<Default>
-									<EnumText>Default</EnumText>
-								</Default>
-								<PTCID>#x00000003</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>StepSizeAdaptation</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk">StepSizeAdaptation</BaseType>
-								<Default>
-									<EnumText>RequireMatchingTaskCycleTime</EnumText>
-								</Default>
-								<PTCID>#x00000004</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>ExecutionSequence</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk">ExecutionSequence1</BaseType>
-								<Default>
-									<EnumText>UpdateBeforeOutputMapping</EnumText>
-								</Default>
-								<PTCID>#x00000005</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>Execute</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-								<Default>
-									<EnumText>TRUE</EnumText>
-								</Default>
-								<PTCID>#x00000006</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>AccessLockState</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000061}">TCOM_STATE</BaseType>
-								<Default>
-									<EnumText>TCOM_STATE_OP</EnumText>
-								</Default>
-								<PTCID>#x00000007</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>InitExceptionHandling</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk">FpExcptCtrlSet</BaseType>
-								<Default>
-									<EnumText>CallerExceptions</EnumText>
-								</Default>
-								<PTCID>#x00000008</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>UpdateExceptionHandling</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk">FpExcptCtrlSetEx</BaseType>
-								<Default>
-									<EnumText>CallerExceptions</EnumText>
-								</Default>
-								<PTCID>#x00000009</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ModuleBuildInfo</Name>
-								<Comment><![CDATA[Legacy! Please use 'LibraryInfo' to read build information.]]></Comment>
-								<BitSize>96</BitSize>
-								<BaseType GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk">ModuleBuildInfo</BaseType>
-								<PTCID>#x0000000a</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>Initialized</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-								<Default>
-									<EnumText>FALSE</EnumText>
-								</Default>
-								<PTCID>#x0000000b</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>SkippedExecutionCount</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<Default>
-									<Value>0</Value>
-								</Default>
-								<PTCID>#x0000000c</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>LibraryInfo</Name>
-								<BitSize>4800</BitSize>
-								<BaseType GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk">LibraryInfo</BaseType>
-								<PTCID>#x0000000d</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ModuleInfo</Name>
-								<BitSize>1280</BitSize>
-								<BaseType GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk">ModuleInfo</BaseType>
-								<PTCID>#x0000000e</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
-								<Name>ModuleGeneratorInfo</Name>
-								<BitSize>256</BitSize>
-								<BaseType GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</BaseType>
-								<PTCID>#x0000000f</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
-								<Name>SimulinkModelInfo</Name>
-								<BitSize>1408</BitSize>
-								<BaseType GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</BaseType>
-								<PTCID>#x00000010</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>vertical_levitation_control_P_Sharing</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
-								<Default>
-									<EnumText>Define</EnumText>
-								</Default>
-								<PTCID>#x00000011</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>vertical_levitation_control_P_Definer</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
-								<PTCID>#x00000012</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>vertical_levitation_control_P</Name>
+								<Name>vertical_levitation_control_new_P</Name>
 								<BitSize>102592</BitSize>
-								<BaseType GUID="{9B89E4C1-6CA7-1288-4D29-DB868126F48E}">P_vertical_levitation_control_T</BaseType>
+								<BaseType GUID="{20EBDED5-657F-0DF6-1D04-630A8E50B035}">P_vertical_levitation_control_new_T</BaseType>
 								<Default>
 									<SubItem>
 										<Name>.Airgaps_HEMS_DH10</Name>
@@ -4526,7 +3376,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<DataAreas>
 							<DataArea>
 								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
-								<Name>vertical_levitation_control_U</Name>
+								<Name>vertical_levitation_control_new_U</Name>
 								<ContextId>0</ContextId>
 								<ByteSize>96</ByteSize>
 								<Symbol>
@@ -4588,7 +3438,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
-								<Name>vertical_levitation_control_Y</Name>
+								<Name>vertical_levitation_control_new_Y</Name>
 								<ContextId>0</ContextId>
 								<ByteSize>240</ByteSize>
 								<Symbol>
@@ -4671,7 +3521,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
-								<Name>vertical_levitation_control_B</Name>
+								<Name>vertical_levitation_control_new_B</Name>
 								<ContextId>0</ContextId>
 								<ByteSize>2120</ByteSize>
 								<Symbol>
@@ -5881,35 +4731,35 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Symbol>
 									<Name>sf_forcecurrent_FR</Name>
 									<BitSize>128</BitSize>
-									<BaseType GUID="{99A6884B-56F2-CEC8-B7EB-AA0425AD1D15}">B_forcecurrent_BL_vertical_levitation_control_T</BaseType>
+									<BaseType GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</BaseType>
 									<PTCID>#x820007a8</PTCID>
 									<BitOffs>15680</BitOffs>
 								</Symbol>
 								<Symbol>
 									<Name>sf_forcecurrent_BL</Name>
 									<BitSize>128</BitSize>
-									<BaseType GUID="{99A6884B-56F2-CEC8-B7EB-AA0425AD1D15}">B_forcecurrent_BL_vertical_levitation_control_T</BaseType>
+									<BaseType GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</BaseType>
 									<PTCID>#x820007b8</PTCID>
 									<BitOffs>15808</BitOffs>
 								</Symbol>
 								<Symbol>
 									<Name>sf_MATLABFunction1</Name>
 									<BitSize>512</BitSize>
-									<BaseType GUID="{C93FD772-B9F9-DC69-B350-F1BD63EA83FE}">B_MATLABFunction_vertical_levitation_control_T</BaseType>
+									<BaseType GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</BaseType>
 									<PTCID>#x820007c8</PTCID>
 									<BitOffs>15936</BitOffs>
 								</Symbol>
 								<Symbol>
 									<Name>sf_MATLABFunction</Name>
 									<BitSize>512</BitSize>
-									<BaseType GUID="{C93FD772-B9F9-DC69-B350-F1BD63EA83FE}">B_MATLABFunction_vertical_levitation_control_T</BaseType>
+									<BaseType GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</BaseType>
 									<PTCID>#x82000808</PTCID>
 									<BitOffs>16448</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
-								<Name>vertical_levitation_control_X</Name>
+								<Name>vertical_levitation_control_new_X</Name>
 								<ContextId>0</ContextId>
 								<ByteSize>160</ByteSize>
 								<Symbol>
@@ -6013,7 +4863,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="Internal" CreateSymbols="true">4</AreaNo>
-								<Name>vertical_levitation_control_DW</Name>
+								<Name>vertical_levitation_control_new_DW</Name>
 								<ContextId>0</ContextId>
 								<ByteSize>160</ByteSize>
 								<Symbol>
@@ -6151,7 +5001,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							</Property>
 						</Properties>
 						<Xml>
-							<GeneratedModuleInfoFile>vertical_levitation_control_ModuleInfo.xml</GeneratedModuleInfoFile>
+							<GeneratedModuleInfoFile>vertical_levitation_control_new_ModuleInfo.xml</GeneratedModuleInfoFile>
 						</Xml>
 						<ParameterValues>
 							<Value>
@@ -6211,940 +5061,940 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<EnumText>CallerExceptions</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P_Sharing</Name>
+								<Name>vertical_levitation_control_new_P_Sharing</Name>
 								<EnumText>Define</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[0]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[0]</Name>
 								<Value>4</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[1]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[1]</Name>
 								<Value>4.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[2]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[2]</Name>
 								<Value>5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[3]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[3]</Name>
 								<Value>5.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[4]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[4]</Name>
 								<Value>6</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[5]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[5]</Name>
 								<Value>6.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[6]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[6]</Name>
 								<Value>7</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[7]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[7]</Name>
 								<Value>7.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[8]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[8]</Name>
 								<Value>8</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[9]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[9]</Name>
 								<Value>8.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[10]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[10]</Name>
 								<Value>9</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[11]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[11]</Name>
 								<Value>9.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[12]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[12]</Name>
 								<Value>10</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[13]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[13]</Name>
 								<Value>10.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[14]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[14]</Name>
 								<Value>11</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[15]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[15]</Name>
 								<Value>11.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[16]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[16]</Name>
 								<Value>12</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[17]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[17]</Name>
 								<Value>12.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[18]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[18]</Name>
 								<Value>13</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[19]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[19]</Name>
 								<Value>13.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[20]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[20]</Name>
 								<Value>14</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[21]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[21]</Name>
 								<Value>14.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[22]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[22]</Name>
 								<Value>15</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[23]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[23]</Name>
 								<Value>15.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[24]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[24]</Name>
 								<Value>16</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[25]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[25]</Name>
 								<Value>16.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[26]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[26]</Name>
 								<Value>17</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[27]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[27]</Name>
 								<Value>17.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[28]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[28]</Name>
 								<Value>18</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[29]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[29]</Name>
 								<Value>18.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[30]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[30]</Name>
 								<Value>19</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[31]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[31]</Name>
 								<Value>19.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[32]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[32]</Name>
 								<Value>20</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[33]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[33]</Name>
 								<Value>20.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[34]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[34]</Name>
 								<Value>21</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[35]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[35]</Name>
 								<Value>21.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[36]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[36]</Name>
 								<Value>22</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[37]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[37]</Name>
 								<Value>22.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[38]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[38]</Name>
 								<Value>23</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[39]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[39]</Name>
 								<Value>23.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[40]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[40]</Name>
 								<Value>24</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[41]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[41]</Name>
 								<Value>24.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[42]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[42]</Name>
 								<Value>25</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[43]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[43]</Name>
 								<Value>25.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[44]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[44]</Name>
 								<Value>26</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[45]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[45]</Name>
 								<Value>26.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[46]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[46]</Name>
 								<Value>27</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[47]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[47]</Name>
 								<Value>27.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[48]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[48]</Name>
 								<Value>28</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[49]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[49]</Name>
 								<Value>28.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[50]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[50]</Name>
 								<Value>29</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[51]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[51]</Name>
 								<Value>29.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Airgaps_HEMS_DH10[52]</Name>
+								<Name>vertical_levitation_control_new_P.Airgaps_HEMS_DH10[52]</Name>
 								<Value>30</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Current_to_force_coefficients_HEMS_DH10</Name>
+								<Name>vertical_levitation_control_new_P.Current_to_force_coefficients_HEMS_DH10</Name>
 								<Data>5ac9a1346e56e8bff3577641b7f7c8c13f8c7ed7b771d041b15a293cae3eb340c5690a21f6c58240721b7169ee7e3a4060fb780a6863d6bf3b1897abb7ae02c0d685d1f46fe2e7bfb85791ba2025a73f49f6ddfd6c55a83ffa150d9a4504493f0de9fcfe3d5958bfc2d3376418b105bfb33d4ff4b4a4fa3edc177dc3ebbaa23e9d369b6b54358ebedd094949209625be8636a54d079d0b3ef667303e4442623f15e1b615054bc7c127662db6cbaad1416e7d3690f674b240a9fe41cda502824017a6fbe8598939402513360984b3f03fcd2176983e0a00c095415eb8397ceabf892e2ef9fa9a9b3fd940bbf62ebda93f75169bc33850543f91d2d7b9f33159bf8a00c943212309bfe3d2c2be2b28fb3e88c005f6a849a43e010437e25d6e8ebeee3cd1b1b2ba26beb1e7d644f38d0b3e964638fc596b204032566d3206a8c7c116bed8f4af75cd4185a89444fe84b1403de549a1a912814001a8a5c5a2214140a17269ccfe5b15404c5c134a59740bc0daa47053c071f3bfaac42d1442f2c13f2723acf04724b13f30493c0ad3296abffb510d40d9555fbfeb8329367dd5053f1a8bdd3609cbff3ea69441ba457293be9a9221258fe590be18d5997bc0a50c3e5ac9ea0a27430d3e4dcb43a56fa51340b1e1c3f68587c4c1530553ec7f9fcf41fd002e4483b4b040b354d1ee7a7580401a850955990a3f40414c625c126e074017b1c2a9138104c043044a67120ee9bf0554d657f299b13f7bfed0091c9ba33f4a550ca1192538bf72bc2ebdba1e4fbf7cd4c888cc95f0be5d9b6c3d1539eb3e1193b2ed273a933e19e93e80d9ed78beceebf15bee5018bead88d0334baaf23d65fa880ce545a440e8d4ea8f2fe38a412ee2918958e5d341f33f75ab4e2c19406071a662ab5a7f4046fc6ee3f26c3a40d14e16904e3d0d40e65ec86de0ca00c0c2011f19d7c5e9bf3da75c63dfc1ad3f8182532479b3a33f76a5a5578da741bf1e0b435fd3b94ebfa5fc6bbb8cb9d6bed43997cb3d58ea3e616af86643c3823e497cc3099e8877beee3b725b655109be2aaca1bfb817f13d4883ed30436626c0c6c29c85e1ffbf41cf14964ac93bcfc15c460620913cae407568b6201b2d7e402de620ac32524040f5da7ebf82ec1840c2d514b613ca05c039604ef09c62f2bf3a69f190f605b93f0c57c824134faf3f8aa79b06031a60bf6794eb3929605cbf6a7e670e2dcbf73e59ad361648e5fc3e235c50f411cd82be62c04b91eeff8ebe9a84d2f62397f83d9dee2fd45e250b3e0ac5a4b35e121ec0cdccc6efa1b3c34109c6a342abf3cac14dc4cef79cedac40887f1dfc07ed7c402302f41e97fd3b40b544cf3a3d5a1640d3302812491100c02f01f3b33199efbf7659328fa7afaa3f925c7edc1d6da93f87add8b013de38bf3c861c5154af55bf924f8754751fe0beec2c0877b6c3f43e79ee4922370f853e578cc124250185be37a47f7a46290bbe3bf31018e76e013e6245192c10eb1cc0658f7e2a3f86c241433b7388ce50cac1f74106f2a5abab402738d37abf207b407514244520883840d210ec8d37f922407945c0a81b4bf7bfee1df2bace36f7bf886c77f1fb7c943fdea943102a02b43f2e3a4fd9c30a423f36036f1a139d62bf9449f59197d9f6beec122458166d033f205224ef22ac913ebb3d10388a4495be8c56922382f812be0c33302df2ec123e74a061e8f3ef23c01f0f2763cb1dc2412db0f793bf32c9c1985cec7a3e73aa4022644e40b1627a402192a5ae64e53940298aaa9f66052140dde441bc8041fabf6b2f5c71eef0f4bf0e359778c428a33f75e0198f1202b23f55964698d0cd25bf85aefa2b96c860bf6d7610b03c87dfbe725bb27af291013f22d9889c7410813e5bee2319364993bef2ce072ddcc104be29d4e812d630113e8fd153bb9da321c021947f2098bfc1415111c905af24c8c14d3feafbc851a940dafee25bf77d79403b0fa4b6368a354038c3eee9a2b41a40d7f75c9d1bc8e8bf52f3aacba9c0efbf6c79b4e77e789bbfb3268404da38a93f5f24ce39feea613f6067cf0e59da55bf649bca43a3840bbf7e5ac85f7487f53ebae2a94e50a2a23e94386731cb8386bea69ef4c168f022be68f215751553033e1f6f4f06c63ce63f9ca76601f731c1c1bc924094ae9ac841114fbe4cf464a84090647bb781847840543f8386030a2440c940277e39331140c51e0002861deb3f5a2ac57ca3cce2bf7cc97e90b88ec0bf44db975cbf54963fb3eef0e59e1f773fdb9a526120bc38bf8bf69a919b721ebfe2cf24fa9478c63e719372ffb25eb33e66a2d3c7b815123e1ab2256fce1b33be62e2b1b7962bd3bd7d6f07666e11d43f0af7c486c3adc0c1b0208151bb0fc8411eb9b5f76756a7409b6bc8494b9877403a7548fdb30f2140799c3f7dd0660e40af6e16b7ba59f13f36284cf20168dfbf63e8599164cfc1bf1f90dc6c95c1903f436d0dba7e91773f0df7794501922ebf7d44878c1af31dbf4a5346284674a93ed2f0de6c7c8bb23e9998b24021284c3ee4732e7048e931be90d81b459c87dabde28b83a99781f0bfd3c0d99ab23ac041613483a78668c7c1bc0dfdf8474fa6404a6234a006cf7640b0bd3b80100723407f3956b2114309406ff7a4a0032ded3f0f3dcc44f24ad8bffdf2d1c564eabfbf6e8765b8b5f8823fbe0e848d1959753f3503cc0cdbfbc63e6ffd077612461bbfc012f55e3a5ecdbeb4dfe7c318f4b03ec51caea007256c3eda3d2716ed6c30be71bb55a51f92f0bd8772eb7fdc55294050fd039c8bf2bf41139c10f5788bc7c1935820ccff8ba540d56447361c3f76407804fde9fc1615406dc1d3d98f69f3bfb6d769ce84c2f03fc7a1531b6529c83f7dbfc0269429bdbf100150b8e76b98bf384a12fbd422723fcb8fc93a2bfe503f001c2c80e72f16bfb441e8ef4c54f6be3f724b294ac4aa3eec79f633b0408c3e1b45adb52b5e29be9b57fd8b91ac0bbefb526902a1ad1f407d05a5e37bf8be4105345535e38ac6c11bbd0d554c98a44083257a1262e87540ee23c7c5e2202140be2a4c9b1f5301c083e6d19d2ca5de3fafad144ec908d03ff67e1d0d074db2bfe0992e0ea86d99bfee055e9ef495673f20a80e39c382503f950defe1e4ef0cbf68ec8ae6e102f5be72e5b4d0a362a13ec518238ed51b8a3eaaeaa413cc6420be2c652eb50a4a09bec3b1e53839e50f408d2a2301abbcbd41bc78511e77aac5c14a5c19f903aea34000746020c01a7540b8c98d6febb72140f429a50b76bffabf01f698abde6be33fc30c795dea79cb3fd73c81b80c99b5bf6f1c4797b87a97bfaa477e049bef6b3fadcd9151f8034f3faefb2497274d11bf22c20be90adaf3be2bc1b9d5e5f9a43e87d47da695bb883e4edb37ba87ec23bedf884d497ffd07be62ed100d6c42fa3f9814a7ea709bc141d044e6cb5c28c3c1ded3ffd97ae0a2409f0ebb16d56a7440685bb0eb8ca02440828412e01a30fbbfcaf3752b039ed43fa7ac21b6b720d13f31458ba92f98aebfc19ad73768ac9cbff8ab6e5602d2633ffffc4b2682eb523f51bb8e50ad0f08bf7ef6e63cb84ff8be45159cef128e9c3e0afe36fdf56a8e3e6c07beb318a01abed5e8736eeb9c0dbed4d89dc367c2e63fb7976c78bfffd1c1fdbf1a8b6572c7417c8c89bb4415a2401dfdc7525abd7340dfe7690a64212740f6324a916d18f3bf0debd61358ca5abfc9c95b3f474cc63f7407401236dc9ebf19b61d0857bb94bf5e0bbc7dd9d7533f125d384a1ccc4b3fe76251bf9248f6be3f901d20d1d7f1be8bbab3ddf12c883e067cf3ffa839863edf4ebe35c7aa04be56bce259318905be0a1bc3b9e3b813c0e7fb6d5db80ebdc1fb3bcd92618ac3419a9650c7806aa1401113a4c7a0f372405dd7beb5507d1e4036e0dd8c808c00c00d6d4e7547e6e03f781cc938d43dd33fb0f4e1a50978b0bf8a77fde614c09bbffaf5ab233de3633f5eece3626129513ffe697c5e178707bf746ffdb93e43f5bebc7a6afaa5aa9b3ea8c1440be6018a3efbe41c3aa1c219be4424b588c4f208be585835525eba07c019002c739035c1c1b82095784bbfc141bec05f73d5b2a04047890a968e617240a3cecdd5528018405742d0110b0404c01f07852aeca6eb3fedd8f4472415d93f27c28e475284b6bfa89f1244db5da1bf841b86346b446a3f053825f1eb41553f03745ac4a3640ebf5ba8fa575142fabe40a0e8504a7ba13e8a12b2187d09903e6832367fdcd51fbe03d92ca408bb0ebec9884045e93922c0a721462fd373b7c15cacbc659a62d44100bd61f18915a0407c0d398f808b71406cea5588082c264020703e77de16e93f77e1ad29e32ca6bfb98e631fb2b5c5bf84642c2887c79dbf0895673f7790743fc71d4d2063e8553f8ea8a0ee25e90cbf7d8e6c45add9fbbe85afb9160b6b83be7e11dd3c68f9903ea63054123040403ee6386e89202010be6e7a8779fa2bc7bd426c88e5601910c023bf6ae4db01b9c1ea22154438dcc3417b4d2c9a3ac89e4036aa8768f811714033df7cf11dd019409259d1626ae104c0eabb040ad864e63f259200c0cdf3db3f394c3209b4f3b1bf5c76b9e7b3aba2bfb6f34adbfbe7633fc4e3d6ad165f563fe613ad4493c705bf56e0f93df13dfbbe4571a5ebaab6973e25d9d7febd76903e9c254fa9398314be4e5684e04d4c0fbed8a01cd29d5106c094a1f60b6323b9c1d02b6469c7b0c241b49136054f939d402f583e0f91897040dbf86d2360da1640387f73829c9a07c0b942cc40f075e93f9cc4370e5f18e03feb4c22d8a3b6b3bfd96fec710615a5bf5eeebf504c66663f2a2323991b37593fe706a7cf4b8909bf68cb42b74bd6febe0153c2e1152a9d3e24c0c2f35cc0923ed300450b307e1abe5bb921d7a4ef11be2494f49b642626c0cf6b0011f740b3410b63ddd93d80d5c1b715b9db870c9c401b166f5c1c9f6f4083d128c4c46326400bf1fc9ba252b53f2bca807fea95debf43a600373449b4bf743d60ed5417a23f69dd703d7e53763fb071d701db2a5dbf532495ceca2131bfb0b2abd8e744063ff9f0c58eac76da3e83329bb9105a9fbe3d481b67540373beba3060da7c8a203ed9ab430d326ef43d7c3d2f738d7110c0fdc12c0c0e2fb8c1d4293bfe19dec1413795b6c81a5f9b40a1a616f615ff6e40c0a56596e01f1640c5f8c5ed2f370bc067cab19322c5e23fb654b1b2153be13f1e218c59006caabfc064371da3fca4bf96791b4e98195a3fc09c63d99717583fda964ae59b64f9be6181f4c683acfcbec7f2dc993886883ea5d09be33e1a913ed6070b2dffc902befa9632bbdf2010be81faee54b56014c0ffcbbd56cadeaf41c1e3855e1e37c6c13a1f4671d8119a40395686aff76c6d4054891eaedcdb18406ba7c3a45612e4bf2fbffb78852dec3fb7287cac82aacc3f551e402e3e10b6bfc21dae0f436698bf63aa8d285b8c693f6572fa303d854f3f1230e9ae80970dbf8a4ad4c363e3f3bee2a4faf83b16a13e163cf7b21d8b883e200f79a277421fbeb406670024a507bed0240ae1e8790f40a81eb5572c06b741959f484fc73ac2c1294bfc95554f994074eb8916509e6c407c36b5e727921340253089d35bd102c0fbf70765c122e33f6546812fb5a8d93f1d61cbc80f18a9bff3901660d524a0bfb4ef2e4273a8573f404afaa64b91523fa0e3d1bf47d0f5be6ba254db2bfaf5bea1b63c33c5ab833e8b6189bdbe098a3e39fef0df1a91fbbd7dd211ae406608bef0d5e0c0d2b411c08d610ee81b47b7c1177f81fed7fdc2419098e60a17639840fa2c2fe0e0db6b40551fd6e5dd360b40631c2659a51a0ac09a68da6c860feb3fa9e334b52b49e13f75f5e27b6245b1bf24bb247247dfa4bf9eda17a773b2613f549a20bc27e0573faa500916d29402bf5b8965f4a96afcbe46a8d83a9cc9933e5d20b999e3f9903ec6e1a4956def10be0d3d567d080b10beef981d59eeaef03fa6f10bd817d5b54129b1036b04b7c0c16ccc6fccfe609740e07285fc17ba6a40b235404936d41640fc8c62e27dc6f7bf09c35dcbb815de3fe0a0cc5137dad13f2c1d5bb13096a4bf7dba52bb99cf97bf4ea273d744e3523fb734eb59aabf4b3f75b22ce54f79f0be1f937b0d7f72f0be0d91321427217b3efe5bf2cb3b72833ed456675b795bf0bd21eb44efa02a02be64cabe001a7b0d40f982723673f7b4c1a5dd4ce04d93c94199d1fab72d6696402dfaa062b6cf6940869de18b36871540cb532d1a0cc3e8bf3b38c13d6cf0e73f412a5a3ba34fca3f0057c3b31bbcb1bfca7a23f26a0394bf5a7c81c540f1633fd7a6fa9f5e83483fee7ebf8b51ba06bfe8f6678228ecedbea90d9aa4000b9a3ebf4b24e3890e823e6a004d8c7cc217bea83ef8e8892101beb402c41a7a4fb33f73111f20d7edbbc1e6b12e5d4229bdc18a93498105a99540f59ab7c730036940dffb41d888f01b401a541eef296de1bf5b1f0ccc2290c83f0b76b2d972d5ba3f0f6e2e535dd794bfe7977ce0556d84bfbb7b9689ba24403fe9a1283eae55373f84e50fe7e224d2be73424232db4bdabee9d341f872be223e9f86491b856e6d3e5900db05799cdc3d1f2ced98a520eabdc864604c6420e83f3ee859bc9acdd6c110761ad3720fbbc105066fa80be29440df3dd6f54a856840a598fe544ac51840b35e30ea7907f2bfff884f3cf01ed83f17fc0831106bc83f3e65d6fe22eea2bfb98e0214a37790bfa655e3d46f7b533f77a6576f451e433ffce180a424e4f3bef4a7fc58e88ae6be9b7902a3bd64843e5c4a2494cf897a3e318005bd53bf00be607b2f03fab6f8bd64d8e8991307d3bfdfe2355ad545b4c193c9113c1cbcc241949545bd4c1e9440cbc7837ae37667407efbf34fb2091a404c905b7e184beabf9ea46570a276c23fc0e9a3529909c23fc7f541732bb386bf1cf066e8f92187bf06a9aa91a4e9f83e0b66a322347a383f7bf376826383da3ed3215ee1791cdabe0ed579586dc17dbeccdbd3c89fea6b3e7157824d7d37033e2ba5085938d1e7bd6151161d0d3ff03f28d7d022f003bac1844812849a19b8c1f78a3a5a836193401133d1cb67a76640ac9e6ef7af7a15400d753b3cb566d0bf5a7b744a1435dc3f07422a31d76cb43f096d366805d1a3bf0f1577ee407581bf58b284dd6fdf533ff44b847af9cb343f5d10afeeac31f4be937a0abe6746d8bebb39a4df84e3843e9de98aecb51e6c3ee8ac977b327c01be9de13dc8cfcde9bdb6ba52a297f2ecbf1b4c9bb91aedb8c1b3b3f0eaa65bca410460f1d01eb392409b3a7606cfcc654050ab7a367e7f19402ab094ac7593843ffcb67e5306a7c53fc289fd73206c9c3f49eba7eab0ce90bfc445c925962371bffb19eb218ca9363f797df332cfe6223fd65490e31b86bdbe63c1032f32bec2bea6e8304f187455bec787dec0fc8f513e085f05f6b0c7e83d623b21ff660ec9bdeb0c85e12288e63fd1ca2998e1a5b8c12c0c592fe763b9c1855b537aba0d92400bbf151c803665405f8520fd0c4a154041283e3985bcb5bf4127dc74e4f6d43fc1badfd146b2a93fcdf7224ce88c9cbf5a550a92444c78bf96f274b9011a4a3fa9e34693c00a2c3ff78668b130ace7be8ce72269fc1acfbe273a27a4399a753ed278915abb17613eb34602c4f5c4efbd928b1f3e6ae4ddbd8ae23cd121fae73f0a10052b19acb8c1bbf26934e046ca41729ea5d2b75c91408da9f42fbb7a644062fc680f00171840afd30a511aa9b3bf011334189626cf3fc26e299b9844b03f98a273c5cdcf97bf92bf0a976a727dbf9e5354fee44b453f570bb57b4852313fdd685ebcc2c3e1be200ffa71edb5d3be4228664e696b6b3ed94262838e28663ecd46cc0f2677ddbd41ca369f54b7e3bd434c12b0fbb5dcbf7c2c3d62d5b6cfc188817e8affbbc141a759a1ec03cb9040807b68ef8bcc63408947546a8f6f164065e175e557dba83f6e2d2d0dc4f9cb3fc2a4d36a8cf99a3f42bb418bd3cd93bf1bf135544ab66ebf8354339cd727403f7daff96d2b8b203f1a6daa24f8a8d7be541930271549c0be6afc1a3ccd275d3e3fce630ad5ce4e3ea7350e316bbdc0bda3f8b8f22aa1c6bdf81043299bf7df3f2a57dc01bb7ad04195d8d59476ccbfc11e97bbcefc389040e4e069dd0e38634060ada58c8c051540ad76fc50b27cb0bf58d93ae53b06cc3f0776c963b2f5a53f9cf61fbe956591bf5a96bc3fdb4873bfa836203f22d5363f387f00572785243fb29874e89ed4c0bedda66392e2b7c4beddfa0c892cab4ebe2221fc941a79543e7f8acb21380ae43df069885919e2cfbdea4073e49316f5bffe7c57a5a987c341bf3a1858bb577a41900748263f518f4030be1e4ef503634063ecf3fabbba1240aa1cd7fa3724ecbf05f471a968ead23fb4b128196ec8c33f7db18ca4347797bfa70456237aae88bf0b3d4fa6a1e7433f780172bed32e3b3f1417c6d1c1aee0be091a13cdddf9debef79161f01ded6b3eefcb889f74da713ed0c4436811a9e2bd3bca6ce2986cf0bd3d249342bdb5cd3f49f4faf00458cf4181084904c491c0c194253a6e5f378e402f480437092f6240969ff59cf28a15405f47a7bac935d7bf9f43bba7a84ac03f60a24bdd36fab33f7bc4483ec9b182bf6888469fc7967abf552031cfaeb9103fe4f6faca72572b3f0774e3cfbe94ca3ef856cdd29d1accbe44f0f752bd5570be7d2d654ef6f75c3e54b78b1c4f5af53de5d13616d7e4d7bd3337350d8c7c0240b93965398c59ad4172e19eacecead3c144d21f07a14b8d40d3e16ef3b39b61406b2f8d67019a1840eab7f5546823b73f8ba1dadc68b8babf58a866c5942389bfb26aa8f96354893f791a0486abea493fb4d2e20fb8024cbf94904010386514bfcfb539ed51def73ec42d18010e91c43e430dec627ca891be263e6a85f9a160be74f5d3667024133e1006cb90c105e33d14240b4060a7edbff437bdfb42dbcec12f878dc841c8bf415b89f8cbf43e8c40d7bbdebef8e86040cf8fd4b346d511408e5e469cca08ac3fba5867db36a9ca3fbeefb736d0b7963f364fd61ea2e28bbf549739222e4966bfd03e9bee7fe82b3ff23ec8140fa2143f59097378884a9e3e7e5594562f2cb0be614ec410cb5063be64d50cae7a62343e2782c47f0a6dee3d815f766df65694bd3226598cd9b9b83fb8235ca1bfa0aac11494b0c51e4ac2c195c152617f418b40f6975a1bee95604015ea5d1fc38c15401eaa078bfc7fabbf36c6f07992307b3f597d908693e88c3fad299bae48265f3f0cfb9352cce354bf7dd5ed5b94a037bf70f5b22da9d9e63e8a7eb3d8d300e83e7670ec97327fa03e95da29e38ded82be85ca0c7affa945beb8255510a827053eb6fda7905a58cd3df899b4eee3a4e73f3256f7c356c0b6c1f2ec5eb19d95b6c16af01db69b668a40195e179b8c6060408e0c82ce3dad114019f0a4ace931e7bfcf1681c53f41c83f5dc5d6e3fa5cbd3fe4b9eeb81ced8bbfd5dbb96a3b3981bf3be747b8c124323f251d09b10dea313fc54b7f9a4272bebed15133d6c95bd3becc32d56c26643bbec6c5fb93ea43653e4a7064dac6ebd73d85f585c4a6bee2bda49883ed5851ea3f11e07087ada4bac168055a54563ad2411850e833ba768940dd65dd2eea2b5f40c45d787dfb601340a9462d338346b73f026799e65505b73fefb6040f3f647a3fae04747920e570bf5f51af6e2f0350bf36c68ff3b1dc22bf485d6af654f0c83eb37e35bf7209df3e06a7c3e4e92ea53e2751d87245b97bbe01f90b44eb9d48be163a919ca061003ed625bb95dd2ed03dd2662fb8508bd3bf365977fddc6eb041344b44a1d726d3c16b34da52b0a38840a551b75b3d5e5e4014ef7cd129b71440e12c3d25e5febabf6a4dbcf542ef98bf81eed6b70ca99b3f2c1524a4fca1713f52b31819b98461bf94fe2326d23b3bbf70cc674f134c073f86b06f31dba8e83ee3e8a42c6edf8dbe7f83c4a72c6f82be5859a340068825be7e138b53ffeb033e88dff5a8206db83dd130075898daa23f040245c8dce8a7c1d28f56028804a9c16b2cddb413dc87402e05d34d7a7c5d403941859b9a251440a0367cf07a9876bf1ba992e244148abf220cf9fed240883f9a8d97e1e4f1643fdad15e8cb53b54bf761b6e0919de34bfbc073c1a8890f33e0e45aff18dc8e33e1c242305e254863e567ab65753197ebe78a7944f76ba37bea042b6f2ca6a003e5ba3f699ff74c13d2a26bff1e1eb81bf5f07da60f558b0c1145fd93bf37ebec1d4319338401887404d78c1c2c7a85c40c8a051b3a565124062c6ea9226a5b4bf2b9b5d957946a83f937378fda749983f95179ca16e8e54bf471d215f201b5fbff9fb520f573e2abf8893f3d6af82033f6d3a98a53dccdf3e81f93a98ee197bbe9fd7fdeed8567abe3af5625448752fbef468579af611fe3d52a86ad70696bd3d265879ddffe4d73fd34f9824cea4bbc179b0952075d0aac16f03ccee135c86407b7c75dc04175c40f06e2fc4bb5a124050d8be0b87ccd1bfcb377324f7a094bf8101cf3e2fb1a23fce364e0f9868753ff41941819b2b62bf8f58a5cf67513dbfd99fea9cf1ab053f411a5dd3fa87e93e547d882a240084bec17ef8ec3cbc82be5e14b448d34e2abe6edcc825a20a043e23ce7a4ff1deb93d39280aafa3ace13f4b1d04b3d7c4bac1d5592d81a8a5acc1f5d41aeaffa28540c7a2f9edc9635b404584d3c9e7dc114042434267dd66d7bf5e38186b74b5773fd38e0837d2beab3f1038a1021bf2653f98f9b65aa4036dbf7f354119b88636bfc2b87d1b204a173f8caac21b5e47e53e2fc9548bfa3ab1be0809bf9cd12a80be9ad4c4e0d08b353e3bcb686d89a2013e9768044fb56499bd29c6891b7082903f3ca169a3b4baccc175ab5b1130adbd4120eebb93deef8440c35c6fa1a66e5a4091cf4fe0049d104028889d65f0e6d1bf635acd711f3dad3f423712cd8d6da83f79defb8ca9b559bfd5d0069c97716abf82a9f3c09c5326bfdf238973d256153f38a8fdded58cdb3ead47022afb8aafbed2c122bfc3b276be9ee4a577958b333e993ec24fecb6f93d61e7fed834bc95bd7c294e11f08ae7bffd820d20cb22df415abde76e7fbac4c14dfa40aea7488440ea81314072fe5940209166b5684c11404fc411e33d3ddbbf63d58a5ab78e87bfdd897ed58f2bab3f3d074f3959fd703fc250f1ced1bb68bf9288c689736439bfd2af27c0e89c103fb23f4494eea6e63e1dadc35e3d45a0bec2fa1bb973d980be07f6e1c594defebd93f31a666333023ec585c03775ffb03d</Data>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[0]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[0]</Name>
 								<Value>-9</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[1]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[1]</Name>
 								<Value>-8</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[2]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[2]</Name>
 								<Value>-7</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[3]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[3]</Name>
 								<Value>-6</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[4]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[4]</Name>
 								<Value>-5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[5]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[5]</Name>
 								<Value>-4</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[6]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[6]</Name>
 								<Value>-3</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[7]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[7]</Name>
 								<Value>-2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[8]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[8]</Name>
 								<Value>-1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[9]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[9]</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[10]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[10]</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[11]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[11]</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[12]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[12]</Name>
 								<Value>3</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[13]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[13]</Name>
 								<Value>4</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[14]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[14]</Name>
 								<Value>5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[15]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[15]</Name>
 								<Value>6</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[16]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[16]</Name>
 								<Value>7</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[17]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[17]</Name>
 								<Value>8</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Currents_HEMS_DH10[18]</Name>
+								<Name>vertical_levitation_control_new_P.Currents_HEMS_DH10[18]</Name>
 								<Value>9</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Force_to_current_coefficients_HEMS_DH10</Name>
+								<Name>vertical_levitation_control_new_P.Force_to_current_coefficients_HEMS_DH10</Name>
 								<Data>000000000000f03f000000000000f03fa42aedc5c099fcc16e5f615d985b90418d7f1f7d903cef419e7bd19f5f11dcc18484a0cc528bad41326e513dfe801c414b713af7c91a63419a22a30d038757c1eb19e3be9b163441f3d5dc717f9fffc08e15b3d54217a740d1a22ec5f2a88740c3ff841c273559c0657881ae6798194001649a7fd01ecfbf9c9e3d489c11773ff44237711e4d13bf9dd0d0f0bb069c3e000000000000f03f000000000000f03f000000000000f03fa4c14175db75c3c1abd02093df61984163e2c0f4138f8ec1be30012cacf2a841a434fb74a90e98c1c72d7ed1624d2e41149d1bf9b1e4694141e88b8160cb54c1fc2a8e5c3d913141411cb47386f302c106eae30dc0dfcb4002da2769279b8cc05f8ecb85977d4440e62a0ddc9614f4bfd5d82916efa5993f2188f2a79d3933bf71f9879987a5b93e000000000000f03f000000000000f03ff5b4ec4cd19f51c164b1fd761dcaa9c152ae5aa78a9993c1a45cd8341c6995c17500accb4786a041d8510b42ff246c41f5a703d594778fc1af672ea5141181417576f23257a163c11bcdfc178ecc3c4126dc330ce1c00cc10dcb62ecea26d440bc8f9772410794c016866d82530f4c408e4d40fa3c10fbbf1c428cea8c15a13facef4a977f6439bf0e95a85219d4c03e000000000000f03f5df3674275adffbfb8c09b9eb85c2ec2d549d85a412c2a42228e167683630dc2e6b03dde4f08c8417368f9504b3ba8410843388dff578c41d8c5e3bb12167ac145cdd1c7c8bc27412adc97908d8f2f41de6ee947538d0bc16ae12f877ac0d64053eb7bb7961d94c04c566f4fde383b403d6295311d4af13f509149a5de95b8bf2c5f176143bc683fd0c9e3b9a56e08bf6208fdfa39b3933e000000000000f03f000000000000f03f000000000000f03f8d259015701cbfc1ed1bfe0ab40391c19cc5dbaf65fa9dc1638008cb4a4eb541910bcef94637a3c1ecb7f41c6131e5c0c6fe2d44cfef744113db77a0838e60c1187851d50dcb3b41b8fada503ad50dc186b37622b3d4d540898938e3564796c0e4a4b5df9cb54f407236bffb7cd8febf51acf985f789a33f57eec8ea20093dbf521cd89a7e30c33e000000000000f03f000000000000f03f000000000000f03fa73fc7e47f81cfc1d4b8d7fc8c3ab5c171e4497f7eeb90c15050549e4d39cb41baf3787026b7c3c1884a43b15afda841f8d3908672617dc199c43bbec18bb0c09051409016582a41572d07e3034105c16f2328819dc0d2407cfbe024b16695c0efc814701472504050fd6b9d4af200c0fd7a4f199f7aa63fb56ee1a9a15a41bf3518306659b4c73e000000000000f03f000000000000f03f000000000000f03f000000000000f03fde5913e4ee7fe5c1588d65172ac95f41f5b9c4d854b6db41471c94f5ac33c9c145aa550cfcdc2dc1047043ca24199a41736f84cad02384c1f29564ee35916041527623295f8d31c188556d231a7cf940231d536a3fe9b9c04280a9f2e56f7240b4975d2bf5fb21c04686fbb4d6e5c63f825524857f2061bf016dfc33c8d0e63e000000000000f03f000000000000f03f000000000000f03f93923735b23e54c135f42ae7e7ee6b4176796b86fc0c5a4128610e95fa0fa841dc0dc20cd1c3acc1fe2bcbe847a29c41986ae6d31f937fc1d2a7d9c33016554167c4791447e220c1db2f0b84e5f8db40c34d965504f6684012db887a3a5962c06790fe5723772640dca0c18e2358ddbf462374697592863fdad8474d604d23bf0e01653dd468ac3e000000000000f03f000000000000f03f000000000000f03f000000000000f03fce198666eac20fc2bc9680f5058ca0c16dd68332f0401342370958c8e5c910c23b70b6aaa63bfd41cf2c93309dd4dfc183faaa440499b74152d62fc793d688c1773de65aa7f75241c14a24b4d53215c18a396aff3d4ed1404224ded2115f84c012957305cece30402d2e6b0abe6bd2bf193cb4411c0f683f37d2bfbf2a50ecbe000000000000f03f000000000000f03f60005bbba02fc841d4b6e13aa1d1a1c19bac679dd33dd3c1d02d0fe1c5c363c192ad367b54d0a741c3d3abf0fba8bb4149d6e13dfebdbdc109c05f04598baa41b8ac97f290e78bc15b84d89d065263410024aac0ac7f32c12eaa15bb3818f940d5ac1ad74749b8c0f921b437b2a47040266f3fb449861fc002cc3809ba99c33ff40c3ab648c45cbf5d5ac90f8cdde23e000000000000f03f000000000000f03f000000000000f03f000000000000f03f1821409dc41de9c101e0fc153343bdc18a651614a480f141d0d0cfcd1de9ecc1db33371d4928d841f9a2f17ae009b9c11a4e8901785f9141156cc8053bac60c1b572d67ee064264103d408388ad4e4c0cb52207076d399406d5528c3c82d43c0acc5a9b76619d53fa7f9e6ae82907c3fab4c74354ae32bbf6f5aa11c6a42bc3e000000000000f03f000000000000f03f000000000000f03f000000000000f03f000000000000f03f629057cd371218c2ccee30465f292242b89e2d5f539118c22aba32d2a4b703425cac62eb44f4e4c148f84265492abf415f54e4a468b690c1f4f66b3149435a411c4fc93ef4621ec188649f7bebc6d9407fdbb59c3a998fc08a5db76f842d3b408ad3bdc8580fdfbf65be495f9825753f8cdc5e40b8eef9be000000000000f03f000000000000f03f75bc7ac62bdef7c1a7e7a5498baba8c1a18287d6775fbec1fad95bfdf69395c1c286eb6aedf5df41d8b6f614f33bd9c1ec4d261a97e4c04154a9819125bd94c1014ccd29ba9403418e778543274243416b143e472ef11fc1e4b9886088d0ec40a84ebcc7e0c3b0c07d1fd2d00d376a405b7a09859b6d1bc02841251a1d6fc23fb679b1f967c95cbf2741b5310fd9e33e000000000000f03f000000000000f03f000000000000f03f000000000000f03f999e22e4c5e2d1c194dd14f5817ca041cd26bb464b14714198c1f8c7ca9dc1411134aefef924c1c1bb46aba97988ae41d1efce6ae64b90c12c546d1aef07674172fd37256b8536c1489a1c67c52cff4072afc5643dbabec0819c19507c647540c3e307c4a18624c07dc78074b3c9c93fe21de42cca1163bf3ce78d70e024e93e000000000000f03f000000000000f03f000000000000f03f7f6a5eee5f36fdc19d85e9af3741e7412ccab65ef91330c12a55be5ecac7c0411216f9d04957b8c16bed9e9c559a4bc12057dcd022329241523f1441086f7ec1d64c846b2ba65a41b7691d63e39b2dc167a503104854f64093b71595eb6ab7c06791933498177140c4b3f8b25e0621c09ff85af0750dc63f60acaa2ba5ba60bf4c6fc35d278be63e000000000000f03f000000000000f03fb3aab75aed7d1ec2ee5a7b157bc10c423b6d8df11b37bbc177a179f7d32cd6c19d11bb839ffdd9417c4494fd00a6cfc16684c346f014b04176b6d396142618419dfbc6ad0d3771c14b477140b1345441577fb43c6d6a29c1e05ec7b35193f440de2c6b4e6a9bb6c06df558fd4d0e7140783e5088126a21c0ed22f76a45fec63fb3c5b936c6b561bf8eebb9f45f29e83e000000000000f03f000000000000f03f000000000000f03f000000000000f03f7ac2d4517ee8cbc17aef9e25ab6772c1b897bb9c5d42e2c07e8a87b83cc9c2411b664a373995c1c163b9057877edae41b7c96d83587590c14d0faf97e94d67411a35800fb5e536c1483fd05031e9ff40589c213bdfb5bfc0ec71193c4e477640b844684fa69525c0be64e9fb7764cb3fc1a9076ef07664bfd4fdb9282843eb3ea83594be9362ebc192e867e41255d441780ac5f7393fc3c1d9da277e3583f1c19802a5f4636b92c19dd95e6779399dc1faf2e715065fe341a0898a893379ddc1378c8c27c608c341219d1836044c96c19cd62950ef3f25c15c11e7310fc74541c90123e1bf5f21c1aa65c2a22da6ee404f4fe2501686b1c0a2737243b5ff6a4037957ea7bce21bc0bcbd2e097b87c23fbfaca03536a55cbf94e542804d93e33e000000000000f03f000000000000f03f000000000000f03f000000000000f03fa7cb8c1457c9e5c1ba133c796422a5c11d20ffdf6662e3419817b83e5aa5d7c153cb8eb980d8b54144fc0a7875120c41c1c7605b5d1374c16aa959f4ba795641510e7816da402bc10e1f81f10670f5406ff373583b05b7c0156394ce610c71403a759be2c52421c0731835fcff59c63f44ba765bcf0861bfc0f3df6f5f08e73e</Data>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_D_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_D_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_D_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_D_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_D_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_D_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_init_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_F_init_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_init_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_F_init_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_init_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_F_init_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_F_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_F_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_F_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_F_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_init_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_I_init_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_init_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_I_init_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_init_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_I_init_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_I_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_I_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_I_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_I_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_P_pit</Name>
+								<Name>vertical_levitation_control_new_P.K_P_pit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_P_roll</Name>
+								<Name>vertical_levitation_control_new_P.K_P_roll</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.K_P_tot</Name>
+								<Name>vertical_levitation_control_new_P.K_P_tot</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.d_HEMS_to_HEMS</Name>
+								<Name>vertical_levitation_control_new_P.d_HEMS_to_HEMS</Name>
 								<Value>0.314</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.enable_extra_roll_notch</Name>
+								<Name>vertical_levitation_control_new_P.enable_extra_roll_notch</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.f_extra_roll_filter</Name>
+								<Name>vertical_levitation_control_new_P.f_extra_roll_filter</Name>
 								<Value>652</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.g</Name>
+								<Name>vertical_levitation_control_new_P.g</Name>
 								<Value>9.812</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.m</Name>
+								<Name>vertical_levitation_control_new_P.m</Name>
 								<Value>1780</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.notch_damp</Name>
+								<Name>vertical_levitation_control_new_P.notch_damp</Name>
 								<Value>0.3</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.notch_gmin</Name>
+								<Name>vertical_levitation_control_new_P.notch_gmin</Name>
 								<Value>0.1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.pitch_target</Name>
+								<Name>vertical_levitation_control_new_P.pitch_target</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_left_com[0]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_left_com[0]</Name>
 								<Value>0.0147302</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_left_com[1]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_left_com[1]</Name>
 								<Value>0.8070598</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_left_com[2]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_left_com[2]</Name>
 								<Value>0.34816</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_right_com[0]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_right_com[0]</Name>
 								<Value>0.0147302</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_right_com[1]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_right_com[1]</Name>
 								<Value>-0.7979402</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_motor_right_com[2]</Name>
+								<Name>vertical_levitation_control_new_P.r_motor_right_com[2]</Name>
 								<Value>0.34816</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_pitch_hems[0]</Name>
+								<Name>vertical_levitation_control_new_P.r_pitch_hems[0]</Name>
 								<Value>0.8879802</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_pitch_hems[1]</Name>
+								<Name>vertical_levitation_control_new_P.r_pitch_hems[1]</Name>
 								<Value>0.8879802</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_pitch_hems[2]</Name>
+								<Name>vertical_levitation_control_new_P.r_pitch_hems[2]</Name>
 								<Value>0.8585198</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_pitch_hems[3]</Name>
+								<Name>vertical_levitation_control_new_P.r_pitch_hems[3]</Name>
 								<Value>0.8585198</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_roll_hems[0]</Name>
+								<Name>vertical_levitation_control_new_P.r_roll_hems[0]</Name>
 								<Value>0.3785598</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_roll_hems[1]</Name>
+								<Name>vertical_levitation_control_new_P.r_roll_hems[1]</Name>
 								<Value>0.3694402</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_roll_hems[2]</Name>
+								<Name>vertical_levitation_control_new_P.r_roll_hems[2]</Name>
 								<Value>0.3785598</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.r_roll_hems[3]</Name>
+								<Name>vertical_levitation_control_new_P.r_roll_hems[3]</Name>
 								<Value>0.3694402</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.roll_target</Name>
+								<Name>vertical_levitation_control_new_P.roll_target</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.z_manual_target</Name>
+								<Name>vertical_levitation_control_new_P.z_manual_target</Name>
 								<Value>-0.016</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.z_mismatch_D</Name>
+								<Name>vertical_levitation_control_new_P.z_mismatch_D</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.z_mismatch_F</Name>
+								<Name>vertical_levitation_control_new_P.z_mismatch_F</Name>
 								<Value>100</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.z_mismatch_I</Name>
+								<Name>vertical_levitation_control_new_P.z_mismatch_I</Name>
 								<Value>0.0001</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.z_mismatch_P</Name>
+								<Name>vertical_levitation_control_new_P.z_mismatch_P</Name>
 								<Value>0.001</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.feed_forward_ems_ON</Name>
+								<Name>vertical_levitation_control_new_P.feed_forward_ems_ON</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.feed_fwd_motor_roll_ON</Name>
+								<Name>vertical_levitation_control_new_P.feed_fwd_motor_roll_ON</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.levi_operational</Name>
+								<Name>vertical_levitation_control_new_P.levi_operational</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.mismatch_enabled</Name>
+								<Name>vertical_levitation_control_new_P.mismatch_enabled</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.mismatch_specific_enabler[0]</Name>
+								<Name>vertical_levitation_control_new_P.mismatch_specific_enabler[0]</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.mismatch_specific_enabler[1]</Name>
+								<Name>vertical_levitation_control_new_P.mismatch_specific_enabler[1]</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.mismatch_specific_enabler[2]</Name>
+								<Name>vertical_levitation_control_new_P.mismatch_specific_enabler[2]</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.pitch_ON</Name>
+								<Name>vertical_levitation_control_new_P.pitch_ON</Name>
 								<EnumText>TRUE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.roll_ON</Name>
+								<Name>vertical_levitation_control_new_P.roll_ON</Name>
 								<EnumText>TRUE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.roll_filter_enabled</Name>
+								<Name>vertical_levitation_control_new_P.roll_filter_enabled</Name>
 								<EnumText>TRUE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.total_ON</Name>
+								<Name>vertical_levitation_control_new_P.total_ON</Name>
 								<EnumText>TRUE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.DiscreteDerivative_ICPrevScaledInput</Name>
+								<Name>vertical_levitation_control_new_P.DiscreteDerivative_ICPrevScaledInput</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForFilter</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForFilter</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForFilter_a</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForFilter_a</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForFilter_j</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForFilter_j</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForIntegrator</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForIntegrator</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForIntegrator_m</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForIntegrator_m</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_InitialConditionForIntegrator_p</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_InitialConditionForIntegrator_p</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_LowerSaturationLimit</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_LowerSaturationLimit</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_LowerSaturationLimit_n</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_LowerSaturationLimit_n</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_LowerSaturationLimit_e</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_LowerSaturationLimit_e</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_UpperSaturationLimit</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_UpperSaturationLimit</Name>
 								<Value>5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_UpperSaturationLimit_n</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_UpperSaturationLimit_n</Name>
 								<Value>5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.PIDController_UpperSaturationLimit_g</Name>
+								<Name>vertical_levitation_control_new_P.PIDController_UpperSaturationLimit_g</Name>
 								<Value>5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant1_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant1_Value</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant1_Value_b</Name>
+								<Name>vertical_levitation_control_new_P.Constant1_Value_b</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant1_Value_e</Name>
+								<Name>vertical_levitation_control_new_P.Constant1_Value_e</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant4_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant4_Value</Name>
 								<Value>9</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant4_Value_e</Name>
+								<Name>vertical_levitation_control_new_P.Constant4_Value_e</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay_InitialCondition</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Integrator1_IC</Name>
+								<Name>vertical_levitation_control_new_P.Integrator1_IC</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant5_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant5_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Switch1_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.Switch1_Threshold</Name>
 								<Value>7</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant7_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant7_Value</Name>
 								<Value>4.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Switch1_Threshold_i</Name>
+								<Name>vertical_levitation_control_new_P.Switch1_Threshold_i</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.sat_enabled_Value</Name>
+								<Name>vertical_levitation_control_new_P.sat_enabled_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant8_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant8_Value</Name>
 								<Value>-9</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant9_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant9_Value</Name>
 								<Value>-4.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Switch2_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.Switch2_Threshold</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Delay_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.Delay_InitialCondition</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.stop_div_by_zero_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.stop_div_by_zero_Threshold</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant_Value_c</Name>
+								<Name>vertical_levitation_control_new_P.Constant_Value_c</Name>
 								<Value>318.306167661718</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.tau_Gain</Name>
+								<Name>vertical_levitation_control_new_P.tau_Gain</Name>
 								<Value>0.00075</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias_Bias</Name>
+								<Name>vertical_levitation_control_new_P.Bias_Bias</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.two_Gain</Name>
+								<Name>vertical_levitation_control_new_P.two_Gain</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.one_Gain</Name>
+								<Name>vertical_levitation_control_new_P.one_Gain</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_m</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_m</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.TSamp_WtEt</Name>
+								<Name>vertical_levitation_control_new_P.TSamp_WtEt</Name>
 								<Value>666.666666666667</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain_Gain</Name>
+								<Name>vertical_levitation_control_new_P.Gain_Gain</Name>
 								<Value>-1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.f_roll_n_Value</Name>
+								<Name>vertical_levitation_control_new_P.f_roll_n_Value</Name>
 								<Value>318.306167661718</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.tau_Gain_h</Name>
+								<Name>vertical_levitation_control_new_P.tau_Gain_h</Name>
 								<Value>0.00075</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias_Bias_j</Name>
+								<Name>vertical_levitation_control_new_P.Bias_Bias_j</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.damp_roll_notch_Value</Name>
+								<Name>vertical_levitation_control_new_P.damp_roll_notch_Value</Name>
 								<Value>0.3</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.two_Gain_h</Name>
+								<Name>vertical_levitation_control_new_P.two_Gain_h</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.g_roll_notch_Value</Name>
+								<Name>vertical_levitation_control_new_P.g_roll_notch_Value</Name>
 								<Value>0.1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.one_Gain_l</Name>
+								<Name>vertical_levitation_control_new_P.one_Gain_l</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_h</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_h</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.tau_Gain_b</Name>
+								<Name>vertical_levitation_control_new_P.tau_Gain_b</Name>
 								<Value>0.00075</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias_Bias_c</Name>
+								<Name>vertical_levitation_control_new_P.Bias_Bias_c</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.two_Gain_f</Name>
+								<Name>vertical_levitation_control_new_P.two_Gain_f</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.one_Gain_g</Name>
+								<Name>vertical_levitation_control_new_P.one_Gain_g</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_c</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_c</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Switch_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.Switch_Threshold</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain1_Gain</Name>
+								<Name>vertical_levitation_control_new_P.Gain1_Gain</Name>
 								<Value>-1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.tau_Gain_d</Name>
+								<Name>vertical_levitation_control_new_P.tau_Gain_d</Name>
 								<Value>0.00075</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias_Bias_g</Name>
+								<Name>vertical_levitation_control_new_P.Bias_Bias_g</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.two_Gain_fc</Name>
+								<Name>vertical_levitation_control_new_P.two_Gain_fc</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.one_Gain_f</Name>
+								<Name>vertical_levitation_control_new_P.one_Gain_f</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_ci</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_ci</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.dist_enabled_Value</Name>
+								<Name>vertical_levitation_control_new_P.dist_enabled_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_n</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_n</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant_Value_e</Name>
+								<Name>vertical_levitation_control_new_P.Constant_Value_e</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.stop_div_by_zero_Threshold_g</Name>
+								<Name>vertical_levitation_control_new_P.stop_div_by_zero_Threshold_g</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay1_InitialCondition_nc</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay1_InitialCondition_nc</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant_Value_a</Name>
+								<Name>vertical_levitation_control_new_P.Constant_Value_a</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.stop_div_by_zero_Threshold_p</Name>
+								<Name>vertical_levitation_control_new_P.stop_div_by_zero_Threshold_p</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.ZeroGain_Gain</Name>
+								<Name>vertical_levitation_control_new_P.ZeroGain_Gain</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.ZeroGain_Gain_m</Name>
+								<Name>vertical_levitation_control_new_P.ZeroGain_Gain_m</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.ZeroGain_Gain_a</Name>
+								<Name>vertical_levitation_control_new_P.ZeroGain_Gain_a</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias1_Bias</Name>
+								<Name>vertical_levitation_control_new_P.Bias1_Bias</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain_Gain_p</Name>
+								<Name>vertical_levitation_control_new_P.Gain_Gain_p</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay2_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay2_InitialCondition</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias1_Bias_d</Name>
+								<Name>vertical_levitation_control_new_P.Bias1_Bias_d</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain_Gain_c</Name>
+								<Name>vertical_levitation_control_new_P.Gain_Gain_c</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay2_InitialCondition_j</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay2_InitialCondition_j</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias1_Bias_l</Name>
+								<Name>vertical_levitation_control_new_P.Bias1_Bias_l</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain_Gain_d</Name>
+								<Name>vertical_levitation_control_new_P.Gain_Gain_d</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay2_InitialCondition_p</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay2_InitialCondition_p</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Bias1_Bias_j</Name>
+								<Name>vertical_levitation_control_new_P.Bias1_Bias_j</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Gain_Gain_a</Name>
+								<Name>vertical_levitation_control_new_P.Gain_Gain_a</Name>
 								<Value>2</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.UnitDelay2_InitialCondition_a</Name>
+								<Name>vertical_levitation_control_new_P.UnitDelay2_InitialCondition_a</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant10_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant10_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant6_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant6_Value</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant7_Value_o</Name>
+								<Name>vertical_levitation_control_new_P.Constant7_Value_o</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant8_Value_h</Name>
+								<Name>vertical_levitation_control_new_P.Constant8_Value_h</Name>
 								<Value>1</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant9_Value_p</Name>
+								<Name>vertical_levitation_control_new_P.Constant9_Value_p</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Integrator2_IC</Name>
+								<Name>vertical_levitation_control_new_P.Integrator2_IC</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.IsPeak1_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.IsPeak1_Threshold</Name>
 								<Value>4.5</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Switch2_Threshold_n</Name>
+								<Name>vertical_levitation_control_new_P.Switch2_Threshold_n</Name>
 								<Value>7</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant2_Value</Name>
+								<Name>vertical_levitation_control_new_P.Constant2_Value</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant2_Value_e</Name>
+								<Name>vertical_levitation_control_new_P.Constant2_Value_e</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Constant2_Value_d</Name>
+								<Name>vertical_levitation_control_new_P.Constant2_Value_d</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Delay1_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.Delay1_InitialCondition</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.wasfmenabledlastrun_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.wasfmenabledlastrun_Threshold</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.hard_disable_fmm_Gain</Name>
+								<Name>vertical_levitation_control_new_P.hard_disable_fmm_Gain</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.usefmornot_Threshold</Name>
+								<Name>vertical_levitation_control_new_P.usefmornot_Threshold</Name>
 								<Value>0</Value>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Memory_InitialCondition</Name>
+								<Name>vertical_levitation_control_new_P.Memory_InitialCondition</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Memory_InitialCondition_m</Name>
+								<Name>vertical_levitation_control_new_P.Memory_InitialCondition_m</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 							<Value>
-								<Name>vertical_levitation_control_P.Memory_InitialCondition_n</Name>
+								<Name>vertical_levitation_control_new_P.Memory_InitialCondition_n</Name>
 								<EnumText>FALSE</EnumText>
 							</Value>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.12">
+				<Module Id="#x01010040" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.14">
 					<Name>Object3 (lateral_levitation_control)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{F87518E2-4113-640C-BFC5-E677387FE878}" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.12">
+					<TmcDesc GUID="{F87518E2-4113-640C-BFC5-E677387FE878}" ClassFactoryId="TE140x Module Vendor|lateral_levitation_control|0.0.0.14">
 						<Name>lateral_levitation_control</Name>
 						<CLSID ClassFactory="lateral_levitation_control" RealTimeInstantiable="true">{F87518E2-4113-640C-BFC5-E677387FE878}</CLSID>
 						<Info>
@@ -7704,7 +6554,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
 								<Name>lateral_levitation_control_U</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>48</ByteSize>
+								<ByteSize>56</ByteSize>
 								<Symbol>
 									<Name>y</Name>
 									<BitSize>64</BitSize>
@@ -7747,12 +6597,19 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<PTCID>#x80000028</PTCID>
 									<BitOffs>320</BitOffs>
 								</Symbol>
+								<Symbol>
+									<Name>Feedback_current_ems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x80000030</PTCID>
+									<BitOffs>384</BitOffs>
+								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
 								<Name>lateral_levitation_control_Y</Name>
 								<ContextId>0</ContextId>
-								<ByteSize>136</ByteSize>
+								<ByteSize>152</ByteSize>
 								<Symbol>
 									<Name>F_latreq</Name>
 									<BitSize>128</BitSize>
@@ -7801,6 +6658,20 @@ Initialising drive references for resetting drive errors]]></Comment>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<PTCID>#x81000080</PTCID>
 									<BitOffs>1024</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_total_ems_current</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Avg_current_ems</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000090</PTCID>
+									<BitOffs>1152</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
@@ -9348,11 +8219,664 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
+				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.36">
+					<Name>Object1 (Sensor_model)</Name>
+					<ImageId>1000</ImageId>
+					<TmcDesc GUID="{01781D84-B470-A997-DC4F-062608A9D221}" ClassFactoryId="TE140x Module Vendor|Sensor_model|0.0.0.36">
+						<Name>Sensor_model</Name>
+						<CLSID ClassFactory="Sensor_model" RealTimeInstantiable="true">{01781D84-B470-A997-DC4F-062608A9D221}</CLSID>
+						<Info>
+							<ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+							<TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}"/>
+						</Info>
+						<Licenses>
+							<License>
+								<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
+							</License>
+						</Licenses>
+						<InitSequence>PSO</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>0</Id>
+								<Name>Context0 (1.5 ms)</Name>
+								<ManualConfig>
+									<OTCID>#x020100a0</OTCID>
+								</ManualConfig>
+								<Priority>4</Priority>
+								<CycleTime>1500000</CycleTime>
+							</Context>
+						</Contexts>
+						<Interfaces>
+							<Interface>
+								<Type GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000002-0000-0000-E000-000000000064}">ITcPersist</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000025-0000-0000-E000-000000000064}">ITcPostCyclic</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{18EE5ABB-CCAE-9158-92DC-B5FF107F0665}">ITcSensor_model</Type>
+								<ContextId>0</ContextId>
+							</Interface>
+						</Interfaces>
+						<Parameters>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskOid</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+								<PTCID>#x03002060</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskPriority</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x03002070</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskCycleTimeNs</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x03002080</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskPort</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+								<PTCID>#x03002090</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskSortOrder</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x030020b0</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>TraceLevelMax</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
+								<Default>
+									<EnumText>tlInfo</EnumText>
+								</Default>
+								<PTCID>#x00000001</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>ModuleCaller</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk">ModuleCaller</BaseType>
+								<Default>
+									<EnumText>CyclicTask</EnumText>
+								</Default>
+								<PTCID>#x00000002</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>CallerVerification</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk">CallerVerification</BaseType>
+								<Default>
+									<EnumText>Default</EnumText>
+								</Default>
+								<PTCID>#x00000003</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>StepSizeAdaptation</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk">StepSizeAdaptation</BaseType>
+								<Default>
+									<EnumText>RequireMatchingTaskCycleTime</EnumText>
+								</Default>
+								<PTCID>#x00000004</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>ExecutionSequence</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk">ExecutionSequence1</BaseType>
+								<Default>
+									<EnumText>UpdateBeforeOutputMapping</EnumText>
+								</Default>
+								<PTCID>#x00000005</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Execute</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<Default>
+									<EnumText>TRUE</EnumText>
+								</Default>
+								<PTCID>#x00000006</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>AccessLockState</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000061}">TCOM_STATE</BaseType>
+								<Default>
+									<EnumText>TCOM_STATE_OP</EnumText>
+								</Default>
+								<PTCID>#x00000007</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>InitExceptionHandling</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk">FpExcptCtrlSet</BaseType>
+								<Default>
+									<EnumText>CallerExceptions</EnumText>
+								</Default>
+								<PTCID>#x00000008</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>UpdateExceptionHandling</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk">FpExcptCtrlSetEx</BaseType>
+								<Default>
+									<EnumText>CallerExceptions</EnumText>
+								</Default>
+								<PTCID>#x00000009</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ModuleBuildInfo</Name>
+								<Comment><![CDATA[Legacy! Please use 'LibraryInfo' to read build information.]]></Comment>
+								<BitSize>96</BitSize>
+								<BaseType GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk">ModuleBuildInfo</BaseType>
+								<PTCID>#x0000000a</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>Initialized</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<Default>
+									<EnumText>FALSE</EnumText>
+								</Default>
+								<PTCID>#x0000000b</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>SkippedExecutionCount</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<Default>
+									<Value>0</Value>
+								</Default>
+								<PTCID>#x0000000c</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>LibraryInfo</Name>
+								<BitSize>4800</BitSize>
+								<BaseType GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk">LibraryInfo</BaseType>
+								<PTCID>#x0000000d</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ModuleInfo</Name>
+								<BitSize>1280</BitSize>
+								<BaseType GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk">ModuleInfo</BaseType>
+								<PTCID>#x0000000e</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+								<Name>ModuleGeneratorInfo</Name>
+								<BitSize>256</BitSize>
+								<BaseType GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</BaseType>
+								<PTCID>#x0000000f</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+								<Name>SimulinkModelInfo</Name>
+								<BitSize>1408</BitSize>
+								<BaseType GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</BaseType>
+								<PTCID>#x00000010</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Sensor_model_P_Sharing</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
+								<Default>
+									<EnumText>Define</EnumText>
+								</Default>
+								<PTCID>#x00000011</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>Sensor_model_P_Definer</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+								<PTCID>#x00000012</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Sensor_model_P</Name>
+								<BitSize>2944</BitSize>
+								<BaseType GUID="{08C8B2B1-3F30-36CE-C44C-A37039ACE23E}">P_Sensor_model_T</BaseType>
+								<Default>
+									<SubItem>
+										<Name>.Laser_magnet_offset_EMS</Name>
+										<Data>58E71890BDDE9D3F9F3C2CD49AE69D3F865AD3BCE3149D3F423EE8D9ACFA9C3FEFC9C342AD699E3F4FAF946588639D3F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.Laser_magnet_offset_HEMS</Name>
+										<Data>2C9D0FCF1264943F7B14AE47E17A943F44696FF085C9943F44696FF085C9943F5437177FDB13943FCBA145B6F3FD943F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.airgap_nominal_ems</Name>
+										<Value>0.008</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.coords_lat_sensors</Name>
+										<Data>75DBCF73556AEC3FFD5305FE4BAD723F75DBCF73556AEC3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.coords_vert_sensors</Name>
+										<Data>75DBCF73556AEC3FB0FAC8529044D73F000000000000000075DBCF73556AEC3F10D0D8F225AFD6BF00000000000000005503835AC290C93FA62325E2523AD83F0000000000000000078C3F9B66CBC5BF06F93482E8A4D7BF0000000000000000A1FDFE83FE78EBBFB0FAC8529044D73F0000000000000000A1FDFE83FE78EBBF10D0D8F225AFD6BF0000000000000000</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.n_sensors_v</Name>
+										<Value>6</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.z_com</Name>
+										<Value>0.5706599999999999</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.Convert_to_meters_Gain</Name>
+										<Value>0.001</Value>
+									</SubItem>
+								</Default>
+								<PTCID>#x00000013</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>CycleCount</Name>
+								<BitSize>64</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+								<PTCID>#x00000014</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ExceptionCount</Name>
+								<BitSize>64</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+								<PTCID>#x00000015</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ExceptionInfo</Name>
+								<BitSize>1376</BitSize>
+								<BaseType GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk">ExceptionInfo</BaseType>
+								<PTCID>#x00000016</PTCID>
+							</Parameter>
+						</Parameters>
+						<DataAreas>
+							<DataArea>
+								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
+								<Name>Sensor_model_U</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>96</ByteSize>
+								<Symbol>
+									<Name>Newsensorairgaps</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x80000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
+								<Name>Sensor_model_Y</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>152</ByteSize>
+								<Symbol>
+									<Name>z</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>roll</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000008</PTCID>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>pitch</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000010</PTCID>
+									<BitOffs>128</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>y</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000018</PTCID>
+									<BitOffs>192</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>yaw</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000020</PTCID>
+									<BitOffs>256</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x81000028</PTCID>
+									<BitOffs>320</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps_ems</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x81000058</PTCID>
+									<BitOffs>704</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_vertical_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_lateral_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000090</PTCID>
+									<BitOffs>1152</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
+								<Name>Sensor_model_B</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>192</ByteSize>
+								<Symbol>
+									<Name>Convert_to_meters</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x82000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>corrected_airgaps</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x82000060</PTCID>
+									<BitOffs>768</BitOffs>
+								</Symbol>
+							</DataArea>
+						</DataAreas>
+						<Properties>
+							<Property>
+								<Name>CoderLicense</Name>
+								<Value>{73C71EBD-104A-4EE6-955D-ADE86A37EFC3}</Value>
+							</Property>
+						</Properties>
+						<Xml>
+							<GeneratedModuleInfoFile>Sensor_model_ModuleInfo.xml</GeneratedModuleInfoFile>
+						</Xml>
+						<ParameterValues>
+							<Value>
+								<Name>TaskOid</Name>
+								<Value>33620128</Value>
+							</Value>
+							<Value>
+								<Name>TaskPriority</Name>
+								<Value>4</Value>
+							</Value>
+							<Value>
+								<Name>TaskCycleTimeNs</Name>
+								<Value>1500000</Value>
+							</Value>
+							<Value>
+								<Name>TaskPort</Name>
+								<Value>357</Value>
+							</Value>
+							<Value>
+								<Name>TaskSortOrder</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>TraceLevelMax</Name>
+								<EnumText>tlInfo</EnumText>
+							</Value>
+							<Value>
+								<Name>ModuleCaller</Name>
+								<EnumText>Module</EnumText>
+							</Value>
+							<Value>
+								<Name>CallerVerification</Name>
+								<EnumText>Default</EnumText>
+							</Value>
+							<Value>
+								<Name>StepSizeAdaptation</Name>
+								<EnumText>RequireMatchingTaskCycleTime</EnumText>
+							</Value>
+							<Value>
+								<Name>ExecutionSequence</Name>
+								<EnumText>UpdateBeforeOutputMapping</EnumText>
+							</Value>
+							<Value>
+								<Name>Execute</Name>
+								<EnumText>TRUE</EnumText>
+							</Value>
+							<Value>
+								<Name>AccessLockState</Name>
+								<EnumText>TCOM_STATE_OP</EnumText>
+							</Value>
+							<Value>
+								<Name>InitExceptionHandling</Name>
+								<EnumText>CallerExceptions</EnumText>
+							</Value>
+							<Value>
+								<Name>UpdateExceptionHandling</Name>
+								<EnumText>CallerExceptions</EnumText>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P_Sharing</Name>
+								<EnumText>Define</EnumText>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[0]</Name>
+								<Value>0.02917</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[1]</Name>
+								<Value>0.0292</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[2]</Name>
+								<Value>0.0284</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[3]</Name>
+								<Value>0.0283</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[4]</Name>
+								<Value>0.0297</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_EMS[5]</Name>
+								<Value>0.0287</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[0]</Name>
+								<Value>0.019913</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[1]</Name>
+								<Value>0.02</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[2]</Name>
+								<Value>0.0203</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[3]</Name>
+								<Value>0.0203</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[4]</Name>
+								<Value>0.019607</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Laser_magnet_offset_HEMS[5]</Name>
+								<Value>0.0205</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.airgap_nominal_ems</Name>
+								<Value>0.008</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[0]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[1]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[2]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[3]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[4]</Name>
+								<Value>0.0147302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[5]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[6]</Name>
+								<Value>0.0147302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[7]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[8]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[9]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[10]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_lat_sensors[11]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[0]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[1]</Name>
+								<Value>0.3635598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[2]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[3]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[4]</Name>
+								<Value>-0.3544402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[5]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[6]</Name>
+								<Value>0.1997302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[7]</Name>
+								<Value>0.3785598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[8]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[9]</Name>
+								<Value>-0.1702698</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[10]</Name>
+								<Value>-0.3694402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[11]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[12]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[13]</Name>
+								<Value>0.3635598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[14]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[15]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[16]</Name>
+								<Value>-0.3544402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.coords_vert_sensors[17]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.n_sensors_v</Name>
+								<Value>6</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.z_com</Name>
+								<Value>0.57066</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_P.Convert_to_meters_Gain</Name>
+								<Value>0.001</Value>
+							</Value>
+						</ParameterValues>
+					</TmcDesc>
+				</Module>
 			</Modules>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{13C554F5-59C0-4E0A-175A-98AF5135A149}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{CE52FD84-95B0-DE78-F942-6150251C788A}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -9660,17 +9184,17 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
-							<Comment><![CDATA[OUTPUTS]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bEstopRestart</Name>
 							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -9709,13 +9233,13 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bbrakes_engaged</Name>
-							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
+							<Name>GVL_FSM.bsafety_inputs_valid</Name>
+							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bsafety_inputs_valid</Name>
-							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
+							<Name>GVL_FSM.bbrakes_engaged</Name>
+							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>

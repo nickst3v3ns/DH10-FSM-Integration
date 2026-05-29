@@ -98,10 +98,10 @@ VAR
 	
 	I_EMS: lateral_levitation_control.T_matrix4xdouble;
 	
-	I_VFL: vertical_levitation_control.T_matrix2xdouble;	
-	I_VFR: vertical_levitation_control.T_matrix2xdouble;
-	I_VBL: vertical_levitation_control.T_matrix2xdouble;	
-	I_VBR: vertical_levitation_control.T_matrix2xdouble;
+	I_VFL: vertical_levitation_control_new.T_matrix2xdouble;	
+	I_VFR: vertical_levitation_control_new.T_matrix2xdouble;
+	I_VBL: vertical_levitation_control_new.T_matrix2xdouble;	
+	I_VBR: vertical_levitation_control_new.T_matrix2xdouble;
 	
 	n_drive_warnings: UINT;
 	n_drive_errors: UINT;
