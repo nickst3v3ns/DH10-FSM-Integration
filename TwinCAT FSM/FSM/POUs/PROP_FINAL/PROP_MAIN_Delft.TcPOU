@@ -166,9 +166,12 @@ VAR CONSTANT
 	OFFSET_BACK : DINT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-PodState := GVL_FSM.E_PodStateGlobal;
+      <ST><![CDATA[PodState := GVL_FSM.E_PodStateGlobal;
 
+// -----------------------------------------------------------------------------------
+// prop flag is assigned through the GVL_PROP global variables for testing (temporarily)
+// comment this line if you wish to go back to changing the prop flag from this file
+// PropFlag := GVL_PROP.PropFlag;
 
 CASE barcodeState OF
 	
@@ -407,6 +410,9 @@ Receive_CAN_abcCurrent_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right,
 Ia_Right := Receive_CAN_abcCurrent_Right.Ia_Right;
 Ib_Right := Receive_CAN_abcCurrent_Right.Ib_Right;
 Ic_Right := Receive_CAN_abcCurrent_Right.Ic_Right;
+GVL_Prop.Ia_right := Ia_Left;
+GVL_Prop.Ib_right := Ib_Left;
+GVL_Prop.Ic_right := Ic_Left;
 
 Receive_CAN_dqVoltages_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
 	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
@@ -452,6 +458,9 @@ Receive_CAN_abcCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left,
 Ia_Left := Receive_CAN_abcCurrent_Left.Ia_Left;
 Ib_Left := Receive_CAN_abcCurrent_Left.Ib_Left;
 Ic_Left := Receive_CAN_abcCurrent_Left.Ic_Left;
+GVL_Prop.Ia_left := Ia_Left;
+GVL_Prop.Ib_left := Ib_Left;
+GVL_Prop.Ic_left := Ic_Left;
 
 Receive_CAN_dqVoltages_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
 	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);

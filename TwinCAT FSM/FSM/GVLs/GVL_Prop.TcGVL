@@ -27,6 +27,14 @@ VAR_GLOBAL
 	accelerating:			BOOL;
 	braking:				BOOL;
 	
+	Ia_left:				LREAL;
+	Ib_left:				LREAL;
+	Ic_left:				LREAL;
+	Ia_right:				LREAL;
+	Ib_right:				LREAL;
+	Ic_right:				LREAL;
+	PropFlag: 				INT;
+	
 	propulsion_fault: 		BOOL;
 	propulsion_enable: 		BOOL;
 	propulsion_active: 		BOOL;

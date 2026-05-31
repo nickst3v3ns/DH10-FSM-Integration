@@ -8876,7 +8876,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{CE52FD84-95B0-DE78-F942-6150251C788A}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{057E6296-65F7-9776-7CB0-EBC32D929DD7}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -9184,17 +9184,17 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bEstopRestart</Name>
 							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
-							<Comment><![CDATA[OUTPUTS]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -9233,13 +9233,13 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bsafety_inputs_valid</Name>
-							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
+							<Name>GVL_FSM.bbrakes_engaged</Name>
+							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bbrakes_engaged</Name>
-							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
+							<Name>GVL_FSM.bsafety_inputs_valid</Name>
+							<Comment><![CDATA[done through twinsafe PLC-TWINSAFE Run mode verification]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -9554,10 +9554,6 @@ barcode ]]></Comment>
 					<Vars VarGrpType="1">
 						<Name>LEVI_TEST_TASK Inputs</Name>
 						<Var>
-							<Name>LEVI_MAIN_TEST.motor_on_for_levi</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>LEVI_MAIN_TEST.Ia_for_levi_left</Name>
 							<Type>LREAL</Type>
 						</Var>
@@ -9588,6 +9584,10 @@ barcode ]]></Comment>
 						<Var>
 							<Name>LEVI_MAIN_TEST.currentangle_for_levi_right</Name>
 							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>LEVI_MAIN_TEST.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>LEVI_MAIN_TEST.Drive_status</Name>

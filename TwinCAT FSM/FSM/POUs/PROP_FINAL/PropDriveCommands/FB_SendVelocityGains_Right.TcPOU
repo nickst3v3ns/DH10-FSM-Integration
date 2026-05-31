@@ -23,14 +23,23 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ProportionalGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(ProportionalGain*100) AND 16#FF);
+      <ST><![CDATA[(*ProportionalGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(ProportionalGain*100) AND 16#FF);
 ProportionalGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(ProportionalGain*100), 8) AND 16#FF);
 
 IntegrallGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(IntegralGain*100) AND 16#FF);
 IntegrallGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(IntegralGain*100), 8) AND 16#FF);
 
 InitialIntegralValue_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValue*100) AND 16#FF);
-InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 8) AND 16#FF);
+InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 8) AND 16#FF);*)
+
+ProportionalGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(ProportionalGain*1) AND 16#FF);
+ProportionalGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(ProportionalGain*1), 8) AND 16#FF);
+
+IntegrallGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(IntegralGain*1) AND 16#FF);
+IntegrallGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(IntegralGain*1), 8) AND 16#FF);
+
+InitialIntegralValue_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValue*1) AND 16#FF);
+InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*1), 8) AND 16#FF);
 
 TxMessage.cobId := 310;
 TxMessage.length := 6;
