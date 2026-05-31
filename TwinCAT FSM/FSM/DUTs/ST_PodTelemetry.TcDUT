@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_PodTelemetry" Id="{af5e9203-9ea2-4930-bb2a-ec026e9a0ede}">
+    <Declaration><![CDATA[TYPE ST_PodTelemetry :
+    STRUCT
+        // Mirrors the Rust struct in crates/protocol/src/lib.rs.
+        // Wire layout: counter first (4 bytes LE), then timestamp (8 bytes LE).
+        // Total payload size: 12 bytes.
+        counter         : UDINT;    // u32, little-endian
+        timestamp_us    : ULINT;    // u64, microseconds since some epoch
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

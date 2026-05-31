@@ -365,6 +365,7 @@
     <Folder Include="POUs\FSM" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
+    <Folder Include="POUs\GS" />
     <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_EHW" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="FB_FrameEncoder" Id="{4256169f-0f0e-480c-9bb1-5e2c55a7250a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FrameEncoder
+VAR_INPUT
+    // Inputs are set by the caller before invoking BuildFrame().
+    msgId       : UINT;             // u16
+    seqNum      : UDINT;            // u32
+    pPayload    : POINTER TO BYTE;  // raw payload bytes
+    payloadLen  : UINT;             // number of payload bytes
+END_VAR
+VAR_OUTPUT
+    // After calling BuildFrame(), the encoded frame lives in `frame`
+    // and is `frameLen` bytes long. Header is 8 bytes, then payload.
+    frame       : ARRAY [0..271] OF BYTE;   // 8 header + max 264 payload; bump if needed
+    frameLen    : UINT;
+END_VAR
+VAR
+    i : UINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Header: msg_id (u16 LE) | length (u16 LE) | seq_num (u32 LE)
+frame[0] := UINT_TO_BYTE(msgId AND 16#00FF);
+frame[1] := UINT_TO_BYTE(SHR(msgId, 8) AND 16#00FF);
+frame[2] := UINT_TO_BYTE(payloadLen AND 16#00FF);
+frame[3] := UINT_TO_BYTE(SHR(payloadLen, 8) AND 16#00FF);
+frame[4] := UDINT_TO_BYTE(seqNum AND 16#000000FF);
+frame[5] := UDINT_TO_BYTE(SHR(seqNum, 8) AND 16#000000FF);
+frame[6] := UDINT_TO_BYTE(SHR(seqNum, 16) AND 16#000000FF);
+frame[7] := UDINT_TO_BYTE(SHR(seqNum, 24) AND 16#000000FF);
+
+// Payload
+IF (payloadLen > 0) AND (pPayload <> 0) THEN
+    MEMCPY(ADR(frame[8]), pPayload, payloadLen);
+END_IF
+
+frameLen := 8 + payloadLen;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
