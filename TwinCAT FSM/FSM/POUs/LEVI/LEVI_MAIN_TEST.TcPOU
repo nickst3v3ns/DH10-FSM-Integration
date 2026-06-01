@@ -299,6 +299,9 @@ VAR
 	
 	Run_z_liftoff_calc : BOOL;
 	All_drives_high_voltage: BOOL;
+	
+	fbSendAirGapLeft : FB_SendAirGap_Left;
+	fbSendAirGapRight : FB_SendAirGap_Right;
 
 	i: INT;
 
@@ -662,7 +665,9 @@ CASE Levi_Command OF
 				
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;
+				
+				
 			ELSE
 				motor_thrust_l := 0;
 				motor_lift_l := 0;
@@ -952,6 +957,23 @@ IF Levi_state = E_Levi_States.LEVI_ERROR THEN
 ELSE
 	GVL_LEVI.levitation_fault := FALSE;
 END_IF
+
+// --------------------------------------------------------------
+//  	Send airgap through CAN
+// --------------------------------------------------------------
+
+fbSendAirGapLeft(
+	motor_airgap_left := motor_airgap_left,
+	motor_airgap_right := motor_airgap_right,
+	CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+	CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
+	
+	
+fbSendAirGapRight(
+	motor_airgap_left := motor_airgap_left,
+	motor_airgap_right := motor_airgap_right,
+	CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 ]]></ST>
     </Implementation>
   </POU>

@@ -2167,74 +2167,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{AAE159D8-6AED-101F-7CCC-72342F0046E4}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..11] OF INT</Name>
-			<BitSize>192</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>12</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6inData22B</Name>
-			<Comment><![CDATA[ This data type is corresponding to the
-   EL-6xxx data structure used in the
-   TwinCAT SystemManager
-   (EL-6xxx version using 22 data bytes) 
-]]></Comment>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>Status</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>22</Elements>
-				</ArrayInfo>
-				<BitSize>176</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
-			<Comment><![CDATA[ This data type is corresponding to the
-   EL-6xxx data structure used in the
-   TwinCAT SystemManager
-   (EL-6xxx version using 22 data bytes) 
-]]></Comment>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>Ctrl</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>22</Elements>
-				</ArrayInfo>
-				<BitSize>176</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{FE565D85-927B-2D08-1043-124F5F921E35}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BYTE</Name>
-			<BitSize>64</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO" TcBaseType="true">CANMESSAGE</Name>
 			<BitSize>64</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
@@ -2298,6 +2230,15 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{AAE159D8-6AED-101F-7CCC-72342F0046E4}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..11] OF INT</Name>
+			<BitSize>192</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>12</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Name>
 			<BitSize>3632</BitSize>
 			<SubItem>
@@ -2328,6 +2269,65 @@ Initialising drive references for resetting drive errors]]></Comment>
 				<BitSize>3584</BitSize>
 				<BitOffs>48</BitOffs>
 			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6inData22B</Name>
+			<Comment><![CDATA[ This data type is corresponding to the
+   EL-6xxx data structure used in the
+   TwinCAT SystemManager
+   (EL-6xxx version using 22 data bytes) 
+]]></Comment>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Status</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6outData22B</Name>
+			<Comment><![CDATA[ This data type is corresponding to the
+   EL-6xxx data structure used in the
+   TwinCAT SystemManager
+   (EL-6xxx version using 22 data bytes) 
+]]></Comment>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Ctrl</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{FE565D85-927B-2D08-1043-124F5F921E35}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BYTE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
@@ -8876,7 +8876,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{057E6296-65F7-9776-7CB0-EBC32D929DD7}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{38E9D273-C6FE-FC23-71AB-A1E5F907C9C8}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -9430,14 +9430,6 @@ barcode ]]></Comment>
 							<Name>GVL_Prop.OutputData_Back</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
-						<Var>
-							<Name>GVL_PropCAN.CAN_OUTPUTS_Right</Name>
-							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PropCAN.CAN_OUTPUTS_Left</Name>
-							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 						<Name>PlcTask_10ms_Barcode_ Inputs</Name>
@@ -9456,14 +9448,6 @@ barcode ]]></Comment>
 						<Var>
 							<Name>GVL_Prop.InputData2_Back</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PropCAN.CAN_INPUTS_Right</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PropCAN.CAN_INPUTS_Left</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
@@ -9550,6 +9534,14 @@ barcode ]]></Comment>
 							<Name>LEVI_MAIN_TEST.Control_word</Name>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
 						</Var>
+						<Var>
+							<Name>GVL_PropCAN.CAN_OUTPUTS_Right</Name>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PropCAN.CAN_OUTPUTS_Left</Name>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
 						<Name>LEVI_TEST_TASK Inputs</Name>
@@ -9620,6 +9612,14 @@ Drive_current_W AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 ----------------------------------------------------------------------------------------------------
 Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{4A09EE85-C846-8596-B7BE-27A5C1C3D419}">ARRAY [0..23] OF Tc2_EtherCAT.ST_PlcDriveRef</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PropCAN.CAN_INPUTS_Right</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PropCAN.CAN_INPUTS_Left</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2026-04-06T17:54:47">
@@ -49907,8 +49907,8 @@ Slave-Mode:
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740601" EquiCycleTime="90000" FifoSize="5" CycleDivider="1"/>
-						<DevParameter CycleTime="90000" InputShift="60"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740601" EquiCycleTime="15000" FifoSize="5" CycleDivider="1"/>
+						<DevParameter CycleTime="15000" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter NodeId="127" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt1="20" TimerTick="2" BusActiveDivider="125" TxBusyTime="500" TimeIntegral="1000" WdTimeoutInCycleTime="25000"/>
@@ -49986,8 +49986,8 @@ Slave-Mode:
 				</Box>
 				<CanOpen>
 					<Fcxxxx>
-						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740701" EquiCycleTime="90000" FifoSize="5" CycleDivider="1"/>
-						<DevParameter CycleTime="90000" InputShift="60"/>
+						<DevSettings BusyIntEnabled="true" DisableSlots="true" NetId="915e85740701" EquiCycleTime="15000" FifoSize="5" CycleDivider="1"/>
+						<DevParameter CycleTime="15000" InputShift="60"/>
 						<EquiParameter RelationShiftCycle="0"/>
 					</Fcxxxx>
 					<BusParameter NodeId="127" CobIdSync="128" TxPdoWindowSize="30" CycleDivider="1" MaxLoPrioQueue="100" Bt1="20" TimerTick="2" BusActiveDivider="125" TxBusyTime="500" TimeIntegral="1000" WdTimeoutInCycleTime="25000"/>
@@ -49997,13 +49997,13 @@ Slave-Mode:
 	</Project>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0320-5008B3000403}" Id="#x020300c0"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0220-500810000403}" Id="#x020300d0"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0220-500860000403}" Id="#x020300e0"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0220-5008A2000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{00000000-2004-0850-0520-500870000403}" Id="#x02030100"/>
 		<MappingInfo Identifier="{00000000-2004-0850-0520-5008C1000403}" Id="#x020300a0"/>
+		<MappingInfo Identifier="{00000000-200A-0850-0020-500810000403}" Id="#x020300d0"/>
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500820000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500834000403}" Id="#x02030090"/>
+		<MappingInfo Identifier="{00000000-200A-0850-0020-500860000403}" Id="#x020300e0"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0120-500891000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{08502002-0020-0304-0020-500820000403}" Id="#x02030020" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00A0-0304-0020-5008A0000403}" Id="#x02030050" Watchdog="00000000000000000000000000000000"/>
@@ -50950,12 +50950,12 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.Periphery_voltage[7]" VarB="AT 2^Actual periphery voltage"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Drive Left^Box 4 (CAN Interface)">
-				<Link VarA="PlcTask_10ms_Barcode_ Inputs^GVL_PropCAN.CAN_INPUTS_Left" VarB="Inputs^RxQueue"/>
-				<Link VarA="PlcTask_10ms_Barcode_ Outputs^GVL_PropCAN.CAN_OUTPUTS_Left" VarB="Outputs^TxQueue"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^GVL_PropCAN.CAN_INPUTS_Left" VarB="Inputs^RxQueue"/>
+				<Link VarA="LEVI_TEST_TASK Outputs^GVL_PropCAN.CAN_OUTPUTS_Left" VarB="Outputs^TxQueue"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Drive Right^Box 5 (CAN Interface)">
-				<Link VarA="PlcTask_10ms_Barcode_ Inputs^GVL_PropCAN.CAN_INPUTS_Right" VarB="Inputs^RxQueue"/>
-				<Link VarA="PlcTask_10ms_Barcode_ Outputs^GVL_PropCAN.CAN_OUTPUTS_Right" VarB="Outputs^TxQueue"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^GVL_PropCAN.CAN_INPUTS_Right" VarB="Inputs^RxQueue"/>
+				<Link VarA="LEVI_TEST_TASK Outputs^GVL_PropCAN.CAN_OUTPUTS_Right" VarB="Outputs^TxQueue"/>
 			</OwnerB>
 			<OwnerB Name="TIPC^FSM^FSM Instance">
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ia_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.Ia_for_levi_left"/>

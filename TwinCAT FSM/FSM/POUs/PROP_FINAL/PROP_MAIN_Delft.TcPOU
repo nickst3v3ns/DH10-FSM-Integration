@@ -113,6 +113,9 @@ VAR
 	Id_filtered_Left : LREAL;
 	Iq_filtered_Left : LREAL;
 	
+	phi_calc_left : LREAL;
+	phi_calc_right : LREAL;
+	
 	Temp_a_gd_Right : LREAL;
 	Temp_b_gd_Right : LREAL;
 	Temp_c_gd_Right : LREAL;
@@ -301,7 +304,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
 	Send_CAN_VelocityGains_Right(ProportionalGain := ProportionalGain,
-		IntegralGain := IntegralGain,
+		IntegralGain := IntegralGain, InitialIntegralValue := InitialIntegralValue,
 		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
@@ -320,6 +323,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 	Send_CAN_AutoDirectionFlag_Right(AutoDirectionFlag := AutoDirectionFlag,
 		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
+		
 		
 	GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := 11;
 	GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
@@ -357,7 +361,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
 	Send_CAN_VelocityGains_Left(ProportionalGain := ProportionalGain,
-		IntegralGain := IntegralGain,
+		IntegralGain := IntegralGain, InitialIntegralValue := InitialIntegralValue,
 		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
@@ -376,6 +380,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 	Send_CAN_AutoDirectionFlag_Left(AutoDirectionFlag := AutoDirectionFlag,
 		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
+
 		
 	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 11;
 	GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
@@ -396,6 +401,14 @@ Id_ref_Right := Receive_CAN_dqCurrent_Right.Id_ref_Right;
 Iq_ref_Right := Receive_CAN_dqCurrent_Right.Iq_ref_Right;
 Id_filtered_Right := Receive_CAN_dqCurrent_Right.Id_filtered_Right;
 Iq_filtered_Right := Receive_CAN_dqCurrent_Right.Iq_filtered_Right;	
+
+// Temporary calculation, not fully solid with each quadrant of the TAN function
+IF Id_filtered_Left>0.01 THEN
+	phi_calc_left := ATAN(Iq_filtered_Left/Id_filtered_Left);
+END_IF
+IF Id_filtered_Right>0.01 THEN
+phi_calc_right := ATAN(Iq_filtered_Right/Id_filtered_Right);
+END_IF
 
 Receive_CAN_gdTemp_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
 	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
@@ -502,8 +515,7 @@ IF PropFlag = 1 THEN
 	motor_on_for_levi := TRUE;
 ELSE
 	motor_on_for_levi := FALSE;
-END_IF
-]]></ST>
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -12,6 +12,9 @@
     <Content Include="Levi.tcscopex">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Prop velocity loop tuning.tcscopex">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Prop.tcscopex">
       <SubType>Content</SubType>
     </Content>

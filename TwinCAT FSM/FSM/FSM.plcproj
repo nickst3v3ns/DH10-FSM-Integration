@@ -208,6 +208,12 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAirGap_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAirGap_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>

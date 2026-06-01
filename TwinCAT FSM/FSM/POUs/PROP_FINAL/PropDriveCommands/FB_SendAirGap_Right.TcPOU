@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendAirGap_Right" Id="{b4615709-23e4-4c1c-8b0a-387ad31c935b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendAirGap_Right
+VAR_INPUT
+	motor_airgap_left : LREAL;
+	motor_airgap_right : LREAL;
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	MotorAirgapLeft_Values : ARRAY[0..1] OF BYTE;
+	MotorAirgapRight_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Right : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Right : CANRXQUEUESTRUCT_E_32;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+MotorAirgapLeft_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(motor_airgap_left*100) AND 16#FF);
+MotorAirgapLeft_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(motor_airgap_left*100), 8) AND 16#FF);
+
+MotorAirgapRight_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(motor_airgap_right*100) AND 16#FF);
+MotorAirgapRight_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(motor_airgap_right*100), 8) AND 16#FF);
+
+TxMessage.cobId := 810;
+TxMessage.length := 4;
+
+TxMessage.data[0] := MotorAirgapLeft_Values[0];
+TxMessage.data[1] := MotorAirgapLeft_Values[1];
+TxMessage.data[2] := MotorAirgapRight_Values[0];
+TxMessage.data[3] := MotorAirgapright_Values[1];
+
+CAN_OUTPUTS_Right.TxMessages[4] := TxMessage;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
