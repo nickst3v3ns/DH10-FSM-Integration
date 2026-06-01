@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TctGeneratedModules>
+   <ModuleInfo CLSID="{C428727E-338E-61BA-4D8D-46AF2244B49C}" GUID="{C428727E-338E-61BA-4D8D-46AF2244B49C}" LibraryId="TE140x Module Vendor|ETML_DH10|0.0.0.1" TmcHash="{880B7FA0-2B2C-4003-BA4E-975450BD5126}">
+      <BlockDiagram>
+         <Name>ETML_DH10</Name>
+         <Identifier>&lt;Root&gt;</Identifier>
+         <Type>root</Type>
+         <Position h="0" w="0" x="0" y="0"/>
+         <BlockDesign/>
+         <State Category="Internal signals" Name="Relational Operator" ReadOnly="true">
+            <GlobalName>ETML_DH10_B.RelationalOperator</GlobalName>
+            <AdsIdxOffs>#x82000000</AdsIdxOffs>
+         </State>
+         <Block>
+            <Name>OffsetLeft</Name>
+            <Identifier>&lt;Root&gt;/OffsetLeft</Identifier>
+            <Type>Inport</Type>
+            <Position h="14" w="30" x="-130" y="-282"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="1"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="-95" y="-275"/>
+               <Name>OffsetLeft</Name>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="-95" y="-275"/>
+                  <Point x="-83" y="-275"/>
+                  <Line>
+                     <Point x="-83" y="-275"/>
+                     <Point x="-35" y="-275"/>
+                  </Line>
+                  <Line>
+                     <Point x="-83" y="-275"/>
+                     <Point x="-83" y="-355"/>
+                     <Point x="20" y="-355"/>
+                  </Line>
+               </Line>
+               <Signal Category="Input" Name="OffsetLeft" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetLeft</GlobalName>
+                  <AdsIdxOffs>#x80000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>OffsetRight</Name>
+            <Identifier>&lt;Root&gt;/OffsetRight</Identifier>
+            <Type>Inport</Type>
+            <Position h="14" w="30" x="-125" y="-172"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="2"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="-90" y="-165"/>
+               <Name>OffsetRight</Name>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="-90" y="-165"/>
+                  <Point x="-72" y="-165"/>
+                  <Point x="-72" y="-260"/>
+                  <Line>
+                     <Point x="-72" y="-260"/>
+                     <Point x="-35" y="-260"/>
+                  </Line>
+                  <Line>
+                     <Point x="-72" y="-260"/>
+                     <Point x="-72" y="-335"/>
+                     <Point x="20" y="-335"/>
+                  </Line>
+               </Line>
+               <Signal Category="Input" Name="OffsetRight" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetRight</GlobalName>
+                  <AdsIdxOffs>#x80000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Abs</Name>
+            <Identifier>&lt;Root&gt;/Abs</Identifier>
+            <Type>Abs</Type>
+            <Position h="30" w="30" x="85" y="-360"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="70" y="-345"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Minus</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="120" y="-345"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="120" y="-345"/>
+                  <Point x="142" y="-345"/>
+                  <Line>
+                     <Point x="142" y="-345"/>
+                     <Point x="153" y="-345"/>
+                     <Point x="153" y="-280"/>
+                     <Point x="215" y="-280"/>
+                  </Line>
+                  <Line>
+                     <Point x="142" y="-345"/>
+                     <Point x="142" y="-150"/>
+                     <Point x="215" y="-150"/>
+                  </Line>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Add</Name>
+            <Identifier>&lt;Root&gt;/Add</Identifier>
+            <Type>Sum</Type>
+            <Position h="31" w="30" x="635" y="-278"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="620" y="-270"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Constant2</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="620" y="-255"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/ETML_gain_left</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="670" y="-260"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="670" y="-260"/>
+                  <Point x="775" y="-260"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Add1</Name>
+            <Identifier>&lt;Root&gt;/Add1</Identifier>
+            <Type>Sum</Type>
+            <Position h="31" w="30" x="635" y="-178"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="620" y="-170"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Constant2</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="620" y="-155"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/ETML_gain_right</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="670" y="-160"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="670" y="-160"/>
+                  <Point x="775" y="-160"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Constant</Name>
+            <Identifier>&lt;Root&gt;/Constant</Identifier>
+            <Type>Constant</Type>
+            <Position h="30" w="30" x="-130" y="-225"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Value" Value="0"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="-95" y="-210"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="-95" y="-210"/>
+                  <Point x="57" y="-210"/>
+                  <Line>
+                     <Point x="57" y="-210"/>
+                     <Point x="200" y="-210"/>
+                     <Point x="200" y="-250"/>
+                     <Point x="215" y="-250"/>
+                  </Line>
+                  <Line>
+                     <Point x="57" y="-210"/>
+                     <Point x="57" y="-180"/>
+                     <Point x="215" y="-180"/>
+                  </Line>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Value">
+               <GlobalName>ETML_DH10_P.Constant_Value</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Constant2</Name>
+            <Identifier>&lt;Root&gt;/Constant2</Identifier>
+            <Type>Constant</Type>
+            <Position h="30" w="30" x="475" y="-345"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Value" Value="45"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="510" y="-330"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="510" y="-330"/>
+                  <Point x="537" y="-330"/>
+                  <Point x="537" y="-270"/>
+                  <Line>
+                     <Point x="537" y="-270"/>
+                     <Point x="630" y="-270"/>
+                  </Line>
+                  <Line>
+                     <Point x="537" y="-270"/>
+                     <Point x="537" y="-170"/>
+                     <Point x="630" y="-170"/>
+                  </Line>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Value">
+               <GlobalName>ETML_DH10_P.Constant2_Value</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>ETML_gain_left</Name>
+            <Identifier>&lt;Root&gt;/ETML_gain_left</Identifier>
+            <Type>Gain</Type>
+            <Position h="30" w="30" x="475" y="-270"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Gain" Value="ETML_gain_left"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="460" y="-255"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Math
+Function</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="510" y="-255"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="510" y="-255"/>
+                  <Point x="630" y="-255"/>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Gain">
+               <GlobalName>ETML_DH10_P.ETML_gain_left</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>ETML_gain_right</Name>
+            <Identifier>&lt;Root&gt;/ETML_gain_right</Identifier>
+            <Type>Gain</Type>
+            <Position h="30" w="30" x="475" y="-170"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Gain" Value="ETML_gain_right"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="460" y="-155"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Math
+Function1</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="510" y="-155"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="510" y="-155"/>
+                  <Point x="630" y="-155"/>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Gain">
+               <GlobalName>ETML_DH10_P.ETML_gain_right</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>ETML_power_constant</Name>
+            <Identifier>&lt;Root&gt;/ETML_power_constant</Identifier>
+            <Type>Constant</Type>
+            <Position h="30" w="115" x="210" y="-225"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Value" Value="ETML_power_constant"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="330" y="-210"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="330" y="-210"/>
+                  <Point x="342" y="-210"/>
+                  <Line>
+                     <Point x="342" y="-210"/>
+                     <Point x="343" y="-210"/>
+                     <Point x="343" y="-250"/>
+                     <Point x="360" y="-250"/>
+                  </Line>
+                  <Line>
+                     <Point x="342" y="-210"/>
+                     <Point x="342" y="-150"/>
+                     <Point x="360" y="-150"/>
+                  </Line>
+               </Line>
+            </Port>
+            <Parameter Category="Parameters" Name="Value">
+               <GlobalName>ETML_DH10_P.ETML_power_constant</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Left</Name>
+            <Identifier>&lt;Root&gt;/Left</Identifier>
+            <Type>Saturate</Type>
+            <Position h="30" w="30" x="780" y="-275"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="765" y="-260"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Add</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="815" y="-260"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="815" y="-260"/>
+                  <Point x="920" y="-260"/>
+               </Line>
+               <Signal Category="Output" Name="CurrentAngleLeft" ReadOnly="true">
+                  <GlobalName>ETML_DH10_Y.CurrentAngleLeft</GlobalName>
+                  <AdsIdxOffs>#x81000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Parameter Category="Parameters" Name="LowerLimit">
+               <GlobalName>ETML_DH10_P.Left_LowerSat</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="UpperLimit">
+               <GlobalName>ETML_DH10_P.Left_UpperSat</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Math
+Function</Name>
+            <Identifier>&lt;Root&gt;/Math
+Function</Identifier>
+            <Type>Math</Type>
+            <Position h="31" w="30" x="365" y="-273"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Operator" Value="pow"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="350" y="-265"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Switch</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="350" y="-250"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/ETML_power_constant</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="400" y="-255"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="400" y="-255"/>
+                  <Point x="470" y="-255"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Math
+Function1</Name>
+            <Identifier>&lt;Root&gt;/Math
+Function1</Identifier>
+            <Type>Math</Type>
+            <Position h="31" w="30" x="365" y="-173"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Operator" Value="pow"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="350" y="-165"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Switch1</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="350" y="-150"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/ETML_power_constant</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="400" y="-155"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="400" y="-155"/>
+                  <Point x="470" y="-155"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Minus</Name>
+            <Identifier>&lt;Root&gt;/Minus</Identifier>
+            <Type>Sum</Type>
+            <Position h="40" w="30" x="25" y="-365"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="10" y="-355"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/OffsetLeft</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Input" Name="OffsetLeft" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetLeft</GlobalName>
+                  <AdsIdxOffs>#x80000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="10" y="-335"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/OffsetRight</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Input" Name="OffsetRight" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetRight</GlobalName>
+                  <AdsIdxOffs>#x80000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="60" y="-345"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="60" y="-345"/>
+                  <Point x="80" y="-345"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Relational
+Operator</Name>
+            <Identifier>&lt;Root&gt;/Relational
+Operator</Identifier>
+            <Type>RelationalOperator</Type>
+            <Position h="31" w="30" x="-30" y="-283"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Operator" Value="&lt;="/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="-45" y="-275"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/OffsetLeft</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Input" Name="OffsetLeft" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetLeft</GlobalName>
+                  <AdsIdxOffs>#x80000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="-45" y="-260"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/OffsetRight</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Input" Name="OffsetRight" ReadOnly="true">
+                  <GlobalName>ETML_DH10_U.OffsetRight</GlobalName>
+                  <AdsIdxOffs>#x80000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="5" y="-265"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="5" y="-265"/>
+                  <Point x="26" y="-265"/>
+                  <Line>
+                     <Point x="26" y="-265"/>
+                     <Point x="215" y="-265"/>
+                  </Line>
+                  <Line>
+                     <Point x="26" y="-265"/>
+                     <Point x="26" y="-165"/>
+                     <Point x="215" y="-165"/>
+                  </Line>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Right</Name>
+            <Identifier>&lt;Root&gt;/Right</Identifier>
+            <Type>Saturate</Type>
+            <Position h="30" w="30" x="780" y="-175"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="765" y="-160"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Add1</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="815" y="-160"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="815" y="-160"/>
+                  <Point x="920" y="-160"/>
+               </Line>
+               <Signal Category="Output" Name="CurrentAngleRight" ReadOnly="true">
+                  <GlobalName>ETML_DH10_Y.CurrentAngleRight</GlobalName>
+                  <AdsIdxOffs>#x81000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+            <Parameter Category="Parameters" Name="LowerLimit">
+               <GlobalName>ETML_DH10_P.Right_LowerSat</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+            <Parameter Category="Parameters" Name="UpperLimit">
+               <GlobalName>ETML_DH10_P.Right_UpperSat</GlobalName>
+               <AdsIdxOffs>#x13</AdsIdxOffs>
+            </Parameter>
+         </Block>
+         <Block>
+            <Name>Switch</Name>
+            <Identifier>&lt;Root&gt;/Switch</Identifier>
+            <Type>Switch</Type>
+            <Position h="40" w="50" x="220" y="-285"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="205" y="-280"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Abs</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="205" y="-265"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Relational
+Operator</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="3">Inport</Type>
+               <Position x="205" y="-250"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Constant</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="275" y="-265"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="275" y="-265"/>
+                  <Point x="360" y="-265"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>Switch1</Name>
+            <Identifier>&lt;Root&gt;/Switch1</Identifier>
+            <Type>Switch</Type>
+            <Position h="40" w="50" x="220" y="-185"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="205" y="-180"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Constant</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="2">Inport</Type>
+               <Position x="205" y="-165"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Relational
+Operator</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="3">Inport</Type>
+               <Position x="205" y="-150"/>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Abs</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+            </Port>
+            <Port>
+               <Type No="1">Outport</Type>
+               <Position x="275" y="-165"/>
+               <IsConnected>1</IsConnected>
+               <Line>
+                  <Point x="275" y="-165"/>
+                  <Point x="360" y="-165"/>
+               </Line>
+            </Port>
+         </Block>
+         <Block>
+            <Name>CurrentAngleLeft</Name>
+            <Identifier>&lt;Root&gt;/CurrentAngleLeft</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="925" y="-267"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="1"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="910" y="-260"/>
+               <Name>CurrentAngleLeft</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Left</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="CurrentAngleLeft" ReadOnly="true">
+                  <GlobalName>ETML_DH10_Y.CurrentAngleLeft</GlobalName>
+                  <AdsIdxOffs>#x81000000</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Block>
+            <Name>CurrentAngleRight</Name>
+            <Identifier>&lt;Root&gt;/CurrentAngleRight</Identifier>
+            <Type>Outport</Type>
+            <Position h="14" w="30" x="925" y="-167"/>
+            <BlockDesign>
+               <Border>
+                  <svg height="1" stroke-width="1" width="1"/>
+               </Border>
+               <Image>
+                  <Placeholder Name="Port" Value="2"/>
+               </Image>
+            </BlockDesign>
+            <Port>
+               <Type No="1">Inport</Type>
+               <Position x="910" y="-160"/>
+               <Name>CurrentAngleRight</Name>
+               <IsConnected>1</IsConnected>
+               <Source>
+                  <BlockIdentifier>&lt;Root&gt;/Right</BlockIdentifier>
+                  <PortType>Outport</PortType>
+                  <PortNo>1</PortNo>
+               </Source>
+               <Signal Category="Output" Name="CurrentAngleRight" ReadOnly="true">
+                  <GlobalName>ETML_DH10_Y.CurrentAngleRight</GlobalName>
+                  <AdsIdxOffs>#x81000008</AdsIdxOffs>
+               </Signal>
+            </Port>
+         </Block>
+         <Annotation>
+            <Text>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body align="left" style=" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;"&gt;
+&lt;p align="left" style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</Text>
+            <Position x="544" y="-287"/>
+            <Alignment H="left" V="top"/>
+            <FontName>auto</FontName>
+            <FontSize>-1</FontSize>
+            <FontWeight>auto</FontWeight>
+         </Annotation>
+         <SubsystemHierarchy>
+            <Subsystem>
+               <ID>&lt;Root&gt;</ID>
+            </Subsystem>
+         </SubsystemHierarchy>
+         <DebugInfo/>
+      </BlockDiagram>
+      <DefaultValues>
+         <Value>
+            <Name>TaskOid</Name>
+            <Value>00000000</Value>
+         </Value>
+         <Value>
+            <Name>TaskPriority</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskCycleTimeNs</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskPort</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TaskSortOrder</Name>
+            <Value>0</Value>
+         </Value>
+         <Value>
+            <Name>TraceLevelMax</Name>
+            <EnumText>tlInfo</EnumText>
+         </Value>
+         <Value>
+            <Name>ModuleCaller</Name>
+            <EnumText>CyclicTask</EnumText>
+         </Value>
+         <Value>
+            <Name>CallerVerification</Name>
+            <EnumText>Default</EnumText>
+         </Value>
+         <Value>
+            <Name>StepSizeAdaptation</Name>
+            <EnumText>RequireMatchingTaskCycleTime</EnumText>
+         </Value>
+         <Value>
+            <Name>ExecutionSequence</Name>
+            <EnumText>UpdateBeforeOutputMapping</EnumText>
+         </Value>
+         <Value>
+            <Name>Execute</Name>
+            <EnumText>TRUE</EnumText>
+         </Value>
+         <Value>
+            <Name>AccessLockState</Name>
+            <EnumText>TCOM_STATE_OP</EnumText>
+         </Value>
+         <Value>
+            <Name>InitExceptionHandling</Name>
+            <EnumText>CallerExceptions</EnumText>
+         </Value>
+         <Value>
+            <Name>UpdateExceptionHandling</Name>
+            <EnumText>CallerExceptions</EnumText>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P_Sharing</Name>
+            <EnumText>Define</EnumText>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.ETML_gain_left</Name>
+            <Value>16.91503741</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.ETML_gain_right</Name>
+            <Value>16.91503741</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.ETML_power_constant</Name>
+            <Value>0.46047809</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Constant2_Value</Name>
+            <Value>45.0</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Constant_Value</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Left_UpperSat</Name>
+            <Value>90.0</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Left_LowerSat</Name>
+            <Value>0.0</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Right_UpperSat</Name>
+            <Value>90.0</Value>
+         </Value>
+         <Value>
+            <Name>ETML_DH10_P.Right_LowerSat</Name>
+            <Value>0.0</Value>
+         </Value>
+      </DefaultValues>
+      <ModuleParameters>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>CallBy</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>ExecutionSequence</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="WRITE">
+            <Name>StepSizeAdaptation</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>Initialized</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>CycleUpdateExecuted</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="" StartupValueAccess="">
+            <Name>ModuleInfo</Name>
+            <Category>Module identification</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>ModuleBuildInfo</Name>
+            <Category>Module identification</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="WRITE" StartupValueAccess="WRITE">
+            <Name>Execute</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>SimulinkTime</Name>
+            <Category>Monitoring</Category>
+         </Parameter>
+         <Parameter DefaultValueAccess="READONLY" OnlineValueAccess="READONLY" StartupValueAccess="">
+            <Name>AccessLockState</Name>
+            <Category>Module parameters</Category>
+         </Parameter>
+      </ModuleParameters>
+      <BlockDesigns>
+         <BlockDesign>
+            <Type>Inport</Type>
+            <Border>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-1022.3622)">
+                     <rect height="28.121166" id="rect2996" ry="14.060583" style="fill:none;stroke:#000000;stroke-width:1.87883461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="58.121166" x="0.9394173" y="1023.3016"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <text id="text3010" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="30" xml:space="preserve" y="15"><tspan id="tspan3012" x="30" y="15">Block::Port</tspan></text></svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Abs</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text2991" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="50.0" xml:space="preserve" y="50.0"><tspan id="tspan2993" x="50.0" y="50.0">|A|</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Sum</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text2991" style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;text-anchor:middle;text-align:center;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan2993" x="50" y="50">+</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Constant</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text3001" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan3003" x="50" y="50">ADS::Value Block::Value</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Gain</Type>
+            <Border>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-952.36218)">
+                     <path d="M 0,100 0,0 100,50 0,100" id="path3005" style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" transform="translate(0,952.36218)"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text2991" style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="5" xml:space="preserve" y="50"><tspan id="tspan2993" x="5" y="50">ADS::Gain Block::Gain</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Saturate</Type>
+            <Image>
+               <svg height="100" id="svg2" version="1.1" width="100">
+                  <title id="title3802">Saturate</title>
+                  <defs id="defs4"/>
+                  <metadata id="metadata7"/>
+                  <path d="m 21.343889,77.165351 15.019759,0 L 69.631521,24 84,24" id="path3774" style="fill:none;stroke:#000000;stroke-width:0.55226934px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+                  <path d="m 51.778672,20.078738 0,62.598424" id="path3776" style="fill:none;stroke:#000000;stroke-width:0.55226934px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+                  <path d="m 21.739143,50.393698 61.264826,0" id="path3778" style="fill:none;stroke:#000000;stroke-width:0.55226934px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Math</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text2991" style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;text-anchor:middle;text-align:center;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan2993" x="50" y="50">Block::Operator</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>RelationalOperator</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1">
+                     <text id="text3001" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="50" xml:space="preserve" y="50"><tspan id="tspan3003" x="50" y="50">Block::Operator</tspan></text></g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Switch</Type>
+            <Image>
+               <svg height="100" id="svg3009" version="1.1" width="100">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-952.36218)">
+                     <rect height="6.1243801" id="rect3006" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="6.1871104" x="41.154118" y="966.15198"/>
+                     <path d="m 41.423146,968.61373 c -13.666931,0 -27.333897,-2e-5 -41.0008279,0" id="path3776" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+                     <path d="m 44.920178,968.55368 35.508632,34.52472 18.651024,0" id="path3778" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+                     <path d="m 16.764368,993.41146 0,20.65474" id="path3780" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+                     <path d="m 16.854023,1003.2585 -16.49895482,0" id="path3782" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+                     <path d="m 0.35506818,1038.8039 41.15773282,0" id="path3784" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"/>
+                     <rect height="6.1243801" id="rect3786" style="fill:none;stroke:#000000;stroke-width:0.58110338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="5.9181056" x="41.423149" y="1035.1414"/>
+                  </g>
+               </svg>
+            </Image>
+         </BlockDesign>
+         <BlockDesign>
+            <Type>Outport</Type>
+            <Border>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <g id="layer1" transform="translate(0,-1022.3622)">
+                     <rect height="28.121166" id="rect2996" ry="14.060583" style="fill:none;stroke:#000000;stroke-width:1.87883461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" width="58.121166" x="0.9394173" y="1023.3016"/>
+                  </g>
+               </svg>
+            </Border>
+            <Image>
+               <svg height="30" id="svg3009" version="1.1" width="60">
+                  <defs id="defs3011"/>
+                  <metadata id="metadata3014"/>
+                  <text id="text3010" style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans" x="30" xml:space="preserve" y="15"><tspan id="tspan3012" x="30" y="15">Block::Port</tspan></text></svg>
+            </Image>
+         </BlockDesign>
+      </BlockDesigns>
+   </ModuleInfo>
+</TctGeneratedModules>

@@ -17,6 +17,11 @@ VAR_OUTPUT
 	motor_on_for_levi AT %Q* : BOOL;
 END_VAR
 
+VAR_INPUT
+	Offset_Left AT %I* : LREAL;
+	Offset_Right AT %I* : LREAL;
+END_VAR
+
 VAR
 	
 	barcodeState : E_Barcode_State := E_Barcode_State.INIT;
@@ -65,6 +70,10 @@ VAR
 	VelocityError : REAL;
 	VelocityErrorIntegral : REAL;
 	InitialIntegralValue : LREAL;
+	
+	ETML_gain_Left : LREAL := 16.91503741;
+	ETML_gain_Right : LREAL := 16.91503741;
+	ETML_power_constant : LREAL := 0.46047809;
 	
 	Send_CAN_PosVelocity_Right : FB_SendPosVelocity_Right;
 	Send_CAN_CurrentAngle_Right : FB_SendCurrentAngle_Right;
@@ -157,6 +166,14 @@ VAR
 	
 	delft_converter_front : FB_PositionConverter;
 	delft_converter_back  : FB_PositionConverter;
+	
+	//ETML TcCOM object setup
+	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
+	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
+	
+	ETML_inputs: ST_ETML_DH10_U_T;
+	ETML_outputs: ST_ETML_DH10_Y_T;
+	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
 END_VAR
 
 VAR CONSTANT
@@ -277,6 +294,22 @@ CASE barcodeState OF
 		barcodeState := E_Barcode_State.INIT;
 		start := FALSE;
 END_CASE
+
+
+//ETML
+ETML_parameters.fETML_gain_left := ETML_gain_Left;
+ETML_parameters.fETML_gain_right := ETML_gain_Right;
+ETML_parameters.fETML_power_constant := ETML_power_constant;
+
+FB_ETML.stETML_DH10_P := ETML_parameters;
+
+ETML_inputs.fOffsetLeft := Offset_Left;
+ETML_inputs.fOffsetRight := Offset_Right;
+
+FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
+
+CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
+CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
 
 
 IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN

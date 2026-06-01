@@ -383,6 +383,10 @@
       <DefaultResolution>Descent_model, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>Descent_model</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="ETML_DH10">
+      <DefaultResolution>ETML_DH10, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>ETML_DH10</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="lateral_levitation_control">
       <DefaultResolution>lateral_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>lateral_levitation_control</Namespace>
