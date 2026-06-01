@@ -5,12 +5,12 @@
   <Children>
     <Node>
       <Title>Levi</Title>
-      <Expanded>False</Expanded>
+      <Expanded>True</Expanded>
       <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\Levi.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -81,6 +81,12 @@
             </Node>
             <Node>
               <Title>aoffset_airgaps_ems[5]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>new_time_zero_current_finder</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -356,6 +362,12 @@
               <Children />
             </Node>
             <Node>
+              <Title>z_target</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>SensorDataArray[5]</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -519,12 +531,6 @@
             </Node>
             <Node>
               <Title>z</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>z_manual_target</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -992,12 +998,6 @@
                   <Children />
                 </Node>
                 <Node>
-                  <Title>z_manual_target</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
                   <Title>y</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
@@ -1005,6 +1005,12 @@
                 </Node>
                 <Node>
                   <Title>y_target_airgap</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>z_target</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -1063,9 +1069,16 @@
           <Children>
             <Node>
               <Title>Vertical integrals</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
-              <Children />
+              <Children>
+                <Node>
+                  <Title>new_time_zero_current_finder</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+              </Children>
             </Node>
             <Node>
               <Title>Lateral integrals</Title>

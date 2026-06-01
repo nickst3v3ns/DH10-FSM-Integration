@@ -178,7 +178,7 @@ VAR
 //----------------------------------------------------------------------------------------------------
 	
 	//Liftoff model
-	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010060);
+	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010050);
 	FB_control_liftoff: FB_Liftoff_model_TcCom_InitStruct(FB_control_liftoff_init);
 	
 	Control_liftoff_inputs: ST_Liftoff_model_U_T;
@@ -186,7 +186,7 @@ VAR
 	Control_liftoff_parameters: ST_P_Liftoff_model_T := FB_control_liftoff.stLiftoff_model_P;
 	
 	//Descent model
-	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010050);
+	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010060);
 	FB_control_descent: FB_Descent_model_TcCom_InitStruct(FB_control_descent_init);
 	
 	Control_descent_outputs: ST_Descent_model_Y_T;
@@ -212,7 +212,7 @@ VAR
 	z_liftoff : LREAL; //m
 	Levi_ready : BOOL;
 	
-	Levi_operational : BOOL := FALSE;
+	Levi_operational : BOOL := TRUE;
 	
 	Vertical_on : BOOL := TRUE;
 	Lateral_on : BOOL := TRUE;
@@ -225,16 +225,17 @@ VAR
 	yaw_on : BOOL := TRUE;	
 	
 	z_initial_target : LREAL := -0.0165; //m
-	z_target : LREAL; //m
+	z_target : LREAL := -0.0165; //m
 	pitch_target : LREAL := 0; //rad
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
 	yaw_target : LREAL := 0; //rad
-	liftoff_time : LREAL := 5; //s
-	descent_time : LREAL := 5; //s
+	liftoff_time : LREAL := 6; //s
+	descent_time : LREAL := 6; //s
 	last_levitating_airgap : LREAL; //m
 	descent_in_progress : USINT;
-
+	prev_time_zero_current_finder : LREAL;
+	new_time_zero_current_finder : LREAL;
 	
 	(*
 	K_P_tot: LREAL := 300000;
@@ -268,13 +269,13 @@ VAR
 	K_I_yaw_initial: LREAL := -1;
 *)	
 	K_P_tot: LREAL := 300000;
-	K_I_tot: LREAL := 100000;
+	K_I_tot: LREAL := 200000;
 	K_D_tot: LREAL := 30000;
 	K_F_tot: LREAL := 100;
 	K_I_tot_initial: LREAL := 14160;
 	
 	K_P_pitch: LREAL := 60000;
-	K_I_pitch: LREAL := 140000;
+	K_I_pitch: LREAL := 200000;
 	K_D_pitch: LREAL := 15000;
 	K_F_pitch: LREAL := 250;
 	K_I_pitch_initial: LREAL := 202;
@@ -297,7 +298,7 @@ VAR
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := 39;	
 	
-	Zero_current_finder_gain : LREAL := 0.001;
+	Zero_current_finder_gain : LREAL := 0.0005;
 	
 	Lift_off_enabled : BOOL := TRUE;
 	descent_enabled : BOOL := TRUE;
@@ -308,8 +309,7 @@ VAR
 	feed_fwd_motor_y_on : BOOL := TRUE;
 	feed_fwd_motor_yaw_on : BOOL := TRUE;
 	feed_fwd_ON_ems : BOOL := TRUE;
-	lift_off_time : LREAL := 5; //s
-	Zero_current_finder_interval : LREAL := 6; //s
+	Zero_current_finder_interval : LREAL := 4; //s
 	
 	tau_x_ems: LREAL;
 	
@@ -456,12 +456,15 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_PULLUP OR 
 			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
-			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+			Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DESCEND OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
 			
-			Levi_State := 0;
+			Levi_State := E_Levi_states.LEVI_IDLE;
+
 			FB_Levi_Idle(	drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							Force_feedback_value := Force_feedback_value,
@@ -490,13 +493,16 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_PULLUP OR 
 			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
-			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+			Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DESCEND OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE AND
 			error_resettable = TRUE AND
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
-			Levi_state := 1;
+			Levi_state := E_Levi_states.LEVI_INIT;
+
 			FB_Levi_Init(	drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							Force_feedback_value := Force_feedback_value,
@@ -530,11 +536,14 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_PULLUP OR
 			Levi_state = E_Levi_States.LEVI_DROPDOWN OR
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
-			Levi_state = E_Levi_States.LEVI_CONTROL) AND
+			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+			Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DESCEND) AND
 			GVL_LEVI.levitation_enable = TRUE AND
 			All_drives_high_voltage = TRUE THEN
 	
-			Levi_state := 2;
+			Levi_state := E_Levi_states.LEVI_READY;
+			normal_shutdown := FALSE;
 			FB_Levi_Ready(	drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							Force_feedback_value := Force_feedback_value,
@@ -552,9 +561,11 @@ CASE Levi_Command OF
 							Levi_ready => Levi_ready,
 							Go_error_state => Error,
 							z_liftoff => z_liftoff);
-		
+			
+			Control_descent_parameters.blevi_operational := FALSE;
 			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
+			Control_vert_parameters.blevi_operational := FALSE;	
+			FB_Control_descent.stDescent_model_P := Control_descent_parameters;		
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;		
 		
@@ -571,7 +582,7 @@ CASE Levi_Command OF
 			reset_busy = FALSE AND
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
-			Levi_state := 3;
+			Levi_state := E_Levi_states.LEVI_PULLUP;
 			FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
 							drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
@@ -604,7 +615,7 @@ CASE Levi_Command OF
 			reset_busy = FALSE AND
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
-			Levi_state := 4;
+			Levi_state := E_Levi_states.LEVI_DROPDOWN;
 			FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
 								drive_status := Drive_status,
 								drive_diagnostics := Drive_Diagnostic,
@@ -630,15 +641,240 @@ CASE Levi_Command OF
 		END_IF		
 	//------------------------------------------------------------------------------------------------
 	
-	E_Levi_States.LEVI_CONTROL:
+	E_Levi_States.LEVI_LIFTOFF:
 		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
-			Levi_state = E_Levi_States.LEVI_CONTROL) AND 
+			Levi_state = E_Levi_States.LEVI_LIFTOFF) AND 
 			Levi_ready AND 
-			z_liftoff < -0.020 AND
 			reset_busy = FALSE AND
-			GVL_LEVI.levitation_enable = TRUE THEN
+			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
 			
-			Levi_state := 5;
+			Levi_state := E_Levi_states.LEVI_LIFTOFF;
+			
+			Run_z_liftoff_calc := FALSE;
+			
+			FOR i:=0 TO 23 DO
+				Control_word[i] := 16#E000;
+			END_FOR
+			
+			//Check if there are errors
+			Error := Check_drives(drive_status := drive_status, 
+								drive_diagnostics := Drive_Diagnostic, 
+								drive_last_request_value := Requested_force_values,
+								drive_last_feedback_value := Force_feedback_value,
+								drive_feedback_timeouts := drive_feedback_timeouts,
+								State := Levi_State,
+								n_warns => n_drive_warnings, 
+								n_errors => n_drive_errors, 
+								errors := error_specifics,
+								Drive_current_error := Drive_current_error);
+								
+			//-------------------------------------------------------------------------					
+			Control_liftoff_parameters.bLevi_operational := Levi_operational;
+			Control_liftoff_parameters.fz_initial_lift_off := z_liftoff;
+			Control_liftoff_parameters.flift_off_time := liftoff_time;		
+			Control_liftoff_parameters.benable_zero_current_finder := enable_zero_current_finder;		
+			Control_liftoff_parameters.blift_off_enabled := lift_off_enabled;
+			Control_liftoff_parameters.fz_manual_target := z_initial_target;
+			Control_liftoff_parameters.fzero_current_finder_gain := Zero_current_finder_gain;
+			Control_liftoff_parameters.fzero_current_finder_interval := Zero_current_finder_interval;
+			
+								
+			FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			Control_liftoff_inputs.fz_target := z_target;
+			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
+			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
+			
+			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
+			
+			z_target := Control_liftoff_outputs.fnew_z_target;
+			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
+			prev_time_zero_current_finder := new_time_zero_current_finder;
+			//-------------------------------------------------------------------------
+			
+			//Setting motor feed forward parameters
+			IF motor_on_for_levi THEN
+				
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
+										Ib := Ib_for_levi_left, 
+										Ic := Ic_for_levi_left,
+										airgap := motor_airgap_left, 
+										currentangle := currentangle_for_levi_left,
+										thrust => motor_thrust_l,
+										lift => motor_lift_l);
+				
+								
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
+										Ib := Ib_for_levi_right, 
+										Ic := Ic_for_levi_right,
+										airgap := motor_airgap_right, 
+										currentangle := currentangle_for_levi_right,
+										thrust => motor_thrust_r,
+										lift => motor_lift_r);
+			
+				(*
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
+				*)
+				
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+			ELSE
+				motor_thrust_l := 0;
+				motor_lift_l := 0;
+				motor_thrust_r := 0;
+				motor_lift_r := 0;
+				
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+			END_IF
+			
+			//-------------------------------------------------------------------------
+							
+			//Setting lateral control parameters	
+			IF Lateral_on THEN
+				Control_lat_parameters.bfeed_forward_ems_ON := feed_fwd_ON_ems;
+				Control_lat_parameters.blevi_operational := Levi_operational;
+			
+			ELSE
+				Control_lat_parameters.bfeed_forward_ems_ON := FALSE;
+				Control_lat_parameters.blevi_operational := FALSE;
+			END_IF
+			
+			
+			Control_lat_parameters.by_ON := y_on;
+			Control_lat_parameters.byaw_ON := yaw_on;
+			Control_lat_parameters.fyaw_target := yaw_target;
+			Control_lat_parameters.fy_target := y_target_airgap;
+			
+			Control_lat_parameters.fK_P_lat := K_P_lat;
+			Control_lat_parameters.fK_I_lat := K_I_lat;
+			Control_lat_parameters.fK_D_lat := K_D_lat;
+			Control_lat_parameters.fK_F_lat := K_F_lat;
+			Control_lat_parameters.fK_I_init_lat := K_I_lat_initial;
+			
+			Control_lat_parameters.fK_P_yaw := K_P_yaw;
+			Control_lat_parameters.fK_I_yaw := K_I_yaw;
+			Control_lat_parameters.fK_D_yaw := K_D_yaw;
+			Control_lat_parameters.fK_F_yaw := K_F_yaw;
+			Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
+			
+			//Uploading lateral parameters to the control model
+			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			//Setting vertical control parameters
+			IF Vertical_on THEN
+				Control_vert_parameters.bfeed_forward_ems_ON := feed_fwd_ON_ems;
+				Control_vert_parameters.blevi_operational := Levi_operational;
+			
+			ELSE
+				Control_vert_parameters.bfeed_forward_ems_ON := FALSE;
+				Control_vert_parameters.blevi_operational := FALSE;
+			END_IF
+			
+			Control_vert_parameters.btotal_ON := Total_on; 
+			Control_vert_parameters.bpitch_ON := Pitch_on;
+			Control_vert_parameters.broll_ON := Roll_on;
+			
+			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
+			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
+			Control_vert_parameters.fK_P_tot := K_P_tot;
+			Control_vert_parameters.fK_I_tot := K_I_tot;
+			Control_vert_parameters.fK_D_tot := K_D_tot;
+			Control_vert_parameters.fK_F_tot := K_F_tot;
+			Control_vert_parameters.fK_I_init_tot := K_I_tot_initial;
+			
+			Control_vert_parameters.fK_P_pit := K_P_pitch;
+			Control_vert_parameters.fK_I_pit := K_I_pitch;
+			Control_vert_parameters.fK_D_pit := K_D_pitch;
+			Control_vert_parameters.fK_F_pit := K_F_pitch;
+			Control_vert_parameters.fK_I_init_pit := K_I_pitch_initial;
+			
+			Control_vert_parameters.fK_P_roll := K_P_roll;
+			Control_vert_parameters.fK_I_roll := K_I_roll;
+			Control_vert_parameters.fK_D_roll := K_D_roll;
+			Control_vert_parameters.fK_F_roll := K_F_roll;
+			Control_vert_parameters.fK_I_init_roll := K_I_roll_initial;
+			
+			Control_vert_parameters.froll_target := roll_target;
+			Control_vert_parameters.fpitch_target := pitch_target;
+			Control_vert_parameters.fz_manual_target := z_target;
+			
+			//Uploading vertical parameters to the control model
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			Control_lat_inputs.fy := y;
+			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
+			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
+			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
+			Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+			
+			FB_Control_lat(stlateral_levitation_control_U := Control_lat_inputs, stlateral_levitation_control_Y => Control_lat_outputs);
+			
+			tau_x_ems := Control_lat_outputs.ftau_x_ems;
+			
+			I_EMS := Control_lat_outputs.aI_ems;
+			
+			//-------------------------------------------------------------------------
+			
+			Control_vert_inputs.fz_avg := z;
+			Control_vert_inputs.froll_measured := roll;
+			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fems_roll := tau_x_ems;
+			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
+			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
+			
+			FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stvertical_levitation_control_new_Y => Control_vert_outputs);
+			
+			I_VFL := Control_vert_outputs.aI_VFL;
+			I_VFR := Control_vert_outputs.aI_VFR;
+			I_VBL := Control_vert_outputs.aI_VBL;
+			I_VBR := Control_vert_outputs.aI_VBR;
+			
+			//-------------------------------------------------------------------------
+			
+			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+		
+		ELSE
+			Levi_command := Levi_state;
+						
+		END_IF	
+	//------------------------------------------------------------------------------------------------	
+
+	E_Levi_States.LEVI_LEVITATION:
+		IF 	(Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+			Levi_state = E_Levi_States.LEVI_LEVITATION) AND 
+			Levi_ready AND
+			reset_busy = FALSE AND
+			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
+			
+			Levi_state := E_Levi_states.LEVI_LEVITATION;
 			(*FB_Levi_Control(	configured_peak_current := configured_peak_current,
 								drive_status := Drive_status,
 								drive_diagnostics := Drive_Diagnostic,
@@ -661,7 +897,7 @@ CASE Levi_Command OF
 								Error => Error,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);*)
 		
-			Run_z_liftoff_calc := FALSE;
+						Run_z_liftoff_calc := FALSE;
 			
 			FOR i:=0 TO 23 DO
 				Control_word[i] := 16#E000;
@@ -707,9 +943,7 @@ CASE Levi_Command OF
 				
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;
-				
-				
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
 			ELSE
 				motor_thrust_l := 0;
 				motor_lift_l := 0;
@@ -765,7 +999,7 @@ CASE Levi_Command OF
 			Control_vert_parameters.btotal_ON := Total_on; 
 			Control_vert_parameters.bpitch_ON := Pitch_on;
 			Control_vert_parameters.broll_ON := Roll_on;
-			//Control_vert_parameters.blift_off_enabled := Lift_off_enabled;
+
 			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
 			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
 			Control_vert_parameters.fK_P_tot := K_P_tot;
@@ -786,16 +1020,12 @@ CASE Levi_Command OF
 			Control_vert_parameters.fK_F_roll := K_F_roll;
 			Control_vert_parameters.fK_I_init_roll := K_I_roll_initial;
 			
-			//Control_vert_parameters. := z_liftoff;
 			Control_vert_parameters.froll_target := roll_target;
 			Control_vert_parameters.fpitch_target := pitch_target;
-			Control_vert_parameters.fz_manual_target := z_manual_target;
-			//Control_vert_parameters.benable_manual_z_target := enable_manual_z_target;
+			Control_vert_parameters.fz_manual_target := z_target;
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
-			
-			
 			
 			Control_lat_inputs.fy := y;
 			Control_lat_inputs.fyaw := yaw;
@@ -840,12 +1070,233 @@ CASE Levi_Command OF
 			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
 			
 			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
-			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);		
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+
+			Last_levitating_airgap := z;	
 		
 		ELSE
 			Levi_command := Levi_state;
 						
 		END_IF					
+	//------------------------------------------------------------------------------------------------
+	E_Levi_States.LEVI_DESCEND:
+		IF 	(Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DESCEND) AND 
+			Levi_ready AND 
+			reset_busy = FALSE AND
+			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
+			
+			Levi_state := E_Levi_states.LEVI_DESCEND;
+			
+			Run_z_liftoff_calc := FALSE;
+			
+			FOR i:=0 TO 23 DO
+				Control_word[i] := 16#E000;
+			END_FOR
+			
+			//Check if there are errors
+			Error := Check_drives(drive_status := drive_status, 
+								drive_diagnostics := Drive_Diagnostic, 
+								drive_last_request_value := Requested_force_values,
+								drive_last_feedback_value := Force_feedback_value,
+								drive_feedback_timeouts := drive_feedback_timeouts,
+								State := Levi_State,
+								n_warns => n_drive_warnings, 
+								n_errors => n_drive_errors, 
+								errors := error_specifics,
+								Drive_current_error := Drive_current_error);
+								
+			//-------------------------------------------------------------------------					
+			Control_descent_parameters.bLevi_operational := Levi_operational;
+			Control_descent_parameters.fz_initial_lift_off := z_liftoff;
+			Control_descent_parameters.fdescent_time := descent_time;		
+			Control_descent_parameters.bdescent_enabled := descent_enabled;
+			Control_descent_parameters.flast_levitating_airgap := last_levitating_airgap;
+											
+			FB_Control_descent.stDescent_model_P := Control_descent_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
+			
+			z_target := Control_descent_outputs.fz_target_descent;
+			descent_in_progress := Control_descent_outputs.nDescent_in_progress;
+			//-------------------------------------------------------------------------
+			
+						//Setting motor feed forward parameters
+			IF motor_on_for_levi THEN
+				
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
+										Ib := Ib_for_levi_left, 
+										Ic := Ic_for_levi_left,
+										airgap := motor_airgap_left, 
+										currentangle := currentangle_for_levi_left,
+										thrust => motor_thrust_l,
+										lift => motor_lift_l);
+				
+								
+				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
+										Ib := Ib_for_levi_right, 
+										Ic := Ic_for_levi_right,
+										airgap := motor_airgap_right, 
+										currentangle := currentangle_for_levi_right,
+										thrust => motor_thrust_r,
+										lift => motor_lift_r);
+			
+				(*
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
+				*)
+				
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+			ELSE
+				motor_thrust_l := 0;
+				motor_lift_l := 0;
+				motor_thrust_r := 0;
+				motor_lift_r := 0;
+				
+				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+			END_IF
+			
+			//-------------------------------------------------------------------------
+							
+			//Setting lateral control parameters	
+			IF Lateral_on THEN
+				Control_lat_parameters.bfeed_forward_ems_ON := feed_fwd_ON_ems;
+				Control_lat_parameters.blevi_operational := Levi_operational;
+			
+			ELSE
+				Control_lat_parameters.bfeed_forward_ems_ON := FALSE;
+				Control_lat_parameters.blevi_operational := FALSE;
+			END_IF
+			
+			
+			Control_lat_parameters.by_ON := y_on;
+			Control_lat_parameters.byaw_ON := yaw_on;
+			Control_lat_parameters.fyaw_target := yaw_target;
+			Control_lat_parameters.fy_target := y_target_airgap;
+			
+			Control_lat_parameters.fK_P_lat := K_P_lat;
+			Control_lat_parameters.fK_I_lat := K_I_lat;
+			Control_lat_parameters.fK_D_lat := K_D_lat;
+			Control_lat_parameters.fK_F_lat := K_F_lat;
+			Control_lat_parameters.fK_I_init_lat := K_I_lat_initial;
+			
+			Control_lat_parameters.fK_P_yaw := K_P_yaw;
+			Control_lat_parameters.fK_I_yaw := K_I_yaw;
+			Control_lat_parameters.fK_D_yaw := K_D_yaw;
+			Control_lat_parameters.fK_F_yaw := K_F_yaw;
+			Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
+			
+			//Uploading lateral parameters to the control model
+			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			//Setting vertical control parameters
+			IF Vertical_on THEN
+				Control_vert_parameters.bfeed_forward_ems_ON := feed_fwd_ON_ems;
+				Control_vert_parameters.blevi_operational := Levi_operational;
+			
+			ELSE
+				Control_vert_parameters.bfeed_forward_ems_ON := FALSE;
+				Control_vert_parameters.blevi_operational := FALSE;
+			END_IF
+			
+			Control_vert_parameters.btotal_ON := Total_on; 
+			Control_vert_parameters.bpitch_ON := Pitch_on;
+			Control_vert_parameters.broll_ON := Roll_on;
+			
+			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
+			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
+			Control_vert_parameters.fK_P_tot := K_P_tot;
+			Control_vert_parameters.fK_I_tot := K_I_tot;
+			Control_vert_parameters.fK_D_tot := K_D_tot;
+			Control_vert_parameters.fK_F_tot := K_F_tot;
+			Control_vert_parameters.fK_I_init_tot := K_I_tot_initial;
+			
+			Control_vert_parameters.fK_P_pit := K_P_pitch;
+			Control_vert_parameters.fK_I_pit := K_I_pitch;
+			Control_vert_parameters.fK_D_pit := K_D_pitch;
+			Control_vert_parameters.fK_F_pit := K_F_pitch;
+			Control_vert_parameters.fK_I_init_pit := K_I_pitch_initial;
+			
+			Control_vert_parameters.fK_P_roll := K_P_roll;
+			Control_vert_parameters.fK_I_roll := K_I_roll;
+			Control_vert_parameters.fK_D_roll := K_D_roll;
+			Control_vert_parameters.fK_F_roll := K_F_roll;
+			Control_vert_parameters.fK_I_init_roll := K_I_roll_initial;
+			
+			Control_vert_parameters.froll_target := roll_target;
+			Control_vert_parameters.fpitch_target := pitch_target;
+			Control_vert_parameters.fz_manual_target := z_target;
+			
+			//Uploading vertical parameters to the control model
+			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
+			
+			//-------------------------------------------------------------------------
+			
+			Control_lat_inputs.fy := y;
+			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
+			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
+			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
+			Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+			
+			FB_Control_lat(stlateral_levitation_control_U := Control_lat_inputs, stlateral_levitation_control_Y => Control_lat_outputs);
+			
+			tau_x_ems := Control_lat_outputs.ftau_x_ems;
+			
+			I_EMS := Control_lat_outputs.aI_ems;
+			
+			//-------------------------------------------------------------------------
+			
+			Control_vert_inputs.fz_avg := z;
+			Control_vert_inputs.froll_measured := roll;
+			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fems_roll := tau_x_ems;
+			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
+			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
+			
+			FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stvertical_levitation_control_new_Y => Control_vert_outputs);
+			
+			I_VFL := Control_vert_outputs.aI_VFL;
+			I_VFR := Control_vert_outputs.aI_VFR;
+			I_VBL := Control_vert_outputs.aI_VBL;
+			I_VBR := Control_vert_outputs.aI_VBR;
+			
+			//-------------------------------------------------------------------------
+			
+			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ configured_peak_current);
+			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
+			
+			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+			
+			IF descent_in_progress = 0 THEN
+				Levi_command := E_Levi_States.LEVI_READY;
+			END_IF
+		ELSE
+			Levi_command := Levi_state;
+						
+		END_IF	
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES:
@@ -855,7 +1306,7 @@ CASE Levi_Command OF
 			reset_busy = FALSE AND
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
-			Levi_state := 6;
+			Levi_state := E_Levi_states.LEVI_TESTING_INDIVIDUAL_DRIVES;
 			FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
 												drive_status := Drive_status,
 												drive_diagnostics := Drive_Diagnostic,
@@ -887,12 +1338,14 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_PULLUP OR 
 			Levi_state = E_Levi_States.LEVI_DROPDOWN OR 
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
-			Levi_state = E_Levi_States.LEVI_CONTROL OR
+			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+			Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DESCEND OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
 			
-			Levi_state := -1;
+			Levi_state := E_Levi_states.LEVI_ERROR;
 			FB_Levi_Error(	drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							State := Levi_State,
@@ -922,7 +1375,7 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND 
 			error_resettable = TRUE THEN		
 	
-			Levi_state := -2;
+			Levi_state := E_Levi_states.LEVI_RESET_DRIVES;
 			FB_Levi_Reset_Drives(	drive_status := Drive_status,
 									drive_diagnostics := Drive_Diagnostic,
 									State := Levi_State,
