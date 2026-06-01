@@ -5,7 +5,7 @@
   <Children>
     <Node>
       <Title>Levi</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\Levi.tcscopex</FileName>
       <Children>
         <Node>
@@ -1077,12 +1077,12 @@
         </Node>
         <Node>
           <Title>Thermal</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>HEMS temps</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1137,7 +1137,7 @@
             </Node>
             <Node>
               <Title>EMS temps</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1290,18 +1290,6 @@
             </Node>
             <Node>
               <Title>Iq_ref_Right</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>phi_calc_left</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>phi_calc_right</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -1699,32 +1687,6 @@
           </Children>
         </Node>
         <Node>
-          <Title>phi</Title>
-          <Expanded>True</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (10)</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>phi_calc_left</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>phi_calc_right</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
           <Title>Position</Title>
           <Expanded>True</Expanded>
           <FileName></FileName>
@@ -2100,12 +2062,6 @@
               <FileName></FileName>
               <Children />
             </Node>
-            <Node>
-              <Title>VelocityErrorIntegral</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
           </Children>
         </Node>
         <Node>
@@ -2115,7 +2071,7 @@
           <Children>
             <Node>
               <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -2126,8 +2082,15 @@
                 </Node>
               </Children>
             </Node>
+          </Children>
+        </Node>
+        <Node>
+          <Title>velocity</Title>
+          <Expanded>True</Expanded>
+          <FileName></FileName>
+          <Children>
             <Node>
-              <Title>Axis Group</Title>
+              <Title>Axis Group (2)</Title>
               <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
@@ -2139,19 +2102,6 @@
                 </Node>
                 <Node>
                   <Title>TargetVelocity</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (4)</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>VelocityErrorIntegral</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
