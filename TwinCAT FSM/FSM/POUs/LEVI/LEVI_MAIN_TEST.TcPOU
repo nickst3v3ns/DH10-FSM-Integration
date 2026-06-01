@@ -85,6 +85,11 @@ VAR
 	//Drive_current_W AT %I*: ARRAY[0..23] OF INT;
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
+	Power_HEMS : ARRAY[0..15] OF LREAL;
+	Power_total_HEMS : LREAL;
+	Power_EMS : ARRAY[0..7] OF LREAL;
+	Power_total_EMS : LREAL;
+	Power_total_levi : LREAL;
 	
 	DC_bus_voltage AT %I*: ARRAY[0..23] OF UINT;
 	//DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
@@ -296,6 +301,8 @@ VAR
 	
 	configured_peak_current : LREAL := 13; //A
 	minimum_dc_bus_voltage : UINT := 313; //V	
+	R_hems : LREAL := 18.4; //Ohm
+	R_ems : LREAL := 10.4; //Ohm
 	
 	Run_z_liftoff_calc : BOOL;
 	All_drives_high_voltage: BOOL;
@@ -928,6 +935,19 @@ FOR i:=0 TO 11 DO
 	Requested_currents[i] := (INT_TO_LREAL(Requested_force_values[i]) * configured_peak_current) / 1000.0;
 END_FOR
 
+Power_total_HEMS := 0;
+FOR i:=0 TO 15 DO
+	Power_HEMS[i] := Real_currents[i]*Real_currents[i] * R_hems;
+	Power_total_HEMS := Power_total_HEMS + Power_HEMS[i];
+END_FOR
+
+Power_total_EMS := 0;
+FOR i:=0 TO 7 DO
+	Power_EMS[i] := Real_currents[i]*Real_currents[i] * R_ems;
+	Power_total_EMS := Power_total_EMS + Power_EMS[i];
+END_FOR
+
+Power_total_levi := Power_total_HEMS + Power_total_EMS;
 
 //----------------------------------------------------------------------------------------------------
 
