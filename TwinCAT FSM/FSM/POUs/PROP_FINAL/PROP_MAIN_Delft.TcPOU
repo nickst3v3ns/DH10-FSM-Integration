@@ -43,12 +43,15 @@ VAR
 	
 	positionDelft : LREAL;
 	VelocityDelft : LREAL;
-	CurrentAngle : LREAL := 45;
+	CurrentAngle_Right : LREAL := 45;
+	CurrentAngle_Left : LREAL := 45;
 	Iamp : LREAL;
 	PositionOffset : LREAL := 2.2;
 	PodState: E_PodState;
 	PropFlag : INT;
 	AutoDirectionFlag : INT;
+	motor_airgap_right : LREAL;
+	motor_airgap_left : LREAL;
 	
 	check : INT := 0;
 	check_1 : INT := 0;
@@ -73,7 +76,8 @@ VAR
 	Send_CAN_DriveReset_Right : FB_SendDriveReset_Right;
 	Send_CAN_CANDelay_Right : FB_SendCANDelay_Right;
 	Send_CAN_TargetVelocity_Right : FB_SendTargetVelocity_Right;
-	send_CAN_AutoDirectionFlag_Right : FB_sendAutoDirectionFlag_Right;
+	Send_CAN_AutoDirectionFlag_Right : FB_sendAutoDirectionFlag_Right;
+	Send_CAN_AirGap_Right : FB_SendAirGap_Right;
 	
 	Send_CAN_PosVelocity_Left : FB_SendPosVelocity_Left;
 	Send_CAN_CurrentAngle_Left : FB_SendCurrentAngle_Left;
@@ -85,7 +89,8 @@ VAR
 	Send_CAN_DriveReset_Left : FB_SendDriveReset_Left;
 	Send_CAN_CANDelay_Left : FB_SendCANDelay_Left;
 	Send_CAN_TargetVelocity_Left : FB_SendTargetVelocity_Left;
-	send_CAN_AutoDirectionFlag_Left : FB_sendAutoDirectionFlag_Left;
+	Send_CAN_AutoDirectionFlag_Left : FB_sendAutoDirectionFlag_Left;
+	Send_CAN_AirGap_Left : FB_SendAirGap_Left;
 	
 	Receive_CAN_abcCurrent_Right : FB_ReceiveabcCurrent_Right;
 	Receive_CAN_dqCurrent_Right : FB_ReceivedqCurrent_Right;
@@ -283,7 +288,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	Send_CAN_CurrentAngle_Right(CurrentAngle := CurrentAngle,
+	Send_CAN_CurrentAngle_Right(CurrentAngle_Right := CurrentAngle_Right,
 		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
@@ -324,8 +329,11 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
+	Send_CAN_AirGap_Right(motor_airgap_right := motor_airgap_right,
+		CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+		CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		
-	GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := 11;
+	GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := 12;
 	GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
 	check := check +1;
 END_IF
@@ -340,7 +348,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
-	Send_CAN_CurrentAngle_Left(CurrentAngle := CurrentAngle,
+	Send_CAN_CurrentAngle_Left(CurrentAngle_Left := CurrentAngle_Left,
 		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		
@@ -380,9 +388,12 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 	Send_CAN_AutoDirectionFlag_Left(AutoDirectionFlag := AutoDirectionFlag,
 		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
-
 		
-	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 11;
+	Send_CAN_AirGap_Left(motor_airgap_left := motor_airgap_left,
+		CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+		CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
+		
+	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 12;
 	GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
 	check_1 := check_1 +1;
 END_IF

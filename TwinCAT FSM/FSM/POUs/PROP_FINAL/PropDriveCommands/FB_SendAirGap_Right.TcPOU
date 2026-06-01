@@ -31,7 +31,7 @@ TxMessage.data[1] := MotorAirgapLeft_Values[1];
 TxMessage.data[2] := MotorAirgapRight_Values[0];
 TxMessage.data[3] := MotorAirgapright_Values[1];
 
-CAN_OUTPUTS_Right.TxMessages[4] := TxMessage;]]></ST>
+CAN_OUTPUTS_Right.TxMessages[11] := TxMessage;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
