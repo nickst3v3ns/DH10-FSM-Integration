@@ -379,9 +379,17 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Descent_model">
+      <DefaultResolution>Descent_model, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>Descent_model</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="lateral_levitation_control">
       <DefaultResolution>lateral_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>lateral_levitation_control</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Liftoff_model">
+      <DefaultResolution>Liftoff_model, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>Liftoff_model</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Sensor_model">
       <DefaultResolution>Sensor_model, * (TE140x Module Vendor)</DefaultResolution>

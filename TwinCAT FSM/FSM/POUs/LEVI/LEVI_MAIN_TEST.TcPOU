@@ -176,6 +176,22 @@ VAR
 //	Control parameters
 
 //----------------------------------------------------------------------------------------------------
+	
+	//Liftoff model
+	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010060);
+	FB_control_liftoff: FB_Liftoff_model_TcCom_InitStruct(FB_control_liftoff_init);
+	
+	Control_liftoff_inputs: ST_Liftoff_model_U_T;
+	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
+	Control_liftoff_parameters: ST_P_Liftoff_model_T := FB_control_liftoff.stLiftoff_model_P;
+	
+	//Descent model
+	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010050);
+	FB_control_descent: FB_Descent_model_TcCom_InitStruct(FB_control_descent_init);
+	
+	Control_descent_outputs: ST_Descent_model_Y_T;
+	Control_descent_parameters: ST_P_Descent_model_T := FB_control_descent.stDescent_model_P;
+
 
 	//Vertical control setup
 	FB_control_vert_init: ST_FB_vertical_levitation_control_new_TcCom_InitStruct := (noid:=16#01010030);
@@ -208,12 +224,17 @@ VAR
 	y_on : BOOL := TRUE;
 	yaw_on : BOOL := TRUE;	
 	
-	z_manual_target : LREAL := -0.0165; //m
+	z_initial_target : LREAL := -0.0165; //m
+	z_target : LREAL; //m
 	pitch_target : LREAL := 0; //rad
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
 	yaw_target : LREAL := 0; //rad
-	enable_manual_z_target : BOOL  := TRUE;
+	liftoff_time : LREAL := 5; //s
+	descent_time : LREAL := 5; //s
+	last_levitating_airgap : LREAL; //m
+	descent_in_progress : USINT;
+
 	
 	(*
 	K_P_tot: LREAL := 300000;
@@ -275,14 +296,20 @@ VAR
 	K_D_yaw: LREAL := 5000;
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := 39;	
-
-	Lift_off_enabled : BOOL := FALSE;
+	
+	Zero_current_finder_gain : LREAL := 0.001;
+	
+	Lift_off_enabled : BOOL := TRUE;
+	descent_enabled : BOOL := TRUE;
+	enable_zero_current_finder : BOOL := TRUE;
 	Mismatch_enabled : BOOL := FALSE;
 	enable_extra_roll_notch_filter : LREAL := 1;
 	feed_fwd_on_prop_roll : BOOL := TRUE;
 	feed_fwd_motor_y_on : BOOL := TRUE;
 	feed_fwd_motor_yaw_on : BOOL := TRUE;
 	feed_fwd_ON_ems : BOOL := TRUE;
+	lift_off_time : LREAL := 5; //s
+	Zero_current_finder_interval : LREAL := 6; //s
 	
 	tau_x_ems: LREAL;
 	
@@ -306,6 +333,7 @@ VAR
 	
 	Run_z_liftoff_calc : BOOL;
 	All_drives_high_voltage: BOOL;
+	normal_shutdown : BOOL := FALSE;
 	
 	fbSendAirGapLeft : FB_SendAirGap_Left;
 	fbSendAirGapRight : FB_SendAirGap_Right;
@@ -379,9 +407,16 @@ motor_airgap_right := 0.013 + y;
 
 //Falling edge trigger for when sensecon disables levitation.
 //This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
-IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
+IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES AND Levi_state <> E_Levi_States.LEVI_LIFTOFF AND Levi_state <> E_Levi_States.LEVI_LEVITATION AND Levi_state <> E_Levi_States.LEVI_DESCEND THEN
 	Levi_command := E_Levi_States.LEVI_IDLE;
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LIFTOFF THEN
+	Levi_command := E_Levi_States.LEVI_LEVITATION;
+	normal_shutdown := TRUE;
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION THEN
+	Levi_command := E_Levi_States.LEVI_DESCEND;
+	normal_shutdown := TRUE;
 END_IF
+
 
 All_drives_high_voltage := TRUE;
 
