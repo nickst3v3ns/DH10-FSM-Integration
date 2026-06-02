@@ -295,7 +295,7 @@ CASE barcodeState OF
 		start := FALSE;
 END_CASE
 
-
+(*
 //ETML
 ETML_parameters.fETML_gain_left := ETML_gain_Left;
 ETML_parameters.fETML_gain_right := ETML_gain_Right;
@@ -310,7 +310,7 @@ FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
 
 CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
 CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
-
+*)
 
 IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN
 	

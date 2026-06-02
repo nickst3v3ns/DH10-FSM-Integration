@@ -10488,10 +10488,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.2">
+				<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.4">
 					<Name>Object6 (ETML_DH10)</Name>
 					<ImageId>1000</ImageId>
-					<TmcDesc GUID="{C428727E-338E-61BA-4D8D-46AF2244B49C}" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.2">
+					<TmcDesc GUID="{C428727E-338E-61BA-4D8D-46AF2244B49C}" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.4">
 						<Name>ETML_DH10</Name>
 						<CLSID ClassFactory="ETML_DH10" RealTimeInstantiable="true">{C428727E-338E-61BA-4D8D-46AF2244B49C}</CLSID>
 						<Info>
@@ -10952,7 +10952,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0B802F85-445A-00B7-AA7E-2C7E14B26254}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B6498A46-B1E2-8139-69E9-E159BD1EA9C3}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -10970,12 +10970,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.OutputData</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_FSM.bbrakes_rearm</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.OutputData</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
@@ -10986,6 +10986,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
 Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Offset_Left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Offset_Right</Name>
+							<Type>LREAL</Type>
 						</Var>
 						<Var>
 							<Name>THERMAL_MAIN.fbEMS_T.temp_rawLFL1</Name>
@@ -11228,6 +11236,14 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -11242,14 +11258,6 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.state</Name>
 							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
@@ -11509,14 +11517,6 @@ barcode ]]></Comment>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 						<Name>PlcTask_10ms_Barcode_ Inputs</Name>
-						<Var>
-							<Name>PROP_MAIN_Delft.Offset_Left</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>PROP_MAIN_Delft.Offset_Right</Name>
-							<Type>LREAL</Type>
-						</Var>
 						<Var>
 							<Name>GVL_Prop.InputData1_Front</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
@@ -52113,6 +52113,7 @@ Slave-Mode:
 		<MappingInfo Identifier="{08502002-00C0-0304-0020-5008C0000403}" Id="#x02030110" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
 		<MappingInfo Identifier="{08502005-00B0-0304-0020-5008B0000403}" Id="#x02030080" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{0850200A-2002-0850-0020-500806205008}" Id="#x02030120" Watchdog="0a010000040000000400000004000000"/>
 		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="1a000000040000000400000004000000"/>
 		<MappingInfo Identifier="{030400C0-00C0-0304-C000-0403C0000403}" Id="#x02030070" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
@@ -53069,8 +53070,8 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.currentangle_for_levi_left" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.currentangle_for_levi_left"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.currentangle_for_levi_right" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.currentangle_for_levi_right"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.motor_on_for_levi" VarB="PlcTask_10ms_Barcode_ Outputs^PROP_MAIN_Delft.motor_on_for_levi"/>
-				<Link VarA="PlcTask_10ms_Barcode_ Inputs^PROP_MAIN_Delft.Offset_Left" VarB="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.motor_airgap_left"/>
-				<Link VarA="PlcTask_10ms_Barcode_ Inputs^PROP_MAIN_Delft.Offset_Right" VarB="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.motor_airgap_right"/>
+				<Link VarA="Thermal_Task Inputs^PROP_MAIN_Delft.Offset_Left" VarB="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.motor_airgap_left"/>
+				<Link VarA="Thermal_Task Inputs^PROP_MAIN_Delft.Offset_Right" VarB="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.motor_airgap_right"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
