@@ -14,6 +14,36 @@
           <FileName></FileName>
           <Children>
             <Node>
+              <Title>aintegral_terms[0]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>aintegral_terms[1]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>aintegral_terms[2]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>aintegrals[0]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>aintegrals[1]</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>aoffset_airgaps[0]</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -589,6 +619,12 @@
                   <FileName></FileName>
                   <Children />
                 </Node>
+                <Node>
+                  <Title>Requested_currents[0]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
               </Children>
             </Node>
             <Node>
@@ -688,12 +724,6 @@
                 </Node>
                 <Node>
                   <Title>Real_currents[15]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Requested_currents[0]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -1073,7 +1103,19 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>new_time_zero_current_finder</Title>
+                  <Title>aintegral_terms[0]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>aintegral_terms[1]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>aintegral_terms[2]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -1082,9 +1124,22 @@
             </Node>
             <Node>
               <Title>Lateral integrals</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
-              <Children />
+              <Children>
+                <Node>
+                  <Title>aintegrals[0]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>aintegrals[1]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+              </Children>
             </Node>
           </Children>
         </Node>

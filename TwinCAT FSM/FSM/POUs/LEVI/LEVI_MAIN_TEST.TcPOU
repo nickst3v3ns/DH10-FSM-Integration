@@ -868,7 +868,8 @@ CASE Levi_Command OF
 	//------------------------------------------------------------------------------------------------	
 
 	E_Levi_States.LEVI_LEVITATION:
-		IF 	(Levi_state = E_Levi_States.LEVI_LIFTOFF OR
+		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
+			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION) AND 
 			Levi_ready AND
 			reset_busy = FALSE AND

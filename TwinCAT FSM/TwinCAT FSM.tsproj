@@ -2902,7 +2902,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 				<Task Id="10" Priority="4" CycleTime="15000" AmsPort="357" Affinity="#x00000004" AdtTasks="true">
 					<Name>LEVI_TEST_TASK</Name>
 				</Task>
-				<Task Id="11" Priority="7" CycleTime="90000" AmsPort="358" Affinity="#x00000008" AdtTasks="true">
+				<Task Id="11" Priority="7" CycleTime="100000" AmsPort="358" Affinity="#x00000008" AdtTasks="true">
 					<Name>10ms (Barcode)</Name>
 				</Task>
 			</Tasks>
@@ -10488,7 +10488,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010070" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.2">
+				<Module Id="#x01010070" Disabled="true" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.2">
 					<Name>Object6 (ETML_DH10)</Name>
 					<ImageId>1000</ImageId>
 					<TmcDesc GUID="{C428727E-338E-61BA-4D8D-46AF2244B49C}" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.2">
@@ -10952,7 +10952,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{4738FB3B-C169-F287-DBF9-8B2A7749E2AB}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0B802F85-445A-00B7-AA7E-2C7E14B26254}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -10970,12 +10970,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_FSM.bbrakes_rearm</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.OutputData</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.bbrakes_rearm</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
@@ -11228,14 +11228,6 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -11250,6 +11242,14 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.state</Name>
 							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
@@ -12124,7 +12124,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<OTCID>#x020100b0</OTCID>
 							</ManualConfig>
 							<Priority>7</Priority>
-							<CycleTime>9000000</CycleTime>
+							<CycleTime>10000000</CycleTime>
 						</Context>
 						<Context>
 							<Id>3</Id>
@@ -52113,7 +52113,7 @@ Slave-Mode:
 		<MappingInfo Identifier="{08502002-00C0-0304-0020-5008C0000403}" Id="#x02030110" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
 		<MappingInfo Identifier="{08502005-00B0-0304-0020-5008B0000403}" Id="#x02030080" Watchdog="00000000000000000000000000000000"/>
-		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="18000000040000000400000004000000"/>
+		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="1a000000040000000400000004000000"/>
 		<MappingInfo Identifier="{030400C0-00C0-0304-C000-0403C0000403}" Id="#x02030070" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">

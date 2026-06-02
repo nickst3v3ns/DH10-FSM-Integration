@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <Task Name="PlcTask_10ms_Barcode_" Id="{f06f2fd1-70a9-4346-a905-944453f8d3fe}">
     <!--CycleTime in micro seconds.-->
-    <CycleTime>9000</CycleTime>
+    <CycleTime>10000</CycleTime>
     <Priority>7</Priority>
     <PouCall>
       <Name>PROP_MAIN_Delft</Name>
