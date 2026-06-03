@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="Propulsion_Task" Id="{532a49b9-39d2-4add-b260-1cfca2f21408}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>7</Priority>
+    <PouCall>
+      <Name>PROP_MAIN_Delft</Name>
+    </PouCall>
+    <TaskFBGuid>{f946c60c-b893-47b6-987a-d3907affb440}</TaskFBGuid>
+    <Fb_init>{8ea16c6d-ca61-4c02-9c3e-dc437e2f45af}</Fb_init>
+    <Fb_exit>{04b0183e-2800-4bd5-90b1-35c30b856578}</Fb_exit>
+    <CycleUpdate>{e3065eca-a333-4b85-aeb7-c27bc093c97a}</CycleUpdate>
+    <PostCycleUpdate>{efc495d6-d6f3-4a64-9eb3-545a3460ae9f}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

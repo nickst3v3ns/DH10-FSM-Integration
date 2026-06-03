@@ -97,9 +97,6 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PlcTask_10ms_Barcode_.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask_1ms_PTC_CAN_RX_FastFlow_.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -359,6 +356,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\THERMAL\THERMAL_MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Propulsion_Task.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Thermal_Task.TcTTO">

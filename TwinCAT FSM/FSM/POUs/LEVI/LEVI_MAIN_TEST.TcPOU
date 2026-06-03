@@ -185,6 +185,12 @@ VAR
 	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
 	Control_liftoff_parameters: ST_P_Liftoff_model_T := FB_control_liftoff.stLiftoff_model_P;
 	
+	prev_time_integrator : LREAL;
+	new_time_integrator : LREAL;
+	prev_error_integrator : LREAL;
+	new_error_integrator : LREAL;
+	
+	
 	//Descent model
 	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010060);
 	FB_control_descent: FB_Descent_model_TcCom_InitStruct(FB_control_descent_init);
@@ -268,13 +274,13 @@ VAR
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := -1;
 *)	
-	K_P_tot: LREAL := 300000;
-	K_I_tot: LREAL := 200000;
+	K_P_tot: LREAL := 400000;
+	K_I_tot: LREAL := 300000;
 	K_D_tot: LREAL := 30000;
 	K_F_tot: LREAL := 100;
 	K_I_tot_initial: LREAL := 14160;
 	
-	K_P_pitch: LREAL := 60000;
+	K_P_pitch: LREAL := 200000;
 	K_I_pitch: LREAL := 200000;
 	K_D_pitch: LREAL := 15000;
 	K_F_pitch: LREAL := 250;
@@ -304,12 +310,16 @@ VAR
 	descent_enabled : BOOL := TRUE;
 	enable_zero_current_finder : BOOL := TRUE;
 	Mismatch_enabled : BOOL := FALSE;
-	enable_extra_roll_notch_filter : LREAL := 1;
+	f_notch_main : LREAL := 50.66; //Hz
+	f_extra_roll_filter_1 : LREAL := 43.4; //Hz
+	f_extra_roll_filter_2 : LREAL := 103.769; //Hz
+	enable_extra_roll_notch_filter_1 : BOOL := TRUE;
+	enable_extra_roll_notch_filter_2 : BOOL := TRUE;
 	feed_fwd_on_prop_roll : BOOL := TRUE;
 	feed_fwd_motor_y_on : BOOL := TRUE;
 	feed_fwd_motor_yaw_on : BOOL := TRUE;
 	feed_fwd_ON_ems : BOOL := TRUE;
-	Zero_current_finder_interval : LREAL := 4; //s
+	Zero_current_finder_interval : LREAL := 1; //s
 	
 	tau_x_ems: LREAL;
 	
@@ -412,7 +422,7 @@ IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR
 ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LIFTOFF THEN
 	Levi_command := E_Levi_States.LEVI_LEVITATION;
 	normal_shutdown := TRUE;
-ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION THEN
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION AND Descent_in_progress <> 0 THEN
 	Levi_command := E_Levi_States.LEVI_DESCEND;
 	normal_shutdown := TRUE;
 END_IF
@@ -562,17 +572,40 @@ CASE Levi_Command OF
 							Go_error_state => Error,
 							z_liftoff => z_liftoff);
 			
+			//-----------------------------------------------------------------------------------------------------------
 			Control_liftoff_parameters.blevi_operational := FALSE;
 			Control_descent_parameters.blevi_operational := FALSE;
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
+			
 			FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;		
 			FB_Control_descent.stDescent_model_P := Control_descent_parameters;		
 			FB_Control_lat.stlateral_levitation_control_P := Control_lat_parameters;
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;	
 
-			z_target := z_initial_target;	
-		
+			//-----------------------------------------------------------------------------------------------------------
+			z_target := z_initial_target;
+			
+			Control_liftoff_inputs.fz_target := z_target;
+			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
+			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
+			Control_liftoff_inputs.fprev_error_integrator := prev_error_integrator;
+			Control_liftoff_inputs.fprev_time_integrator := prev_time_integrator;
+			
+			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
+			
+			z_target := Control_liftoff_outputs.fnew_z_target;
+			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
+			new_time_integrator := Control_liftoff_outputs.fnew_time_intergrator;
+			new_error_integrator := Control_liftoff_outputs.fnew_error_intergrator;
+			prev_time_zero_current_finder := new_time_zero_current_finder;
+			prev_time_integrator := new_time_integrator;
+			prev_error_integrator := new_error_integrator;
+
+			FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
+			
+			z_target := z_initial_target;
+			//-------------------------------------------------------------------------------------------------------------
 		ELSE
 			Levi_command := Levi_state;		
 					
@@ -690,12 +723,19 @@ CASE Levi_Command OF
 			Control_liftoff_inputs.fz_target := z_target;
 			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
 			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
+			Control_liftoff_inputs.fprev_error_integrator := prev_error_integrator;
+			Control_liftoff_inputs.fprev_time_integrator := prev_time_integrator;
 			
 			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
 			
 			z_target := Control_liftoff_outputs.fnew_z_target;
 			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
+			new_time_integrator := Control_liftoff_outputs.fnew_time_intergrator;
+			new_error_integrator := Control_liftoff_outputs.fnew_error_intergrator;
 			prev_time_zero_current_finder := new_time_zero_current_finder;
+			prev_time_integrator := new_time_integrator;
+			prev_error_integrator := new_error_integrator;
+			
 			//-------------------------------------------------------------------------
 			
 			//Setting motor feed forward parameters
@@ -788,7 +828,11 @@ CASE Levi_Command OF
 			Control_vert_parameters.broll_ON := Roll_on;
 			
 			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
-			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
+			Control_vert_parameters.benable_extra_roll_notch_1 := enable_extra_roll_notch_filter_1;
+			Control_vert_parameters.benable_extra_roll_notch_2 := enable_extra_roll_notch_filter_2;
+			Control_vert_parameters.ff_notch_main := f_notch_main;
+			Control_vert_parameters.ff_extra_roll_filter_1 := f_extra_roll_filter_1;
+			Control_vert_parameters.ff_extra_roll_filter_2 := f_extra_roll_filter_2;
 			Control_vert_parameters.fK_P_tot := K_P_tot;
 			Control_vert_parameters.fK_I_tot := K_I_tot;
 			Control_vert_parameters.fK_D_tot := K_D_tot;
@@ -1006,7 +1050,11 @@ CASE Levi_Command OF
 			Control_vert_parameters.broll_ON := Roll_on;
 
 			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
-			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
+			Control_vert_parameters.benable_extra_roll_notch_1 := enable_extra_roll_notch_filter_1;
+			Control_vert_parameters.benable_extra_roll_notch_2 := enable_extra_roll_notch_filter_2;
+			Control_vert_parameters.ff_notch_main := f_notch_main;
+			Control_vert_parameters.ff_extra_roll_filter_1 := f_extra_roll_filter_1;
+			Control_vert_parameters.ff_extra_roll_filter_2 := f_extra_roll_filter_2;
 			Control_vert_parameters.fK_P_tot := K_P_tot;
 			Control_vert_parameters.fK_I_tot := K_I_tot;
 			Control_vert_parameters.fK_D_tot := K_D_tot;
@@ -1218,7 +1266,11 @@ CASE Levi_Command OF
 			Control_vert_parameters.broll_ON := Roll_on;
 			
 			Control_vert_parameters.bmismatch_enabled := Mismatch_enabled;
-			Control_vert_parameters.fenable_extra_roll_notch := enable_extra_roll_notch_filter;
+			Control_vert_parameters.benable_extra_roll_notch_1 := enable_extra_roll_notch_filter_1;
+			Control_vert_parameters.benable_extra_roll_notch_2 := enable_extra_roll_notch_filter_2;
+			Control_vert_parameters.ff_notch_main := f_notch_main;
+			Control_vert_parameters.ff_extra_roll_filter_1 := f_extra_roll_filter_1;
+			Control_vert_parameters.ff_extra_roll_filter_2 := f_extra_roll_filter_2;
 			Control_vert_parameters.fK_P_tot := K_P_tot;
 			Control_vert_parameters.fK_I_tot := K_I_tot;
 			Control_vert_parameters.fK_D_tot := K_D_tot;
