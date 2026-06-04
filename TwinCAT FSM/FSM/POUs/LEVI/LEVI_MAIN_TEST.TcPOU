@@ -85,6 +85,7 @@ VAR
 	//Drive_current_W AT %I*: ARRAY[0..23] OF INT;
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
+	average_current_hems : LREAL;
 	Power_HEMS : ARRAY[0..15] OF LREAL;
 	Power_total_HEMS : LREAL;
 	Power_EMS : ARRAY[0..7] OF LREAL;
@@ -733,10 +734,14 @@ CASE Levi_Command OF
 			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
 			new_time_integrator := Control_liftoff_outputs.fnew_time_intergrator;
 			new_error_integrator := Control_liftoff_outputs.fnew_error_intergrator;
+			average_current_hems := Control_liftoff_outputs.faverage_current_hems;
 			prev_time_zero_current_finder := new_time_zero_current_finder;
 			prev_time_integrator := new_time_integrator;
 			prev_error_integrator := new_error_integrator;
 			
+			IF average_current_hems = 0 THEN
+				Levi_command := E_Levi_States.LEVI_LEVITATION;
+			END_IF
 			//-------------------------------------------------------------------------
 			
 			//Setting motor feed forward parameters
