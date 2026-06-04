@@ -415,6 +415,7 @@ yaw := Sensor_model_output.fyaw;
 motor_airgap_left := 0.013 - y;
 motor_airgap_right := 0.013 + y;
 
+
 //Falling edge trigger for when sensecon disables levitation.
 //This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
 IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES AND Levi_state <> E_Levi_States.LEVI_LIFTOFF AND Levi_state <> E_Levi_States.LEVI_LEVITATION AND Levi_state <> E_Levi_States.LEVI_DESCEND THEN

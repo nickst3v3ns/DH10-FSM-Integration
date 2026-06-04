@@ -19,8 +19,8 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CANDelay_Values[1] := INT_TO_BYTE(LREAL_TO_INT(CANDelay) AND 16#FF);
-CANDelay_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(CANDelay), 8) AND 16#FF);
+      <ST><![CDATA[CANDelay_Values[1] := INT_TO_BYTE(LREAL_TO_INT(CANDelay*1000) AND 16#FF);
+CANDelay_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(CANDelay*1000), 8) AND 16#FF);
 
 
 TxMessage.cobId := 160;

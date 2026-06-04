@@ -11253,7 +11253,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{82DE0BC7-8DDF-7780-285A-BD9C2EB84999}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{4FB52957-549B-78D8-69DF-F5FEB16B3884}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -11618,6 +11618,23 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>GVL_Prop.drive_voltages1</Name>
+							<Comment><![CDATA[DC-Link voltages]]></Comment>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages2</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages3</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.drive_voltages4</Name>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
 							<Name>GVL_FSM.bbrakes_engaged</Name>
 							<Comment><![CDATA[Normally Closed system -> TRUE when retracted False when engaged]]></Comment>
 							<Type>BOOL</Type>
@@ -11634,23 +11651,6 @@ Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 						<Var>
 							<Name>GVL_FSM.nMasterDevStatePLC</Name>
 							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages1</Name>
-							<Comment><![CDATA[DC-Link voltages]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages2</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages3</Name>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.drive_voltages4</Name>
-							<Type>REAL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PT.CAN_INPUTS</Name>

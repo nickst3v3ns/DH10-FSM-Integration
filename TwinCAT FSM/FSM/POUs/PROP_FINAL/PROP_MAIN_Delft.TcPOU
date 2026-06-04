@@ -63,7 +63,10 @@ VAR
 	start : BOOL := TRUE;
 	
 	CANDelay : LREAL := 0.04;
+	
 	DriveReset : INT;
+	TON_Reset  : TON; 
+	
 	ProportionalGain : LREAL;
 	IntegralGain : LREAL;
 	TargetVelocity : LREAL;
@@ -311,6 +314,11 @@ FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
 CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
 CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
 *)
+
+TON_Reset(IN := DriveReset = 1, PT := T#1S);
+IF TON_Reset.Q THEN
+    DriveReset := 0;
+END_IF
 
 IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN
 	
