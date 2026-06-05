@@ -8,6 +8,12 @@ VAR_GLOBAL
 	levitation_fault: 		BOOL; //fatal levitation error
 	levitation_state:		E_Levi_States;
 	
+	//----------------------------------------------------------------------------------------------------
+
+	//	Variables for the groundstation
+
+	//----------------------------------------------------------------------------------------------------
+	
 	//DC link voltages
 	DC_link_voltage_HEMS : ARRAY[0..15] OF UINT;
 	DC_link_voltage_EMS : ARRAY[0..7] OF UINT;
@@ -18,8 +24,61 @@ VAR_GLOBAL
 	EMS_real_current : ARRAY[0..7] OF LREAL;
 	EMS_requested_current : ARRAY[0..3] OF LREAL;
 
+	DC_LINK_SAFE : BOOL;
 	
-	DC_LINK_SAFE				:BOOL;
+	Drive_status : ARRAY[0..23] OF UINT;
+	Drive_Diagnostic : ARRAY[0..23] OF UINT;
+	Periphery_voltage : ARRAY[0..23] OF UINT;
+	Control_word : ARRAY[0..23] OF UINT;
+	All_drives_high_voltage: BOOL;
+	
+	reset_busy : BOOL;
+	reset_error : BOOL;
+	n_drive_warnings : UINT;
+	n_drive_errors : UINT;
+	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
+	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
+	Drive_current_error : ARRAY[0..23] OF BOOL;
+	Error : BOOL;
+	error_resettable : BOOL;
+	error_emergency : BOOL;
+	error_non_emergency : BOOL;
+	
+	Levi_ready : BOOL;
+	motor_on_for_levi AT %I* : BOOL;
+	
+	z: LREAL; //m
+	roll: LREAL; //rad
+	pitch: LREAL; //rad
+	
+	y: LREAL; //m
+	yaw: LREAL;	//rad
+	
+	z_liftoff : LREAL; //m
+	
+	z_target : LREAL; //m
+	pitch_target : LREAL; //rad
+	roll_target : LREAL; //rad
+	y_target : LREAL; //m
+	yaw_target : LREAL; //rad
+	
+	z_initial_target : LREAL;
+	
+	SensorDataArray : ARRAY[0..11] OF REAL;
+	Offset_airgaps : ARRAY[0..11] OF LREAL;
+	
+	liftoff_in_progress : BOOL;
+	Finding_zero_current : BOOL;
+	descent_in_progress : BOOL;
+	normal_shutdown : BOOL;
+	
+	//----------------------------------------------------------------------------------------------------
+
+	//	Variables for the laser sensor code
+
+	//----------------------------------------------------------------------------------------------------
+
+	
 	
 	//FOR laser Sensors
 	RxBufferEL				: ComBuffer;	(* Receive data buffer; used with all receive function blocks *) 

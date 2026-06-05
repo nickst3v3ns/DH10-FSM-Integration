@@ -5,7 +5,7 @@
   <Children>
     <Node>
       <Title>Levi</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\Levi.tcscopex</FileName>
       <Children>
         <Node>
@@ -13,24 +13,6 @@
           <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
-            <Node>
-              <Title>aF_requested[0]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aF_requested[1]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>aF_requested[2]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
             <Node>
               <Title>faverage_current_hems</Title>
               <Expanded>False</Expanded>
@@ -1319,33 +1301,7 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>aF_requested[0]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aF_requested[1]</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (2)</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>aF_requested[2]</Title>
+                  <Title>faverage_current_hems</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

@@ -1558,6 +1558,43 @@ ELSE
 	GVL_LEVI.levitation_fault := FALSE;
 END_IF
 
+GVL_LEVI.Drive_status := Drive_status;
+GVL_LEVI.Drive_Diagnostic := Drive_Diagnostic;
+GVL_LEVI.Periphery_voltage := Periphery_voltage;
+GVL_LEVI.Control_word := Control_word;
+GVL_LEVI.All_drives_high_voltage := All_drives_high_voltage;
+GVL_LEVI.reset_busy := reset_busy;
+GVL_LEVI.reset_error := reset_error;
+GVL_LEVI.n_drive_warnings := n_drive_warnings;
+GVL_LEVI.n_drive_errors := n_drive_errors;
+GVL_LEVI.error_specifics := error_specifics;
+GVL_LEVI.drive_feedback_timeouts := drive_feedback_timeouts;
+GVL_LEVI.Drive_current_error := Drive_current_error;
+GVL_LEVI.Error := Error;
+GVL_LEVI.error_resettable := error_resettable;
+GVL_LEVI.error_emergency := error_emergency;
+GVL_LEVI.error_non_emergency := error_non_emergency;
+GVL_LEVI.Levi_ready := Levi_ready;
+GVL_LEVI.motor_on_for_levi := motor_on_for_levi;
+GVL_LEVI.z := z;
+GVL_LEVI.roll := roll;
+GVL_LEVI.pitch := pitch;
+GVL_LEVI.y := y;
+GVL_LEVI.yaw := yaw;
+GVL_LEVI.z_liftoff := z_liftoff;
+GVL_LEVI.z_target := z_target;
+GVL_LEVI.pitch_target := pitch_target;
+GVL_LEVI.roll_target := roll_target;
+GVL_LEVI.y_target := y_target_airgap;
+GVL_LEVI.yaw_target := yaw_target;
+GVL_LEVI.z_initial_target := z_initial_target;
+GVL_LEVI.SensorDataArray := SensorDataArray;
+//GVL_LEVI.Offset_airgaps := Offset_airgaps;
+//GVL_LEVI.liftoff_in_progress := liftoff_in_progress;
+//GVL_LEVI.finding_zero_current := finding_zero_current;
+//GVL_LEVI.descent_in_progress := descent_in_progress;
+GVL_LEVI.normal_shutdown := normal_shutdown;
+
 // --------------------------------------------------------------
 //  	Send airgap through CAN
 // --------------------------------------------------------------
