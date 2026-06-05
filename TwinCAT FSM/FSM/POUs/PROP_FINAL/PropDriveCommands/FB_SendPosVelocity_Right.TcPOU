@@ -23,13 +23,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-Position_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(positionDelft*100000) AND 16#FF);
-Position_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100000), 8) AND 16#FF);
-Position_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100000), 16) AND 16#FF);
-Position_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*100000), 24) AND 16#FF);
+Position_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(positionDelft*10000) AND 16#FF);
+Position_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*10000), 8) AND 16#FF);
+Position_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*10000), 16) AND 16#FF);
+Position_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionDelft*10000), 24) AND 16#FF);
 
-Velocity_Values[1] := INT_TO_BYTE(LREAL_TO_INT(VelocityDelft*1000) AND 16#FF);
-Velocity_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(VelocityDelft*1000), 8) AND 16#FF);
+Velocity_Values[1] := INT_TO_BYTE(LREAL_TO_INT(VelocityDelft) AND 16#FF);
+Velocity_Values[0] := INT_TO_BYTE(SHR(LREAL_TO_INT(VelocityDelft), 8) AND 16#FF);
 
 TxMessage.cobId := 800;
 TxMessage.length := 6;

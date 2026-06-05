@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendCurrentIdGains_Right" Id="{f7941424-a486-455e-ab77-121dc7fd7fbe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendCurrentIdGains_Right
+VAR_INPUT
+	ProportionalGainId : LREAL;
+	IntegralGainId : LREAL;
+	InitialIntegralValueId : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	ProportionalGain_Values : ARRAY[0..1] OF BYTE;
+	IntegrallGain_Values : ARRAY[0..1] OF BYTE;
+	InitialIntegralValue_Values : ARRAY[0..1] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Right : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Right : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*ProportionalGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(ProportionalGain*100) AND 16#FF);
+ProportionalGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(ProportionalGain*100), 8) AND 16#FF);
+
+IntegrallGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(IntegralGain*100) AND 16#FF);
+IntegrallGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(IntegralGain*100), 8) AND 16#FF);
+
+InitialIntegralValue_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValue*100) AND 16#FF);
+InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 8) AND 16#FF);*)
+
+ProportionalGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(ProportionalGainId*1) AND 16#FF);
+ProportionalGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(ProportionalGainId*1), 8) AND 16#FF);
+
+IntegrallGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(IntegralGainId*1) AND 16#FF);
+IntegrallGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(IntegralGainId*1), 8) AND 16#FF);
+
+InitialIntegralValue_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValueId*1) AND 16#FF);
+InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValueId*1), 8) AND 16#FF);
+
+TxMessage.cobId := 320;
+TxMessage.length := 6;
+FOR i := 0 TO 5 DO 
+	IF i < 2 THEN 
+		TxMessage.data[i] := ProportionalGain_Values[i];
+	ELSIF i < 4 THEN
+		TxMessage.data[i] := IntegrallGain_Values[i - 2];
+	ELSE 
+		TxMessage.data[i] := InitialIntegralValue_Values[i - 4];
+	END_IF
+END_FOR
+CAN_OUTPUTS_Right.TxMessages[12] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

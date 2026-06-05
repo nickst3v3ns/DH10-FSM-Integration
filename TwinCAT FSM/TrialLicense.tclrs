@@ -2,9 +2,9 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{B388C193-491B-1287-B84E-EA18EDCCF8D7}</SystemId>
-		<IssueTime>2026-06-04T15:09:00</IssueTime>
-		<ExpireTime>2026-06-12T00:00:00</ExpireTime>
-		<LicenseKey>8cb8959394bd1db4f7b344e9490938b91e8e10e06b1f3ee03b90705a9da8bfc9ddf6f675db7dc6cdb1bddb6d57a1afc0c2a6a55760d845a86382dd9c956bb9d13261e790768f943e517990b6990c86dccb247582030bb3b024a5433c6bb43a24345c97243bf214bb688866d2af72be76284ac319448a323c87917bc71ded72928e010a9830767a31d6881ade8c0fe361cf550c3f61cc85b5c25e9ee7bf4af0f95caac0e79e903649cb803f19ef96a316ab83548a93cae90457384ef2afd1db8b21e991dfbc685df859a1077d81e1db09a87542c56397f91cab52917f04fc77c8fb9cfec5621d99eb47f946ef6bdd7cae6b4f1712aa385de4972dd5533d39c885</LicenseKey>
+		<IssueTime>2026-06-05T08:46:00</IssueTime>
+		<ExpireTime>2026-06-13T00:00:00</ExpireTime>
+		<LicenseKey>89417ad015afaea8ececfae3b1f2933ccfee922e4d237c0bde4e8fba9c9d0e44e6818fb4ec408b04c7869860292a7da889576b553e010b60f3e8d68bcce558223a0c7ef1d8f848e62e933dcfc8ae61ff38b4bd7ebdb04716a9eb980cad77ffa2321d32fe800abc5c3e9b2d01a1dccca0e1d7e7301dd840ccca960322ffdb0ccbbeeea5a9d7ed674e6cbf4046187db384447a53573bdd30d792f4d65e3ba675d12fc23dde77ca0980b6358593be29f89fa99eeef9a268dde2cbff807fa4832f6a3cefa125ed38c127297c8d9c3c0f27c2ea890a5ba410392ea74a613c25f228029957a3443bbb78899b6b7c1321923b2a6603f0fe1713194704f759c44ffd25ad</LicenseKey>
 		<License>
 			<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
 			<Name>Runtime for MATLAB / Simulink</Name>

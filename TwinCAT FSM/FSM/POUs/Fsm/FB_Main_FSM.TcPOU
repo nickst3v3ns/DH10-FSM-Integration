@@ -47,7 +47,7 @@ VAR
 	speedLimitSlow:							REAL := 300;
 	speedLimit:								REAL := 1000;
 	
-	UpperBoundPropOutputCurrent:			REAL := 10;
+	UpperBoundPropOutputCurrent:			REAL := 10.5;
 	errorMessageFSM : STRING := 'NONE';
 END_VAR
 ]]></Declaration>

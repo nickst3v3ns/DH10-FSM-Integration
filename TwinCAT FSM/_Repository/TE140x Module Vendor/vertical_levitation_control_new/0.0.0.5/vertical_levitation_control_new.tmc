@@ -1,0 +1,4225 @@
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" Hash="{9552CD68-A56D-48E1-B66B-F68FEB0D2963}" GeneratedBy="TE140x-TargetForMatlabSimulink 2.11.168.0, MATLAB 25.2.0.2998904 (R2025b) (win64)">
+  <Vendor>
+    <Name>TE140x Module Vendor</Name>
+    <ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+  </Vendor>
+  <DataTypes>
+    <DataType>
+      <Name GUID="{74F12B5E-BA63-FF4E-6812-DB8AD7649B43}">ITcvertical_levitation_control_new</Name>
+      <BitSize X64="64">32</BitSize>
+      <BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+      <Method>
+        <Name VTableIndex="0">vertical_levitation_control_new_step</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+      </Method>
+      <Properties>
+        <Property>
+          <Name>TcComWrapper_GenerateGetter</Name>
+          <Value>FALSE</Value>
+        </Property>
+        <Property>
+          <Name>TcComWrapper_GenerateMethods</Name>
+          <Value>TRUE</Value>
+        </Property>
+      </Properties>
+    </DataType>
+    <DataType>
+      <Name GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk" CName="TcMgSdk::ModuleCaller">ModuleCaller</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[CyclicTask]]></Text>
+        <Enum>0</Enum>
+        <Comment><![CDATA[Add to the specified cyclic caller tasks.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Module]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Don't add to cyclic callers. The module can be called from other TwinCAT modules (e. g. a PLC).]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk" CName="TcMgSdk::CallerVerification">CallerVerification</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[Default]]></Text>
+        <Enum>0</Enum>
+        <Comment><![CDATA[Verify the caller task only if the "ModuleCaller" parameter is set to "Module" but not when added to cyclic caller tasks.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Always]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Always verify the caller context to prevent concurrent execution of model code and corresponding DataArea mappings.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Never]]></Text>
+        <Enum>2</Enum>
+        <Comment><![CDATA[Skip caller verification to reduce execution times.]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk" CName="TcMgSdk::StepSizeAdaptation">StepSizeAdaptation</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[RequireMatchingTaskCycleTime]]></Text>
+        <Enum>0</Enum>
+        <Comment><![CDATA[Don't accept task cycle times other than the Simulink step sizes.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[UseTaskCycleTime]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Adapt the Smulink step sizes to the task cycle times.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[UseModelStepSize]]></Text>
+        <Enum>2</Enum>
+        <Comment><![CDATA[Keep the Smulink step sizes, independent of the callers cycle time.]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk" CName="TcMgSdk::ExecutionSequence1">ExecutionSequence1</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[UpdateBeforeOutputMapping]]></Text>
+        <Enum>0</Enum>
+        <Comment><![CDATA[Input mapping -> State and output update -> Output mapping -> ADS processing]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[IoAtTaskBegin]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Input mapping -> Code execution -> Output update -> ADS processing]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{18071995-0000-0000-0000-000000000061}" TcBaseType="true" CName="TCOM_STATE">TCOM_STATE</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[TCOM_STATE_INIT]]></Text>
+        <Enum>1</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCOM_STATE_PREOP]]></Text>
+        <Enum>2</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCOM_STATE_SAFEOP]]></Text>
+        <Enum>4</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCOM_STATE_OP]]></Text>
+        <Enum>8</Enum>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk" CName="TcMgSdk::FpExcptCtrlSet">FpExcptCtrlSet</Name>
+      <BitSize>8</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[CallerExceptions]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Use the floating point exception settings provided by the caller]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[ThrowExceptions]]></Text>
+        <Enum>3</Enum>
+        <Comment><![CDATA[Enable floating point exceptions on invalid operations and divisions by zero]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[SuppressExceptions]]></Text>
+        <Enum>5</Enum>
+        <Comment><![CDATA[Disable floating point exceptions.]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk" CName="TcMgSdk::FpExcptCtrlSet">FpExcptCtrlSetEx</Name>
+      <BitSize>8</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[CallerExceptions]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[Use the floating point exception settings provided by the caller]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[ThrowExceptions]]></Text>
+        <Enum>3</Enum>
+        <Comment><![CDATA[Enable floating point exceptions on invalid operations and divisions by zero]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[SuppressExceptions]]></Text>
+        <Enum>13</Enum>
+        <Comment><![CDATA[Disable floating point exceptions.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogExceptions]]></Text>
+        <Enum>19</Enum>
+        <Comment><![CDATA[Log exception information.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogAndHold]]></Text>
+        <Enum>51</Enum>
+        <Comment><![CDATA[Log exception information and puase execution of the cyclic code after completion of the actual cycle]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogAndCatch]]></Text>
+        <Enum>83</Enum>
+        <Comment><![CDATA[Log exception information and immediately terminate execution of the cyclic code. Reinitialization is required to restart.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogAndDump]]></Text>
+        <Enum>147</Enum>
+        <Comment><![CDATA[Log exception information, create a dump file with detailed exception information and try to continue execution of the cyclic code]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogHoldAndDump]]></Text>
+        <Enum>179</Enum>
+        <Comment><![CDATA[Log exception information, create a dump file with detailed exception information and puase execution of the cyclic code after completion of the actual cycle]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[LogCatchAndDump]]></Text>
+        <Enum>211</Enum>
+        <Comment><![CDATA[Log exception information, create a dump file with detailed exception information and immediately terminate execution of the cyclic code. Reinitialization is required to restart.]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk" CName="TcMgSdk::ModuleBuildInfo">ModuleBuildInfo</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>TcBuild</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TcRevision</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Debug</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk" CName="TcMgSdk::LibraryInfo">LibraryInfo</Name>
+      <BitSize>4800</BitSize>
+      <SubItem>
+        <Name>FileVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ProductVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>VendorName</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>LibraryName</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>1280</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>LibraryVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>2304</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>LibraryId</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>2432</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>LibraryGUID</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000024}">CLSID</Type>
+        <BitSize>128</BitSize>
+        <BitOffs>3456</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TcSdkVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>3584</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Compiler</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>3712</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Debug</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>4736</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk" CName="TcMgSdk::ModuleInfo">ModuleInfo</Name>
+      <BitSize>1280</BitSize>
+      <SubItem>
+        <Name>ClassName</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>CommonClassId</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000024}">CLSID</Type>
+        <BitSize>128</BitSize>
+        <BitOffs>1024</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>VersionClassId</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000024}">CLSID</Type>
+        <BitSize>128</BitSize>
+        <BitOffs>1152</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</Name>
+      <BitSize>256</BitSize>
+      <SubItem>
+        <Name>MatlabVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TE140xVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</Name>
+      <BitSize>1408</BitSize>
+      <SubItem>
+        <Name>ModelName</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SimulinkVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>1024</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ModelVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>1152</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ModelChecksum</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>1280</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[Define]]></Text>
+        <Enum>0</Enum>
+        <Comment><![CDATA[This module instance defines the parameter values for all further instances of this module class. Exactly one instance of this module class must use this option.]]></Comment>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Inherit]]></Text>
+        <Enum>1</Enum>
+        <Comment><![CDATA[This module instance inherits the parameter values from the instance of this module class configured to "Define" the parameter values. Model parameters configured at this instsance are ignored.]]></Comment>
+      </EnumInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{5F4B2074-C890-DD8C-3DD0-13534D9A6C4A}">matrix53xdouble</Name>
+      <BitSize>3392</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>53</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{6D0929F2-8A2E-D8EA-7E99-A414CF846A84}" HideSubItems="true">matrix1007xdouble</Name>
+      <BitSize>64448</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>1007</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{591E3F3F-2630-9AB5-5868-3CA49B118D88}">matrix19xdouble</Name>
+      <BitSize>1216</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>19</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{65130AFC-FA94-5A72-C381-B6491106EABB}" HideSubItems="true">matrix380xdouble</Name>
+      <BitSize>24320</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>380</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</Name>
+      <BitSize>192</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>3</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</Name>
+      <BitSize>256</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>4</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{52A40B9B-8A9B-714C-8E6A-09D201F1792B}">matrix3xlogical</Name>
+      <BitSize>24</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>3</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{F60EB8C5-537E-799B-76E4-761F5EDE84EE}">P_vertical_levitation_control_new_T</Name>
+      <BitSize>102976</BitSize>
+      <SubItem>
+        <Name>Airgaps_HEMS_DH10</Name>
+        <Type GUID="{5F4B2074-C890-DD8C-3DD0-13534D9A6C4A}">matrix53xdouble</Type>
+        <BitSize>3392</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Current_to_force_coefficients_HEMS_DH10</Name>
+        <Type GUID="{6D0929F2-8A2E-D8EA-7E99-A414CF846A84}">matrix1007xdouble</Type>
+        <BitSize>64448</BitSize>
+        <BitOffs>3392</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Currents_HEMS_DH10</Name>
+        <Type GUID="{591E3F3F-2630-9AB5-5868-3CA49B118D88}">matrix19xdouble</Type>
+        <BitSize>1216</BitSize>
+        <BitOffs>67840</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Force_to_current_coefficients_HEMS_DH10</Name>
+        <Type GUID="{65130AFC-FA94-5A72-C381-B6491106EABB}">matrix380xdouble</Type>
+        <BitSize>24320</BitSize>
+        <BitOffs>69056</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_D_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93376</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_D_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93440</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_D_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93504</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_init_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93568</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_init_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93632</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_init_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93696</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93760</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93824</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_F_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93888</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_init_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>93952</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_init_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94016</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_init_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94080</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94144</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94208</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_I_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94272</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_P_pit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94336</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_P_roll</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94400</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>K_P_tot</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94464</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>d_HEMS_to_HEMS</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94528</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>f_extra_roll_filter_1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94592</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>f_extra_roll_filter_2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94656</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>f_notch_main</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94720</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94784</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>m</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94848</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>notch_damp</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94912</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>notch_gmin</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>94976</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>pitch_target</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>95040</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>r_motor_left_com</Name>
+        <Type GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</Type>
+        <BitSize>192</BitSize>
+        <BitOffs>95104</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>r_motor_right_com</Name>
+        <Type GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</Type>
+        <BitSize>192</BitSize>
+        <BitOffs>95296</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>r_pitch_hems</Name>
+        <Type GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</Type>
+        <BitSize>256</BitSize>
+        <BitOffs>95488</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>r_roll_hems</Name>
+        <Type GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</Type>
+        <BitSize>256</BitSize>
+        <BitOffs>95744</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>roll_target</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96000</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>wheel_compression_liftoff</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96064</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_initial_lift_off</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_manual_target</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_mismatch_D</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_mismatch_F</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_mismatch_I</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>z_mismatch_P</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>enable_extra_roll_notch_1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>enable_extra_roll_notch_2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96520</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>feed_forward_ems_ON</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96528</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>feed_fwd_motor_roll_ON</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96536</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>levi_operational</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>mismatch_enabled</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96552</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>mismatch_specific_enabler</Name>
+        <Type GUID="{52A40B9B-8A9B-714C-8E6A-09D201F1792B}">matrix3xlogical</Type>
+        <BitSize>24</BitSize>
+        <BitOffs>96560</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>pitch_ON</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96584</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>roll_ON</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96592</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>roll_filter_enabled</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96600</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>total_ON</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>DiscreteDerivative_ICPrevScaledInput</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForFilter</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96704</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForFilter_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96768</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForFilter_j</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96832</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForIntegrator</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96896</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForIntegrator_m</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>96960</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_InitialConditionForIntegrator_p</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97024</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_LowerSaturationLimit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97088</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_LowerSaturationLimit_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97152</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_LowerSaturationLimit_e</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97216</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_UpperSaturationLimit</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97280</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_UpperSaturationLimit_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97344</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>PIDController_UpperSaturationLimit_g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97408</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant1_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97472</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant1_Value_b</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97536</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant1_Value_e</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97600</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant4_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97664</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant4_Value_e</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97728</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97792</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Integrator1_IC</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97856</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant5_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97920</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Switch1_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>97984</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant7_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98048</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Switch1_Threshold_i</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98112</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>sat_enabled_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98176</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant8_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98240</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant9_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98304</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Switch2_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98368</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Delay_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98432</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98496</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98560</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>stop_div_by_zero_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98624</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>tau_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98688</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias_Bias</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98752</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>two_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98816</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>one_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98880</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_m</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>98944</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TSamp_WtEt</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99008</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99072</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>tau_Gain_h</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99136</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias_Bias_j</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99200</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>two_Gain_h</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99264</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>one_Gain_l</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99328</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_h</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99392</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>tau_Gain_m</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99456</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias_Bias_b</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99520</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>two_Gain_o</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99584</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>one_Gain_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99648</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99712</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>tau_Gain_b</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99776</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias_Bias_c</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99840</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>two_Gain_f</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99904</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>one_Gain_g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>99968</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_c</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100032</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain1_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100096</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>tau_Gain_d</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias_Bias_g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>two_Gain_fc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>one_Gain_f</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_ci</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>dist_enabled_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100480</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant_Value_e</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>stop_div_by_zero_Threshold_g</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100672</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay1_InitialCondition_nc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100736</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant_Value_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100800</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>stop_div_by_zero_Threshold_p</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100864</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ZeroGain_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100928</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ZeroGain_Gain_m</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>100992</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ZeroGain_Gain_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101056</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias1_Bias</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101120</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101184</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay2_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101248</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias1_Bias_i</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101312</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain_f</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101376</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay2_InitialCondition_h</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101440</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias1_Bias_l</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101504</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain_d</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101568</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay2_InitialCondition_p</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101632</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias1_Bias_d</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101696</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain_c</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101760</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay2_InitialCondition_j</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101824</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Bias1_Bias_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101888</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Gain_Gain_p</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>101952</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>UnitDelay2_InitialCondition_a</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102016</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant10_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102080</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant6_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102144</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant7_Value_o</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102208</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant8_Value_h</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102272</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant9_Value_p</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102336</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Integrator2_IC</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102400</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>IsPeak1_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102464</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Switch2_Threshold_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102528</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant2_Value</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102592</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant2_Value_e</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102656</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Constant2_Value_d</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>102720</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Delay1_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>102784</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>wasfmenabledlastrun_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>102816</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>hard_disable_fmm_Gain</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>102848</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>usefmornot_Threshold</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>102880</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Memory_InitialCondition</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>102912</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Memory_InitialCondition_m</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>102920</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Memory_InitialCondition_n</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>102928</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk" CName="TcMgSdk::ExceptionInfo">ExceptionInfo</Name>
+      <BitSize>1376</BitSize>
+      <SubItem>
+        <Name>ExceptionCode</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TmxName</Name>
+        <Type GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</Type>
+        <BitSize>1024</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TmxVersion</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>1056</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>InstructionAddr</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1184</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ReturnAddr</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <ArrayInfo>
+          <LBound>0</LBound>
+          <Elements>4</Elements>
+        </ArrayInfo>
+        <BitSize>128</BitSize>
+        <BitOffs>1216</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>DumpCreated</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>1344</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</Name>
+      <BitSize>128</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>2</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</Name>
+      <BitSize>512</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>8</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{B1DDD3CB-A760-1C23-8A87-0F10909E975A}">matrix5xdouble</Name>
+      <BitSize>320</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>5</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{BC8DEAFD-5FD9-CB86-C530-98C6C9D662B4}">matrix4xlogical</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>4</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{29A544D3-6F2A-B4AD-F69F-E6B45360B1C5}">matrix8xlogical</Name>
+      <BitSize>64</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+      <ArrayInfo>
+        <LBound>0</LBound>
+        <Elements>8</Elements>
+      </ArrayInfo>
+    </DataType>
+    <DataType>
+      <Name GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</Name>
+      <BitSize>128</BitSize>
+      <SubItem>
+        <Name>current_reqf</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>current_reqb</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+        <BitSize>64</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</Name>
+      <BitSize>512</BitSize>
+      <SubItem>
+        <Name>y</Name>
+        <Type GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</Type>
+        <BitSize>512</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+    </DataType>
+  </DataTypes>
+  <Licenses />
+  <Groups>
+    <Group SortOrder="101">
+      <Name>TE140x</Name>
+      <DisplayName>TE140x</DisplayName>
+      <ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+    </Group>
+    <Group SortOrder="101" ParentGroup="TE140x">
+      <Name>TE140x|Simulink Modules</Name>
+      <DisplayName>Simulink Modules</DisplayName>
+      <ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+    </Group>
+  </Groups>
+  <Modules>
+    <Module GUID="{D01E120F-3EB7-B08A-F3FB-D062E2A9097B}" Group="TE140x|Simulink Modules">
+      <Name>vertical_levitation_control_new</Name>
+      <CLSID ClassFactory="vertical_levitation_control_new" RealTimeInstantiable="true">{D01E120F-3EB7-B08A-F3FB-D062E2A9097B}</CLSID>
+      <Info>
+        <TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}" />
+        <ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+      </Info>
+      <Licenses>
+        <License>
+          <LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
+        </License>
+      </Licenses>
+      <InitSequence>PSO</InitSequence>
+      <Contexts>
+        <Context>
+          <Id>0</Id>
+          <Name>Context0 (1.5 ms)</Name>
+          <CycleTime>1500000</CycleTime>
+        </Context>
+      </Contexts>
+      <Interfaces>
+        <Interface>
+          <Type GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{00000002-0000-0000-E000-000000000064}">ITcPersist</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000025-0000-0000-E000-000000000064}">ITcPostCyclic</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{74F12B5E-BA63-FF4E-6812-DB8AD7649B43}">ITcvertical_levitation_control_new</Type>
+          <ContextId>0</ContextId>
+        </Interface>
+      </Interfaces>
+      <Parameters>
+        <Parameter HideParameter="true" CreateSymbol="true">
+          <Name>TaskOid</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+          <PTCID>#x03002060</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true" CreateSymbol="true">
+          <Name>TaskPriority</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          <PTCID>#x03002070</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true" CreateSymbol="true">
+          <Name>TaskCycleTimeNs</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          <PTCID>#x03002080</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true" CreateSymbol="true">
+          <Name>TaskPort</Name>
+          <BitSize>16</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+          <PTCID>#x03002090</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true" CreateSymbol="true">
+          <Name>TaskSortOrder</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          <PTCID>#x030020b0</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true">
+          <Name>TraceLevelMax</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
+          <Default>
+            <EnumText>tlInfo</EnumText>
+          </Default>
+          <PTCID>#x00000001</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>ModuleCaller</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk">ModuleCaller</BaseType>
+          <Default>
+            <EnumText>CyclicTask</EnumText>
+          </Default>
+          <PTCID>#x00000002</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true">
+          <Name>CallerVerification</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk">CallerVerification</BaseType>
+          <Default>
+            <EnumText>Default</EnumText>
+          </Default>
+          <PTCID>#x00000003</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>StepSizeAdaptation</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk">StepSizeAdaptation</BaseType>
+          <Default>
+            <EnumText>RequireMatchingTaskCycleTime</EnumText>
+          </Default>
+          <PTCID>#x00000004</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>ExecutionSequence</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk">ExecutionSequence1</BaseType>
+          <Default>
+            <EnumText>UpdateBeforeOutputMapping</EnumText>
+          </Default>
+          <PTCID>#x00000005</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>Execute</Name>
+          <BitSize>8</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          <Default>
+            <EnumText>TRUE</EnumText>
+          </Default>
+          <PTCID>#x00000006</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true">
+          <Name>AccessLockState</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000061}">TCOM_STATE</BaseType>
+          <Default>
+            <EnumText>TCOM_STATE_OP</EnumText>
+          </Default>
+          <PTCID>#x00000007</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true">
+          <Name>InitExceptionHandling</Name>
+          <BitSize>8</BitSize>
+          <BaseType GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk">FpExcptCtrlSet</BaseType>
+          <Default>
+            <EnumText>CallerExceptions</EnumText>
+          </Default>
+          <PTCID>#x00000008</PTCID>
+        </Parameter>
+        <Parameter HideParameter="true">
+          <Name>UpdateExceptionHandling</Name>
+          <BitSize>8</BitSize>
+          <BaseType GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk">FpExcptCtrlSetEx</BaseType>
+          <Default>
+            <EnumText>CallerExceptions</EnumText>
+          </Default>
+          <PTCID>#x00000009</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>ModuleBuildInfo</Name>
+          <Comment><![CDATA[Legacy! Please use 'LibraryInfo' to read build information.]]></Comment>
+          <BitSize>96</BitSize>
+          <BaseType GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk">ModuleBuildInfo</BaseType>
+          <PTCID>#x0000000a</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>Initialized</Name>
+          <BitSize>8</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          <Default>
+            <EnumText>FALSE</EnumText>
+          </Default>
+          <PTCID>#x0000000b</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>SkippedExecutionCount</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          <Default>
+            <Value>0</Value>
+          </Default>
+          <PTCID>#x0000000c</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>LibraryInfo</Name>
+          <BitSize>4800</BitSize>
+          <BaseType GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk">LibraryInfo</BaseType>
+          <PTCID>#x0000000d</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>ModuleInfo</Name>
+          <BitSize>1280</BitSize>
+          <BaseType GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk">ModuleInfo</BaseType>
+          <PTCID>#x0000000e</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+          <Name>ModuleGeneratorInfo</Name>
+          <BitSize>256</BitSize>
+          <BaseType GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</BaseType>
+          <PTCID>#x0000000f</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+          <Name>SimulinkModelInfo</Name>
+          <BitSize>1408</BitSize>
+          <BaseType GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</BaseType>
+          <PTCID>#x00000010</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>vertical_levitation_control_new_P_Sharing</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
+          <Default>
+            <EnumText>Define</EnumText>
+          </Default>
+          <PTCID>#x00000011</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>vertical_levitation_control_new_P_Definer</Name>
+          <BitSize>32</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+          <PTCID>#x00000012</PTCID>
+        </Parameter>
+        <Parameter CreateSymbol="true">
+          <Name>vertical_levitation_control_new_P</Name>
+          <BitSize>102976</BitSize>
+          <BaseType GUID="{F60EB8C5-537E-799B-76E4-761F5EDE84EE}">P_vertical_levitation_control_new_T</BaseType>
+          <Default>
+            <SubItem>
+              <Name>.Airgaps_HEMS_DH10</Name>
+              <Data>000000000000104000000000000012400000000000001440000000000000164000000000000018400000000000001A400000000000001C400000000000001E4000000000000020400000000000002140000000000000224000000000000023400000000000002440000000000000254000000000000026400000000000002740000000000000284000000000000029400000000000002A400000000000002B400000000000002C400000000000002D400000000000002E400000000000002F40000000000000304000000000008030400000000000003140000000000080314000000000000032400000000000803240000000000000334000000000008033400000000000003440000000000080344000000000000035400000000000803540000000000000364000000000008036400000000000003740000000000080374000000000000038400000000000803840000000000000394000000000008039400000000000003A400000000000803A400000000000003B400000000000803B400000000000003C400000000000803C400000000000003D400000000000803D400000000000003E40</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.Current_to_force_coefficients_HEMS_DH10</Name>
+              <Data>5EC9A1346E56E8BFF7577641B7F7C8C1378C7ED7B771D041B45A293CAE3EB340C8690A21F6C582407D1B7169EE7E3A4067FB780A6863D6BF3E1897ABB7AE02C0D985D1F46FE2E7BFB35791BA2025A73F48F6DDFD6C55A83FF7150D9A4504493FFBE8FCFE3D5958BFC1D3376418B105BFAA3D4FF4B4A4FA3EE1177DC3EBBAA23E8A369B6B54358EBEE5094949209625BE8336A54D079D0B3EFF67303E4442623F13E1B615054BC7C117662DB6CBAAD1416B7D3690F674B240A6FE41CDA502824009A6FBE8598939403713360984B3F03FD62176983E0A00C096415EB8397CEABF802E2EF9FA9A9B3FD640BBF62EBDA93F83169BC33850543F88D2D7B9F33159BF9100C943212309BFE9D2C2BE2B28FB3E8CC005F6A849A43EF50337E25D6E8EBEF33CD1B1B2BA26BEB0E7D644F38D0B3E974638FC596B204036566D3206A8C7C116BED8F4AF75CD4186A89444FE84B1403EE549A1A9128140FFA7A5C5A22141409E7269CCFE5B1540555C134A59740BC0C8A47053C071F3BF98C42D1442F2C13F2423ACF04724B13F30493C0AD3296ABF04520D40D9555FBFEB8329367DD5053F1D8BDD3609CBFF3EA49441BA457293BE9C9221258FE590BE19D5997BC0A50C3E59C9EA0A27430D3E4BCB43A56FA51340B4E1C3F68587C4C1420553EC7F9FCF4101012E4483B4B040B554D1EE7A7580401A850955990A3F40414C625C126E074017B1C2A9138104C042044A67120EE9BF0854D657F299B13F7AFED0091C9BA33F49550CA1192538BF6EBC2EBDBA1E4FBF88D4C888CC95F0BE699B6C3D1539EB3E0993B2ED273A933E16E93E80D9ED78BEE6EBF15BEE5018BEB588D0334BAAF23D70FA880CE545A440E3D4EA8F2FE38A4126E2918958E5D341EF3F75AB4E2C19405971A662AB5A7F4046FC6EE3F26C3A40D34E16904E3D0D40E45EC86DE0CA00C0C2011F19D7C5E9BF38A75C63DFC1AD3F8882532479B3A33F76A5A5578DA741BF1D0B435FD3B94EBFA8FC6BBB8CB9D6BEDA3997CB3D58EA3E656AF86643C3823E4C7CC3099E8877BEED3B725B655109BE2AACA1BFB817F13D4383ED30436626C0C3C29C85E1FFBF41F014964AC93BCFC167460620913CAE407168B6201B2D7E4026E620AC32524040F9DA7EBF82EC1840B9D514B613CA05C039604EF09C62F2BF3869F190F605B93F1357C824134FAF3F93A79B06031A60BF5994EB3929605CBF6D7E670E2DCBF73E56AD361648E5FC3E325C50F411CD82BE56C04B91EEFF8EBE9C84D2F62397F83D98EE2FD45E250B3E0CC5A4B35E121EC0CECCC6EFA1B3C3410CC6A342ABF3CAC148C4CEF79CEDAC408E7F1DFC07ED7C402002F41E97FD3B40BA44CF3A3D5A1640DE302812491100C02F01F3B33199EFBF7059328FA7AFAA3F8C5C7EDC1D6DA93F87ADD8B013DE38BF4F861C5154AF55BF924F8754751FE0BEE92C0877B6C3F43E6EEE4922370F853E5F8CC124250185BE37A47F7A46290BBE3DF31018E76E013E5D45192C10EB1CC0668F7E2A3F86C241403B7388CE50CAC1F54106F2A5ABAB402938D37ABF207B407514244520883840D210EC8D37F922406C45C0A81B4BF7BFFC1DF2BACE36F7BF806C77F1FB7C943FDCA943102A02B43F2B3A4FD9C30A423F2C036F1A139D62BFA049F59197D9F6BEE5122458166D033F295224EF22AC913EB43D10388A4495BEA456922382F812BE0C33302DF2EC123E76A061E8F3EF23C01C0F2763CB1DC2412EB0F793BF32C9C1955CEC7A3E73AA402A644E40B1627A402C92A5AE64E53940298AAA9F66052140D9E441BC8041FABF5D2F5C71EEF0F4BF11359778C428A33F72E0198F1202B23F43964698D0CD25BF85AEFA2B96C860BF6D7610B03C87DFBE6C5BB27AF291013F1AD9889C7410813E5FEE2319364993BEEFCE072DDCC104BE29D4E812D630113E90D153BB9DA321C01D947F2098BFC1415311C905AF24C8C1463FEAFBC851A940E3FEE25BF77D7940400FA4B6368A354035C3EEE9A2B41A40D7F75C9D1BC8E8BF56F3AACBA9C0EFBF6C79B4E77E789BBFBA268404DA38A93F6324CE39FEEA613F6067CF0E59DA55BF6A9BCA43A3840BBF8C5AC85F7487F53EB7E2A94E50A2A23E9F386731CB8386BEB09EF4C168F022BE6BF215751553033E206F4F06C63CE63F9BA76601F731C1C1C0924094AE9AC841154FBE4CF464A8408E647BB7818478404F3F8386030A2440CE40277E39331140C51E0002861DEB3F5A2AC57CA3CCE2BF86C97E90B88EC0BF47DB975CBF54963FB4EEF0E59E1F773FDF9A526120BC38BF6DF69A919B721EBFDECF24FA9478C63E809372FFB25EB33E53A2D3C7B815123E14B2256FCE1B33BE61E2B1B7962BD3BD7F6F07666E11D43F09F7C486C3ADC0C1AD208151BB0FC84124B9B5F76756A7409B6BC8494B9877403D7548FDB30F2140709C3F7DD0660E40B86E16B7BA59F13F3F284CF20168DFBF63E8599164CFC1BF2290DC6C95C1903F476D0DBA7E91773F0DF7794501922EBF9344878C1AF31DBF475346284674A93EE5F0DE6C7C8BB23EB198B24021284C3EEA732E7048E931BE91D81B459C87DABDEB8B83A99781F0BFD3C0D99AB23AC041623483A78668C7C1C00DFDF8474FA6404D6234A006CF7640B3BD3B80100723407F3956B2114309406BF7A4A0032DED3F103DCC44F24AD8BFE7F2D1C564EABFBF6F8765B8B5F8823FC10E848D1959753F3503CC0CDBFBC63E59FD077612461BBFC512F55E3A5ECDBEC2DFE7C318F4B03EC41CAEA007256C3EDA3D2716ED6C30BE7ABB55A51F92F0BD8172EB7FDC5529404DFD039C8BF2BF41169C10F5788BC7C18C5820CCFF8BA540D56447361C3F76407404FDE9FC16154057C1D3D98F69F3BFA9D769CE84C2F03FB5A1531B6529C83F92BFC0269429BDBF130150B8E76B98BF3A4A12FBD422723FD98FC93A2BFE503F001C2C80E72F16BFA841E8EF4C54F6BE3C724B294AC4AA3EFB79F633B0408C3E0F45ADB52B5E29BE9D57FD8B91AC0BBEF9526902A1AD1F408205A5E37BF8BE4103345535E38AC6C11DBD0D554C98A44082257A1262E87540EF23C7C5E2202140BE2A4C9B1F5301C07AE6D19D2CA5DE3FA8AD144EC908D03FF97E1D0D074DB2BFD4992E0EA86D99BFE7055E9EF495673F13A80E39C382503F970DEFE1E4EF0CBF71EC8AE6E102F5BE73E5B4D0A362A13EC518238ED51B8A3EA0EAA413CC6420BE2F652EB50A4A09BEC7B1E53839E50F40902A2301ABBCBD41BF78511E77AAC5C1505C19F903AEA34003746020C01A7540B6C98D6FEBB72140022AA50B76BFFABF05F698ABDE6BE33FBF0C795DEA79CB3FDA3C81B80C99B5BF661C4797B87A97BFAF477E049BEF6B3FABCD9151F8034F3FAEFB2497274D11BF2BC20BE90ADAF3BE27C1B9D5E5F9A43E7BD47DA695BB883E49DB37BA87EC23BEE0884D497FFD07BE66ED100D6C42FA3F9C14A7EA709BC141D344E6CB5C28C3C1D3D3FFD97AE0A240A20EBB16D56A7440575BB0EB8CA02440798412E01A30FBBFCAF3752B039ED43FA3AC21B6B720D13F37458BA92F98AEBFCD9AD73768AC9CBFFDAB6E5602D2633F0CFD4B2682EB523F51BB8E50AD0F08BF75F6E63CB84FF8BE3F159CEF128E9C3E06FE36FDF56A8E3E7F07BEB318A01ABED9E8736EEB9C0DBED5D89DC367C2E63FBB976C78BFFFD1C1FEBF1A8B6572C7417C8C89BB4415A2401BFDC7525ABD7340C3E7690A64212740F6324A916D18F3BF24EBD61358CA5ABFD3C95B3F474CC63F6907401236DC9EBF16B61D0857BB94BF540BBC7DD9D7533F155D384A1CCC4B3FDE6251BF9248F6BE4B901D20D1D7F1BE78BAB3DDF12C883E117CF3FFA839863EE44EBE35C7AA04BE5BBCE259318905BE081BC3B9E3B813C0E1FB6D5DB80EBDC1FC3BCD92618AC3419F9650C7806AA1400F13A4C7A0F372405CD7BEB5507D1E403DE0DD8C808C00C00B6D4E7547E6E03F7D1CC938D43DD33FB2F4E1A50978B0BF8777FDE614C09BBF05F6AB233DE3633F71ECE3626129513F006A7C5E178707BF686FFDB93E43F5BEB77A6AFAA5AA9B3EA8C1440BE6018A3E13E51C3AA1C219BE4324B588C4F208BE5D5835525EBA07C01B002C739035C1C1BB2095784BBFC141BCC05F73D5B2A04042890A968E6172409FCECDD5528018404E42D0110B0404C01B07852AECA6EB3FF1D8F4472415D93F27C28E475284B6BFAF9F1244DB5DA1BF7D1B86346B446A3FF73725F1EB41553F07745AC4A3640EBF4FA8FA575142FABE42A0E8504A7BA13E8812B2187D09903E6432367FDCD51FBE07D92CA408BB0EBEC9884045E93922C0AF21462FD373B7C160ACBC659A62D441FEBC61F18915A040760D398F808B714077EA5588082C264023703E77DE16E93F7EE1AD29E32CA6BFA78E631FB2B5C5BF8A642C2887C79DBF0A95673F7790743FD01D4D2063E8553F8EA8A0EE25E90CBF778E6C45ADD9FBBE79AFB9160B6B83BE8711DD3C68F9903EA33054123040403EE8386E89202010BE757A8779FA2BC7BD466C88E5601910C023BF6AE4DB01B9C1EB22154438DCC3418D4D2C9A3AC89E4038AA8768F811714035DF7CF11DD019409B59D1626AE104C0ECBB040AD864E63F209200C0CDF3DB3F394C3209B4F3B1BF5E76B9E7B3ABA2BFB1F34ADBFBE7633FADE3D6AD165F563FEB13AD4493C705BF53E0F93DF13DFBBE3E71A5EBAAB6973E1CD9D7FEBD76903EA1254FA9398314BE4E5684E04D4C0FBEE1A01CD29D5106C099A1F60B6323B9C1CE2B6469C7B0C2419E9136054F939D402C583E0F91897040DBF86D2360DA1640417F73829C9A07C0B542CC40F075E93F9FC4370E5F18E03FEA4C22D8A3B6B3BFDB6FEC710615A5BF57EEBF504C66663F2F2323991B37593FE606A7CF4B8909BF5CCB42B74BD6FEBE0453C2E1152A9D3E20C0C2F35CC0923EC500450B307E1ABE60B921D7A4EF11BE1394F49B642626C0C96B0011F740B341FE62DDD93D80D5C1A615B9DB870C9C4010166F5C1C9F6F4083D128C4C46326400EF1FC9BA252B53F2ECA807FEA95DEBF42A600373449B4BF773D60ED5417A23F6FDD703D7E53763FBE71D701DB2A5DBF502495CECA2131BFB7B2ABD8E744063FF8F0C58EAC76DA3E85329BB9105A9FBE3C481B67540373BEB53060DA7C8A203EDBAB430D326EF43D793D2F738D7110C0FDC12C0C0E2FB8C1D2293BFE19DEC1414D95B6C81A5F9B409AA616F615FF6E40BBA56596E01F1640C7F8C5ED2F370BC063CAB19322C5E23FB454B1B2153BE13F22218C59006CAABFC064371DA3FCA4BF91791B4E98195A3FC99C63D99717583FCE964AE59B64F9BE6681F4C683ACFCBECBF2DC993886883EA1D09BE33E1A913ED9070B2DFFC902BEFB9632BBDF2010BE7EFAEE54B56014C00DCCBD56CADEAF41C3E3855E1E37C6C13A1F4671D8119A402B5686AFF76C6D404F891EAEDCDB18406FA7C3A45612E4BF2CBFFB78852DEC3FC2287CAC82AACC3F581E402E3E10B6BFCD1DAE0F436698BF5CAA8D285B8C693F6672FA303D854F3F0E30E9AE80970DBF8D4AD4C363E3F3BEE4A4FAF83B16A13E0F3CF7B21D8B883E1B0F79A277421FBEB306670024A507BED0240AE1E8790F40A81EB5572C06B741919F484FC73AC2C13A4BFC95554F994085EB8916509E6C407E36B5E727921340273089D35BD102C0F9F70765C122E33F6A46812FB5A8D93F2161CBC80F18A9BFEE901660D524A0BFC2EF2E4273A8573F2D4AFAA64B91523F9DE3D1BF47D0F5BE71A254DB2BFAF5BE8EB63C33C5AB833E876189BDBE098A3E40FEF0DF1A91FBBD7BD211AE406608BEF4D5E0C0D2B411C090610EE81B47B7C11B7F81FED7FDC2419098E60A17639840F32C2FE0E0DB6B404A1FD6E5DD360B40611C2659A51A0AC09968DA6C860FEB3FA5E334B52B49E13F76F5E27B6245B1BF2ABB247247DFA4BF9CDA17A773B2613F629A20BC27E0573FA4500916D29402BF648965F4A96AFCBE46A8D83A9CC9933E5420B999E3F9903EC7E1A4956DEF10BE0C3D567D080B10BE01991D59EEAEF03FA7F10BD817D5B54125B1036B04B7C0C163CC6FCCFE609740D67285FC17BA6A40B235404936D41640018D62E27DC6F7BF11C35DCBB815DE3FDDA0CC5137DAD13F291D5BB13096A4BF8BBA52BB99CF97BF49A273D744E3523FB734EB59AABF4B3F80B22CE54F79F0BE25937B0D7F72F0BEEF90321427217B3EFA5BF2CB3B72833EDC56675B795BF0BD24EB44EFA02A02BE5DCABE001A7B0D40F882723673F7B4C1A4DD4CE04D93C94199D1FAB72D66964031FAA062B6CF6940839DE18B36871540CB532D1A0CC3E8BF3B38C13D6CF0E73F3A2A5A3BA34FCA3FFF56C3B31BBCB1BFCA7A23F26A0394BF5E7C81C540F1633FDBA6FA9F5E83483FE77EBF8B51BA06BFFAF6678228ECEDBEA30D9AA4000B9A3EB44B24E3890E823E79004D8C7CC217BEA63EF8E8892101BEB702C41A7A4FB33F7A111F20D7EDBBC1E1B12E5D4229BDC18193498105A99540F19AB7C730036940E2FB41D888F01B401C541EEF296DE1BF5B1F0CCC2290C83F1A76B2D972D5BA3F0F6E2E535DD794BFE6977CE0556D84BFBC7B9689BA24403FF2A1283EAE55373F88E50FE7E224D2BE6E424232DB4BDABEF5D341F872BE223E9986491B856E6D3E6100DB05799CDC3D1F2CED98A520EABDC964604C6420E83F3EE859BC9ACDD6C115761AD3720FBBC1F8056FA80BE29440D13DD6F54A856840A898FE544AC518409D5E30EA7907F2BFFB884F3CF01ED83F13FC0831106BC83F3B65D6FE22EEA2BFBE8E0214A37790BF8F55E3D46F7B533F79A6576F451E433FF9E180A424E4F3BEF9A7FC58E88AE6BE9B7902A3BD64843E5A4A2494CF897A3E348005BD53BF00BE677B2F03FAB6F8BD5ED8E8991307D3BFE5E2355AD545B4C196C9113C1CBCC241AA9545BD4C1E9440D9C7837AE376674079FBF34FB2091A4049905B7E184BEABF8CA46570A276C23FC7E9A3529909C23FABF541732BB386BF16F066E8F92187BF00A9AA91A4E9F83E0666A322347A383F7AF376826383DA3ED4215EE1791CDABE16D579586DC17DBEC6DBD3C89FEA6B3E6E57824D7D37033E24A5085938D1E7BD6A51161D0D3FF03F28D7D022F003BAC17D4812849A19B8C1048B3A5A836193401B33D1CB67A76640AA9E6EF7AF7A15400F753B3CB566D0BF517B744A1435DC3F04422A31D76CB43F106D366805D1A3BF101577EE407581BF6FB284DD6FDF533FFA4B847AF9CB343F6310AFEEAC31F4BE967A0ABE6746D8BEA839A4DF84E3843E9AE98AECB51E6C3EE7AC977B327C01BEA0E13DC8CFCDE9BDB2BA52A297F2ECBF214C9BB91AEDB8C1B6B3F0EAA65BCA410D60F1D01EB392408A3A7606CFCC654050AB7A367E7F194041B094AC7593843FFCB67E5306A7C53FCA89FD73206C9C3F52EBA7EAB0CE90BFC845C925962371BFFB19EB218CA9363F757DF332CFE6223FDF5490E31B86BDBE5CC1032F32BEC2BE99E8304F187455BEC187DEC0FC8F513E015F05F6B0C7E83D623B21FF660EC9BDE90C85E12288E63FD1CA2998E1A5B8C12B0C592FE763B9C17D5B537ABA0D924016BF151C80366540638520FD0C4A154043283E3985BCB5BF4A27DC74E4F6D43FC7BADFD146B2A93FCBF7224CE88C9CBF59550A92444C78BF94F274B9011A4A3FA9E34693C00A2C3FE58668B130ACE7BE93E72269FC1ACFBE253A27A4399A753ED778915ABB17613EA74602C4F5C4EFBDB88B1F3E6AE4DDBD86E23CD121FAE73F0210052B19ACB8C1B9F26934E046CA41839EA5D2B75C91408AA9F42FBB7A64405DFC680F00171840AFD30A511AA9B3BF0C1334189626CF3FBF6E299B9844B03F93A273C5CDCF97BF92BF0A976A727DBF9F5354FEE44B453F590BB57B4852313FDE685EBCC2C3E1BE220FFA71EDB5D3BE4428664E696B6B3EDA4262838E28663EBD46CC0F2677DDBD31CA369F54B7E3BD4A4C12B0FBB5DCBF6B2C3D62D5B6CFC18A817E8AFFBBC141B859A1EC03CB9040807B68EF8BCC63408847546A8F6F164069E175E557DBA83F7C2D2D0DC4F9CB3FCBA4D36A8CF99A3F50BB418BD3CD93BF14F135544AB66EBF8754339CD727403F7DAFF96D2B8B203F1A6DAA24F8A8D7BE4A1930271549C0BE67FC1A3CCD275D3E51CE630AD5CE4E3EAA350E316BBDC0BDA8F8B8F22AA1C6BDEF1043299BF7DF3F2A57DC01BB7AD0419AD8D59476CCBFC11597BBCEFC389040EFE069DD0E3863405CADA58C8C051540AE76FC50B27CB0BF67D93AE53B06CC3F0976C963B2F5A53F9CF61FBE956591BF5F96BC3FDB4873BFA836203F22D5363F4A7F00572785243FB29874E89ED4C0BED3A66392E2B7C4BEF5FA0C892CAB4EBE2E21FC941A79543E838ACB21380AE43DF669885919E2CFBDF34073E49316F5BFFE7C57A5A987C341BF3A1858BB577A41990748263F518F403EBE1E4EF503634064ECF3FABBBA1240A91CD7FA3724ECBF00F471A968EAD23FB8B128196EC8C33F71B18CA4347797BF9C0456237AAE88BF0D3D4FA6A1E7433F780172BED32E3B3F1417C6D1C1AEE0BE0B1A13CDDDF9DEBEF49161F01DED6B3EECCB889F74DA713EC9C4436811A9E2BD42CA6CE2986CF0BD41249342BDB5CD3F5AF4FAF00458CF4180084904C491C0C194253A6E5F378E4037480437092F6240999FF59CF28A15405D47A7BAC935D7BFA243BBA7A84AC03F63A24BDD36FAB33F7EC4483EC9B182BF6388469FC7967ABF582031CFAEB9103FD5F6FACA72572B3F0E74E3CFBE94CA3EFF56CDD29D1ACCBE41F0F752BD5570BE7A2D654EF6F75C3E56B78B1C4F5AF53DE6D13616D7E4D7BD2F37350D8C7C0240AE3965398C59AD4182E19EACECEAD3C145D21F07A14B8D40C2E16EF3B39B61406B2F8D67019A1840E8B7F5546823B73F83A1DADC68B8BABF6AA866C5942389BFBD6AA8F96354893F771A0486ABEA493FB6D2E20FB8024CBF96904010386514BFD8B539ED51DEF73EC92D18010E91C43E3C0DEC627CA891BE293E6A85F9A160BE74F5D3667024133E0406CB90C105E33D15240B4060A7EDBF1538BDFB42DBCEC127878DC841C8BF415789F8CBF43E8C40DBBBDEBEF8E86040D38FD4B346D511408A5E469CCA08AC3FC85867DB36A9CA3FCCEFB736D0B7963F2A4FD61EA2E28BBF599739222E4966BFDF3E9BEE7FE82B3FF03EC8140FA2143F5D097378884A9E3E7D5594562F2CB0BE5E4EC410CB5063BE64D50CAE7A62343E2082C47F0A6DEE3D7C5F766DF65694BD3426598CD9B9B83FAA235CA1BFA0AAC11094B0C51E4AC2C193C152617F418B4001985A1BEE95604010EA5D1FC38C154019AA078BFC7FABBF33C6F07992307B3F597D908693E88C3FBF299BAE48265F3FFEFA9352CCE354BF7BD5ED5B94A037BF70F5B22DA9D9E63E967EB3D8D300E83E7270EC97327FA03E91DA29E38DED82BE97CA0C7AFFA945BEBA255510A827053EBAFDA7905A58CD3DF999B4EEE3A4E73F3756F7C356C0B6C1EFEC5EB19D95B6C16BF01DB69B668A400B5E179B8C6060408D0C82CE3DAD11401BF0A4ACE931E7BFDE1681C53F41C83F73C5D6E3FA5CBD3FF5B9EEB81CED8BBFD3DBB96A3B3981BF3BE747B8C124323F271D09B10DEA313FBC4B7F9A4272BEBED45133D6C95BD3BECC32D56C26643BBEC3C5FB93EA43653E477064DAC6EBD73D98F585C4A6BEE2BDA79883ED5851EA3F18E07087ADA4BAC164055A54563AD2411850E833BA768940F965DD2EEA2B5F40C45D787DFB601340AB462D338346B73F026799E65505B73FEBB6040F3F647A3FAE04747920E570BF5F51AF6E2F0350BF41C68FF3B1DC22BF465D6AF654F0C83EB37E35BF7209DF3E03A7C3E4E92EA53E3E51D87245B97BBEFBF80B44EB9D48BE143A919CA061003ED625BB95DD2ED03DD9662FB8508BD3BF2F5977FDDC6EB041404B44A1D726D3C16D34DA52B0A38840AC51B75B3D5E5E4015EF7CD129B71440F02C3D25E5FEBABF724DBCF542EF98BF79EED6B70CA99B3F2B1524A4FCA1713F5DB31819B98461BF94FE2326D23B3BBF71CC674F134C073F9EB06F31DBA8E83EF2E8A42C6EDF8DBE7883C4A72C6F82BE4C59A340068825BE7C138B53FFEB033E91DFF5A8206DB83DD730075898DAA23FF60145C8DCE8A7C1C18F56028804A9C16C2CDDB413DC87404305D34D7A7C5D403841859B9A2514409F367CF07A9876BF1BA992E244148ABF160CF9FED240883F918D97E1E4F1643FE3D15E8CB53B54BF731B6E0919DE34BFCB073C1A8890F33E0C45AFF18DC8E33E19242305E254863E387AB65753197EBE7AA7944F76BA37BE9D42B6F2CA6A003E5FA3F699FF74C13D2826BFF1E1EB81BF6407DA60F558B0C1145FD93BF37EBEC1D7319338401887405B78C1C2C7A85C40C4A051B3A565124061C6EA9226A5B4BF2E9B5D957946A83F9C7378FDA749983F8C179CA16E8E54BF5E1D215F201B5FBFEBFB520F573E2ABF8893F3D6AF82033F6B3A98A53DCCDF3E79F93A98EE197BBE9DD7FDEED8567ABE46F5625448752FBEFA68579AF611FE3D5BA86AD70696BD3D2D5879DDFFE4D73FDB4F9824CEA4BBC186B0952075D0AAC17203CCEE135C8640827C75DC04175C40F06E2FC4BB5A124050D8BE0B87CCD1BFD4377324F7A094BF8101CF3E2FB1A23FCC364E0F9868753FF01941819B2B62BF9158A5CF67513DBFD69FEA9CF1AB053F591A5DD3FA87E93E457D882A240084BEB67EF8EC3CBC82BE6514B448D34E2ABE72DCC825A20A043E1DCE7A4FF1DEB93D37280AAFA3ACE13F4B1D04B3D7C4BAC1D9592D81A8A5ACC1F4D41AEAFFA28540B9A2F9EDC9635B404584D3C9E7DC114040434267DD66D7BF6038186B74B5773FD38E0837D2BEAB3F0638A1021BF2653F9FF9B65AA4036DBF86354119B88636BFC1B87D1B204A173F92AAC21B5E47E53E26C9548BFA3AB1BE0809BF9CD12A80BE97D4C4E0D08B353E37CB686D89A2013E9A68044FB56499BD2FC6891B7082903F38A169A3B4BACCC179AB5B1130ADBD4120EEBB93DEEF8440C35C6FA1A66E5A4096CF4FE0049D10402C889D65F0E6D1BF675ACD711F3DAD3F493712CD8D6DA83F66DEFB8CA9B559BFD9D0069C97716ABF7FA9F3C09C5326BFDD238973D256153F3CA8FDDED58CDB3EAE47022AFB8AAFBECFC122BFC3B276BE9BE4A577958B333E953EC24FECB6F93D5BE7FED834BC95BD7C294E11F08AE7BF0A830D20CB22DF4156BDE76E7FBAC4C150FA40AEA7488440E381314072FE5940229166B5684C114056C411E33D3DDBBF69D58A5AB78E87BFE3897ED58F2BAB3F3B074F3959FD703FBB50F1CED1BB68BF9B88C689736439BFD4AF27C0E89C103FA63F4494EEA6E63E1CADC35E3D45A0BEB3FA1BB973D980BEFDF5E1C594DEFEBD92F31A666333023EC285C03775FFB03D</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.Currents_HEMS_DH10</Name>
+              <Data>00000000000022C000000000000020C00000000000001CC000000000000018C000000000000014C000000000000010C000000000000008C000000000000000C0000000000000F0BF0000000000000000000000000000F03F000000000000004000000000000008400000000000001040000000000000144000000000000018400000000000001C4000000000000020400000000000002240</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.Force_to_current_coefficients_HEMS_DH10</Name>
+              <Data>000000000000F03F000000000000F03F9F2AEDC5C099FCC16F5F615D985B9041917F1F7D903CEF418D7BD19F5F11DCC19184A0CC528BAD412D6E513DFE801C413B713AF7C91A63419722A30D038757C1DA19E3BE9B1634410FD6DC717F9FFFC08315B3D54217A740D4A22EC5F2A88740A7FF841C273559C0677881AE67981940F3639A7FD01ECFBF9E9E3D489C11773FF14237711E4D13BFA1D0D0F0BB069C3E000000000000F03F000000000000F03F000000000000F03FA3C14175DB75C3C1C5D02093DF61984167E2C0F4138F8EC1B730012CACF2A8419734FB74A90E98C1C52D7ED1624D2E410F9D1BF9B1E4694145E88B8160CB54C1FC2A8E5C3D913141331CB47386F302C116EAE30DC0DFCB4001DA2769279B8CC05A8ECB85977D4440E62A0DDC9614F4BFD2D82916EFA5993F1888F2A79D3933BF71F9879987A5B93E000000000000F03F000000000000F03FF6B4EC4CD19F51C15DB1FD761DCAA9C154AE5AA78A9993C1A45CD8341C6995C16500ACCB4786A041F3510B42FF246C41F8A703D594778FC1B2672EA5141181415F76F23257A163C116CDFC178ECC3C4126DC330CE1C00CC112CB62ECEA26D440CD8F9772410794C01B866D82530F4C407C4D40FA3C10FBBF1C428CEA8C15A13FB5EF4A977F6439BF1395A85219D4C03E000000000000F03F4FF3674275ADFFBFB1C09B9EB85C2EC2CF49D85A412C2A420D8E167683630DC2E5B03DDE4F08C8418368F9504B3BA8410A43388DFF578C41E3C5E3BB12167AC143CDD1C7C8BC27414DDC97908D8F2F41E16EE947538D0BC16AE12F877AC0D64053EB7BB7961D94C04C566F4FDE383B404F6295311D4AF13F4E9149A5DE95B8BF375F176143BC683FD3C9E3B9A56E08BF5C08FDFA39B3933E000000000000F03F000000000000F03F000000000000F03F8F259015701CBFC1EC1BFE0AB40391C1B0C5DBAF65FA9DC1698008CB4A4EB5418A0BCEF94637A3C1F3B7F41C6131E5C0B9FE2D44CFEF744113DB77A0838E60C10F7851D50DCB3B41B8FADA503AD50DC184B37622B3D4D5409B8938E3564796C0E2A4B5DF9CB54F407236BFFB7CD8FEBF50ACF985F789A33F5CEEC8EA20093DBF591CD89A7E30C33E000000000000F03F000000000000F03F000000000000F03FB83FC7E47F81CFC1DBB8D7FC8C3AB5C170E4497F7EEB90C14E50549E4D39CB41B9F3787026B7C3C17A4A43B15AFDA841FBD3908672617DC19CC43BBEC18BB0C08D51409016582A41572D07E3034105C1722328819DC0D2408EFBE024B16695C0F1C814701472504055FD6B9D4AF200C0037B4F199F7AA63FB26EE1A9A15A41BF2E18306659B4C73E000000000000F03F000000000000F03F000000000000F03F000000000000F03FD55913E4EE7FE5C1548D65172AC95F41F5B9C4D854B6DB41461C94F5AC33C9C145AA550CFCDC2DC1F06F43CA24199A41716F84CAD02384C1F09564EE35916041457623295F8D31C173556D231A7CF940241D536A3FE9B9C03A80A9F2E56F7240B1975D2BF5FB21C04386FBB4D6E5C63F855524857F2061BF196DFC33C8D0E63E000000000000F03F000000000000F03F000000000000F03F98923735B23E54C125F42AE7E7EE6B4177796B86FC0C5A4136610E95FA0FA841D90DC20CD1C3ACC1EA2BCBE847A29C41956AE6D31F937FC1D6A7D9C3301655416AC4791447E220C1CE2F0B84E5F8DB40C64D965504F668400BDB887A3A5962C05190FE5723772640D6A0C18E2358DDBF2E2374697592863FE5D8474D604D23BF0F01653DD468AC3E000000000000F03F000000000000F03F000000000000F03F000000000000F03FC4198666EAC20FC2AE9680F5058CA0C160D68332F0401342440958C8E5C910C23B70B6AAA63BFD41D82C93309DD4DFC180FAAA440499B7414ED62FC793D688C17A3DE65AA7F75241BA4A24B4D53215C184396AFF3D4ED1404624DED2115F84C014957305CECE3040332E6B0ABE6BD2BF123CB4411C0F683F37D2BFBF2A50ECBE000000000000F03F000000000000F03F5D005BBBA02FC841CAB6E13AA1D1A1C18AAC679DD33DD3C1D52D0FE1C5C363C1A0AD367B54D0A741BDD3ABF0FBA8BB4149D6E13DFEBDBDC114C05F04598BAA41B8AC97F290E78BC16684D89D06526341F423AAC0AC7F32C142AA15BB3818F940D2AC1AD74749B8C0F721B437B2A47040246F3FB449861FC0F7CB3809BA99C33FDD0C3AB648C45CBF5E5AC90F8CDDE23E000000000000F03F000000000000F03F000000000000F03F000000000000F03F1621409DC41DE9C107E0FC153343BDC18B651614A480F141D5D0CFCD1DE9ECC1D333371D4928D841F5A2F17AE009B9C11D4E8901785F9141146CC8053BAC60C1B272D67EE0642641FED308388AD4E4C0D852207076D399406F5528C3C82D43C0ADC5A9B76619D53FA3F9E6AE82907C3FB24C74354AE32BBF785AA11C6A42BC3E000000000000F03F000000000000F03F000000000000F03F000000000000F03F000000000000F03F609057CD371218C2CFEE30465F292242B39E2D5F539118C23FBA32D2A4B7034258AC62EB44F4E4C143F84265492ABF415F54E4A468B690C1F0F66B3149435A411B4FC93EF4621EC193649F7BEBC6D94065DBB59C3A998FC0925DB76F842D3B4088D3BDC8580FDFBF6ABE495F9825753F86DC5E40B8EEF9BE000000000000F03F000000000000F03F7ABC7AC62BDEF7C1B1E7A5498BABA8C1998287D6775FBEC1FAD95BFDF69395C1BE86EB6AEDF5DF41D8B6F614F33BD9C1ED4D261A97E4C04156A9819125BD94C10C4CCD29BA9403418E7785432742434163143E472EF11FC1E2B9886088D0EC40A94EBCC7E0C3B0C07D1FD2D00D376A40567A09859B6D1BC03241251A1D6FC23FA379B1F967C95CBF2841B5310FD9E33E000000000000F03F000000000000F03F000000000000F03F000000000000F03F8C9E22E4C5E2D1C186DD14F5817CA041D526BB464B14714199C1F8C7CA9DC1410F34AEFEF924C1C1BB46ABA97988AE41CFEFCE6AE64B90C141546D1AEF0767417BFD37256B8536C14F9A1C67C52CFF406FAFC5643DBABEC07D9C19507C647540B7E307C4A18624C07DC78074B3C9C93FE41DE42CCA1163BF3CE78D70E024E93E000000000000F03F000000000000F03F000000000000F03F846A5EEE5F36FDC1A585E9AF3741E7413DCAB65EF91330C12D55BE5ECAC7C0411316F9D04957B8C176ED9E9C559A4BC12157DCD022329241583F1441086F7EC1DB4C846B2BA65A41B3691D63E39B2DC169A503104854F64093B71595EB6AB7C06E91933498177140C2B3F8B25E0621C0A6F85AF0750DC63F59ACAA2BA5BA60BF2F6FC35D278BE63E000000000000F03F000000000000F03FB9AAB75AED7D1EC2F45A7B157BC10C423F6D8DF11B37BBC183A179F7D32CD6C19411BB839FFDD9419E4494FD00A6CFC16484C346F014B0417BB6D39614261841AAFBC6AD0D3771C149477140B1345441547FB43C6D6A29C1E05EC7B35193F440DB2C6B4E6A9BB6C06FF558FD4D0E7140793E5088126A21C0F822F76A45FEC63FB8C5B936C6B561BF83EBB9F45F29E83E000000000000F03F000000000000F03F000000000000F03F000000000000F03F78C2D4517EE8CBC16FEF9E25AB6772C1B897BB9C5D42E2C07B8A87B83CC9C2411F664A373995C1C166B9057877EDAE41B5C96D83587590C1470FAF97E94D67410835800FB5E536C14F3FD05031E9FF405D9C213BDFB5BFC0F371193C4E477640B344684FA69525C0C964E9FB7764CB3FC1A9076EF07664BFC2FDB9282843EB3EA83594BE9362EBC19FE867E41255D4417B0AC5F7393FC3C1D6DA277E3583F1C19902A5F4636B92C1AAD95E6779399DC104F3E715065FE3418F898A893379DDC1368C8C27C608C3411F9D1836044C96C19ED62950EF3F25C15A11E7310FC74541CA0123E1BF5F21C1A965C2A22DA6EE40514FE2501686B1C0AA737243B5FF6A4033957EA7BCE21BC0C0BD2E097B87C23FD6ACA03536A55CBF95E542804D93E33E000000000000F03F000000000000F03F000000000000F03F000000000000F03FA1CB8C1457C9E5C1C4133C796422A5C11420FFDF6662E3418F17B83E5AA5D7C14ECB8EB980D8B54136FC0A7875120C41C1C7605B5D1374C16CA959F4BA795641520E7816DA402BC10F1F81F10670F54071F373583B05B7C00D6394CE610C71403D759BE2C52421C0681835FCFF59C63F3BBA765BCF0861BFA8F3DF6F5F08E73E</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.K_D_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_D_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_D_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_init_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_init_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_init_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_F_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_init_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_init_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_init_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_I_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_P_pit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_P_roll</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.K_P_tot</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.d_HEMS_to_HEMS</Name>
+              <Value>0.314</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.f_extra_roll_filter_1</Name>
+              <Value>43.4</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.f_extra_roll_filter_2</Name>
+              <Value>103.769</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.f_notch_main</Name>
+              <Value>50.66</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.g</Name>
+              <Value>9.811999999999999</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.m</Name>
+              <Value>1780</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.notch_damp</Name>
+              <Value>0.3</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.notch_gmin</Name>
+              <Value>0.1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.pitch_target</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.r_motor_left_com</Name>
+              <Data>71BA1BFADD2A8E3F5652DD126FD3E93F809F71E14048D63F</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.r_motor_right_com</Name>
+              <Data>71BA1BFADD2A8E3F063DE5E2B988E9BF809F71E14048D63F</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.r_pitch_hems</Name>
+              <Data>75DBCF73556AEC3F75DBCF73556AEC3FA1FDFE83FE78EB3FA1FDFE83FE78EB3F</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.r_roll_hems</Name>
+              <Data>A62325E2523AD83F06F93482E8A4D73FA62325E2523AD83F06F93482E8A4D73F</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.roll_target</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.wheel_compression_liftoff</Name>
+              <Value>0.0015</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_initial_lift_off</Name>
+              <Value>-0.023</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_manual_target</Name>
+              <Value>-0.016</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_mismatch_D</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_mismatch_F</Name>
+              <Value>100</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_mismatch_I</Name>
+              <Value>0.0001</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.z_mismatch_P</Name>
+              <Value>0.001</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.enable_extra_roll_notch_1</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.enable_extra_roll_notch_2</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.feed_forward_ems_ON</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.feed_fwd_motor_roll_ON</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.levi_operational</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.mismatch_enabled</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.mismatch_specific_enabler</Name>
+              <Data>000000</Data>
+            </SubItem>
+            <SubItem>
+              <Name>.pitch_ON</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.roll_ON</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.roll_filter_enabled</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.total_ON</Name>
+              <EnumText>TRUE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.DiscreteDerivative_ICPrevScaledInput</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForFilter</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForFilter_a</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForFilter_j</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForIntegrator</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForIntegrator_m</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_InitialConditionForIntegrator_p</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_LowerSaturationLimit</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_LowerSaturationLimit_n</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_LowerSaturationLimit_e</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_UpperSaturationLimit</Name>
+              <Value>5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_UpperSaturationLimit_n</Name>
+              <Value>5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.PIDController_UpperSaturationLimit_g</Name>
+              <Value>5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant1_Value</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant1_Value_b</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant1_Value_e</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant4_Value</Name>
+              <Value>9</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant4_Value_e</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay_InitialCondition</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Integrator1_IC</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant5_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Switch1_Threshold</Name>
+              <Value>7</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant7_Value</Name>
+              <Value>4.5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Switch1_Threshold_i</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.sat_enabled_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant8_Value</Name>
+              <Value>-9</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant9_Value</Name>
+              <Value>-4.5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Switch2_Threshold</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Delay_InitialCondition</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.stop_div_by_zero_Threshold</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.tau_Gain</Name>
+              <Value>0.00075</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias_Bias</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.two_Gain</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.one_Gain</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_m</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.TSamp_WtEt</Name>
+              <Value>666.6666666666666</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain</Name>
+              <Value>-1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.tau_Gain_h</Name>
+              <Value>0.00075</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias_Bias_j</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.two_Gain_h</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.one_Gain_l</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_h</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.tau_Gain_m</Name>
+              <Value>0.00075</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias_Bias_b</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.two_Gain_o</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.one_Gain_n</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_g</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.tau_Gain_b</Name>
+              <Value>0.00075</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias_Bias_c</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.two_Gain_f</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.one_Gain_g</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_c</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain1_Gain</Name>
+              <Value>-1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.tau_Gain_d</Name>
+              <Value>0.00075</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias_Bias_g</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.two_Gain_fc</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.one_Gain_f</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_ci</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.dist_enabled_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_n</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant_Value_e</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.stop_div_by_zero_Threshold_g</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay1_InitialCondition_nc</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant_Value_a</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.stop_div_by_zero_Threshold_p</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.ZeroGain_Gain</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.ZeroGain_Gain_m</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.ZeroGain_Gain_a</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias1_Bias</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain_a</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay2_InitialCondition</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias1_Bias_i</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain_f</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay2_InitialCondition_h</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias1_Bias_l</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain_d</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay2_InitialCondition_p</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias1_Bias_d</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain_c</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay2_InitialCondition_j</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Bias1_Bias_a</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Gain_Gain_p</Name>
+              <Value>2</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.UnitDelay2_InitialCondition_a</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant10_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant6_Value</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant7_Value_o</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant8_Value_h</Name>
+              <Value>1</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant9_Value_p</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Integrator2_IC</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.IsPeak1_Threshold</Name>
+              <Value>4.5</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Switch2_Threshold_n</Name>
+              <Value>7</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant2_Value</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant2_Value_e</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Constant2_Value_d</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Delay1_InitialCondition</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.wasfmenabledlastrun_Threshold</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.hard_disable_fmm_Gain</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.usefmornot_Threshold</Name>
+              <Value>0</Value>
+            </SubItem>
+            <SubItem>
+              <Name>.Memory_InitialCondition</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.Memory_InitialCondition_m</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+            <SubItem>
+              <Name>.Memory_InitialCondition_n</Name>
+              <EnumText>FALSE</EnumText>
+            </SubItem>
+          </Default>
+          <PTCID>#x00000013</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>SimulationTime</Name>
+          <BitSize>64</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+          <PTCID>#x00000014</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>CycleCount</Name>
+          <BitSize>64</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+          <PTCID>#x00000015</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>ExceptionCount</Name>
+          <BitSize>64</BitSize>
+          <BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+          <PTCID>#x00000016</PTCID>
+        </Parameter>
+        <Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+          <Name>ExceptionInfo</Name>
+          <BitSize>1376</BitSize>
+          <BaseType GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk">ExceptionInfo</BaseType>
+          <PTCID>#x00000017</PTCID>
+        </Parameter>
+      </Parameters>
+      <DataAreas>
+        <DataArea>
+          <AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
+          <Name>vertical_levitation_control_new_U</Name>
+          <ContextId>0</ContextId>
+          <ByteSize>96</ByteSize>
+          <Symbol>
+            <Name>z_avg</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000000</PTCID>
+            <BitOffs>0</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>roll_measured</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000008</PTCID>
+            <BitOffs>64</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>pitch_measured</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000010</PTCID>
+            <BitOffs>128</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>ems_roll</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000018</PTCID>
+            <BitOffs>192</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_imu</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x80000020</PTCID>
+            <BitOffs>256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>gyro_imu</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x80000038</PTCID>
+            <BitOffs>448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>motor_Fy_l</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000050</PTCID>
+            <BitOffs>640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>motor_Fy_r</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x80000058</PTCID>
+            <BitOffs>704</BitOffs>
+          </Symbol>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
+          <Name>vertical_levitation_control_new_Y</Name>
+          <ContextId>0</ContextId>
+          <ByteSize>240</ByteSize>
+          <Symbol>
+            <Name>I_VFL</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x81000000</PTCID>
+            <BitOffs>0</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>I_VFR</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x81000010</PTCID>
+            <BitOffs>128</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>I_VBL</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x81000020</PTCID>
+            <BitOffs>256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>I_VBR</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x81000030</PTCID>
+            <BitOffs>384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_hems</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x81000040</PTCID>
+            <BitOffs>512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_requested</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x81000060</PTCID>
+            <BitOffs>768</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>integral_terms</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x81000078</PTCID>
+            <BitOffs>960</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sat_failed</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x81000090</PTCID>
+            <BitOffs>1152</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>net_post_sat</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x81000098</PTCID>
+            <BitOffs>1216</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Max_allowed_current</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x810000b0</PTCID>
+            <BitOffs>1408</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Min_allowed_current</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x810000d0</PTCID>
+            <BitOffs>1664</BitOffs>
+          </Symbol>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
+          <Name>vertical_levitation_control_new_B</Name>
+          <ContextId>0</ContextId>
+          <ByteSize>2288</ByteSize>
+          <Symbol>
+            <Name>UnitDelay</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000000</PTCID>
+            <BitOffs>0</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch1</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000020</PTCID>
+            <BitOffs>256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch1_d</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000040</PTCID>
+            <BitOffs>512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain3</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000060</PTCID>
+            <BitOffs>768</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain7</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000068</PTCID>
+            <BitOffs>832</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000070</PTCID>
+            <BitOffs>896</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>select_maxs</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000090</PTCID>
+            <BitOffs>1152</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Delay</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x820000b0</PTCID>
+            <BitOffs>1408</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000c8</PTCID>
+            <BitOffs>1600</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>FilterCoefficient</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000d0</PTCID>
+            <BitOffs>1664</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Saturation</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000d8</PTCID>
+            <BitOffs>1728</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain10</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000e0</PTCID>
+            <BitOffs>1792</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000e8</PTCID>
+            <BitOffs>1856</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filtertotgain</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000f0</PTCID>
+            <BitOffs>1920</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add4</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820000f8</PTCID>
+            <BitOffs>1984</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000100</PTCID>
+            <BitOffs>2048</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000108</PTCID>
+            <BitOffs>2112</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain12</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000110</PTCID>
+            <BitOffs>2176</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000118</PTCID>
+            <BitOffs>2240</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>K_D_roll</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000120</PTCID>
+            <BitOffs>2304</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filterrollgain</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000128</PTCID>
+            <BitOffs>2368</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>TSamp</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000130</PTCID>
+            <BitOffs>2432</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Diff</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000138</PTCID>
+            <BitOffs>2496</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add4_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000140</PTCID>
+            <BitOffs>2560</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000148</PTCID>
+            <BitOffs>2624</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add4_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000150</PTCID>
+            <BitOffs>2688</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000158</PTCID>
+            <BitOffs>2752</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add4_gu</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000160</PTCID>
+            <BitOffs>2816</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000168</PTCID>
+            <BitOffs>2880</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000170</PTCID>
+            <BitOffs>2944</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain13</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000178</PTCID>
+            <BitOffs>3008</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000180</PTCID>
+            <BitOffs>3072</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filterpitgain</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000188</PTCID>
+            <BitOffs>3136</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add4_l</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000190</PTCID>
+            <BitOffs>3200</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000198</PTCID>
+            <BitOffs>3264</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001a0</PTCID>
+            <BitOffs>3328</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>select_mins</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x820001a8</PTCID>
+            <BitOffs>3392</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001c8</PTCID>
+            <BitOffs>3648</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001d0</PTCID>
+            <BitOffs>3712</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>FilterCoefficient_l</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001d8</PTCID>
+            <BitOffs>3776</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Saturation_p</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001e0</PTCID>
+            <BitOffs>3840</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch1_a</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001e8</PTCID>
+            <BitOffs>3904</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_n</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001f0</PTCID>
+            <BitOffs>3968</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>FilterCoefficient_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820001f8</PTCID>
+            <BitOffs>4032</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Saturation_pi</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000200</PTCID>
+            <BitOffs>4096</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000208</PTCID>
+            <BitOffs>4160</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_hemsfinal</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000210</PTCID>
+            <BitOffs>4224</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2_fu</Name>
+            <BitSize>512</BitSize>
+            <BaseType GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</BaseType>
+            <PTCID>#x82000230</PTCID>
+            <BitOffs>4480</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000270</PTCID>
+            <BitOffs>4992</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000278</PTCID>
+            <BitOffs>5056</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000280</PTCID>
+            <BitOffs>5120</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add5</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000288</PTCID>
+            <BitOffs>5184</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add6</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000290</PTCID>
+            <BitOffs>5248</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000298</PTCID>
+            <BitOffs>5312</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002a0</PTCID>
+            <BitOffs>5376</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum4</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002a8</PTCID>
+            <BitOffs>5440</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002b0</PTCID>
+            <BitOffs>5504</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add5_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002b8</PTCID>
+            <BitOffs>5568</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add6_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002c0</PTCID>
+            <BitOffs>5632</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain_n</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002c8</PTCID>
+            <BitOffs>5696</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_n</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002d0</PTCID>
+            <BitOffs>5760</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum4_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002d8</PTCID>
+            <BitOffs>5824</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002e0</PTCID>
+            <BitOffs>5888</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add5_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002e8</PTCID>
+            <BitOffs>5952</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add6_a</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002f0</PTCID>
+            <BitOffs>6016</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820002f8</PTCID>
+            <BitOffs>6080</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000300</PTCID>
+            <BitOffs>6144</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum4_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000308</PTCID>
+            <BitOffs>6208</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000310</PTCID>
+            <BitOffs>6272</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add5_p</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000318</PTCID>
+            <BitOffs>6336</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add6_l</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000320</PTCID>
+            <BitOffs>6400</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000328</PTCID>
+            <BitOffs>6464</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000330</PTCID>
+            <BitOffs>6528</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum4_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000338</PTCID>
+            <BitOffs>6592</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000340</PTCID>
+            <BitOffs>6656</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add5_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000348</PTCID>
+            <BitOffs>6720</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Add6_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000350</PTCID>
+            <BitOffs>6784</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Gain_a</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000358</PTCID>
+            <BitOffs>6848</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000360</PTCID>
+            <BitOffs>6912</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum4_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000368</PTCID>
+            <BitOffs>6976</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000370</PTCID>
+            <BitOffs>7040</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>IsPeak1</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000378</PTCID>
+            <BitOffs>7104</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2_d</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000398</PTCID>
+            <BitOffs>7360</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_netpostfm</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x820003b8</PTCID>
+            <BitOffs>7616</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003d0</PTCID>
+            <BitOffs>7808</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum1</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003d8</PTCID>
+            <BitOffs>7872</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamppit</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003e0</PTCID>
+            <BitOffs>7936</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003e8</PTCID>
+            <BitOffs>8000</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum1_a</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003f0</PTCID>
+            <BitOffs>8064</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamproll</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820003f8</PTCID>
+            <BitOffs>8128</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamptot</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000400</PTCID>
+            <BitOffs>8192</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>K_I_tot</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000408</PTCID>
+            <BitOffs>8256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>K_I_roll</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000410</PTCID>
+            <BitOffs>8320</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>K_I_pit</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000418</PTCID>
+            <BitOffs>8384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>current_reqf</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000420</PTCID>
+            <BitOffs>8448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>current_reqb</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000428</PTCID>
+            <BitOffs>8512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>current_reqf_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000430</PTCID>
+            <BitOffs>8576</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>current_reqb_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000438</PTCID>
+            <BitOffs>8640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_hems</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000440</PTCID>
+            <BitOffs>8704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch2_l</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000460</PTCID>
+            <BitOffs>8960</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sum5_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000480</PTCID>
+            <BitOffs>9216</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Is</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000488</PTCID>
+            <BitOffs>9280</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>satn</Name>
+            <BitSize>512</BitSize>
+            <BaseType GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</BaseType>
+            <PTCID>#x820004a8</PTCID>
+            <BitOffs>9536</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>airgaps_avg</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x820004e8</PTCID>
+            <BitOffs>10048</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>airgap_diff</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000508</PTCID>
+            <BitOffs>10304</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>tau_x</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000510</PTCID>
+            <BitOffs>10368</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>corrected_out</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000518</PTCID>
+            <BitOffs>10432</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>corrected_out_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000520</PTCID>
+            <BitOffs>10496</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>corrected_out_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000528</PTCID>
+            <BitOffs>10560</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_hems_b</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000530</PTCID>
+            <BitOffs>10624</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamp_tot</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x82000550</PTCID>
+            <BitOffs>10880</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamp_roll</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x82000560</PTCID>
+            <BitOffs>11008</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>clamp_pit</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+            <PTCID>#x82000570</PTCID>
+            <BitOffs>11136</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>counter</Name>
+            <BitSize>320</BitSize>
+            <BaseType GUID="{B1DDD3CB-A760-1C23-8A87-0F10909E975A}">matrix5xdouble</BaseType>
+            <PTCID>#x82000580</PTCID>
+            <BitOffs>11264</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>F_dof_sat</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x820005a8</PTCID>
+            <BitOffs>11584</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sat_fail</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005c0</PTCID>
+            <BitOffs>11776</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>q</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005c8</PTCID>
+            <BitOffs>11840</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>q_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005d0</PTCID>
+            <BitOffs>11904</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>q_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005d8</PTCID>
+            <BitOffs>11968</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>q_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005e0</PTCID>
+            <BitOffs>12032</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>q_dq</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005e8</PTCID>
+            <BitOffs>12096</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnaryMinus</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005f0</PTCID>
+            <BitOffs>12160</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnaryMinus_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820005f8</PTCID>
+            <BitOffs>12224</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnaryMinus_n</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000600</PTCID>
+            <BitOffs>12288</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnaryMinus_bv</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000608</PTCID>
+            <BitOffs>12352</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnaryMinus_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000610</PTCID>
+            <BitOffs>12416</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator2</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000618</PTCID>
+            <BitOffs>12480</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Switch_ka</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000638</PTCID>
+            <BitOffs>12736</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>K_P_tot</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000658</PTCID>
+            <BitOffs>12992</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product1</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000660</PTCID>
+            <BitOffs>13056</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product1_p</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000668</PTCID>
+            <BitOffs>13120</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product1_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000670</PTCID>
+            <BitOffs>13184</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>TmpSignalConversionAtSFunctionInport1</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x82000678</PTCID>
+            <BitOffs>13248</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>t</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000690</PTCID>
+            <BitOffs>13440</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>s</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000698</PTCID>
+            <BitOffs>13504</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>v</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006a0</PTCID>
+            <BitOffs>13568</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>t_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006a8</PTCID>
+            <BitOffs>13632</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>s_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006b0</PTCID>
+            <BitOffs>13696</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>v_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006b8</PTCID>
+            <BitOffs>13760</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>t_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006c0</PTCID>
+            <BitOffs>13824</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>s_h</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006c8</PTCID>
+            <BitOffs>13888</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>v_m</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006d0</PTCID>
+            <BitOffs>13952</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006d8</PTCID>
+            <BitOffs>14016</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>t_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006e0</PTCID>
+            <BitOffs>14080</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>s_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006e8</PTCID>
+            <BitOffs>14144</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>t_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006f0</PTCID>
+            <BitOffs>14208</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>s_iy</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820006f8</PTCID>
+            <BitOffs>14272</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000700</PTCID>
+            <BitOffs>14336</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>u</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000708</PTCID>
+            <BitOffs>14400</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>u_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000710</PTCID>
+            <BitOffs>14464</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>u_h</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000718</PTCID>
+            <BitOffs>14528</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>u_ha</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000720</PTCID>
+            <BitOffs>14592</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Final_ON</Name>
+            <BitSize>512</BitSize>
+            <BaseType GUID="{DC4B0998-4574-035F-E689-B7A6E2D93B15}">matrix8xdouble</BaseType>
+            <PTCID>#x82000728</PTCID>
+            <BitOffs>14656</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Abs1</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x82000768</PTCID>
+            <BitOffs>15168</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>IntegralGain</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000788</PTCID>
+            <BitOffs>15424</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>u_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000790</PTCID>
+            <BitOffs>15488</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product3</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000798</PTCID>
+            <BitOffs>15552</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>IntegralGain_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007a0</PTCID>
+            <BitOffs>15616</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>SignPreSat</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007a8</PTCID>
+            <BitOffs>15680</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007b0</PTCID>
+            <BitOffs>15744</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>IntegralGain_h</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007b8</PTCID>
+            <BitOffs>15808</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007c0</PTCID>
+            <BitOffs>15872</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007c8</PTCID>
+            <BitOffs>15936</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product3_h</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007d0</PTCID>
+            <BitOffs>16000</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>SignPreSat_g</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007d8</PTCID>
+            <BitOffs>16064</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007e0</PTCID>
+            <BitOffs>16128</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>SignPreSat_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007e8</PTCID>
+            <BitOffs>16192</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product3_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007f0</PTCID>
+            <BitOffs>16256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Product4_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x820007f8</PTCID>
+            <BitOffs>16320</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sign</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000800</PTCID>
+            <BitOffs>16384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Sign1</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x82000808</PTCID>
+            <BitOffs>16448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Delay1</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+            <PTCID>#x82000810</PTCID>
+            <BitOffs>16512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>fmsatfailordisabled</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+            <PTCID>#x82000814</PTCID>
+            <BitOffs>16544</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>hard_disable_fmm</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+            <PTCID>#x82000818</PTCID>
+            <BitOffs>16576</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>enabled</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+            <PTCID>#x8200081c</PTCID>
+            <BitOffs>16608</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>DataTypeConv2</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000003}">SINT</BaseType>
+            <PTCID>#x8200081d</PTCID>
+            <BitOffs>16616</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>DataTypeConv1</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000003}">SINT</BaseType>
+            <PTCID>#x8200081e</PTCID>
+            <BitOffs>16624</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>didfmcausesattofail</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{BC8DEAFD-5FD9-CB86-C530-98C6C9D662B4}">matrix4xlogical</BaseType>
+            <PTCID>#x8200081f</PTCID>
+            <BitOffs>16632</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>AND3</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000823</PTCID>
+            <BitOffs>16664</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000824</PTCID>
+            <BitOffs>16672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>AND3_d</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000825</PTCID>
+            <BitOffs>16680</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory_p</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000826</PTCID>
+            <BitOffs>16688</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>AND3_l</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000827</PTCID>
+            <BitOffs>16696</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory_f</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000828</PTCID>
+            <BitOffs>16704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>y</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000829</PTCID>
+            <BitOffs>16712</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>LowerRelop1</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{BC8DEAFD-5FD9-CB86-C530-98C6C9D662B4}">matrix4xlogical</BaseType>
+            <PTCID>#x8200082a</PTCID>
+            <BitOffs>16720</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UpperRelop</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{BC8DEAFD-5FD9-CB86-C530-98C6C9D662B4}">matrix4xlogical</BaseType>
+            <PTCID>#x8200082e</PTCID>
+            <BitOffs>16752</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>LowerRelop1_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{29A544D3-6F2A-B4AD-F69F-E6B45360B1C5}">matrix8xlogical</BaseType>
+            <PTCID>#x82000832</PTCID>
+            <BitOffs>16784</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UpperRelop_o</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{29A544D3-6F2A-B4AD-F69F-E6B45360B1C5}">matrix8xlogical</BaseType>
+            <PTCID>#x8200083a</PTCID>
+            <BitOffs>16848</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>LowerRelop1_e</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{BC8DEAFD-5FD9-CB86-C530-98C6C9D662B4}">matrix4xlogical</BaseType>
+            <PTCID>#x82000842</PTCID>
+            <BitOffs>16912</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>AND</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000846</PTCID>
+            <BitOffs>16944</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>RelationalOperator1</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000847</PTCID>
+            <BitOffs>16952</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>CastToBoolean</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x82000848</PTCID>
+            <BitOffs>16960</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sf_forcecurrent_FR</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</BaseType>
+            <PTCID>#x82000850</PTCID>
+            <BitOffs>17024</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sf_forcecurrent_BL</Name>
+            <BitSize>128</BitSize>
+            <BaseType GUID="{F2722814-69B8-77FB-A622-86AFCA6AB982}">B_forcecurrent_BL_vertical_levitation_control_new_T</BaseType>
+            <PTCID>#x82000860</PTCID>
+            <BitOffs>17152</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sf_MATLABFunction1</Name>
+            <BitSize>512</BitSize>
+            <BaseType GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</BaseType>
+            <PTCID>#x82000870</PTCID>
+            <BitOffs>17280</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>sf_MATLABFunction</Name>
+            <BitSize>512</BitSize>
+            <BaseType GUID="{A04BD435-F2EF-35A3-9FF1-AA537586A3D1}">B_MATLABFunction_vertical_levitation_control_new_T</BaseType>
+            <PTCID>#x820008b0</PTCID>
+            <BitOffs>17792</BitOffs>
+          </Symbol>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
+          <Name>vertical_levitation_control_new_X</Name>
+          <ContextId>0</ContextId>
+          <ByteSize>160</ByteSize>
+          <Symbol>
+            <Name>Integrator1_CSTATE</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x83000000</PTCID>
+            <BitOffs>0</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000020</PTCID>
+            <BitOffs>256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filter_CSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000028</PTCID>
+            <BitOffs>320</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE_p</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000030</PTCID>
+            <BitOffs>384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filtertot_CSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000038</PTCID>
+            <BitOffs>448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE_k</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000040</PTCID>
+            <BitOffs>512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filterroll_CSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000048</PTCID>
+            <BitOffs>576</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE_pl</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000050</PTCID>
+            <BitOffs>640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filterpit_CSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000058</PTCID>
+            <BitOffs>704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000060</PTCID>
+            <BitOffs>768</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filter_CSTATE_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000068</PTCID>
+            <BitOffs>832</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator_CSTATE_pq</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000070</PTCID>
+            <BitOffs>896</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Filter_CSTATE_b</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x83000078</PTCID>
+            <BitOffs>960</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Integrator2_CSTATE</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x83000080</PTCID>
+            <BitOffs>1024</BitOffs>
+          </Symbol>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="Internal" CreateSymbols="true">4</AreaNo>
+          <Name>vertical_levitation_control_new_DW</Name>
+          <ContextId>0</ContextId>
+          <ByteSize>176</ByteSize>
+          <Symbol>
+            <Name>UnitDelay_DSTATE</Name>
+            <BitSize>256</BitSize>
+            <BaseType GUID="{3CADFB10-8946-7AD9-CEA7-D14699644FA0}">matrix4xdouble</BaseType>
+            <PTCID>#x84000000</PTCID>
+            <BitOffs>0</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Delay_DSTATE</Name>
+            <BitSize>192</BitSize>
+            <BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+            <PTCID>#x84000020</PTCID>
+            <BitOffs>256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000038</PTCID>
+            <BitOffs>448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_a</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000040</PTCID>
+            <BitOffs>512</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UD_DSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000048</PTCID>
+            <BitOffs>576</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_j</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000050</PTCID>
+            <BitOffs>640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_f</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000058</PTCID>
+            <BitOffs>704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_e</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000060</PTCID>
+            <BitOffs>768</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_ev</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000068</PTCID>
+            <BitOffs>832</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000070</PTCID>
+            <BitOffs>896</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay1_DSTATE_d</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000078</PTCID>
+            <BitOffs>960</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_DSTATE</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000080</PTCID>
+            <BitOffs>1024</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_DSTATE_i</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000088</PTCID>
+            <BitOffs>1088</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_DSTATE_l</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000090</PTCID>
+            <BitOffs>1152</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_DSTATE_lo</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x84000098</PTCID>
+            <BitOffs>1216</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>UnitDelay2_DSTATE_c</Name>
+            <BitSize>64</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+            <PTCID>#x840000a0</PTCID>
+            <BitOffs>1280</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Delay1_DSTATE</Name>
+            <BitSize>32</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+            <PTCID>#x840000a8</PTCID>
+            <BitOffs>1344</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory_PreviousInput</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x840000ac</PTCID>
+            <BitOffs>1376</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory_PreviousInput_l</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x840000ad</PTCID>
+            <BitOffs>1384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Memory_PreviousInput_a</Name>
+            <BitSize>8</BitSize>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+            <PTCID>#x840000ae</PTCID>
+            <BitOffs>1392</BitOffs>
+          </Symbol>
+        </DataArea>
+      </DataAreas>
+      <Properties>
+        <Property>
+          <Name>CoderLicense</Name>
+          <Value>{73C71EBD-104A-4EE6-955D-ADE86A37EFC3}</Value>
+        </Property>
+      </Properties>
+      <Xml>
+        <GeneratedModuleInfoFile>vertical_levitation_control_new_ModuleInfo.xml</GeneratedModuleInfoFile>
+      </Xml>
+      <InterfacePointers />
+      <DataPointers />
+      <TypeReferences />
+      <Deployment />
+      <EventMessages />
+      <EventClasses />
+    </Module>
+  </Modules>
+  <Configurations />
+  <Library>
+    <Name>vertical_levitation_control_new</Name>
+    <Version>0.0.0.5</Version>
+  </Library>
+</TcModuleClass>

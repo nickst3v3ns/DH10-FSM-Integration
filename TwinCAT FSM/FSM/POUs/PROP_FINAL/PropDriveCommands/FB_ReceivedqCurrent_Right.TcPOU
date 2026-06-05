@@ -15,6 +15,11 @@ END_VAR
 VAR
 	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
 	i : INT;
+	
+	fbPPS_Timer : TON;
+	nPacketsPerSecond: INT;
+	nReceiveCounter : INT;
+	nLastReceiveCounter : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -32,8 +37,14 @@ END_VAR
 		Iq_ref_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[2]), 8) OR USINT_TO_UINT(MessageReceived[i].data[3]))) / 100.0;
 		Id_filtered_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[4]), 8) OR USINT_TO_UINT(MessageReceived[i].data[5]))) / 100.0;
 		Iq_filtered_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(MessageReceived[i].data[6]), 8) OR USINT_TO_UINT(MessageReceived[i].data[7]))) / 100.0;
+		nReceiveCounter := nReceiveCounter + 1;
 	   END_IF
    End_for
+END_IF
+fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
+IF fbPPS_Timer.Q THEN
+			nPacketsPerSecond   := nReceiveCounter - nLastReceiveCounter;
+			nLastReceiveCounter := nReceiveCounter;
 END_IF]]></ST>
     </Implementation>
   </POU>

@@ -217,6 +217,12 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentIqGains_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentIqGains_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -235,10 +241,16 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentIdGains_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentIdGains_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PROP_MAIN_Delft.TcPOU">

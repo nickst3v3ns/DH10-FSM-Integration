@@ -553,26 +553,9 @@ CASE Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_DESCEND) AND
 			GVL_LEVI.levitation_enable = TRUE AND
 			All_drives_high_voltage = TRUE THEN
-	
+			
 			Levi_state := E_Levi_states.LEVI_READY;
 			normal_shutdown := FALSE;
-			FB_Levi_Ready(	drive_status := Drive_status,
-							drive_diagnostics := Drive_Diagnostic,
-							Force_feedback_value := Force_feedback_value,
-							drive_feedback_timeouts := drive_feedback_timeouts,
-							force_values := Requested_force_values,
-							drive_refs := drive_refs,
-							PLC_drive_refs := PLC_drive_refs,
-							State := Levi_state,
-							Run_z_liftoff_calc := Run_z_liftoff_calc,
-							z := z,
-							Control_word_array := Control_word,
-							Drive_current_error := Drive_current_error,
-							error_specifics := error_specifics,
-							reset_busy => reset_busy,
-							Levi_ready => Levi_ready,
-							Go_error_state => Error,
-							z_liftoff => z_liftoff);
 			
 			//-----------------------------------------------------------------------------------------------------------
 			Control_liftoff_parameters.blevi_operational := FALSE;
@@ -607,6 +590,49 @@ CASE Levi_Command OF
 			FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
 			
 			z_target := z_initial_target;
+			
+			//-------------------------------------------------------------------------------------------------------------
+			
+			Control_lat_inputs.fy := y;
+			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fmotor_Fx_l := 0;
+			Control_lat_inputs.fmotor_Fx_r := 0;
+			Control_lat_inputs.fmotor_Fy_l := 0;
+			Control_lat_inputs.fmotor_Fy_r := 0;
+			
+			FB_Control_lat(stlateral_levitation_control_U := Control_lat_inputs, stlateral_levitation_control_Y => Control_lat_outputs);
+			
+			//-------------------------------------------------------------------------------------------------------------
+			
+			Control_vert_inputs.fz_avg := z;
+			Control_vert_inputs.froll_measured := roll;
+			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fems_roll := 0;
+			Control_vert_inputs.fmotor_Fy_l := 0;
+			Control_vert_inputs.fmotor_Fy_r := 0;
+			
+			FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stvertical_levitation_control_new_Y => Control_vert_outputs);
+			
+			//-------------------------------------------------------------------------------------------------------------
+			
+			FB_Levi_Ready(	drive_status := Drive_status,
+							drive_diagnostics := Drive_Diagnostic,
+							Force_feedback_value := Force_feedback_value,
+							drive_feedback_timeouts := drive_feedback_timeouts,
+							force_values := Requested_force_values,
+							drive_refs := drive_refs,
+							PLC_drive_refs := PLC_drive_refs,
+							State := Levi_state,
+							Run_z_liftoff_calc := Run_z_liftoff_calc,
+							z := z,
+							Control_word_array := Control_word,
+							Drive_current_error := Drive_current_error,
+							error_specifics := error_specifics,
+							reset_busy => reset_busy,
+							Levi_ready => Levi_ready,
+							Go_error_state => Error,
+							z_liftoff => z_liftoff);
+			
 			//-------------------------------------------------------------------------------------------------------------
 		ELSE
 			Levi_command := Levi_state;		
@@ -860,6 +886,7 @@ CASE Levi_Command OF
 			Control_vert_parameters.froll_target := roll_target;
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_target;
+			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
@@ -1082,6 +1109,7 @@ CASE Levi_Command OF
 			Control_vert_parameters.froll_target := roll_target;
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_target;
+			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
@@ -1298,6 +1326,7 @@ CASE Levi_Command OF
 			Control_vert_parameters.froll_target := roll_target;
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_target;
+			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;

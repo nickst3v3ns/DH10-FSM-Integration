@@ -12,14 +12,25 @@ END_VAR
 VAR
 	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
 	i : INT;
+	
+	fbPPS_Timer : TON;
+	nPacketsPerSecond: INT;
+	nReceiveCounter : INT;
+	nLastReceiveCounter : INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO
     IF Inputs_Left.RxMessages[i].cobId = 100 THEN 
         PropState_Left := Inputs_Left.RxMessages[i].data[0];
+		nReceiveCounter := nReceiveCounter + 1;
     END_IF
-END_FOR]]></ST>
+END_FOR
+fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
+IF fbPPS_Timer.Q THEN
+			nPacketsPerSecond   := nReceiveCounter - nLastReceiveCounter;
+			nLastReceiveCounter := nReceiveCounter;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
