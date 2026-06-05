@@ -4,6 +4,12 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 //Heartbeat
+	fbLink : FB_GroundStationLink := (
+        sRemoteHost := '192.168.1.5',   // <-- ground station IP, change to match
+        nRemotePort := 6949,
+        bEnable     := TRUE
+    );
+
 	benable_heartbeat:		BOOL; //for groundstation output
 	bheartbeat_OK: 			BOOL := TRUE; //for groundstation evaluation
 	

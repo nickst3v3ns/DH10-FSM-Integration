@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_GroundStationLink" Id="{bb2708ad-2e30-4998-8a72-d284a9c1c89f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_GroundStationLink
+VAR_INPUT
+    sRemoteHost     : STRING(15) := '192.168.1.100';
+    nRemotePort     : UDINT := 9000;
+    bEnable         : BOOL := TRUE;
+END_VAR
+
+VAR_OUTPUT
+    eState          : E_LinkState;
+    bConnected      : BOOL;
+    nFramesSent     : UDINT;
+    nFramesReceived : UDINT;
+    nReconnects     : UDINT;
+    lastCommand     : ST_Command;
+    bNewCommand     : BOOL;
+END_VAR
+
+VAR
+	dp1 : ST_Offset;
+    fbConnect       : Tc2_TcpIp.FB_ClientServerConnection;
+    fbSend          : Tc2_TcpIp.FB_SocketSend;
+    fbReceive       : Tc2_TcpIp.FB_SocketReceive;
+    fbEncoder       : FB_FrameEncoder;
+    telemetry       : ST_PodTelemetry;
+    sendTimer       : TON;
+    sendInterval    : TIME := T#10MS;
+    nSeqTx          : UDINT;
+    bSendPending    : BOOL;
+    rxBuffer        : ARRAY [0..1023] OF BYTE;
+    rxLen           : UINT;
+    rxScratch       : ARRAY [0..511] OF BYTE;
+    rxScratchLen    : UDINT;
+    reconnectTimer  : TON;
+    reconnectDelay  : TIME := T#1S;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE eState OF
+
+    E_LinkState.eDisconnected:
+        bConnected := FALSE;
+        IF bEnable THEN
+            fbConnect(
+                sRemoteHost := sRemoteHost,
+                nRemotePort := nRemotePort,
+                bEnable := TRUE
+            );
+            eState := E_LinkState.eConnecting;
+        END_IF
+
+    E_LinkState.eConnecting:
+        fbConnect(bEnable := TRUE);
+        IF fbConnect.bError THEN
+            eState := E_LinkState.eReconnectWait;
+            reconnectTimer(IN := FALSE);
+        ELSIF fbConnect.eState = eSOCKET_CONNECTED THEN
+            rxLen := 0;
+            bConnected := TRUE;
+            sendTimer(IN := FALSE);
+            eState := E_LinkState.eConnected;
+        END_IF
+
+    E_LinkState.eConnected:
+        sendTimer(IN := TRUE, PT := sendInterval);
+        IF sendTimer.Q AND NOT bSendPending THEN
+            sendTimer(IN := FALSE);
+            SendOffset();
+        END_IF
+
+        IF bSendPending THEN
+            fbSend(bExecute := TRUE);
+            IF NOT fbSend.bBusy AND NOT fbSend.bError THEN
+                fbSend(bExecute := FALSE);
+                bSendPending := FALSE;
+                nFramesSent := nFramesSent + 1;
+            ELSIF fbSend.bError THEN
+                fbSend(bExecute := FALSE);
+                bSendPending := FALSE;
+                eState := E_LinkState.eError;
+            END_IF
+        END_IF
+
+        PollReceive();
+
+        IF fbConnect.eState <> eSOCKET_CONNECTED THEN
+            eState := E_LinkState.eError;
+        END_IF
+
+    E_LinkState.eError:
+        bConnected := FALSE;
+        fbConnect(bEnable := FALSE);
+        reconnectTimer(IN := FALSE);
+        eState := E_LinkState.eReconnectWait;
+
+    E_LinkState.eReconnectWait:
+        reconnectTimer(IN := TRUE, PT := reconnectDelay);
+        IF reconnectTimer.Q THEN
+            reconnectTimer(IN := FALSE);
+            nReconnects := nReconnects + 1;
+            eState := E_LinkState.eDisconnected;
+        END_IF
+
+END_CASE
+
+IF bNewCommand THEN
+    bNewCommand := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="BuildDatapoint" Id="{1984dfb5-e247-4430-8114-76733fe18619}">
+      <Declaration><![CDATA[METHOD PRIVATE BuildDatapoint : BOOL
+VAR_INPUT
+    id          : UINT;
+    valueBits   : ULINT;
+    timestampUs : ULINT;
+END_VAR
+VAR_IN_OUT
+    dp : ST_Offset;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[dp.sentinelStart := 16#FF;
+dp.idBE[0]       := UINT_TO_BYTE(SHR(id, 8) AND 16#FF);   // high byte first (BE)
+dp.idBE[1]       := UINT_TO_BYTE(id AND 16#FF);           // low byte
+dp.value         := valueBits;
+dp.timestamp_us  := timestampUs;
+dp.sentinelEnd   := 16#FF;
+BuildDatapoint := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PollReceive" Id="{2cf97d43-3e79-47ed-acf4-22ac7ca2e071}">
+      <Declaration><![CDATA[METHOD PollReceive : BOOL
+VAR
+    bytesAvail : UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbReceive(
+	hSocket  := fbConnect.hSocket,
+	pDest    := ADR(rxScratch),
+	cbLen    := SIZEOF(rxScratch),
+	bExecute := TRUE
+);
+IF NOT fbReceive.bError AND NOT fbReceive.bError THEN
+	fbReceive(bExecute := FALSE);
+	IF fbReceive.nRecBytes > 0 THEN
+		// Append to rxBuffer.
+		IF (rxLen + fbReceive.nRecBytes) <= SIZEOF(rxBuffer) THEN
+			MEMCPY(ADR(rxBuffer[rxLen]), ADR(rxScratch), fbReceive.nRecBytes);
+			rxLen := UDINT_TO_UINT(rxLen + fbReceive.nRecBytes);
+			TryParseFrames();
+		ELSE
+			// Buffer overflow — drop and resync. Treat as protocol error.
+			rxLen := 0;
+			eState := E_LinkState.eError;
+		END_IF
+	END_IF
+ELSIF fbReceive.bError THEN
+	fbReceive(bExecute := FALSE);
+	eState := E_LinkState.eError;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendOffset" Id="{ad2ff5c8-ef47-472a-bef4-0d677bcc8305}">
+      <Declaration><![CDATA[METHOD PRIVATE SendOffset : BOOL
+VAR
+    offsetMm  : LREAL;
+    valueBits : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// For now, a fake offset that wobbles between -5 and +5 mm.
+// Replace with the real input from your I/O once we know where it lives.
+offsetMm := 5.0 * SIN(UDINT_TO_LREAL(nSeqTx) * 0.01);
+
+// gs_2p_float encoding: ((10000.0 + offsetMm) * 100.0) as u64
+valueBits := LREAL_TO_ULINT((10000.0 + offsetMm) * 100.0);
+
+BuildDatapoint(
+    id          := 16#0848,            // ID_OFFSET_1
+    valueBits   := valueBits,
+    timestampUs := telemetry.timestamp_us,    // keep using the fake timestamp for now
+    dp          := dp1
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := SIZEOF(dp1),                  // = 20
+    pSrc     := ADR(dp1),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+nSeqTx       := nSeqTx + 1;
+SendOffset  := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendTelemetry" Id="{70ab0a90-ea43-4f72-be08-b70492b04a31}">
+      <Declaration><![CDATA[METHOD PRIVATE SendTelemetry : BOOL
+VAR
+    nNowUs : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSeqTx := nSeqTx + 1;
+telemetry.counter := telemetry.counter + 1;
+telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+
+fbEncoder(
+    msgId      := 16#0010,
+    seqNum     := nSeqTx,
+    pPayload   := ADR(telemetry),
+    payloadLen := SIZEOF(telemetry)
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := fbEncoder.frameLen,
+    pSrc     := ADR(fbEncoder.frame),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+SendTelemetry := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryParseFrames" Id="{ba047145-da3f-4ebc-b0ba-c4ab60c41fe4}">
+      <Declaration><![CDATA[METHOD TryParseFrames : BOOL
+VAR
+    msgId, length : UINT;
+    seqNum        : UDINT;
+    total         : UINT;
+    i             : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Loop because one read might contain multiple frames.
+WHILE rxLen >= 8 DO
+	msgId  := BYTE_TO_UINT(rxBuffer[0]) OR SHL(BYTE_TO_UINT(rxBuffer[1]), 8);
+	length := BYTE_TO_UINT(rxBuffer[2]) OR SHL(BYTE_TO_UINT(rxBuffer[3]), 8);
+	seqNum := BYTE_TO_UDINT(rxBuffer[4])
+		   OR SHL(BYTE_TO_UDINT(rxBuffer[5]), 8)
+		   OR SHL(BYTE_TO_UDINT(rxBuffer[6]), 16)
+		   OR SHL(BYTE_TO_UDINT(rxBuffer[7]), 24);
+	total := 8 + length;
+
+	IF rxLen < total THEN
+		EXIT;   // need more bytes
+	END_IF
+
+	// Dispatch on msgId.
+	CASE msgId OF
+		16#0020:    // MsgId::Command
+			IF length = SIZEOF(lastCommand) THEN
+				MEMCPY(ADR(lastCommand), ADR(rxBuffer[8]), length);
+				bNewCommand := TRUE;
+				nFramesReceived := nFramesReceived + 1;
+			END_IF
+		ELSE
+			// Unknown msg_id — drop and resync by clearing the buffer.
+			// (In future: log it.)
+			rxLen := 0;
+			EXIT;
+	END_CASE
+
+	// Slide the buffer down past the consumed frame.
+	IF rxLen > total THEN
+		MEMMOVE(ADR(rxBuffer[0]), ADR(rxBuffer[total]), rxLen - total);
+	END_IF
+	rxLen := rxLen - total;
+END_WHILE
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

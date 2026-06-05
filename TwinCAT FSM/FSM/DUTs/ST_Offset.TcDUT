@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_Offset" Id="{b0f813f7-ffee-4e5d-87c2-d549e5574cd9}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
+TYPE ST_Offset :
+STRUCT
+    // Wire layout — must be EXACTLY 20 bytes, no padding.
+    // | 0xFF | id BE | value LE | timestamp LE | 0xFF |
+    //   1B     2B      8B         8B              1B
+    sentinelStart   : BYTE;     // always 0xFF
+    idBE            : ARRAY [0..1] OF BYTE;     // id as big-endian bytes
+    value           : ULINT;    // u64, little-endian on x86 = native layout
+    timestamp_us    : ULINT;    // u64, little-endian on x86 = native layout
+    sentinelEnd     : BYTE;     // always 0xFF
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>
