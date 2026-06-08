@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <Task Name="Propulsion_Task" Id="{532a49b9-39d2-4add-b260-1cfca2f21408}">
     <!--CycleTime in micro seconds.-->
-    <CycleTime>9000</CycleTime>
+    <CycleTime>6000</CycleTime>
     <Priority>7</Priority>
     <PouCall>
       <Name>PROP_MAIN_Delft</Name>

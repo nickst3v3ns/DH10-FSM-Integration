@@ -5,7 +5,9 @@
 VAR_GLOBAL
 	//First propulsion checks
 	
-	//barcode 
+	//
+	// Barcode setup
+	//
 	
 	OutputData_Front AT %Q*: ARRAY[0..7] OF BYTE;
 	OutputData_Back AT %Q*: ARRAY[0..7] OF BYTE;
@@ -18,32 +20,74 @@ VAR_GLOBAL
 	InputData2_Back AT %I*: ARRAY[0..7] OF BYTE;
 	InputData3_Back AT %I*: ARRAY[0..7] OF BYTE;
 	
-	//drives
-	position:				REAL;
 	
-	speed:					REAL;
-	target_speed:			REAL;
+	//
+	// Variables to read and write
+	//
 	
-	accelerating:			BOOL;
-	braking:				BOOL;
+	PropFlag : 				INT;
+	AutoPilotFlag :			INT;
+	DriveReset :			INT;
+	TargetVelocity :		LREAL;
+	PositionLimit_Low :		LREAL;
+	PositionLimit_High :	LREAL;
+	MaxThrust :				LREAL;
 	
-	Ia_left:				LREAL;
-	Ib_left:				LREAL;
-	Ic_left:				LREAL;
-	Ia_right:				LREAL;
-	Ib_right:				LREAL;
-	Ic_right:				LREAL;
-	PropFlag: 				INT;
+	ProportionalGain :		LREAL;
+	IntegralGain :			LREAL;
+	InitialIntegralValue :	LREAL;
+	
+	
+	//
+	// Variables to read
+	//
+	
+	Position :				LREAL;
+	PositionInterpolared :	LREAL;
+	Velocity :				LREAL;
+	
+	Iq_Left :				LREAL;
+	Id_Left :				LREAL;
+	Iq_Right :				LREAL;
+	Id_Right :				LREAL;
+	
+	Ia_Left:				LREAL;
+	Ib_Left:				LREAL;
+	Ic_Left:				LREAL;
+	Ia_Right:				LREAL;
+	Ib_Right:				LREAL;
+	Ic_Right:				LREAL;
+	
+	Ta_GD_Left :			LREAL;
+	Tb_GD_Left :			LREAL;
+	Tc_GD_Left :			LREAL;
+	Ta_GD_Right :			LREAL;
+	Tb_GD_Right :			LREAL;
+	Tc_GD_Right :			LREAL;
+	
+	CurrentAngle_Left :		LREAL;
+	CurrentAngle_Right :	LREAL;
+	
+	Vbus_Left :				LREAL;
+	Vbus_Right :			LREAL;
+	
+	FAULT_Left :			INT;
+	FAULT_Right :			INT;
+
+	PropState_Left :		INT;
+	PropState_Right :		INT;
+	
+	PropSubState_Left :		INT;
+	PropSubState_Right :	INT;
+	
+	
+	//
+	// Main FSM
+	//
 	
 	propulsion_fault: 		BOOL;
 	propulsion_enable: 		BOOL;
 	propulsion_active: 		BOOL;
-	
-	//DC-Link voltages
-	drive_voltages1 AT %I*:	REAL;
-	drive_voltages2 AT %I*:	REAL;
-	drive_voltages3 AT %I*:	REAL;
-	drive_voltages4 AT %I*:	REAL;
 	
 	DC_LINK_SAFE			:BOOL;
 END_VAR]]></Declaration>

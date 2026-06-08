@@ -68,6 +68,9 @@ VAR
 	y: LREAL; //m
 	yaw: LREAL;	//rad
 	
+	Offset_airgaps_vertical : T_matrix6xdouble;
+	Offset_airgaps_lateral : T_matrix6xdouble;
+	
 //----------------------------------------------------------------------------------------------------
 
 //	Drive Inputs (Inputs into PLC, drive feedback)
@@ -118,9 +121,7 @@ VAR
 //	States
 
 //----------------------------------------------------------------------------------------------------
-	//Levi_command is where you tell the pod to which state you want to switch. The code will then check if you are allowed to switch to that state.
 	//Levi_state tells you and the code your current state.
-	Levi_command : E_Levi_States;
 	Levi_State : E_Levi_States;
 
 	//Initialising the state function blocks
@@ -186,10 +187,7 @@ VAR
 	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
 	Control_liftoff_parameters: ST_P_Liftoff_model_T := FB_control_liftoff.stLiftoff_model_P;
 	
-	prev_time_integrator : LREAL;
-	new_time_integrator : LREAL;
-	prev_error_integrator : LREAL;
-	new_error_integrator : LREAL;
+	zero_current_trigger : BOOL;
 	
 	
 	//Descent model
@@ -240,7 +238,9 @@ VAR
 	liftoff_time : LREAL := 6; //s
 	descent_time : LREAL := 6; //s
 	last_levitating_airgap : LREAL; //m
+	Liftoff_in_progress : USINT;
 	descent_in_progress : USINT;
+	finding_zero_current : BOOL;
 	prev_time_zero_current_finder : LREAL;
 	new_time_zero_current_finder : LREAL;
 	
@@ -346,8 +346,8 @@ VAR
 	All_drives_high_voltage: BOOL;
 	normal_shutdown : BOOL := FALSE;
 	
-	fbSendAirGapLeft : FB_SendAirGap_Left;
-	fbSendAirGapRight : FB_SendAirGap_Right;
+	//fbSendAirGapLeft : FB_SendAirGap_Left;
+	//fbSendAirGapRight : FB_SendAirGap_Right;
 
 	i: INT;
 
@@ -413,22 +413,36 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
+Offset_airgaps_vertical := Sensor_model_output.aoffset_airgaps;
+Offset_airgaps_lateral := Sensor_model_output.aoffset_airgaps_ems;
+
 motor_airgap_left := 0.013 - y;
 motor_airgap_right := 0.013 + y;
 
+//----------------------------------------------------------------------------------------------------
 
+IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
+END_IF
+
+(*
 //Falling edge trigger for when sensecon disables levitation.
 //This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
 IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES AND Levi_state <> E_Levi_States.LEVI_LIFTOFF AND Levi_state <> E_Levi_States.LEVI_LEVITATION AND Levi_state <> E_Levi_States.LEVI_DESCEND THEN
-	Levi_command := E_Levi_States.LEVI_IDLE;
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
 ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LIFTOFF THEN
-	Levi_command := E_Levi_States.LEVI_LEVITATION;
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 	normal_shutdown := TRUE;
-ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION AND Descent_in_progress <> 0 THEN
-	Levi_command := E_Levi_States.LEVI_DESCEND;
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION THEN
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+	normal_shutdown := TRUE;
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_DESCEND AND descent_in_progress <> 0 THEN
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
 	normal_shutdown := TRUE;
 END_IF
+*)
 
+//----------------------------------------------------------------------------------------------------
 
 All_drives_high_voltage := TRUE;
 
@@ -457,7 +471,7 @@ END_FOR*)
 
 //The command asks to switch state. For each command it is then evaluated if you are currently allowed to switch to that state.
 //If yes, the state is updated and the corresponding function block is ran.
-CASE Levi_Command OF
+CASE GVL_LEVI.Levi_Command OF
 	
 	//------------------------------------------------------------------------------------------------
 	
@@ -493,7 +507,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 							
 		END_IF				
 	//------------------------------------------------------------------------------------------------	
@@ -537,7 +551,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 			
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 		
 		END_IF
 	//------------------------------------------------------------------------------------------------	
@@ -574,18 +588,12 @@ CASE Levi_Command OF
 			Control_liftoff_inputs.fz_target := z_target;
 			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
 			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
-			Control_liftoff_inputs.fprev_error_integrator := prev_error_integrator;
-			Control_liftoff_inputs.fprev_time_integrator := prev_time_integrator;
 			
 			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
 			
 			z_target := Control_liftoff_outputs.fnew_z_target;
 			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
-			new_time_integrator := Control_liftoff_outputs.fnew_time_intergrator;
-			new_error_integrator := Control_liftoff_outputs.fnew_error_intergrator;
 			prev_time_zero_current_finder := new_time_zero_current_finder;
-			prev_time_integrator := new_time_integrator;
-			prev_error_integrator := new_error_integrator;
 
 			FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
 			
@@ -635,7 +643,7 @@ CASE Levi_Command OF
 			
 			//-------------------------------------------------------------------------------------------------------------
 		ELSE
-			Levi_command := Levi_state;		
+			GVL_LEVI.Levi_command := Levi_state;		
 					
 		END_IF		
 	//------------------------------------------------------------------------------------------------					
@@ -659,7 +667,7 @@ CASE Levi_Command OF
 							Drive_current_error := Drive_current_error,
 							error_specifics := error_specifics,
 							Error => Error,
-							Back_to_ready => Levi_command,
+							Back_to_ready => GVL_LEVI.Levi_command,
 							Run_z_liftoff_calc => Run_z_liftoff_calc);
 
 			Control_lat_parameters.blevi_operational := FALSE;
@@ -668,7 +676,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 
 		ELSE
-			Levi_command := Levi_state;		
+			GVL_LEVI.Levi_command := Levi_state;		
 	
 		END_IF			
 	//------------------------------------------------------------------------------------------------
@@ -692,7 +700,7 @@ CASE Levi_Command OF
 								Drive_current_error := Drive_current_error,
 								error_specifics := error_specifics,
 								Error => Error,
-								Back_to_ready => Levi_command,
+								Back_to_ready => GVL_LEVI.Levi_command,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);
 			
 			Control_lat_parameters.blevi_operational := FALSE;
@@ -701,7 +709,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 						
 		END_IF		
 	//------------------------------------------------------------------------------------------------
@@ -751,22 +759,29 @@ CASE Levi_Command OF
 			Control_liftoff_inputs.fz_target := z_target;
 			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
 			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
-			Control_liftoff_inputs.fprev_error_integrator := prev_error_integrator;
-			Control_liftoff_inputs.fprev_time_integrator := prev_time_integrator;
 			
 			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
 			
 			z_target := Control_liftoff_outputs.fnew_z_target;
 			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
-			new_time_integrator := Control_liftoff_outputs.fnew_time_intergrator;
-			new_error_integrator := Control_liftoff_outputs.fnew_error_intergrator;
 			average_current_hems := Control_liftoff_outputs.faverage_current_hems;
+			Liftoff_in_progress := Control_liftoff_outputs.nLiftoff_in_progress;
+			zero_current_trigger := Control_liftoff_outputs.bzero_current_trigger;
 			prev_time_zero_current_finder := new_time_zero_current_finder;
-			prev_time_integrator := new_time_integrator;
-			prev_error_integrator := new_error_integrator;
 			
-			IF average_current_hems = 0 THEN
-				Levi_command := E_Levi_States.LEVI_LEVITATION;
+			IF enable_zero_current_finder = TRUE AND Liftoff_in_progress = 0 THEN
+				
+				finding_zero_current := TRUE;
+				
+				IF zero_current_trigger = FALSE AND (ABS(average_current_hems) <0.002)  THEN
+					GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
+					finding_zero_current := FALSE;
+				END_IF
+				
+			ELSIF enable_zero_current_finder = FALSE AND Liftoff_in_progress = 0 THEN
+				
+				finding_zero_current := FALSE;
+				GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 			END_IF
 			//-------------------------------------------------------------------------
 			
@@ -943,7 +958,7 @@ CASE Levi_Command OF
 			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 						
 		END_IF	
 	//------------------------------------------------------------------------------------------------	
@@ -1162,7 +1177,7 @@ CASE Levi_Command OF
 			Last_levitating_airgap := z;	
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 						
 		END_IF					
 	//------------------------------------------------------------------------------------------------
@@ -1383,10 +1398,10 @@ CASE Levi_Command OF
 			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
 			
 			IF descent_in_progress = 0 THEN
-				Levi_command := E_Levi_States.LEVI_READY;
+				GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
 			END_IF
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 						
 		END_IF	
 	//------------------------------------------------------------------------------------------------
@@ -1418,7 +1433,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 										
 		END_IF
 	//------------------------------------------------------------------------------------------------
@@ -1457,7 +1472,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
-			Levi_command := Levi_state;
+			GVL_LEVI.Levi_command := Levi_state;
 				
 		END_IF
 	//------------------------------------------------------------------------------------------------	
@@ -1482,7 +1497,7 @@ CASE Levi_Command OF
 									error_specifics := error_specifics,
 									reset_busy => reset_busy,
 									reset_error => reset_error,
-									Go_next_state => Levi_command);
+									Go_next_state => GVL_LEVI.Levi_command);
 
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
@@ -1490,7 +1505,7 @@ CASE Levi_Command OF
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 
 		ELSE
-			Levi_command := Levi_state;		
+			GVL_LEVI.Levi_command := Levi_state;		
 							
 		END_IF
 	//------------------------------------------------------------------------------------------------	
@@ -1499,7 +1514,7 @@ END_CASE
 
 
 IF (ERROR OR GVL_LEVI.levitation_fault) AND Levi_state <> E_Levi_States.LEVI_IDLE AND Levi_state <> E_Levi_States.LEVI_ERROR AND Levi_state <> E_Levi_States.LEVI_RESET_DRIVES THEN
-	Levi_command := E_Levi_States.LEVI_ERROR;
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_ERROR;
 	
 	//Making sure no drives are giving an output
 	FOR i:=0 TO 23 DO
@@ -1589,28 +1604,40 @@ GVL_LEVI.y_target := y_target_airgap;
 GVL_LEVI.yaw_target := yaw_target;
 GVL_LEVI.z_initial_target := z_initial_target;
 GVL_LEVI.SensorDataArray := SensorDataArray;
-//GVL_LEVI.Offset_airgaps := Offset_airgaps;
-//GVL_LEVI.liftoff_in_progress := liftoff_in_progress;
-//GVL_LEVI.finding_zero_current := finding_zero_current;
-//GVL_LEVI.descent_in_progress := descent_in_progress;
+GVL_LEVI.Offset_airgaps_vertical := Offset_airgaps_vertical;
+GVL_LEVI.Offset_airgaps_lateral := Offset_airgaps_lateral;
+
+IF Liftoff_in_progress = 0 THEN
+	GVL_LEVI.liftoff_in_progress := FALSE;
+ELSE
+	GVL_LEVI.liftoff_in_progress := TRUE;
+END_IF
+
+IF descent_in_progress = 0 THEN
+	GVL_LEVI.descent_in_progress := FALSE;
+ELSE
+	GVL_LEVI.descent_in_progress := TRUE;
+END_IF
+
+GVL_LEVI.finding_zero_current := finding_zero_current;
 GVL_LEVI.normal_shutdown := normal_shutdown;
 
 // --------------------------------------------------------------
 //  	Send airgap through CAN
 // --------------------------------------------------------------
 
-fbSendAirGapLeft(
-	motor_airgap_left := motor_airgap_left,
-	motor_airgap_right := motor_airgap_right,
-	CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
-	CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
+//fbSendAirGapLeft(
+//	motor_airgap_left := motor_airgap_left,
+//	motor_airgap_right := motor_airgap_right,
+//	CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+//	CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 	
 	
-fbSendAirGapRight(
-	motor_airgap_left := motor_airgap_left,
-	motor_airgap_right := motor_airgap_right,
-	CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
-	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
+//fbSendAirGapRight(
+//	motor_airgap_left := motor_airgap_left,
+//	motor_airgap_right := motor_airgap_right,
+//	CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+//	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 ]]></ST>
     </Implementation>
   </POU>

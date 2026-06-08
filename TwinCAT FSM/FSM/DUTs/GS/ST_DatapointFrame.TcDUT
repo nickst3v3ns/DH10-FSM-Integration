@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_DatapointFrame" Id="{c05051af-287e-4962-8152-43de0e485aaa}">
+    <Declaration><![CDATA[TYPE ST_DatapointFrame :
+STRUCT
+	sentinelStart : BYTE;
+	idBE : ARRAY[0..1] OF BYTE;
+	value : ULINT;
+	timestampUs : ULINT;
+	sentinelEnd : BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

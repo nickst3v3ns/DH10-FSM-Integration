@@ -21,7 +21,7 @@ END_VAR
 TxMessage.cobId := 110;
 TxMessage.length := 1;
 TxMessage.data[0] :=  INT_TO_BYTE(PodState AND 16#FF);
-CAN_OUTPUTS_Right.TxMessages[3] := TxMessage;
+CAN_OUTPUTS_Right.TxMessages[2] := TxMessage;
 //CAN_OUTPUTS.NoOfTxMessages := 1;
 
 ]]></ST>

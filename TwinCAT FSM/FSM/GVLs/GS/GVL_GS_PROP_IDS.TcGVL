@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_GS_PROP_IDS" Id="{cebfb173-e1e6-4da1-aa50-7504b52bc9ac}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+    // ─── Propulsion datapoint IDs (0xb00 – 0xb21) ────────────────────
+    DP_ID_PROP_FLAG                  : UINT := 16#0B00;   // u8,  bidir
+    DP_ID_PROP_POSITION              : UINT := 16#0B01;   // f64, m
+    DP_ID_PROP_POSITION_INTERPOLATED : UINT := 16#0B02;   // f64, m
+    DP_ID_PROP_VELOCITY              : UINT := 16#0B03;   // f64, mm/s
+    DP_ID_PROP_FAULT_RIGHT           : UINT := 16#0B04;   // u16
+    DP_ID_PROP_FAULT_LEFT            : UINT := 16#0B05;   // u16
+    DP_ID_PROP_CURRENT_ANGLE_RIGHT   : UINT := 16#0B06;   // f64, deg
+    DP_ID_PROP_CURRENT_ANGLE_LEFT    : UINT := 16#0B07;   // f64, deg
+    DP_ID_PROP_TARGET_VELOCITY       : UINT := 16#0B08;   // i32, mm/s
+    DP_ID_PROP_VBUS_RIGHT            : UINT := 16#0B09;   // f64, V
+    DP_ID_PROP_VBUS_LEFT             : UINT := 16#0B0A;   // f64, V
+    DP_ID_PROP_STATE_RIGHT           : UINT := 16#0B0B;   // u16
+    DP_ID_PROP_STATE_LEFT            : UINT := 16#0B0C;   // u16
+    DP_ID_PROP_ID_RIGHT              : UINT := 16#0B0D;   // f64, A
+    DP_ID_PROP_IQ_RIGHT              : UINT := 16#0B0E;   // f64, A
+    DP_ID_PROP_IA_RIGHT              : UINT := 16#0B0F;   // f64, A
+    DP_ID_PROP_IB_RIGHT              : UINT := 16#0B10;   // f64, A
+    DP_ID_PROP_IC_RIGHT              : UINT := 16#0B11;   // f64, A
+    DP_ID_PROP_ID_LEFT               : UINT := 16#0B12;   // f64, A
+    DP_ID_PROP_IQ_LEFT               : UINT := 16#0B13;   // f64, A
+    DP_ID_PROP_IA_LEFT               : UINT := 16#0B14;   // f64, A
+    DP_ID_PROP_IB_LEFT               : UINT := 16#0B15;   // f64, A
+    DP_ID_PROP_IC_LEFT               : UINT := 16#0B16;   // f64, A
+    DP_ID_PROP_DRIVE_RESET           : UINT := 16#0B17;   // u8,  bidir
+    DP_ID_PROP_AUTO_PILOT_FLAG       : UINT := 16#0B18;   // u8,  bidir
+    DP_ID_PROP_TA_GD_LEFT            : UINT := 16#0B19;   // u16, deci-degC
+    DP_ID_PROP_TB_GD_LEFT            : UINT := 16#0B1A;   // u16, deci-degC
+    DP_ID_PROP_TC_GD_LEFT            : UINT := 16#0B1B;   // u16, deci-degC
+    DP_ID_PROP_TA_GD_RIGHT           : UINT := 16#0B1C;   // u16, deci-degC
+    DP_ID_PROP_TB_GD_RIGHT           : UINT := 16#0B1D;   // u16, deci-degC
+    DP_ID_PROP_TC_GD_RIGHT           : UINT := 16#0B1E;   // u16, deci-degC
+    DP_ID_PROP_POSITION_LIMIT_LOW    : UINT := 16#0B1F;   // u32, m
+    DP_ID_PROP_POSITION_LIMIT_HIGH   : UINT := 16#0B20;   // u32, m
+    DP_ID_PROP_MAX_THRUST            : UINT := 16#0B21;   // u32, N
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -5,41 +5,40 @@
 VAR_GLOBAL
 //Heartbeat
 	fbLink : FB_GroundStationLink := (
-        sRemoteHost := '192.168.1.5',   // <-- ground station IP, change to match
+        sRemoteHost := '192.168.1.7',   // <-- ground station IP, change to match
         nRemotePort := 6949,
         bEnable     := TRUE
     );
 
-	benable_heartbeat:		BOOL; //for groundstation output
-	bheartbeat_OK: 			BOOL := TRUE; //for groundstation evaluation
+	benable_heartbeat:				BOOL := FALSE; //for groundstation output
+	bheartbeat_OK: 					BOOL := TRUE; //for groundstation evaluation
 	
-	bprecharge:				BOOL;
+	bprecharge:						BOOL := FALSE;
 	
 	E_PodStateGlobal : E_PodState;
 	
-	bsdc_closed:				BOOL;
+	bsdc_closed:					BOOL := FALSE;
  
-	bengage_brakes AT %Q*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	bCLKTrigger AT %Q*:				BOOL := FALSE; 
-	bbrakes_engaged AT %I*:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	bbrakes_rearm AT %Q*:			BOOL := FALSE;
+	bbrakes_armed:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bbrakes_clock:			BOOL := FALSE; 
+	bbrakes_engaged:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	
 
 	
-	bsafety_inputs_valid AT %I*: 	BOOL; //done through twinsafe PLC-TWINSAFE Run mode verification
+	bsafety_inputs_valid:			BOOL := FALSE; //done through twinsafe PLC-TWINSAFE Run mode verification
 	
-	b_EmergencyLine AT %Q*: 			BOOL := TRUE; //NC System
+	b_AlivePLC AT %Q*: 				BOOL := TRUE; //NC System
 
-	bEstopError:				BOOL; 
-	bEstopRestart:			BOOL := FALSE; //Used to restart the Estop from the PLC side
-	bEstopRestartTracker:	BOOL := FALSE;
+	bEstopError:					BOOL := FALSE; 
+	bEstopRestart:					BOOL := FALSE; //Used to restart the Estop from the PLC side
+	bFalseForEstopRestart:			BOOL := FALSE;
 	
-	benable_telemetry: 		BOOL;
+	benable_telemetry: 				BOOL;
 	
-	bcan_bus_ok: 			BOOL := TRUE; 
+	bcan_bus_ok: 					BOOL := TRUE; 
 	nMasterDevStateCouplers AT %I*: UINT; 
-	nMasterDevStatePLC AT %I*: UINT; 
-	bethercat_ready:  		BOOL := TRUE; 
+	nMasterDevStatePLC AT %I*: 		UINT; 
+	bethercat_ready:  				BOOL := TRUE; 
 	
 	
 	

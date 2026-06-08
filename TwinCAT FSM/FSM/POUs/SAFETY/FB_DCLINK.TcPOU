@@ -31,10 +31,8 @@ END_FOR
 
 
 //DC-LINK PROP
-IF GVL_Prop.drive_voltages1 < 60.0 
-AND GVL_Prop.drive_voltages2 < 60.0
-AND GVL_Prop.drive_voltages3 < 60.0
-AND GVL_Prop.drive_voltages4 < 60.0 THEN
+IF GVL_Prop.Vbus_Left < 60.0 
+AND GVL_Prop.Vbus_Right < 60.0 THEN
 	
 	DC_LINK_SAFE_PROP := TRUE;
 

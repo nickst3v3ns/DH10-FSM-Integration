@@ -9,6 +9,8 @@ VAR_INPUT
 	FlowSensor : BOOL;
 END_VAR
 VAR
+	testclk : TON; // testclk
+	
 	rtPulse : R_TRIG; // Edge detection
 END_VAR
 ]]></Declaration>
@@ -16,9 +18,14 @@ END_VAR
       <ST><![CDATA[// Look for the "False -> True" transition
 rtPulse(CLK := FlowSensor);
 
+testclk(IN := NOT testclk.Q, PT := T#50ms);
 // If edge detected, increment the global counter
 IF rtPulse.Q THEN
     PulseCount := PulseCount + 1;
+END_IF
+	
+IF testclk.Q THEN
+	PulseCount := PulseCount + 1;
 END_IF]]></ST>
     </Implementation>
   </POU>

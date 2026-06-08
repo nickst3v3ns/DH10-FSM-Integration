@@ -18,6 +18,21 @@
     <LibraryReferences>{a0174ccd-e1c7-4336-844e-25062a3daf29}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\E_LinkState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\GS\ST_Command.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\GS\ST_DatapointFrame.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\GS\ST_Offset.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\GS\ST_PodTelemetry.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_Track_Segment_Delft.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +68,30 @@
     </Compile>
     <Compile Include="DUTs\ST_Track_Segment_Raw.TcDUT">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_COMMAND_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_LEVI_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_MISC_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_PROP_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_PT_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_THERMAL_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\GVL_FLOW.TcGVL">
       <SubType>Code</SubType>
@@ -118,6 +157,9 @@
     <Compile Include="POUs\FSM\CheckCritical.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FSM\FB_BrakesRearm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FSM\FB_Charge.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +173,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\SC_MAIN_FSM.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\GS\FB_FrameEncoder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\GS\FB_GroundStationLink.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\BackgroundLateral.TcPOU">
@@ -205,12 +253,6 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAirGap_Left.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAirGap_Right.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -229,10 +271,10 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendDriveReset_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoDirectionFlag_Left.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoPilotFlag_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoDirectionFlag_Right.TcPOU">
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoPilotFlag_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Right.TcPOU">
@@ -304,12 +346,6 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentAngle_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_Right.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIamp_Left.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPodState_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -379,10 +415,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\GS" />
     <Folder Include="GVLs" />
+    <Folder Include="GVLs\GS" />
     <Folder Include="POUs\FSM" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
+    <Folder Include="POUs\GS" />
     <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_EHW" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />

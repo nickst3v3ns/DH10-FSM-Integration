@@ -21,7 +21,7 @@ END_VAR
 TxMessage.cobId := 120;
 TxMessage.length := 1;
 TxMessage.data[0] :=  INT_TO_BYTE(PropFlag AND 16#FF);
-CAN_OUTPUTS_Right.TxMessages[5] := TxMessage;
+CAN_OUTPUTS_Right.TxMessages[4] := TxMessage;
 //CAN_OUTPUTS.NoOfTxMessages := 1;
 ]]></ST>
     </Implementation>

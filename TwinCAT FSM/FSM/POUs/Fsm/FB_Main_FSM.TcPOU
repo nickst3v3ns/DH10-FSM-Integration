@@ -29,13 +29,15 @@ VAR
 	fbcharge:					FB_Charge;
 	
 	
-	fbCLKTrigger:				TP;
+	fbCLK:				TP;
 	
 	fbHeartBeatFailReset:		TON;
 	
 	bBasicChecksOk:				BOOL;
 	bCriticalFaultActive:			BOOL;
 	
+	
+	//testing bounds for propulsion
 	
 	rLowerBoundSoftStopVerySlow:			REAL := 4.4;
 	rUpperBoundSoftStopVerySlow:			REAL := 16;
@@ -66,8 +68,7 @@ IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultA
 //if statement adapetd for testing purposes	
 END_IF
 
-
-
+// GVL_FSM.fbLink();
 
 CASE currentState OF
 	
@@ -104,12 +105,6 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
-		IF GVL_FSM.bsafety_inputs_valid AND NOT GVL_FSM.bsdc_closed AND NOT (GVL_FSM.bEstopRestart < GVL_FSM.bEstopRestartTracker) THEN
-			GVL_FSM.bEstopRestartTracker := GVL_FSM.bEstopRestartTracker;
-			GVL_FSM.bEstopRestart := NOT GVL_FSM.bEstopRestart;
-		END_IF
-		
-		
 		// for testing purposes
 		IF currentCmd = E_Command.CMD_TO_MOVEMENT AND bTESTSTATE THEN
 			currentState := E_PodState.STATE_MOVEMENT;
@@ -126,7 +121,6 @@ CASE currentState OF
 		//Have some resettting functions here for some autonomous troobleshooting
 //IDLE	
 	E_PodState.STATE_SYNC:
-		
 		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
 		
 		GVL_LEVI.levitation_enable := FALSE;
@@ -163,7 +157,7 @@ CASE currentState OF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
 			
-			GVL_FSM.bengage_brakes := TRUE; //retract brakes
+			GVL_FSM.bbrakes_armed := TRUE; //retract brakes
 			
 			currentState := E_PodState.STATE_MAINTENANCE;
 			currentCmd := E_Command.CMD_NONE;
@@ -178,7 +172,8 @@ CASE currentState OF
 				
 		IF currentCmd = E_Command.CMD_TO_DEMO THEN
 			
-			GVL_FSM.bengage_brakes := TRUE; //retract brakes
+			GVL_FSM.bbrakes_armed := TRUE; //retract brakes
+			
 			
 			IF GVL_FSM.bbrakes_engaged THEN
 				
@@ -190,7 +185,6 @@ CASE currentState OF
 			
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
 			
-			GVL_FSM.b_EmergencyLine := TRUE;
 			fbdischarge();
 			
 			IF GVL_PT.PTC_STATE = 0 AND GVL_LEVI.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
@@ -209,7 +203,7 @@ CASE currentState OF
 		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
-			GVL_FSM.b_EmergencyLine := TRUE; //should we do this though?
+			GVL_FSM.bbrakes_armed := FALSE;
 		
 			fbdischarge();
 			
@@ -272,18 +266,18 @@ CASE currentState OF
 										sOut => errorMessageFSM);
 			
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		ELSIF ABS(GVL_PROP.speed)>speedLimit THEN
+		ELSIF ABS(GVL_PROP.Velocity)>speedLimit THEN
 			//Too speedy in middle track
 			GVL_LEVI.levitation_enable := FALSE;
 			GVL_PROP.propulsion_enable := FALSE;
 			
 			fbFormat(sFormat := 'Speed is too high : %.4f', 
-										 arg1 := F_REAL(GVL_PROP.speed),
+										 arg1 := F_LREAL(GVL_PROP.velocity),
 								sOut => errorMessageFSM);
 										 
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		
-		ELSIF (GVL_PROP.position < rLowerBoundSoftStopSlow AND GVL_PROP.speed<-speedLimitSlow) OR (GVL_PROP.position > rUpperBoundSoftStopSlow AND GVL_PROP.speed>speedLimitSlow) THEN
+		ELSIF (GVL_PROP.position < rLowerBoundSoftStopSlow AND GVL_PROP.velocity<-speedLimitSlow) OR (GVL_PROP.position > rUpperBoundSoftStopSlow AND GVL_PROP.velocity>speedLimitSlow) THEN
 			//Too speedy in slow zone
 			GVL_LEVI.levitation_enable := FALSE;
 			GVL_PROP.propulsion_enable := FALSE;
@@ -293,13 +287,13 @@ CASE currentState OF
 										 arg2 := F_REAL(GVL_PROP.position),
 										sOut => errorMessageFSM);*)
 			fbFormat(sFormat := 'Speed is too high slow: v: %.4f, pos : %.4f', 
-										 arg1 := F_REAL(GVL_PROP.speed),
-										 arg2 := F_REAL(GVL_PROP.position),
+										 arg1 := F_LREAL(GVL_PROP.Velocity),
+										 arg2 := F_LREAL(GVL_PROP.position),
 										sOut => errorMessageFSM);
 										
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		
-		ELSIF (GVL_PROP.position < rLowerBoundSoftStopVerySlow AND GVL_PROP.speed<-speedLimitVerySlow) OR (GVL_PROP.position > rUpperBoundSoftStopVerySlow AND GVL_PROP.speed>speedLimitVerySlow) THEN
+		ELSIF (GVL_PROP.position < rLowerBoundSoftStopVerySlow AND GVL_PROP.velocity<-speedLimitVerySlow) OR (GVL_PROP.position > rUpperBoundSoftStopVerySlow AND GVL_PROP.velocity>speedLimitVerySlow) THEN
 			//Too speedy in superslow zone
 			GVL_LEVI.levitation_enable := FALSE;
 			GVL_PROP.propulsion_enable := FALSE;
@@ -309,8 +303,8 @@ CASE currentState OF
 							 arg2 := F_REAL(GVL_PROP.position),
 								sOut => errorMessageFSM);*)
 			fbFormat(sFormat := 'SpeeD too high in very slow: v: %.4f, pos : %.4f', 
-							 arg1 := F_REAL(GVL_PROP.speed),
-							 arg2 := F_REAL(GVL_PROP.position),
+							 arg1 := F_LREAL(GVL_PROP.velocity),
+							 arg2 := F_LREAL(GVL_PROP.position),
 								sOut => errorMessageFSM);
 			
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
@@ -325,11 +319,11 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 	
-		GVL_FSM.bengage_brakes := TRUE;
+		GVL_FSM.bbrakes_armed := TRUE;
 		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN
 			
-			GVL_FSM.bengage_brakes := FALSE;
+			GVL_FSM.bbrakes_armed := FALSE;
 			
 			IF NOT GVL_FSM.bbrakes_engaged THEN
 				
@@ -348,13 +342,13 @@ ELSE
 END_CASE
 
 //Unconditional calls
-IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bengage_brakes THEN
+IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bbrakes_armed THEN
 	
-	fbCLKTrigger(IN := TRUE, PT := T#100mS, Q => GVL_FSM.bCLKTrigger); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
+	fbCLK(IN := TRUE, PT := T#100mS, Q => GVL_FSM.bbrakes_clock); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 
 END_IF
 
-GVL_FSM.bCLKTrigger := fbCLKTrigger.Q;
+GVL_FSM.bbrakes_clock := fbCLK.Q;
 
 //Forced Reset to Emergency if the Heartbeat fails
 

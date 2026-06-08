@@ -31,16 +31,15 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.b_EmergencyLine := FALSE;
+    0:  GVL_FSM.b_AlivePLC := FALSE;
 		
         GVL_Prop.propulsion_enable := FALSE;
         GVL_LEVI.levitation_enable := FALSE;
 		
         state := 1;
         
-    1:	allActionsCompleteShutdown := NOT GVL_LEVI.levitation_enable
-		AND NOT GVL_Prop.propulsion_active 
-		AND GVL_Levi.DC_LINK_SAFE 
+    1:	allActionsCompleteShutdown :=
+		GVL_Levi.DC_LINK_SAFE 
 		AND GVL_Prop.DC_LINK_SAFE 
 		AND GVL_FSM.bbrakes_engaged; 
 	
@@ -64,7 +63,8 @@ CASE state OF
 		
 		IF RecoveryToMaintenance THEN
 			
-			GVL_FSM.b_EmergencyLine := TRUE;
+			GVL_FSM.b_AlivePLC := TRUE;
+			
 			
 			state := 3;
 			

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_SendAutoDirectionFlag_Left" Id="{834cfa8c-b24b-455d-a8c9-5c8be0fce6d7}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendAutoDirectionFlag_Left
+  <POU Name="FB_SendAutoPilotFlag_Left" Id="{834cfa8c-b24b-455d-a8c9-5c8be0fce6d7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendAutoPilotFlag_Left
 VAR_INPUT
-	AutoDirectionFlag : INT;
+	AutoPilotFlag : INT;
 END_VAR
 VAR_OUTPUT
 END_VAR
@@ -20,8 +20,8 @@ END_VAR
       <ST><![CDATA[ 
 TxMessage.cobId := 130;
 TxMessage.length := 1;
-TxMessage.data[0] :=  INT_TO_BYTE(AutoDirectionFlag AND 16#FF);
-CAN_OUTPUTS_Left.TxMessages[10] := TxMessage;
+TxMessage.data[0] :=  INT_TO_BYTE(AutoPilotFlag AND 16#FF);
+CAN_OUTPUTS_Left.TxMessages[11] := TxMessage;
 //CAN_OUTPUTS.NoOfTxMessages := 1;
 ]]></ST>
     </Implementation>

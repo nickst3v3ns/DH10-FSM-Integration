@@ -4,29 +4,32 @@
     <Declaration><![CDATA[PROGRAM SAFETY_MAIN
 VAR
 	fDCLINKTreshold:				REAL := 5.0;
-	//INPUTS
-	SafetyResetButton AT %I*		:BOOL;
+
+	SafetyResetButton AT %I*:		BOOL := FALSE;
 	
-	bRearm AT %Q*: BOOL;
-	bCLK AT %Q*: BOOL;
+	bRearm AT %Q*: 					BOOL := FALSE;
+	bCLK AT %Q*: 					BOOL := FALSE;
+	bbrakes_engaged AT %I*:				BOOL := FALSE;
+	
+	bFalseForEstopRestart:					BOOL := FALSE;
 	
 	//INTERNAL VARIABLE
-	SafetyResetButton_RT 			:R_TRIG;
+	SafetyResetButton_RT:			R_TRIG;
+	StartupTimerFirst:					TON;
+	StartupTimerSecond:					TON;
 	
-	testbooltoggle : BOOL := FALSE;
-	
-	
-	bRearmNormallyOpen AT %Q*		:BOOL;
 
 	//OUTPUTS
-	SafetyRunCommand AT %Q*			:BOOL;
-	SafetyErrorAcknowledge AT %Q*	:BOOL;	
+	SafetyRunCommand AT %Q*:		BOOL := TRUE;
+	SafetyErrorAcknowledge AT %Q*:	BOOL := FALSE;	
 
-	bEstopError AT %I*:				BOOL; 
+	bEstopError AT %I*:				BOOL := FALSE; 
 	bEstopRestart AT %Q*:			BOOL := FALSE; //Used to restart the Estop from the PLC side
+	bTwinSAFEstart:			BOOL := FALSE;
 	
-	bsdc_closed AT %I*:				BOOL;
+	b_AlivePLC AT %I*:				BOOL := FALSE;
 	
+	bsafety_inputs_valid AT %I*:	BOOL := FALSE;
 	
 	
 	fbdclink						:FB_DCLINK;
@@ -34,8 +37,30 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Safety RUN/STOP command, should always be running TRUE.
-SafetyRunCommand := TRUE;
+      <ST><![CDATA[//Fetch from GVL
+
+//brakes
+bRearm := GVL_FSM.bbrakes_armed;
+bCLK := GVL_FSM.bbrakes_clock;
+
+
+//TwinSAFE Estop Logic
+bFalseForEstopRestart := GVL_FSM.bFalseForEstopRestart;
+bEstopRestart := GVL_FSM.bEstopRestart;
+
+
+//-------------
+
+
+//Safety RUN/STOP command, should always be running TRUE.
+
+StartupTimerSecond(IN := (NOT StartupTimerSecond.Q) AND (NOT bTwinSAFEstart), PT := T#0.5S);
+
+IF StartupTimerSecond.Q AND NOT bTwinSAFEstart THEN
+	SafetyRunCOmmand := NOT SafetyRunCommand;
+	bTwinSAFEstart := SafetyRunCommand;
+END_IF
+
 
 
 //Safety Error should be anknowledged when the resetbutton is pressed -> not sure if we are gonna have a reset button
@@ -43,16 +68,34 @@ SafetyResetButton_RT(CLK := SafetyResetButton);
 SafetyErrorAcknowledge := SafetyResetButton_RT.Q;
 
 
+IF bsafety_inputs_valid AND NOT b_AlivePLC AND NOT bFalseForEstopRestart THEN
+	bEstopRestart := NOT bEstopRestart;
+	
+ELSIF bsafety_inputs_valid AND NOT bFalseForEstopRestart THEN
+	bEstopRestart := FALSE;
+	bFalseForEstopRestart := TRUE;
+END_IF
 
 //DC-LINK
 fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_LINK_SAFE, DC_LINK_SAFE_PROP => GVL_Prop.DC_LINK_SAFE); 
 
 
+
+
+
+//push to GVL
+
+//estop
 GVL_FSM.bEstopError := bEstopError;
 GVL_FSM.bEstopRestart := bEstopRestart;
-GVL_FSM.bsdc_closed := bsdc_closed;
+GVL_FSM.bsdc_closed := b_AlivePLC;
 
-testbooltoggle := NOT testbooltoggle;]]></ST>
+//brakes
+bRearm := GVL_FSM.bbrakes_armed;
+bCLK := GVL_FSM.bbrakes_clock;
+bbrakes_engaged := GVL_FSM.bbrakes_engaged;
+
+//------------]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

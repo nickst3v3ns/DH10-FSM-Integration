@@ -3,8 +3,8 @@
   <POU Name="FB_GroundStationLink" Id="{bb2708ad-2e30-4998-8a72-d284a9c1c89f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_GroundStationLink
 VAR_INPUT
-    sRemoteHost     : STRING(15) := '192.168.1.100';
-    nRemotePort     : UDINT := 9000;
+    sRemoteHost     : STRING(15) := '192.168.1.7';
+    nRemotePort     : UDINT := 6949;
     bEnable         : BOOL := TRUE;
 END_VAR
 
@@ -19,7 +19,7 @@ VAR_OUTPUT
 END_VAR
 
 VAR
-	dp1 : ST_Offset;
+	dp1 : ST_DatapointFrame;
     fbConnect       : Tc2_TcpIp.FB_ClientServerConnection;
     fbSend          : Tc2_TcpIp.FB_SocketSend;
     fbReceive       : Tc2_TcpIp.FB_SocketReceive;
@@ -66,7 +66,7 @@ END_VAR]]></Declaration>
         sendTimer(IN := TRUE, PT := sendInterval);
         IF sendTimer.Q AND NOT bSendPending THEN
             sendTimer(IN := FALSE);
-            SendOffset();
+            SendPropulsion();
         END_IF
 
         IF bSendPending THEN
@@ -116,23 +116,24 @@ VAR_INPUT
     timestampUs : ULINT;
 END_VAR
 VAR_IN_OUT
-    dp : ST_Offset;
+    dp : ST_DatapointFrame;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[dp.sentinelStart := 16#FF;
 dp.idBE[0]       := UINT_TO_BYTE(SHR(id, 8) AND 16#FF);   // high byte first (BE)
 dp.idBE[1]       := UINT_TO_BYTE(id AND 16#FF);           // low byte
 dp.value         := valueBits;
-dp.timestamp_us  := timestampUs;
+dp.timestampUs  := timestampUs;
 dp.sentinelEnd   := 16#FF;
 BuildDatapoint := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="PollReceive" Id="{2cf97d43-3e79-47ed-acf4-22ac7ca2e071}">
+    <Method Name="PollReceive" Id="{62925d86-ab69-423e-bb6f-d19498152213}">
       <Declaration><![CDATA[METHOD PollReceive : BOOL
 VAR
-    bytesAvail : UDINT;
-END_VAR]]></Declaration>
+	bytesAvail : UDINT;
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbReceive(
 	hSocket  := fbConnect.hSocket,
@@ -159,6 +160,209 @@ ELSIF fbReceive.bError THEN
 	eState := E_LinkState.eError;
 END_IF
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDatapoint" Id="{1954acf1-0f13-4f0b-8601-03ebb95491bf}">
+      <Declaration><![CDATA[METHOD SendDatapoint : BOOL
+VAR_INPUT
+	id : UINT;
+	valueBits: ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BuildDatapoint(
+	id := id,
+	valueBits := valueBits,
+	timestampUs := 0,
+	dp := dp1);
+	
+fbSend(
+	hSocket := fbConnect.hSocket,
+	cbLen := SIZEOF(dp1),
+	pSrc := ADR(dp1),
+	bExecute := TRUE);
+
+bSendPending := TRUE;
+nSeqTx := nSeqTx + 1;
+SendDatapoint := TRUE;
+	
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpF32" Id="{8b58a37a-bfdd-4dd4-9552-479c5c73edf3}">
+      <Declaration><![CDATA[METHOD SendDpF32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : REAL;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+SendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpF64" Id="{072a36ab-9a6d-4f83-80d5-343dda594ef5}">
+      <Declaration><![CDATA[METHOD SendDpF64 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : LREAL;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 0);
+SendDatapoint(id := id, valueBits := bits);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpI32" Id="{664a2830-f477-49c4-91f3-a411a5d7f27b}">
+      <Declaration><![CDATA[METHOD SendDpI32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : DINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+SendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpU16" Id="{994ce20f-4c6e-4e04-a056-e10db23869a0}">
+      <Declaration><![CDATA[METHOD SendDpU16 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : UINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 2);
+SendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpU32" Id="{f619bf4f-38d3-47e9-bf28-b2682df9ba52}">
+      <Declaration><![CDATA[METHOD SendDpU32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : UDINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+SendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendDpU8" Id="{91e20036-b02c-4e61-8862-1a44c87ef13f}">
+      <Declaration><![CDATA[METHOD SendDpU8 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : BYTE;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 1);
+SendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendFlow" Id="{81541abe-e6ef-4d15-ae44-5c575c029872}">
+      <Declaration><![CDATA[METHOD SendFlow : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSeqTx := nSeqTx + 1;
+telemetry.counter := telemetry.counter + 1;
+telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+
+fbEncoder(
+    msgId      := 16#0010,
+    seqNum     := nSeqTx,
+    pPayload   := ADR(telemetry),
+    payloadLen := SIZEOF(telemetry)
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := fbEncoder.frameLen,
+    pSrc     := ADR(fbEncoder.frame),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+SendTelemetry();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendLevitation" Id="{e4a54db3-21f5-43a2-9e4c-6e63f589d318}">
+      <Declaration><![CDATA[METHOD SendLevitation : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSeqTx := nSeqTx + 1;
+telemetry.counter := telemetry.counter + 1;
+telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+
+fbEncoder(
+    msgId      := 16#0010,
+    seqNum     := nSeqTx,
+    pPayload   := ADR(telemetry),
+    payloadLen := SIZEOF(telemetry)
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := fbEncoder.frameLen,
+    pSrc     := ADR(fbEncoder.frame),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+SendTelemetry();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendMisc" Id="{1153f69f-d02a-4ea0-ab45-1e63991a2810}">
+      <Declaration><![CDATA[METHOD SendMisc : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSeqTx := nSeqTx + 1;
+telemetry.counter := telemetry.counter + 1;
+telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+
+fbEncoder(
+    msgId      := 16#0010,
+    seqNum     := nSeqTx,
+    pPayload   := ADR(telemetry),
+    payloadLen := SIZEOF(telemetry)
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := fbEncoder.frameLen,
+    pSrc     := ADR(fbEncoder.frame),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+SendTelemetry();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendOffset" Id="{ad2ff5c8-ef47-472a-bef4-0d677bcc8305}">
@@ -193,11 +397,11 @@ nSeqTx       := nSeqTx + 1;
 SendOffset  := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SendTelemetry" Id="{70ab0a90-ea43-4f72-be08-b70492b04a31}">
-      <Declaration><![CDATA[METHOD PRIVATE SendTelemetry : BOOL
-VAR
-    nNowUs : ULINT;
-END_VAR]]></Declaration>
+    <Method Name="SendPowerTrain" Id="{2ced000f-49f9-4c01-bef0-08b0fff904c1}">
+      <Declaration><![CDATA[METHOD SendPowerTrain : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[nSeqTx := nSeqTx + 1;
 telemetry.counter := telemetry.counter + 1;
@@ -217,7 +421,104 @@ fbSend(
     bExecute := TRUE
 );
 bSendPending := TRUE;
-SendTelemetry := TRUE;]]></ST>
+SendTelemetry();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendPropulsion" Id="{100d753a-6bef-4543-8ded-1ff745c56ed9}">
+      <Declaration><![CDATA[METHOD SendPropulsion : BOOL
+VAR_INPUT
+	nPropIndex : INT := 0;
+	nSendCounter : INT := 0;
+	nNumber : INT := 20;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+CASE nPropIndex OF
+    0:  SendDpU8(GVL_GS_PROP_IDS.DP_ID_PROP_FLAG, INT_TO_BYTE(GVL_Prop.PropFlag));
+    1:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION,            REAL_TO_LREAL(GVL_Prop.position));
+    2:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_INTERPOLATED, 0.0);                          // TODO: source var
+    3:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VELOCITY,            REAL_TO_LREAL(GVL_Prop.Velocity));
+    4:  SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_RIGHT,         0);                              // TODO: source var
+    5:  SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_LEFT,          0);                              // TODO: source var
+    6:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_RIGHT, 0.0);                            // TODO: source var
+    7:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_LEFT,  0.0);                            // TODO: source var
+    8:  SendDpI32(GVL_GS_PROP_IDS.DP_ID_PROP_TARGET_VELOCITY,     LREAL_TO_DINT(REAL_TO_LREAL(GVL_Prop.TargetVelocity) * 1000.0));  // m/s → mm/s
+    9:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_RIGHT,          REAL_TO_LREAL(GVL_PROP.Vbus_Right));  // verify mapping
+    10: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_LEFT,           REAL_TO_LREAL(GVL_PROP.Vbus_Left));  // verify mapping
+    11: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_RIGHT,         0);                              // TODO
+    12: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_LEFT,          0);                              // TODO
+    13: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_RIGHT,            0.0);                            // TODO: d-axis current
+    14: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_RIGHT,            0.0);                            // TODO: q-axis current
+    15: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_RIGHT,            GVL_Prop.Ia_right);
+    16: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_RIGHT,            GVL_Prop.Ib_right);
+    17: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_RIGHT,            GVL_Prop.Ic_right);
+    18: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_LEFT,             0.0);                            // TODO
+    19: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_LEFT,             0.0);                            // TODO
+    20: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_LEFT,             GVL_Prop.Ia_left);
+    21: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_LEFT,             GVL_Prop.Ib_left);
+    22: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_LEFT,             GVL_Prop.Ic_left);
+    23: SendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_DRIVE_RESET,         0);                              // TODO
+    24: SendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,     0);                              // TODO
+    25: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_LEFT,          0);                              // TODO
+    26: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_LEFT,          0);                              // TODO
+    27: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_LEFT,          0);                              // TODO
+    28: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_RIGHT,         0);                              // TODO
+    29: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_RIGHT,         0);                              // TODO
+    30: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_RIGHT,         0);                              // TODO
+    31: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_LOW,  0);                              // TODO
+    32: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_HIGH, 0);                              // TODO
+    33: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_MAX_THRUST,          0);                              // TODO
+
+END_CASE
+
+nPropIndex := (nPropIndex + 1) MOD 34;
+SendPropulsion := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendTelemetry" Id="{70ab0a90-ea43-4f72-be08-b70492b04a31}">
+      <Declaration><![CDATA[METHOD PRIVATE SendTelemetry
+VAR
+	nTelemeteryIndex: INT := 0;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+CASE nTelemeteryIndex OF
+	0: SendLevitation();
+	1: SendThermal();
+	2: SendPropulsion();
+	3: SendMisc();
+	4: SendFlow();
+END_CASE
+
+nTelemeteryIndex := (nTelemeteryIndex + 1) MOD 5;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SendThermal" Id="{80a8c1e2-37ed-4cc1-b543-748701fe96f2}">
+      <Declaration><![CDATA[METHOD SendThermal : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSeqTx := nSeqTx + 1;
+telemetry.counter := telemetry.counter + 1;
+telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+
+fbEncoder(
+    msgId      := 16#0010,
+    seqNum     := nSeqTx,
+    pPayload   := ADR(telemetry),
+    payloadLen := SIZEOF(telemetry)
+);
+
+fbSend(
+    hSocket  := fbConnect.hSocket,
+    cbLen    := fbEncoder.frameLen,
+    pSrc     := ADR(fbEncoder.frame),
+    bExecute := TRUE
+);
+bSendPending := TRUE;
+SendTelemetry();]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryParseFrames" Id="{ba047145-da3f-4ebc-b0ba-c4ab60c41fe4}">
