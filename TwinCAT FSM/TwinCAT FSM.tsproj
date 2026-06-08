@@ -2916,6 +2916,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 				<Debugger Priority="61"/>
 				<IoIdleTask Priority="5" Affinity="#x00000008"/>
 			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000008" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
@@ -11216,7 +11221,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{13BAA199-E16B-FEC7-0619-231413E6597B}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C8FD7875-8677-B83A-8744-50972CD78C90}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -11228,6 +11233,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
 						<Name>Thermal_Task Inputs</Name>
+						<Var>
+							<Name>PROP_MAIN_Delft.Offset_Left</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>PROP_MAIN_Delft.Offset_Right</Name>
+							<Type>LREAL</Type>
+						</Var>
 						<Var>
 							<Name>THERMAL_MAIN.fbEMS_T.temp_rawLFL1</Name>
 							<Type>INT</Type>
@@ -11469,14 +11482,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>PROP_MAIN_Delft.Offset_Left</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>PROP_MAIN_Delft.Offset_Right</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
 							<Name>GVL_Prop.InputData3_Front</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -11509,11 +11514,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>SAFETY_MAIN.bEstopRestart</Name>
-							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>SAFETY_MAIN.bRearm</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -11528,6 +11528,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bEstopRestart</Name>
+							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -11689,6 +11694,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 						<Name>Propulsion_Task Outputs</Name>
 						<Var>
+							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>PROP_MAIN_Delft.Ia_for_levi_left</Name>
 							<Type>LREAL</Type>
 						</Var>
@@ -11719,10 +11728,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>PROP_MAIN_Delft.currentangle_for_levi_right</Name>
 							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_Prop.OutputData_Front</Name>

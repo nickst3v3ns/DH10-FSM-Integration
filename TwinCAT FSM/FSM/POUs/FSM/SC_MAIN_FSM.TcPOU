@@ -6,7 +6,9 @@ VAR
 	main_fsm	: FB_Main_FSM;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[main_fsm();]]></ST>
+      <ST><![CDATA[main_fsm();
+
+// GVL_FSM.fbLink();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

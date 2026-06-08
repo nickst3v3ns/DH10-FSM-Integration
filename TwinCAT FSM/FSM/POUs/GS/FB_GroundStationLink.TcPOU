@@ -3,7 +3,7 @@
   <POU Name="FB_GroundStationLink" Id="{bb2708ad-2e30-4998-8a72-d284a9c1c89f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_GroundStationLink
 VAR_INPUT
-    sRemoteHost     : STRING(15) := '192.168.1.7';
+    sRemoteHost     : STRING(15);
     nRemotePort     : UDINT := 6949;
     bEnable         : BOOL := TRUE;
 END_VAR
@@ -38,7 +38,6 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE eState OF
-
     E_LinkState.eDisconnected:
         bConnected := FALSE;
         IF bEnable THEN
@@ -51,7 +50,7 @@ END_VAR]]></Declaration>
         END_IF
 
     E_LinkState.eConnecting:
-        fbConnect(bEnable := TRUE);
+        fbConnect(bEnable := TRUE, tReconnect := T#30S);
         IF fbConnect.bError THEN
             eState := E_LinkState.eReconnectWait;
             reconnectTimer(IN := FALSE);
@@ -66,7 +65,7 @@ END_VAR]]></Declaration>
         sendTimer(IN := TRUE, PT := sendInterval);
         IF sendTimer.Q AND NOT bSendPending THEN
             sendTimer(IN := FALSE);
-            SendPropulsion();
+            SendOffset();
         END_IF
 
         IF bSendPending THEN
@@ -380,7 +379,7 @@ offsetMm := 5.0 * SIN(UDINT_TO_LREAL(nSeqTx) * 0.01);
 valueBits := LREAL_TO_ULINT((10000.0 + offsetMm) * 100.0);
 
 BuildDatapoint(
-    id          := 16#0848,            // ID_OFFSET_1
+    id          := 16#0A40,            // ID_OFFSET_1
     valueBits   := valueBits,
     timestampUs := telemetry.timestamp_us,    // keep using the fake timestamp for now
     dp          := dp1

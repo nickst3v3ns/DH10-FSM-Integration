@@ -2,9 +2,9 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{B388C193-491B-1287-B84E-EA18EDCCF8D7}</SystemId>
-		<IssueTime>2026-06-08T11:22:00</IssueTime>
+		<IssueTime>2026-06-08T17:45:00</IssueTime>
 		<ExpireTime>2026-06-16T00:00:00</ExpireTime>
-		<LicenseKey>1aa680e16234ed15b618f5b173e9cbbc12b7725aff5fc9ced2ea9394908e8561fe14cc905065702ed4a9a2fdbd293600c6cc29e314aeb4a20bbc0271875a7278e61d9047122bbd69643216927f370a3a0917ab6aa8356c8517746754c295eae293ca5e9f1b97c85658d81abb603a3559d56e60d0bb434801f773d6583277b24044df71ec9b2a13dc203d5053c309ef8d494ff4780d738bf3495113856b2df114bf016329a8741d0951c8aa8355a4ae86d2700b68ee7c5c3892cedac4fab3d77a0c00213a7bc0ebdddb337b42ed3c6099d3b161c2f61c9170bb2155001b46eb4f00d1f767853244516225c392c691f34b40568543b388f3df999dd5b51026d6f4</LicenseKey>
+		<LicenseKey>1defc9dd39c48ac0ba6a7d8435c498e351a19065ee4e92b09edfcdb44aaf5c99cc9f6614a2cd9d816f3b15884bc7a52d1d928a88462509f302a3344cdcace3d244fb16e38936500553df3ca176119f0dba21b3da70087c8b7e5a47ffdc783b2e537acd87be30d0a2d90cea7f5db01940435744d7f5c751fd79c432287c1e1bfd2912e8f329a59ccd552c0045eba76e767ee929fd1da4e8eb89e5063c6ee3fe015d1f241cf7a1a2c5f10268cd5400b9c12a939a7718dfb63aa328ea3b721c9f3ad1bb6f92ba5e0a91ee9a7b264833e77e8944752bbb45e25ec4eafe0d4185765dc21e6890b68a695b4f9c692756d4d735c415be158289e28731e4a043728b6d50</LicenseKey>
 		<License>
 			<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
 			<Name>Runtime for MATLAB / Simulink</Name>
@@ -34,6 +34,11 @@
 			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
 			<Name>TC3 Serial-Communication</Name>
 			<OrderNo>TF6340</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</LicenseId>
+			<Name>TC3 TCP/IP</Name>
+			<OrderNo>TF6310</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

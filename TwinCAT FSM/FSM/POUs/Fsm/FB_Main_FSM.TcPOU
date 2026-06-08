@@ -54,7 +54,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[GVL_FSM.fbLink();
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
@@ -68,7 +68,7 @@ IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultA
 //if statement adapetd for testing purposes	
 END_IF
 
-// GVL_FSM.fbLink();
+
 
 CASE currentState OF
 	
