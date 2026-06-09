@@ -379,7 +379,7 @@ offsetMm := 5.0 * SIN(UDINT_TO_LREAL(nSeqTx) * 0.01);
 valueBits := LREAL_TO_ULINT((10000.0 + offsetMm) * 100.0);
 
 BuildDatapoint(
-    id          := 16#0A40,            // ID_OFFSET_1
+    id          := 16#0848,            // ID_OFFSET_1
     valueBits   := valueBits,
     timestampUs := telemetry.timestamp_us,    // keep using the fake timestamp for now
     dp          := dp1

@@ -33,8 +33,8 @@ VAR_GLOBAL
 	PositionLimit_High :	LREAL;
 	MaxThrust :				LREAL;
 	
-	ProportionalGain :		LREAL;
-	IntegralGain :			LREAL;
+	ProportionalGain :		LREAL := 1200;
+	IntegralGain :			LREAL := 3;
 	InitialIntegralValue :	LREAL;
 	
 	

@@ -11221,7 +11221,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C8FD7875-8677-B83A-8744-50972CD78C90}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{475ECC8D-B7E4-766A-179E-968AFE53304C}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -11514,16 +11514,16 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>SAFETY_MAIN.bRearm</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>SAFETY_MAIN.bCLK</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
 							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bRearm</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
