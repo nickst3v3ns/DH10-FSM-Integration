@@ -18586,7 +18586,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B560FB5A-222E-49D1-6192-146563CDDAD2}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{12B363FD-8C37-0CA6-E4EA-0D54C43C6EA3}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="6" AreaNo="97">
@@ -19144,11 +19144,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PropCAN.CAN_INPUTS_Right</Name>
+							<Name>GVL_PropCAN.CAN_INPUTS_Left</Name>
 							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PropCAN.CAN_INPUTS_Left</Name>
+							<Name>GVL_PropCAN.CAN_INPUTS_Right</Name>
 							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>

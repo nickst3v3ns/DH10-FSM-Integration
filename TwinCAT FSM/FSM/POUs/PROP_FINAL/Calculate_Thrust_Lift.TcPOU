@@ -8,6 +8,8 @@ VAR_INPUT
     Ic              : LREAL;
     airgap   	    : LREAL;
     currentangle    : LREAL;
+	//PositionDelft   : LREAL;
+	//PositionOffset   : LREAL;
 END_VAR
 
 VAR_OUTPUT
@@ -17,15 +19,22 @@ END_VAR
 
 VAR
 	current         : LREAL;
+	Thrust_Ripple : LREAL;
+	Lift_Ripple : LREAL;
 	PI : LREAL := 3.14159265358979323846;
+	position   : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[current := SQRT(Ia*Ia + Ib*Ib + Ic*Ic);
 
+// Not sure if we should use PositionOffset or a new variable here...
+//Thrust_Ripple := -270.41 + 63.47*SIN(2*PI*position/0.2 - PositionOffset - 2.4258) + 36.64*SIN(2*PI*position/0.2 - PositionOffset + 1.25) + 102.812*SIN(2*PI*position/0.2 - PositionOffset + 1.0689) + 3.069*SIN(2*PI*position/0.2 - PositionOffset + 0.8013); 
+//Lift_Ripple := 999.754 + 174.196*SIN(2*PI*position/0.2 - PositionOffset + 3.024) + 88.337*SIN(2*PI*position/0.2 - PositionOffset - 0.2107) + 235.01*SIN(2*PI*position/0.2 - PositionOffset - 0.4521) + 6.383*SIN(2*PI*position/0.2 - PositionOffset - 0.632); 
+
 Thrust :=  -2 * (EXPT(current,2)/EXPT(101.82337649086286,2)) * (-2.71444834E+02 *  SIN(2*PI*currentangle/180 - 1.13342567E+01 - 1.2322024519079966) + 1.64599854E-01) * (-3.30732756E+03*EXPT(airgap*1000,-9.92971373E-01)/-269.32518584269127);
 
-Lift := -2 * (EXPT(current,2) / (EXPT(101.82337649086286,2)) * (700.43884012 *  SIN(2*PI*currentangle/180 + 78.20145859 - 1.2322024519079966) -1018.85968232) * (-5.51114275E+04*EXPT(airgap*1000,-1.58045446)/-1017.713037265408));]]></ST>
+Lift := -2 * (EXPT(current,2) / (EXPT(101.82337649086286,2)) * (-700.43884012 *  SIN(2*PI*currentangle/180 + 78.20145859 - 1.2322024519079966) -1018.85968232) * (-5.51114275E+04*EXPT(airgap*1000,-1.58045446)/-1017.713037265408));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

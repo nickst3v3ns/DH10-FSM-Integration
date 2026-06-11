@@ -57,7 +57,8 @@ VAR_GLOBAL
 	rcritical_temp_watercooling_coolDown:	REAL;
 	rcritical_temp_PT_coolDown:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
 	
-
+	Max_velocity_left : LREAL;
+	Max_velocity_right : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

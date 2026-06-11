@@ -51,6 +51,7 @@ VAR
 	
 	UpperBoundPropOutputCurrent:			REAL := 150;
 	errorMessageFSM : STRING := 'NONE';
+	sOut: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -223,7 +224,7 @@ CASE currentState OF
 		
 //LEVITATION		
 	E_PodState.STATE_LEVITATION:
-	
+		
 		GVL_LEVI.levitation_enable := TRUE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
@@ -241,7 +242,19 @@ CASE currentState OF
 
 //MOVEMENT		
 	E_PodState.STATE_MOVEMENT: //bit empty innit
-	
+		
+		IF GVL_prop.Position < 5.2 THEN
+			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.311-GVL_PROP.Position)+225);
+			GVL_FSM.Max_velocity_right := -50;
+		ELSIF GVL_prop.Position > 15.3 THEN
+			GVL_FSM.Max_velocity_left := 50;
+			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-5.189)+225));
+		ELSE
+			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.311-GVL_PROP.Position)+225);
+			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-5.189)+225));
+		END_IF
+		
+		
 		
 		(*
 		IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
@@ -266,7 +279,32 @@ CASE currentState OF
 										sOut => errorMessageFSM);
 			
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		ELSIF ABS(GVL_PROP.Velocity)>speedLimit THEN
+		ELSIF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
+			//Too speedy in track
+			GVL_LEVI.levitation_enable := FALSE;
+			GVL_PROP.propulsion_enable := FALSE;
+			
+			fbFormat(sFormat := 'Speed is too high to the left : %.4f with a max of : %.4f', 
+										 arg1 := F_LREAL(GVL_PROP.velocity),
+										 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
+								sOut => errorMessageFSM);
+										 
+			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+		ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
+			//Too speedy in track
+			GVL_LEVI.levitation_enable := FALSE;
+			GVL_PROP.propulsion_enable := FALSE;
+			
+			fbFormat(sFormat := 'Speed is too high to the right : %.4f with a max of : %.4f', 
+										 arg1 := F_LREAL(GVL_PROP.velocity),
+										 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
+								sOut => errorMessageFSM);
+										 
+			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+		
+		
+
+		(* ELSIF ABS(GVL_PROP.Velocity)>speedLimit THEN
 			//Too speedy in middle track
 			GVL_LEVI.levitation_enable := FALSE;
 			GVL_PROP.propulsion_enable := FALSE;
@@ -308,6 +346,7 @@ CASE currentState OF
 								sOut => errorMessageFSM);
 			
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+		*)
 		ELSE
 			GVL_LEVI.levitation_enable := TRUE;
 			GVL_Prop.propulsion_enable := TRUE;

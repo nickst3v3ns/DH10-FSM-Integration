@@ -13,8 +13,8 @@ VAR_GLOBAL
 	AutoPilotFlag :			INT;
 	DriveReset :			INT;
 	TargetVelocity :		LREAL;
-	PositionLimit_Low :		LREAL := 8;
-	PositionLimit_High :	LREAL := 12.5;
+	PositionLimit_Low :		LREAL := 7.7;
+	PositionLimit_High :	LREAL := 13;
 	MaxThrust :				LREAL := 500;
 	
 	ProportionalGainVelocity :		LREAL := 1500;

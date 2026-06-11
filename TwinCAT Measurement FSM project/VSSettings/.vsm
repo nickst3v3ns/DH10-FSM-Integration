@@ -1000,7 +1000,7 @@
             </Node>
             <Node>
               <Title>n_lat_rejected</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1729,6 +1729,18 @@
               <Children />
             </Node>
             <Node>
+              <Title>Max_velocity_left</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>Max_velocity_right</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>motor_lift_l</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -2205,6 +2217,18 @@
               <Children>
                 <Node>
                   <Title>VelocityDelft</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>Max_velocity_left</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>Max_velocity_right</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
