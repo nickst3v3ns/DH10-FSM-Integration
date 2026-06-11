@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SendPosLimits_Left" Id="{55b5eb70-4d5d-4105-9064-8ad320338970}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SendPosLimits_Left
+VAR_INPUT
+	positionLimit_High : LREAL;
+	positionLimit_Low : LREAL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	TxMessage : EXTCANQUEUE;
+	i : INT;
+	HighLimit_Values : ARRAY[0..3] OF BYTE;
+	LowLimit_Values : ARRAY[0..3] OF BYTE;
+END_VAR
+VAR_IN_OUT
+	CAN_OUTPUTS_Left : CANTXQUEUESTRUCT_E_32;
+	CAN_INPUTS_Left : CANRXQUEUESTRUCT_E_32;
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[HighLimit_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(positionLimit_High*10000) AND 16#FF);
+HighLimit_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_High*10000), 8) AND 16#FF);
+HighLimit_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_High*10000), 16) AND 16#FF);
+HighLimit_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_High*10000), 24) AND 16#FF);
+
+LowLimit_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(positionLimit_Low*10000) AND 16#FF);
+LowLimit_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_Low*10000), 8) AND 16#FF);
+LowLimit_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_Low*10000), 16) AND 16#FF);
+LowLimit_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(positionLimit_Low*10000), 24) AND 16#FF);
+
+
+TxMessage.cobId := 1400;
+TxMessage.length := 8;
+FOR i := 0 TO 7 DO 
+	IF i < 4 THEN 
+		TxMessage.data[i] := HighLimit_Values[i];
+	ELSE 
+		TxMessage.data[i] := LowLimit_Values[i - 4];
+	END_IF
+END_FOR
+CAN_OUTPUTS_Left.TxMessages[12] := TxMessage;
+//CAN_OUTPUTS.NoOfTxMessages := 1
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

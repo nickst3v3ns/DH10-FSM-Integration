@@ -24,9 +24,9 @@ END_VAR
     <Implementation>
       <ST><![CDATA[FOR i := 0 TO (Inputs_Right.NoOfRxMessages-1) DO
     IF Inputs_Right.RxMessages[i].cobId = 600 THEN 
-        Ia_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[1]))) / 100.0; 
-        Ib_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[2]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[3]))) / 100.0; 
-        Ic_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[4]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[5]))) / 100.0; 
+        Ia_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[1]))) / 10.0; 
+        Ib_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[2]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[3]))) / 10.0; 
+        Ic_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[4]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[5]))) / 10.0; 
     	nReceiveCounter := nReceiveCounter + 1;
 	END_IF
 END_FOR

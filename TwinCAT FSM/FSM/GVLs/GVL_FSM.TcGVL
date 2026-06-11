@@ -5,7 +5,7 @@
 VAR_GLOBAL
 //Heartbeat
 	fbLink : FB_GroundStationLink := (
-        sRemoteHost := '192.168.1.9',   // <-- ground station IP, change to match
+        sRemoteHost := '192.168.1.5',   // <-- ground station IP, change to match
         nRemotePort := 6949,
         bEnable     := TRUE
     );

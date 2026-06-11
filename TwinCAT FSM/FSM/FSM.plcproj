@@ -253,6 +253,18 @@
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePosInterpolated_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVelocityIntegral_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceivePosInterpolated_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_ReceiveVelocityIntegral_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCANDelay_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -275,6 +287,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendAutoPilotFlag_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendFmax_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosLimits_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendFmax_Right.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosLimits_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Right.TcPOU">
@@ -438,9 +462,9 @@
       <DefaultResolution>ETML_DH10, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>ETML_DH10</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="lateral_levitation_control">
-      <DefaultResolution>lateral_levitation_control, * (TE140x Module Vendor)</DefaultResolution>
-      <Namespace>lateral_levitation_control</Namespace>
+    <PlaceholderReference Include="lateral_levitation_control_new">
+      <DefaultResolution>lateral_levitation_control_new, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>lateral_levitation_control_new</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Liftoff_model">
       <DefaultResolution>Liftoff_model, * (TE140x Module Vendor)</DefaultResolution>

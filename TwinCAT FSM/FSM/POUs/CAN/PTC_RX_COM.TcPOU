@@ -9,8 +9,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[receive_messages(CAN_OUTPUTS := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
-LV_BAT_Par();]]></ST>
+      <ST><![CDATA[receive_messages(CAN_OUTPUTS := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

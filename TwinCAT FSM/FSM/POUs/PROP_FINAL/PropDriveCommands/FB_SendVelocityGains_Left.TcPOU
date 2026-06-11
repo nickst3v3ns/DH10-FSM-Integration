@@ -14,7 +14,7 @@ VAR
 	i : INT;
 	ProportionalGain_Values : ARRAY[0..1] OF BYTE;
 	IntegrallGain_Values : ARRAY[0..1] OF BYTE;
-	InitialIntegralValue_Values : ARRAY[0..1] OF BYTE;
+	InitialIntegralValue_Values : ARRAY[0..3] OF BYTE;
 	CAN_OUTPUTS: INT;
 END_VAR
 VAR_IN_OUT
@@ -39,12 +39,14 @@ ProportionalGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(ProportionalGain*1)
 IntegrallGain_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(IntegralGain*1) AND 16#FF);
 IntegrallGain_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(IntegralGain*1), 8) AND 16#FF);
 
-InitialIntegralValue_Values[1] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValue*1) AND 16#FF);
-InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*1), 8) AND 16#FF);
+InitialIntegralValue_Values[3] := DINT_TO_BYTE(LREAL_TO_DINT(InitialIntegralValue*100) AND 16#FF);
+InitialIntegralValue_Values[2] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 8) AND 16#FF);
+InitialIntegralValue_Values[1] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 16) AND 16#FF);
+InitialIntegralValue_Values[0] := DINT_TO_BYTE(SHR(LREAL_TO_DINT(InitialIntegralValue*100), 24) AND 16#FF);
 
 TxMessage.cobId := 310;
-TxMessage.length := 6;
-FOR i := 0 TO 5 DO 
+TxMessage.length := 8;
+FOR i := 0 TO 7 DO 
 	IF i < 2 THEN 
 		TxMessage.data[i] := ProportionalGain_Values[i];
 	ELSIF i < 4 THEN

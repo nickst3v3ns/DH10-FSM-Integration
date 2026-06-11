@@ -19,6 +19,8 @@ VAR_OUTPUT
 END_VAR
 
 VAR
+	txBatch : ARRAY[0..2047] OF BYTE;
+	txBatchLen : UDINT;
 	dp1 : ST_DatapointFrame;
     fbConnect       : Tc2_TcpIp.FB_ClientServerConnection;
     fbSend          : Tc2_TcpIp.FB_SocketSend;
@@ -65,7 +67,7 @@ END_VAR]]></Declaration>
         sendTimer(IN := TRUE, PT := sendInterval);
         IF sendTimer.Q AND NOT bSendPending THEN
             sendTimer(IN := FALSE);
-            SendOffset();
+            SendPropulsion();
         END_IF
 
         IF bSendPending THEN
@@ -107,6 +109,124 @@ IF bNewCommand THEN
     bNewCommand := FALSE;
 END_IF]]></ST>
     </Implementation>
+    <Method Name="AppendDatapoint" Id="{55febd3b-86f2-4a2c-94a0-27bbcb4a37ab}">
+      <Declaration><![CDATA[METHOD AppendDatapoint : BOOL
+VAR_INPUT
+	id : UINT;
+	valueBits : ULINT;
+END_VAR
+VAR
+	ts : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(txBatchLen + 20) > SIZEOF(txBatch) THEN
+	AppendDatapoint := FALSE;
+	RETURN;
+END_IF
+
+ts := 0;
+BuildDatapoint(id := id, valueBits := valueBits, timestampUs := ts, dp := dp1);
+MEMCPY(ADR(txBatch[txBatchLen]), ADR(dp1), 20);
+txBatchLen := txBatchLen + 20;
+AppendDatapoint := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDP16" Id="{994ce20f-4c6e-4e04-a056-e10db23869a0}">
+      <Declaration><![CDATA[METHOD AppendDP16 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : UINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 2);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpF32" Id="{8b58a37a-bfdd-4dd4-9552-479c5c73edf3}">
+      <Declaration><![CDATA[METHOD AppendDpF32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : REAL;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpF64" Id="{072a36ab-9a6d-4f83-80d5-343dda594ef5}">
+      <Declaration><![CDATA[METHOD AppendDpF64 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : LREAL;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 8);
+AppendDatapoint(id := id, valueBits := bits);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpI32" Id="{664a2830-f477-49c4-91f3-a411a5d7f27b}">
+      <Declaration><![CDATA[METHOD AppendDpI32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : DINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpU32" Id="{f619bf4f-38d3-47e9-bf28-b2682df9ba52}">
+      <Declaration><![CDATA[METHOD AppendDpU32 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : UDINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 4);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpU8" Id="{91e20036-b02c-4e61-8862-1a44c87ef13f}">
+      <Declaration><![CDATA[METHOD AppendDpU8 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : BYTE;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 1);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="BuildDatapoint" Id="{1984dfb5-e247-4430-8114-76733fe18619}">
       <Declaration><![CDATA[METHOD PRIVATE BuildDatapoint : BOOL
 VAR_INPUT
@@ -127,6 +247,29 @@ dp.sentinelEnd   := 16#FF;
 BuildDatapoint := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="FlushBatch" Id="{992beee3-aef5-4593-92eb-1fae988f1a0e}">
+      <Declaration><![CDATA[METHOD FlushBatch : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF txBatchLen = 0 OR bSendPending THEN
+	FlushBatch := TRUE;
+	RETURN;
+END_IF
+
+fbSend(
+	hSocket := fbConnect.hSocket,
+	cbLen := txBatchLen,
+	pSrc := ADR(txBatch),
+	bExecute := TRUE
+);
+
+bSendPending := TRUE;
+txBatchLen := 0;
+FlushBatch := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="PollReceive" Id="{62925d86-ab69-423e-bb6f-d19498152213}">
       <Declaration><![CDATA[METHOD PollReceive : BOOL
 VAR
@@ -140,7 +283,7 @@ END_VAR
 	cbLen    := SIZEOF(rxScratch),
 	bExecute := TRUE
 );
-IF NOT fbReceive.bError AND NOT fbReceive.bError THEN
+IF NOT fbReceive.bBusy AND NOT fbReceive.bError THEN
 	fbReceive(bExecute := FALSE);
 	IF fbReceive.nRecBytes > 0 THEN
 		// Append to rxBuffer.
@@ -186,101 +329,6 @@ nSeqTx := nSeqTx + 1;
 SendDatapoint := TRUE;
 	
 	]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpF32" Id="{8b58a37a-bfdd-4dd4-9552-479c5c73edf3}">
-      <Declaration><![CDATA[METHOD SendDpF32 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : REAL;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 4);
-SendDatapoint(id := id, valueBits := bits);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpF64" Id="{072a36ab-9a6d-4f83-80d5-343dda594ef5}">
-      <Declaration><![CDATA[METHOD SendDpF64 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : LREAL;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 0);
-SendDatapoint(id := id, valueBits := bits);
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpI32" Id="{664a2830-f477-49c4-91f3-a411a5d7f27b}">
-      <Declaration><![CDATA[METHOD SendDpI32 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : DINT;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 4);
-SendDatapoint(id := id, valueBits := bits);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpU16" Id="{994ce20f-4c6e-4e04-a056-e10db23869a0}">
-      <Declaration><![CDATA[METHOD SendDpU16 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : UINT;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 2);
-SendDatapoint(id := id, valueBits := bits);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpU32" Id="{f619bf4f-38d3-47e9-bf28-b2682df9ba52}">
-      <Declaration><![CDATA[METHOD SendDpU32 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : UDINT;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 4);
-SendDatapoint(id := id, valueBits := bits);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SendDpU8" Id="{91e20036-b02c-4e61-8862-1a44c87ef13f}">
-      <Declaration><![CDATA[METHOD SendDpU8 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : BYTE;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 1);
-SendDatapoint(id := id, valueBits := bits);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendFlow" Id="{81541abe-e6ef-4d15-ae44-5c575c029872}">
@@ -426,52 +474,47 @@ SendTelemetry();]]></ST>
     <Method Name="SendPropulsion" Id="{100d753a-6bef-4543-8ded-1ff745c56ed9}">
       <Declaration><![CDATA[METHOD SendPropulsion : BOOL
 VAR_INPUT
-	nPropIndex : INT := 0;
 	nSendCounter : INT := 0;
 	nNumber : INT := 20;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-CASE nPropIndex OF
-    0:  SendDpU8(GVL_GS_PROP_IDS.DP_ID_PROP_FLAG, INT_TO_BYTE(GVL_Prop.PropFlag));
-    1:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION,            REAL_TO_LREAL(GVL_Prop.position));
-    2:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_INTERPOLATED, 0.0);                          // TODO: source var
-    3:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VELOCITY,            REAL_TO_LREAL(GVL_Prop.Velocity));
-    4:  SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_RIGHT,         0);                              // TODO: source var
-    5:  SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_LEFT,          0);                              // TODO: source var
-    6:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_RIGHT, 0.0);                            // TODO: source var
-    7:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_LEFT,  0.0);                            // TODO: source var
-    8:  SendDpI32(GVL_GS_PROP_IDS.DP_ID_PROP_TARGET_VELOCITY,     LREAL_TO_DINT(REAL_TO_LREAL(GVL_Prop.TargetVelocity) * 1000.0));  // m/s → mm/s
-    9:  SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_RIGHT,          REAL_TO_LREAL(GVL_PROP.Vbus_Right));  // verify mapping
-    10: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_LEFT,           REAL_TO_LREAL(GVL_PROP.Vbus_Left));  // verify mapping
-    11: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_RIGHT,         0);                              // TODO
-    12: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_LEFT,          0);                              // TODO
-    13: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_RIGHT,            0.0);                            // TODO: d-axis current
-    14: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_RIGHT,            0.0);                            // TODO: q-axis current
-    15: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_RIGHT,            GVL_Prop.Ia_right);
-    16: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_RIGHT,            GVL_Prop.Ib_right);
-    17: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_RIGHT,            GVL_Prop.Ic_right);
-    18: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_LEFT,             0.0);                            // TODO
-    19: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_LEFT,             0.0);                            // TODO
-    20: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_LEFT,             GVL_Prop.Ia_left);
-    21: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_LEFT,             GVL_Prop.Ib_left);
-    22: SendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_LEFT,             GVL_Prop.Ic_left);
-    23: SendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_DRIVE_RESET,         0);                              // TODO
-    24: SendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,     0);                              // TODO
-    25: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_LEFT,          0);                              // TODO
-    26: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_LEFT,          0);                              // TODO
-    27: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_LEFT,          0);                              // TODO
-    28: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_RIGHT,         0);                              // TODO
-    29: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_RIGHT,         0);                              // TODO
-    30: SendDpU16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_RIGHT,         0);                              // TODO
-    31: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_LOW,  0);                              // TODO
-    32: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_HIGH, 0);                              // TODO
-    33: SendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_MAX_THRUST,          0);                              // TODO
+        <ST><![CDATA[AppendDpU8(GVL_GS_PROP_IDS.DP_ID_PROP_FLAG, INT_TO_BYTE(GVL_Prop.PropFlag));
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION,            REAL_TO_LREAL(GVL_Prop.position));
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_INTERPOLATED, 0.0);                          // TODO: source var
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VELOCITY,            REAL_TO_LREAL(GVL_Prop.Velocity));
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_RIGHT,         0);                              // TODO: source var
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_LEFT,          0);                              // TODO: source var
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_RIGHT, 0.0);                            // TODO: source var
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_LEFT,  0.0);                            // TODO: source var
+AppendDpI32(GVL_GS_PROP_IDS.DP_ID_PROP_TARGET_VELOCITY,     LREAL_TO_DINT(REAL_TO_LREAL(GVL_Prop.TargetVelocity) * 1000.0));  // m/s → mm/s
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_RIGHT,          REAL_TO_LREAL(GVL_PROP.Vbus_Right));  // verify mapping
+ AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_LEFT,           REAL_TO_LREAL(GVL_PROP.Vbus_Left));  // verify mapping
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_RIGHT,         0);                              // TODO
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_LEFT,          0);                              // TODO
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_RIGHT,            0.0);                            // TODO: d-axis current
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_RIGHT,            0.0);                            // TODO: q-axis current
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_RIGHT,            GVL_Prop.Ia_right);
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_RIGHT,            GVL_Prop.Ib_right);
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_RIGHT,            GVL_Prop.Ic_right);
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_LEFT,             0.0);                            // TODO
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_LEFT,             0.0);                            // TODO
+AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_LEFT,             GVL_Prop.Ia_left);
+ AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_LEFT,             GVL_Prop.Ib_left);
+ AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_LEFT,             GVL_Prop.Ic_left);
+AppendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_DRIVE_RESET,         0);                              // TODO
+AppendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,     0);                              // TODO
+ AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_LEFT,          0);                              // TODO
+ AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_LEFT,          0);                              // TODO
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_LEFT,          0);                              // TODO
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_RIGHT,         0);                              // TODO
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_RIGHT,         0);                              // TODO
+AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_RIGHT,         0);                              // TODO
+AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_LOW,  0);                              // TODO
+AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_HIGH, 0);                              // TODO
+AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_MAX_THRUST,          0);                              // TODO
 
-END_CASE
-
-nPropIndex := (nPropIndex + 1) MOD 34;
+FlushBatch();
 SendPropulsion := TRUE;]]></ST>
       </Implementation>
     </Method>

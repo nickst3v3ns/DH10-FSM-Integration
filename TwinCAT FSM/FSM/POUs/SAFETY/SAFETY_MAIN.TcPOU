@@ -3,7 +3,7 @@
   <POU Name="SAFETY_MAIN" Id="{b6f5d991-137b-4625-ad53-4d4b654d8ae8}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM SAFETY_MAIN
 VAR
-	fDCLINKTreshold:				REAL := 5.0;
+	fDCLINKTreshold:				REAL := 40.0;
 
 	SafetyResetButton AT %I*:		BOOL := FALSE;
 	

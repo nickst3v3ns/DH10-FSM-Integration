@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ReceivePosInterpolated_Right" Id="{c9cb07ee-140e-4a02-8d05-57436ea06db5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReceivePosInterpolated_Right
+VAR_IN_OUT
+	Inputs_Right : CANRXQUEUESTRUCT_E_32;
+	Outputs_Right : CANTXQUEUESTRUCT_E_32;
+END_VAR
+VAR_OUTPUT
+	PositionInterpolated_Right : LREAL;
+END_VAR
+VAR
+	MessageReceived : ARRAY[0..31] OF EXTCANQUEUE;
+	i : INT;
+	
+	fbPPS_Timer : TON;
+	nPacketsPerSecond: INT;
+	nReceiveCounter : INT;
+	nLastReceiveCounter : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 0 TO (Inputs_Right.NoOfRxMessages-1) DO
+    IF Inputs_Right.RxMessages[i].cobId = 1200 THEN 
+       PositionInterpolated_Right := INT_TO_LREAL(DWORD_TO_INT(SHL(USINT_TO_UDINT(Inputs_Right.RxMessages[i].data[0]), 24) OR SHL(USINT_TO_UDINT(Inputs_Right.RxMessages[i].data[1]), 16) OR SHL(USINT_TO_UDINT(Inputs_Right.RxMessages[i].data[2]), 8)  OR USINT_TO_UDINT(Inputs_Right.RxMessages[i].data[3]))); 
+         
+    	nReceiveCounter := nReceiveCounter + 1;
+	END_IF
+END_FOR
+fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
+IF fbPPS_Timer.Q THEN
+			nPacketsPerSecond   := nReceiveCounter - nLastReceiveCounter;
+			nLastReceiveCounter := nReceiveCounter;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

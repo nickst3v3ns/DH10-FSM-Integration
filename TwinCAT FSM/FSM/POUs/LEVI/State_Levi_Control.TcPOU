@@ -64,7 +64,7 @@ VAR
 	
 	K_P_pitch: LREAL := 60000;
 	K_I_pitch: LREAL := 100000;
-	K_D_pitch: LREAL := 15000;
+	K_D_pitch: LREAL := 20000;
 	K_F_pitch: LREAL := 250;
 	K_I_pitch_initial: LREAL := -44;
 	
@@ -96,7 +96,7 @@ VAR
 	
 	tau_x_ems: LREAL;
 	
-	I_EMS: lateral_levitation_control.T_matrix4xdouble;
+	I_EMS: lateral_levitation_control_new.T_matrix4xdouble;
 	
 	I_VFL: vertical_levitation_control_new.T_matrix2xdouble;	
 	I_VFR: vertical_levitation_control_new.T_matrix2xdouble;
