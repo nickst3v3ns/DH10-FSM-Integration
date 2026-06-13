@@ -226,6 +226,7 @@ VAR_OUTPUT
 	
 	Position_for_levi AT %Q* : LREAL;
 	Velocity_for_levi AT %Q* : LREAL;
+	PositionOffset_for_levi AT %Q* : LREAL;
 END_VAR
 
 VAR_INPUT
@@ -741,6 +742,7 @@ END_IF
 
 Position_for_levi := positionDelft;
 Velocity_for_levi := VelocityDelft;
+PositionOffset_for_levi := PositionOffset;
 
 
 //

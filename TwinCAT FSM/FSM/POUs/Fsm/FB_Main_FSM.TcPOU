@@ -381,13 +381,13 @@ ELSE
 END_CASE
 
 //Unconditional calls
-IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bbrakes_armed THEN
+//IF GVL_FSM.bbrakes_engaged <> GVL_FSM.bbrakes_armed THEN
 	
-	fbCLK(IN := TRUE, PT := T#100mS, Q => GVL_FSM.bbrakes_clock); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
+	//fbCLK(IN := TRUE, PT := T#100mS, Q => GVL_FSM.bbrakes_clock); //fire a clk pulse to trigger PLC control on the Braking PCB. IN is defined as the opposite status so that it only fires once
 
-END_IF
+//END_IF
 
-GVL_FSM.bbrakes_clock := fbCLK.Q;
+//GVL_FSM.bbrakes_clock := fbCLK.Q;
 
 //Forced Reset to Emergency if the Heartbeat fails
 

@@ -18,6 +18,7 @@ VAR_INPUT
 	
 	Position AT %I* : LREAL;
 	Velocity AT %I* : LREAL;
+	PositionOffset AT %I* : LREAL;
 END_VAR
 
 VAR_OUTPUT
@@ -278,64 +279,64 @@ VAR
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := 39;	
 	*)
-	K_P_tot_motor_on: LREAL := 400000;
-	K_I_tot_motor_on: LREAL := 300000;
-	K_D_tot_motor_on: LREAL := 45000;
+	K_P_tot_motor_on: LREAL := 300000;
+	K_I_tot_motor_on: LREAL := 200000;
+	K_D_tot_motor_on: LREAL := 30000;
 	K_F_tot_motor_on: LREAL := 100;
 	K_I_tot_initial_motor_on: LREAL := 14160;
 	
-	K_P_pitch_motor_on: LREAL := 200000;
+	K_P_pitch_motor_on: LREAL := 60000;
 	K_I_pitch_motor_on: LREAL := 200000;
-	K_D_pitch_motor_on: LREAL := 40000;
+	K_D_pitch_motor_on: LREAL := 15000;
 	K_F_pitch_motor_on: LREAL := 250;
 	K_I_pitch_initial_motor_on: LREAL := 202;
 	
 	K_P_roll_motor_on: LREAL := 150000;
 	K_I_roll_motor_on: LREAL := 100000;
-	K_D_roll_motor_on: LREAL := 30000;
+	K_D_roll_motor_on: LREAL := 10000;
 	K_F_roll_motor_on: LREAL := 120;
 	K_I_roll_initial_motor_on: LREAL := -11;
 	
-	K_P_lat_motor_on: LREAL := 800000;
-	K_I_lat_motor_on: LREAL := 60000;
-	K_D_lat_motor_on: LREAL := 30000;
+	K_P_lat_motor_on: LREAL := 120000;
+	K_I_lat_motor_on: LREAL := 30000;
+	K_D_lat_motor_on: LREAL := 10000;
 	K_F_lat_motor_on: LREAL := 120;
 	K_I_lat_initial_motor_on: LREAL := 20;
 
-	K_P_yaw_motor_on: LREAL := 600000;
-	K_I_yaw_motor_on: LREAL := 70000;
-	K_D_yaw_motor_on: LREAL := 30000;
-	K_F_yaw_motor_on: LREAL := 100;
+	K_P_yaw_motor_on: LREAL := 50000;
+	K_I_yaw_motor_on: LREAL := 50000;
+	K_D_yaw_motor_on: LREAL := 5000;
+	K_F_yaw_motor_on: LREAL := 120;
 	K_I_yaw_initial_motor_on: LREAL := 39;	
 	
-	K_P_tot: LREAL := 400000;
-	K_I_tot: LREAL := 300000;
-	K_D_tot: LREAL := 45000;
+	K_P_tot: LREAL := 300000;
+	K_I_tot: LREAL := 200000;
+	K_D_tot: LREAL := 30000;
 	K_F_tot: LREAL := 100;
 	K_I_tot_initial: LREAL := 14160;
 	
-	K_P_pitch: LREAL := 200000;
+	K_P_pitch: LREAL := 60000;
 	K_I_pitch: LREAL := 200000;
-	K_D_pitch: LREAL := 40000;
+	K_D_pitch: LREAL := 15000;
 	K_F_pitch: LREAL := 250;
 	K_I_pitch_initial: LREAL := 202;
 	
 	K_P_roll: LREAL := 150000;
 	K_I_roll: LREAL := 100000;
-	K_D_roll: LREAL := 30000;
+	K_D_roll: LREAL := 10000;
 	K_F_roll: LREAL := 120;
 	K_I_roll_initial: LREAL := -11;
 	
-	K_P_lat: LREAL := 800000;
-	K_I_lat: LREAL := 60000;
-	K_D_lat: LREAL := 30000;
+	K_P_lat: LREAL := 120000;
+	K_I_lat: LREAL := 30000;
+	K_D_lat: LREAL := 10000;
 	K_F_lat: LREAL := 120;
 	K_I_lat_initial: LREAL := 20;
 
-	K_P_yaw: LREAL := 600000;
-	K_I_yaw: LREAL := 70000;
-	K_D_yaw: LREAL := 30000;
-	K_F_yaw: LREAL := 100;
+	K_P_yaw: LREAL := 50000;
+	K_I_yaw: LREAL := 50000;
+	K_D_yaw: LREAL := 5000;
+	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := 39;	
 	
 	Zero_current_finder_gain : LREAL := 0.00025;
@@ -349,6 +350,7 @@ VAR
 	motor_y_gain : LREAL := 1;
 	motor_yaw_gain : LREAL := 1;	
 	
+	FF_Delay : REAL;
 	
 	Lift_off_enabled : BOOL := TRUE;
 	descent_enabled : BOOL := TRUE;
@@ -412,11 +414,11 @@ VAR
 	f_lat_notch_main_4 : LREAL := 210.94;
 	enable_lat_main_notch_4 : BOOL := TRUE;
 	
-	f_extra_y_filter_1 : LREAL := 0;
-	enable_extra_y_notch_1 : BOOL := FALSE;
+	f_extra_y_filter_1 : LREAL := 13.122; 
+	enable_extra_y_notch_1 : BOOL := TRUE;
 	
-	f_extra_y_filter_2 : LREAL := 0;
-	enable_extra_y_notch_2 : BOOL := FALSE;
+	f_extra_y_filter_2 : LREAL := 11.15;
+	enable_extra_y_notch_2 : BOOL := TRUE;
 	
 	f_extra_y_filter_3 : LREAL := 0;
 	enable_extra_y_notch_3 : BOOL := FALSE;
@@ -904,8 +906,12 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_left,
 										airgap := motor_airgap_left, 
 										currentangle := currentangle_for_levi_left,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_l,
-										lift => motor_lift_l);
+										lift => motor_lift_l, );
 				
 								
 				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
@@ -913,6 +919,10 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_right,
 										airgap := motor_airgap_right, 
 										currentangle := currentangle_for_levi_right,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
 			
@@ -1199,8 +1209,12 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_left,
 										airgap := motor_airgap_left, 
 										currentangle := currentangle_for_levi_left,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_l,
-										lift => motor_lift_l);
+										lift => motor_lift_l, );
 				
 								
 				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
@@ -1208,6 +1222,10 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_right,
 										airgap := motor_airgap_right, 
 										currentangle := currentangle_for_levi_right,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
  
@@ -1505,8 +1523,12 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_left,
 										airgap := motor_airgap_left, 
 										currentangle := currentangle_for_levi_left,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_l,
-										lift => motor_lift_l);
+										lift => motor_lift_l, );
 				
 								
 				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
@@ -1514,6 +1536,10 @@ CASE GVL_LEVI.Levi_Command OF
 										Ic := Ic_for_levi_right,
 										airgap := motor_airgap_right, 
 										currentangle := currentangle_for_levi_right,
+										FF_Delay := FF_Delay,
+										PositionDelft := Position,
+										PositionOffset := PositionOffset,
+										VelocityDelft := Velocity,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
 			
