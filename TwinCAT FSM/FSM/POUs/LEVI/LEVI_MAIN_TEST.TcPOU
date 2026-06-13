@@ -351,6 +351,7 @@ VAR
 	motor_yaw_gain : LREAL := 1;	
 	
 	FF_Delay : REAL;
+	position_tune : REAL;
 	
 	Lift_off_enabled : BOOL := TRUE;
 	descent_enabled : BOOL := TRUE;
@@ -910,6 +911,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_l,
 										lift => motor_lift_l, );
 				
@@ -923,6 +925,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
 			
@@ -1213,6 +1216,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_l,
 										lift => motor_lift_l, );
 				
@@ -1226,6 +1230,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
  
@@ -1527,6 +1532,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_l,
 										lift => motor_lift_l, );
 				
@@ -1540,6 +1546,7 @@ CASE GVL_LEVI.Levi_Command OF
 										PositionDelft := Position,
 										PositionOffset := PositionOffset,
 										VelocityDelft := Velocity,
+										position_tune := position_tune,
 										thrust => motor_thrust_r,
 										lift => motor_lift_r);
 			

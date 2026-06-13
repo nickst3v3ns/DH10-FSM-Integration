@@ -9,6 +9,8 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
+	bGsLinkAlive : BOOL;
+
     eState          : E_LinkState;
     bConnected      : BOOL;
     nFramesSent     : UDINT;
@@ -19,6 +21,13 @@ VAR_OUTPUT
 END_VAR
 
 VAR
+	wdGsLink : TON;
+	wdGsLinkTimeout : TIME := T#100MS;
+
+	nUnknownMsgIds : UDINT;
+	nHeartbeatsRx : UDINT;
+	nLastMsgIdRx : UINT;	
+
 	txBatch : ARRAY[0..2047] OF BYTE;
 	txBatchLen : UDINT;
 	dp1 : ST_DatapointFrame;
@@ -60,6 +69,8 @@ END_VAR]]></Declaration>
             rxLen := 0;
             bConnected := TRUE;
             sendTimer(IN := FALSE);
+			wdGsLink(IN := FALSE);
+			bGsLinkAlive := TRUE;
             eState := E_LinkState.eConnected;
         END_IF
 
@@ -84,6 +95,8 @@ END_VAR]]></Declaration>
         END_IF
 
         PollReceive();
+		wdGsLink(IN := TRUE, PT := wdGsLinkTimeout);
+		bGsLinkAlive := NOT wdGsLink.Q;
 
         IF fbConnect.eState <> eSOCKET_CONNECTED THEN
             eState := E_LinkState.eError;
@@ -103,11 +116,7 @@ END_VAR]]></Declaration>
             eState := E_LinkState.eDisconnected;
         END_IF
 
-END_CASE
-
-IF bNewCommand THEN
-    bNewCommand := FALSE;
-END_IF]]></ST>
+END_CASE]]></ST>
     </Implementation>
     <Method Name="AppendDatapoint" Id="{55febd3b-86f2-4a2c-94a0-27bbcb4a37ab}">
       <Declaration><![CDATA[METHOD AppendDatapoint : BOOL
@@ -247,6 +256,81 @@ dp.sentinelEnd   := 16#FF;
 BuildDatapoint := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="DecodeF32" Id="{21e93e0a-6b13-4ba7-b284-1e00db11fbfe}">
+      <Declaration><![CDATA[METHOD DecodeF32 : BOOL
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DecodeF64" Id="{f6360286-985c-4749-ac46-ecccb7c39792}">
+      <Declaration><![CDATA[METHOD DecodeF64 : LREAL
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 8);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DecodeI16" Id="{754fb116-512f-451f-8a50-e06e92ebd5fd}">
+      <Declaration><![CDATA[METHOD DecodeI16 : UINT
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 2);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DecodeI32" Id="{f0fffbfa-15fa-400d-bb74-de1cc2e5c43b}">
+      <Declaration><![CDATA[METHOD DecodeI32 : DINT
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DecodeU32" Id="{0edaae4a-c4da-4d02-a29e-a53a64fb0b09}">
+      <Declaration><![CDATA[METHOD DecodeU32 : UINT
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DecodeU8" Id="{a38b7d03-293c-4c86-b3ac-eadbc0f12fb2}">
+      <Declaration><![CDATA[METHOD DecodeU8 : BOOL
+VAR_INPUT
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DispatchCommand" Id="{1d17d398-2731-445d-b478-17278c6a2887}">
+      <Declaration><![CDATA[METHOD DispatchCommand
+VAR_INPUT
+	msgId : UINT;
+	valueBits : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE msgId OF
+	
+END_CASE
+
+DispatchCommand := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FlushBatch" Id="{992beee3-aef5-4593-92eb-1fae988f1a0e}">
       <Declaration><![CDATA[METHOD FlushBatch : BOOL
 VAR_INPUT
@@ -268,6 +352,18 @@ fbSend(
 bSendPending := TRUE;
 txBatchLen := 0;
 FlushBatch := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnHeartbeat" Id="{d2394bbb-1b1e-4317-a4ac-c5260873b8f4}">
+      <Declaration><![CDATA[METHOD OnHeartbeat : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nHeartbeatsRx := nHeartbeatsRx + 1;
+
+wdGsLink(IN := FALSE);
+OnHeartbeat := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="PollReceive" Id="{62925d86-ab69-423e-bb6f-d19498152213}">
@@ -567,47 +663,34 @@ SendTelemetry();]]></ST>
       <Declaration><![CDATA[METHOD TryParseFrames : BOOL
 VAR
     msgId, length : UINT;
-    seqNum        : UDINT;
-    total         : UINT;
-    i             : UINT;
+	valueBits : UDINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Loop because one read might contain multiple frames.
-WHILE rxLen >= 8 DO
+WHILE rxLen >= 16 DO
 	msgId  := BYTE_TO_UINT(rxBuffer[0]) OR SHL(BYTE_TO_UINT(rxBuffer[1]), 8);
 	length := BYTE_TO_UINT(rxBuffer[2]) OR SHL(BYTE_TO_UINT(rxBuffer[3]), 8);
-	seqNum := BYTE_TO_UDINT(rxBuffer[4])
-		   OR SHL(BYTE_TO_UDINT(rxBuffer[5]), 8)
-		   OR SHL(BYTE_TO_UDINT(rxBuffer[6]), 16)
-		   OR SHL(BYTE_TO_UDINT(rxBuffer[7]), 24);
-	total := 8 + length;
 
-	IF rxLen < total THEN
+	IF length <> 8 THEN
+		rxLen := 0;
+		eState := E_LinkState.eError;
 		EXIT;   // need more bytes
 	END_IF
-
-	// Dispatch on msgId.
-	CASE msgId OF
-		16#0020:    // MsgId::Command
-			IF length = SIZEOF(lastCommand) THEN
-				MEMCPY(ADR(lastCommand), ADR(rxBuffer[8]), length);
-				bNewCommand := TRUE;
-				nFramesReceived := nFramesReceived + 1;
-			END_IF
-		ELSE
-			// Unknown msg_id — drop and resync by clearing the buffer.
-			// (In future: log it.)
-			rxLen := 0;
-			EXIT;
-	END_CASE
-
-	// Slide the buffer down past the consumed frame.
-	IF rxLen > total THEN
-		MEMMOVE(ADR(rxBuffer[0]), ADR(rxBuffer[total]), rxLen - total);
+	
+	MEMCPY(ADR(valueBits), ADR(rxBuffer[8]), 8);
+	DispatchCommand(msgId := msgId, valueBits := valueBits);
+	
+	nLastMsgIdRx := msgId;
+	nFramesReceived := nFramesReceived + 1;
+	
+	IF rxLen > 16 THEN
+		MEMMOVE(ADR(rxBuffer[0]), ADR(rxBuffer[16]), rxLen - 16);
 	END_IF
-	rxLen := rxLen - total;
+	rxLen := rxLen - 16;
 END_WHILE
+
+TryParseFrames := TRUE;
 ]]></ST>
       </Implementation>
     </Method>
