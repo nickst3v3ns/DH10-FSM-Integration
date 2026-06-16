@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_PWM
 VAR_INPUT
     fTargetDutyCycle : REAL;    // Target: 0.0 to 100.0
-    fRampTime        : TIME := T#3s;    // Time to go from 0 to 100% (e.g., T#5s)
+    fRampTime        : TIME := T#1s;    // Time to go from 0 to 100% (e.g., T#5s)
     nPeriodCycles    : INT := 10; // 20ms period / 2ms cycle
 END_VAR
 VAR_OUTPUT

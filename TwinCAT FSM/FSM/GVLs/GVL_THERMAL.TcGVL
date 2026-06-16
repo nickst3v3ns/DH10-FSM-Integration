@@ -4,11 +4,10 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	
-	//VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2
+
 	T_EMS:		ARRAY[0..7] OF REAL;
 	
 	
-	//VFL1, VFL2, VFR1, VFR2, VBL1, VBL2, VBR1, VBR2
 	T_HEMS:		ARRAY[0..7] OF REAL;
 	
 	
@@ -20,6 +19,8 @@ VAR_GLOBAL
 	
 	
 	T_FLOW:		ARRAY[0..7] OF REAL;
+	
+	FLOWarray:		ARRAY[0..9] OF REAL; //,meausrements from the flow sensors
 
 
 //OVERHEAT bools
@@ -31,7 +32,7 @@ VAR_GLOBAL
 	
 //PWM CONTROL
 	fDutyCycle_PROP			:REAL := 0;
-	fDutyCycle_LEVI			:REAL := 0;
+
 END_VAR
 
 (*	HEMS / EMS indexing -> specifically for index to placement mapping of temperature sensors

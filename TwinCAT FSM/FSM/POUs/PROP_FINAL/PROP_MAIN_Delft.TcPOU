@@ -141,12 +141,12 @@ VAR
 	VelocityErrorIntegral : REAL;
 	
 	//ETML TcCOM object setup
-	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
-	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
+//	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
+//	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
 	
-	ETML_inputs: ST_ETML_DH10_U_T;
-	ETML_outputs: ST_ETML_DH10_Y_T;
-	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
+//	ETML_inputs: ST_ETML_DH10_U_T;
+//	ETML_outputs: ST_ETML_DH10_Y_T;
+//	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
 	
 	// Main FSM
 	propulsion_fault: BOOL;

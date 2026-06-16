@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_ChemType" Id="{a9bdc064-38d3-427b-ab1a-eb46d1622755}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+TYPE E_ChemType :       // INDIVIDUAL DATA 1 byte 2
+(
+    LiIonNMC := 1,
+    LiFePO4  := 2,
+    LeadAcid := 3
+) BYTE;
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

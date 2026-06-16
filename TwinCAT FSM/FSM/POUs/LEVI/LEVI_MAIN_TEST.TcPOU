@@ -281,32 +281,32 @@ VAR
 	*)
 	K_P_tot_motor_on: LREAL := 300000;
 	K_I_tot_motor_on: LREAL := 200000;
-	K_D_tot_motor_on: LREAL := 30000;
+	K_D_tot_motor_on: LREAL := 40000;
 	K_F_tot_motor_on: LREAL := 100;
 	K_I_tot_initial_motor_on: LREAL := 14160;
 	
-	K_P_pitch_motor_on: LREAL := 60000;
+	K_P_pitch_motor_on: LREAL := 200000;
 	K_I_pitch_motor_on: LREAL := 200000;
-	K_D_pitch_motor_on: LREAL := 15000;
+	K_D_pitch_motor_on: LREAL := 30000;
 	K_F_pitch_motor_on: LREAL := 250;
 	K_I_pitch_initial_motor_on: LREAL := 202;
 	
 	K_P_roll_motor_on: LREAL := 150000;
 	K_I_roll_motor_on: LREAL := 100000;
-	K_D_roll_motor_on: LREAL := 10000;
+	K_D_roll_motor_on: LREAL := 30000;
 	K_F_roll_motor_on: LREAL := 120;
 	K_I_roll_initial_motor_on: LREAL := -11;
 	
-	K_P_lat_motor_on: LREAL := 120000;
-	K_I_lat_motor_on: LREAL := 30000;
-	K_D_lat_motor_on: LREAL := 10000;
+	K_P_lat_motor_on: LREAL := 400000;
+	K_I_lat_motor_on: LREAL := 150000;
+	K_D_lat_motor_on: LREAL := 30000;
 	K_F_lat_motor_on: LREAL := 120;
 	K_I_lat_initial_motor_on: LREAL := 20;
 
-	K_P_yaw_motor_on: LREAL := 50000;
-	K_I_yaw_motor_on: LREAL := 50000;
-	K_D_yaw_motor_on: LREAL := 5000;
-	K_F_yaw_motor_on: LREAL := 120;
+	K_P_yaw_motor_on: LREAL := 300000;
+	K_I_yaw_motor_on: LREAL := 200000;
+	K_D_yaw_motor_on: LREAL := 20000;
+	K_F_yaw_motor_on: LREAL := 100;
 	K_I_yaw_initial_motor_on: LREAL := 39;	
 	
 	K_P_tot: LREAL := 300000;
@@ -341,7 +341,13 @@ VAR
 	
 	Zero_current_finder_gain : LREAL := 0.00025;
 	
-	thermal_gap_gain : LREAL := 1.16;
+	extreme_z_gain_multiplier : LREAL := 1;
+	extreme_pitch_gain_multiplier : LREAL := 1;
+	extreme_roll_gain_multiplier : LREAL := 1;
+	extreme_y_gain_multiplier : LREAL := 1;
+	extreme_yaw_gain_multiplier : LREAL := 1;
+	
+	thermal_gap_gain_derivative_multiplier : LREAL := 1;
 	
 	thermal_gap_gain_hems : LREAL := 1.16;
 	thermal_gap_gain_ems : LREAL := 1.16;
@@ -854,7 +860,9 @@ CASE GVL_LEVI.Levi_Command OF
 								n_errors => n_drive_errors, 
 								errors := error_specifics,
 								Drive_current_error := Drive_current_error);
-								
+			
+			GVL_PROP.PropFlag := 0;
+					
 			//-------------------------------------------------------------------------					
 			Control_liftoff_parameters.bLevi_operational := Levi_operational;
 			Control_liftoff_parameters.fz_initial_lift_off := z_liftoff;
@@ -1239,35 +1247,55 @@ CASE GVL_LEVI.Levi_Command OF
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
 				
-				Control_vert_parameters.fK_P_tot := K_P_tot;
-				Control_vert_parameters.fK_I_tot := K_I_tot;
-				Control_vert_parameters.fK_D_tot := K_D_tot;
-				Control_vert_parameters.fK_F_tot := K_F_tot;
-				Control_vert_parameters.fK_I_init_tot := K_I_tot_initial;
+				Control_vert_parameters.fK_P_tot := K_P_tot_motor_on;
+				Control_vert_parameters.fK_I_tot := K_I_tot_motor_on;
+				Control_vert_parameters.fK_D_tot := K_D_tot_motor_on;
+				Control_vert_parameters.fK_F_tot := K_F_tot_motor_on;
+				Control_vert_parameters.fK_I_init_tot := K_I_tot_initial_motor_on;
 				
-				Control_vert_parameters.fK_P_pit := K_P_pitch;
-				Control_vert_parameters.fK_I_pit := K_I_pitch;
-				Control_vert_parameters.fK_D_pit := K_D_pitch;
-				Control_vert_parameters.fK_F_pit := K_F_pitch;
-				Control_vert_parameters.fK_I_init_pit := K_I_pitch_initial;
+				Control_vert_parameters.fK_P_pit := K_P_pitch_motor_on;
+				Control_vert_parameters.fK_I_pit := K_I_pitch_motor_on;
+				Control_vert_parameters.fK_D_pit := K_D_pitch_motor_on;
+				Control_vert_parameters.fK_F_pit := K_F_pitch_motor_on;
+				Control_vert_parameters.fK_I_init_pit := K_I_pitch_initial_motor_on;
 				
-				Control_vert_parameters.fK_P_roll := K_P_roll;
-				Control_vert_parameters.fK_I_roll := K_I_roll;
-				Control_vert_parameters.fK_D_roll := K_D_roll;
-				Control_vert_parameters.fK_F_roll := K_F_roll;
-				Control_vert_parameters.fK_I_init_roll := K_I_roll_initial;
+				Control_vert_parameters.fK_P_roll := K_P_roll_motor_on;
+				Control_vert_parameters.fK_I_roll := K_I_roll_motor_on;
+				Control_vert_parameters.fK_D_roll := K_D_roll_motor_on;
+				Control_vert_parameters.fK_F_roll := K_F_roll_motor_on;
+				Control_vert_parameters.fK_I_init_roll := K_I_roll_initial_motor_on;
 				
-				Control_lat_parameters.fK_P_lat := K_P_lat;
-				Control_lat_parameters.fK_I_lat := K_I_lat;
-				Control_lat_parameters.fK_D_lat := K_D_lat;
-				Control_lat_parameters.fK_F_lat := K_F_lat;
-				Control_lat_parameters.fK_I_init_lat := K_I_lat_initial;
+				Control_lat_parameters.fK_P_lat := K_P_lat_motor_on;
+				Control_lat_parameters.fK_I_lat := K_I_lat_motor_on;
+				Control_lat_parameters.fK_D_lat := K_D_lat_motor_on;
+				Control_lat_parameters.fK_F_lat := K_F_lat_motor_on;
+				Control_lat_parameters.fK_I_init_lat := K_I_lat_initial_motor_on;
 				
-				Control_lat_parameters.fK_P_yaw := K_P_yaw;
-				Control_lat_parameters.fK_I_yaw := K_I_yaw;
-				Control_lat_parameters.fK_D_yaw := K_D_yaw;
-				Control_lat_parameters.fK_F_yaw := K_F_yaw;
-				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
+				Control_lat_parameters.fK_P_yaw := K_P_yaw_motor_on;
+				Control_lat_parameters.fK_I_yaw := K_I_yaw_motor_on;
+				Control_lat_parameters.fK_D_yaw := K_D_yaw_motor_on;
+				Control_lat_parameters.fK_F_yaw := K_F_yaw_motor_on;
+				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial_motor_on;
+				
+				IF ABS(z) > z_target + 0.9E-3 THEN
+					Control_vert_parameters.fK_P_tot := extreme_z_gain_multiplier * K_P_tot_motor_on;
+				END_IF
+				
+				IF ABS(pitch) > pitch_target + 0.9E-3 THEN
+					Control_vert_parameters.fK_P_pit := extreme_pitch_gain_multiplier * K_P_pitch_motor_on;
+				END_IF
+				
+				IF ABS(roll) > roll_target + 0.9E-3 THEN
+					Control_vert_parameters.fK_P_roll := extreme_roll_gain_multiplier * K_P_roll_motor_on;
+				END_IF
+				
+				IF ABS(y) > y_target_airgap + 1.0E-3 THEN
+					Control_lat_parameters.fK_P_lat := extreme_y_gain_multiplier * K_P_lat_motor_on;
+				END_IF
+				
+				IF ABS(yaw) > yaw_target + 0.9E-3 THEN
+					Control_lat_parameters.fK_P_yaw := extreme_yaw_gain_multiplier * K_P_yaw_motor_on;
+				END_IF
 
 			ELSE
 				motor_thrust_l := 0;
@@ -1308,8 +1336,26 @@ CASE GVL_LEVI.Levi_Command OF
 				Control_lat_parameters.fK_D_yaw := K_D_yaw;
 				Control_lat_parameters.fK_F_yaw := K_F_yaw;
 				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
+				
 			END_IF
-							
+			
+			IF Position >= 11.2295 AND Position <= 11.3725 THEN
+				hems_under_gap := 1;	
+			ELSIF Position >= 10.9005 AND Position <= 11.079 THEN
+				hems_under_gap := 2;
+			ELSIF Position >= 9.4765 AND Position <= 9.6275 THEN
+				hems_under_gap := 3;
+			ELSIF Position >= 9.1415 AND Position <= 9.3265 THEN
+				hems_under_gap := 4;
+			ELSE
+				hems_under_gap := 0;
+			END_IF
+			
+			IF hems_under_gap <> 0 THEN
+				Control_vert_parameters.fK_D_tot := thermal_gap_gain_derivative_multiplier * K_D_tot_motor_on;
+				Control_lat_parameters.fK_D_lat := thermal_gap_gain_derivative_multiplier * K_D_lat_motor_on;
+			END_IF
+			
 			//Setting lateral control parameters	
 			IF Lateral_on THEN
 				Control_lat_parameters.bfeed_forward_ems_ON := feed_fwd_ON_ems;
@@ -1402,18 +1448,6 @@ CASE GVL_LEVI.Levi_Command OF
 
 			Control_vert_parameters.fthermal_gap_gain_hems := thermal_gap_gain_hems;
 			
-			IF Position >= 11.2295 AND Position <= 11.3725 THEN
-				hems_under_gap := 1;
-			ELSIF Position >= 10.9005 AND Position <= 11.079 THEN
-				hems_under_gap := 2;
-			ELSIF Position >= 9.4765 AND Position <= 9.6275 THEN
-				hems_under_gap := 3;
-			ELSIF Position >= 9.1415 AND Position <= 9.3265 THEN
-				hems_under_gap := 4;
-			ELSE
-				hems_under_gap := 0;
-			END_IF
-			
 			Control_vert_parameters.fhems_under_gap := hems_under_gap;
 			
 			Control_vert_parameters.froll_target := roll_target;
@@ -1490,6 +1524,8 @@ CASE GVL_LEVI.Levi_Command OF
 			FOR i:=0 TO 23 DO
 				Control_word[i] := 16#E000;
 			END_FOR
+			
+			GVL_PROP.TargetVelocity := 0;
 			
 			//Check if there are errors
 			Error := Check_drives(drive_status := drive_status, 

@@ -14,7 +14,7 @@ TYPE E_Command :
     CMD_TO_MOVEMENT := 50,
     CMD_TO_MAINTENANCE := 60,
     CMD_EMERGENCY := 70
-);
+) ULINT;
 END_TYPE
 ]]></Declaration>
   </DUT>

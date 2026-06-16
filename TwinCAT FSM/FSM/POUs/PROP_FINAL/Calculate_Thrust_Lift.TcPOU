@@ -22,8 +22,10 @@ END_VAR
 
 VAR
 	current         : LREAL;
-	Thrust_Ripple : LREAL;
-	Lift_Ripple : LREAL;
+	Thrust_Ripple1 : LREAL;
+	Thrust_Ripple2 : LREAL;
+	Lift_Ripple1 : LREAL;
+	Lift_Ripple2 : LREAL;
 	PI : LREAL := 3.14159265358979323846;
 	position   : LREAL;
 END_VAR
@@ -33,12 +35,15 @@ END_VAR
 
 // Not sure if we should use PositionOffset or a new variable here...
 position := PositionDelft*1000 + position_tune*1000 + VelocityDelft * FF_Delay; // Both in mm
-Thrust_Ripple := -270.41 + 63.47*COS(2*PI*position*0.0049 - PositionOffset - 2.4258) + 36.64*COS(2*PI*position*0.0098 - PositionOffset + 1.25) + 102.812*COS(2*PI*position*0.0147 - PositionOffset + 1.0689) + 3.069*COS(2*PI*position*0.0196 - PositionOffset + 0.8013); 
-Lift_Ripple := -999.754 + 174.196*COS(2*PI*position*0.0049 - PositionOffset + 3.024) + 88.337*COS(2*PI*position*0.0098 - PositionOffset - 0.2107) + 235.01*COS(2*PI*position*0.0147 - PositionOffset - 0.4521) + 6.383*COS(2*PI*position*0.0196 - PositionOffset - 0.632); 
 
-Thrust :=  -2 * (EXPT(current,2)/EXPT(101.82337649086286,2)) * Thrust_Ripple * (-3.30732756E+03*EXPT(airgap*1000,-9.92971373E-01)/-269.32518584269127);
+Thrust_Ripple1 := -270.41 + 63.47*COS(2*PI*position*0.0049 - PositionOffset - 2.4258) + 36.64*COS(2*PI*position*0.0098 - PositionOffset + 1.25) + 102.812*COS(2*PI*position*0.0147 - PositionOffset + 1.0689) + 3.069*COS(2*PI*position*0.0196 - PositionOffset + 0.8013); 
+Thrust_Ripple2 := -270.41 + 63.47*COS(2*PI*position*0.0049 - PositionOffset - 2.4258 - 0.6667*PI) + 36.64*COS(2*PI*position*0.0098 - PositionOffset + 1.25 - 0.6667*PI) + 102.812*COS(2*PI*position*0.0147 - PositionOffset + 1.0689 - 0.6667*PI) + 3.069*COS(2*PI*position*0.0196 - PositionOffset + 0.8013 - 0.6667*PI);
+Lift_Ripple1 := -999.754 + 174.196*COS(2*PI*position*0.0049 - PositionOffset + 3.024) + 88.337*COS(2*PI*position*0.0098 - PositionOffset - 0.2107) + 235.01*COS(2*PI*position*0.0147 - PositionOffset - 0.4521) + 6.383*COS(2*PI*position*0.0196 - PositionOffset - 0.632); 
+Lift_Ripple2 := -999.754 + 174.196*COS(2*PI*position*0.0049 - PositionOffset + 3.024 - 0.6667*PI) + 88.337*COS(2*PI*position*0.0098 - PositionOffset - 0.2107 - 0.6667*PI) + 235.01*COS(2*PI*position*0.0147 - PositionOffset - 0.4521 - 0.6667*PI) + 6.383*COS(2*PI*position*0.0196 - PositionOffset - 0.632 - 0.6667*PI); 
 
-Lift := -2 * (EXPT(current,2) / (EXPT(101.82337649086286,2)) * Lift_Ripple * (-5.51114275E+04*EXPT(airgap*1000,-1.58045446)/-1017.713037265408));
+Thrust :=  -1 * (EXPT(current,2)/EXPT(101.82337649086286,2)) * (Thrust_Ripple1 + Thrust_Ripple2) * (-3.30732756E+03*EXPT(airgap*1000,-9.92971373E-01)/-269.32518584269127);
+
+Lift := -1 * (EXPT(current,2) / (EXPT(101.82337649086286,2)) * (Lift_Ripple1 + Lift_Ripple2) * (-5.51114275E+04*EXPT(airgap*1000,-1.58045446)/-1017.713037265408));
 
 //Thrust :=  -2 * (EXPT(current,2)/EXPT(101.82337649086286,2)) * (-2.71444834E+02 *  SIN(2*PI*currentangle/180 - 1.13342567E+01 - 1.2322024519079966) + 1.64599854E-01) * (-3.30732756E+03*EXPT(airgap*1000,-9.92971373E-01)/-269.32518584269127);
 

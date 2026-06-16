@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_PackData2" Id="{40da173e-81e7-4fa0-a8d7-ca0862f96e01}">
+    <Declaration><![CDATA[TYPE ST_PackData2 :
+STRUCT
+    PackState        : E_BatteryState; // byte 0
+    Current_A        : INT;            // bytes 1-2  (sign UNVERIFIED on bus)
+    SmartChargerConn : BOOL;           // byte 3
+    MaxPackSOC_pct   : USINT;          // byte 4
+    MinPackSOC_pct   : USINT;          // byte 5
+    MaxPackTemp_C    : INT;            // byte 6, offset -55
+    MinPackTemp_C    : INT;            // byte 7, offset -55
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

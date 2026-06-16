@@ -16,13 +16,16 @@ VAR_GLOBAL
 	bprecharge:						BOOL := FALSE;
 	
 	E_PodStateGlobal : E_PodState;
+	E_CommandGlobal : E_Command;
+	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
+	
+	//-----
 	
 	bsdc_closed:					BOOL := FALSE;
  
 	bbrakes_armed:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	bbrakes_clock:			BOOL := FALSE; 
 	bbrakes_engaged:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	
 
 	
 	bsafety_inputs_valid:			BOOL := FALSE; //done through twinsafe PLC-TWINSAFE Run mode verification
@@ -32,6 +35,9 @@ VAR_GLOBAL
 	bEstopError:					BOOL := FALSE; 
 	bEstopRestart:					BOOL := FALSE; //Used to restart the Estop from the PLC side
 	bFalseForEstopRestart:			BOOL := FALSE;
+	
+	//----
+	
 	
 	benable_telemetry: 				BOOL;
 	

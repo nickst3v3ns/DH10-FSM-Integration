@@ -7,6 +7,9 @@ VAR_INPUT
 	currentCmd:					E_Command 	:= E_Command.CMD_NONE; 
 END_VAR
 
+VAR_IN_OUT
+	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
+END_VAR
 
 VAR_OUTPUT
 END_VAR
@@ -14,7 +17,6 @@ END_VAR
 VAR
 	fbFormat : FB_FormatString;
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
-	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
 	
 	bTESTSTATE : BOOL := TRUE;
 	
@@ -55,7 +57,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[GVL_FSM.fbLink();
+      <ST><![CDATA[
+
+
+GVL_FSM.fbLink();
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 

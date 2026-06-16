@@ -15,7 +15,7 @@ TYPE E_PodState :
     STATE_LEVITATION	:= 6,
     STATE_MOVEMENT		:= 7,
     STATE_MAINTENANCE	:= 8
-);
+) INT;
 END_TYPE
 ]]></Declaration>
   </DUT>

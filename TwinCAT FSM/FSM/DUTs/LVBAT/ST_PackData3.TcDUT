@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_PackData3" Id="{b7b57080-a321-4681-8aa1-77982e6048df}">
+    <Declaration><![CDATA[TYPE ST_PackData3 :
+STRUCT
+    MaxChargeVoltage_V    : REAL;  // bytes 0-1, /10
+    MaxChargeCurrent_A    : REAL;  // bytes 2-3, /10
+    MaxDischargeCurrent_A : REAL;  // bytes 4-5, /10
+    MaxDischargeVoltage_V : REAL;  // bytes 6-7, /10
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

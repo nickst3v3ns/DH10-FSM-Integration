@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="LVBAT" Id="{1cc50207-4a76-4ca9-ba38-76631a8c13e7}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>18</Priority>
+    <PouCall>
+      <Name>P_ParseBattery</Name>
+    </PouCall>
+    <TaskFBGuid>{9b04acab-2be0-49fe-86f2-db9fc1fc9c30}</TaskFBGuid>
+    <Fb_init>{225a65be-583c-459e-95e9-f2a4603d0c64}</Fb_init>
+    <Fb_exit>{d8132567-f359-4a58-8c20-1d4a5ac338cf}</Fb_exit>
+    <CycleUpdate>{db75e527-5202-47af-a32b-bf6a6111d093}</CycleUpdate>
+    <PostCycleUpdate>{eb067f28-2dab-4915-9786-b382166313c8}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

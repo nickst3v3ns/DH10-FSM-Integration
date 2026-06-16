@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_BatteryState" Id="{9eb4211c-9218-4e47-b724-e9cf72a551dc}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+TYPE E_BatteryState :   // PACK DATA 2 / INDIVIDUAL DATA 1 spec (images)
+(
+    Standby     := 10,
+    Ready       := 20,   // per PACK DATA 2 spec line
+    Disengaged  := 30,   // per PACK DATA 2 spec line
+    Discharging := 40,
+    Charging    := 50,
+    Error       := 70
+) BYTE;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

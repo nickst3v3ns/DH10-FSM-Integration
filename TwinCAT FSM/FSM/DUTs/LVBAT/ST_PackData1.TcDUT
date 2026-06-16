@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_PackData1" Id="{632f45bd-f9db-4861-ae23-dcbf88406006}">
+    <Declaration><![CDATA[TYPE ST_PackData1 :
+STRUCT
+    SOC_All_pct     : USINT;   // byte 0
+    Voltage_V       : REAL;    // bytes 1-4, /1024
+    SOC_Active_pct  : USINT;   // byte 5
+    Num_Active      : USINT;   // byte 6
+    Num_Passive     : USINT;   // byte 7
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

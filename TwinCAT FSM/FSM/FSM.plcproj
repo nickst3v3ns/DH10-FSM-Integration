@@ -33,6 +33,27 @@
     <Compile Include="DUTs\GS\ST_PodTelemetry.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\LVBAT\E_BatteryState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\E_ChemType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\ST_CanFrame8.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\ST_IndividualData1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\ST_PackData1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\ST_PackData2.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LVBAT\ST_PackData3.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_Track_Segment_Delft.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +91,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GS\GVL_GS_COMMAND_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GS\GVL_GS_IDS.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -133,10 +158,16 @@
     <Compile Include="LEVI_TEST_TASK.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LVBAT.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask_1ms_PTC_CAN_RX_FastFlow_.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PlcTask_2ms_PWM_.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
@@ -224,6 +255,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Testing_Individual_Drives.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LVBATPRG\P_ParseBattery.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_EHW\EHWCalculatePosition.TcPOU">
@@ -440,12 +474,14 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="DUTs\GS" />
+    <Folder Include="DUTs\LVBAT" />
     <Folder Include="GVLs" />
     <Folder Include="GVLs\GS" />
     <Folder Include="POUs\FSM" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
     <Folder Include="POUs\GS" />
+    <Folder Include="POUs\LVBATPRG" />
     <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_EHW" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />

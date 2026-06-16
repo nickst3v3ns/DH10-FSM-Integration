@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="P_ParseBattery" Id="{e90656e5-c708-4a5c-a423-7c9caf3ff9f0}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_ParseBattery
+VAR
+    rPack1 AT %I*: ST_CanFrame8;  rPack2 AT %I* : ST_CanFrame8;
+    rPack3 AT %I*: ST_CanFrame8;  rInd1 AT %I* : ST_CanFrame8;
+    Pack1  : ST_PackData1;  Pack2  : ST_PackData2;
+    Pack3  : ST_PackData3;  Ind1   : ST_IndividualData1;
+    u32    : DWORD;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+// --- PACK DATA 1 ---
+Pack1.SOC_All_pct := rPack1.data[0];
+u32 := BYTE_TO_DWORD(rPack1.data[1])
+    OR SHL(BYTE_TO_DWORD(rPack1.data[2]), 8)
+    OR SHL(BYTE_TO_DWORD(rPack1.data[3]), 16)
+    OR SHL(BYTE_TO_DWORD(rPack1.data[4]), 24);
+Pack1.Voltage_V      := DWORD_TO_REAL(u32) / 1024.0;
+Pack1.SOC_Active_pct := rPack1.data[5];
+Pack1.Num_Active     := rPack1.data[6];
+Pack1.Num_Passive    := rPack1.data[7];
+
+// --- PACK DATA 2 ---
+Pack2.PackState        := rPack2.data[0];
+Pack2.Current_A        := UINT_TO_INT(BYTE_TO_UINT(rPack2.data[1]) OR SHL(BYTE_TO_UINT(rPack2.data[2]), 8));
+Pack2.SmartChargerConn := (rPack2.data[3] <> 0);
+Pack2.MaxPackSOC_pct   := rPack2.data[4];
+Pack2.MinPackSOC_pct   := rPack2.data[5];
+Pack2.MaxPackTemp_C    := BYTE_TO_INT(rPack2.data[6]) - 55;
+Pack2.MinPackTemp_C    := BYTE_TO_INT(rPack2.data[7]) - 55;
+
+// --- PACK DATA 3 ---
+Pack3.MaxChargeVoltage_V    := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[0]) OR SHL(BYTE_TO_UINT(rPack3.data[1]), 8)) / 10.0;
+Pack3.MaxChargeCurrent_A    := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[2]) OR SHL(BYTE_TO_UINT(rPack3.data[3]), 8)) / 10.0;
+Pack3.MaxDischargeCurrent_A := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[4]) OR SHL(BYTE_TO_UINT(rPack3.data[5]), 8)) / 10.0;
+Pack3.MaxDischargeVoltage_V := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[6]) OR SHL(BYTE_TO_UINT(rPack3.data[7]), 8)) / 10.0;
+
+// --- INDIVIDUAL DATA 1 ---
+Ind1.PermissionToJoin := rInd1.data[0];
+Ind1.HeatingMode      := rInd1.data[1] AND 16#0F;
+Ind1.HeatingActive    := (rInd1.data[1] AND 16#10) <> 0;
+Ind1.ChemType         := rInd1.data[2];
+Ind1.CellsInSeries    := rInd1.data[3];
+Ind1.SOC_pct          := rInd1.data[4];
+Ind1.BatteryState     := rInd1.data[5];
+Ind1.Current_A        := BYTE_TO_INT(rInd1.data[6]);
+Ind1.Temp_C           := BYTE_TO_INT(rInd1.data[7]) - 55;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -14,6 +14,12 @@ VAR_GLOBAL
 	bFlowSensor8 AT %I* : BOOL;
 	bFlowSensor9 AT %I* : BOOL;
 	bFlowSensor10 AT %I* : BOOL;
+	bFlowSensor11 AT %I* : BOOL;
+	bFlowSensor12 AT %I* : BOOL;
+	bFlowSensor13 AT %I* : BOOL;
+	bFlowSensor14 AT %I* : BOOL;
+	bFlowSensor15 AT %I* : BOOL;
+	bFlowSensor16 AT %I* : BOOL;
 
     // The raw counter (Written by Fast Task, Read by Main Task)
     udiPulseCount1 : UDINT := 0;
@@ -26,6 +32,12 @@ VAR_GLOBAL
 	udiPulseCount8 : UDINT := 0;
 	udiPulseCount9 : UDINT := 0;
 	udiPulseCount10 : UDINT := 0; 
+	udiPulseCount11 : UDINT := 0; 
+	udiPulseCount12 : UDINT := 0; 
+	udiPulseCount13 : UDINT := 0; 
+	udiPulseCount14 : UDINT := 0; 
+	udiPulseCount15 : UDINT := 0; 
+	udiPulseCount16 : UDINT := 0; 
 	
 	fFLOWrate1 : REAL;
 	fFLOWrate2 : REAL;
@@ -37,6 +49,12 @@ VAR_GLOBAL
 	fFLOWrate8 : REAL;
 	fFLOWrate9 : REAL;
 	fFLOWrate10 : REAL;
+	fFLOWrate11 : REAL;
+	fFLOWrate12 : REAL;
+	fFLOWrate13 : REAL;
+	fFLOWrate14 : REAL;
+	fFLOWrate15 : REAL;
+	fFLOWrate16 : REAL;
 	
 END_VAR]]></Declaration>
   </GVL>

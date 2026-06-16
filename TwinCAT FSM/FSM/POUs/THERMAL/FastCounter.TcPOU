@@ -13,6 +13,12 @@ VAR
 	counter8 : FB_Fastcounter;
 	counter9 : FB_Fastcounter;
 	counter10 : FB_Fastcounter;
+	counter11 : FB_Fastcounter;
+	counter12 : FB_Fastcounter;
+	counter13 : FB_Fastcounter;
+	counter14 : FB_Fastcounter;
+	counter15 : FB_Fastcounter;
+	counter16 : FB_Fastcounter;
 	
 END_VAR
 ]]></Declaration>
@@ -26,7 +32,13 @@ counter6(PulseCount := GVL_FLOW.udiPulseCount6, FlowSensor := GVL_FLOW.bFlowSens
 counter7(PulseCount := GVL_FLOW.udiPulseCount7, FlowSensor := GVL_FLOW.bFlowSensor7);
 counter8(PulseCount := GVL_FLOW.udiPulseCount8, FlowSensor := GVL_FLOW.bFlowSensor8);
 counter9(PulseCount := GVL_FLOW.udiPulseCount9, FlowSensor := GVL_FLOW.bFlowSensor9);
-counter10(PulseCount := GVL_FLOW.udiPulseCount10, FlowSensor := GVL_FLOW.bFlowSensor10);]]></ST>
+counter10(PulseCount := GVL_FLOW.udiPulseCount10, FlowSensor := GVL_FLOW.bFlowSensor10);
+counter11(PulseCount := GVL_FLOW.udiPulseCount11, FlowSensor := GVL_FLOW.bFlowSensor11);
+counter12(PulseCount := GVL_FLOW.udiPulseCount12, FlowSensor := GVL_FLOW.bFlowSensor12);
+counter13(PulseCount := GVL_FLOW.udiPulseCount13, FlowSensor := GVL_FLOW.bFlowSensor13);
+counter14(PulseCount := GVL_FLOW.udiPulseCount14, FlowSensor := GVL_FLOW.bFlowSensor14);
+counter15(PulseCount := GVL_FLOW.udiPulseCount15, FlowSensor := GVL_FLOW.bFlowSensor15);
+counter16(PulseCount := GVL_FLOW.udiPulseCount16, FlowSensor := GVL_FLOW.bFlowSensor16);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="PlcTask_2ms_PWM_" Id="{e9a0f002-418d-449f-b1eb-2730a62002f3}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>2000</CycleTime>
+    <Priority>12</Priority>
+    <PouCall>
+      <Name>PWM_CTRL</Name>
+    </PouCall>
+    <TaskFBGuid>{a218c01e-90c0-4a81-b71a-e8cfb0399b09}</TaskFBGuid>
+    <Fb_init>{f3829d36-fbab-4529-93a6-5590fb5a7d46}</Fb_init>
+    <Fb_exit>{2217d97d-ec89-4405-aab8-c92f51d30587}</Fb_exit>
+    <CycleUpdate>{9c3f223a-4e6c-42fe-8094-eaec7ef1c001}</CycleUpdate>
+    <PostCycleUpdate>{3d1823cb-b831-4390-aaa9-7edbf8f07260}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

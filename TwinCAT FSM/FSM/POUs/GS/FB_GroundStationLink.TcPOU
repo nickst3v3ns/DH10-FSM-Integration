@@ -46,6 +46,7 @@ VAR
     rxScratchLen    : UDINT;
     reconnectTimer  : TON;
     reconnectDelay  : TIME := T#1S;
+	nTelemeteryIndex: INT := 0;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE eState OF
@@ -78,7 +79,7 @@ END_VAR]]></Declaration>
         sendTimer(IN := TRUE, PT := sendInterval);
         IF sendTimer.Q AND NOT bSendPending THEN
             sendTimer(IN := FALSE);
-            SendPropulsion();
+            SendTelemetry();
         END_IF
 
         IF bSendPending THEN
@@ -141,22 +142,6 @@ txBatchLen := txBatchLen + 20;
 AppendDatapoint := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="AppendDP16" Id="{994ce20f-4c6e-4e04-a056-e10db23869a0}">
-      <Declaration><![CDATA[METHOD AppendDP16 : BOOL
-VAR_INPUT
-	id : UINT;
-	value : UINT;
-END_VAR
-VAR
-	bits : ULINT;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[bits := 0;
-MEMCPY(ADR(bits), ADR(value), 2);
-AppendDatapoint(id := id, valueBits := bits);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="AppendDpF32" Id="{8b58a37a-bfdd-4dd4-9552-479c5c73edf3}">
       <Declaration><![CDATA[METHOD AppendDpF32 : BOOL
 VAR_INPUT
@@ -186,6 +171,22 @@ END_VAR]]></Declaration>
 MEMCPY(ADR(bits), ADR(value), 8);
 AppendDatapoint(id := id, valueBits := bits);
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AppendDpI16" Id="{994ce20f-4c6e-4e04-a056-e10db23869a0}">
+      <Declaration><![CDATA[METHOD AppendDpI16 : BOOL
+VAR_INPUT
+	id : UINT;
+	value : UINT;
+END_VAR
+VAR
+	bits : ULINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bits := 0;
+MEMCPY(ADR(bits), ADR(value), 2);
+AppendDatapoint(id := id, valueBits := bits);]]></ST>
       </Implementation>
     </Method>
     <Method Name="AppendDpI32" Id="{664a2830-f477-49c4-91f3-a411a5d7f27b}">
@@ -257,13 +258,13 @@ BuildDatapoint := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="DecodeF32" Id="{21e93e0a-6b13-4ba7-b284-1e00db11fbfe}">
-      <Declaration><![CDATA[METHOD DecodeF32 : BOOL
+      <Declaration><![CDATA[METHOD DecodeF32 : REAL
 VAR_INPUT
 	bits : ULINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+        <ST><![CDATA[MEMCPY(ADR(DecodeF32), ADR(bits), 4);]]></ST>
       </Implementation>
     </Method>
     <Method Name="DecodeF64" Id="{f6360286-985c-4749-ac46-ecccb7c39792}">
@@ -277,7 +278,7 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="DecodeI16" Id="{754fb116-512f-451f-8a50-e06e92ebd5fd}">
-      <Declaration><![CDATA[METHOD DecodeI16 : UINT
+      <Declaration><![CDATA[METHOD DecodeI16 : INT
 VAR_INPUT
 	bits : ULINT;
 END_VAR
@@ -293,27 +294,27 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+        <ST><![CDATA[MEMCPY(ADR(DecodeI32), ADR(bits), 4);]]></ST>
       </Implementation>
     </Method>
     <Method Name="DecodeU32" Id="{0edaae4a-c4da-4d02-a29e-a53a64fb0b09}">
-      <Declaration><![CDATA[METHOD DecodeU32 : UINT
+      <Declaration><![CDATA[METHOD DecodeU32 : UDINT
 VAR_INPUT
 	bits : ULINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 4);]]></ST>
+        <ST><![CDATA[MEMCPY(ADR(DecodeU32), ADR(bits), 4);]]></ST>
       </Implementation>
     </Method>
     <Method Name="DecodeU8" Id="{a38b7d03-293c-4c86-b3ac-eadbc0f12fb2}">
-      <Declaration><![CDATA[METHOD DecodeU8 : BOOL
+      <Declaration><![CDATA[METHOD DecodeU8 : USINT
 VAR_INPUT
 	bits : ULINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 1);]]></ST>
+        <ST><![CDATA[MEMCPY(ADR(DecodeU8), ADR(bits), 1);]]></ST>
       </Implementation>
     </Method>
     <Method Name="DispatchCommand" Id="{1d17d398-2731-445d-b478-17278c6a2887}">
@@ -325,10 +326,51 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE msgId OF
-	
+	16#0042: OnHeartbeat(); // heartbeat
+	16#0251: // emergency reason
+		CASE valueBits OF
+			0 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_NONE;
+			1 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_HearBeatFail;
+			2 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_EmergencyOverGS;
+			3 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_IMD;
+			4 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_BMS;
+			5 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
+		END_CASE
+	16#0252: // FSM COMMAND
+		CASE valueBits OF
+			0 : GVL_FSM.E_CommandGlobal := E_Command.CMD_NONE;
+			10 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_IDLE;
+			20 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_HV_ACTIVE;
+			30 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_DEMO;
+			40 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_LEVITATION;
+			50 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MOVEMENT;
+			60 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MAINTENANCE;
+			70 : GVL_FSM.E_CommandGlobal := E_Command.CMD_EMERGENCY;
+		END_CASE
+	16#0905: // LEVI COMMAND
+		CASE DecodeU8(valueBits) OF
+			-2 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_RESET_DRIVES;
+			-1 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_ERROR;
+			0 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
+			1 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_INIT;
+			2 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
+			3 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_PULLUP;
+			4 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DROPDOWN;
+			5 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
+			6 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
+			7 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+			8 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES;
+		END_CASE
+	16#0B00: GVL_PROP.PropFlag := DecodeI16(valueBits);
+	16#0B08: GVL_PROP.TargetVelocity := DecodeF64(valueBits);
+	16#0B17: GVL_PROP.DriveReset := DecodeU8(valueBits);
+	16#0B18: GVL_PROP.AutoPilotFlag := DecodeU8(valueBits);
+	16#0B1F: GVL_PROP.PositionLimit_Low := DecodeU32(valueBits);
+	16#0B20: GVL_PROP.PositionLimit_High := DecodeU32(valueBits);
+	16#0B21: GVL_PROP.MaxThrust := DecodeU32(valueBits);
 END_CASE
 
-DispatchCommand := TRUE;]]></ST>
+//DispatchCommand := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FlushBatch" Id="{992beee3-aef5-4593-92eb-1fae988f1a0e}">
@@ -456,29 +498,163 @@ SendTelemetry();]]></ST>
     </Method>
     <Method Name="SendLevitation" Id="{e4a54db3-21f5-43a2-9e4c-6e63f589d318}">
       <Declaration><![CDATA[METHOD SendLevitation : BOOL
-VAR_INPUT
+VAR
+	i : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nSeqTx := nSeqTx + 1;
-telemetry.counter := telemetry.counter + 1;
-telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+        <ST><![CDATA[
+// --- Scalars ---
+// AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_STATE, GVL_LEVI.levitation_state);
 
-fbEncoder(
-    msgId      := 16#0010,
-    seqNum     := nSeqTx,
-    pPayload   := ADR(telemetry),
-    payloadLen := SIZEOF(telemetry)
-);
+// AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_COMMAND,GVL_LEVI.Levi_command);
 
-fbSend(
-    hSocket  := fbConnect.hSocket,
-    cbLen    := fbEncoder.frameLen,
-    pSrc     := ADR(fbEncoder.frame),
-    bExecute := TRUE
-);
-bSendPending := TRUE;
-SendTelemetry();]]></ST>
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_READY,
+           BOOL_TO_BYTE(GVL_LEVI.Levi_ready));
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_Z_TARGET,
+            GVL_LEVI.z_target);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_PITCH_TARGET,
+            GVL_LEVI.pitch_target);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_ROLL_TARGET,
+            GVL_LEVI.roll_target);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_Y_TARGET_AIRGAP,
+            GVL_LEVI.y_target);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_YAW_TARGET,
+            GVL_LEVI.yaw_target);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_Z_LIFTOFF,
+            GVL_LEVI.z_liftoff);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_Z,        GVL_LEVI.z);
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_ROLL,     GVL_LEVI.roll);
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_PITCH,    GVL_LEVI.pitch);
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_Y,        GVL_LEVI.y);
+AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_YAW,      GVL_LEVI.yaw);
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_RESET_BUSY,
+           BOOL_TO_BYTE(GVL_LEVI.reset_busy));
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_RESET_ERROR,
+           BOOL_TO_BYTE(GVL_LEVI.reset_error));
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_DRIVE_ERROR,
+           BOOL_TO_BYTE(GVL_LEVI.Error));
+
+AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_N_DRIVE_WARNINGS,
+           GVL_LEVI.n_drive_warnings);
+
+AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_N_DRIVE_ERRORS,
+           GVL_LEVI.n_drive_errors);
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_RESETTABLE,
+           BOOL_TO_BYTE(GVL_LEVI.error_resettable));
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_EMERGENCY,
+           BOOL_TO_BYTE(GVL_LEVI.error_emergency));
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_NON_EMERGENCY,
+           BOOL_TO_BYTE(GVL_LEVI.error_non_emergency));
+
+AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ALL_DRIVES_HIGH_VOLTAGE, BOOL_TO_BYTE(GVL_LEVI.All_drives_high_voltage));
+
+// --- SensorDataArray[0..11]: REAL in GVL, f64 on wire ---
+FOR i := 0 TO 11 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_SENSOR_DATA_0 + INT_TO_UINT(i),
+                REAL_TO_LREAL(GVL_LEVI.SensorDataArray[i]));
+END_FOR
+
+// --- LeviDriveStatus[0..23] ---
+FOR i := 0 TO 23 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_DRIVE_STATUS_0 + INT_TO_UINT(i),
+               GVL_LEVI.Drive_status[i]);
+END_FOR
+
+// --- LeviDriveDiagnostics[0..23] ---
+
+FOR i := 0 TO 23 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_DRIVE_DIAGNOSTICS_0 + INT_TO_UINT(i),
+               GVL_LEVI.Drive_Diagnostic[i]);
+END_FOR
+
+// --- LeviRealCurrents[0..23]: HEMS[0..15] + EMS[0..7] ---
+FOR i := 0 TO 15 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_REAL_CURRENTS_0 + INT_TO_UINT(i),
+                GVL_LEVI.HEMS_real_current[i]);
+END_FOR
+FOR i := 0 TO 7 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_REAL_CURRENTS_0 + 16 + INT_TO_UINT(i),
+                GVL_LEVI.EMS_real_current[i]);
+END_FOR
+
+// --- LeviDCBusVoltage[0..23]: HEMS[0..15] + EMS[0..7] ---
+FOR i := 0 TO 15 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_DC_BUS_VOLTAGE_0 + INT_TO_UINT(i),
+               GVL_LEVI.DC_link_voltage_HEMS[i]);
+END_FOR
+FOR i := 0 TO 7 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_DC_BUS_VOLTAGE_0 + 16 + INT_TO_UINT(i),
+               GVL_LEVI.DC_link_voltage_EMS[i]);
+END_FOR
+
+// --- LeviPeripheryVoltage[0..23] ---
+FOR i := 0 TO 23 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_PERIPHERY_VOLTAGE_0 + INT_TO_UINT(i),
+               GVL_LEVI.Periphery_voltage[i]);
+END_FOR
+
+// --- LeviRequestedCurrents[0..11]: HEMS[0..7] + EMS[0..3] ---
+FOR i := 0 TO 7 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_REQUESTED_CURRENTS_0 + INT_TO_UINT(i),
+                GVL_LEVI.HEMS_requested_current[i]);
+END_FOR
+FOR i := 0 TO 3 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_REQUESTED_CURRENTS_0 + 8 + INT_TO_UINT(i),
+                GVL_LEVI.EMS_requested_current[i]);
+END_FOR
+
+// --- LeviControlWord[0..23] ---
+FOR i := 0 TO 23 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_CONTROL_WORD_0 + INT_TO_UINT(i),
+               GVL_LEVI.Control_word[i]);
+END_FOR
+
+// --- LeviErrorSpecifics[0..23]: Drive_error_mapping → i8 ---
+// Assumes Drive_error_mapping is a SINT or single-byte struct.
+// If it's an enum/struct, adjust the cast below.
+//FOR i := 0 TO 23 DO
+ //   AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_SPECIFICS_0 + INT_TO_UINT(i),
+ //              SINT_TO_BYTE(GVL_LEVI.error_specifics[i]));  // adjust if not SINT
+//END_FOR
+
+// --- LeviDriveFeedbackTimeouts[0..23] ---
+FOR i := 0 TO 23 DO
+    AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_DRIVE_FEEDBACK_TIMEOUTS_0 + INT_TO_UINT(i),
+               GVL_LEVI.drive_feedback_timeouts[i]);
+END_FOR
+
+// --- LeviDriveCurrentError[0..23]: BOOL → u8 ---
+FOR i := 0 TO 23 DO
+    AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_DRIVE_CURRENT_ERROR_0 + INT_TO_UINT(i),
+               BOOL_TO_BYTE(GVL_LEVI.Drive_current_error[i]));
+END_FOR
+
+// --- LeviOffsetAirgaps[0..11]: vertical[0..5] + lateral[0..5] ---
+FOR i := 0 TO 5 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_OFFSET_AIRGAPS_0 + INT_TO_UINT(i),
+                GVL_LEVI.Offset_airgaps_vertical[i]);
+END_FOR
+FOR i := 0 TO 5 DO
+    AppendDpF64(GVL_GS_IDS.DP_ID_LEVI_OFFSET_AIRGAPS_0 + 6 + INT_TO_UINT(i),
+                GVL_LEVI.Offset_airgaps_lateral[i]);
+END_FOR
+
+FlushBatch();
+SendLevitation := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendMisc" Id="{1153f69f-d02a-4ea0-ab45-1e63991a2810}">
@@ -546,90 +722,201 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nSeqTx := nSeqTx + 1;
-telemetry.counter := telemetry.counter + 1;
-telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+        <ST><![CDATA[// PTCState (0xd00) — u16 on wire
+// AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, USINT_TO_UINT(GVL_PT.PTC_STATE));
+AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, 10);
 
-fbEncoder(
-    msgId      := 16#0010,
-    seqNum     := nSeqTx,
-    pPayload   := ADR(telemetry),
-    payloadLen := SIZEOF(telemetry)
-);
+// HVALStatus (0xd01) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_HVAL_STATUS,
+           USINT_TO_UINT(GVL_PT.HVAL_STATUS));
 
-fbSend(
-    hSocket  := fbConnect.hSocket,
-    cbLen    := fbEncoder.frameLen,
-    pSrc     := ADR(fbEncoder.frame),
-    bExecute := TRUE
-);
-bSendPending := TRUE;
-SendTelemetry();]]></ST>
+// IMDWarnings (0xd02) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_IMD_WARNINGS,
+           GVL_PT.IMD_WARNINGS);
+
+// PTErrorStatus (0xd03) — u16 bitmask
+AppendDpI16(GVL_GS_IDS.DP_ID_PT_ERROR_STATUS,
+           USINT_TO_UINT(GVL_PT.ERROR_STATUS));
+
+// PTFailReason (0xd04) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_PT_FAIL_REASON,
+           USINT_TO_UINT(GVL_PT.FAIL_REASON));
+
+// ISORes (0xd05) — u32 on wire, UINT in GVL
+AppendDpU32(GVL_GS_IDS.DP_ID_ISO_RES,
+            UINT_TO_UDINT(GVL_PT.ISO_RES));
+
+// IVTCurrent (0xd06) — i32 on wire, DWORD in GVL
+AppendDpI32(GVL_GS_IDS.DP_ID_IVT_CURRENT,
+            DWORD_TO_DINT(GVL_PT.IVT_CURRENT));
+
+// PTMaxVoltage (0xd07) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.MAX_VOLTAGE));
+
+// PTMinVoltage (0xd08) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.MIN_VOLTAGE));
+
+// PTMaxTemp (0xd09) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_TEMP,
+            UINT_TO_UDINT(GVL_PT.MAX_TEMP));
+
+// PTMinTemp (0xd0a) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_TEMP,
+            UINT_TO_UDINT(GVL_PT.MIN_TEMP));
+
+// PTTotalVoltage (0xd0b) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
+
+// PTPackCurrent (0xd0c) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT,
+            UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
+
+// PTDCLinkVoltage (0xd0d) — i32 on wire, DWORD in GVL
+AppendDpI32(GVL_GS_IDS.DP_ID_PTDC_LINK_VOLTAGE,
+            DWORD_TO_DINT(GVL_PT.DC_LINK_VOLTAGE));
+
+FlushBatch();
+SendPowerTrain := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendPropulsion" Id="{100d753a-6bef-4543-8ded-1ff745c56ed9}">
       <Declaration><![CDATA[METHOD SendPropulsion : BOOL
 VAR_INPUT
-	nSendCounter : INT := 0;
-	nNumber : INT := 20;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[AppendDpU8(GVL_GS_PROP_IDS.DP_ID_PROP_FLAG, INT_TO_BYTE(GVL_Prop.PropFlag));
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION,            REAL_TO_LREAL(GVL_Prop.position));
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_INTERPOLATED, 0.0);                          // TODO: source var
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VELOCITY,            REAL_TO_LREAL(GVL_Prop.Velocity));
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_RIGHT,         0);                              // TODO: source var
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_FAULT_LEFT,          0);                              // TODO: source var
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_RIGHT, 0.0);                            // TODO: source var
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_CURRENT_ANGLE_LEFT,  0.0);                            // TODO: source var
-AppendDpI32(GVL_GS_PROP_IDS.DP_ID_PROP_TARGET_VELOCITY,     LREAL_TO_DINT(REAL_TO_LREAL(GVL_Prop.TargetVelocity) * 1000.0));  // m/s → mm/s
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_RIGHT,          REAL_TO_LREAL(GVL_PROP.Vbus_Right));  // verify mapping
- AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_VBUS_LEFT,           REAL_TO_LREAL(GVL_PROP.Vbus_Left));  // verify mapping
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_RIGHT,         0);                              // TODO
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_STATE_LEFT,          0);                              // TODO
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_RIGHT,            0.0);                            // TODO: d-axis current
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_RIGHT,            0.0);                            // TODO: q-axis current
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_RIGHT,            GVL_Prop.Ia_right);
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_RIGHT,            GVL_Prop.Ib_right);
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_RIGHT,            GVL_Prop.Ic_right);
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_ID_LEFT,             0.0);                            // TODO
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IQ_LEFT,             0.0);                            // TODO
-AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IA_LEFT,             GVL_Prop.Ia_left);
- AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IB_LEFT,             GVL_Prop.Ib_left);
- AppendDpF64(GVL_GS_PROP_IDS.DP_ID_PROP_IC_LEFT,             GVL_Prop.Ic_left);
-AppendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_DRIVE_RESET,         0);                              // TODO
-AppendDpU8 (GVL_GS_PROP_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,     0);                              // TODO
- AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_LEFT,          0);                              // TODO
- AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_LEFT,          0);                              // TODO
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_LEFT,          0);                              // TODO
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TA_GD_RIGHT,         0);                              // TODO
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TB_GD_RIGHT,         0);                              // TODO
-AppendDP16(GVL_GS_PROP_IDS.DP_ID_PROP_TC_GD_RIGHT,         0);                              // TODO
-AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_LOW,  0);                              // TODO
-AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_POSITION_LIMIT_HIGH, 0);                              // TODO
-AppendDpU32(GVL_GS_PROP_IDS.DP_ID_PROP_MAX_THRUST,          0);                              // TODO
+        <ST><![CDATA[
+AppendDpU8(16#0250, INT_TO_BYTE(GVL_FSM.E_PodStateGlobal));
+
+AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_FLAG,
+            INT_TO_BYTE(GVL_Prop.PropFlag));
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION,
+            GVL_Prop.Position);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION_INTERPOLATED,
+            GVL_Prop.PositionInterpolared);   // typo is in the GVL, mirror it
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_VELOCITY,
+            GVL_Prop.Velocity);
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_FAULT_RIGHT,
+            INT_TO_UINT(GVL_Prop.FAULT_Right));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_FAULT_LEFT,
+            INT_TO_UINT(GVL_Prop.FAULT_Left));
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_CURRENT_ANGLE_RIGHT,
+            GVL_Prop.CurrentAngle_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_CURRENT_ANGLE_LEFT,
+            GVL_Prop.CurrentAngle_Left);
+
+AppendDpI32(GVL_GS_IDS.DP_ID_PROP_TARGET_VELOCITY,
+            LREAL_TO_DINT(GVL_Prop.TargetVelocity * 1000.0));  // m/s → mm/s
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_V_BUS_RIGHT,
+            GVL_Prop.Vbus_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_V_BUS_LEFT,
+            GVL_Prop.Vbus_Left);
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_STATE_RIGHT,
+            INT_TO_UINT(GVL_Prop.PropState_Right));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_STATE_LEFT,
+            INT_TO_UINT(GVL_Prop.PropState_Left));
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_ID_RIGHT,
+            GVL_Prop.Id_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IQ_RIGHT,
+            GVL_Prop.Iq_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IA_RIGHT,
+            GVL_Prop.Ia_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IB_RIGHT,
+            GVL_Prop.Ib_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IC_RIGHT,
+            GVL_Prop.Ic_Right);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_ID_LEFT,
+            GVL_Prop.Id_Left);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IQ_LEFT,
+            GVL_Prop.Iq_Left);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IA_LEFT,
+            GVL_Prop.Ia_Left);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IB_LEFT,
+            GVL_Prop.Ib_Left);
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IC_LEFT,
+            GVL_Prop.Ic_Left);
+
+AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_DRIVE_RESET,
+            INT_TO_BYTE(GVL_Prop.DriveReset));
+
+AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,
+            INT_TO_BYTE(GVL_Prop.AutoPilotFlag));
+
+// Temperatures: GVL is LREAL (decidegrees already per Excel), wire-type u16
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TA_GD_LEFT,
+            LREAL_TO_UINT(GVL_Prop.Ta_GD_Left));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TB_GD_LEFT,
+            LREAL_TO_UINT(GVL_Prop.Tb_GD_Left));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TC_GD_LEFT,
+            LREAL_TO_UINT(GVL_Prop.Tc_GD_Left));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TA_GD_RIGHT,
+            LREAL_TO_UINT(GVL_Prop.Ta_GD_Right));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TB_GD_RIGHT,
+            LREAL_TO_UINT(GVL_Prop.Tb_GD_Right));
+
+AppendDpI16 (GVL_GS_IDS.DP_ID_PROP_TC_GD_RIGHT,
+            LREAL_TO_UINT(GVL_Prop.Tc_GD_Right));
+
+// Position limits and MaxThrust: LREAL in GVL, u32 on wire
+AppendDpU32(GVL_GS_IDS.DP_ID_PROP_POSITION_LIMIT_LOW,
+            LREAL_TO_UDINT(GVL_Prop.PositionLimit_Low));
+
+AppendDpU32(GVL_GS_IDS.DP_ID_PROP_POSITION_LIMIT_HIGH,
+            LREAL_TO_UDINT(GVL_Prop.PositionLimit_High));
+
+AppendDpU32(GVL_GS_IDS.DP_ID_PROP_MAX_THRUST,
+            LREAL_TO_UDINT(GVL_Prop.MaxThrust));
 
 FlushBatch();
 SendPropulsion := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendTelemetry" Id="{70ab0a90-ea43-4f72-be08-b70492b04a31}">
-      <Declaration><![CDATA[METHOD PRIVATE SendTelemetry
+      <Declaration><![CDATA[METHOD SendTelemetry
 VAR
-	nTelemeteryIndex: INT := 0;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
+        <ST><![CDATA[// IF fbSend.bBusy = FALSE THEN
 CASE nTelemeteryIndex OF
 	0: SendLevitation();
-	1: SendThermal();
-	2: SendPropulsion();
-	3: SendMisc();
-	4: SendFlow();
+	1: SendPropulsion();
+	2: SendPowerTrain();
+	// 3: SendMisc();
+	// 4: SendFlow();
+	// 5: SendThermal();
 END_CASE
 
-nTelemeteryIndex := (nTelemeteryIndex + 1) MOD 5;]]></ST>
+nTelemeteryIndex := (nTelemeteryIndex + 1) MOD 3;
+// END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendThermal" Id="{80a8c1e2-37ed-4cc1-b543-748701fe96f2}">
@@ -638,25 +925,64 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nSeqTx := nSeqTx + 1;
-telemetry.counter := telemetry.counter + 1;
-telemetry.timestamp_us := telemetry.timestamp_us + 10000; // placeholder while looking for method that gives system time
+        <ST><![CDATA[// PTCState (0xd00) — u16 on wire
+// AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, USINT_TO_UINT(GVL_PT.PTC_STATE));
+AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, 10);
 
-fbEncoder(
-    msgId      := 16#0010,
-    seqNum     := nSeqTx,
-    pPayload   := ADR(telemetry),
-    payloadLen := SIZEOF(telemetry)
-);
+// HVALStatus (0xd01) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_HVAL_STATUS,
+           USINT_TO_UINT(GVL_PT.HVAL_STATUS));
 
-fbSend(
-    hSocket  := fbConnect.hSocket,
-    cbLen    := fbEncoder.frameLen,
-    pSrc     := ADR(fbEncoder.frame),
-    bExecute := TRUE
-);
-bSendPending := TRUE;
-SendTelemetry();]]></ST>
+// IMDWarnings (0xd02) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_IMD_WARNINGS,
+           GVL_PT.IMD_WARNINGS);
+
+// PTErrorStatus (0xd03) — u16 bitmask
+AppendDpI16(GVL_GS_IDS.DP_ID_PT_ERROR_STATUS,
+           USINT_TO_UINT(GVL_PT.ERROR_STATUS));
+
+// PTFailReason (0xd04) — u16
+AppendDpI16(GVL_GS_IDS.DP_ID_PT_FAIL_REASON,
+           USINT_TO_UINT(GVL_PT.FAIL_REASON));
+
+// ISORes (0xd05) — u32 on wire, UINT in GVL
+AppendDpU32(GVL_GS_IDS.DP_ID_ISO_RES,
+            UINT_TO_UDINT(GVL_PT.ISO_RES));
+
+// IVTCurrent (0xd06) — i32 on wire, DWORD in GVL
+AppendDpI32(GVL_GS_IDS.DP_ID_IVT_CURRENT,
+            DWORD_TO_DINT(GVL_PT.IVT_CURRENT));
+
+// PTMaxVoltage (0xd07) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.MAX_VOLTAGE));
+
+// PTMinVoltage (0xd08) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.MIN_VOLTAGE));
+
+// PTMaxTemp (0xd09) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_TEMP,
+            UINT_TO_UDINT(GVL_PT.MAX_TEMP));
+
+// PTMinTemp (0xd0a) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_TEMP,
+            UINT_TO_UDINT(GVL_PT.MIN_TEMP));
+
+// PTTotalVoltage (0xd0b) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE,
+            UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
+
+// PTPackCurrent (0xd0c) — u32
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT,
+            UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
+
+// PTDCLinkVoltage (0xd0d) — i32 on wire, DWORD in GVL
+AppendDpI32(GVL_GS_IDS.DP_ID_PTDC_LINK_VOLTAGE,
+            DWORD_TO_DINT(GVL_PT.DC_LINK_VOLTAGE));
+
+FlushBatch();
+SendThermal := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryParseFrames" Id="{ba047145-da3f-4ebc-b0ba-c4ab60c41fe4}">

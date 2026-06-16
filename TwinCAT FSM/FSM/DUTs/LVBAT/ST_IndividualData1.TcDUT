@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_IndividualData1" Id="{1bb3ca9a-5dd6-470b-bcc8-70908faa84d5}">
+    <Declaration><![CDATA[TYPE ST_IndividualData1 :
+STRUCT
+    PermissionToJoin : USINT;          // byte 0 (1=yes,2=no)
+    HeatingMode      : USINT;          // byte 1 low nibble (0x00-0x0F)
+    HeatingActive    : BOOL;           // byte 1 bit 0x10
+    ChemType         : E_ChemType;     // byte 2
+    CellsInSeries    : USINT;          // byte 3
+    SOC_pct          : USINT;          // byte 4
+    BatteryState     : E_BatteryState; // byte 5
+    Current_A        : INT;            // byte 6 (1 byte; sign UNVERIFIED)
+    Temp_C           : INT;            // byte 7, offset -55
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

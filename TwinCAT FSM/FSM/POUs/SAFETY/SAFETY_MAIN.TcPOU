@@ -13,6 +13,9 @@ VAR
 	
 	bFalseForEstopRestart:					BOOL := FALSE;
 	
+	bPLCToggle AT %Q*:				BOOL := FALSE;
+	bPLCtoggleStop:					BOOL := FALSE;
+	
 	//INTERNAL VARIABLE
 	SafetyResetButton_RT:			R_TRIG;
 	StartupTimerFirst:					TON;
@@ -68,19 +71,20 @@ SafetyResetButton_RT(CLK := SafetyResetButton);
 SafetyErrorAcknowledge := SafetyResetButton_RT.Q;
 
 
-//IF bsafety_inputs_valid AND NOT b_AlivePLC AND NOT bFalseForEstopRestart THEN
-//	bEstopRestart := NOT bEstopRestart;
+IF bsafety_inputs_valid AND NOT b_AlivePLC AND NOT bFalseForEstopRestart THEN
+	bEstopRestart := NOT bEstopRestart;
 	
-//ELSIF bsafety_inputs_valid AND NOT bFalseForEstopRestart THEN
-//	bEstopRestart := FALSE;
-//	bFalseForEstopRestart := TRUE;
-//END_IF
+ELSIF bsafety_inputs_valid AND NOT bFalseForEstopRestart THEN
+	bEstopRestart := FALSE;
+	bFalseForEstopRestart := TRUE;
+END_IF
 
 //DC-LINK
 fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_LINK_SAFE, DC_LINK_SAFE_PROP => GVL_Prop.DC_LINK_SAFE); 
 
-
-
+IF NOT bPLCtoggleStop THEN
+	bPLCToggle := NOT bPLCToggle;	
+END_IF
 
 
 //push to GVL
