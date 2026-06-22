@@ -5,7 +5,10 @@
 VAR
 	send_message : PTC_Send_Message;
 	receive_messages : PTC_Receive_Messages;
+	
 	LV_BAT_Par : FB_CAN_LV;
+
+	
 END_VAR
 ]]></Declaration>
     <Implementation>

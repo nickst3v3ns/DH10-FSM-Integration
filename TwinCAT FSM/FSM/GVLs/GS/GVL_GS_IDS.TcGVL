@@ -4,6 +4,8 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL CONSTANT
     DP_ID_DEFAULT_DATATYPE                   : UINT := 16#0000;
+    DP_ID_PP_EMERGENCY_2                     : UINT := 16#0003;
+    DP_ID_PP_EMERGENCY_1                     : UINT := 16#0004;
 
     DP_ID_DEBUG                              : UINT := 16#0069;
     DP_ID_MAIN_PCB_BOOT                      : UINT := 16#0070;
@@ -35,15 +37,78 @@ VAR_GLOBAL CONSTANT
     DP_ID_EMERGENCY_STALE_CRITICAL_DATA      : UINT := 16#0227;
     DP_ID_LOCALIZATION_LIMIT_REACHED         : UINT := 16#0228;
 
+    DP_ID_POD_STATE                          : UINT := 16#0250;   // u16,  pod->gs,  critical
+    DP_ID_EMERGENCY_REASON                   : UINT := 16#0251;   // u16,  bidir,  critical
+    DP_ID_POD_STATE_COMMAND                  : UINT := 16#0252;   // u16,  gs->pod
+
     DP_ID_LOCALIZATION                       : UINT := 16#0321;   // f32,  mm,  pod->gs
 
     DP_ID_HV_V_HIGH                          : UINT := 16#03A1;   // critical
     DP_ID_BMS_TEMPERATURE_HIGH               : UINT := 16#03A2;
+    DP_ID_HVAL_STATE                         : UINT := 16#03A4;
+    DP_ID_VDC_LINK                           : UINT := 16#03A7;   // critical
+    DP_ID_PTC_ERRORS                         : UINT := 16#03B1;
 
+    DP_ID_TEMP_MOTOR_LEFT_0                  : UINT := 16#04B0;
+    DP_ID_TEMP_MOTOR_LEFT_1                  : UINT := 16#04B1;
+    DP_ID_TEMP_MOTOR_LEFT_2                  : UINT := 16#04B2;
+    DP_ID_TEMP_MOTOR_LEFT_3                  : UINT := 16#04B3;
+    DP_ID_TEMP_MOTOR_LEFT_4                  : UINT := 16#04B4;
+    DP_ID_TEMP_MOTOR_LEFT_5                  : UINT := 16#04B5;
+    DP_ID_WORD_2                             : UINT := 16#04B6;   // critical
+    DP_ID_IBUS_1                             : UINT := 16#04C2;
+    DP_ID_IBUS_2                             : UINT := 16#04C6;
+
+    DP_ID_PP_INIT_FAULT_1                    : UINT := 16#0507;
+    DP_ID_PP_INIT_FAULT_2                    : UINT := 16#0508;
+    DP_ID_TEMP_MOTOR_RIGHT_1                 : UINT := 16#050A;
+    DP_ID_TEMP_MOTOR_RIGHT_2                 : UINT := 16#050B;
+    DP_ID_TEMP_MOTOR_RIGHT_3                 : UINT := 16#050C;
+    DP_ID_TEMP_MOTOR_RIGHT_4                 : UINT := 16#050D;
+    DP_ID_TEMP_MOTOR_RIGHT_5                 : UINT := 16#050E;
+    DP_ID_TEMP_MOTOR_RIGHT_6                 : UINT := 16#050F;
+
+    DP_ID_TEMP_MOTOR_RIGHT_0                 : UINT := 16#0520;
     DP_ID_VELOCITY                           : UINT := 16#0527;   // i16,  mm/s,  pod->gs
     DP_ID_ROLL                               : UINT := 16#052E;
     DP_ID_PITCH                              : UINT := 16#052F;
     DP_ID_YAW                                : UINT := 16#0530;
+    DP_ID_TEMP_HEMS1                         : UINT := 16#053C;
+    DP_ID_TEMP_HEMS2                         : UINT := 16#053D;
+    DP_ID_TEMP_HEMS3                         : UINT := 16#053E;
+    DP_ID_TEMP_HEMS4                         : UINT := 16#053F;
+    DP_ID_TEMP_HEMS5                         : UINT := 16#0540;
+    DP_ID_TEMP_HEMS6                         : UINT := 16#0541;
+    DP_ID_TEMP_HEMS7                         : UINT := 16#0542;
+    DP_ID_TEMP_HEMS8                         : UINT := 16#0543;
+    DP_ID_TEMP_EMS1                          : UINT := 16#0544;
+    DP_ID_TEMP_EMS2                          : UINT := 16#0545;
+    DP_ID_TEMP_EMS3                          : UINT := 16#0546;
+    DP_ID_TEMP_EMS4                          : UINT := 16#0547;
+    DP_ID_TEMP_EMS5                          : UINT := 16#0548;
+    DP_ID_TEMP_EMS6                          : UINT := 16#0549;
+    DP_ID_TEMP_EMS7                          : UINT := 16#054A;
+    DP_ID_TEMP_EMS8                          : UINT := 16#054B;
+    DP_ID_TEMP_MOTOR_RIGHT_7                 : UINT := 16#0555;
+    DP_ID_TEMP_MOTOR_LEFT_6                  : UINT := 16#0556;
+    DP_ID_TEMP_MOTOR_LEFT_7                  : UINT := 16#0557;
+    DP_ID_LEVI_HEARTBEAT                     : UINT := 16#0567;   // critical
+    DP_ID_LEVI_FAULT                         : UINT := 16#0568;
+
+    DP_ID_WORD_1                             : UINT := 16#05B8;   // critical
+
+    DP_ID_ISOLATION_RESISTANCE               : UINT := 16#0610;   // critical
+    DP_ID_BUS_CURRENT                        : UINT := 16#0611;   // critical
+
+    DP_ID_PRESSURE_LOW                       : UINT := 16#0666;   // critical
+    DP_ID_PRESSURE_HIGH                      : UINT := 16#0667;   // critical
+
+    DP_ID_SENSOR_HUB_EMERGENCY               : UINT := 16#0696;
+    DP_ID_PTC_ERROR_EMERGENCY                : UINT := 16#0697;
+    DP_ID_BMS_ERROR_LOW_VOLTAGE              : UINT := 16#0698;
+    DP_ID_BMS_ERROR_HIGH_VOLTAGE             : UINT := 16#0699;
+
+    DP_ID_LEVI_FAULT_DRIVE_NUMBER            : UINT := 16#0777;
 
     DP_ID_OFFSET_1                           : UINT := 16#0848;   // f32,  mm,  pod->gs
     DP_ID_OFFSET_2                           : UINT := 16#0849;   // f32,  mm,  pod->gs
@@ -56,8 +121,8 @@ VAR_GLOBAL CONSTANT
     DP_ID_BARCODE_VELOCITY                   : UINT := 16#0901;
     DP_ID_BARCODE_ID                         : UINT := 16#0902;
     DP_ID_BARCODE_QUALITY                    : UINT := 16#0903;
-    DP_ID_LEVI_STATE                         : UINT := 16#0904;   // u8,  pod->gs,  critical
-    DP_ID_LEVI_COMMAND                       : UINT := 16#0905;   // u8,  bidir,  critical
+    DP_ID_LEVI_STATE                         : UINT := 16#0904;   // i16,  pod->gs,  critical
+    DP_ID_LEVI_COMMAND                       : UINT := 16#0905;   // i16,  bidir,  critical
     DP_ID_LEVI_READY                         : UINT := 16#0906;   // u8,  pod->gs
     DP_ID_LEVI_Z_TARGET                      : UINT := 16#0907;   // f64,  m,  pod->gs
     DP_ID_LEVI_PITCH_TARGET                  : UINT := 16#0908;   // f64,  rad,  pod->gs
@@ -405,50 +470,125 @@ VAR_GLOBAL CONSTANT
     DP_ID_PROP_POSITION_LIMIT_HIGH           : UINT := 16#0B20;   // u32,  m,  bidir
     DP_ID_PROP_MAX_THRUST                    : UINT := 16#0B21;   // u32,  N,  bidir
 
-    DP_ID_TEMP_LEVI_FL1                      : UINT := 16#0C00;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_FL2                      : UINT := 16#0C01;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_FR1                      : UINT := 16#0C02;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_FR2                      : UINT := 16#0C03;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_BL1                      : UINT := 16#0C04;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_BL2                      : UINT := 16#0C05;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_BR1                      : UINT := 16#0C06;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_BR2                      : UINT := 16#0C07;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FL1                      : UINT := 16#0C08;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FL2                      : UINT := 16#0C09;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FL3                      : UINT := 16#0C0A;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FL4                      : UINT := 16#0C0B;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FR1                      : UINT := 16#0C0C;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FR2                      : UINT := 16#0C0D;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FR3                      : UINT := 16#0C0E;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_FR4                      : UINT := 16#0C0F;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BL1                      : UINT := 16#0C10;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BL2                      : UINT := 16#0C11;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BL3                      : UINT := 16#0C12;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BL4                      : UINT := 16#0C13;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BR1                      : UINT := 16#0C14;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BR2                      : UINT := 16#0C15;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BR3                      : UINT := 16#0C16;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_BR4                      : UINT := 16#0C17;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_LOOP_IN                  : UINT := 16#0C18;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_PROP_LOOP_OUT                 : UINT := 16#0C19;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_LOOP_IN                  : UINT := 16#0C1A;   // f32,  degC,  pod->gs,  critical
-    DP_ID_TEMP_LEVI_LOOP_OUT                 : UINT := 16#0C1B;   // f32,  degC,  pod->gs,  critical
-    DP_ID_FLOW_LEVI_FL                       : UINT := 16#0C1C;   // f32,  pod->gs
-    DP_ID_FLOW_LEVI_FR                       : UINT := 16#0C1D;   // f32,  pod->gs
-    DP_ID_FLOW_LEVI_BL                       : UINT := 16#0C1E;   // f32,  pod->gs
-    DP_ID_FLOW_LEVI_BR                       : UINT := 16#0C1F;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L1                       : UINT := 16#0C20;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L2                       : UINT := 16#0C21;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L3                       : UINT := 16#0C22;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L4                       : UINT := 16#0C23;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L5                       : UINT := 16#0C24;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_L6                       : UINT := 16#0C25;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R1                       : UINT := 16#0C26;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R2                       : UINT := 16#0C27;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R3                       : UINT := 16#0C28;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R4                       : UINT := 16#0C29;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R5                       : UINT := 16#0C2A;   // f32,  pod->gs
-    DP_ID_FLOW_PROP_R6                       : UINT := 16#0C2B;   // f32,  pod->gs
+    DP_ID_TEMP_LEVI_FL1                      : UINT := 16#0C00;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_FL2                      : UINT := 16#0C01;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_FR1                      : UINT := 16#0C02;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_FR2                      : UINT := 16#0C03;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_BL1                      : UINT := 16#0C04;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_BL2                      : UINT := 16#0C05;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_BR1                      : UINT := 16#0C06;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_BR2                      : UINT := 16#0C07;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FL1                      : UINT := 16#0C08;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FL2                      : UINT := 16#0C09;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FL3                      : UINT := 16#0C0A;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FL4                      : UINT := 16#0C0B;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FR1                      : UINT := 16#0C0C;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FR2                      : UINT := 16#0C0D;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FR3                      : UINT := 16#0C0E;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_FR4                      : UINT := 16#0C0F;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BL1                      : UINT := 16#0C10;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BL2                      : UINT := 16#0C11;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BL3                      : UINT := 16#0C12;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BL4                      : UINT := 16#0C13;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BR1                      : UINT := 16#0C14;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BR2                      : UINT := 16#0C15;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BR3                      : UINT := 16#0C16;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_BR4                      : UINT := 16#0C17;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_LOOP_IN                  : UINT := 16#0C18;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_PROP_LOOP_OUT                 : UINT := 16#0C19;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_LOOP_IN                  : UINT := 16#0C1A;   // i32,  degC,  pod->gs,  critical
+    DP_ID_TEMP_LEVI_LOOP_OUT                 : UINT := 16#0C1B;   // i32,  degC,  pod->gs,  critical
+    DP_ID_FLOW_LEVI_FL                       : UINT := 16#0C1C;   // i32,  pod->gs
+    DP_ID_FLOW_LEVI_FR                       : UINT := 16#0C1D;   // i32,  pod->gs
+    DP_ID_FLOW_LEVI_BL                       : UINT := 16#0C1E;   // i32,  pod->gs
+    DP_ID_FLOW_LEVI_BR                       : UINT := 16#0C1F;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L1                       : UINT := 16#0C20;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L2                       : UINT := 16#0C21;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L3                       : UINT := 16#0C22;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L4                       : UINT := 16#0C23;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L5                       : UINT := 16#0C24;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_L6                       : UINT := 16#0C25;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R1                       : UINT := 16#0C26;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R2                       : UINT := 16#0C27;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R3                       : UINT := 16#0C28;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R4                       : UINT := 16#0C29;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R5                       : UINT := 16#0C2A;   // i32,  pod->gs
+    DP_ID_FLOW_PROP_R6                       : UINT := 16#0C2B;   // i32,  pod->gs
+    DP_ID_THERM_EMS0                         : UINT := 16#0C2C;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS1                         : UINT := 16#0C2D;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS2                         : UINT := 16#0C2E;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS3                         : UINT := 16#0C2F;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS4                         : UINT := 16#0C30;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS5                         : UINT := 16#0C31;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS6                         : UINT := 16#0C32;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_EMS7                         : UINT := 16#0C33;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS0                        : UINT := 16#0C34;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS1                        : UINT := 16#0C35;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS2                        : UINT := 16#0C36;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS3                        : UINT := 16#0C37;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS4                        : UINT := 16#0C38;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS5                        : UINT := 16#0C39;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS6                        : UINT := 16#0C3A;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_HEMS7                        : UINT := 16#0C3B;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_0           : UINT := 16#0C3C;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_1           : UINT := 16#0C3D;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_2           : UINT := 16#0C3E;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_3           : UINT := 16#0C3F;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_4           : UINT := 16#0C40;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_5           : UINT := 16#0C41;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_6           : UINT := 16#0C42;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_7           : UINT := 16#0C43;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_FRONT_8           : UINT := 16#0C44;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_0          : UINT := 16#0C45;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_1          : UINT := 16#0C46;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_2          : UINT := 16#0C47;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_3          : UINT := 16#0C48;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_4          : UINT := 16#0C49;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_5          : UINT := 16#0C4A;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_6          : UINT := 16#0C4B;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_7          : UINT := 16#0C4C;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_FRONT_8          : UINT := 16#0C4D;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_0            : UINT := 16#0C4E;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_1            : UINT := 16#0C4F;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_2            : UINT := 16#0C50;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_3            : UINT := 16#0C51;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_4            : UINT := 16#0C52;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_5            : UINT := 16#0C53;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_6            : UINT := 16#0C54;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_7            : UINT := 16#0C55;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_LEFT_BACK_8            : UINT := 16#0C56;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_0           : UINT := 16#0C57;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_1           : UINT := 16#0C58;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_2           : UINT := 16#0C59;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_3           : UINT := 16#0C5A;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_4           : UINT := 16#0C5B;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_5           : UINT := 16#0C5C;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_6           : UINT := 16#0C5D;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_7           : UINT := 16#0C5E;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_MOTOR_RIGHT_BACK_8           : UINT := 16#0C5F;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_0                       : UINT := 16#0C60;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_1                       : UINT := 16#0C61;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_2                       : UINT := 16#0C62;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_3                       : UINT := 16#0C63;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_4                       : UINT := 16#0C64;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_5                       : UINT := 16#0C65;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_6                       : UINT := 16#0C66;   // f32,  degC,  pod->gs,  critical
+    DP_ID_THERM_FLOW_7                       : UINT := 16#0C67;   // f32,  degC,  pod->gs,  critical
+    DP_ID_FLOW_ARRAY_0                       : UINT := 16#0C68;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_1                       : UINT := 16#0C69;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_2                       : UINT := 16#0C6A;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_3                       : UINT := 16#0C6B;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_4                       : UINT := 16#0C6C;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_5                       : UINT := 16#0C6D;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_6                       : UINT := 16#0C6E;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_7                       : UINT := 16#0C6F;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_8                       : UINT := 16#0C70;   // f32,  pod->gs
+    DP_ID_FLOW_ARRAY_9                       : UINT := 16#0C71;   // f32,  pod->gs
+    DP_ID_OVERHEAT_HEMS                      : UINT := 16#0C72;   // u8,  pod->gs,  critical
+    DP_ID_OVERHEAT_EMS                       : UINT := 16#0C73;   // u8,  pod->gs,  critical
+    DP_ID_OVERHEAT_MOTOR                     : UINT := 16#0C74;   // u8,  pod->gs,  critical
+    DP_ID_OVERHEAT_FLOW                      : UINT := 16#0C75;   // u8,  pod->gs,  critical
+    DP_ID_PROP_DUTY_CYCLE                    : UINT := 16#0C76;   // f32,  pod->gs
 
     DP_ID_PTC_STATE                          : UINT := 16#0D00;   // u16,  pod->gs,  critical
     DP_ID_HVAL_STATUS                        : UINT := 16#0D01;   // u16,  pod->gs
@@ -466,7 +606,6 @@ VAR_GLOBAL CONSTANT
     DP_ID_PTDC_LINK_VOLTAGE                  : UINT := 16#0D0D;   // i32,  pod->gs,  critical
 
     DP_ID_CAN_LOG                            : UINT := 16#0FFD;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

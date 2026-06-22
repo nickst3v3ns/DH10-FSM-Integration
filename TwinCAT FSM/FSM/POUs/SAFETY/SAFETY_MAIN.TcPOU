@@ -7,14 +7,15 @@ VAR
 
 	SafetyResetButton AT %I*:		BOOL := FALSE;
 	
-	bRearm AT %Q*: 					BOOL := FALSE;
+	bAlivePLC AT %Q*:				BOOL := TRUE;
+	bArmSignal AT %Q*: 					BOOL := FALSE;
 	bCLK AT %Q*: 					BOOL := FALSE;
 	bbrakes_engaged AT %I*:				BOOL := FALSE;
 	
-	bFalseForEstopRestart:					BOOL := FALSE;
+	bFalseForEstopRestart:					BOOL := FALSE; //when false, the esotp reset automatically
 	
-	bPLCToggle AT %Q*:				BOOL := FALSE;
-	bPLCtoggleStop:					BOOL := FALSE;
+	bPLCToggle AT %Q*:				BOOL := FALSE; //cycle time watchdog
+	bPLCtoggleStop:					BOOL := FALSE; //when true, the cycle time watchdog does not work anymore
 	
 	//INTERNAL VARIABLE
 	SafetyResetButton_RT:			R_TRIG;
@@ -28,10 +29,8 @@ VAR
 
 	bEstopError AT %I*:				BOOL := FALSE; 
 	bEstopRestart AT %Q*:			BOOL := FALSE; //Used to restart the Estop from the PLC side
-	bTwinSAFEstart:			BOOL := FALSE;
-	
-	b_AlivePLC AT %I*:				BOOL := FALSE;
-	
+	bTwinSAFEstart:					BOOL := FALSE;
+	bJorianSpecial AT %Q*:			BOOL := TRUE;
 	bsafety_inputs_valid AT %I*:	BOOL := FALSE;
 	
 	
@@ -43,13 +42,17 @@ END_VAR
       <ST><![CDATA[//Fetch from GVL
 
 //brakes
-bRearm := GVL_FSM.bbrakes_armed;
-bCLK := GVL_FSM.bbrakes_clock;
+bArmSignal := GVL_FSM.bbrakes_arm_signalGlobal;
+bCLK := GVL_FSM.bbrakes_clockGlobal;
+bAlivePLC := GVL_FSM.b_AlivePLCGlobal;
+bJorianSpecial := GVL_FSM.bJorianSpecialGlobal;
+bbrakes_engaged := GVL_FSM.bbrakes_engaged;
+
 
 
 //TwinSAFE Estop Logic
-bFalseForEstopRestart := GVL_FSM.bFalseForEstopRestart;
-bEstopRestart := GVL_FSM.bEstopRestart;
+bFalseForEstopRestart := GVL_FSM.bFalseForEstopRestartGlobal;
+bEstopRestart := GVL_FSM.bEstopRestartGlobal;
 
 
 //-------------
@@ -71,7 +74,7 @@ SafetyResetButton_RT(CLK := SafetyResetButton);
 SafetyErrorAcknowledge := SafetyResetButton_RT.Q;
 
 
-IF bsafety_inputs_valid AND NOT b_AlivePLC AND NOT bFalseForEstopRestart THEN
+IF bsafety_inputs_valid AND NOT bAlivePLC AND NOT bFalseForEstopRestart THEN
 	bEstopRestart := NOT bEstopRestart;
 	
 ELSIF bsafety_inputs_valid AND NOT bFalseForEstopRestart THEN
@@ -90,14 +93,16 @@ END_IF
 //push to GVL
 
 //estop
-GVL_FSM.bEstopError := bEstopError;
-GVL_FSM.bEstopRestart := bEstopRestart;
-GVL_FSM.bsdc_closed := b_AlivePLC;
+GVL_FSM.bEstopErrorGlobal := bEstopError;
+GVL_FSM.bEstopRestartGlobal := bEstopRestart;
+GVL_FSM.b_AlivePLCGlobal := bAlivePLC;
+
+GVL_FSM.bJorianSpecialGlobal:= bJorianSpecial;
 
 //brakes
-bRearm := GVL_FSM.bbrakes_armed;
-bCLK := GVL_FSM.bbrakes_clock;
-bbrakes_engaged := GVL_FSM.bbrakes_engaged;
+GVL_FSM.bbrakes_arm_signalGlobal := bArmSignal;
+GVL_FSM.bbrakes_clockGlobal := bCLK;
+GVL_FSM.bbrakes_engaged := bbrakes_engaged;
 
 //------------]]></ST>
     </Implementation>

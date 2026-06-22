@@ -3,86 +3,114 @@
   <GVL Name="GVL_Prop" Id="{50abe306-50cd-40fe-9fcd-ded7060b0d4e}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	//First propulsion checks
 	
-	//
-	// Variables to read and write
-	//
-	
-	PropFlag : 				INT;
-	AutoPilotFlag :			INT;
-	DriveReset :			INT;
-	TargetVelocity :		LREAL;
-	PositionLimit_Low :		LREAL := 7.7;
-	PositionLimit_High :	LREAL := 13;
-	MaxThrust :				LREAL := 500;
-	
-	ProportionalGainVelocity :		LREAL := 1500;
-	IntegralGainVelocity :			LREAL := 1000;
-	InitialIntegralValueVelocity :	LREAL;
+//
+//First propulsion checks
+//
 	
 	
-	//
-	// Variables to read
-	//
+//
+// Variables to read and write
+//
 	
-	Position :				LREAL;
-	PositionInterpolared :	LREAL;
-	Velocity :				LREAL;
+	PropFlag : 							INT;
+	AutoPilotFlag :						INT;
+	DriveReset :						INT;
+	TargetVelocity :					LREAL;
+	Iamp_Temp : 						LREAL;
 	
-	VelocityIntegral_Left :		LREAL;
-	VelocityIntegral_Right :	LREAL;
+	PositionLimit_Low :					LREAL := 7.7;
+	PositionLimit_High :				LREAL := 13;
+	MaxThrust :							LREAL := 500;
 	
-	Iq_Left :				LREAL;
-	Id_Left :				LREAL;
-	Iq_Right :				LREAL;
-	Id_Right :				LREAL;
+	ProportionalGainVelocity :			LREAL := 1500;
+	IntegralGainVelocity :				LREAL := 1000;
+	InitialIntegralValueVelocity :		LREAL;
 	
-	Ia_Left:				LREAL;
-	Ib_Left:				LREAL;
-	Ic_Left:				LREAL;
-	Ia_Right:				LREAL;
-	Ib_Right:				LREAL;
-	Ic_Right:				LREAL;
+	ProportionalGainId : 				LREAL := 10;
+	IntegralGainId : 					LREAL := 5;
+	InitialIntegralGainId :				LREAL;
+	ProportionalGainIq :				LREAL := 10;
+	IntegralGainIq : 					LREAL := 5;
+	InitialIntegralGainIq : 			LREAL;
 	
-	Ta_GD_Left :			LREAL;
-	Tb_GD_Left :			LREAL;
-	Tc_GD_Left :			LREAL;
-	Ta_GD_Right :			LREAL;
-	Tb_GD_Right :			LREAL;
-	Tc_GD_Right :			LREAL;
+	PositionOffset : 					LREAL := 2.2;
+	CANDelay : 							LREAL := 0.04;
 	
-	CurrentAngle_Left :		LREAL;
-	CurrentAngle_Right :	LREAL;
-	
-	Vbus_Left :				LREAL;
-	Vbus_Right :			LREAL;
-	
-	FAULT_Left :			INT;
-	FAULT_Right :			INT;
-
-	PropState_Left :		INT;
-	PropState_Right :		INT;
-	
-	PropSubState_Left :		INT;
-	PropSubState_Right :	INT;
+	ETML_gain_Left : 					LREAL := 16.91503741;
+	ETML_gain_Right : 					LREAL := 16.91503741;
+	ETML_power_constant :		 		LREAL := 0.46047809;
 	
 	
-	//
-	// Main FSM
-	//
+//
+// Variables to read
+//
 	
-	propulsion_fault: 		BOOL;
-	propulsion_enable: 		BOOL;
-	propulsion_active: 		BOOL;
+	PropState_Left :					INT;
+	PropState_Right :					INT;
 	
-	DC_LINK_SAFE			:BOOL;
+	PropSubState_Left :					INT;
+	PropSubState_Right :				INT;
+	
+	FAULT_Left :						INT;
+	FAULT_Right :						INT;
+	
+	Position :							LREAL;
+	PositionInterpolared :				LREAL;
+	Velocity :							LREAL;
+	
+	VelocityIntegral_Left :				LREAL;
+	VelocityIntegral_Right :			LREAL;
+	
+	Id_ref_Right : 						LREAL;
+	Iq_ref_Right :						LREAL;
+	Id_Right :							LREAL;
+	Iq_Right :							LREAL;
+	Id_ref_Left :						LREAL;
+	Iq_ref_Left :						LREAL;
+	Id_Left :							LREAL;
+	Iq_Left :							LREAL;
+	
+	Ia_Left:							LREAL;
+	Ib_Left:							LREAL;
+	Ic_Left:							LREAL;
+	Ia_Right:							LREAL;
+	Ib_Right:							LREAL;
+	Ic_Right:							LREAL;
+	
+	Ta_GD_Left :						LREAL;
+	Tb_GD_Left :						LREAL;
+	Tc_GD_Left :						LREAL;
+	Ta_GD_Right :						LREAL;
+	Tb_GD_Right :						LREAL;
+	Tc_GD_Right :						LREAL;
+	
+	CurrentAngle_Left :					LREAL := 45;
+	CurrentAngle_Right :				LREAL := 45;
+	
+	Vd_Right :							LREAL;
+	Vq_Right :							LREAL;
+	Vd_Left :							LREAL;
+	Vq_Left :							LREAL;
+	
+	Vbus_Left :							LREAL;
+	Vbus_Right :						LREAL;
 	
 	
+//
+// Main FSM
+//
 	
-	//
-	// Barcode setup
-	//
+	propulsion_fault : 					BOOL;
+	propulsion_enable : 				BOOL;
+	propulsion_active : 				BOOL;
+	
+	DC_LINK_SAFE : 						BOOL;
+	
+	
+//
+// Barcode setup
+//
 	
 	OutputData_Front AT %Q*: ARRAY[0..7] OF BYTE;
 	OutputData_Back AT %Q*: ARRAY[0..7] OF BYTE;
@@ -95,6 +123,7 @@ VAR_GLOBAL
 	InputData2_Back AT %I*: ARRAY[0..7] OF BYTE;
 	InputData3_Back AT %I*: ARRAY[0..7] OF BYTE;
 	
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

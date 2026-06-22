@@ -57,12 +57,12 @@ VAR
 
 	//Simulink Sensor Setup
 	//Initialising the tccom object
-	FB_sensor_init: ST_FB_Sensor_model_TcCom_InitStruct :=  (noid:=16#01010020);
-	FB_sensor: FB_Sensor_model_TcCom_InitStruct(FB_sensor_init);
+	FB_sensor_init: ST_FB_Sensor_model_new_TcCom_InitStruct :=  (noid:=16#01010020);
+	FB_sensor: FB_Sensor_model_new_TcCom_InitStruct(FB_sensor_init);
 	
-	Sensor_model_input: ST_Sensor_model_U_T;
-	Sensor_model_output: ST_Sensor_model_Y_T;
-	Sensor_parameters: ST_P_Sensor_model_T := FB_sensor.stSensor_model_P;
+	Sensor_model_input: ST_Sensor_model_new_U_T;
+	Sensor_model_output: ST_Sensor_model_new_Y_T;
+	Sensor_parameters: ST_P_Sensor_model_new_T := FB_sensor.stSensor_model_new_P;
 	
 	//outputs
 	z: LREAL; //m
@@ -71,6 +71,13 @@ VAR
 	
 	y: LREAL; //m
 	yaw: LREAL;	//rad
+	
+	z_filtered: LREAL; //m
+	roll_filtered: LREAL; //rad
+	pitch_filtered: LREAL; //rad
+	
+	y_filtered: LREAL; //m
+	yaw_filtered: LREAL;	//rad
 	
 	Offset_airgaps_vertical : T_matrix6xdouble;
 	Offset_airgaps_lateral : T_matrix6xdouble;
@@ -293,19 +300,19 @@ VAR
 	
 	K_P_roll_motor_on: LREAL := 150000;
 	K_I_roll_motor_on: LREAL := 100000;
-	K_D_roll_motor_on: LREAL := 30000;
+	K_D_roll_motor_on: LREAL := 20000;
 	K_F_roll_motor_on: LREAL := 120;
 	K_I_roll_initial_motor_on: LREAL := -11;
 	
-	K_P_lat_motor_on: LREAL := 400000;
-	K_I_lat_motor_on: LREAL := 150000;
+	K_P_lat_motor_on: LREAL := 600000;
+	K_I_lat_motor_on: LREAL := 200000;
 	K_D_lat_motor_on: LREAL := 30000;
 	K_F_lat_motor_on: LREAL := 120;
 	K_I_lat_initial_motor_on: LREAL := 20;
 
-	K_P_yaw_motor_on: LREAL := 300000;
+	K_P_yaw_motor_on: LREAL := 400000;
 	K_I_yaw_motor_on: LREAL := 200000;
-	K_D_yaw_motor_on: LREAL := 20000;
+	K_D_yaw_motor_on: LREAL := 30000;
 	K_F_yaw_motor_on: LREAL := 100;
 	K_I_yaw_initial_motor_on: LREAL := 39;	
 	
@@ -323,7 +330,7 @@ VAR
 	
 	K_P_roll: LREAL := 150000;
 	K_I_roll: LREAL := 100000;
-	K_D_roll: LREAL := 10000;
+	K_D_roll: LREAL := 13000;
 	K_F_roll: LREAL := 120;
 	K_I_roll_initial: LREAL := -11;
 	
@@ -470,6 +477,10 @@ VAR
 	//fbSendAirGapRight : FB_SendAirGap_Right;
 
 	i: INT;
+	
+	Front_sensors_off : BOOL;
+	Middle_sensors_off : BOOL;
+	Back_sensors_off : BOOL;
 
 END_VAR
 
@@ -520,11 +531,49 @@ SensorData_Packets_Array[9] := fb_serial_LMR.nPacketsPerSecond;
 SensorData_Packets_Array[10] := fb_serial_LBL.nPacketsPerSecond;
 SensorData_Packets_Array[11] := fb_serial_LBR.nPacketsPerSecond;
 
+IF Front_sensors_off THEN
+	SensorDataArray[0] := 25;
+	SensorDataArray[1] := 25;
+	SensorDataArray[6] := 25;
+	SensorDataArray[7] := 25;
+END_IF
+
+IF Middle_sensors_off THEN
+	SensorDataArray[2] := 25;
+	SensorDataArray[3] := 25;
+	SensorDataArray[8] := 25;
+	SensorDataArray[9] := 25;
+END_IF
+
+IF Back_sensors_off THEN
+	SensorDataArray[4] := 25;
+	SensorDataArray[5] := 25;
+	SensorDataArray[10] := 25;
+	SensorDataArray[11] := 25;
+END_IF
+
+IF Position >= 10.9005 AND Position <= 11.3725 THEN
+	SensorDataArray[0] := 25;
+	SensorDataArray[1] := 25;
+	SensorDataArray[6] := 25;
+	SensorDataArray[7] := 25;
+ELSIF Position >= 9.8275 AND Position <= 10.7005 THEN
+	SensorDataArray[2] := 25;
+	SensorDataArray[3] := 25;
+	SensorDataArray[8] := 25;
+	SensorDataArray[9] := 25;
+ELSIF Position >= 9.1415 AND Position <= 9.6275 THEN
+	SensorDataArray[4] := 25;
+	SensorDataArray[5] := 25;
+	SensorDataArray[10] := 25;
+	SensorDataArray[11] := 25;
+END_IF
+
 FOR i:=0 TO 11 DO
 	sensor_model_input.aNewsensorairgaps[i] := SensorDataArray[i];
 END_FOR
 
-FB_sensor(stSensor_model_u := Sensor_model_input, stSensor_model_y => Sensor_model_output);
+FB_sensor(stSensor_model_new_u := Sensor_model_input, stSensor_model_new_y => Sensor_model_output);
 
 z := Sensor_model_output.fz;
 roll := Sensor_model_output.froll;
@@ -533,11 +582,18 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
+z_filtered := Sensor_model_output.fz_filtered;
+roll_filtered := Sensor_model_output.froll_filtered;
+pitch_filtered := Sensor_model_output.fpitch_filtered;
+
+y_filtered := Sensor_model_output.fy_filtered;
+yaw_filtered := Sensor_model_output.fyaw_filtered;
+
 Offset_airgaps_vertical := Sensor_model_output.aoffset_airgaps;
 Offset_airgaps_lateral := Sensor_model_output.aoffset_airgaps_ems;
 
-motor_airgap_left := 0.013 - y;
-motor_airgap_right := 0.013 + y;
+motor_airgap_left := 0.013 - y_filtered;
+motor_airgap_right := 0.013 + y_filtered;
 
 //----------------------------------------------------------------------------------------------------
 
@@ -721,8 +777,8 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------------------------------------------
 			
-			Control_lat_inputs.fy := y;
-			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fy := y_filtered;
+			Control_lat_inputs.fyaw := yaw_filtered;
 			Control_lat_inputs.fmotor_Fx_l := 0;
 			Control_lat_inputs.fmotor_Fx_r := 0;
 			Control_lat_inputs.fmotor_Fy_l := 0;
@@ -732,9 +788,9 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------------------------------------------
 			
-			Control_vert_inputs.fz_avg := z;
-			Control_vert_inputs.froll_measured := roll;
-			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fz_avg := z_filtered;
+			Control_vert_inputs.froll_measured := roll_filtered;
+			Control_vert_inputs.fpitch_measured := pitch_filtered;
 			Control_vert_inputs.fems_roll := 0;
 			Control_vert_inputs.fmotor_Fy_l := 0;
 			Control_vert_inputs.fmotor_Fy_r := 0;
@@ -1108,8 +1164,8 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Control_lat_inputs.fy := y;
-			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fy := y_filtered;
+			Control_lat_inputs.fyaw := yaw_filtered;
 			Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
@@ -1123,9 +1179,9 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Control_vert_inputs.fz_avg := z;
-			Control_vert_inputs.froll_measured := roll;
-			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fz_avg := z_filtered;
+			Control_vert_inputs.froll_measured := roll_filtered;
+			Control_vert_inputs.fpitch_measured := pitch_filtered;
 			Control_vert_inputs.fems_roll := tau_x_ems;
 			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
@@ -1277,25 +1333,29 @@ CASE GVL_LEVI.Levi_Command OF
 				Control_lat_parameters.fK_F_yaw := K_F_yaw_motor_on;
 				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial_motor_on;
 				
-				IF ABS(z) > z_target + 0.9E-3 THEN
+				IF ABS(z_filtered) > z_target + 0.9E-3 THEN
 					Control_vert_parameters.fK_P_tot := extreme_z_gain_multiplier * K_P_tot_motor_on;
 				END_IF
 				
-				IF ABS(pitch) > pitch_target + 0.9E-3 THEN
+				IF ABS(pitch_filtered) > pitch_target + 0.9E-3 THEN
 					Control_vert_parameters.fK_P_pit := extreme_pitch_gain_multiplier * K_P_pitch_motor_on;
 				END_IF
 				
-				IF ABS(roll) > roll_target + 0.9E-3 THEN
+				IF ABS(roll_filtered) > roll_target + 0.9E-3 THEN
 					Control_vert_parameters.fK_P_roll := extreme_roll_gain_multiplier * K_P_roll_motor_on;
 				END_IF
 				
-				IF ABS(y) > y_target_airgap + 1.0E-3 THEN
+				IF ABS(y_filtered) > y_target_airgap + 1.0E-3 THEN
 					Control_lat_parameters.fK_P_lat := extreme_y_gain_multiplier * K_P_lat_motor_on;
 				END_IF
 				
-				IF ABS(yaw) > yaw_target + 0.9E-3 THEN
+				IF ABS(yaw_filtered) > yaw_target + 0.9E-3 THEN
 					Control_lat_parameters.fK_P_yaw := extreme_yaw_gain_multiplier * K_P_yaw_motor_on;
 				END_IF
+				
+				enable_lat_main_notch_3 := FALSE;
+				enable_extra_y_notch_1 := FALSE;
+				enable_extra_y_notch_2 := FALSE;
 
 			ELSE
 				motor_thrust_l := 0;
@@ -1336,6 +1396,10 @@ CASE GVL_LEVI.Levi_Command OF
 				Control_lat_parameters.fK_D_yaw := K_D_yaw;
 				Control_lat_parameters.fK_F_yaw := K_F_yaw;
 				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
+				
+				enable_lat_main_notch_3 := TRUE;
+				enable_extra_y_notch_1 := TRUE;
+				enable_extra_y_notch_2 := TRUE;
 				
 			END_IF
 			
@@ -1458,8 +1522,8 @@ CASE GVL_LEVI.Levi_Command OF
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 			
-			Control_lat_inputs.fy := y;
-			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fy := y_filtered;
+			Control_lat_inputs.fyaw := yaw_filtered;
 			Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
@@ -1471,9 +1535,9 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			I_EMS := Control_lat_outputs.aI_ems;
 			
-			Control_vert_inputs.fz_avg := z;
-			Control_vert_inputs.froll_measured := roll;
-			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fz_avg := z_filtered;
+			Control_vert_inputs.froll_measured := roll_filtered;
+			Control_vert_inputs.fpitch_measured := pitch_filtered;
 			Control_vert_inputs.fems_roll := tau_x_ems;
 			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;
@@ -1757,8 +1821,8 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Control_lat_inputs.fy := y;
-			Control_lat_inputs.fyaw := yaw;
+			Control_lat_inputs.fy := y_filtered;
+			Control_lat_inputs.fyaw := yaw_filtered;
 			Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
@@ -1772,9 +1836,9 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Control_vert_inputs.fz_avg := z;
-			Control_vert_inputs.froll_measured := roll;
-			Control_vert_inputs.fpitch_measured := pitch;
+			Control_vert_inputs.fz_avg := z_filtered;
+			Control_vert_inputs.froll_measured := roll_filtered;
+			Control_vert_inputs.fpitch_measured := pitch_filtered;
 			Control_vert_inputs.fems_roll := tau_x_ems;
 			Control_vert_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_vert_inputs.fmotor_Fy_r := motor_lift_r;

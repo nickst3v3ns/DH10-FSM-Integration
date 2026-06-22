@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_PTC_ErrorCode" Id="{87b55095-6c3c-487a-ac69-de6473670dd8}">
+    <Declaration><![CDATA[TYPE ST_PTC_ErrorCode :
+STRUCT
+	ERROR_SDC_TRIGGERED 	: BIT;
+	ERROR_IMD_TRIGGERED 	: BIT;
+	ERROR_CONTACT_MISMATCH 	: BIT;
+	ERROR_PRECHARGE_FAILURE : BIT;
+	ERROR_CAN_FAILED 		: BIT;
+	ERROR_OVERVOLTAGE 		: BIT;
+	ERROR_BMS_VOLTAGE 		: BIT;
+	EMPTY					: BIT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_IMD_Warnings" Id="{2f651f9a-ed90-41bc-a7ee-0203ece55c4b}">
+    <Declaration><![CDATA[TYPE U_IMD_Warnings :
+UNION
+	wRaw : WORD;
+	stBits : ST_IMD_Warnings;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

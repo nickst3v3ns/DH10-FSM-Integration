@@ -20,7 +20,7 @@ VAR_GLOBAL
 	
 	T_FLOW:		ARRAY[0..7] OF REAL;
 	
-	FLOWarray:		ARRAY[0..9] OF REAL; //,meausrements from the flow sensors
+	FLOWarray:		ARRAY[0..9] OF REAL; // meausrements from the flow sensors
 
 
 //OVERHEAT bools

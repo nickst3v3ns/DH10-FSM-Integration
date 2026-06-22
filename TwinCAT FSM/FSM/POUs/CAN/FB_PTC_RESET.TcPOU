@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PTC_RESET" Id="{2126362a-8db8-4835-94ee-d87f1381cff3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PTC_RESET
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	send_message : PTC_Send_Message;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[send_message(ID := E_PTC_TX_ID.Reset, CAN_OUTPUts := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

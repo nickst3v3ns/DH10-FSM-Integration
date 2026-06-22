@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_BrakesDearm" Id="{b55b9b90-36a5-4687-8fe1-aa7ce19c370d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_BrakesDearm
+VAR_IN_OUT
+	armSignal : BOOL;
+	clkSignal : BOOL;
+END_VAR
+VAR
+	tracker	: BOOL := FALSE;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//because braking pcb is broken
+(*
+IF armSignal AND NOT clkSignal AND NOT tracker THEN
+	armSignal := FALSE;
+	clkSignal := TRUE;
+	tracker := TRUE;
+ELSIF NOT armSignal AND clkSignal AND tracker THEN
+	clkSignal := FALSE;
+	tracker := FALSE;
+END_IF
+*)
+GVL_FSM.bbrakes_engaged := FALSE;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

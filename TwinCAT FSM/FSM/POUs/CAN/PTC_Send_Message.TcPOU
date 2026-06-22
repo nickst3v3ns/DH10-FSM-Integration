@@ -24,7 +24,8 @@ END_VAR]]></Declaration>
 	CAN_OUTPUTS.TxMessages[0] := Message;
 	CAN_OUTPUTS.NoOfTxMessages := 1;
 	CAN_OUTPUTS.TxCounter := CAN_INPUTS.TxCounter + 1;
-END_IF]]></ST>
+END_IF
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

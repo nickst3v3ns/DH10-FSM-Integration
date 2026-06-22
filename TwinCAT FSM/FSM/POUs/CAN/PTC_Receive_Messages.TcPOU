@@ -14,6 +14,10 @@ VAR
 	i : UINT;
 	MessagesReceived : ARRAY[0..31] OF EXTCANQUEUE;
 	Data : ARRAY[0..7] OF USINT;
+	
+	converter : FB_NTC_CodeToCelsius;
+	uPTCError : U_PTC_ErrorCode;
+	uIMDWarnings : U_IMD_Warnings;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -32,10 +36,16 @@ END_IF]]></ST>
 	CASE MessagesReceived[i].cobId OF
 		E_PTC_RX_ID.Status_Log:
 			GVL_PT.PTC_STATE := Data[0];
+			
 			GVL_PT.HVAL_STATUS := Data[1];
+			
 			GVL_PT.IMD_WARNINGS := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
+			uIMDwarnings.wRaw := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]); 
+			
 			GVL_PT.ERROR_STATUS := Data[4];
-			GVL_PT.FAIL_REASON := Data[6];
+			uPTCError.braw := Data[4];
+			
+			GVL_PT.HV_FAIL_REASON := Data[6];
 		E_PTC_RX_ID.HV_Log:
 			GVL_PT.ISO_RES := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
 			GVL_PT.IVT_CURRENT := SHL(TO_DWORD(Data[2]), 24) OR 
@@ -43,13 +53,13 @@ END_IF]]></ST>
 							SHL(TO_DWORD(Data[4]), 8) OR 
 							TO_DWORD(Data[5]);
 		E_PTC_RX_ID.BMS_Log_A:
-			GVL_PT.MAX_VOLTAGE := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
-			GVL_PT.MIN_VOLTAGE := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
-			GVL_PT.MAX_TEMP := SHL(TO_UINT(Data[4]), 8) OR TO_UINT(Data[5]);
-			GVL_PT.MIN_TEMP := SHL(TO_UINT(Data[6]), 8) OR TO_UINT(Data[7]);
+			GVL_PT.MAX_VOLTAGE := TO_REAL(SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]))/10000.0;
+			GVL_PT.MIN_VOLTAGE := TO_REAL(SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]))/10000.0;
+			converter(code := SHL(TO_UINT(Data[4]), 8) OR TO_UINT(Data[5]), T_cel => GVL_PT.MAX_TEMP);
+			converter(code := SHL(TO_UINT(Data[6]), 8) OR TO_UINT(Data[7]), T_cel => GVL_PT.MIN_TEMP);
 		E_PTC_RX_ID.BMS_Log_B:
 			GVL_PT.TOTAL_VOLTAGE := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
-			GVL_PT.PACK_CURRENT := SHL(TO_UINT(Data[2]), 8) OR TO_UINT(Data[3]);
+			GVL_PT.PACK_CURRENT := SHL(TO_INT(Data[2]), 8) OR TO_INT(Data[3]);
 			GVL_PT.DC_LINK_VOLTAGE := SHL(TO_DWORD(Data[4]), 24) OR 
 							SHL(TO_DWORD(Data[5]), 16) OR 
 							SHL(TO_DWORD(Data[6]), 8) OR 

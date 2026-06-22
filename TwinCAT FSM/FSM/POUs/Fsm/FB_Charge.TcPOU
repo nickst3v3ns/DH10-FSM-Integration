@@ -12,8 +12,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-send_message(ID := E_PTC_TX_ID.MAIN_FSM, Command := E_PTC_TX_Command.HV_ON, CAN_OUTPUts := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
+      <ST><![CDATA[send_message(ID := E_PTC_TX_ID.MAIN_FSM, Command := E_PTC_TX_Command.HV_ON, CAN_OUTPUts := GVL_PT.CAN_OUTPUTS, CAN_INPUTS := GVL_PT.CAN_INPUTS);
 ]]></ST>
     </Implementation>
   </POU>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_PTC_State" Id="{f1fa6799-c5e3-474d-a8d1-792a04d34180}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'to_string'}
+TYPE E_PTC_State :
+(
+	Idle_state := 0,
+	PreCharge_state := 1,
+	HV_ON		:= 2,
+	Fail_state := 3,
+	Discharge_state := 4
+)USINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

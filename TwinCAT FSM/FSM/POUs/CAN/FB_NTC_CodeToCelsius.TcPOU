@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_NTC_CodeToCelsius" Id="{008bb70c-b22e-45ce-af88-e61ea9552e59}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NTC_CodeToCelsius
+VAR_INPUT
+    code    : WORD;     // raw 16-bit value from CAN: NTC voltage in 100 uV units (= spreadsheet VT)
+END_VAR
+VAR_OUTPUT
+    T_cel   : LREAL;    // temperature in degrees Celsius
+END_VAR
+VAR CONSTANT
+    Rdiv    : LREAL := 10000.0;      // divider resistor [ohm]
+    Vref2   : LREAL := 30000.0;      // 3.0 V in 100 uV units
+    R25     : LREAL := 10060.0;      // NTC nominal resistance at 25 C [ohm]
+    Beta    : LREAL := 4150.0;       // Beta constant [K]
+    T0      : LREAL := 298.15;       // reference temperature [K]
+    code_lo : LREAL := 0.001;        // clamp floor (keeps Rt > 0)
+    code_hi : LREAL := 29999.0;      // clamp ceiling (keeps denominator > 0)
+END_VAR
+VAR
+    c       : LREAL;    // clamped code
+    Rt      : LREAL;    // thermistor resistance [ohm]
+    invT    : LREAL;    // 1 / T  [1/K]
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Clamp raw code into the open interval (0, Vref2) so the divider and LN() stay valid
+c    := LIMIT(code_lo, WORD_TO_LREAL(code), code_hi);
+
+// Step 1: thermistor resistance from low-side divider
+Rt   := (c * Rdiv) / (Vref2 - c);
+
+// Step 2: Beta equation -> 1/T in kelvin
+invT := (LN(Rt) - LN(R25)) / Beta + 1.0 / T0;
+
+// Step 3: kelvin -> Celsius (spreadsheet uses 273, not 273.15)
+T_cel := 1.0 / invT - 273.0;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

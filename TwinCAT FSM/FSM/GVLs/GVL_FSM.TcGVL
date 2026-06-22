@@ -20,26 +20,27 @@ VAR_GLOBAL
 	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
 	
 	//-----
-	
-	bsdc_closed:					BOOL := FALSE;
  
-	bbrakes_armed:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	bbrakes_clock:			BOOL := FALSE; 
+	bbrakes_arm_signalGlobal:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bbrakes_clockGlobal:			BOOL := FALSE; 
 	bbrakes_engaged:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 
 	
-	bsafety_inputs_valid:			BOOL := FALSE; //done through twinsafe PLC-TWINSAFE Run mode verification
+	bsafety_inputs_valid:			BOOL := TRUE; //done through twinsafe PLC-TWINSAFE Run mode verification
 	
-	b_AlivePLC AT %Q*: 				BOOL := TRUE; //NC System
+	b_AlivePLCGlobal: 				BOOL := TRUE; //NC System
 
-	bEstopError:					BOOL := FALSE; 
-	bEstopRestart:					BOOL := FALSE; //Used to restart the Estop from the PLC side
-	bFalseForEstopRestart:			BOOL := FALSE;
+	bEstopErrorGlobal:					BOOL := FALSE; 
+	bEstopRestartGlobal:					BOOL := FALSE; //Used to restart the Estop from the PLC side
+	bFalseForEstopRestartGlobal:			BOOL := TRUE;
+	
+	bJorianSpecialGlobal:					BOOL := TRUE;
+	
 	
 	//----
 	
 	
-	benable_telemetry: 				BOOL;
+	benable_telemetryGlobal: 				BOOL;
 	
 	bcan_bus_ok: 					BOOL := TRUE; 
 	nMasterDevStateCouplers AT %I*: UINT; 

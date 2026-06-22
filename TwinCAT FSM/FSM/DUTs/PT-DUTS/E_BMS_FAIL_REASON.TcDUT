@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_BMS_FAIL_REASON" Id="{df704c33-b052-4e1a-97e9-2f98e42cfe1a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'to_string'}
+TYPE E_BMS_FAIL_REASON :
+(
+	ERROR_NONE := 0,
+	WRONG_NUMBER_OF_SLAVES := 1,
+	NO_CURRENT_SENSE_SLAVE := 2,
+	SELF_TEST_FAILURE := 3,
+	ADC_SELF_TEST_FAILURE := 4,
+	FAILED_AUX_ADC_SELF_TEST := 5,
+	FAILED_STATUS_REGISTER_SELF_TEST := 6,
+	ISOSPI_REPEATED_FAIL := 7,
+	CONVERSION_TIMEOUT := 8,
+	OPEN_WIRE_DETECTION := 9,
+	FAILED_CELL_VOLTAGE_READING := 10
+) USINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

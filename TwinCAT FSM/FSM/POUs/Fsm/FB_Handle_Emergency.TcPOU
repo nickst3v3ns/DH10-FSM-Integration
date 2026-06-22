@@ -11,9 +11,10 @@ END_VAR
 VAR
     state: 					INT := 0;
     tonDelay: 				TON;
-	
 	allActionsCompleteShutdown:		BOOL;
 	RecoveryToMaintenance:							BOOL;
+	fbDearm : FB_BrakesDearm;
+	send_message : PTC_Send_Message; 
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -31,17 +32,20 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.b_AlivePLC := FALSE;
-		
+    0:  GVL_FSM.b_AlivePLCGlobal := FALSE;
         GVL_Prop.propulsion_enable := FALSE;
         GVL_LEVI.levitation_enable := FALSE;
 		
-        state := 1;
-        
+		//because braking pcb is broken
+		GVL_FSM.bbrakes_engaged := FALSE;
+		
+		IF NOT GVL_FSM.bbrakes_engaged THEN
+        	state := 1;
+        END_IF
+		
     1:	allActionsCompleteShutdown :=
 		GVL_Levi.DC_LINK_SAFE 
-		AND GVL_Prop.DC_LINK_SAFE 
-		AND GVL_FSM.bbrakes_engaged; 
+		AND GVL_Prop.DC_LINK_SAFE;
 	
         IF allActionsCompleteShutdown THEN
 			
@@ -59,11 +63,12 @@ CASE state OF
 		NOT GVL_THERMAL.bMOTOROVERHEAT AND 
 		NOT GVL_THERMAL.bHEMSOVERHEAT AND
 		NOT GVL_THERMAL.bEMSOVERHEAT AND
-		NOT GVL_THERMAL.bFLOWOVERHEAT;
+		NOT GVL_THERMAL.bFLOWOVERHEAT
+		AND GVL_PT.PTC_STATE = 0;
 		
 		IF RecoveryToMaintenance THEN
 			
-			GVL_FSM.b_AlivePLC := TRUE;
+			GVL_FSM.b_AlivePLCGlobal := TRUE;
 			
 			
 			state := 3;
@@ -72,7 +77,7 @@ CASE state OF
 	//not sure if we dont get the same error with the brakes and SDC resetting that we go into a maintenance to emergency loop. Since the maintenance command is explciti the FSM might have time to reset.
 		    
     3:	tonDelay(IN := TRUE, PT := T#2S);
-        IF tonDelay.Q AND GVL_FSM.bsdc_closed THEN
+        IF tonDelay.Q THEN
 			
             busy := FALSE;
 			execute := FALSE;

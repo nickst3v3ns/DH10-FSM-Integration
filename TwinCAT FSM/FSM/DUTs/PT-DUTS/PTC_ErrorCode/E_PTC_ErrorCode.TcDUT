@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_PTC_ErrorCode" Id="{d7164854-45c7-45d0-8c9c-fba0675c77ff}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'to_string'}
+TYPE E_PTC_ErrorCode :
+(
+	ERR_NONE := 0,
+	ERROR_SDC_TRIGGERED := 1,
+	ERROR_IMD_TRIGGERED := 2,
+	ERROR_CONTACT_MISMATCH := 4,
+	ERROR_PRECHARGE_FAILURE := 8,
+	ERROR_CAN_FAILED := 16,
+	ERROR_OVERVOLTAGE := 32,
+	ERROR_BMS_VOLTAGE := 64
+)USINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

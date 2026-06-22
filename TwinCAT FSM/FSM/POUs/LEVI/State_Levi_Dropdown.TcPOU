@@ -25,7 +25,7 @@ VAR_IN_OUT
 END_VAR
 
 VAR
-	current_dropdown : LREAL := -2.5; //A
+	current_dropdown : LREAL := -3; //A
 	count_cycles: INT;
 	n_drive_warnings: UINT;
 	n_drive_errors: UINT;

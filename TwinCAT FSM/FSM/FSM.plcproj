@@ -54,6 +54,30 @@
     <Compile Include="DUTs\LVBAT\ST_PackData3.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\PT-DUTS\E_BMS_FAIL_REASON.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\E_HVAL_STATUS.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\E_PTC_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\IMD_Warning\ST_IMD_Warnings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\IMD_Warning\U_IMD_Warnings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\PTC_ErrorCode\E_PTC_ErrorCode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\ST_PTC_ErrorCode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\U_PTC_ErrorCode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_Track_Segment_Delft.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -173,6 +197,12 @@
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\CAN\FB_NTC_CodeToCelsius.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CAN\FB_PTC_RESET.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\CAN\PTC_Receive_Messages.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -188,7 +218,10 @@
     <Compile Include="POUs\FSM\CheckCritical.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FSM\FB_BrakesRearm.TcPOU">
+    <Compile Include="POUs\FSM\FB_BrakesArm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\FB_BrakesDearm.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\FB_Charge.TcPOU">
@@ -335,6 +368,9 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPosLimits_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIampTemp_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendTargetVelocity_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -342,6 +378,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendCurrentIdGains_Left.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendIampTemp_Right.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendVelocityGains_Right.TcPOU">
@@ -475,6 +514,9 @@
     <Folder Include="DUTs" />
     <Folder Include="DUTs\GS" />
     <Folder Include="DUTs\LVBAT" />
+    <Folder Include="DUTs\PT-DUTS" />
+    <Folder Include="DUTs\PT-DUTS\IMD_Warning" />
+    <Folder Include="DUTs\PT-DUTS\PTC_ErrorCode" />
     <Folder Include="GVLs" />
     <Folder Include="GVLs\GS" />
     <Folder Include="POUs\FSM" />
@@ -506,9 +548,9 @@
       <DefaultResolution>Liftoff_model, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>Liftoff_model</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Sensor_model">
-      <DefaultResolution>Sensor_model, * (TE140x Module Vendor)</DefaultResolution>
-      <Namespace>Sensor_model</Namespace>
+    <PlaceholderReference Include="Sensor_model_new">
+      <DefaultResolution>Sensor_model_new, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>Sensor_model_new</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Drive">
       <DefaultResolution>Tc2_Drive, * (Beckhoff Automation GmbH)</DefaultResolution>

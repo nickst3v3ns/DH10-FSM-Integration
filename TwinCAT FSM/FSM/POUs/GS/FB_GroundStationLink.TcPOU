@@ -135,7 +135,7 @@ END_VAR
 	RETURN;
 END_IF
 
-ts := 0;
+ts := F_GetCurDcTaskTime64() / 1000;
 BuildDatapoint(id := id, valueBits := valueBits, timestampUs := ts, dp := dp1);
 MEMCPY(ADR(txBatch[txBatchLen]), ADR(dp1), 20);
 txBatchLen := txBatchLen + 20;
@@ -326,51 +326,95 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE msgId OF
-	16#0042: OnHeartbeat(); // heartbeat
-	16#0251: // emergency reason
-		CASE valueBits OF
-			0 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_NONE;
-			1 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_HearBeatFail;
-			2 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_EmergencyOverGS;
-			3 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_IMD;
-			4 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_BMS;
-			5 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
-		END_CASE
-	16#0252: // FSM COMMAND
-		CASE valueBits OF
-			0 : GVL_FSM.E_CommandGlobal := E_Command.CMD_NONE;
-			10 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_IDLE;
-			20 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_HV_ACTIVE;
-			30 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_DEMO;
-			40 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_LEVITATION;
-			50 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MOVEMENT;
-			60 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MAINTENANCE;
-			70 : GVL_FSM.E_CommandGlobal := E_Command.CMD_EMERGENCY;
-		END_CASE
-	16#0905: // LEVI COMMAND
-		CASE DecodeU8(valueBits) OF
-			-2 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_RESET_DRIVES;
-			-1 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_ERROR;
-			0 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
-			1 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_INIT;
-			2 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
-			3 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_PULLUP;
-			4 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DROPDOWN;
-			5 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
-			6 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
-			7 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
-			8 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES;
-		END_CASE
-	16#0B00: GVL_PROP.PropFlag := DecodeI16(valueBits);
-	16#0B08: GVL_PROP.TargetVelocity := DecodeF64(valueBits);
-	16#0B17: GVL_PROP.DriveReset := DecodeU8(valueBits);
-	16#0B18: GVL_PROP.AutoPilotFlag := DecodeU8(valueBits);
-	16#0B1F: GVL_PROP.PositionLimit_Low := DecodeU32(valueBits);
-	16#0B20: GVL_PROP.PositionLimit_High := DecodeU32(valueBits);
-	16#0B21: GVL_PROP.MaxThrust := DecodeU32(valueBits);
-END_CASE
+    16#0042: OnHeartbeat();
 
-//DispatchCommand := TRUE;]]></ST>
+    16#0251: // EmergencyReason
+        CASE valueBits OF
+            0 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_NONE;
+            1 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_HearBeatFail;
+            2 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_EmergencyOverGS;
+            3 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_IMD;
+            4 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_BMS;
+            5 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
+        END_CASE
+
+    16#0252: // PodStateCommand
+        CASE valueBits OF
+            0  : GVL_FSM.E_CommandGlobal := E_Command.CMD_NONE;
+            10 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_IDLE;
+            20 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_HV_ACTIVE;
+            30 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_DEMO;
+            40 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_LEVITATION;
+            50 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MOVEMENT;
+            60 : GVL_FSM.E_CommandGlobal := E_Command.CMD_TO_MAINTENANCE;
+            70 : GVL_FSM.E_CommandGlobal := E_Command.CMD_EMERGENCY;
+        END_CASE
+
+    16#0905: // LeviCommand
+        CASE DecodeU8(valueBits) OF
+            -2 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_RESET_DRIVES;
+            -1 : GVL_LEVI.Levi_command := E_Levi_States.LEVI_ERROR;
+            0  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
+            1  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_INIT;
+            2  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
+            3  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_PULLUP;
+            4  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DROPDOWN;
+            5  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
+            6  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
+            7  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+            8  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES;
+        END_CASE
+
+	(*
+    // --- Levi control flags (u8, bidir) ---
+    16#0A30: GVL_LEVI.Operational          := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A31: GVL_LEVI.Vertical_on          := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A32: GVL_LEVI.Lateral_on           := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A33: GVL_LEVI.Motor_on             := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A34: GVL_LEVI.Total_on             := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A35: GVL_LEVI.Pitch_on             := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A36: GVL_LEVI.Roll_on              := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A37: GVL_LEVI.Y_on                 := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A38: GVL_LEVI.Yaw_on              := BYTE_TO_BOOL(DecodeU8(valueBits));
+    16#0A39: GVL_LEVI.Enable_manual_z_target := BYTE_TO_BOOL(DecodeU8(valueBits));
+
+    // --- Levi PID gains (f64, bidir) ---
+    16#0A40: GVL_LEVI.KP_tot              := DecodeF64(valueBits);
+    16#0A41: GVL_LEVI.KI_tot              := DecodeF64(valueBits);
+    16#0A42: GVL_LEVI.KD_tot              := DecodeF64(valueBits);
+    16#0A43: GVL_LEVI.KF_tot              := DecodeF64(valueBits);
+    16#0A44: GVL_LEVI.KI_tot_initial      := DecodeF64(valueBits);
+    16#0A45: GVL_LEVI.KP_pitch            := DecodeF64(valueBits);
+    16#0A46: GVL_LEVI.KI_pitch            := DecodeF64(valueBits);
+    16#0A47: GVL_LEVI.KD_pitch            := DecodeF64(valueBits);
+    16#0A48: GVL_LEVI.KF_pitch            := DecodeF64(valueBits);
+    16#0A49: GVL_LEVI.KI_pitch_initial    := DecodeF64(valueBits);
+    16#0A4A: GVL_LEVI.KP_roll             := DecodeF64(valueBits);
+    16#0A4B: GVL_LEVI.KI_roll             := DecodeF64(valueBits);
+    16#0A4C: GVL_LEVI.KD_roll             := DecodeF64(valueBits);
+    16#0A4D: GVL_LEVI.KF_roll             := DecodeF64(valueBits);
+    16#0A4E: GVL_LEVI.KI_roll_initial     := DecodeF64(valueBits);
+    16#0A4F: GVL_LEVI.KP_lat              := DecodeF64(valueBits);
+    16#0A50: GVL_LEVI.KI_lat              := DecodeF64(valueBits);
+    16#0A51: GVL_LEVI.KD_lat              := DecodeF64(valueBits);
+    16#0A52: GVL_LEVI.KF_lat              := DecodeF64(valueBits);
+    16#0A53: GVL_LEVI.KI_lat_initial      := DecodeF64(valueBits);
+    16#0A54: GVL_LEVI.KP_yaw              := DecodeF64(valueBits);
+    16#0A55: GVL_LEVI.KI_yaw              := DecodeF64(valueBits);
+    16#0A56: GVL_LEVI.KD_yaw              := DecodeF64(valueBits);
+    16#0A57: GVL_LEVI.KF_yaw              := DecodeF64(valueBits);
+    16#0A58: GVL_LEVI.KI_yaw_initial      := DecodeF64(valueBits);
+	*)
+
+    16#0B00: GVL_PROP.PropFlag            := DecodeI16(valueBits);
+    16#0B08: GVL_PROP.TargetVelocity      := DecodeF64(valueBits);
+    16#0B17: GVL_PROP.DriveReset          := DecodeU8(valueBits);
+    16#0B18: GVL_PROP.AutoPilotFlag       := DecodeU8(valueBits);
+    16#0B1F: GVL_PROP.PositionLimit_Low   := DecodeU32(valueBits);
+    16#0B20: GVL_PROP.PositionLimit_High  := DecodeU32(valueBits);
+    16#0B21: GVL_PROP.MaxThrust           := DecodeU32(valueBits);
+
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="FlushBatch" Id="{992beee3-aef5-4593-92eb-1fae988f1a0e}">
@@ -505,9 +549,9 @@ END_VAR
       <Implementation>
         <ST><![CDATA[
 // --- Scalars ---
-// AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_STATE, GVL_LEVI.levitation_state);
+AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_STATE, GVL_LEVI.levitation_state);
 
-// AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_COMMAND,GVL_LEVI.Levi_command);
+AppendDpI16(GVL_GS_IDS.DP_ID_LEVI_COMMAND,GVL_LEVI.Levi_command);
 
 AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_READY,
            BOOL_TO_BYTE(GVL_LEVI.Levi_ready));
@@ -626,10 +670,10 @@ END_FOR
 // --- LeviErrorSpecifics[0..23]: Drive_error_mapping → i8 ---
 // Assumes Drive_error_mapping is a SINT or single-byte struct.
 // If it's an enum/struct, adjust the cast below.
-//FOR i := 0 TO 23 DO
- //   AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_SPECIFICS_0 + INT_TO_UINT(i),
- //              SINT_TO_BYTE(GVL_LEVI.error_specifics[i]));  // adjust if not SINT
-//END_FOR
+FOR i := 0 TO 23 DO
+	AppendDpU8(GVL_GS_IDS.DP_ID_LEVI_ERROR_SPECIFICS_0 + INT_TO_UINT(i),
+	INT_TO_BYTE(GVL_LEVI.error_specifics[i]));
+END_FOR
 
 // --- LeviDriveFeedbackTimeouts[0..23] ---
 FOR i := 0 TO 23 DO
@@ -740,7 +784,7 @@ AppendDpI16(GVL_GS_IDS.DP_ID_PT_ERROR_STATUS,
 
 // PTFailReason (0xd04) — u16
 AppendDpI16(GVL_GS_IDS.DP_ID_PT_FAIL_REASON,
-           USINT_TO_UINT(GVL_PT.FAIL_REASON));
+           USINT_TO_UINT(GVL_PT.HV_FAIL_REASON));
 
 // ISORes (0xd05) — u32 on wire, UINT in GVL
 AppendDpU32(GVL_GS_IDS.DP_ID_ISO_RES,
@@ -751,28 +795,22 @@ AppendDpI32(GVL_GS_IDS.DP_ID_IVT_CURRENT,
             DWORD_TO_DINT(GVL_PT.IVT_CURRENT));
 
 // PTMaxVoltage (0xd07) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.MAX_VOLTAGE));
+AppendDpF32(GVL_GS_IDS.DP_ID_PT_MAX_VOLTAGE, GVL_PT.MAX_VOLTAGE);
 
 // PTMinVoltage (0xd08) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.MIN_VOLTAGE));
+AppendDpF32(GVL_GS_IDS.DP_ID_PT_MIN_VOLTAGE, GVL_PT.MIN_VOLTAGE);
 
 // PTMaxTemp (0xd09) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_TEMP,
-            UINT_TO_UDINT(GVL_PT.MAX_TEMP));
+AppendDpF64(GVL_GS_IDS.DP_ID_PT_MAX_TEMP, GVL_PT.MAX_TEMP);
 
 // PTMinTemp (0xd0a) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_TEMP,
-            UINT_TO_UDINT(GVL_PT.MIN_TEMP));
+AppendDpF64(GVL_GS_IDS.DP_ID_PT_MIN_TEMP, GVL_PT.MIN_TEMP);
 
 // PTTotalVoltage (0xd0b) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE, UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
 
 // PTPackCurrent (0xd0c) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT,
-            UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT, UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
 
 // PTDCLinkVoltage (0xd0d) — i32 on wire, DWORD in GVL
 AppendDpI32(GVL_GS_IDS.DP_ID_PTDC_LINK_VOLTAGE,
@@ -794,8 +832,7 @@ AppendDpU8(16#0250, INT_TO_BYTE(GVL_FSM.E_PodStateGlobal));
 AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_FLAG,
             INT_TO_BYTE(GVL_Prop.PropFlag));
 
-AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION,
-            GVL_Prop.Position);
+AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION, GVL_Prop.Position);
 
 AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION_INTERPOLATED,
             GVL_Prop.PositionInterpolared);   // typo is in the GVL, mirror it
@@ -909,77 +946,80 @@ CASE nTelemeteryIndex OF
 	0: SendLevitation();
 	1: SendPropulsion();
 	2: SendPowerTrain();
-	// 3: SendMisc();
-	// 4: SendFlow();
-	// 5: SendThermal();
+	3: SendThermal();
+	// 4: SendMisc();
 END_CASE
 
-nTelemeteryIndex := (nTelemeteryIndex + 1) MOD 3;
+nTelemeteryIndex := (nTelemeteryIndex + 1) MOD 4;
 // END_IF
 ]]></ST>
       </Implementation>
     </Method>
     <Method Name="SendThermal" Id="{80a8c1e2-37ed-4cc1-b543-748701fe96f2}">
       <Declaration><![CDATA[METHOD SendThermal : BOOL
-VAR_INPUT
+VAR
+	i : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// PTCState (0xd00) — u16 on wire
-// AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, USINT_TO_UINT(GVL_PT.PTC_STATE));
-AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, 10);
+        <ST><![CDATA[
 
-// HVALStatus (0xd01) — u16
-AppendDpI16(GVL_GS_IDS.DP_ID_HVAL_STATUS,
-           USINT_TO_UINT(GVL_PT.HVAL_STATUS));
+// --- T_EMS[0..7] ---
+FOR i := 0 TO 7 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_EMS0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_EMS[i]);
+END_FOR
 
-// IMDWarnings (0xd02) — u16
-AppendDpI16(GVL_GS_IDS.DP_ID_IMD_WARNINGS,
-           GVL_PT.IMD_WARNINGS);
+// --- T_HEMS[0..7] ---
+FOR i := 0 TO 7 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_HEMS0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_HEMS[i]);
+END_FOR
 
-// PTErrorStatus (0xd03) — u16 bitmask
-AppendDpI16(GVL_GS_IDS.DP_ID_PT_ERROR_STATUS,
-           USINT_TO_UINT(GVL_PT.ERROR_STATUS));
+// --- T_MOTOR_LEFTFRONT[0..8] ---
+FOR i := 0 TO 8 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_MOTOR_LEFT_FRONT_0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_MOTOR_LEFTFRONT[i]);
+END_FOR
 
-// PTFailReason (0xd04) — u16
-AppendDpI16(GVL_GS_IDS.DP_ID_PT_FAIL_REASON,
-           USINT_TO_UINT(GVL_PT.FAIL_REASON));
+// --- T_MOTOR_RIGHTFRONT[0..8] ---
+FOR i := 0 TO 8 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_MOTOR_RIGHT_FRONT_0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_MOTOR_RIGHTFRONT[i]);
+END_FOR
 
-// ISORes (0xd05) — u32 on wire, UINT in GVL
-AppendDpU32(GVL_GS_IDS.DP_ID_ISO_RES,
-            UINT_TO_UDINT(GVL_PT.ISO_RES));
+// --- T_MOTOR_LEFTBACK[0..8] ---
+FOR i := 0 TO 8 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_MOTOR_LEFT_BACK_0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_MOTOR_LEFTBACK[i]);
+END_FOR
 
-// IVTCurrent (0xd06) — i32 on wire, DWORD in GVL
-AppendDpI32(GVL_GS_IDS.DP_ID_IVT_CURRENT,
-            DWORD_TO_DINT(GVL_PT.IVT_CURRENT));
+// --- T_MOTOR_RIGHTBACK[0..8] ---
+FOR i := 0 TO 8 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_MOTOR_RIGHT_BACK_0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_MOTOR_RIGHTBACK[i]);
+END_FOR
 
-// PTMaxVoltage (0xd07) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.MAX_VOLTAGE));
+// --- T_FLOW[0..7] ---
+FOR i := 0 TO 7 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_THERM_FLOW_0 + INT_TO_UINT(i),
+                GVL_THERMAL.T_FLOW[i]);
+END_FOR
 
-// PTMinVoltage (0xd08) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.MIN_VOLTAGE));
+// --- FLOWarray[0..9] ---
+FOR i := 0 TO 9 DO
+    AppendDpF32(GVL_GS_IDS.DP_ID_FLOW_ARRAY_0 + INT_TO_UINT(i),
+                GVL_THERMAL.FLOWarray[i]);
+END_FOR
 
-// PTMaxTemp (0xd09) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MAX_TEMP,
-            UINT_TO_UDINT(GVL_PT.MAX_TEMP));
+// --- Overheat flags ---
+AppendDpU8(GVL_GS_IDS.DP_ID_OVERHEAT_HEMS,  BOOL_TO_BYTE(GVL_THERMAL.bHEMSOVERHEAT));
+AppendDpU8(GVL_GS_IDS.DP_ID_OVERHEAT_EMS,   BOOL_TO_BYTE(GVL_THERMAL.bEMSOVERHEAT));
+AppendDpU8(GVL_GS_IDS.DP_ID_OVERHEAT_MOTOR, BOOL_TO_BYTE(GVL_THERMAL.bMOTOROVERHEAT));
+AppendDpU8(GVL_GS_IDS.DP_ID_OVERHEAT_FLOW,  BOOL_TO_BYTE(GVL_THERMAL.bFLOWOVERHEAT));
 
-// PTMinTemp (0xd0a) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_MIN_TEMP,
-            UINT_TO_UDINT(GVL_PT.MIN_TEMP));
-
-// PTTotalVoltage (0xd0b) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE,
-            UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
-
-// PTPackCurrent (0xd0c) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT,
-            UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
-
-// PTDCLinkVoltage (0xd0d) — i32 on wire, DWORD in GVL
-AppendDpI32(GVL_GS_IDS.DP_ID_PTDC_LINK_VOLTAGE,
-            DWORD_TO_DINT(GVL_PT.DC_LINK_VOLTAGE));
+// --- Propulsion duty cycle ---
+AppendDpF32(GVL_GS_IDS.DP_ID_PROP_DUTY_CYCLE, GVL_THERMAL.fDutyCycle_PROP);
 
 FlushBatch();
 SendThermal := TRUE;]]></ST>

@@ -10,26 +10,26 @@ VAR_GLOBAL
 	//PTC_BMS LOGS
 	
 	//PTC_STATUS
-	PTC_STATE : USINT;
-	HVAL_STATUS : USINT;
+	PTC_STATE : E_PTC_State;
+	HVAL_STATUS : E_HVAL_STATUS; //0 led green high comparator below / 1 green led low comp below / 2 green led high comp above, 3 green led low comp above
 	IMD_WARNINGS : UINT;
-	ERROR_STATUS : USINT;
-	FAIL_REASON : USINT;
+	ERROR_STATUS : E_PTC_ErrorCode;
+	HV_FAIL_REASON : E_BMS_FAIL_REASON; //bms
 	
 	//HV_STATUS
-	ISO_RES : UINT;
-	IVT_CURRENT : DWORD;
+	ISO_RES : UINT; //in kOhms
+	IVT_CURRENT : UDINT; //
 	
 	//BMS_LOG_A
-	MAX_VOLTAGE : UINT;
-	MIN_VOLTAGE : UINT;
-	MAX_TEMP : UINT;
-	MIN_TEMP : UINT;
+	MAX_VOLTAGE : REAL; //stored as 0.1mV
+	MIN_VOLTAGE : REAL; //stored as 0.1mV
+	MAX_TEMP : LREAL; //given as ohms probably, needs conversion. Martin may fix this
+	MIN_TEMP : LREAL; //given as ohms probably, needs conversion Martin may fix this
 	
 	//BMS_LOG_B
 	TOTAL_VOLTAGE : UINT;
-	PACK_CURRENT : UINT;
-	DC_LINK_VOLTAGE : DWORD;
+	PACK_CURRENT : INT;
+	DC_LINK_VOLTAGE : DINT;
 	
 	
 //LVBAT

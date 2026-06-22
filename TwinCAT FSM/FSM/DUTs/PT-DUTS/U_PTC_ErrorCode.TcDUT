@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_PTC_ErrorCode" Id="{9a8f194c-cd97-4d3b-ad09-67c1026f6aae}">
+    <Declaration><![CDATA[TYPE U_PTC_ErrorCode :
+UNION
+	braw : BYTE;
+	stBits : ST_PTC_ErrorCode;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

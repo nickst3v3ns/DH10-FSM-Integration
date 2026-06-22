@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_BrakesArm" Id="{1a49c53a-438a-46aa-b7dc-e596bb02d16b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_BrakesArm
+VAR_IN_OUT
+	armSignal : BOOL;
+	clkSignal : BOOL;
+END_VAR
+VAR
+	tracker : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//because braking pcb is broken
+(*
+IF NOT armSignal AND NOT clkSignal AND NOT tracker THEN
+	armsignal := TRUE;
+	clkSignal := TRUE;
+	tracker := TRUE;
+ELSIF armSignal AND clkSignal AND tracker THEN
+	clkSignal := FALSE;
+	tracker := FALSE;
+END_IF
+*)
+GVL_FSM.bbrakes_engaged := TRUE;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

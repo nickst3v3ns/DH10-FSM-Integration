@@ -6,53 +6,67 @@
 VAR
 	
 // 
-// Variables to write
+// Variables to read and write
 //
 	PropFlag : INT;
 	AutoPilotFlag : INT;
 	DriveReset : INT;
 	TargetVelocity : LREAL;
-	
-	ProportionalGainVelocity : LREAL;
-	IntegralGainVelocity : LREAL;
-	InitialIntegralValueVelocity : LREAL;
-	VelocityIntegral_Left : LREAL;
-	VelocityIntegral_Right : LREAL;
-	
-	ProportionalGainId : LREAL := 143;
-	IntegralGainId : LREAL;
-	InitialIntegralValueId : LREAL;
-	ProportionalGainIq : LREAL := 80;
-	IntegralGainIq : LREAL;
-	InitialIntegralValueIq : LREAL;
-	
-	ETML_gain_Left : LREAL := 16.91503741;
-	ETML_gain_Right : LREAL := 16.91503741;
-	ETML_power_constant : LREAL := 0.46047809;
+	Iamp_Temp : LREAL;
 	
 	PositionLimit_Low : LREAL;
 	PositionLimit_High : LREAL;
 	MaxThrust : LREAL;
+	
+	ProportionalGainVelocity : LREAL;
+	IntegralGainVelocity : LREAL;
+	InitialIntegralValueVelocity : LREAL;
+
+	ProportionalGainId : LREAL;
+	IntegralGainId : LREAL;
+	InitialIntegralValueId : LREAL;
+	ProportionalGainIq : LREAL;
+	IntegralGainIq : LREAL;
+	InitialIntegralValueIq : LREAL;
+	
+	PositionOffset : LREAL;
+	CANDelay : LREAL;
+	
+	ETML_gain_Left : LREAL;
+	ETML_gain_Right : LREAL;
+	ETML_power_constant : LREAL;
+	
+	d_position : LREAL;
+	distance_traveled : LREAL;
 
 //
 // Variables to read
 //
 	PodState: E_PodState;
-	PropSubState_Left : INT;
-	PropSubState_Right : INT;
+	
 	positionDelft : LREAL;
 	PositionInterpolatedDelft : LREAL;
 	VelocityDelft : LREAL;
-	VelocityIntgral : LREAL;
-	CurrentAngle_Right : LREAL := 45;
-	CurrentAngle_Left : LREAL := 45;
-	PositionOffset : LREAL := 2.2;
-	CANDelay : LREAL := 0.04;
+	
+	VelocityIntegral_Left : LREAL;
+	VelocityIntegral_Right : LREAL;
+	
+	CurrentAngle_Right : LREAL;
+	CurrentAngle_Left : LREAL;
 	
 	
 //
 // Received messages from both drives
 //
+	PropState_Right : INT;
+	PropState_Left : INT;
+	
+	PropSubState_Left : INT;
+	PropSubState_Right : INT;
+	
+	FAULT_Right : INT;
+	FAULT_Left : INT;
+	
 	Id_ref_Right : LREAL;
 	Iq_ref_Right : LREAL;
 	Id_filtered_Right : LREAL;
@@ -62,13 +76,6 @@ VAR
 	Id_filtered_Left : LREAL;
 	Iq_filtered_Left : LREAL;
 	
-	Temp_a_gd_Right : LREAL;
-	Temp_b_gd_Right : LREAL;
-	Temp_c_gd_Right : LREAL;
-	Temp_a_gd_Left : LREAL;
-	Temp_b_gd_Left : LREAL;
-	Temp_c_gd_Left : LREAL;
-	
 	Ia_Right : LREAL;
 	Ib_Right : LREAL;
 	Ic_Right : LREAL; 
@@ -76,19 +83,21 @@ VAR
 	Ib_Left : LREAL;
 	Ic_Left : LREAL; 
 	
+	Temp_a_gd_Right : LREAL;
+	Temp_b_gd_Right : LREAL;
+	Temp_c_gd_Right : LREAL;
+	Temp_a_gd_Left : LREAL;
+	Temp_b_gd_Left : LREAL;
+	Temp_c_gd_Left : LREAL;
+	
 	Vd_Right : LREAL;
 	Vq_Right : LREAL;
 	Vd_Left : LREAL;
 	Vq_Left : LREAL;
 	
-	FAULT_Right : INT;
-	FAULT_Left : INT;
-	
-	PropState_Right : INT;
-	PropState_Left : INT;
-	
 	Vbus_Right : LREAL;
 	Vbus_Left : LREAL;
+	
 	
 //
 // Variables for setup
@@ -122,7 +131,7 @@ VAR
 	// Automatically resetting reset buttom
 	TON_Reset  : TON; 
 	
-	// CAN message analysis 
+	// CAN Message analysis 
 	fbPPS_Timer : TON;
 	
 	//CAN Message throttler
@@ -136,27 +145,32 @@ VAR
 	nSendCounterRight : INT;
 	nLastSendCounterRight : INT;
 	
-	// Velocity PI controller analysis 
-	VelocityError : REAL;
-	VelocityErrorIntegral : REAL;
-	
-	//ETML TcCOM object setup
+
+//
+// ETML TcCOM object setup
+//
+
 //	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
 //	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
 	
 //	ETML_inputs: ST_ETML_DH10_U_T;
 //	ETML_outputs: ST_ETML_DH10_Y_T;
 //	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
-	
-	// Main FSM
+
+
+//
+// Main FSM
+//
 	propulsion_fault: BOOL;
 	propulsion_enable: BOOL;
 	propulsion_active: BOOL;
+	DC_LINK_SAFE: BOOL;
 	
 	
 //
 // CAN setup
 //	
+
 	// Sending messages to right driver
 	Send_CAN_PosVelocity_Right : FB_SendPosVelocity_Right;
 	Send_CAN_CurrentAngle_Right : FB_SendCurrentAngle_Right;
@@ -172,6 +186,7 @@ VAR
 	Send_CAN_AutoPilotFlag_Right : FB_SendAutoPilotFlag_Right;
 	Send_CAN_PosLimits_Right : FB_SendPosLimits_Right;
 	Send_CAN_Fmax_Right : FB_SendFmax_Right;
+	Send_CAN_IampTemp_Right : FB_SendIampTemp_Right;
 	
 	// Sending messages to left driver
 	Send_CAN_PosVelocity_Left : FB_SendPosVelocity_Left;
@@ -188,6 +203,7 @@ VAR
 	Send_CAN_AutoPilotFlag_Left : FB_SendAutoPilotFlag_Left;
 	Send_CAN_PosLimits_Left : FB_SendPosLimits_Left;
 	Send_CAN_Fmax_Left : FB_SendFmax_Left;
+	Send_CAN_IampTemp_Left : FB_SendIampTemp_Left;
 	
 	// Receiving messages from right driver
 	Receive_CAN_abcCurrent_Right : FB_ReceiveabcCurrent_Right;
@@ -258,22 +274,40 @@ PropFlag := GVL_PROP.PropFlag;
 AutoPilotFlag := GVL_PROP.AutoPilotFlag;
 DriveReset := GVL_PROP.DriveReset;
 TargetVelocity := GVL_PROP.TargetVelocity;
+Iamp_Temp := GVL_PROP.Iamp_Temp;
+
 PositionLimit_Low := GVL_PROP.PositionLimit_Low;
 PositionLimit_High := GVL_PROP.PositionLimit_High;
 MaxThrust := GVL_PROP.MaxThrust;
-
-// Main FSM
-propulsion_enable := GVL_PROP.propulsion_enable;
-
-// Pod state 
-PodState := GVL_FSM.E_PodStateGlobal;
 
 // Testing
 ProportionalGainVelocity := GVL_PROP.ProportionalGainVelocity;
 IntegralGainVelocity := GVL_PROP.IntegralGainVelocity;
 InitialIntegralValueVelocity := GVL_PROP.InitialIntegralValueVelocity;
 
+ProportionalGainId := GVL_PROP.ProportionalGainId;
+IntegralGainId := GVL_PROP.IntegralGainId;
+InitialIntegralValueId := GVL_PROP.InitialIntegralGainId;
+ProportionalGainIq := GVL_PROP.ProportionalGainIq;
+IntegralGainIq := GVL_PROP.IntegralGainIq;
+InitialIntegralValueIq := GVL_PROP.InitialIntegralGainIq;
 
+PositionOffset := GVL_PROP.PositionOffset;
+CANDelay := GVL_PROP.CANDelay;
+
+ETML_gain_Left := GVL_PROP.ETML_gain_Left;
+ETML_gain_Right := GVL_PROP.ETML_gain_Right;
+ETML_power_constant := GVL_PROP.ETML_power_constant;
+
+CurrentAngle_Left := GVL_PROP.CurrentAngle_Left;
+CurrentAngle_Right := GVL_PROP.CurrentAngle_Right;
+
+// Main FSM
+propulsion_enable := GVL_PROP.propulsion_enable;
+
+// Pod state 
+PodState := GVL_FSM.E_PodStateGlobal;
+DC_LINK_SAFE := GVL_PROP.DC_LINK_SAFE;
 
 //
 // Timers
@@ -298,7 +332,6 @@ TON_Reset(IN := DriveReset = 1, PT := T#1S);
 IF TON_Reset.Q THEN
     DriveReset := 0;
 END_IF
-
 
 
 //
@@ -420,21 +453,40 @@ CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
 *)
 
 
-
 //
 // CAN setup
 //
+
 //Timer CAN throttler
 CAN_send_timer(IN := NOT CAN_send_timer.Q, PT := T#0.1S); 
 
+// Safety logic
 IF NOT propulsion_enable THEN
 	PropFlag := 0;
+END_IF
+
+//IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
+//	PropFlag := 0;
+//END_IF
+
+IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = 1) THEN
+	propulsion_active := TRUE;
+ELSE
+	propulsion_active := FALSE;
+END_IF
+
+IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
+	propulsion_fault := TRUE;
+ELSE
+	propulsion_fault := FALSE;
 END_IF
 
 // Sending messages to right driver 
 IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN
 	GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := 0;	
-
+	
+	//IF CAN_send_timer.Q THEN
+	
 		Send_CAN_PosVelocity_Right(positionDelft := positionDelft,
 			VelocityDelft := VelocityDelft, 
 			CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
@@ -510,15 +562,24 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 			CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 			CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
 		GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages + 1;
+		
+		Send_CAN_IampTemp_Right(Iamp_Temp := Iamp_Temp,
+			CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
+			CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
+		GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages := GVL_PropCAN.CAN_OUTPUTS_Right.NoOfTxMessages + 1;
 			
-		GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
+		
 	END_IF
+	
+	GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
 END_IF
 		
 
 // Sending messages to left driver	
 IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounter THEN	
 	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 0;
+	
+	//IF CAN_send_timer.Q THEN
 	
 		Send_CAN_PosVelocity_Left(positionDelft := positionDelft,
 			VelocityDelft := VelocityDelft, 
@@ -542,10 +603,6 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 			CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 			CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages + 1;
-			
-		IF NOT propulsion_enable THEN
-			PropFlag := 0;
-		END_IF
 		
 		Send_CAN_PropFlag_Left(PropFlag := PropFlag,
 			CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
@@ -599,9 +656,16 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 			CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
 			CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
 		GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages + 1;
+		
+		Send_CAN_IampTemp_Left(Iamp_Temp := Iamp_Temp,
+			CAN_OUTPUTS_Left := GVL_PropCAN.CAN_OUTPUTS_Left, 
+			CAN_INPUTS_Left := GVL_PropCAN.CAN_INPUTS_Left);
+		GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages + 1;
 			
-		GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
+		
 	END_IF
+	
+	GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
 END_IF
 
 // Receiving messages from right driver
@@ -661,7 +725,6 @@ Receive_CAN_VelocityIntegral_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right,
 
 VelocityIntegral_Right := Receive_CAN_VelocityIntegral_Right.VelocityIntegral_Right;
 
-
 // Receiving messages from left driver
 Receive_CAN_dqCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
 	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
@@ -714,11 +777,12 @@ Receive_CAN_VelocityIntegral_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left,
 
 VelocityIntegral_Left := Receive_CAN_VelocityIntegral_Left.VelocityIntegral_Left;
 
+//
+//Calculate distance traveled
+//
 
-// Check and plot what should be the initial integral value of the velocity PI controller (Added by Roemer & Remi)
-VelocityError := TargetVelocity - VelocityDelft;
-VelocityErrorIntegral := VelocityErrorIntegral + (VelocityError * 0.01);
-
+d_position := ABS(positionDelft - Position_for_levi);
+distance_traveled := distance_traveled + d_position;
 
 //
 //Send data to levi
@@ -745,6 +809,7 @@ Velocity_for_levi := VelocityDelft;
 PositionOffset_for_levi := PositionOffset;
 
 
+
 //
 // General variables to read and write
 //
@@ -754,6 +819,8 @@ GVL_PROP.PropFlag := PropFlag;
 GVL_PROP.AutoPilotFlag := AutoPilotFlag;
 GVL_PROP.DriveReset := DriveReset;
 GVL_PROP.TargetVelocity := TargetVelocity;
+GVL_PROP.Iamp_Temp := Iamp_Temp;
+
 GVL_PROP.PositionLimit_Low := PositionLimit_Low;
 GVL_PROP.PositionLimit_High := PositionLimit_High;
 GVL_PROP.MaxThrust := MaxThrust;
@@ -762,10 +829,24 @@ GVL_PROP.ProportionalGainVelocity := ProportionalGainVelocity;
 GVL_PROP.IntegralGainVelocity := IntegralGainVelocity;
 GVL_PROP.InitialIntegralValueVelocity := InitialIntegralValueVelocity;
 
+GVL_PROP.ProportionalGainId := ProportionalGainId;
+GVL_PROP.IntegralGainId := IntegralGainId;
+GVL_PROP.InitialIntegralGainId := InitialIntegralValueId;
+GVL_PROP.ProportionalGainIq := ProportionalGainIq;
+GVL_PROP.IntegralGainIq := IntegralGainIq;
+GVL_PROP.InitialIntegralGainIq := InitialIntegralValueIq;
+
+GVL_PROP.PositionOffset := PositionOffset;
+GVL_PROP.CANDelay := CANDelay;
+
+GVL_PROP.ETML_gain_Left := ETML_gain_Left;
+GVL_PROP.ETML_gain_Right := ETML_gain_Right;
+GVL_PROP.ETML_power_constant := ETML_power_constant;
+
 // Main FSM
 GVL_PROP.propulsion_active := propulsion_active;
 GVL_PROP.propulsion_fault := propulsion_fault;
-
+GVL_PROP.DC_LINK_SAFE := DC_LINK_SAFE;
 
 
 //
@@ -773,6 +854,15 @@ GVL_PROP.propulsion_fault := propulsion_fault;
 //
 
 // Ground station
+GVL_PROP.PropState_Left := PropState_Left;
+GVL_PROP.PropState_Right := PropState_Right;
+
+GVL_PROP.PropSubState_Left := PropSubState_Left;
+GVL_PROP.PropSubState_Right := PropSubState_Right;
+
+GVL_PROP.FAULT_Left := FAULT_Left;
+GVL_PROP.FAULT_Right := FAULT_Right;
+
 GVL_PROP.Position := positionDelft;
 GVL_PROP.PositionInterpolared := PositionInterpolatedDelft;
 GVL_PROP.Velocity := VelocityDelft;
@@ -780,10 +870,14 @@ GVL_PROP.Velocity := VelocityDelft;
 GVL_PROP.VelocityIntegral_Left := VelocityIntegral_Left;
 GVL_PROP.VelocityIntegral_Right := VelocityIntegral_Right;
 
-GVL_PROP.Iq_Left := Iq_filtered_Left;
+GVL_PROP.Id_ref_Left := Id_ref_Left;
+GVL_PROP.Iq_ref_Left := Iq_ref_Left;
 GVL_PROP.Id_Left := Id_filtered_Left;
-GVL_PROP.Iq_Right := Iq_filtered_Right;
+GVL_PROP.Iq_Left := Iq_filtered_Left;
+GVL_PROP.Id_ref_Right := Id_ref_Right;
+GVL_PROP.Iq_ref_Right := Iq_ref_Right;
 GVL_PROP.Id_Left := Id_filtered_Right;
+GVL_PROP.Iq_Right := Iq_filtered_Right;
 
 GVL_PROP.Ia_Left := Ia_Left;
 GVL_PROP.Ib_Left := Ib_Left;
@@ -802,17 +896,14 @@ GVL_PROP.Tc_GD_Right := Temp_c_gd_Right;
 GVL_PROP.CurrentAngle_Left := CurrentAngle_Left;
 GVL_PROP.CurrentAngle_Right := CurrentAngle_Right;
 
+GVL_PROP.Vd_Left := Vd_left;
+GVL_PROP.Vq_Left := Vq_Left;
+GVL_PROP.Vd_Right := Vd_Right;
+GVL_PROP.Vq_Right := Vq_Right;
+
 GVL_PROP.Vbus_Left := Vbus_Left;
 GVL_PROP.Vbus_Right := Vbus_Right;
 
-GVL_PROP.FAULT_Left := FAULT_Left;
-GVL_PROP.FAULT_Right := FAULT_Right;
-
-GVL_PROP.PropState_Left := PropState_Left;
-GVL_PROP.PropState_Right := PropState_Right;
-
-GVL_PROP.PropSubState_Left := PropSubState_Left;
-GVL_PROP.PropSubState_Right := PropSubState_Right;
 
 
 
