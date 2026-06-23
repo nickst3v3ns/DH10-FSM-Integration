@@ -294,15 +294,15 @@ CASE currentState OF
 	
 		//GVL_PROP.PropFlag := 1;
 		
-		IF GVL_prop.Position < 5.2 THEN
-			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.311-GVL_PROP.Position)+225);
+		IF GVL_prop.Position < 4.689 THEN
+			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
 			GVL_FSM.Max_velocity_right := -50;
-		ELSIF GVL_prop.Position > 15.3 THEN
+		ELSIF GVL_prop.Position > 15.811 THEN
 			GVL_FSM.Max_velocity_left := 50;
-			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-5.189)+225));
+			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
 		ELSE
-			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.311-GVL_PROP.Position)+225);
-			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-5.189)+225));
+			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
+			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
 		END_IF
 		
 		

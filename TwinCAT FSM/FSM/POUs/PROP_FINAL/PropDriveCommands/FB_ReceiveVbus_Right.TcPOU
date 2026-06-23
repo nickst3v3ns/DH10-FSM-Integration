@@ -24,7 +24,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[FOR i := 0 TO (Inputs_Right.NoOfRxMessages-1) DO
     IF Inputs_Right.RxMessages[i].cobId = 1000 THEN 
-        Vbus_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[1]))) / 100.0;
+        Vbus_Right := INT_TO_LREAL(WORD_TO_INT(SHL(USINT_TO_UINT(Inputs_Right.RxMessages[i].data[0]), 8) OR USINT_TO_UINT(Inputs_Right.RxMessages[i].data[1]))) / 10.0;
 		nReceiveCounter := nReceiveCounter + 1; 
     END_IF
 END_FOR

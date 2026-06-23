@@ -24,6 +24,11 @@ VAR_GLOBAL
 	HEMS_requested_current : ARRAY[0..7] OF LREAL;
 	EMS_real_current : ARRAY[0..7] OF LREAL;
 	EMS_requested_current : ARRAY[0..3] OF LREAL;
+	
+	//Levi power usage
+	Power_usage_HEMS : LREAL;
+	Power_usage_EMS : LREAL;
+	Power_usage_Levi : LREAL;
 
 	DC_LINK_SAFE : BOOL;
 	

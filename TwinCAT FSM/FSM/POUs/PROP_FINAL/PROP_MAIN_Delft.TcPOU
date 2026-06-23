@@ -36,8 +36,6 @@ VAR
 	ETML_gain_Right : LREAL;
 	ETML_power_constant : LREAL;
 	
-	d_position : LREAL;
-	distance_traveled : LREAL;
 
 //
 // Variables to read
@@ -53,6 +51,16 @@ VAR
 	
 	CurrentAngle_Right : LREAL;
 	CurrentAngle_Left : LREAL;
+	
+	PowerConsumption : LREAL;
+	JouleperMeter : LREAL;
+	
+	d_position : LREAL;
+	distance_traveled : LREAL;
+	distance_reset : BOOL;
+	First_startup : BOOL := TRUE;
+	
+	Direction : INT;
 	
 	
 //
@@ -215,6 +223,7 @@ VAR
 	Receive_CAN_Vbus_Right : FB_ReceiveVbus_Right;
 	Receive_CAN_VelocityIntegral_Right : FB_ReceiveVelocityIntegral_Right;
 	Receive_CAN_PosInterpolated_Right : FB_ReceivePosInterpolated_Right;
+	Receive_CAN_Power_Right : FB_ReceivePower_Right;
 	
 	// Receiving messages from left driver
 	Receive_CAN_abcCurrent_Left : FB_ReceiveabcCurrent_Left;
@@ -225,6 +234,7 @@ VAR
 	Receive_CAN_PropState_Left : FB_ReceivePROPSTATES_Left;
 	Receive_CAN_Vbus_Left : FB_ReceiveVbus_Left;
 	Receive_CAN_VelocityIntegral_Left : FB_ReceiveVelocityIntegral_Left;
+	Receive_CAN_Power_Left : FB_ReceivePower_Left;
 END_VAR
 
 VAR_OUTPUT
@@ -454,13 +464,42 @@ CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
 
 
 //
-// CAN setup
+// Auto Pilot
 //
 
-//Timer CAN throttler
-CAN_send_timer(IN := NOT CAN_send_timer.Q, PT := T#0.1S); 
+CASE AutoPilotFlag OF
 
+    0:  // Stuur zelf de snelheid
+        TargetVelocity    := TargetVelocity;
+		Direction 		  := 1;
+
+    1:  // Ga automatisch heen en weer met een zelf gekozen snelheid
+        TargetVelocity    := ABS(TargetVelocity);
+		Direction		  := 1;
+
+    2:	// Volg het snelheidsprofiel van de track
+		IF positionDelft >= 15.0 THEN
+            Direction := -1;
+        ELSIF positionDelft <= 5.2 THEN
+            Direction := 1;
+        END_IF
+		
+		IF Direction = -1 THEN
+			TargetVelocity := -15 + SQRT(384615.38*(15.811-positionDelft)+225)*0.9;
+		ELSIF Direction = 1 THEN
+			TargetVelocity := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225))*0.9;
+		END_IF
+	ELSE
+    	TargetVelocity := 0.0;
+    	Direction := 1;
+END_CASE;
+			
+
+
+//
 // Safety logic
+//
+
 IF NOT propulsion_enable THEN
 	PropFlag := 0;
 END_IF
@@ -480,6 +519,14 @@ IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_
 ELSE
 	propulsion_fault := FALSE;
 END_IF
+
+
+//
+// CAN setup
+//
+
+//Timer CAN throttler
+CAN_send_timer(IN := NOT CAN_send_timer.Q, PT := T#0.1S); 
 
 // Sending messages to right driver 
 IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCounter THEN
@@ -725,6 +772,12 @@ Receive_CAN_VelocityIntegral_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right,
 
 VelocityIntegral_Right := Receive_CAN_VelocityIntegral_Right.VelocityIntegral_Right;
 
+Receive_CAN_Power_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
+	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
+
+PowerConsumption := Receive_CAN_Power_Right.Power_Right;
+JouleperMeter := Receive_CAN_Power_Right.JpM_Right;
+
 // Receiving messages from left driver
 Receive_CAN_dqCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
 	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
@@ -777,12 +830,19 @@ Receive_CAN_VelocityIntegral_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left,
 
 VelocityIntegral_Left := Receive_CAN_VelocityIntegral_Left.VelocityIntegral_Left;
 
+
 //
 //Calculate distance traveled
 //
 
 d_position := ABS(positionDelft - Position_for_levi);
 distance_traveled := distance_traveled + d_position;
+IF distance_reset = TRUE OR First_startup THEN
+	distance_traveled := 0;
+	distance_reset := FALSE;
+	First_startup := FALSE;
+END_IF
+
 
 //
 //Send data to levi
@@ -807,7 +867,6 @@ END_IF
 Position_for_levi := positionDelft;
 Velocity_for_levi := VelocityDelft;
 PositionOffset_for_levi := PositionOffset;
-
 
 
 //
@@ -866,6 +925,7 @@ GVL_PROP.FAULT_Right := FAULT_Right;
 GVL_PROP.Position := positionDelft;
 GVL_PROP.PositionInterpolared := PositionInterpolatedDelft;
 GVL_PROP.Velocity := VelocityDelft;
+GVL_PROP.Distance_traveled := distance_traveled;
 
 GVL_PROP.VelocityIntegral_Left := VelocityIntegral_Left;
 GVL_PROP.VelocityIntegral_Right := VelocityIntegral_Right;
@@ -903,6 +963,10 @@ GVL_PROP.Vq_Right := Vq_Right;
 
 GVL_PROP.Vbus_Left := Vbus_Left;
 GVL_PROP.Vbus_Right := Vbus_Right;
+
+GVL_PROP.PowerConsumption := PowerConsumption;
+GVL_PROP.JouleperMeter := JouleperMeter;
+
 
 
 

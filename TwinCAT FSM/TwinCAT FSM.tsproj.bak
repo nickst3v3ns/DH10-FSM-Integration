@@ -4327,6 +4327,15 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{91239864-304F-B482-FF88-6AB5664D3226}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..23] OF DINT</Name>
+			<BitSize>768</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>24</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000041}" TcBaseType="true" HideSubItems="true" CName="AmsNetId">AMSNETID</Name>
 			<BitSize>48</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
@@ -19194,7 +19203,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E78D6914-3D1D-879C-FD2F-E940B56323CD}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{D057E990-863E-328A-83FC-FC8182E7CAF1}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -19206,6 +19215,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="8" AreaNo="128">
 						<Name>Thermal_Task Inputs</Name>
+						<Var>
+							<Name>LEVI_MAIN_TEST.External_DC_bus_current</Name>
+							<Type GUID="{91239864-304F-B482-FF88-6AB5664D3226}">ARRAY [0..23] OF DINT</Type>
+						</Var>
 						<Var>
 							<Name>PTC_RX_COM.LV_BAT_Par.stBattery1</Name>
 							<Type GUID="{E98FCC6E-547D-501A-F3D6-B488C542CEB9}">ST_FMB_BatteryData</Type>
@@ -19495,6 +19508,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>SAFETY_MAIN.bArmSignal</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bCLK</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>SAFETY_MAIN.bPLCToggle</Name>
 							<Comment><![CDATA[cycle time watchdog]]></Comment>
 							<Type>BOOL</Type>
@@ -19515,14 +19536,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bJorianSpecial</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bArmSignal</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bCLK</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -19981,10 +19994,12 @@ Drive_current_W AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
 						</Var>
 						<Var>
+							<Name>LEVI_MAIN_TEST.DC_bus_current</Name>
+							<Type GUID="{91239864-304F-B482-FF88-6AB5664D3226}">ARRAY [0..23] OF DINT</Type>
+						</Var>
+						<Var>
 							<Name>LEVI_MAIN_TEST.Periphery_voltage</Name>
-							<Comment><![CDATA[DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
-External_DC_bus_current AT %I*: ARRAY[0..23] OF DINT;
-Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
+							<Comment><![CDATA[Mains_voltage AT %I*: ARRAY[0..23] OF INT;]]></Comment>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
 						</Var>
 						<Var>
@@ -60432,6 +60447,7 @@ Slave-Mode:
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500820000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500834000403}" Id="#x02030090"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0120-500891000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{08502002-0020-0304-0020-500820000403}" Id="#x02030070" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00A0-0304-0020-5008A0000403}" Id="#x02030050" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00B0-0304-0020-5008B0000403}" Id="#x020300b0" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
@@ -60487,6 +60503,8 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^GVL_Prop.InputData3_Front" VarB="TxPDO^8 Byte In (3)"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^LB1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[20]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[21]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[20]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[21]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[20]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -60505,8 +60523,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[21]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[10]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[10]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[20]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[21]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^LB2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[22]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[23]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[22]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[23]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[22]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -60525,8 +60547,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[23]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[11]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[11]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[22]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[23]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^LF1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[16]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[17]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[16]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[17]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[16]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -60545,8 +60571,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[17]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[8]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[8]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[16]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[17]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^LF2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[18]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[19]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[18]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[19]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[18]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -60565,6 +60595,8 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[19]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[9]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[9]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[18]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[19]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal BL (EK1100)^LaSeVBL (EL6021)">
 				<Link VarA="Levi_Fast_Task_Vertical Inputs^GVL_LEVI.stIn_EL6021_VBL^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
@@ -61219,6 +61251,8 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbHEMS_T.temp_rawVFR2" VarB="RTD Inputs Channel 2^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VBL1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[8]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[9]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[8]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[9]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[8]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61237,8 +61271,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[9]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[4]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[4]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[8]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[9]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VBL2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[10]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[11]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[10]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[11]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[10]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61257,8 +61295,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[11]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[5]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[5]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[10]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[11]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VBR1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[12]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[13]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[12]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[13]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[12]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61277,8 +61319,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[13]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[6]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[6]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[12]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[13]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VBR2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[14]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[15]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[14]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[15]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[14]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61297,8 +61343,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[15]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[7]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[7]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[14]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[15]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VFL1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[0]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[1]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[0]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[1]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[0]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61317,8 +61367,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[1]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[0]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[0]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[0]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[1]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VFL2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[2]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[3]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[2]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[3]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[2]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61337,8 +61391,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[3]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[1]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[1]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[2]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[3]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VFR1 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[4]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[5]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[4]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[5]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[4]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61357,8 +61415,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[5]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[2]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[2]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[4]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[5]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^VFR2 (AX5206-0000-0215)">
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[6]" VarB="AT 1^DC bus current"/>
+				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_current[7]" VarB="AT 2^DC bus current"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[6]" VarB="AT 1^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.DC_bus_voltage[7]" VarB="AT 2^DC bus voltage"/>
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Drive_Diagnostic[6]" VarB="AT 1^Class 1 diagnostic (C1D)"/>
@@ -61377,6 +61439,8 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Control_word[7]" VarB="MDT 2^Master control word"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[3]" VarB="MDT 1^Torque/force command value"/>
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[3]" VarB="MDT 2^Torque/force command value"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[6]" VarB="AT 1^External DC link current"/>
+				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[7]" VarB="AT 2^External DC link current"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Drive Left^Box 4 (CAN Interface)">
 				<Link VarA="Propulsion_Task Inputs^GVL_PropCAN.CAN_INPUTS_Left" VarB="Inputs^RxQueue"/>

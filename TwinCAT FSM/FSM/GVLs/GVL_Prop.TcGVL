@@ -58,6 +58,7 @@ VAR_GLOBAL
 	Position :							LREAL;
 	PositionInterpolared :				LREAL;
 	Velocity :							LREAL;
+	Distance_traveled : 				LREAL;
 	
 	VelocityIntegral_Left :				LREAL;
 	VelocityIntegral_Right :			LREAL;
@@ -95,6 +96,9 @@ VAR_GLOBAL
 	
 	Vbus_Left :							LREAL;
 	Vbus_Right :						LREAL;
+	
+	PowerConsumption : 					LREAL;
+	JouleperMeter :						LREAL;
 	
 	
 //
