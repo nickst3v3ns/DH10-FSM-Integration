@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_EHC_Converter" Id="{7b87db6a-3546-4924-bd4f-b44bdbc7d2d7}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+    ============================================================================
+    FB_EHC_Converter
+    ----------------------------------------------------------------------------
+    Converts a *relative* barcode/tape reading into an *absolute* track position,
+    using a table of track segments. This is a clean, self-contained rewrite of
+    the original EHW converter (EHWConverter + EHWFindPosition + EHWCheckRange +
+    EHWCalculatePosition + EHWCheckValid). The LOGIC is intentionally identical to
+    the original; only the structure, typing and documentation have been cleaned
+    up. No sensor / transport / process-image code lives here on purpose.
+
+    CORE IDEA (unchanged from the original):
+      The tape repeats per segment, so a raw reading is only meaningful *within*
+      a segment. The converter therefore works in two modes:
+
+        1. ACQUISITION  (no valid previous segment, or after a reset)
+           Linear-scan the whole table to find the segment whose local span
+           contains the reading. This is the "cold start" / re-find.
+
+        2. TRACKING     (we already know roughly where we are)
+           Only look at the current segment and its nearer neighbour. If neither
+           contains the reading, dead-reckon forward using the velocity input.
+           This is cheap and robust against momentary bad reads.
+
+      A separate, stricter band check (CheckValid) reports whether the current
+      reading sits comfortably inside the segment (not near a seam), independent
+      of whether a position could be produced.
+
+    SEGMENT DIRECTION (unchanged from the original):
+      A segment may count *up* (rStart < rEnd) or *down* (rStart > rEnd) along the
+      tape. All band / position math handles both directions.
+
+    CONVENTIONS / ASSUMPTIONS:
+      - Track IDs are 1..C_SEGMENT_COUNT and EQUAL the array index. The original
+        code indexed the array by track id, so we keep that 1:1 mapping. iID is
+        kept in the struct for readability but the index is authoritative.
+      - iTrackId = -1 means "no segment found / not localised".
+      - The velocity dead-reckon term reproduces the original exactly
+        (rAbsolute + rVelocity / 1000.0 per call). See note at that line — it is a
+        per-call increment, not a per-second one; kept as-is to preserve behaviour.
+
+    USAGE:
+      fbEhc(rBarcode := <reading>, rVelocity := <vel>, bReset := <reset>);
+      // fbEhc.rAbsolutePos, fbEhc.iTrackId, fbEhc.bValid, fbEhc.bExtrapolating
+    ============================================================================
+*)
+FUNCTION_BLOCK FB_EHC_Converter
+VAR_INPUT
+    rBarcode    : REAL;             // Current RELATIVE reading from the tape [tape units]
+    rVelocity   : REAL;             // Current velocity, used only for dead-reckoning fallback
+    bReset      : BOOL;             // Rising/level reset: forces a fresh ACQUISITION next scan
+END_VAR
+
+VAR_OUTPUT
+    rAbsolutePos    : REAL;         // Calculated ABSOLUTE position along the track, or -1.0 if not found
+    iTrackId        : INT;          // Current segment id (= array index), or -1 if not localised
+    bValid          : BOOL;         // TRUE if the reading sits safely inside the segment (strict band)
+    bAcquiring      : BOOL;         // TRUE while in ACQUISITION (full-scan) mode
+    bExtrapolating  : BOOL;         // TRUE when position was dead-reckoned from velocity (no in-range segment)
+END_VAR
+
+VAR CONSTANT
+    C_SEGMENT_COUNT : INT  := 28;       // Number of track segments in the table below
+    C_RANGE_GUARD   : REAL := 0.05;     // Guard band for ACQUISITION/TRACKING in-range test (original: 0.05)
+    C_VALID_GUARD   : REAL := 0.2;      // Guard band for the stricter validity test       (original: 0.2)
+    C_FAR           : REAL := 5000.0;   // "Effectively infinite" distance used to veto a clamped neighbour
+    C_NONE          : INT  := -1;       // Sentinel: no segment
+END_VAR
+
+VAR
+    (* --- Track table -------------------------------------------------------
+       Real survey values, taken from GVL_PROP_BARCODE_EHW.TrackSegmentsRaw1.
+       Mapping ST_Track_Segment_Raw -> ST_Track_Segment:
+         iID            := iTrackNumber           (1..N, == array index)
+         rStart         := rStartValue            (local barcode span start)
+         rEnd           := rEndValue              (local barcode span end)
+         rAbsoluteStart := iXPosition             (absolute span start [m])
+         rAbsoluteEnd   := iXPosition + iLength   (absolute span end   [m])
+       Each segment has a DISTINCT barcode range (what the matching relies on).
+       Small physical gaps exist between some segments (e.g. 16.2 -> 16.4);
+       the converter dead-reckons across them.                              *)
+    aTracks : ARRAY[1..C_SEGMENT_COUNT] OF ST_Track_Segment := [
+        (iID := 1,  rStart := 640.0,  rEnd := 644.0,  rAbsoluteStart := 0.0,   rAbsoluteEnd := 4.0),
+        (iID := 2,  rStart := 628.0,  rEnd := 632.0,  rAbsoluteStart := 4.0,   rAbsoluteEnd := 8.0),
+        (iID := 3,  rStart := 636.0,  rEnd := 640.0,  rAbsoluteStart := 8.0,   rAbsoluteEnd := 12.0),
+        (iID := 4,  rStart := 304.6,  rEnd := 308.8,  rAbsoluteStart := 12.0,  rAbsoluteEnd := 16.2),
+        (iID := 5,  rStart := 212.2,  rEnd := 216.4,  rAbsoluteStart := 16.4,  rAbsoluteEnd := 20.6),
+        (iID := 6,  rStart := 660.0,  rEnd := 664.0,  rAbsoluteStart := 20.6,  rAbsoluteEnd := 24.6),
+        (iID := 7,  rStart := 656.0,  rEnd := 660.0,  rAbsoluteStart := 24.6,  rAbsoluteEnd := 28.6),
+        (iID := 8,  rStart := 616.0,  rEnd := 620.0,  rAbsoluteStart := 28.6,  rAbsoluteEnd := 32.6),
+        (iID := 9,  rStart := 584.0,  rEnd := 588.0,  rAbsoluteStart := 32.6,  rAbsoluteEnd := 36.6),
+        (iID := 10, rStart := 572.0,  rEnd := 576.0,  rAbsoluteStart := 36.6,  rAbsoluteEnd := 40.6),
+        (iID := 11, rStart := 1108.0, rEnd := 1112.0, rAbsoluteStart := 40.6,  rAbsoluteEnd := 44.6),
+        (iID := 12, rStart := 220.6,  rEnd := 224.8,  rAbsoluteStart := 44.6,  rAbsoluteEnd := 48.8),
+        (iID := 13, rStart := 241.6,  rEnd := 245.8,  rAbsoluteStart := 49.0,  rAbsoluteEnd := 53.2),
+        (iID := 14, rStart := 1120.0, rEnd := 1124.0, rAbsoluteStart := 53.2,  rAbsoluteEnd := 57.2),
+        (iID := 15, rStart := 1052.0, rEnd := 1056.0, rAbsoluteStart := 57.2,  rAbsoluteEnd := 61.2),
+        (iID := 16, rStart := 692.0,  rEnd := 696.0,  rAbsoluteStart := 61.2,  rAbsoluteEnd := 65.2),
+        (iID := 17, rStart := 1060.0, rEnd := 1064.0, rAbsoluteStart := 65.2,  rAbsoluteEnd := 69.2),
+        (iID := 18, rStart := 524.0,  rEnd := 528.0,  rAbsoluteStart := 69.2,  rAbsoluteEnd := 73.2),
+        (iID := 19, rStart := 1132.0, rEnd := 1136.0, rAbsoluteStart := 73.2,  rAbsoluteEnd := 77.2),
+        (iID := 20, rStart := 1144.0, rEnd := 1148.0, rAbsoluteStart := 77.2,  rAbsoluteEnd := 81.2),
+        (iID := 21, rStart := 460.0,  rEnd := 464.0,  rAbsoluteStart := 81.2,  rAbsoluteEnd := 85.2),
+        (iID := 22, rStart := 452.0,  rEnd := 456.0,  rAbsoluteStart := 85.2,  rAbsoluteEnd := 89.2),
+        (iID := 23, rStart := 448.0,  rEnd := 452.0,  rAbsoluteStart := 89.2,  rAbsoluteEnd := 93.2),
+        (iID := 24, rStart := 484.0,  rEnd := 488.0,  rAbsoluteStart := 93.2,  rAbsoluteEnd := 97.2),
+        (iID := 25, rStart := 1028.0, rEnd := 1032.0, rAbsoluteStart := 97.2,  rAbsoluteEnd := 101.2),
+        (iID := 26, rStart := 548.0,  rEnd := 552.0,  rAbsoluteStart := 101.2, rAbsoluteEnd := 105.2),
+        (iID := 27, rStart := 876.0,  rEnd := 880.0,  rAbsoluteStart := 105.2, rAbsoluteEnd := 109.2),
+        (iID := 28, rStart := 287.8,  rEnd := 292.0,  rAbsoluteStart := 109.2, rAbsoluteEnd := 113.4)
+    ];
+
+    (* --- Persistent localisation state (kept across cycles) --- *)
+    iTrackIdPrev    : INT  := -1;       // -1 forces ACQUISITION on the first scan
+    rAbsolutePrev   : REAL;             // Last absolute position (seed for tracking / dead-reckoning)
+    iFound          : INT;              // Scratch: index returned by Acquire()
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* ===========================================================================
+   Main scan: decide ACQUISITION vs TRACKING, produce position + id, then
+   evaluate validity and persist state. Mirrors EHWConverter exactly.
+   =========================================================================== *)
+
+// Reset request -> drop our fix so the next step re-acquires from scratch.
+IF bReset THEN
+    iTrackIdPrev := C_NONE;
+END_IF
+
+// Fresh outputs for this scan.
+bExtrapolating := FALSE;
+
+IF iTrackIdPrev = C_NONE THEN
+    // -------------------------------------------------------------------
+    // ACQUISITION: no known segment -> scan the whole table.
+    // -------------------------------------------------------------------
+    bAcquiring := TRUE;
+
+    iFound := Acquire(rReading := rBarcode);
+    IF iFound = C_NONE THEN
+        // Reading not inside any segment.
+        iTrackId     := C_NONE;
+        rAbsolutePos := -1.0;       // original "not found" sentinel
+    ELSE
+        iTrackId     := iFound;     // id == array index
+        rAbsolutePos := CalcPosition(rReading := rBarcode, ts := aTracks[iFound]);
+    END_IF
+
+ELSE
+    // -------------------------------------------------------------------
+    // TRACKING: we know roughly where we are -> only check neighbours.
+    // -------------------------------------------------------------------
+    bAcquiring := FALSE;
+
+    // Seed from last cycle, then let Track() refine in place.
+    iTrackId     := iTrackIdPrev;
+    rAbsolutePos := rAbsolutePrev;
+
+    Track(rReading := rBarcode, rVelocity := rVelocity, iId := iTrackId, rAbsolute := rAbsolutePos);
+END_IF
+
+// -----------------------------------------------------------------------
+// Validity: stricter band test, only meaningful if we are localised.
+// -----------------------------------------------------------------------
+IF iTrackId = C_NONE THEN
+    bValid := FALSE;
+ELSE
+    bValid := InBand(rReading := rBarcode, ts := aTracks[iTrackId], rGuard := C_VALID_GUARD);
+END_IF
+
+// -----------------------------------------------------------------------
+// Persist state for the next cycle.
+// -----------------------------------------------------------------------
+iTrackIdPrev  := iTrackId;
+rAbsolutePrev := rAbsolutePos;]]></ST>
+    </Implementation>
+    <Method Name="Acquire" Id="{d613aa30-c8a5-41df-8cfb-76882a4c108a}">
+      <Declaration><![CDATA[(*
+    ACQUISITION scan: walk the whole table and return the index of the first
+    segment whose local span contains the reading, or C_NONE (-1) if none.
+    Same result as the original EHWConverter WHILE-loop, written cleanly.
+*)
+METHOD PRIVATE Acquire : INT
+VAR_INPUT
+    rReading : REAL;
+END_VAR
+VAR
+    i : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Acquire := C_NONE;
+
+FOR i := 1 TO C_SEGMENT_COUNT DO
+    IF InBand(rReading := rReading, ts := aTracks[i], rGuard := C_RANGE_GUARD) THEN
+        Acquire := i;
+        RETURN;
+    END_IF
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CalcPosition" Id="{e0aefcb4-2a1e-4af2-b529-87e4c658d1bf}">
+      <Declaration><![CDATA[(*
+    Map a local reading to an absolute track position within a segment.
+    Mirrors EHWCalculatePosition, handling both segment directions.
+*)
+METHOD PRIVATE CalcPosition : REAL
+VAR_INPUT
+    rReading : REAL;
+    ts       : ST_Track_Segment;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ts.rStart < ts.rEnd THEN
+    CalcPosition := ts.rAbsoluteStart + (rReading - ts.rStart);
+ELSE
+    CalcPosition := ts.rAbsoluteEnd + (rReading - ts.rEnd);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InBand" Id="{a2624820-25a9-4927-8d5c-063cb767afbf}">
+      <Declaration><![CDATA[(*
+    Is the reading inside this segment's local span, minus a guard band?
+    Handles both segment directions (up: rStart<rEnd, down: rStart>rEnd).
+    Unifies the original EHWCheckRange (guard 0.05) and EHWCheckValid (guard 0.2),
+    which were identical apart from the guard value.
+*)
+METHOD PRIVATE InBand : BOOL
+VAR_INPUT
+    rReading : REAL;            // current relative reading
+    ts       : ST_Track_Segment;// segment to test against
+    rGuard   : REAL;            // guard band to keep away from the seams
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InBand := FALSE;
+
+IF ts.rStart < ts.rEnd THEN
+    // Up-counting segment.
+    IF rReading >= ts.rStart + rGuard AND rReading <= ts.rEnd - rGuard THEN
+        InBand := TRUE;
+    END_IF
+ELSE
+    // Down-counting segment.
+    IF rReading <= ts.rStart - rGuard AND rReading >= ts.rEnd + rGuard THEN
+        InBand := TRUE;
+    END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Track" Id="{c1470680-399d-4d8e-8847-05422a5ed7dc}">
+      <Declaration><![CDATA[(*
+    TRACKING step: refine id + absolute position when we already have a fix.
+    Mirrors EHWFindPosition:
+      - Consider the previous and next segments (clamped at the table ends).
+      - Pick the neighbour ("other") that is nearer to our current absolute pos.
+      - If the reading falls in that neighbour -> hand over to it.
+      - Else if it still falls in the current segment -> stay, recompute.
+      - Else -> dead-reckon forward from velocity (sets bExtrapolating).
+    iId and rAbsolute are updated in place.
+*)
+METHOD PRIVATE Track
+VAR_INPUT
+    rReading  : REAL;
+    rVelocity : REAL;
+END_VAR
+VAR_IN_OUT
+    iId       : INT;        // current segment id (= index); refined in place
+    rAbsolute : REAL;       // current absolute position; refined in place
+END_VAR
+VAR
+    iPrev   : INT;
+    iNext   : INT;
+    iOther  : INT;
+    rDistPrev : REAL;
+    rDistNext : REAL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Neighbours, clamped so the ends point at themselves.
+iPrev := iId - 1;
+iNext := iId + 1;
+IF iId = 1 THEN
+    iPrev := iId;
+ELSIF iId = C_SEGMENT_COUNT THEN
+    iNext := iId;
+END_IF
+
+// Distance from our current absolute position to each neighbour's near seam.
+rDistPrev := ABS(rAbsolute - aTracks[iPrev].rAbsoluteStart);
+rDistNext := ABS(rAbsolute - aTracks[iNext].rAbsoluteEnd);
+
+// A clamped (self) neighbour must never be chosen -> push its distance to infinity.
+IF iPrev = iId THEN
+    rDistPrev := C_FAR;
+END_IF
+IF iNext = iId THEN
+    rDistNext := C_FAR;
+END_IF
+
+// Pick the nearer neighbour as the candidate to hand over to.
+IF rDistPrev <= rDistNext THEN
+    iOther := iPrev;
+ELSE
+    iOther := iNext;
+END_IF
+
+IF InBand(rReading := rReading, ts := aTracks[iOther], rGuard := C_RANGE_GUARD) THEN
+    // Reading now lives in the neighbour -> move there.
+    iId       := iOther;
+    rAbsolute := CalcPosition(rReading := rReading, ts := aTracks[iOther]);
+
+ELSIF InBand(rReading := rReading, ts := aTracks[iId], rGuard := C_RANGE_GUARD) THEN
+    // Still inside the current segment -> just recompute.
+    rAbsolute := CalcPosition(rReading := rReading, ts := aTracks[iId]);
+
+ELSE
+    // Reading not usable in either segment -> dead-reckon forward.
+    // NOTE: reproduces the original's per-call term (velocity / 1000). It is an
+    //       increment per invocation, not per second; revisit if you want a true
+    //       time-based estimate (e.g. rVelocity * fCycleTime).
+    rAbsolute      := rAbsolute + rVelocity / 1000.0;
+    bExtrapolating := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

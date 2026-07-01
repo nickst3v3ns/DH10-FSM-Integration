@@ -36,6 +36,25 @@ VAR
 	
 	fbdclink						:FB_DCLINK;
 	
+	
+	//CAN watchdogs
+	watchdogReset : BOOL;
+	
+	fbCANwatchPropLeft : FB_CANWatchdog;
+	RXwatchdogPropLeft : BOOL;
+	TXwatchdogPropLeft : BOOL;
+	
+	
+	fbCANwatchPropRight : FB_CANWatchdog;
+	RXwatchdogPropRight : BOOL;
+	TXwatchdogPropRight : BOOL;
+	
+	
+	fbCANwatchPTHV : FB_CANWatchdog;
+	RXwatchdogPTHV : BOOL;
+	TXwatchdogPTHV : BOOL;
+	
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -53,6 +72,10 @@ bbrakes_engaged := GVL_FSM.bbrakes_engaged;
 //TwinSAFE Estop Logic
 bFalseForEstopRestart := GVL_FSM.bFalseForEstopRestartGlobal;
 bEstopRestart := GVL_FSM.bEstopRestartGlobal;
+
+
+//watchdog
+watchdogReset := GVL_FSM.bwatchdogResetGlobal;
 
 
 //-------------
@@ -90,6 +113,14 @@ IF NOT bPLCtoggleStop THEN
 END_IF
 
 
+//CAN watchdogs
+IF GVL_FSM.E_PodStateGlobal > 3 THEN
+fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogReset, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
+fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogReset, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
+fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+END_IF
+
+
 //push to GVL
 
 //estop
@@ -103,6 +134,22 @@ GVL_FSM.bJorianSpecialGlobal:= bJorianSpecial;
 GVL_FSM.bbrakes_arm_signalGlobal := bArmSignal;
 GVL_FSM.bbrakes_clockGlobal := bCLK;
 GVL_FSM.bbrakes_engaged := bbrakes_engaged;
+
+//watchdogs
+IF watchdogReset THEN
+	watchdogReset := FALSE;
+END_IF
+
+GVL_FSM.RXwatchdogPropLeftGlobal := RXwatchdogPropLeft;
+GVL_FSM.TXwatchdogPropLeftGlobal := TXwatchdogPropLeft;
+
+GVL_FSM.RXwatchdogPropRightGlobal := RXwatchdogPropRight;
+GVL_FSM.TXwatchdogPropRightGlobal := TXwatchdogPropRight;
+
+GVL_FSM.RXwatchdogPTHV := RXwatchdogPTHV;
+GVL_FSM.TXwatchdogPTHV := TXwatchdogPTHV;
+
+GVL_FSM.bwatchdogResetGlobal := watchdogReset;
 
 //------------]]></ST>
     </Implementation>

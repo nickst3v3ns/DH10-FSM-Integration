@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="auto_DOF_states" Id="{88b3ba29-d807-476c-a617-85382edc07b5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION auto_DOF_states : E_auto_DOF_States
+VAR_INPUT
+END_VAR
+
+VAR_IN_OUT 
+	enable_auto_z_target : BOOL;
+	enable_auto_y_target : BOOL;
+	enable_auto_yaw_target : BOOL;
+	
+	auto_z_target_trigger : BOOL;
+	auto_y_target_trigger : BOOL;
+	auto_yaw_target_trigger : BOOL;
+	
+	auto_y_target_error : LREAL;
+	auto_yaw_target_error : LREAL;
+	
+	auto_y_target_gain : LREAL;
+	auto_yaw_target_gain : LREAL;
+	
+	Control_liftoff_inputs: ST_Liftoff_model_U_T;
+	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
+	Control_liftoff_parameters: ST_P_Liftoff_model_T;
+	
+	Liftoff_in_progress : USINT;
+	
+	
+	avg_I_squared_HEMS : LREAL;
+END_VAR
+
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE auto_DOF_states OF
+	
+	E_auto_DOF_States.DOF_INIT:
+	
+		auto_DOF_states := E_auto_DOF_States.FINDING_Z_TARGET;
+	
+	E_auto_DOF_States.FINDING_Z_TARGET:
+		
+		Control_liftoff_parameters.benable_auto_z_target := enable_auto_z_target;
+		Control_liftoff_parameters.benable_auto_y_target := FALSE;
+		Control_liftoff_parameters.benable_auto_yaw_target := FALSE;
+		
+		IF (auto_z_target_trigger = FALSE AND (ABS(avg_I_squared_HEMS) <0.002)) OR  enable_auto_z_target = FALSE THEN
+			auto_DOF_states := E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS;
+		END_IF
+	
+	E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS:
+	
+		Control_liftoff_parameters.benable_auto_z_target := FALSE;
+		Control_liftoff_parameters.benable_auto_y_target := enable_auto_y_target;
+		Control_liftoff_parameters.benable_auto_yaw_target := enable_auto_yaw_target;
+		
+		IF enable_auto_y_target AND enable_auto_yaw_target THEN
+			
+			IF (auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < 0.02)) AND (auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < 0.02)) THEN
+				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
+			END_IF
+			
+		ELSIF enable_auto_y_target AND enable_auto_yaw_target = FALSE THEN
+			
+			IF auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < 0.02) THEN
+				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
+			END_IF
+			
+		ELSIF enable_auto_y_target = FALSE AND enable_auto_yaw_target THEN
+			
+			IF auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < 0.02) THEN
+				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
+			END_IF
+		
+		ELSE
+			
+			auto_DOF_states := E_auto_DOF_States.DOF_INIT;
+		
+		END_IF
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

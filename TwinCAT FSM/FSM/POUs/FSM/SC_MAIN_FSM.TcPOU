@@ -6,7 +6,7 @@ VAR
 	main_fsm	: FB_Main_FSM;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[main_fsm(currentCmd := GVL_FSM.E_CommandGlobal, EmergencyReason := GVL_FSM.EmergencyReason);
+      <ST><![CDATA[main_fsm(currentCmd := GVL_FSM.E_CommandGlobal, EmergencyReason := GVL_FSM.E_EmergencyReasonGlobal);
 
 // GVL_FSM.fbLink();]]></ST>
     </Implementation>

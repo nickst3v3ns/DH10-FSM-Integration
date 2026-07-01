@@ -330,12 +330,12 @@ END_VAR
 
     16#0251: // EmergencyReason
         CASE valueBits OF
-            0 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_NONE;
-            1 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_HearBeatFail;
-            2 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_EmergencyOverGS;
-            3 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_IMD;
-            4 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_BMS;
-            5 : GVL_FSM.EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
+            0 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_NONE;
+            1 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_HearBeatFail;
+            2 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_EmergencyOverGS;
+            3 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_IMD;
+            4 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_BMS;
+            5 : GVL_FSM.E_EmergencyReasonGlobal := E_EmergencyReason.ERR_CHECKCRITICAL;
         END_CASE
 
     16#0252: // PodStateCommand
@@ -768,7 +768,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// PTCState (0xd00) — u16 on wire
 // AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, USINT_TO_UINT(GVL_PT.PTC_STATE));
-AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, 10);
+AppendDpI16(GVL_GS_IDS.DP_ID_PTC_STATE, GVL_PT.PTC_STATE);
 
 // HVALStatus (0xd01) — u16
 AppendDpI16(GVL_GS_IDS.DP_ID_HVAL_STATUS,

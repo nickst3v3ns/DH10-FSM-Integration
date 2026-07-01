@@ -18,5 +18,8 @@
     <Content Include="Prop.tcscopex">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="PT.tcscopex">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
 </Project>

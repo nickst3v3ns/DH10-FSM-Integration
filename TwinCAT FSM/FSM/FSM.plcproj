@@ -33,6 +33,12 @@
     <Compile Include="DUTs\GS\ST_PodTelemetry.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\LEVI\E_auto_DOF_states.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\LEVI\E_Levi_States.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\LVBAT\E_BatteryState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +58,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\LVBAT\ST_PackData3.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\BMSFAILREASON\ST_BMS_Fail_Reason.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\PT-DUTS\BMSFAILREASON\U_BMS_Fail_Reason.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\PT-DUTS\E_BMS_FAIL_REASON.TcDUT">
@@ -88,9 +100,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\E_EmergencyReason.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Levi_States.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\E_PodState.TcDUT">
@@ -191,16 +200,10 @@
     <Compile Include="PlcTask_1ms_PTC_CAN_RX_FastFlow_.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PlcTask_2ms_PWM_.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\CAN\FB_CAN_LV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CAN\FB_NTC_CodeToCelsius.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\CAN\FB_PTC_RESET.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CAN\PTC_Receive_Messages.TcPOU">
@@ -224,16 +227,25 @@
     <Compile Include="POUs\FSM\FB_BrakesDearm.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FSM\FB_Charge.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\FB_Discharge.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FSM\FB_Handle_Emergency.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\FB_Main_FSM.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\PTSendMessage\FB_Charge.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\PTSendMessage\FB_ClearPrechargeFailure.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\PTSendMessage\FB_Discharge.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\PTSendMessage\FB_PrechargeReset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FSM\PTSendMessage\FB_PTC_RESET.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\SC_MAIN_FSM.TcPOU">
@@ -243,6 +255,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\GS\FB_GroundStationLink.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\auto_DOF_states.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\BackgroundLateral.TcPOU">
@@ -293,25 +308,10 @@
     <Compile Include="POUs\LVBATPRG\P_ParseBattery.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_EHW\EHWCalculatePosition.TcPOU">
+    <Compile Include="POUs\PROP_EHW\FB_EHC_Converter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PROP_EHW\EHWCheckRange.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_EHW\EHWCheckValid.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_EHW\EHWConverter.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_EHW\EHWFindPosition.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_EHW\PROP_MAIN_EHW.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\PROP_EHW\SendPositionTelegram.TcPOU">
+    <Compile Include="POUs\PROP_EHW\FB_EHC_Converter_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\Calculate_Thrust_Lift.TcPOU">
@@ -473,6 +473,9 @@
     <Compile Include="POUs\PROP_FINAL\PropDriveCommands\FB_SendPropFlag_Left.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\SAFETY\FB_CANWatchDog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\SAFETY\FB_DCLINK.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -520,18 +523,21 @@
     <Folder Include="DUTs" />
     <Folder Include="DUTs\GS" />
     <Folder Include="DUTs\LVBAT" />
+    <Folder Include="DUTs\LEVI" />
     <Folder Include="DUTs\PT-DUTS" />
     <Folder Include="DUTs\PT-DUTS\IMD_Warning" />
+    <Folder Include="DUTs\PT-DUTS\BMSFAILREASON" />
     <Folder Include="DUTs\PT-DUTS\PTC_ErrorCode" />
     <Folder Include="GVLs" />
     <Folder Include="GVLs\GS" />
     <Folder Include="POUs\FSM" />
+    <Folder Include="POUs\FSM\PTSendMessage" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
     <Folder Include="POUs\GS" />
     <Folder Include="POUs\LVBATPRG" />
-    <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_EHW" />
+    <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />
     <Folder Include="POUs\SAFETY" />
     <Folder Include="POUs\THERMAL" />
@@ -609,8 +615,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -686,14 +692,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

@@ -8,6 +8,8 @@ VAR_GLOBAL
 	levitation_fault: 		BOOL; //fatal levitation error
 	Levi_command:			E_Levi_States; //Levi_command is where you tell the pod to which levi state you want to switch. The code will then check if you are allowed to switch to that state.
 	levitation_state:		E_Levi_States;
+	enable_auto_y_target : BOOL;
+	enable_auto_yaw_target : BOOL;
 	
 	//----------------------------------------------------------------------------------------------------
 

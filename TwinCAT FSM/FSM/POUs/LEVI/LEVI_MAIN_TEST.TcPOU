@@ -99,7 +99,7 @@ VAR
 	//Drive_current_W AT %I*: ARRAY[0..23] OF INT;
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
-	average_current_hems : LREAL;
+	avg_I_squared_HEMS : LREAL;
 	Power_HEMS : ARRAY[0..15] OF LREAL;
 	Power_total_HEMS : LREAL;
 	Power_EMS : ARRAY[0..7] OF LREAL;
@@ -198,7 +198,11 @@ VAR
 	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
 	Control_liftoff_parameters: ST_P_Liftoff_model_T := FB_control_liftoff.stLiftoff_model_P;
 	
-	zero_current_trigger : BOOL;
+	auto_z_target_trigger : BOOL;
+	auto_y_target_trigger : BOOL;
+	auto_yaw_target_trigger : BOOL;
+	auto_y_target_error : LREAL;
+	auto_yaw_target_error : LREAL;
 	
 	
 	//Descent model
@@ -252,8 +256,9 @@ VAR
 	Liftoff_in_progress : USINT;
 	descent_in_progress : USINT;
 	finding_zero_current : BOOL;
-	prev_time_zero_current_finder : LREAL;
-	new_time_zero_current_finder : LREAL;
+	zero_current_airgap_found : BOOL;
+	finding_y_target : BOOL;
+	finding_yaw_target : BOOL;
 	
 	(*
 	K_P_tot: LREAL := 400000;
@@ -346,7 +351,9 @@ VAR
 	K_F_yaw: LREAL := 120;
 	K_I_yaw_initial: LREAL := 39;	
 	
-	Zero_current_finder_gain : LREAL := 0.00025;
+	auto_z_target_gain : LREAL := 0.00025;
+	auto_y_target_gain : LREAL := 0.00050;
+	auto_yaw_target_gain : LREAL := 0.00025;
 	
 	extreme_z_gain_multiplier : LREAL := 1;
 	extreme_pitch_gain_multiplier : LREAL := 1;
@@ -368,14 +375,16 @@ VAR
 	
 	Lift_off_enabled : BOOL := TRUE;
 	descent_enabled : BOOL := TRUE;
-	enable_zero_current_finder : BOOL := TRUE;
+	enable_auto_z_target : BOOL := TRUE;
 	Mismatch_enabled : BOOL := FALSE;
 	
 	feed_fwd_on_prop_roll : BOOL := FALSE;
 	feed_fwd_motor_y_on : BOOL := FALSE;
 	feed_fwd_motor_yaw_on : BOOL := FALSE;
 	feed_fwd_ON_ems : BOOL := TRUE;
-	Zero_current_finder_interval : LREAL := 0.75; //s
+	auto_z_target_interval : LREAL := 0.75; //s
+	auto_y_target_interval : LREAL := 6; //s
+	auto_yaw_target_interval : LREAL := 6; //s
 	
 	f_vert_notch_main_1 : LREAL := 50.66;
 	enable_vert_main_notch_1 : BOOL := TRUE;
@@ -765,16 +774,16 @@ CASE GVL_LEVI.Levi_Command OF
 
 			//-----------------------------------------------------------------------------------------------------------
 			z_target := z_initial_target;
+			zero_current_airgap_found := FALSE;
+			finding_y_target := FALSE;
+			finding_yaw_target := FALSE;
 			
 			Control_liftoff_inputs.fz_target := z_target;
-			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
-			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
+			Control_liftoff_inputs.aFeedback_current := Real_currents;
 			
 			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
 			
 			z_target := Control_liftoff_outputs.fnew_z_target;
-			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
-			prev_time_zero_current_finder := new_time_zero_current_finder;
 
 			FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
 			
@@ -928,44 +937,98 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_liftoff_parameters.bLevi_operational := Levi_operational;
 			Control_liftoff_parameters.fz_initial_lift_off := z_liftoff;
 			Control_liftoff_parameters.flift_off_time := liftoff_time;		
-			Control_liftoff_parameters.benable_zero_current_finder := enable_zero_current_finder;		
-			Control_liftoff_parameters.blift_off_enabled := lift_off_enabled;
-			Control_liftoff_parameters.fz_manual_target := z_initial_target;
-			Control_liftoff_parameters.fzero_current_finder_gain := Zero_current_finder_gain;
-			Control_liftoff_parameters.fzero_current_finder_interval := Zero_current_finder_interval;
+			Control_liftoff_parameters.blift_off_enabled := lift_off_enabled;			
+			Control_liftoff_parameters.fz_manual_target := z_initial_target;	
+		
+			Control_liftoff_parameters.benable_auto_z_target := enable_auto_z_target;		
+			Control_liftoff_parameters.fauto_z_target_gain := auto_z_target_gain;
+			Control_liftoff_parameters.fauto_z_target_interval := auto_z_target_interval;
 			
+			Control_liftoff_parameters.fauto_y_target_gain := auto_y_target_gain;
+			Control_liftoff_parameters.fauto_y_target_interval := auto_y_target_interval;
+			
+			Control_liftoff_parameters.fauto_yaw_target_gain := auto_yaw_target_gain;
+			Control_liftoff_parameters.fauto_y_target_interval := auto_y_target_interval;
 								
 			FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;
 			
 			//-------------------------------------------------------------------------
 			
 			Control_liftoff_inputs.fz_target := z_target;
-			Control_liftoff_inputs.aFeedback_current_hems := Real_currents;
-			Control_liftoff_inputs.fprev_time := prev_time_zero_current_finder;
+			Control_liftoff_inputs.fy_target := y_target_airgap;
+			Control_liftoff_inputs.fyaw_target := yaw_target;
+			Control_liftoff_inputs.aFeedback_current := Real_currents;
 			
 			FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
 			
 			z_target := Control_liftoff_outputs.fnew_z_target;
-			new_time_zero_current_finder := Control_liftoff_outputs.fnew_time;
-			average_current_hems := Control_liftoff_outputs.faverage_current_hems;
+			y_target_airgap := Control_liftoff_outputs.fnew_y_target;
+			yaw_target := Control_liftoff_outputs.fnew_yaw_target;
+			avg_I_squared_HEMS := Control_liftoff_outputs.favg_I_squared_HEMS;
 			Liftoff_in_progress := Control_liftoff_outputs.nLiftoff_in_progress;
-			zero_current_trigger := Control_liftoff_outputs.bzero_current_trigger;
-			prev_time_zero_current_finder := new_time_zero_current_finder;
+			auto_z_target_trigger := Control_liftoff_outputs.bauto_z_target_trigger;
+			auto_y_target_trigger := Control_liftoff_outputs.bauto_y_target_trigger;
+			auto_yaw_target_trigger := Control_liftoff_outputs.bauto_yaw_target_trigger;
+			auto_y_target_error := Control_liftoff_outputs.fauto_y_target_error;
+			auto_yaw_target_error := Control_liftoff_outputs.fauto_yaw_target_error;
 			
-			IF enable_zero_current_finder = TRUE AND Liftoff_in_progress = 0 THEN
+			
+			//-------------------------------------------------------------------------
+			(*
+			IF enable_auto_z_target AND Liftoff_in_progress = 0 AND zero_current_airgap_found = FALSE THEN
+				
+				finding_zero_current := TRUE;
+				Control_liftoff_parameters.benable_auto_y_target := FALSE;
+				Control_liftoff_parameters.benable_auto_yaw_target := FALSE;
+				
+				IF auto_z_target_trigger = FALSE AND (ABS(avg_I_squared_HEMS) <0.002)  THEN
+					finding_zero_current := FALSE;
+					zero_current_airgap_found := TRUE;
+				END_IF
+			END_IF
+			
+			IF zero_current_airgap_found = TRUE AND GVL_LEVI.enable_auto_y_target AND GVL_LEVI.enable_auto_yaw_target AND Liftoff_in_progress = 0 THEN
+				
+				finding_y_target := TRUE;
+				finding_yaw_target := TRUE;
+				Control_liftoff_parameters.benable_auto_y_target := GVL_LEVI.enable_auto_y_target;
+				Control_liftoff_parameters.benable_auto_yaw_target := GVL_LEVI.enable_auto_yaw_target;
+				
+				IF auto_y_target_trigger = FALSE AND auto_yaw_target_trigger = FALSE AND (ABS(auto_y_target_error/auto_y_target_gain) <0.1) AND (ABS(auto_yaw_target_error/auto_yaw_target_gain) <0.05) THEN
+					finding_y_target := FALSE;
+					finding_yaw_target := FALSE;
+				END_IF
+			END_IF
+			
+			IF finding_y_target AND GVL_LEVI.enable_auto_y_target = FALSE THEN
+				finding_y_target := FALSE;
+			END_IF
+			
+			IF finding_yaw_target AND GVL_LEVI.enable_auto_yaw_target = FALSE THEN
+				finding_yaw_target := FALSE;
+			END_IF
+			
+			IF zero_current_airgap_found = TRUE AND finding_y_target = FALSE AND finding_yaw_target = FALSE AND Liftoff_in_progress = 0 THEN
+				GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
+			END_IF
+			*)
+			
+			(*
+			IF enable_auto_z_target = TRUE AND GVL_LEVI.enable_auto_y_target AND GVL_LEVI.enable_auto_yaw_target AND Liftoff_in_progress = 0 THEN
 				
 				finding_zero_current := TRUE;
 				
-				IF zero_current_trigger = FALSE AND (ABS(average_current_hems) <0.002)  THEN
+				IF auto_z_target_trigger = FALSE AND (ABS(avg_I_squared_HEMS) <0.002)  THEN
 					GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 					finding_zero_current := FALSE;
 				END_IF
 				
-			ELSIF enable_zero_current_finder = FALSE AND Liftoff_in_progress = 0 THEN
+			ELSIF enable_auto_z_target = FALSE AND Liftoff_in_progress = 0 THEN
 				
 				finding_zero_current := FALSE;
 				GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 			END_IF
+			*)
 			//-------------------------------------------------------------------------
 			
 			//Setting motor feed forward parameters

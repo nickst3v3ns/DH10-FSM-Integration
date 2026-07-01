@@ -28,7 +28,7 @@ END_VAR
                                                      // is in the buffer
        	MessageReceived[i] := Inputs_Left.RxMessages[i];   // copy the CAN message
    END_FOR
-   Outputs_Left.RxCounter := Inputs_Left.RxCounter;            // set equal: the CAN interface then knows,
+   Outputs_Left.RxCounter := Inputs_Left.RxCounter;            // set equal: the CAN interface then knows. Probably needs to be set equal at the end of the receive block to be honest.
                                                      // that you have copied the CAN data
 	FOR i := 0 TO (Inputs_Left.NoOfRxMessages-1) DO        // start the LOOP and check how much data
                                                      // is in the buffer

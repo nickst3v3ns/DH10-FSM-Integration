@@ -3,6 +3,7 @@
   <POU Name="THERMAL_MAIN" Id="{9720e83a-0dc5-4f23-bffc-80a51a9855a8}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM THERMAL_MAIN
 VAR
+	
 	//8 channels
 	fbEMS_T : FB_NTCLE_EMS();
 	
@@ -30,41 +31,49 @@ VAR
 	FLOWCount9 : FB_Flow;
 	FLOWCount10 : FB_Flow;
 	
+	
+	//PUMPCONTROL
+	bPumpLeviEnable AT %Q*: BOOL;
+	bPumpPropEnable AT %Q*: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//8 channels
-fbEMS_T();
+      <ST><![CDATA[bPumpLeviEnable := GVL_THERMAL.bPumpLeviEnable;
+bPumpPropEnable := GVL_THERMAL.bPumpPropEnable;
+
+
+//8 channels
+fbEMS_T(icriticalindex := -1);
 
 //IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
-IF ((fbEMS_T.bcriticalCoolDown) = FALSE) AND GVL_THERMAL.bEMSOVERHEAT THEN
+IF (fbEMS_T.bcriticalCoolDown) AND GVL_THERMAL.bEMSOVERHEAT THEN
 	GVL_THERMAL.bEMSOVERHEAT := FALSE;
 END_IF
 
 //8 channels
-fbHEMS_T();
+fbHEMS_T(icriticalindex := -1);
 
 //IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
-IF ((fbHEMS_T.bcriticalCoolDown) = FALSE) AND GVL_THERMAL.bHEMSOVERHEAT THEN
+IF (fbHEMS_T.bcriticalCoolDown) AND GVL_THERMAL.bHEMSOVERHEAT THEN
 	GVL_THERMAL.bHEMSOVERHEAT := FALSE;
 END_IF
 
 //36 channels divided over 4 motors
-fbMOTOR_LEFTFRONT_T();
-fbMOTOR_RIGHTFRONT_T();
-fbMOTOR_LEFTBACK_T();
-fbMOTOR_RIGHTBACK_T();
+fbMOTOR_LEFTFRONT_T(icriticalindex := -1);
+fbMOTOR_RIGHTFRONT_T(icriticalindex := -1);
+fbMOTOR_LEFTBACK_T(icriticalindex := -1);
+fbMOTOR_RIGHTBACK_T(icriticalindex := -1);
 
 
 //IF statement to make sure the Global OVERHEAT bool flips back to false once set to true after cooling down
-IF ((fbMOTOR_LEFTFRONT_T.bcriticalCoolDown AND fbMOTOR_RIGHTFRONT_T.bcriticalCoolDown AND fbMOTOR_LEFTBACK_T.bcriticalCoolDown AND fbMOTOR_RIGHTBACK_T.bcriticalCoolDown) = FALSE) AND GVL_THERMAL.bMOTOROVERHEAT THEN
+IF (fbMOTOR_LEFTFRONT_T.bcriticalCoolDown AND fbMOTOR_RIGHTFRONT_T.bcriticalCoolDown AND fbMOTOR_LEFTBACK_T.bcriticalCoolDown AND fbMOTOR_RIGHTBACK_T.bcriticalCoolDown) AND GVL_THERMAL.bMOTOROVERHEAT THEN
 	GVL_THERMAL.bMOTOROVERHEAT := FALSE;
 END_IF
 
 //8 channels
-fbFLOW_T();
+fbFLOW_T(icriticalindex := -1);
 
-IF ((fbFLOW_T.bcriticalCoolDown) = FALSE) AND GVL_THERMAL.bFLOWOVERHEAT THEN
+IF (fbFLOW_T.bcriticalCoolDown) AND GVL_THERMAL.bFLOWOVERHEAT THEN
 	GVL_THERMAL.bFLOWOVERHEAT := FALSE;
 END_IF
 

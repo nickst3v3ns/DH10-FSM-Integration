@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_CANWatchDog" Id="{d5035c70-1dc9-4766-94bd-a989e58e0f67}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CANWatchDog
+VAR_INPUT
+	CAN_Inputs 	: CANRXQUEUESTRUCT_E_32;
+	watchdogReset : BOOL;
+	
+	
+	RXtimer : TIME := T#100MS;
+	TXtimer : TIME := T#100MS;
+END_VAR
+VAR_OUTPUT
+	RXwatchdog : BOOL;
+	TXwatchdog : BOOL;
+END_VAR
+VAR
+	RXcounterInput_OLD : UINT;
+	RXcounterInput_NEW : UINT;
+	TXcounterInput_OLD : UINT;
+	TXcounterInput_NEW : UINT;
+	watchdogRX : TON;
+	watchdogTX : TON;
+	
+	RXtrig : R_TRIG;
+	TXtrig : R_TRIG;
+	RXtestrig : R_TRIG;
+	TXtestrig : R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+RXcounterInput_NEW := CAN_Inputs.RxCounter;
+TXcounterInput_NEW := CAN_Inputs.TxCounter;
+
+IF RXtimer <> T#0MS THEN
+	watchdogRX(IN := (RXcounterInput_OLD = RXcounterInput_NEW), PT := RXtimer);
+END_IF
+
+IF TXtimer <> T#0MS THEN
+	watchdogTX(IN := (TXcounterInput_OLD = TXcounterInput_NEW), PT := TXtimer);	
+END_IF
+
+
+RXtrig(CLK := watchdogRX.Q);
+TXtrig(CLK := watchdogTX.Q);
+
+
+IF RXtrig.Q THEN
+	RXwatchdog := TRUE;
+	
+END_IF
+IF TXtrig.Q THEN
+	TXwatchdog := TRUE;
+END_IF
+RXcounterInput_OLD := RXcounterInput_NEW;
+TXcounterInput_OLD := TXcounterInput_NEW;
+
+IF watchdogreset THEN
+	RXwatchdog := FALSE;
+	TXwatchdog := FALSE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

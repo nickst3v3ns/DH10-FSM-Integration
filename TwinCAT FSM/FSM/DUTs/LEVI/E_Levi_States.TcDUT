@@ -17,7 +17,7 @@ TYPE E_Levi_States :
 	LEVI_TESTING_INDIVIDUAL_DRIVES 	:= 8, 
 	LEVI_ERROR						:= -1,
 	LEVI_RESET_DRIVES				:= -2
-) UINT;
+) INT;
 END_TYPE
 ]]></Declaration>
   </DUT>

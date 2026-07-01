@@ -15,6 +15,7 @@ VAR
 	RecoveryToMaintenance:							BOOL;
 	fbDearm : FB_BrakesDearm;
 	send_message : PTC_Send_Message; 
+	fbdischarge : FB_Discharge;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -36,6 +37,7 @@ CASE state OF
         GVL_Prop.propulsion_enable := FALSE;
         GVL_LEVI.levitation_enable := FALSE;
 		
+		fbdischarge();
 		//because braking pcb is broken
 		GVL_FSM.bbrakes_engaged := FALSE;
 		
@@ -50,6 +52,7 @@ CASE state OF
         IF allActionsCompleteShutdown THEN
 			
 			  state := 2;
+			  GVL_FSM.bwatchdogResetGlobal := TRUE;
 		
         END_IF
 		

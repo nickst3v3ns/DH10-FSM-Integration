@@ -19,9 +19,11 @@ VAR
 	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
 	
 	bTESTSTATE : BOOL;
-	
+	bDescend : BOOL;
 	fbArm : FB_BrakesArm;
 	fbDearm : FB_BrakesDearm;
+	
+	isdrivereset:				BOOL;
 	
 	criticalFault:				BOOL; 
 	
@@ -61,8 +63,6 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-
-
 GVL_FSM.fbLink();
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
@@ -83,6 +83,8 @@ CASE currentState OF
 	
 //EMERGENCY
 	E_PodState.STATE_EMERGENCY:
+	
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
 
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
@@ -108,6 +110,8 @@ CASE currentState OF
 //BOOT		
 	E_PodState.STATE_BOOT:  
 	
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
+	
 		GVL_FSM.benable_telemetryGlobal := FALSE;
 		GVL_FSM.benable_heartbeat := FALSE;
 		
@@ -132,6 +136,7 @@ CASE currentState OF
 		//Have some resettting functions here for some autonomous troobleshooting
 //IDLE	
 	E_PodState.STATE_SYNC:
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
 		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
 		
 		GVL_LEVI.levitation_enable := FALSE;
@@ -148,8 +153,13 @@ CASE currentState OF
 //IDLE
 	E_PodState.STATE_IDLE:
 	
+		IF NOT isdrivereset THEN
+			GVL_PROP.DriveReset := 1; 
+			isdrivereset := TRUE;
+		END_IF
 		
-
+		
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		GVL_FSM.benable_telemetryGlobal := TRUE;
 		GVL_FSM.benable_heartbeat := TRUE;
 		
@@ -157,7 +167,8 @@ CASE currentState OF
 		GVL_Prop.propulsion_enable := FALSE;	
 		
 		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive THEN
-			
+			GVL_FSM.b_AlivePLCGlobal := TRUE;
+			//maybe add a timer but this depends on the interpretation of SDC off
 			IF NOT charging_in_progress THEN
 				fbcharge();
 				charging_in_progress := TRUE;
@@ -186,8 +197,6 @@ CASE currentState OF
 		
 //HV_ACTIVE		
 	E_PodState.STATE_HV_ACTIVE:
-	
-		GVL_LEVI.Levi_command := E_Levi_States.LEVI_INIT;
 		
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
@@ -221,8 +230,11 @@ CASE currentState OF
 		
 //DEMO		
 	E_PodState.STATE_DEMO:
-		GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
-	
+		IF GVL_LEVI.levitation_state = E_Levi_states.LEVI_IDLE THEN
+			GVL_LEVI.Levi_command := E_Levi_states.LEVI_INIT;
+		ELSIF GVL_LEVI.levitation_state = E_Levi_states.LEVI_INIT THEN
+			GVL_LEVI.Levi_command := E_Levi_states.LEVI_READY;
+		END_IF
 		//because braking pcb is broken and tests without automation - START
 		//GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;		
 		//GVL_LEVI.levitation_enable := FALSE;
@@ -262,30 +274,34 @@ CASE currentState OF
 	E_PodState.STATE_LEVITATION:
 		
 		//This is some automatic code for liftoff at levitation, it has never  been tested, so let me know what it does
-		IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY THEN
+		IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND NOT bDescend THEN
 			GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
 			
-		ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_LEVITATION THEN
+		ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_LEVITATION OR (GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND bDescend) THEN
 			
 			//command to go back to DEMO is checked for with a stable levitation state requisite
-			IF currentCmd = E_Command.CMD_TO_DEMO AND GVL_LEVI.levitation_state = E_Levi_States.LEVI_LEVITATION THEN
+			
+			IF currentCmd = E_Command.CMD_TO_DEMO THEN
 				
 				//levi command for descend is toggled
-				GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+				IF NOT bDescend THEN
+					GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+					bDescend := TRUE;
+				END_IF
+				
 				
 				//whenever the levi FSM indicated being brought back to IDLE, we ack the state change
 				IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY THEN
-					
+					bDescend := FALSE;
 					currentState := E_PodState.STATE_DEMO;
 					currentCmd := E_Command.CMD_NONE;
 					
 				END_IF
-				
+			
 			ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
 				
 				currentState := E_PodState.STATE_MOVEMENT;
 				currentCmd := E_Command.CMD_NONE;
-				
 			END_IF
 		END_IF
 
@@ -340,7 +356,7 @@ CASE currentState OF
 										 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
 								sOut => errorMessageFSM);
 										 
-			currentCmd := E_Command.CMD_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
 			//Too speedy in track
 			GVL_LEVI.levitation_enable := FALSE;
@@ -351,7 +367,7 @@ CASE currentState OF
 										 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
 								sOut => errorMessageFSM);
 										 
-			currentCmd := E_Command.CMD_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		
 		
 
@@ -399,9 +415,19 @@ CASE currentState OF
 			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		*)
 		ELSE
+			IF currentCmd = E_Command.CMD_TO_LEVITATION THEN
+				GVL_PROP.AutoPilotFlag := 0;
+				GVL_PROP.TargetVelocity := 0;
+				IF GVL_PROP.Velocity < 75 THEN //velocity in mm/s. might need to increase due to track being crooked?
+					GVL_PROP.propulsion_enable := FALSE;
+					currentState := E_PodState.STATE_LEVITATION;
+					currentCmd := E_Command.CMD_NONE;
+				END_IF
+			END_IF
 			GVL_LEVI.levitation_enable := TRUE;
 			GVL_Prop.propulsion_enable := TRUE;
 		END_IF
+		
 
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE:

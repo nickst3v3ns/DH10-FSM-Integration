@@ -8,6 +8,8 @@ VAR
 // 
 // Variables to read and write
 //
+	TESTposition_EHC : REAL;
+	
 	PropFlag : INT;
 	AutoPilotFlag : INT;
 	DriveReset : INT;
@@ -32,6 +34,7 @@ VAR
 	PositionOffset : LREAL;
 	CANDelay : LREAL;
 	
+	ETML_ON : BOOL;
 	ETML_gain_Left : LREAL;
 	ETML_gain_Right : LREAL;
 	ETML_power_constant : LREAL;
@@ -49,8 +52,10 @@ VAR
 	VelocityIntegral_Left : LREAL;
 	VelocityIntegral_Right : LREAL;
 	
-	CurrentAngle_Right : LREAL;
-	CurrentAngle_Left : LREAL;
+	CurrentAngle_Right : LREAL := 45;
+	CurrentAngle_Left : LREAL := 45;
+	CurrentAngleReset : BOOL;
+	
 	
 	PowerConsumption : LREAL;
 	JouleperMeter : LREAL;
@@ -120,6 +125,9 @@ VAR
 	delft_converter_front : FB_PositionConverter;
 	delft_converter_back  : FB_PositionConverter;
 	
+	fbEHCBack : FB_EHC_Converter;
+	fbEHCFront : FB_EHC_Converter;
+	
 	positionValues_Front : ARRAY[0..3] OF BYTE;
 	velocityValues_Front : ARRAY[0..3] OF BYTE;
 	
@@ -158,12 +166,12 @@ VAR
 // ETML TcCOM object setup
 //
 
-//	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
-//	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
+	FB_ETML_init: ST_FB_ETML_DH10_TcCom_InitStruct := (noid:=16#01010070);
+	FB_ETML: FB_ETML_DH10_TcCom_InitStruct(FB_ETML_init);
 	
-//	ETML_inputs: ST_ETML_DH10_U_T;
-//	ETML_outputs: ST_ETML_DH10_Y_T;
-//	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
+	ETML_inputs: ST_ETML_DH10_U_T;
+	ETML_outputs: ST_ETML_DH10_Y_T;
+	ETML_parameters: ST_P_ETML_DH10_T := FB_ETML.stETML_DH10_P;
 
 
 //
@@ -305,6 +313,7 @@ InitialIntegralValueIq := GVL_PROP.InitialIntegralGainIq;
 PositionOffset := GVL_PROP.PositionOffset;
 CANDelay := GVL_PROP.CANDelay;
 
+ETML_ON := GVL_PROP.ETML_ON;
 ETML_gain_Left := GVL_PROP.ETML_gain_Left;
 ETML_gain_Right := GVL_PROP.ETML_gain_Right;
 ETML_power_constant := GVL_PROP.ETML_power_constant;
@@ -382,6 +391,10 @@ CASE barcodeState OF
 		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
 		
 		delft_converter_front(diReadValue := position_Front, diPosition => positionDelft_Front);
+		
+		fbEHCFront(rBarcode := DINT_TO_REAL(position_Front)/1000.0, rVelocity := DINT_TO_REAL(Velocity_Front)/1000.0);
+		
+		
 		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
 		testbool := NOT testbool;
 
@@ -417,12 +430,17 @@ CASE barcodeState OF
 		
 		delft_converter_back(diReadValue := position_Back, diPosition => positionDelft_Back);
 		
+		//fbEHCBack(rBarcode := DINT_TO_REAL(position_back)/1000.0, rVelocity := DINT_TO_REAL(velocity_Back)/1000.0);
+		fbEHCBack(rBarcode := TESTposition_EHC, rVelocity := 0);
+		
 		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
 		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
 	
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
 		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
+		
+		
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
 		newData := newData XOR 16#80;
@@ -442,7 +460,7 @@ CASE barcodeState OF
 END_CASE
 
 
-(*
+
 //
 //ETML setup
 //
@@ -453,14 +471,23 @@ ETML_parameters.fETML_power_constant := ETML_power_constant;
 
 FB_ETML.stETML_DH10_P := ETML_parameters;
 
-ETML_inputs.fOffsetLeft := Offset_Left;
-ETML_inputs.fOffsetRight := Offset_Right;
+ETML_inputs.fOffsetLeft := Offset_Left * 1000; // Convert from m to mm
+ETML_inputs.fOffsetRight := Offset_Right * 1000; // Convert from m to mm
 
 FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
 
-CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
-CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
-*)
+IF ETML_ON THEN
+	CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
+	CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
+	CurrentAngleReset := FALSE;
+ELSE
+	IF NOT CurrentAngleReset THEN
+		CurrentAngle_Left := 45;
+		CurrentAngle_Right := 45;
+		CurrentAngleReset := TRUE;
+	END_IF
+END_IF
+
 
 
 //
@@ -478,16 +505,16 @@ CASE AutoPilotFlag OF
 		Direction		  := 1;
 
     2:	// Volg het snelheidsprofiel van de track
-		IF positionDelft >= 15.0 THEN
-            Direction := -1;
-        ELSIF positionDelft <= 5.2 THEN
+		IF positionDelft >= 14.5 THEN
             Direction := 1;
+        ELSIF positionDelft <= 6 THEN
+            Direction := -1;
         END_IF
 		
 		IF Direction = -1 THEN
-			TargetVelocity := -15 + SQRT(384615.38*(15.811-positionDelft)+225)*0.9;
+			TargetVelocity := (-15 + SQRT(384615.38*(15.811-positionDelft)+225))*0.8;
 		ELSIF Direction = 1 THEN
-			TargetVelocity := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225))*0.9;
+			TargetVelocity := -1*(-15 + SQRT(384615.38*(positionDelft-4.689)+225))*0.8;
 		END_IF
 	ELSE
     	TargetVelocity := 0.0;

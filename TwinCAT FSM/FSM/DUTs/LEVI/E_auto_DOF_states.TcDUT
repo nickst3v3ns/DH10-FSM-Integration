@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_auto_DOF_states" Id="{7ba90be2-0015-48f6-a5e9-3d404110726f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_auto_DOF_states :
+(
+	DOF_INIT 						:= 0,
+	FINDING_Z_TARGET 				:= 1,
+	FINDING_Y_AND_YAW_TARGETS 		:= 2
+) INT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

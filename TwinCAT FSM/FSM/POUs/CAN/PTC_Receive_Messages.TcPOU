@@ -18,6 +18,7 @@ VAR
 	converter : FB_NTC_CodeToCelsius;
 	uPTCError : U_PTC_ErrorCode;
 	uIMDWarnings : U_IMD_Warnings;
+	uBMSFailReason : U_BMS_Fail_Reason;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -46,6 +47,7 @@ END_IF]]></ST>
 			uPTCError.braw := Data[4];
 			
 			GVL_PT.HV_FAIL_REASON := Data[6];
+			uBMSFailReason.wRaw := Data[6];
 		E_PTC_RX_ID.HV_Log:
 			GVL_PT.ISO_RES := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
 			GVL_PT.IVT_CURRENT := SHL(TO_DWORD(Data[2]), 24) OR 
@@ -58,7 +60,7 @@ END_IF]]></ST>
 			converter(code := SHL(TO_UINT(Data[4]), 8) OR TO_UINT(Data[5]), T_cel => GVL_PT.MAX_TEMP);
 			converter(code := SHL(TO_UINT(Data[6]), 8) OR TO_UINT(Data[7]), T_cel => GVL_PT.MIN_TEMP);
 		E_PTC_RX_ID.BMS_Log_B:
-			GVL_PT.TOTAL_VOLTAGE := SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]);
+			GVL_PT.TOTAL_VOLTAGE := TO_UINT((SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]))*1.28);
 			GVL_PT.PACK_CURRENT := SHL(TO_INT(Data[2]), 8) OR TO_INT(Data[3]);
 			GVL_PT.DC_LINK_VOLTAGE := SHL(TO_DWORD(Data[4]), 24) OR 
 							SHL(TO_DWORD(Data[5]), 16) OR 

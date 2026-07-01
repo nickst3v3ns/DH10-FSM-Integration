@@ -37,6 +37,7 @@ VAR_GLOBAL
 	PositionOffset : 					LREAL := 2.2;
 	CANDelay : 							LREAL := 0.04;
 	
+	ETML_ON : 							BOOL;
 	ETML_gain_Left : 					LREAL := 16.91503741;
 	ETML_gain_Right : 					LREAL := 16.91503741;
 	ETML_power_constant :		 		LREAL := 0.46047809;

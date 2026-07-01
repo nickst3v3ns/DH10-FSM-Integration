@@ -12,12 +12,25 @@ END_VAR
       <ST><![CDATA[//CheckCritical
 CheckCritical := FALSE;
 IF  GVL_PT.ERROR_STATUS <> 0 OR 
+	
+//uncommented out because still not used
+	//GVL_FSM.RXwatchdogPropLeftGlobal OR
+	//GVL_FSM.TXwatchdogPropLeftGlobal OR
+	
+	//GVL_FSM.RXwatchdogPropRightGlobal OR
+	//GVL_FSM.TXwatchdogPropRightGlobal OR
+	
+	//GVL_FSM.RXwatchdogPTHV OR
+	//GVL_FSM.TXwatchdogPTHV OR
+	
 	GVL_THERMAL.bEMSOVERHEAT OR 
 	GVL_THERMAL.bFLOWOVERHEAT OR 
 	GVL_THERMAL.bHEMSOVERHEAT OR 
 	GVL_THERMAL.bMOTOROVERHEAT OR
+	
     GVL_LEVI.levitation_fault OR
     GVL_Prop.propulsion_fault OR
+	
 	(GVL_FSM.fbLink.bConnected AND NOT GVL_FSM.fbLink.bGsLinkAlive) THEN
 	
 	EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;

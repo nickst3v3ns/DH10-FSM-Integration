@@ -5,9 +5,6 @@
     <CycleTime>1000</CycleTime>
     <Priority>11</Priority>
     <PouCall>
-      <Name>FastCounter</Name>
-    </PouCall>
-    <PouCall>
       <Name>PTC_RX_COM</Name>
     </PouCall>
     <TaskFBGuid>{b7f5731c-bf16-4dc8-a3df-32d6bb87b4ee}</TaskFBGuid>

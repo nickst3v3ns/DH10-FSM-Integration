@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_BMS_Fail_Reason" Id="{0509b8b9-d468-46af-9bab-bb6675fac75f}">
+    <Declaration><![CDATA[TYPE U_BMS_Fail_Reason :
+UNION
+	wRaw : WORD;
+	stBits : ST_BMS_Fail_Reason;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

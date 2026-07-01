@@ -30,8 +30,11 @@ VAR_GLOBAL
 	bFLOWOVERHEAT			:BOOL;
 	
 	
-//PWM CONTROL
-	fDutyCycle_PROP			:REAL := 0;
+//PUMP CONTROL
+	bPumpLeviEnable			:BOOL;
+	bPumpPropEnable			:BOOL;
+	
+	fDutyCycle_PROP			:REAL;
 
 END_VAR
 
