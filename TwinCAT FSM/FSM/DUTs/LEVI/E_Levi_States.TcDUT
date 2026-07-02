@@ -13,7 +13,7 @@ TYPE E_Levi_States :
 	LEVI_DROPDOWN 					:= 4,
 	LEVI_LIFTOFF					:= 5,
 	LEVI_LEVITATION					:= 6,
-	LEVI_DESCEND					:= 7,
+	LEVI_DESCENT					:= 7,
 	LEVI_TESTING_INDIVIDUAL_DRIVES 	:= 8, 
 	LEVI_ERROR						:= -1,
 	LEVI_RESET_DRIVES				:= -2

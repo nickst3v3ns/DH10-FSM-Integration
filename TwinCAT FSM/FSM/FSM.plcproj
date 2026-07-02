@@ -84,6 +84,9 @@
     <Compile Include="DUTs\PT-DUTS\PTC_ErrorCode\E_PTC_ErrorCode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\PT-DUTS\ST_OCVCurvePoint.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\PT-DUTS\ST_PTC_ErrorCode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,10 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\GS\GVL_GS_THERMAL_IDS.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\GVL_BatteryConstants.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -257,7 +264,7 @@
     <Compile Include="POUs\GS\FB_GroundStationLink.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\LEVI\auto_DOF_states.TcPOU">
+    <Compile Include="POUs\LEVI\auto_DOF_state.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\BackgroundLateral.TcPOU">
@@ -278,7 +285,7 @@
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\LEVI\State_Levi_Control.TcPOU">
+    <Compile Include="POUs\LEVI\State_Levi_Descent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Error.TcPOU">
@@ -288,6 +295,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Init.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Levitation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Liftoff.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Pullup.TcPOU">
@@ -482,6 +495,15 @@
     <Compile Include="POUs\SAFETY\SAFETY_MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\SOC\CoulombCount.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\SOC\FB_SOC_CoulombCount.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\SOC\F_SOCFromOCV.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\THERMAL\FastCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -540,6 +562,7 @@
     <Folder Include="POUs\PROP_FINAL" />
     <Folder Include="POUs\PROP_FINAL\PropDriveCommands" />
     <Folder Include="POUs\SAFETY" />
+    <Folder Include="POUs\SOC" />
     <Folder Include="POUs\THERMAL" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -615,8 +638,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -692,14 +715,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

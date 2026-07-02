@@ -141,10 +141,11 @@ VAR
 	FB_Levi_Ready : State_Levi_Ready;
 	FB_Levi_Pullup : State_Levi_Pullup;
 	FB_Levi_Dropdown : State_Levi_Dropdown;
-	FB_Levi_Control : State_Levi_Control;
 	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
 	FB_Levi_Error : State_Levi_Error;
 	FB_Levi_Reset_Drives : State_Levi_Reset_Drives;
+	
+	FB_auto_DOF_state : auto_DOF_state;
 	
 
 //----------------------------------------------------------------------------------------------------
@@ -204,6 +205,8 @@ VAR
 	auto_y_target_error : LREAL;
 	auto_yaw_target_error : LREAL;
 	
+	auto_DOF_states : E_auto_DOF_states;
+	
 	
 	//Descent model
 	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010060);
@@ -255,10 +258,10 @@ VAR
 	last_levitating_airgap : LREAL; //m
 	Liftoff_in_progress : USINT;
 	descent_in_progress : USINT;
-	finding_zero_current : BOOL;
-	zero_current_airgap_found : BOOL;
-	finding_y_target : BOOL;
-	finding_yaw_target : BOOL;
+	found_auto_z_target : BOOL;
+	found_auto_y_target : BOOL;
+	found_auto_yaw_target : BOOL;
+	End_auto_DOF_cycle : BOOL;
 	
 	(*
 	K_P_tot: LREAL := 400000;
@@ -355,6 +358,9 @@ VAR
 	auto_y_target_gain : LREAL := 0.00050;
 	auto_yaw_target_gain : LREAL := 0.00025;
 	
+	auto_y_target_I_gain : LREAL := 1;
+	auto_yaw_target_I_gain : LREAL := 1;
+	
 	extreme_z_gain_multiplier : LREAL := 1;
 	extreme_pitch_gain_multiplier : LREAL := 1;
 	extreme_roll_gain_multiplier : LREAL := 1;
@@ -375,7 +381,6 @@ VAR
 	
 	Lift_off_enabled : BOOL := TRUE;
 	descent_enabled : BOOL := TRUE;
-	enable_auto_z_target : BOOL := TRUE;
 	Mismatch_enabled : BOOL := FALSE;
 	
 	feed_fwd_on_prop_roll : BOOL := FALSE;
@@ -618,16 +623,16 @@ END_IF
 (*
 //Falling edge trigger for when sensecon disables levitation.
 //This will put the pod back to idle if levitation is disabled whilst the pod is in any state other than IDLE, ERROR, or REST_DRIVES.
-IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES AND Levi_state <> E_Levi_States.LEVI_LIFTOFF AND Levi_state <> E_Levi_States.LEVI_LEVITATION AND Levi_state <> E_Levi_States.LEVI_DESCEND THEN
+IF GVL_LEVI.levitation_enable = FALSE AND Levi_state <> E_Levi_States.LEVI_ERROR AND  Levi_state <> E_Levi_States.LEVI_RESET_DRIVES AND Levi_state <> E_Levi_States.LEVI_LIFTOFF AND Levi_state <> E_Levi_States.LEVI_LEVITATION AND Levi_state <> E_Levi_States.LEVI_DESCENT THEN
 	GVL_LEVI.Levi_command := E_Levi_States.LEVI_IDLE;
 ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LIFTOFF THEN
 	GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 	normal_shutdown := TRUE;
 ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_LEVITATION THEN
-	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCENT;
 	normal_shutdown := TRUE;
-ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_DESCEND AND descent_in_progress <> 0 THEN
-	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+ELSIF GVL_LEVI.levitation_enable = FALSE AND Levi_state = E_Levi_States.LEVI_DESCENT AND descent_in_progress <> 0 THEN
+	GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCENT;
 	normal_shutdown := TRUE;
 END_IF
 *)
@@ -674,7 +679,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCEND OR
+			Levi_state = E_Levi_States.LEVI_DESCENT OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
@@ -711,7 +716,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCEND OR
+			Levi_state = E_Levi_States.LEVI_DESCENT OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE AND
 			error_resettable = TRUE AND
@@ -754,7 +759,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCEND) AND
+			Levi_state = E_Levi_States.LEVI_DESCENT) AND
 			GVL_LEVI.levitation_enable = TRUE AND
 			All_drives_high_voltage = TRUE THEN
 			
@@ -767,6 +772,10 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_parameters.blevi_operational := FALSE;
 			Control_vert_parameters.blevi_operational := FALSE;
 			
+			Control_liftoff_parameters.benable_auto_z_target := FALSE;
+			Control_liftoff_parameters.benable_auto_y_target := FALSE;
+			Control_liftoff_parameters.benable_auto_yaw_target := FALSE;
+			
 			FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;		
 			FB_Control_descent.stDescent_model_P := Control_descent_parameters;		
 			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
@@ -774,9 +783,10 @@ CASE GVL_LEVI.Levi_Command OF
 
 			//-----------------------------------------------------------------------------------------------------------
 			z_target := z_initial_target;
-			zero_current_airgap_found := FALSE;
-			finding_y_target := FALSE;
-			finding_yaw_target := FALSE;
+			found_auto_z_target := FALSE;
+			found_auto_y_target := FALSE;
+			found_auto_yaw_target := FALSE;
+			
 			
 			Control_liftoff_inputs.fz_target := z_target;
 			Control_liftoff_inputs.aFeedback_current := Real_currents;
@@ -930,8 +940,6 @@ CASE GVL_LEVI.Levi_Command OF
 								n_errors => n_drive_errors, 
 								errors := error_specifics,
 								Drive_current_error := Drive_current_error);
-			
-			GVL_PROP.PropFlag := 0;
 					
 			//-------------------------------------------------------------------------					
 			Control_liftoff_parameters.bLevi_operational := Levi_operational;
@@ -939,8 +947,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_liftoff_parameters.flift_off_time := liftoff_time;		
 			Control_liftoff_parameters.blift_off_enabled := lift_off_enabled;			
 			Control_liftoff_parameters.fz_manual_target := z_initial_target;	
-		
-			Control_liftoff_parameters.benable_auto_z_target := enable_auto_z_target;		
+			
 			Control_liftoff_parameters.fauto_z_target_gain := auto_z_target_gain;
 			Control_liftoff_parameters.fauto_z_target_interval := auto_z_target_interval;
 			
@@ -971,6 +978,27 @@ CASE GVL_LEVI.Levi_Command OF
 			auto_yaw_target_trigger := Control_liftoff_outputs.bauto_yaw_target_trigger;
 			auto_y_target_error := Control_liftoff_outputs.fauto_y_target_error;
 			auto_yaw_target_error := Control_liftoff_outputs.fauto_yaw_target_error;
+			
+			IF liftoff_in_progress = 0 THEN
+				FB_auto_DOF_state(	auto_DOF_states				:= auto_DOF_states,
+									auto_z_target_trigger		:= auto_z_target_trigger,
+									auto_y_target_trigger		:= auto_y_target_trigger,
+									auto_yaw_target_trigger		:= auto_yaw_target_trigger,
+									auto_y_target_error			:= auto_y_target_error,	
+									auto_yaw_target_error		:= auto_yaw_target_error,
+									auto_y_target_gain			:= auto_y_target_gain,
+									auto_yaw_target_gain		:= auto_yaw_target_gain,
+									found_auto_z_target			:= found_auto_z_target,	
+									found_auto_y_target			:= found_auto_y_target,
+									found_auto_yaw_target		:= found_auto_yaw_target,
+									Control_liftoff_parameters	:= Control_liftoff_parameters,
+									avg_I_squared_HEMS			:= avg_I_squared_HEMS,
+									End_auto_DOF_cycle			:= End_auto_DOF_cycle);
+			END_IF
+			
+			IF End_auto_DOF_cycle = TRUE THEN
+				GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
+			END_IF
 			
 			
 			//-------------------------------------------------------------------------
@@ -1029,58 +1057,6 @@ CASE GVL_LEVI.Levi_Command OF
 				GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 			END_IF
 			*)
-			//-------------------------------------------------------------------------
-			
-			//Setting motor feed forward parameters
-			IF motor_on_for_levi THEN
-				
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
-										Ib := Ib_for_levi_left, 
-										Ic := Ic_for_levi_left,
-										airgap := motor_airgap_left, 
-										currentangle := currentangle_for_levi_left,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_l,
-										lift => motor_lift_l, );
-				
-								
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
-										Ib := Ib_for_levi_right, 
-										Ic := Ic_for_levi_right,
-										airgap := motor_airgap_right, 
-										currentangle := currentangle_for_levi_right,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_r,
-										lift => motor_lift_r);
-			
-				
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
-				
-				(*
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
-				*)
-			ELSE
-				motor_thrust_l := 0;
-				motor_lift_l := 0;
-				motor_thrust_r := 0;
-				motor_lift_r := 0;
-				
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
-			END_IF
 			
 			//-------------------------------------------------------------------------
 							
@@ -1101,13 +1077,25 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_parameters.fy_target := y_target_airgap;
 			
 			Control_lat_parameters.fK_P_lat := K_P_lat;
-			Control_lat_parameters.fK_I_lat := K_I_lat;
+			
+			IF auto_DOF_states = E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS THEN
+				Control_lat_parameters.fK_I_lat := K_I_lat * auto_y_target_I_gain;
+			ELSE
+				Control_lat_parameters.fK_I_lat := K_I_lat;
+			END_IF
+			
 			Control_lat_parameters.fK_D_lat := K_D_lat;
 			Control_lat_parameters.fK_F_lat := K_F_lat;
 			Control_lat_parameters.fK_I_init_lat := K_I_lat_initial;
 			
 			Control_lat_parameters.fK_P_yaw := K_P_yaw;
-			Control_lat_parameters.fK_I_yaw := K_I_yaw;
+			
+			IF auto_DOF_states = E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS THEN
+				Control_lat_parameters.fK_I_yaw := K_I_yaw * auto_yaw_target_I_gain;
+			ELSE
+				Control_lat_parameters.fK_I_yaw := K_I_yaw;
+			END_IF
+			
 			Control_lat_parameters.fK_D_yaw := K_D_yaw;
 			Control_lat_parameters.fK_F_yaw := K_F_yaw;
 			Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial;
@@ -1137,6 +1125,9 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_parameters.ff_extra_yaw_filter_3 := f_extra_yaw_filter_3;
 			
 			//Control_lat_parameters.fthermal_gap_gain_ems := thermal_gap_gain_ems;
+			
+			Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+			Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
 			
 			//Uploading lateral parameters to the control model
 			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
@@ -1226,6 +1217,8 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_target;
 			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
+			
+			Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
@@ -1336,37 +1329,43 @@ CASE GVL_LEVI.Levi_Command OF
 								errors := error_specifics,
 								Drive_current_error := Drive_current_error);
 			
-			//Setting motor feed forward parameters
-			IF motor_on_for_levi THEN
+			//This if statement allows for different control parameters depending for if the motor is on or not.
+			//If the motor is on but the pod is standing still it is treated as motor off.
+			IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR 
+				(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag < 2 AND (ABS(GVL_PROP.TargetVelocity) <> 0 OR (GVL_PROP.TargetVelocity = 0 AND ABS(Velocity) > 50))) THEN
 				
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
-										Ib := Ib_for_levi_left, 
-										Ic := Ic_for_levi_left,
-										airgap := motor_airgap_left, 
-										currentangle := currentangle_for_levi_left,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_l,
-										lift => motor_lift_l, );
+				//reset auto_DOF to INIT in case motor was turned on whilst still finding the optimal target
+				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
+				
+				//calculating the thrust and lift of the motor for feedforward
+				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
+										Ib 				:= Ib_for_levi_left, 
+										Ic 				:= Ic_for_levi_left,
+										airgap 			:= motor_airgap_left, 
+										currentangle 	:= currentangle_for_levi_left,
+										FF_Delay 		:= FF_Delay,
+										PositionDelft 	:= Position,
+										PositionOffset 	:= PositionOffset,
+										VelocityDelft 	:= Velocity,
+										position_tune 	:= position_tune,
+										thrust 			=> motor_thrust_l,
+										lift 			=> motor_lift_l, );
 				
 								
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
-										Ib := Ib_for_levi_right, 
-										Ic := Ic_for_levi_right,
-										airgap := motor_airgap_right, 
-										currentangle := currentangle_for_levi_right,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_r,
-										lift => motor_lift_r);
+				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
+										Ib 				:= Ib_for_levi_right, 
+										Ic 				:= Ic_for_levi_right,
+										airgap 			:= motor_airgap_right, 
+										currentangle 	:= currentangle_for_levi_right,
+										FF_Delay 		:= FF_Delay,
+										PositionDelft 	:= Position,
+										PositionOffset 	:= PositionOffset,
+										VelocityDelft 	:= Velocity,
+										position_tune 	:= position_tune,
+										thrust 			=> motor_thrust_r,
+										lift 			=> motor_lift_r);
  
-
+				//Setting all the control parameters for when the motor is on
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
@@ -1401,6 +1400,7 @@ CASE GVL_LEVI.Levi_Command OF
 				Control_lat_parameters.fK_F_yaw := K_F_yaw_motor_on;
 				Control_lat_parameters.fK_I_init_yaw := K_I_yaw_initial_motor_on;
 				
+				//allows for different gains when traversing a thermal gap
 				IF ABS(z_filtered) > z_target + 0.9E-3 THEN
 					Control_vert_parameters.fK_P_tot := extreme_z_gain_multiplier * K_P_tot_motor_on;
 				END_IF
@@ -1421,19 +1421,103 @@ CASE GVL_LEVI.Levi_Command OF
 					Control_lat_parameters.fK_P_yaw := extreme_yaw_gain_multiplier * K_P_yaw_motor_on;
 				END_IF
 				
+				//disables some notch filters
 				enable_lat_main_notch_3 := FALSE;
 				enable_extra_y_notch_1 := FALSE;
 				enable_extra_y_notch_2 := FALSE;
 
 			ELSE
-				motor_thrust_l := 0;
-				motor_lift_l := 0;
-				motor_thrust_r := 0;
-				motor_lift_r := 0;
+				//
+				//calculating the thrust and lift of the motor
+				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
+										Ib 				:= Ib_for_levi_left, 
+										Ic 				:= Ic_for_levi_left,
+										airgap 			:= motor_airgap_left, 
+										currentangle 	:= currentangle_for_levi_left,
+										FF_Delay 		:= FF_Delay,
+										PositionDelft 	:= Position,
+										PositionOffset 	:= PositionOffset,
+										VelocityDelft 	:= Velocity,
+										position_tune 	:= position_tune,
+										thrust 			=> motor_thrust_l,
+										lift 			=> motor_lift_l, );
 				
+								
+				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
+										Ib 				:= Ib_for_levi_right, 
+										Ic 				:= Ic_for_levi_right,
+										airgap 			:= motor_airgap_right, 
+										currentangle 	:= currentangle_for_levi_right,
+										FF_Delay 		:= FF_Delay,
+										PositionDelft 	:= Position,
+										PositionOffset 	:= PositionOffset,
+										VelocityDelft 	:= Velocity,
+										position_tune 	:= position_tune,
+										thrust 			=> motor_thrust_r,
+										lift 			=> motor_lift_r);
+				
+				//Disableing feedforward
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
 				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+				
+				//-------------------------------------------------------------------------
+				//run the liftoff control model without ascending to continously find the optimal targets whilst the pod is standing still					
+				Control_liftoff_parameters.bLevi_operational := Levi_operational;
+				Control_liftoff_parameters.fz_initial_lift_off := z_liftoff;
+				Control_liftoff_parameters.flift_off_time := liftoff_time;		
+				Control_liftoff_parameters.blift_off_enabled := FALSE;			
+				Control_liftoff_parameters.fz_manual_target := z_initial_target;	
+				
+				Control_liftoff_parameters.fauto_z_target_gain := auto_z_target_gain;
+				Control_liftoff_parameters.fauto_z_target_interval := auto_z_target_interval;
+				
+				Control_liftoff_parameters.fauto_y_target_gain := auto_y_target_gain;
+				Control_liftoff_parameters.fauto_y_target_interval := auto_y_target_interval;
+				
+				Control_liftoff_parameters.fauto_yaw_target_gain := auto_yaw_target_gain;
+				Control_liftoff_parameters.fauto_y_target_interval := auto_y_target_interval;
+									
+				FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;
+				
+				//-------------------------------------------------------------------------
+				
+				Control_liftoff_inputs.fz_target := z_target;
+				Control_liftoff_inputs.fy_target := y_target_airgap;
+				Control_liftoff_inputs.fyaw_target := yaw_target;
+				Control_liftoff_inputs.aFeedback_current := Real_currents;
+				
+				FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
+				
+				z_target := Control_liftoff_outputs.fnew_z_target;
+				y_target_airgap := Control_liftoff_outputs.fnew_y_target;
+				yaw_target := Control_liftoff_outputs.fnew_yaw_target;
+				avg_I_squared_HEMS := Control_liftoff_outputs.favg_I_squared_HEMS;
+				Liftoff_in_progress := Control_liftoff_outputs.nLiftoff_in_progress;
+				auto_z_target_trigger := Control_liftoff_outputs.bauto_z_target_trigger;
+				auto_y_target_trigger := Control_liftoff_outputs.bauto_y_target_trigger;
+				auto_yaw_target_trigger := Control_liftoff_outputs.bauto_yaw_target_trigger;
+				auto_y_target_error := Control_liftoff_outputs.fauto_y_target_error;
+				auto_yaw_target_error := Control_liftoff_outputs.fauto_yaw_target_error;
+				
+				IF liftoff_in_progress = 0 THEN
+					FB_auto_DOF_state(	auto_DOF_states				:= auto_DOF_states,
+										auto_z_target_trigger		:= auto_z_target_trigger,
+										auto_y_target_trigger		:= auto_y_target_trigger,
+										auto_yaw_target_trigger		:= auto_yaw_target_trigger,
+										auto_y_target_error			:= auto_y_target_error,	
+										auto_yaw_target_error		:= auto_yaw_target_error,
+										auto_y_target_gain			:= auto_y_target_gain,
+										auto_yaw_target_gain		:= auto_yaw_target_gain,
+										found_auto_z_target			:= found_auto_z_target,	
+										found_auto_y_target			:= found_auto_y_target,
+										found_auto_yaw_target		:= found_auto_yaw_target,
+										Control_liftoff_parameters	:= Control_liftoff_parameters,
+										avg_I_squared_HEMS			:= avg_I_squared_HEMS,
+										End_auto_DOF_cycle			:= End_auto_DOF_cycle);
+				END_IF
+				
+				//-------------------------------------------------------------------------
 				
 				Control_vert_parameters.fK_P_tot := K_P_tot;
 				Control_vert_parameters.fK_I_tot := K_I_tot;
@@ -1470,6 +1554,8 @@ CASE GVL_LEVI.Levi_Command OF
 				enable_extra_y_notch_2 := TRUE;
 				
 			END_IF
+			
+			//-------------------------------------------------------------------------
 			
 			IF Position >= 11.2295 AND Position <= 11.3725 THEN
 				hems_under_gap := 1;	
@@ -1642,14 +1728,14 @@ CASE GVL_LEVI.Levi_Command OF
 						
 		END_IF					
 	//------------------------------------------------------------------------------------------------
-	E_Levi_States.LEVI_DESCEND:
+	E_Levi_States.LEVI_DESCENT:
 		IF 	(Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCEND) AND 
+			Levi_state = E_Levi_States.LEVI_DESCENT) AND 
 			Levi_ready AND 
 			reset_busy = FALSE AND
 			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
 			
-			Levi_state := E_Levi_states.LEVI_DESCEND;
+			Levi_state := E_Levi_states.LEVI_DESCENT;
 			
 			Run_z_liftoff_calc := FALSE;
 			
@@ -1686,58 +1772,6 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			z_target := Control_descent_outputs.fz_target_descent;
 			descent_in_progress := Control_descent_outputs.nDescent_in_progress;
-			//-------------------------------------------------------------------------
-			
-						//Setting motor feed forward parameters
-			IF motor_on_for_levi THEN
-				
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_left, 
-										Ib := Ib_for_levi_left, 
-										Ic := Ic_for_levi_left,
-										airgap := motor_airgap_left, 
-										currentangle := currentangle_for_levi_left,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_l,
-										lift => motor_lift_l, );
-				
-								
-				Calculate_Thrust_Lift(	Ia := Ia_for_levi_right, 
-										Ib := Ib_for_levi_right, 
-										Ic := Ic_for_levi_right,
-										airgap := motor_airgap_right, 
-										currentangle := currentangle_for_levi_right,
-										FF_Delay := FF_Delay,
-										PositionDelft := Position,
-										PositionOffset := PositionOffset,
-										VelocityDelft := Velocity,
-										position_tune := position_tune,
-										thrust => motor_thrust_r,
-										lift => motor_lift_r);
-			
-				
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := feed_fwd_on_prop_roll;
-				
-				(*
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
-				*)
-			ELSE
-				motor_thrust_l := 0;
-				motor_lift_l := 0;
-				motor_thrust_r := 0;
-				motor_lift_r := 0;
-				
-				Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
-				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
-				Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
-			END_IF
 			
 			//-------------------------------------------------------------------------
 							
@@ -1794,6 +1828,9 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_parameters.ff_extra_yaw_filter_3 := f_extra_yaw_filter_3;
 			
 			Control_lat_parameters.fthermal_gap_gain_ems := thermal_gap_gain_ems;
+			
+			Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+			Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
 			
 			//Uploading lateral parameters to the control model
 			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
@@ -1883,6 +1920,8 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_vert_parameters.fpitch_target := pitch_target;
 			Control_vert_parameters.fz_manual_target := z_target;
 			Control_vert_parameters.fz_initial_lift_off := z_liftoff;
+			
+			Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
 			
 			//Uploading vertical parameters to the control model
 			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
@@ -1988,7 +2027,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCEND OR
+			Levi_state = E_Levi_States.LEVI_DESCENT OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
@@ -2130,7 +2169,6 @@ GVL_LEVI.error_resettable := error_resettable;
 GVL_LEVI.error_emergency := error_emergency;
 GVL_LEVI.error_non_emergency := error_non_emergency;
 GVL_LEVI.Levi_ready := Levi_ready;
-GVL_LEVI.motor_on_for_levi := motor_on_for_levi;
 GVL_LEVI.z := z;
 GVL_LEVI.roll := roll;
 GVL_LEVI.pitch := pitch;
@@ -2162,7 +2200,10 @@ ELSE
 	GVL_LEVI.descent_in_progress := TRUE;
 END_IF
 
-GVL_LEVI.finding_zero_current := finding_zero_current;
+GVL_LEVI.auto_DOF_states := auto_DOF_states;
+GVL_LEVI.found_auto_z_target := found_auto_z_target;
+GVL_LEVI.found_auto_y_target := found_auto_y_target;
+GVL_LEVI.found_auto_yaw_target := found_auto_yaw_target;
 GVL_LEVI.normal_shutdown := normal_shutdown;
 
 // --------------------------------------------------------------

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SOC_CoulombCount" Id="{4442ab3e-60b0-4a6b-80b0-a40673133870}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SOC_CoulombCount
+VAR_INPUT
+    fPackCurrent_Amps          : LREAL;
+ 
+    bSeedFromStartupOCV         : BOOL;
+    fSeedSOC_Percent            : LREAL;  // = FB_InitialSoCEstimation.fInitialSOC_Percent
+END_VAR
+VAR_OUTPUT
+    fStateOfCharge_Percent      : LREAL;  
+    fRemainingCapacity_AmpHours : LREAL;  
+END_VAR
+VAR
+    bFirstCycleSinceBoot            : BOOL := TRUE;
+    fElapsedTime_Seconds            : LREAL;
+ 
+    bSeedFromStartupOCV_Previous    : BOOL;
+    fAnchorSOC_Percent              : LREAL;
+    fAmpHoursDischarged_SinceAnchor : LREAL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bFirstCycleSinceBoot THEN
+	fElapsedTime_Seconds := 0.0;
+	bFirstCycleSinceBoot := FALSE;
+ELSE
+	fElapsedTime_Seconds := F_GetTaskTotalTime(0);
+END_IF
+
+IF bSeedFromStartupOCV AND NOT bSeedFromStartupOCV_Previous THEN 
+	fAnchorSOC_Percent := LIMIT(0.0, fSeedSOC_Percent, 100.0);
+    fStateOfCharge_Percent := fAnchorSOC_Percent;
+    fAmpHoursDischarged_SinceAnchor := 0.0;
+END_IF
+bSeedFromStartupOCV_Previous := bSeedFromStartupOCV;
+
+IF fElapsedTime_Seconds > 0.0 THEN 
+	fAmpHoursDischarged_SinceAnchor := fAmpHoursDischarged_SinceAnchor + (fPackCurrent_Amps * fElapsedTime_Seconds / 3600.0);
+	fStateOfCharge_Percent := fAnchorSOC_Percent - (fAmpHoursDischarged_SinceAnchor / 2.5) * 100.0;
+	fStateOfCharge_Percent := LIMIT(0.0, fStateOfCharge_Percent, 100.0);
+END_IF
+fRemainingCapacity_AmpHours := 2.5 * (fStateOfCharge_Percent / 100.0);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

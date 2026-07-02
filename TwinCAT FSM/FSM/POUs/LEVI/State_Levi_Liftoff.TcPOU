@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="State_Levi_Liftoff" Id="{9c5893f5-5a99-4c7c-bce8-eb81fb0494c5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Liftoff
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

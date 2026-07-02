@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_OCVCurvePoint" Id="{57cb4618-2e69-41c0-80de-56f5fc5315e9}">
+    <Declaration><![CDATA[TYPE ST_OCVCurvePoint :
+STRUCT
+    fSOC_Percent       : LREAL;  // 0..100
+    fCellVoltage_Volts : LREAL;  // resting (no-load) voltage at that SoC
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

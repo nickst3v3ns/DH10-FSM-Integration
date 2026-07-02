@@ -21,8 +21,8 @@ VAR_GLOBAL
 	IVT_CURRENT : UDINT; //
 	
 	//BMS_LOG_A
-	MAX_VOLTAGE : REAL; //stored as 0.1mV
-	MIN_VOLTAGE : REAL; //stored as 0.1mV
+	MAX_VOLTAGE : REAL; //V
+	MIN_VOLTAGE : REAL; //V
 	MAX_TEMP : LREAL; //given as ohms probably, needs conversion. Martin may fix this
 	MIN_TEMP : LREAL; //given as ohms probably, needs conversion Martin may fix this
 	

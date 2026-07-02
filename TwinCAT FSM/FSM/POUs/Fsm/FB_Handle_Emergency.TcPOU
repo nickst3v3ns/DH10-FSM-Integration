@@ -33,22 +33,22 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.b_AlivePLCGlobal := FALSE;
-        GVL_Prop.propulsion_enable := FALSE;
-        GVL_LEVI.levitation_enable := FALSE;
+    0:  GVL_FSM.b_AlivePLCGlobal := FALSE; //used for SDC of the pod
+		GVL_FSM.bbrakes_engageGlobal := FALSE;
+        GVL_Prop.propulsion_enable := FALSE; //disabling Propulsion
+        GVL_LEVI.levitation_enable := FALSE; //disabling Levitation
 		
-		fbdischarge();
+		fbdischarge(); //calling for discharge as double safety, normally the pod should directly trip the SDC
 		//because braking pcb is broken
-		GVL_FSM.bbrakes_engaged := FALSE;
+		GVL_FSM.bareBrakesEngaged := FALSE;
 		
-		IF NOT GVL_FSM.bbrakes_engaged THEN
+		IF NOT GVL_FSM.bareBrakesEngaged THEN
         	state := 1;
         END_IF
 		
-    1:	allActionsCompleteShutdown :=
-		GVL_Levi.DC_LINK_SAFE 
-		AND GVL_Prop.DC_LINK_SAFE;
-	
+    1:	allActionsCompleteShutdown := 
+	GVL_PT.HVAL_STATUS := E_HVAL_STATUS.GREEN_HV_OFF;
+		
         IF allActionsCompleteShutdown THEN
 			
 			  state := 2;
@@ -71,7 +71,7 @@ CASE state OF
 		
 		IF RecoveryToMaintenance THEN
 			
-			GVL_FSM.b_AlivePLCGlobal := TRUE;
+			GVL_FSM.bMovementSoftStopGlobal := FALSE;
 			
 			
 			state := 3;

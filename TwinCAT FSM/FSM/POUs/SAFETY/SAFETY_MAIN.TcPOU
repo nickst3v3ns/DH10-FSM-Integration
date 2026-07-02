@@ -11,6 +11,7 @@ VAR
 	bArmSignal AT %Q*: 					BOOL := FALSE;
 	bCLK AT %Q*: 					BOOL := FALSE;
 	bbrakes_engaged AT %I*:				BOOL := FALSE;
+	bbrakes_engage AT %Q*:				BOOL;
 	
 	bFalseForEstopRestart:					BOOL := FALSE; //when false, the esotp reset automatically
 	
@@ -61,11 +62,12 @@ END_VAR
       <ST><![CDATA[//Fetch from GVL
 
 //brakes
+bbrakes_engage := GVL_FSM.bbrakes_engageGlobal;
 bArmSignal := GVL_FSM.bbrakes_arm_signalGlobal;
 bCLK := GVL_FSM.bbrakes_clockGlobal;
 bAlivePLC := GVL_FSM.b_AlivePLCGlobal;
 bJorianSpecial := GVL_FSM.bJorianSpecialGlobal;
-bbrakes_engaged := GVL_FSM.bbrakes_engaged;
+bbrakes_engaged := GVL_FSM.bareBrakesEngaged;
 
 
 
@@ -133,7 +135,7 @@ GVL_FSM.bJorianSpecialGlobal:= bJorianSpecial;
 //brakes
 GVL_FSM.bbrakes_arm_signalGlobal := bArmSignal;
 GVL_FSM.bbrakes_clockGlobal := bCLK;
-GVL_FSM.bbrakes_engaged := bbrakes_engaged;
+GVL_FSM.bareBrakesEngaged := bbrakes_engaged;
 
 //watchdogs
 IF watchdogReset THEN
@@ -146,8 +148,8 @@ GVL_FSM.TXwatchdogPropLeftGlobal := TXwatchdogPropLeft;
 GVL_FSM.RXwatchdogPropRightGlobal := RXwatchdogPropRight;
 GVL_FSM.TXwatchdogPropRightGlobal := TXwatchdogPropRight;
 
-GVL_FSM.RXwatchdogPTHV := RXwatchdogPTHV;
-GVL_FSM.TXwatchdogPTHV := TXwatchdogPTHV;
+GVL_FSM.RXwatchdogPTHVGlobal := RXwatchdogPTHV;
+GVL_FSM.TXwatchdogPTHVGlobal := TXwatchdogPTHV;
 
 GVL_FSM.bwatchdogResetGlobal := watchdogReset;
 

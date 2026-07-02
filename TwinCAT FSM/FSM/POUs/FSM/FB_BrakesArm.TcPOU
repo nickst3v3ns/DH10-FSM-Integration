@@ -24,7 +24,8 @@ ELSIF armSignal AND clkSignal AND tracker THEN
 	tracker := FALSE;
 END_IF
 *)
-GVL_FSM.bbrakes_engaged := TRUE;]]></ST>
+GVL_FSM.bbrakes_engageGlobal := TRUE;
+GVL_FSM.bareBrakesEngaged := TRUE;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

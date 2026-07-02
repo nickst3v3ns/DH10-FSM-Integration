@@ -4,12 +4,13 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	
-	levitation_enable:		BOOL;
-	levitation_fault: 		BOOL; //fatal levitation error
-	Levi_command:			E_Levi_States; //Levi_command is where you tell the pod to which levi state you want to switch. The code will then check if you are allowed to switch to that state.
-	levitation_state:		E_Levi_States;
-	enable_auto_y_target : BOOL;
-	enable_auto_yaw_target : BOOL;
+	levitation_enable 				: BOOL;
+	levitation_fault 				: BOOL; //fatal levitation error
+	Levi_command 					: E_Levi_States; //Levi_command is where you tell the pod to which levi state you want to switch. The code will then check if you are allowed to switch to that state.
+	levitation_state 				: E_Levi_States;
+	enable_auto_z_target 			: BOOL := TRUE;
+	enable_auto_y_target 			: BOOL := TRUE;
+	enable_auto_yaw_target 			: BOOL := TRUE;
 	
 	//----------------------------------------------------------------------------------------------------
 
@@ -18,68 +19,70 @@ VAR_GLOBAL
 	//----------------------------------------------------------------------------------------------------
 	
 	//DC link voltages
-	DC_link_voltage_HEMS : ARRAY[0..15] OF UINT;
-	DC_link_voltage_EMS : ARRAY[0..7] OF UINT;
+	DC_link_voltage_HEMS 			: ARRAY[0..15] OF UINT;
+	DC_link_voltage_EMS 			: ARRAY[0..7] OF UINT;
 	
 	//Levi currents
-	HEMS_real_current : ARRAY[0..15] OF LREAL;
-	HEMS_requested_current : ARRAY[0..7] OF LREAL;
-	EMS_real_current : ARRAY[0..7] OF LREAL;
-	EMS_requested_current : ARRAY[0..3] OF LREAL;
+	HEMS_real_current 				: ARRAY[0..15] OF LREAL;
+	HEMS_requested_current 			: ARRAY[0..7] OF LREAL;
+	EMS_real_current 				: ARRAY[0..7] OF LREAL;
+	EMS_requested_current 			: ARRAY[0..3] OF LREAL;
 	
 	//Levi power usage
-	Power_usage_HEMS : LREAL;
-	Power_usage_EMS : LREAL;
-	Power_usage_Levi : LREAL;
+	Power_usage_HEMS 				: LREAL;
+	Power_usage_EMS 				: LREAL;
+	Power_usage_Levi 				: LREAL;
 
-	DC_LINK_SAFE : BOOL;
+	DC_LINK_SAFE 					: BOOL;
 	
-	Drive_status : ARRAY[0..23] OF UINT;
-	Drive_Diagnostic : ARRAY[0..23] OF UINT;
-	Periphery_voltage : ARRAY[0..23] OF UINT;
-	Control_word : ARRAY[0..23] OF UINT;
-	All_drives_high_voltage: BOOL;
+	Drive_status 					: ARRAY[0..23] OF UINT;
+	Drive_Diagnostic 				: ARRAY[0..23] OF UINT;
+	Periphery_voltage 				: ARRAY[0..23] OF UINT;
+	Control_word 					: ARRAY[0..23] OF UINT;
+	All_drives_high_voltage			: BOOL;
 	
-	reset_busy : BOOL;
-	reset_error : BOOL;
-	n_drive_warnings : UINT;
-	n_drive_errors : UINT;
-	error_specifics : ARRAY[0..23] OF Drive_error_mapping;
-	drive_feedback_timeouts : ARRAY[0..23] OF UINT;
-	Drive_current_error : ARRAY[0..23] OF BOOL;
-	Error : BOOL;
-	error_resettable : BOOL;
-	error_emergency : BOOL;
-	error_non_emergency : BOOL;
+	reset_busy 						: BOOL;
+	reset_error 					: BOOL;
+	n_drive_warnings 				: UINT;
+	n_drive_errors 					: UINT;
+	error_specifics 				: ARRAY[0..23] OF Drive_error_mapping;
+	drive_feedback_timeouts 		: ARRAY[0..23] OF UINT;
+	Drive_current_error 			: ARRAY[0..23] OF BOOL;
+	Error 							: BOOL;
+	error_resettable 				: BOOL;
+	error_emergency 				: BOOL;
+	error_non_emergency 			: BOOL;
 	
-	Levi_ready : BOOL;
-	motor_on_for_levi AT %I* : BOOL;
+	Levi_ready 						: BOOL;
 	
-	z: LREAL; //m
-	roll: LREAL; //rad
-	pitch: LREAL; //rad
+	z								: LREAL; //m
+	roll							: LREAL; //rad
+	pitch							: LREAL; //rad
 	
-	y: LREAL; //m
-	yaw: LREAL;	//rad
+	y								: LREAL; //m
+	yaw								: LREAL;	//rad
 	
-	z_liftoff : LREAL; //m
+	z_liftoff 						: LREAL; //m
 	
-	z_target : LREAL; //m
-	pitch_target : LREAL; //rad
-	roll_target : LREAL; //rad
-	y_target : LREAL; //m
-	yaw_target : LREAL; //rad
+	z_target 						: LREAL; //m
+	pitch_target 					: LREAL; //rad
+	roll_target 					: LREAL; //rad
+	y_target 						: LREAL; //m
+	yaw_target 						: LREAL; //rad
 	
-	z_initial_target : LREAL;
+	z_initial_target 				: LREAL;
 	
-	SensorDataArray : ARRAY[0..11] OF REAL;
-	Offset_airgaps_vertical : ARRAY[0..5] OF LREAL;
-	Offset_airgaps_lateral : ARRAY[0..5] OF LREAL;
+	SensorDataArray 				: ARRAY[0..11] OF REAL;
+	Offset_airgaps_vertical 		: ARRAY[0..5] OF LREAL;
+	Offset_airgaps_lateral 			: ARRAY[0..5] OF LREAL;
 	
-	liftoff_in_progress : BOOL;
-	Finding_zero_current : BOOL;
-	descent_in_progress : BOOL;
-	normal_shutdown : BOOL;
+	liftoff_in_progress 			: BOOL;
+	descent_in_progress 			: BOOL;
+	auto_DOF_states 				: E_auto_DOF_states;
+	found_auto_z_target 			: BOOL;
+	found_auto_y_target 			: BOOL;
+	found_auto_yaw_target 			: BOOL;
+	normal_shutdown 				: BOOL;
 	
 	//----------------------------------------------------------------------------------------------------
 

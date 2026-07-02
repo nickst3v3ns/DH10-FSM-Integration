@@ -19880,14 +19880,13 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{ABCDA763-457A-1BCF-16CC-B2B384E740A7}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{7AB55472-0330-E29C-A17D-55B94F89EA25}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
 						<Name>Thermal_Task Outputs</Name>
 						<Var>
 							<Name>THERMAL_MAIN.bPumpLeviEnable</Name>
-							<Comment><![CDATA[PUMPCONTROL]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -20150,6 +20149,15 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_FLOW.bFlowSensor1</Name>
+							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.state</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
 							<Name>GVL_Prop.InputData3_Front</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -20168,15 +20176,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.state</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FLOW.bFlowSensor1</Name>
-							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_FLOW.bFlowSensor2</Name>
@@ -20279,6 +20278,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bJorianSpecial</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bbrakes_engage</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -20412,6 +20415,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 						<Name>Propulsion_Task Outputs</Name>
 						<Var>
+							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>PROP_MAIN_Delft.Ia_for_levi_left</Name>
 							<Type>LREAL</Type>
 						</Var>
@@ -20442,10 +20449,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>PROP_MAIN_Delft.currentangle_for_levi_right</Name>
 							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>PROP_MAIN_Delft.Position_for_levi</Name>
@@ -35601,7 +35604,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbHEMS_T.temp_rawVBR1" Index="#x6000" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -35679,7 +35682,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6030" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbHEMS_T.temp_rawVBR2" Index="#x6030" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -60242,17 +60245,17 @@ Initialising drive references for resetting drive errors]]></Comment>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="GVL_FSM.b_AlivePLC" Index="#x7020" Sub="#x01">
+								<Entry Name="SAFETY_MAIN.bbrakes_engage" Index="#x7020" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="THERMAL_MAIN.bPumpLeviEnable" Index="#x7030" Sub="#x01">
+								<Entry Name="UNUSED" Index="#x7030" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="THERMAL_MAIN.bPumpPropEnable" Index="#x7040" Sub="#x01">
+								<Entry Name="UNUSED" Index="#x7040" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -61207,6 +61210,7 @@ Slave-Mode:
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bArmSignal" VarB="Channel 1^SAFETY_MAIN.bRearm"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bCLK" VarB="Channel 2^SAFETY_MAIN.bCLK"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bJorianSpecial" VarB="Channel 8^SAFETY_MAIN.bJorianSpecial"/>
+				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bbrakes_engage" VarB="Channel 3^SAFETY_MAIN.bbrakes_engage"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>
@@ -61646,8 +61650,8 @@ Slave-Mode:
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbMOTOR_RIGHTBACK_T.temp_raw17" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal BR (EK1100)^Thermal_VBR (EL3204-0200)">
-				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbHEMS_T.temp_rawVBR1" VarB="RTD Inputs Channel 1^Value"/>
-				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbHEMS_T.temp_rawVBR2" VarB="RTD Inputs Channel 2^Value"/>
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbHEMS_T.temp_rawVBR1" VarB="RTD Inputs Channel 1^THERMAL_MAIN.fbHEMS_T.temp_rawVBR1"/>
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbHEMS_T.temp_rawVBR2" VarB="RTD Inputs Channel 4^THERMAL_MAIN.fbHEMS_T.temp_rawVBR2"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal FL (EK1100)^LaSeLBL (EL6021)">
 				<Link VarA="Levi_Fast_Task_Horizontal Inputs^GVL_LEVI.stIn_EL6021_LBL^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>

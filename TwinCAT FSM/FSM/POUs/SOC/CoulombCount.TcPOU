@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CoulombCount" Id="{00e5a03e-ce15-4529-b8c1-0d6ff1e2f696}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM CoulombCount
+VAR
+	fbCoulombCount : FB_SOC_CoulombCount;
+	bStartup : BOOL;
+	OCVest : LREAL;
+	SOC : LREAL;
+	RemainingAh : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bStartup THEN
+	OCVest := F_SOCFromOCV(fCellVoltage_Volts := GVL_PT.MIN_VOLTAGE);
+	fbCoulombcount(bSeedFromStartupOCV := TRUE, fStateOfCharge_Percent => SOC, fRemainingCapacity_AmpHours => RemainingAh);
+	bStartup := TRUE;
+END_IF
+
+fbCoulombcount(fPackCurrent_Amps := GVL_PT.IVT_CURRENT,fSeedSOC_Percent := SOC, fStateOfCharge_Percent => SOC, fRemainingCapacity_AmpHours => RemainingAh);
+
+
+//call FB_CoulombCount with the inputs from GVL_PT
+//at startup in the fsm call an instance of FB_SOC_OCV]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

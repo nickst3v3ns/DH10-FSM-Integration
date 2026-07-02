@@ -31,6 +31,12 @@ VAR_GLOBAL
 	
 	
 //PUMP CONTROL
+	rPumpOnLevi				:REAL := 35;
+	rPumpOnProp				:REAL := 60;
+	
+	rPumpOffLevi			:REAL := 30;
+	rPumpOffProp			:REAL := 40;
+
 	bPumpLeviEnable			:BOOL;
 	bPumpPropEnable			:BOOL;
 	

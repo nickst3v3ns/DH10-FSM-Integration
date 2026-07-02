@@ -62,7 +62,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[//checks for HVAL in none HV Active states -> To emergency
 GVL_FSM.fbLink();
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
@@ -189,7 +189,7 @@ CASE currentState OF
 			
 			fbArm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
-			IF GVL_FSM.bbrakes_engaged THEN
+			IF GVL_FSM.bareBrakesEngaged THEN
 				currentState := E_PodState.STATE_MAINTENANCE;
 				currentCmd := E_Command.CMD_NONE;
 			END_IF
@@ -197,6 +197,8 @@ CASE currentState OF
 		
 //HV_ACTIVE		
 	E_PodState.STATE_HV_ACTIVE:
+		
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
@@ -207,7 +209,7 @@ CASE currentState OF
 			fbArm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
 			
-			IF GVL_FSM.bbrakes_engaged THEN
+			IF GVL_FSM.bareBrakesEngaged THEN
 				
 				currentState := E_PodState.STATE_DEMO;
 				currentCmd := E_Command.CMD_NONE;
@@ -230,6 +232,8 @@ CASE currentState OF
 		
 //DEMO		
 	E_PodState.STATE_DEMO:
+	
+	
 		IF GVL_LEVI.levitation_state = E_Levi_states.LEVI_IDLE THEN
 			GVL_LEVI.Levi_command := E_Levi_states.LEVI_INIT;
 		ELSIF GVL_LEVI.levitation_state = E_Levi_states.LEVI_INIT THEN
@@ -254,7 +258,7 @@ CASE currentState OF
 			END_IF
 			
 			
-			IF NOT GVL_FSM.bbrakes_engaged AND GVL_PT.PTC_STATE = 0 THEN
+			IF NOT GVL_FSM.bareBrakesEngaged AND GVL_PT.PTC_STATE = 0 THEN
 				
 				currentState := E_PodState.STATE_IDLE;
 				currentCmd := E_Command.CMD_NONE;
@@ -345,6 +349,7 @@ CASE currentState OF
 										 arg6 := F_LREAL(GVL_PROP.Ic_right),
 										sOut => errorMessageFSM);
 			
+			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
 			currentCmd := E_Command.CMD_EMERGENCY;//this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		ELSIF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
 			//Too speedy in track
@@ -355,7 +360,8 @@ CASE currentState OF
 										 arg1 := F_LREAL(GVL_PROP.velocity),
 										 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
 								sOut => errorMessageFSM);
-										 
+								
+			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge			 
 			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
 			//Too speedy in track
@@ -366,7 +372,8 @@ CASE currentState OF
 										 arg1 := F_LREAL(GVL_PROP.velocity),
 										 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
 								sOut => errorMessageFSM);
-										 
+								
+			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
 			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
 		
 		
@@ -430,7 +437,7 @@ CASE currentState OF
 		
 
 //MOVEMENT		
-	E_PodState.STATE_MAINTENANCE:
+	E_PodState.STATE_MAINTENANCE: //for change to HV Active with Brakes retracted, checks should be equal to whats happening in IDLE, also, standard retracted or toggable from GS? 
 	
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;

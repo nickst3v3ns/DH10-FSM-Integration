@@ -33,6 +33,9 @@ VAR
 	
 	
 	//PUMPCONTROL
+	MAXTHEMS : REAL;
+	MAXTPROP : REAL;
+	
 	bPumpLeviEnable AT %Q*: BOOL;
 	bPumpPropEnable AT %Q*: BOOL;
 END_VAR
@@ -40,6 +43,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[bPumpLeviEnable := GVL_THERMAL.bPumpLeviEnable;
 bPumpPropEnable := GVL_THERMAL.bPumpPropEnable;
+
 
 
 //8 channels
@@ -106,9 +110,21 @@ FLOWCount9(PulseCount := GVL_FLOW.udiPulseCount9, fFlowRate_L_Min => GVL_FLOW.fF
 FLOWCount10(PulseCount := GVL_FLOW.udiPulseCount10, fFlowRate_L_Min => GVL_FLOW.fFLOWrate10);
 
 
+
+//pump controller
+//MAXTHEMS := MAX(fbHEMS_T.TEMP);
+//MAXTPROP := MAX(fbMOTOR_LEFTBACK_T.TEMP, fbMOTOR_RIGHTBACK_T.TEMP, fbMOTOR_LEFTFRONT_T.TEMP, fbMOTOR_RIGHTFRONT_T.TEMP);
+
+//IF MAX(GVL_THERMAL.T_HEMS) >= GVL_THERMAL.rPumpOnLevi THEN
+//	bPumpLeviEnable := TRUE;
+//ELSIF MAX(GVL_THERMAL.T_HEMS
+
+
+
+
 //here the full documentation for which temperature corresponds to which variable
 
-	]]></ST>
+	//oeps no documentation :(]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SOCFromOCV" Id="{47a44f15-c97c-4f44-9801-d6f0c2a184d2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_SOCFromOCV : LREAL
+VAR_INPUT
+    fCellVoltage_Volts : LREAL;  
+END_VAR
+
+VAR
+	    aCurve : ARRAY[0..10] OF ST_OCVCurvePoint := [
+        (fSOC_Percent:=0.0,   fCellVoltage_Volts:=2.50),  
+        (fSOC_Percent:=10.0,  fCellVoltage_Volts:=3.30),  
+        (fSOC_Percent:=20.0,  fCellVoltage_Volts:=3.45),  
+        (fSOC_Percent:=30.0,  fCellVoltage_Volts:=3.55),  
+        (fSOC_Percent:=40.0,  fCellVoltage_Volts:=3.62),  
+        (fSOC_Percent:=50.0,  fCellVoltage_Volts:=3.68),
+        (fSOC_Percent:=60.0,  fCellVoltage_Volts:=3.74),
+        (fSOC_Percent:=70.0,  fCellVoltage_Volts:=3.80),
+        (fSOC_Percent:=80.0,  fCellVoltage_Volts:=3.90),
+        (fSOC_Percent:=90.0,  fCellVoltage_Volts:=4.05),
+        (fSOC_Percent:=100.0, fCellVoltage_Volts:=4.20)   
+    ];
+    i      : INT;
+    fRatio : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF fCellVoltage_Volts <= aCurve[0].fCellVoltage_Volts THEN
+    F_SOCFromOCV := aCurve[0].fSOC_Percent;
+    RETURN;
+ELSIF fCellVoltage_Volts >= aCurve[10].fCellVoltage_Volts THEN
+    F_SOCFromOCV := aCurve[10].fSOC_Percent;
+    RETURN;
+END_IF
+
+//Find the two points in the look-up table where the voltage is in between and do bilinear interpolation to estimate SOC
+FOR i := 0 TO 9 DO
+    IF (fCellVoltage_Volts >= aCurve[i].fCellVoltage_Volts) AND
+       (fCellVoltage_Volts <= aCurve[i+1].fCellVoltage_Volts) THEN
+        fRatio := (fCellVoltage_Volts - aCurve[i].fCellVoltage_Volts) /
+                  (aCurve[i+1].fCellVoltage_Volts - aCurve[i].fCellVoltage_Volts);
+        F_SOCFromOCV := aCurve[i].fSOC_Percent +
+                         fRatio * (aCurve[i+1].fSOC_Percent - aCurve[i].fSOC_Percent);
+        RETURN;
+    END_IF
+END_FOR
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

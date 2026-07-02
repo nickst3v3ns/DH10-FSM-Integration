@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_BatteryConstants" Id="{162ce7a6-0b6f-4610-9e73-e7086941e053}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    CELL_RATED_CAPACITY_AmpHours : LREAL := 2.5;
+ 
+    CELLS_PER_MODULE : INT := 16;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
