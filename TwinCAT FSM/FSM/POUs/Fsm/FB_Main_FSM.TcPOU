@@ -15,33 +15,47 @@ VAR_OUTPUT
 END_VAR
 
 VAR
-	fbFormat : FB_FormatString;
-	currentState: 				E_PodState  := E_PodState.STATE_BOOT;
+	fbFormat		:FB_FormatString;
+	currentState	:E_PodState  := E_PodState.STATE_BOOT;
+
+	//BOOLEANS for faults and nominal operation
+	bBasicChecksOk				:BOOL;
+	bCriticalFaultActive		:BOOL;
+	criticalFault				:BOOL; 
 	
-	bTESTSTATE : BOOL;
-	bDescend : BOOL;
-	fbArm : FB_BrakesArm;
-	fbDearm : FB_BrakesDearm;
+	bCommandSet					:BOOL;
+	bCommandSetDupe				:BOOL;
 	
-	isdrivereset:				BOOL;
+	//TestState - SET TO FALSE WHEN DEMONSTRATING
+	bTESTSTATE 		:BOOL;
 	
-	criticalFault:				BOOL; 
+	//LEVI tracker for descend --allows bidriectional transitioning
+	bDescend 		:BOOL;
 	
-	charging_in_progress:		BOOL; 
-	discharging_in_progress:	BOOL;
+	//Function blocks for arming and dearming brakes
+	fbArm 			:FB_BrakesArm;
+	fbDearm 		:FB_BrakesDearm;
 	
-	fb_handle_emergency:		FB_Handle_Emergency;
-	
-	fbdischarge:				FB_Discharge;
-	fbcharge:					FB_Charge;
+	//tracker for propulsion drive reset over CAN
+	isdrivereset	:BOOL;
 	
 	
-	fbCLK:				TP;
+
+	
+	//Emergency handler
+	fb_handle_emergency			:FB_Handle_Emergency;
+	
+	//function blcoks for sending precharge and discharge commands
+	fbdischarge					:FB_Discharge;
+	fbPrecharge					:FB_Charge;
+	
+	//PT trackers for Precharge and Discharge
+	charging_in_progress		:BOOL; 
+	discharging_in_progress		:BOOL;
 	
 	fbHeartBeatFailReset:		TON;
 	
-	bBasicChecksOk:				BOOL;
-	bCriticalFaultActive:			BOOL;
+
 	
 	
 	//testing bounds for propulsion
@@ -62,15 +76,17 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//checks for HVAL in none HV Active states -> To emergency
-GVL_FSM.fbLink();
+      <ST><![CDATA[//estop restart routine to add
+//checks for HVAL in none HV Active states -> To emergency
+//immediate SDC close -> precharge, maybe give some time and PTC state check to confirm PT is ready for precharge
+GVL_FSM.fbLink(bGsLinkAlive => GVL_FSM.bheartbeat_OK);
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 4) OR GVL_PT.ERROR_STATUS <> 0) THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 3) OR GVL_PT.ERROR_STATUS <> 0) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
@@ -84,66 +100,81 @@ CASE currentState OF
 //EMERGENCY
 	E_PodState.STATE_EMERGENCY:
 	
+		//State for which SDC is broken
 		GVL_FSM.b_AlivePLCGlobal := FALSE;
 
+		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
-		IF NOT bTESTSTATE THEN //if placed here for testing purposes
-				fb_handle_emergency(execute := criticalFault, busy => criticalFault);	
-		END_IF
+		//tracker reset for the propulsion drive reset set to FALSE for reset after emergency
+		isDriveReset := FALSE;
+		
+		//the main emergency handler, its output busy defines whether a transition to MAINTENANCE is allowed
+		fb_handle_emergency(execute := criticalFault, busy => criticalFault);	
 
-			
+		
+		//transition to maintenance after recovery
 		IF currentCmd = E_Command.CMD_TO_MAINTENANCE AND NOT criticalFault THEN
 			
-			currentState := E_PodState.STATE_MAINTENANCE;
-			currentCmd := E_Command.CMD_NONE;
+			//retract brakes			
+			fbArm(armsignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
+			
+			//check if brakes are truly engaged
+			IF GVL_FSM.bareBrakesEngaged THEN
+				currentState := E_PodState.STATE_MAINTENANCE;
+				currentCmd := E_Command.CMD_NONE;
+			END_IF
+			
+			
 			
 		END_IF
 		
-		// for testing purposes
+		// for testing purposes -- do not use this while demonstrating!!
 		IF currentCmd = E_Command.CMD_TO_MOVEMENT AND bTESTSTATE THEN
 			currentState := E_PodState.STATE_MOVEMENT;
 			currentCmd := E_Command.CMD_NONE;
 		END_IF
 		
 //BOOT		
+	//The BOOT atate is the state the POD gets upon initialization
 	E_PodState.STATE_BOOT:  
-	
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
-	
-		GVL_FSM.benable_telemetryGlobal := FALSE;
-		GVL_FSM.benable_heartbeat := FALSE;
 		
+		//State for which SDC is broken
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
+		
+		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
 		
-		// for testing purposes
+		// for testing purposes --do not use this while demonstrating!!!
 		IF currentCmd = E_Command.CMD_TO_MOVEMENT AND bTESTSTATE THEN
 			currentState := E_PodState.STATE_MOVEMENT;
 			currentCmd := E_Command.CMD_NONE;
 		END_IF
 			
 		
-		//IF bBasicChecksOk AND NOT bTESTSTATE THEN
-		IF NOT bTESTSTATE THEN
+		//Immediate transition to SYNC once ethercat READY
+		IF NOT bTESTSTATE AND bBasicChecksOK THEN
 			
 			currentState := E_PodState.STATE_SYNC;
 			
 		END_IF
 		
-		//Have some resettting functions here for some autonomous troobleshooting
-//IDLE	
-	E_PodState.STATE_SYNC:
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
-		GVL_FSM.benable_heartbeat := TRUE; //Enables the connection to the grounstation
 		
+	//SYNC is the state before IDLE - it offers zero functionality except for the opportunity to connect to the ground station	
+	E_PodState.STATE_SYNC:
+	
+		//State for which the SDC is open
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
+		
+		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
-		
-		IF GVL_FSM.bheartbeat_OK AND currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOk THEN
+		//Explicit command triggers
+		IF currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOk THEN
 			
 			currentState := E_PodState.STATE_IDLE;
 			currentCmd := E_Command.CMD_NONE;
@@ -154,7 +185,7 @@ CASE currentState OF
 	E_PodState.STATE_IDLE:
 	
 		IF NOT isdrivereset THEN
-			GVL_PROP.DriveReset := 1; 
+			GVL_PROP.DriveReset := TRUE; 
 			isdrivereset := TRUE;
 		END_IF
 		
@@ -166,32 +197,40 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;	
 		
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive THEN
+		//explicit command
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive AND NOT bCommandSetDupe THEN
+		
+			bCommandSet := TRUE;
+			
 			GVL_FSM.b_AlivePLCGlobal := TRUE;
+			
 			//maybe add a timer but this depends on the interpretation of SDC off
 			IF NOT charging_in_progress THEN
-				fbcharge();
-				charging_in_progress := TRUE;
-
-	
-			
 				
+				fbPrecharge();
+				charging_in_progress := TRUE;
+	
 			ELSIF GVL_PT.PTC_STATE = 2 THEN 
 				
 				charging_in_progress := FALSE;
 				currentState := E_PodState.STATE_HV_ACTIVE;
 				currentCmd := E_Command.CMD_NONE;
+				bCommandSet := FALSE;
 				
 			END_IF
 		END_IF
 		
-		IF currentCmd = E_Command.CMD_TO_MAINTENANCE THEN
+		IF currentCmd = E_Command.CMD_TO_MAINTENANCE AND NOT bCommandSet THEN
+			
+			bCommandSetDupe := TRUE;
 			
 			fbArm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
 			IF GVL_FSM.bareBrakesEngaged THEN
 				currentState := E_PodState.STATE_MAINTENANCE;
 				currentCmd := E_Command.CMD_NONE;
+				bCommandSetDupe := FALSE;
+				
 			END_IF
 		END_IF
 		
@@ -204,7 +243,9 @@ CASE currentState OF
 		GVL_Prop.propulsion_enable := FALSE;
 		
 				
-		IF currentCmd = E_Command.CMD_TO_DEMO THEN
+		IF currentCmd = E_Command.CMD_TO_DEMO AND NOT bCommandSetDupe THEN
+			
+			bCommandSet := TRUE;
 			
 			fbArm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
@@ -213,12 +254,14 @@ CASE currentState OF
 				
 				currentState := E_PodState.STATE_DEMO;
 				currentCmd := E_Command.CMD_NONE;
+				bCommandSet := FALSE;
 				
 			END_IF
 				
 			
-		ELSIF currentCmd = E_Command.CMD_TO_IDLE THEN
+		ELSIF currentCmd = E_Command.CMD_TO_IDLE AND NOT bCommandSet THEN
 			
+			bCommandSetDupe := TRUE;
 			fbdischarge();
 			
 			//doordat DC link levi intern wordt gemeten kan dit erg lang duren
@@ -226,6 +269,7 @@ CASE currentState OF
 				
 				currentState := E_PodState.STATE_IDLE;
 				currentCmd := E_Command.CMD_NONE;
+				bCommandSetDupe := FALSE;
 				
 			END_IF
 		END_IF
@@ -233,6 +277,7 @@ CASE currentState OF
 //DEMO		
 	E_PodState.STATE_DEMO:
 	
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 	
 		IF GVL_LEVI.levitation_state = E_Levi_states.LEVI_IDLE THEN
 			GVL_LEVI.Levi_command := E_Levi_states.LEVI_INIT;
@@ -251,7 +296,9 @@ CASE currentState OF
 		//because braking pcb is broken and tests without automation - END
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
+			bCommandSet := TRUE;
 			fbDearm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
+			
 			IF NOT discharging_in_progress THEN
 				fbdischarge();
 				discharging_in_progress := TRUE;
@@ -263,11 +310,13 @@ CASE currentState OF
 				currentState := E_PodState.STATE_IDLE;
 				currentCmd := E_Command.CMD_NONE;
 				discharging_in_progress := FALSE;
+				bCommandSet := FALSE;
 				
 			END_IF
 			
-		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION  AND GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY THEN		
-	
+		ELSIF currentCmd = E_Command.CMD_TO_LEVITATION  AND GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND NOT bCommandSet THEN		
+			
+			
 			currentState := E_PodState.STATE_LEVITATION;
 			currentCmd := E_Command.CMD_NONE;
 
@@ -276,6 +325,9 @@ CASE currentState OF
 		
 //LEVITATION		
 	E_PodState.STATE_LEVITATION:
+		
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
+		
 		
 		//This is some automatic code for liftoff at levitation, it has never  been tested, so let me know what it does
 		IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND NOT bDescend THEN
@@ -287,9 +339,10 @@ CASE currentState OF
 			
 			IF currentCmd = E_Command.CMD_TO_DEMO THEN
 				
+				bCommandSet := TRUE;
 				//levi command for descend is toggled
 				IF NOT bDescend THEN
-					GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+					GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCENT;
 					bDescend := TRUE;
 				END_IF
 				
@@ -299,10 +352,11 @@ CASE currentState OF
 					bDescend := FALSE;
 					currentState := E_PodState.STATE_DEMO;
 					currentCmd := E_Command.CMD_NONE;
+					bCommandSet := FALSE;
 					
 				END_IF
 			
-			ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT THEN
+			ELSIF currentCmd = E_Command.CMD_TO_MOVEMENT AND NOT bCommandSet THEN
 				
 				currentState := E_PodState.STATE_MOVEMENT;
 				currentCmd := E_Command.CMD_NONE;
@@ -312,6 +366,7 @@ CASE currentState OF
 //MOVEMENT		
 	E_PodState.STATE_MOVEMENT: //bit empty innit
 	
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		//GVL_PROP.PropFlag := 1;
 		
 		IF GVL_prop.Position < 4.689 THEN
@@ -439,17 +494,50 @@ CASE currentState OF
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE: //for change to HV Active with Brakes retracted, checks should be equal to whats happening in IDLE, also, standard retracted or toggable from GS? 
 	
+		IF NOT isdrivereset THEN
+			GVL_PROP.DriveReset := TRUE; 
+			isdrivereset := TRUE;
+		END_IF
+		
+			
+		GVL_FSM.b_AlivePLCGlobal := TRUE;	
+			
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
-		fbArm(armSignal:= GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
-		
-		IF currentCmd = E_Command.CMD_TO_IDLE THEN
+		IF currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOK AND NOT bCommandSet THEN
+			
+				fbDearm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
+				
+				
 				
 				currentState := E_PodState.STATE_IDLE;
 				currentCmd := E_Command.CMD_NONE;
 				
 		END_IF
+		//explicit command
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive THEN
+		
+			bCommandSet := TRUE;
+			
+			GVL_FSM.b_AlivePLCGlobal := TRUE;
+			
+			//maybe add a timer but this depends on the interpretation of SDC off
+			IF NOT charging_in_progress THEN
+				
+				fbPrecharge();
+				charging_in_progress := TRUE;
+	
+			ELSIF GVL_PT.PTC_STATE = 2 THEN 
+				
+				charging_in_progress := FALSE;
+				currentState := E_PodState.STATE_HV_ACTIVE;
+				currentCmd := E_Command.CMD_NONE;
+				bCommandSet := FALSE;
+				
+			END_IF
+		END_IF
+		
 	
 		
 ELSE

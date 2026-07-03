@@ -69,7 +69,7 @@ END_FOR
 	
 
 //Check if all the drives are outputting current when a current is requested
-IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR State = E_Levi_States.LEVI_LIFTOFF OR State = E_Levi_States.LEVI_LEVITATION OR State = E_Levi_States.LEVI_DESCEND OR State = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES THEN
+IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR State = E_Levi_States.LEVI_LIFTOFF OR State = E_Levi_States.LEVI_LEVITATION OR State = E_Levi_States.LEVI_DESCENT OR State = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES THEN
 	FOR i:=0 TO 11 DO
 		
 		IF ABS(drive_last_request_value[i]) > 100 AND ABS(drive_last_feedback_value[2*i]) < 50 THEN

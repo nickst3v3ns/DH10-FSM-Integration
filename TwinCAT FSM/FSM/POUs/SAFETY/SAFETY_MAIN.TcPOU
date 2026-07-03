@@ -5,14 +5,14 @@
 VAR
 	fDCLINKTreshold:				REAL := 40.0;
 
-	SafetyResetButton AT %I*:		BOOL := FALSE;
+	SafetyResetButton AT %I*:			BOOL := FALSE;
 	
-	bAlivePLC AT %Q*:				BOOL := TRUE;
+	bAlivePLC AT %Q*:					BOOL := TRUE;
 	bArmSignal AT %Q*: 					BOOL := FALSE;
-	bCLK AT %Q*: 					BOOL := FALSE;
+	bCLK AT %Q*: 						BOOL := FALSE;
 	bbrakes_engaged AT %I*:				BOOL := FALSE;
 	bbrakes_engage AT %Q*:				BOOL;
-	
+	bEstopOut AT %I*:				BOOL;
 	bFalseForEstopRestart:					BOOL := FALSE; //when false, the esotp reset automatically
 	
 	bPLCToggle AT %Q*:				BOOL := FALSE; //cycle time watchdog
@@ -152,6 +152,8 @@ GVL_FSM.RXwatchdogPTHVGlobal := RXwatchdogPTHV;
 GVL_FSM.TXwatchdogPTHVGlobal := TXwatchdogPTHV;
 
 GVL_FSM.bwatchdogResetGlobal := watchdogReset;
+
+GVL_FSM.bEstopOutGlobal := bEstopOut;
 
 //------------]]></ST>
     </Implementation>

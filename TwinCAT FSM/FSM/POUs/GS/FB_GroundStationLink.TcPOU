@@ -361,7 +361,7 @@ END_VAR
             4  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DROPDOWN;
             5  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
             6  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
-            7  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCEND;
+            7  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCENT;
             8  : GVL_LEVI.Levi_command := E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES;
         END_CASE
 
@@ -406,9 +406,9 @@ END_VAR
     16#0A58: GVL_LEVI.KI_yaw_initial      := DecodeF64(valueBits);
 	*)
 
-    16#0B00: GVL_PROP.PropFlag            := DecodeI16(valueBits);
+    16#0B00: GVL_PROP.PropFlag            := INT_TO_BOOL(DecodeI16(valueBits));
     16#0B08: GVL_PROP.TargetVelocity      := DecodeF64(valueBits);
-    16#0B17: GVL_PROP.DriveReset          := DecodeU8(valueBits);
+    16#0B17: GVL_PROP.DriveReset          := UINT_TO_BOOL(DecodeU8(valueBits));
     16#0B18: GVL_PROP.AutoPilotFlag       := DecodeU8(valueBits);
     16#0B1F: GVL_PROP.PositionLimit_Low   := DecodeU32(valueBits);
     16#0B20: GVL_PROP.PositionLimit_High  := DecodeU32(valueBits);
@@ -830,7 +830,7 @@ END_VAR
 AppendDpU8(16#0250, INT_TO_BYTE(GVL_FSM.E_PodStateGlobal));
 
 AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_FLAG,
-            INT_TO_BYTE(GVL_Prop.PropFlag));
+            INT_TO_BYTE(BOOL_TO_INT(GVL_Prop.PropFlag)));
 
 AppendDpF64(GVL_GS_IDS.DP_ID_PROP_POSITION, GVL_Prop.Position);
 
@@ -898,7 +898,7 @@ AppendDpF64(GVL_GS_IDS.DP_ID_PROP_IC_LEFT,
             GVL_Prop.Ic_Left);
 
 AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_DRIVE_RESET,
-            INT_TO_BYTE(GVL_Prop.DriveReset));
+            INT_TO_BYTE(BOOL_TO_INT(GVL_Prop.DriveReset)));
 
 AppendDpU8 (GVL_GS_IDS.DP_ID_PROP_AUTO_PILOT_FLAG,
             INT_TO_BYTE(GVL_Prop.AutoPilotFlag));

@@ -285,6 +285,9 @@
     <Compile Include="POUs\LEVI\LEVI_MAIN_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\LEVI\State_Levi_Dance.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Descent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -328,6 +331,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\Calculate_Thrust_Lift.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PROP_FINAL\FB_CenterPosition.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\PROP_FINAL\FB_PositionConverter.TcPOU">

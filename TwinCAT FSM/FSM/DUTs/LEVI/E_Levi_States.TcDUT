@@ -15,6 +15,7 @@ TYPE E_Levi_States :
 	LEVI_LEVITATION					:= 6,
 	LEVI_DESCENT					:= 7,
 	LEVI_TESTING_INDIVIDUAL_DRIVES 	:= 8, 
+	LEVI_DANCE						:= 9,
 	LEVI_ERROR						:= -1,
 	LEVI_RESET_DRIVES				:= -2
 ) INT;

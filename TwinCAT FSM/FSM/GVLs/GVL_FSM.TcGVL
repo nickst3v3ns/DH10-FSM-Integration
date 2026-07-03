@@ -21,20 +21,21 @@ VAR_GLOBAL
 //FSM Core variables
 
 //TWINSAFE + BRAKES 
-	bbrakes_arm_signalGlobal:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	bbrakes_clockGlobal:			BOOL := FALSE; //used for arming and dearming sequence
-	bareBrakesEngaged:			BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
-	bbrakes_engageGlobal:				BOOL; //output for the regular relay system , replaced the clk + arm signal
+	bbrakes_arm_signalGlobal:				BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bbrakes_clockGlobal:					BOOL := FALSE; //used for arming and dearming sequence
+	bareBrakesEngaged:						BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bbrakes_engageGlobal:					BOOL; //output for the regular relay system , replaced the clk + arm signal
 	
-	bsafety_inputs_valid:			BOOL := TRUE; //done through twinsafe PLC-TWINSAFE Run mode verification
+	bsafety_inputs_valid:					BOOL := TRUE; //done through twinsafe PLC-TWINSAFE Run mode verification
 	
-	b_AlivePLCGlobal: 				BOOL := TRUE; //NC System
+	b_AlivePLCGlobal: 						BOOL := TRUE; //toggle to close or open the SDC via the SC enable relay
+	bEstopOutGlobal:						BOOL; //this is the output of the TwinSAFE estop that verifies the state of the 
 
-	bEstopErrorGlobal:					BOOL := FALSE; 
+	bEstopErrorGlobal:						BOOL := FALSE; 
 	bEstopRestartGlobal:					BOOL := FALSE; //Used to restart the Estop from the PLC side
-	bFalseForEstopRestartGlobal:			BOOL := TRUE;
+	bFalseForEstopRestartGlobal:			BOOL := TRUE; //
 	
-	bJorianSpecialGlobal:					BOOL := TRUE;
+	bJorianSpecialGlobal:					BOOL := TRUE; //not used
 //TWINSAFE + BRAKES 
 
 	

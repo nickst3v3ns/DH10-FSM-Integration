@@ -70,8 +70,6 @@ VAR_GLOBAL
 	y_target 						: LREAL; //m
 	yaw_target 						: LREAL; //rad
 	
-	z_initial_target 				: LREAL;
-	
 	SensorDataArray 				: ARRAY[0..11] OF REAL;
 	Offset_airgaps_vertical 		: ARRAY[0..5] OF LREAL;
 	Offset_airgaps_lateral 			: ARRAY[0..5] OF LREAL;
@@ -158,6 +156,195 @@ VAR_GLOBAL
 	stIn_EL6021_LBR AT %I*	: EL6inData22B;	(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	stOut_EL6021_LBR AT %Q*	: EL6outData22B;(* linked to the EL6021 in the TwinCAT System Manager : TO LaSeHorizontalLeftBack*)
 	
+	//----------------------------------------------------------------------------------------------------
+
+	//	Control parameters
+
+	//----------------------------------------------------------------------------------------------------
+	
+	Levi_operational : BOOL := TRUE;
+	
+	Vertical_on : BOOL := TRUE;
+	Lateral_on : BOOL := TRUE;
+	Motor_on : BOOL := TRUE;
+	
+	Total_on : BOOL := TRUE;
+	Pitch_on : BOOL := TRUE;
+	Roll_on : BOOL := TRUE;
+	y_on : BOOL := TRUE;
+	yaw_on : BOOL := TRUE;	
+	
+	z_initial_target : LREAL := -0.0165; //m
+	liftoff_time : LREAL := 10; //s
+	descent_time : LREAL := 6; //s
+	
+	K_P_tot_motor_on: LREAL := 300000;
+	K_I_tot_motor_on: LREAL := 200000;
+	K_D_tot_motor_on: LREAL := 40000;
+	K_F_tot_motor_on: LREAL := 100;
+	K_I_tot_initial_motor_on: LREAL := 14160;
+	
+	K_P_pitch_motor_on: LREAL := 200000;
+	K_I_pitch_motor_on: LREAL := 200000;
+	K_D_pitch_motor_on: LREAL := 30000;
+	K_F_pitch_motor_on: LREAL := 250;
+	K_I_pitch_initial_motor_on: LREAL := 202;
+	
+	K_P_roll_motor_on: LREAL := 150000;
+	K_I_roll_motor_on: LREAL := 100000;
+	K_D_roll_motor_on: LREAL := 20000;
+	K_F_roll_motor_on: LREAL := 120;
+	K_I_roll_initial_motor_on: LREAL := -11;
+	
+	K_P_lat_motor_on: LREAL := 600000;
+	K_I_lat_motor_on: LREAL := 200000;
+	K_D_lat_motor_on: LREAL := 30000;
+	K_F_lat_motor_on: LREAL := 120;
+	K_I_lat_initial_motor_on: LREAL := 20;
+
+	K_P_yaw_motor_on: LREAL := 400000;
+	K_I_yaw_motor_on: LREAL := 200000;
+	K_D_yaw_motor_on: LREAL := 30000;
+	K_F_yaw_motor_on: LREAL := 100;
+	K_I_yaw_initial_motor_on: LREAL := 39;	
+	
+	K_P_tot: LREAL := 300000;
+	K_I_tot: LREAL := 200000;
+	K_D_tot: LREAL := 30000;
+	K_F_tot: LREAL := 100;
+	K_I_tot_initial: LREAL := 14160;
+	
+	K_P_pitch: LREAL := 60000;
+	K_I_pitch: LREAL := 200000;
+	K_D_pitch: LREAL := 15000;
+	K_F_pitch: LREAL := 250;
+	K_I_pitch_initial: LREAL := 202;
+	
+	K_P_roll: LREAL := 150000;
+	K_I_roll: LREAL := 100000;
+	K_D_roll: LREAL := 13000;
+	K_F_roll: LREAL := 120;
+	K_I_roll_initial: LREAL := -11;
+	
+	K_P_lat: LREAL := 120000;
+	K_I_lat: LREAL := 30000;
+	K_D_lat: LREAL := 10000;
+	K_F_lat: LREAL := 120;
+	K_I_lat_initial: LREAL := 20;
+
+	K_P_yaw: LREAL := 50000;
+	K_I_yaw: LREAL := 50000;
+	K_D_yaw: LREAL := 5000;
+	K_F_yaw: LREAL := 120;
+	K_I_yaw_initial: LREAL := 39;	
+	
+	auto_z_target_gain : LREAL := 0.00025;
+	auto_y_target_gain : LREAL := 0.00050;
+	auto_yaw_target_gain : LREAL := 0.00025;
+	
+	auto_y_target_I_gain : LREAL := 1;
+	auto_yaw_target_I_gain : LREAL := 1;
+	
+	extreme_z_gain_multiplier : LREAL := 1;
+	extreme_pitch_gain_multiplier : LREAL := 1;
+	extreme_roll_gain_multiplier : LREAL := 1;
+	extreme_y_gain_multiplier : LREAL := 1;
+	extreme_yaw_gain_multiplier : LREAL := 1;
+	
+	thermal_gap_gain_derivative_multiplier : LREAL := 1;
+	
+	thermal_gap_gain_hems : LREAL := 1.16;
+	thermal_gap_gain_ems : LREAL := 1.16;
+	
+	motor_roll_gain : LREAL := 1;
+	motor_y_gain : LREAL := 1;
+	motor_yaw_gain : LREAL := 1;	
+	
+	FF_Delay : REAL;
+	position_tune : REAL;
+	
+	Lift_off_enabled : BOOL := TRUE;
+	descent_enabled : BOOL := TRUE;
+	Mismatch_enabled : BOOL := FALSE;
+	
+	feed_fwd_on_prop_roll : BOOL := FALSE;
+	feed_fwd_motor_y_on : BOOL := FALSE;
+	feed_fwd_motor_yaw_on : BOOL := FALSE;
+	feed_fwd_ON_ems : BOOL := TRUE;
+	auto_z_target_interval : LREAL := 0.75; //s
+	auto_y_target_interval : LREAL := 6; //s
+	auto_yaw_target_interval : LREAL := 6; //s
+	
+	f_vert_notch_main_1 : LREAL := 50.66;
+	enable_vert_main_notch_1 : BOOL := TRUE;
+	
+	f_vert_notch_main_2 : LREAL := 41.58;
+	enable_vert_main_notch_2 : BOOL := TRUE;
+	
+	f_vert_notch_main_3 : LREAL := 42.86;
+	enable_vert_main_notch_3 : BOOL := TRUE;
+	
+	f_vert_notch_main_4 : LREAL := 210.94;
+	enable_vert_main_notch_4 : BOOL := TRUE;
+	
+	f_extra_total_filter_1 : LREAL := 0;
+	enable_extra_total_notch_1 : BOOL := FALSE;
+	
+	f_extra_total_filter_2 : LREAL :=0;
+	enable_extra_total_notch_2 : BOOL := FALSE;
+	
+	f_extra_total_filter_3 : LREAL := 71.787;
+	enable_extra_total_notch_3 : BOOL := TRUE;
+	
+	f_extra_roll_filter_1 : LREAL := 43.4;
+	enable_extra_roll_notch_1 : BOOL := TRUE;
+	
+	f_extra_roll_filter_2 : LREAL := 103.769;
+	enable_extra_roll_notch_2 : BOOL := TRUE;
+	
+	f_extra_roll_filter_3 : LREAL := 71.787;
+	enable_extra_roll_notch_3 : BOOL := TRUE;
+	
+	f_extra_pitch_filter_1 : LREAL := 0;
+	enable_extra_pitch_notch_1 : BOOL := FALSE;
+	
+	f_extra_pitch_filter_2 : LREAL := 0;
+	enable_extra_pitch_notch_2 : BOOL := FALSE;
+	
+	f_extra_pitch_filter_3 : LREAL := 71.787;
+	enable_extra_pitch_notch_3 : BOOL := TRUE;
+	
+	f_lat_notch_main_1 : LREAL := 54.0540540541;
+	enable_lat_main_notch_1 : BOOL := TRUE;
+	
+	f_lat_notch_main_2 : LREAL := 70.31;
+	enable_lat_main_notch_2 : BOOL := TRUE;
+	
+	f_lat_notch_main_3 : LREAL := 23.0769;
+	enable_lat_main_notch_3 : BOOL := TRUE;
+	
+	f_lat_notch_main_4 : LREAL := 210.94;
+	enable_lat_main_notch_4 : BOOL := TRUE;
+	
+	f_extra_y_filter_1 : LREAL := 13.122; 
+	enable_extra_y_notch_1 : BOOL := TRUE;
+	
+	f_extra_y_filter_2 : LREAL := 11.15;
+	enable_extra_y_notch_2 : BOOL := TRUE;
+	
+	f_extra_y_filter_3 : LREAL := 0;
+	enable_extra_y_notch_3 : BOOL := FALSE;
+	
+	f_extra_yaw_filter_1 : LREAL := 81.395;
+	enable_extra_yaw_notch_1 : BOOL := TRUE;
+	
+	f_extra_yaw_filter_2 : LREAL := 22.727;
+	enable_extra_yaw_notch_2 : BOOL := TRUE;
+	
+	f_extra_yaw_filter_3 : LREAL := 235.839;
+	enable_extra_yaw_notch_3 : BOOL := TRUE;
+	
+	configured_peak_current : LREAL := 13; //A
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

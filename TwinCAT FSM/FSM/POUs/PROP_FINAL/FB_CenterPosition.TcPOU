@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_CenterPosition" Id="{a8f81790-528b-4d59-93ef-2f6dcb1d7904}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CenterPosition
+VAR_INPUT
+	rPositionFront 	: LREAL;
+	rPositionBack 	: LREAL;
+END_VAR
+VAR_OUTPUT
+	rPosition 	: LREAL;
+	FrontValid 	: BOOL;
+	BackValid 	: BOOL;
+END_VAR
+VAR
+	rDistanceBarcodes : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FrontValid 	:= TRUE;
+BackValid 	:= TRUE;
+
+IF rPositionFront = 0 AND rPosition = 0 THEN
+	
+	FrontValid 	:= FALSE;
+	BackValid 	:= FALSE;
+	
+	rPosition := 0;
+ELSIF rPositionFront = 0 AND rPositionBack <> 0 THEN
+	
+	FrontValid := FALSE;
+	
+	rPosition := rPositionBack + (rDistanceBarcodes/2);
+ELSIF rPositionFront <> 0 AND rPositionBack = 0 THEN
+	
+	BackValid := FALSE;
+	
+	rPosition := rPositionFront - (rDistanceBarcodes/2);
+ELSE
+	rPosition := (rPositionFront + rPositionBack)/2;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

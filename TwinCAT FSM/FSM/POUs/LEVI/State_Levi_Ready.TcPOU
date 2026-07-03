@@ -27,6 +27,15 @@ VAR_IN_OUT
 	force_values : ARRAY[0..11] OF INT;
 	Drive_current_error : ARRAY[0..23] OF BOOL;
 	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
+	(*
+	//Liftoff model
+	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010050);
+	FB_control_liftoff: FB_Liftoff_model_TcCom_InitStruct(FB_control_liftoff_init);
+	
+	Control_liftoff_inputs: ST_Liftoff_model_U_T;
+	Control_liftoff_outputs: ST_Liftoff_model_Y_T;
+	Control_liftoff_parameters: ST_P_Liftoff_model_T;
+	*)
 END_VAR
 
 VAR
@@ -46,19 +55,73 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[reset_busy := FALSE;
+      <ST><![CDATA[(*
+normal_shutdown := FALSE;
+
+//-----------------------------------------------------------------------------------------------------------
+Control_liftoff_parameters.blevi_operational := FALSE;
+Control_descent_parameters.blevi_operational := FALSE;
+Control_lat_parameters.blevi_operational := FALSE;
+Control_vert_parameters.blevi_operational := FALSE;
+
+Control_liftoff_parameters.benable_auto_z_target := FALSE;
+Control_liftoff_parameters.benable_auto_y_target := FALSE;
+Control_liftoff_parameters.benable_auto_yaw_target := FALSE;
+
+FB_Control_liftoff.stLiftoff_model_P := Control_liftoff_parameters;		
+FB_Control_descent.stDescent_model_P := Control_descent_parameters;		
+FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
+FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;	
+
+//-----------------------------------------------------------------------------------------------------------
+z_target := z_initial_target;
+found_auto_z_target := FALSE;
+found_auto_y_target := FALSE;
+found_auto_yaw_target := FALSE;
+
+
+Control_liftoff_inputs.fz_target := z_target;
+Control_liftoff_inputs.aFeedback_current := Real_currents;
+
+FB_Control_liftoff(stLiftoff_model_U := Control_liftoff_inputs, stLiftoff_model_Y => Control_liftoff_outputs);
+
+z_target := Control_liftoff_outputs.fnew_z_target;
+
+FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
+
+z_target := z_initial_target;
+
+//-------------------------------------------------------------------------------------------------------------
+
+Control_lat_inputs.fy := y_filtered;
+Control_lat_inputs.fyaw := yaw_filtered;
+Control_lat_inputs.fmotor_Fx_l := 0;
+Control_lat_inputs.fmotor_Fx_r := 0;
+Control_lat_inputs.fmotor_Fy_l := 0;
+Control_lat_inputs.fmotor_Fy_r := 0;
+
+FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
+
+//-------------------------------------------------------------------------------------------------------------
+
+Control_vert_inputs.fz_avg := z_filtered;
+Control_vert_inputs.froll_measured := roll_filtered;
+Control_vert_inputs.fpitch_measured := pitch_filtered;
+Control_vert_inputs.fems_roll := 0;
+Control_vert_inputs.fmotor_Fy_l := 0;
+Control_vert_inputs.fmotor_Fy_r := 0;
+
+FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stvertical_levitation_control_new_Y => Control_vert_outputs);
+
+//-------------------------------------------------------------------------------------------------------------
+*)
+
+reset_busy := FALSE;
 Drive_undervoltage := FALSE;
 
 FOR i:=0 TO 23 DO
 	Control_word_array[i] := 16#E000;
 END_FOR
-
-(*
-GVL_LEVI.Control_lat_parameters.blevi_operational := FALSE;
-GVL_LEVI.Control_vert_parameters.blevi_operational := FALSE;
-GVL_LEVI.FB_Control_lat.stlateral_levitation_control_P := GVL_LEVI.Control_lat_parameters;
-GVL_LEVI.FB_Control_vert.stvertical_levitation_control_P := GVL_LEVI.Control_vert_parameters;
-*)
 
 //Check if there are errors
 Error := Check_drives(drive_status := drive_status, 

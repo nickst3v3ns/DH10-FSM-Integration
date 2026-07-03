@@ -9,7 +9,7 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
-    diPosition      : LREAL; (* The calculated true X position [m] *)
+    rPosition      : LREAL; (* The calculated true X position [m] *)
     bValid         : BOOL;  (* TRUE if we have a valid position (read or estimated) *)
     bExtrapolating : BOOL;  (* TRUE if running on estimated speed due to sensor loss *)
     nTrackFound    : INT;   (* Outputs which track the read value belongs to *)
@@ -46,7 +46,7 @@ IF bSensorValid THEN
 
             IF (aTracks[i].fEndValue - aTracks[i].fStartValue) <> 0.0 THEN
                 fRatio := (diReadValue - aTracks[i].fStartValue) / (aTracks[i].fEndValue - aTracks[i].fStartValue);
-                diPosition := aTracks[i].fXPosition + (fRatio * aTracks[i].fLength);
+                rPosition := aTracks[i].fXPosition + (fRatio * aTracks[i].fLength);
                 
                 bValid := TRUE;
                 nTrackFound := aTracks[i].nTrackNumber;
@@ -57,12 +57,12 @@ IF bSensorValid THEN
 
     (* Calculate current velocity for future extrapolation *)
     IF bValid AND NOT bFirstCycle AND fDeltaTime > 0.0 THEN
-        fVelocity := (diPosition - fLastPosition) / fDeltaTime;
+        fVelocity := (rPosition - fLastPosition) / fDeltaTime;
     END_IF
     
     (* Save current position for the next cycle *)
     IF bValid THEN
-        fLastPosition := diPosition;
+        fLastPosition := rPosition;
         bFirstCycle := FALSE;
     END_IF
 
@@ -70,10 +70,10 @@ ELSE
     (* Sensor dropout! Extrapolate based on last known velocity. *)
     IF NOT bFirstCycle AND fDeltaTime > 0.0 THEN
         (* New Position = Old Position + (Velocity * Time) *)
-        diPosition := fLastPosition + (fVelocity * fDeltaTime);
+        rPosition := fLastPosition + (fVelocity * fDeltaTime);
         
         (* Update last position so we keep moving forward next cycle if sensor is still dead *)
-        fLastPosition := diPosition;
+        fLastPosition := rPosition;
         
         bValid := TRUE;        
         bExtrapolating := TRUE;

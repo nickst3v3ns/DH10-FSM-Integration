@@ -47,7 +47,7 @@ CASE state OF
         END_IF
 		
     1:	allActionsCompleteShutdown := 
-	GVL_PT.HVAL_STATUS := E_HVAL_STATUS.GREEN_HV_OFF;
+	GVL_PT.HVAL_STATUS = E_HVAL_STATUS.GREEN_HV_OFF;
 		
         IF allActionsCompleteShutdown THEN
 			

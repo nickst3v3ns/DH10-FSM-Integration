@@ -10,9 +10,9 @@ VAR
 //
 	TESTposition_EHC : REAL;
 	
-	PropFlag : INT;
+	PropFlag : BOOL;
 	AutoPilotFlag : INT;
-	DriveReset : INT;
+	DriveReset : BOOL;
 	TargetVelocity : LREAL;
 	Iamp_Temp : LREAL;
 	
@@ -55,7 +55,6 @@ VAR
 	CurrentAngle_Right : LREAL := 45;
 	CurrentAngle_Left : LREAL := 45;
 	CurrentAngleReset : BOOL;
-	
 	
 	PowerConsumption : LREAL;
 	JouleperMeter : LREAL;
@@ -122,11 +121,25 @@ VAR
 	testbool : BOOL := TRUE;
 	start : BOOL := TRUE; 
 	
+	//1st gen converter -> purely for Delft
 	delft_converter_front : FB_PositionConverter;
 	delft_converter_back  : FB_PositionConverter;
 	
+	//last gen converter for EHW
 	fbEHCBack : FB_EHC_Converter;
-	fbEHCFront : FB_EHC_Converter;
+	fbEHCFront : FB_EHC_Converter; 
+	
+	//last gen converter for Delft
+	fbEHCDelftBack : FB_EHC_Converter_Test;
+	fbEHCDelftFront : FB_EHC_Converter_Test;
+	rPositionFrontDelftTest : LREAL;
+	rPositionBackDelftTest : LREAL;
+	
+	
+	fbCenterPos : FB_CenterPosition;
+	bFrontValid : BOOL;
+	bBackValid 	: BOOL;
+	rPosCenteredThomas : LREAL;
 	
 	positionValues_Front : ARRAY[0..3] OF BYTE;
 	velocityValues_Front : ARRAY[0..3] OF BYTE;
@@ -143,6 +156,8 @@ VAR
 	positionDelft_Front : LREAL;
 	positionDelft_Back	: LREAL;
 	Center_OFFSET : LREAL;
+	
+
 	
 	// Automatically resetting reset buttom
 	TON_Reset  : TON; 
@@ -269,6 +284,7 @@ VAR_INPUT
 END_VAR
 
 VAR CONSTANT
+	diDistanceBarcode : REAL := 0;
 	time_step : LREAL := 10; // in ms 
 	alpha : LREAL := 0.05;
 	SCALE : LREAL := 1000;
@@ -347,9 +363,9 @@ IF fbPPS_Timer.Q THEN
 END_IF
 
 // Reset buttom
-TON_Reset(IN := DriveReset = 1, PT := T#1S);
+TON_Reset(IN := DriveReset = TRUE, PT := T#1S);
 IF TON_Reset.Q THEN
-    DriveReset := 0;
+    DriveReset := FALSE;
 END_IF
 
 
@@ -388,12 +404,13 @@ CASE barcodeState OF
 			+ 256 * positionValues_Front[2]
 			+ positionValues_Front[3];
 		
-		position_Front := position_Front / SCALE_FACTOR - BARCODE_START;
 		
-		delft_converter_front(diReadValue := position_Front, diPosition => positionDelft_Front);
+		position_Front := position_Front / SCALE_FACTOR - BARCODE_START; //from now on in mm
+		
+		delft_converter_front(diReadValue := position_Front, rPosition => positionDelft_Front); //positionDelft in m
 		
 		fbEHCFront(rBarcode := DINT_TO_REAL(position_Front)/1000.0, rVelocity := DINT_TO_REAL(Velocity_Front)/1000.0);
-		
+		fbEHCDelftFront(rBarcode := DINT_TO_REAL(position_Front)/1000.0, rVelocity := DINT_TO_REAL(Velocity_Front)/1000.0, rAbsolutePos => rPositionFrontDelftTest);
 		
 		newData := newData XOR 16#80; // -> only toggled once every cycle since the the newdata toggled is shared between the two 
 		testbool := NOT testbool;
@@ -428,18 +445,22 @@ CASE barcodeState OF
 			
 		position_Back := position_Back / SCALE_FACTOR - BARCODE_START;
 		
-		delft_converter_back(diReadValue := position_Back, diPosition => positionDelft_Back);
+		delft_converter_back(diReadValue := position_Back, rPosition => positionDelft_Back);
 		
-		//fbEHCBack(rBarcode := DINT_TO_REAL(position_back)/1000.0, rVelocity := DINT_TO_REAL(velocity_Back)/1000.0);
-		fbEHCBack(rBarcode := TESTposition_EHC, rVelocity := 0);
+		fbEHCBack(rBarcode := DINT_TO_REAL(position_back)/1000.0, rVelocity := DINT_TO_REAL(velocity_Back)/1000.0);
+		fbEHCDelftBack(rBarcode := DINT_TO_REAL(position_back)/1000.0, rVelocity := DINT_TO_REAL(velocity_Back)/1000.0, rAbsolutePos => rPositionBackDelftTest);
+		
 		
 		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
 		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
 	
+		//ties wat doe je hier???????????
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
 		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
 		
+		//thomas' addition
+		fbCenterPos(rPositionFront := PositionDelft_Front, rPositionBack := PositionDelft_Back, rPosition => rPosCenteredThomas, FrontValid => bFrontValid, BackValid => bBackValid);
 		
 		
 	E_Barcode_State.SEND_DIAGNOSTIC_COMMAND:
@@ -528,14 +549,14 @@ END_CASE;
 //
 
 IF NOT propulsion_enable THEN
-	PropFlag := 0;
+	PropFlag := FALSE;
 END_IF
 
 //IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
-//	PropFlag := 0;
+//	PropFlag := FALSE;
 //END_IF
 
-IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = 1) THEN
+IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = TRUE) THEN
 	propulsion_active := TRUE;
 ELSE
 	propulsion_active := FALSE;
@@ -885,7 +906,7 @@ Ib_for_levi_right := Ib_Right;
 Ic_for_levi_right := Ic_Right;
 currentangle_for_levi_right := CurrentAngle_Right;
 
-IF PropFlag = 1 THEN
+IF PropFlag = TRUE THEN
 	motor_on_for_levi := TRUE;
 ELSE
 	motor_on_for_levi := FALSE;

@@ -13,9 +13,9 @@ VAR_GLOBAL
 // Variables to read and write
 //
 	
-	PropFlag : 							INT;
+	PropFlag : 							BOOL;
 	AutoPilotFlag :						INT;
-	DriveReset :						INT;
+	DriveReset :						BOOL;
 	TargetVelocity :					LREAL;
 	Iamp_Temp : 						LREAL;
 	

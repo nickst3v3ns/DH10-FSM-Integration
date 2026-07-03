@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="State_Levi_Descent" Id="{4d914e98-2308-47ea-a9f9-8e90ace0e6da}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Descent
+  <POU Name="State_Levi_Dance" Id="{3ba0e8c6-5266-4ae0-a85d-855f1c1ce3d3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Dance
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -109,13 +109,6 @@ VAR_IN_OUT
 
 //----------------------------------------------------------------------------------------------------
 	
-	//Descent model
-	FB_control_descent_init: ST_FB_Descent_model_TcCom_InitStruct := (noid:=16#01010060);
-	FB_control_descent: FB_Descent_model_TcCom_InitStruct(FB_control_descent_init);
-	
-	Control_descent_outputs: ST_Descent_model_Y_T;
-	Control_descent_parameters: ST_P_Descent_model_T;
-
 	//Vertical control setup
 	FB_control_vert_init: ST_FB_vertical_levitation_control_new_TcCom_InitStruct := (noid:=16#01010030);
 	FB_control_vert: FB_vertical_levitation_control_new_TcCom_InitStruct(FB_control_vert_init);
@@ -131,6 +124,8 @@ VAR_IN_OUT
 	Control_lat_inputs: ST_lateral_levitation_control_new_U_T;
 	Control_lat_outputs: ST_lateral_levitation_control_new_Y_T;
 	Control_lat_parameters: ST_P_lateral_levitation_control_new_T;
+	
+	auto_DOF_states : E_auto_DOF_states;
 
 	z_liftoff : LREAL; //m
 	
@@ -139,8 +134,14 @@ VAR_IN_OUT
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
 	yaw_target : LREAL := 0; //rad
-	last_levitating_airgap : LREAL; //m
-	descent_in_progress : USINT;
+	
+	z_target_dance : LREAL;
+	pitch_target_dance : LREAL;
+	roll_target_dance : LREAL;
+	y_target_dance : LREAL;
+	yaw_target_dance : LREAL;
+	
+	dancing : BOOL;
 	
 	hems_under_gap : LREAL := 0;
 	ems_under_gap : LREAL := 0;
@@ -151,6 +152,8 @@ VAR_IN_OUT
 
 //----------------------------------------------------------------------------------------------------
 	
+	cycle_time_levi : LREAL := 1.5E-3; //s
+	clock : LREAL; //s
 	
 	Run_z_liftoff_calc : BOOL;
 
@@ -159,8 +162,11 @@ END_VAR
 VAR
 	i: INT;
 	
+	Dance_time_start : LREAL;
+	dance_clock : LREAL;
+	
 	tau_x_ems: LREAL;
-
+	
 	I_EMS: lateral_levitation_control_new.T_matrix4xdouble;
 	
 	I_VFL: vertical_levitation_control_new.T_matrix2xdouble;	
@@ -168,10 +174,34 @@ VAR
 	I_VBL: vertical_levitation_control_new.T_matrix2xdouble;	
 	I_VBR: vertical_levitation_control_new.T_matrix2xdouble;
 END_VAR
-
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Run_z_liftoff_calc := FALSE;
+      <ST><![CDATA[IF dancing = FALSE THEN
+	Dance_time_start := clock;
+	dancing := TRUE;
+END_IF
+
+dance_clock := clock - dance_time_start;
+
+//----------------------------------------------------------------------------------------------------
+
+//	Dance sequence
+
+//----------------------------------------------------------------------------------------------------
+	
+
+
+//----------------------------------------------------------------------------------------------------
+
+//	Levitation
+
+//----------------------------------------------------------------------------------------------------
+
+//reset Run_z_liftoff_calc
+Run_z_liftoff_calc := FALSE;
+
+//reset auto_DOF_states to INIT
+auto_DOF_states := E_auto_DOF_States.DOF_INIT;
 
 FOR i:=0 TO 23 DO
 	Control_word[i] := 16#E000;
@@ -188,25 +218,193 @@ Error := Check_drives(drive_status := drive_status,
 					n_errors => n_drive_errors, 
 					errors := error_specifics,
 					Drive_current_error := Drive_current_error);
+
+//This if statement allows for different control parameters depending for if the motor is on or not.
+//If the motor is on but the pod is standing still it is treated as motor off.
+IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR 
+	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag < 2 AND (ABS(GVL_PROP.TargetVelocity) <> 0 OR (GVL_PROP.TargetVelocity = 0 AND ABS(Velocity) > 50))) THEN
+	
+	//calculating the thrust and lift of the motor for feedforward
+	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
+							Ib 				:= Ib_for_levi_left, 
+							Ic 				:= Ic_for_levi_left,
+							airgap 			:= motor_airgap_left, 
+							currentangle 	:= currentangle_for_levi_left,
+							FF_Delay 		:= GVL_LEVI.FF_Delay,
+							PositionDelft 	:= Position,
+							PositionOffset 	:= PositionOffset,
+							VelocityDelft 	:= Velocity,
+							position_tune 	:= GVL_LEVI.position_tune,
+							thrust 			=> motor_thrust_l,
+							lift 			=> motor_lift_l, );
+	
 					
-//-------------------------------------------------------------------------					
-Control_descent_parameters.bLevi_operational := GVL_LEVI.Levi_operational;
-Control_descent_parameters.fz_initial_lift_off := z_liftoff;
-Control_descent_parameters.fdescent_time := GVL_LEVI.descent_time;		
-Control_descent_parameters.bdescent_enabled := GVL_LEVI.descent_enabled;
-Control_descent_parameters.flast_levitating_airgap := last_levitating_airgap;
-								
-FB_Control_descent.stDescent_model_P := Control_descent_parameters;
+	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
+							Ib 				:= Ib_for_levi_right, 
+							Ic 				:= Ic_for_levi_right,
+							airgap 			:= motor_airgap_right, 
+							currentangle 	:= currentangle_for_levi_right,
+							FF_Delay 		:= GVL_LEVI.FF_Delay,
+							PositionDelft 	:= Position,
+							PositionOffset 	:= PositionOffset,
+							VelocityDelft 	:= Velocity,
+							position_tune 	:= GVL_LEVI.position_tune,
+							thrust 			=> motor_thrust_r,
+							lift 			=> motor_lift_r);
+
+	//Setting all the control parameters for when the motor is on
+	Control_lat_parameters.bfeed_fwd_motor_y_ON := GVL_LEVI.feed_fwd_motor_y_on;
+	Control_lat_parameters.bfeed_fwd_motor_yaw_ON := GVL_LEVI.feed_fwd_motor_yaw_on;
+	Control_vert_parameters.bfeed_fwd_motor_roll_ON := GVL_LEVI.feed_fwd_on_prop_roll;
+	
+	Control_vert_parameters.fK_P_tot := GVL_LEVI.K_P_tot_motor_on;
+	Control_vert_parameters.fK_I_tot := GVL_LEVI.K_I_tot_motor_on;
+	Control_vert_parameters.fK_D_tot := GVL_LEVI.K_D_tot_motor_on;
+	Control_vert_parameters.fK_F_tot := GVL_LEVI.K_F_tot_motor_on;
+	Control_vert_parameters.fK_I_init_tot := GVL_LEVI.K_I_tot_initial_motor_on;
+	
+	Control_vert_parameters.fK_P_pit := GVL_LEVI.K_P_pitch_motor_on;
+	Control_vert_parameters.fK_I_pit := GVL_LEVI.K_I_pitch_motor_on;
+	Control_vert_parameters.fK_D_pit := GVL_LEVI.K_D_pitch_motor_on;
+	Control_vert_parameters.fK_F_pit := GVL_LEVI.K_F_pitch_motor_on;
+	Control_vert_parameters.fK_I_init_pit := GVL_LEVI.K_I_pitch_initial_motor_on;
+	
+	Control_vert_parameters.fK_P_roll := GVL_LEVI.K_P_roll_motor_on;
+	Control_vert_parameters.fK_I_roll := GVL_LEVI.K_I_roll_motor_on;
+	Control_vert_parameters.fK_D_roll := GVL_LEVI.K_D_roll_motor_on;
+	Control_vert_parameters.fK_F_roll := GVL_LEVI.K_F_roll_motor_on;
+	Control_vert_parameters.fK_I_init_roll := GVL_LEVI.K_I_roll_initial_motor_on;
+	
+	Control_lat_parameters.fK_P_lat := GVL_LEVI.K_P_lat_motor_on;
+	Control_lat_parameters.fK_I_lat := GVL_LEVI.K_I_lat_motor_on;
+	Control_lat_parameters.fK_D_lat := GVL_LEVI.K_D_lat_motor_on;
+	Control_lat_parameters.fK_F_lat := GVL_LEVI.K_F_lat_motor_on;
+	Control_lat_parameters.fK_I_init_lat := GVL_LEVI.K_I_lat_initial_motor_on;
+	
+	Control_lat_parameters.fK_P_yaw := GVL_LEVI.K_P_yaw_motor_on;
+	Control_lat_parameters.fK_I_yaw := GVL_LEVI.K_I_yaw_motor_on;
+	Control_lat_parameters.fK_D_yaw := GVL_LEVI.K_D_yaw_motor_on;
+	Control_lat_parameters.fK_F_yaw := GVL_LEVI.K_F_yaw_motor_on;
+	Control_lat_parameters.fK_I_init_yaw := GVL_LEVI.K_I_yaw_initial_motor_on;
+	
+	//allows for different gains when traversing a thermal gap
+	IF ABS(z_filtered) > z_target + 0.9E-3 THEN
+		Control_vert_parameters.fK_P_tot := GVL_LEVI.extreme_z_gain_multiplier * GVL_LEVI.K_P_tot_motor_on;
+	END_IF
+	
+	IF ABS(pitch_filtered) > pitch_target + 0.9E-3 THEN
+		Control_vert_parameters.fK_P_pit := GVL_LEVI.extreme_pitch_gain_multiplier * GVL_LEVI.K_P_pitch_motor_on;
+	END_IF
+	
+	IF ABS(roll_filtered) > roll_target + 0.9E-3 THEN
+		Control_vert_parameters.fK_P_roll := GVL_LEVI.extreme_roll_gain_multiplier * GVL_LEVI.K_P_roll_motor_on;
+	END_IF
+	
+	IF ABS(y_filtered) > y_target_airgap + 1.0E-3 THEN
+		Control_lat_parameters.fK_P_lat := GVL_LEVI.extreme_y_gain_multiplier * GVL_LEVI.K_P_lat_motor_on;
+	END_IF
+	
+	IF ABS(yaw_filtered) > yaw_target + 0.9E-3 THEN
+		Control_lat_parameters.fK_P_yaw := GVL_LEVI.extreme_yaw_gain_multiplier * GVL_LEVI.K_P_yaw_motor_on;
+	END_IF
+	
+	//disables some notch filters
+	GVL_LEVI.enable_lat_main_notch_3 := FALSE;
+	GVL_LEVI.enable_extra_y_notch_1 := FALSE;
+	GVL_LEVI.enable_extra_y_notch_2 := FALSE;
+
+ELSE
+	//
+	//calculating the thrust and lift of the motor
+	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
+							Ib 				:= Ib_for_levi_left, 
+							Ic 				:= Ic_for_levi_left,
+							airgap 			:= motor_airgap_left, 
+							currentangle 	:= currentangle_for_levi_left,
+							FF_Delay 		:= GVL_LEVI.FF_Delay,
+							PositionDelft 	:= Position,
+							PositionOffset 	:= PositionOffset,
+							VelocityDelft 	:= Velocity,
+							position_tune 	:= GVL_LEVI.position_tune,
+							thrust 			=> motor_thrust_l,
+							lift 			=> motor_lift_l, );
+	
+					
+	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
+							Ib 				:= Ib_for_levi_right, 
+							Ic 				:= Ic_for_levi_right,
+							airgap 			:= motor_airgap_right, 
+							currentangle 	:= currentangle_for_levi_right,
+							FF_Delay 		:= GVL_LEVI.FF_Delay,
+							PositionDelft 	:= Position,
+							PositionOffset 	:= PositionOffset,
+							VelocityDelft 	:= Velocity,
+							position_tune 	:= GVL_LEVI.position_tune,
+							thrust 			=> motor_thrust_r,
+							lift 			=> motor_lift_r);
+	
+	//Disableing feedforward
+	Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
+	Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+	Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
+	
+	//-------------------------------------------------------------------------
+	
+	Control_vert_parameters.fK_P_tot := GVL_LEVI.K_P_tot;
+	Control_vert_parameters.fK_I_tot := GVL_LEVI.K_I_tot;
+	Control_vert_parameters.fK_D_tot := GVL_LEVI.K_D_tot;
+	Control_vert_parameters.fK_F_tot := GVL_LEVI.K_F_tot;
+	Control_vert_parameters.fK_I_init_tot := GVL_LEVI.K_I_tot_initial;
+	
+	Control_vert_parameters.fK_P_pit := GVL_LEVI.K_P_pitch;
+	Control_vert_parameters.fK_I_pit := GVL_LEVI.K_I_pitch;
+	Control_vert_parameters.fK_D_pit := GVL_LEVI.K_D_pitch;
+	Control_vert_parameters.fK_F_pit := GVL_LEVI.K_F_pitch;
+	Control_vert_parameters.fK_I_init_pit := GVL_LEVI.K_I_pitch_initial;
+	
+	Control_vert_parameters.fK_P_roll := GVL_LEVI.K_P_roll;
+	Control_vert_parameters.fK_I_roll := GVL_LEVI.K_I_roll;
+	Control_vert_parameters.fK_D_roll := GVL_LEVI.K_D_roll;
+	Control_vert_parameters.fK_F_roll := GVL_LEVI.K_F_roll;
+	Control_vert_parameters.fK_I_init_roll := GVL_LEVI.K_I_roll_initial;
+	
+	Control_lat_parameters.fK_P_lat := GVL_LEVI.K_P_lat;
+	Control_lat_parameters.fK_I_lat := GVL_LEVI.K_I_lat;
+	Control_lat_parameters.fK_D_lat := GVL_LEVI.K_D_lat;
+	Control_lat_parameters.fK_F_lat := GVL_LEVI.K_F_lat;
+	Control_lat_parameters.fK_I_init_lat := GVL_LEVI.K_I_lat_initial;
+	
+	Control_lat_parameters.fK_P_yaw := GVL_LEVI.K_P_yaw;
+	Control_lat_parameters.fK_I_yaw := GVL_LEVI.K_I_yaw;
+	Control_lat_parameters.fK_D_yaw := GVL_LEVI.K_D_yaw;
+	Control_lat_parameters.fK_F_yaw := GVL_LEVI.K_F_yaw;
+	Control_lat_parameters.fK_I_init_yaw := GVL_LEVI.K_I_yaw_initial;
+	
+	GVL_LEVI.enable_lat_main_notch_3 := TRUE;
+	GVL_LEVI.enable_extra_y_notch_1 := TRUE;
+	GVL_LEVI.enable_extra_y_notch_2 := TRUE;
+	
+END_IF
 
 //-------------------------------------------------------------------------
 
-FB_Control_descent(stDescent_model_Y => Control_descent_outputs);
+IF Position >= 11.2295 AND Position <= 11.3725 THEN
+	hems_under_gap := 1;	
+ELSIF Position >= 10.9005 AND Position <= 11.079 THEN
+	hems_under_gap := 2;
+ELSIF Position >= 9.4765 AND Position <= 9.6275 THEN
+	hems_under_gap := 3;
+ELSIF Position >= 9.1415 AND Position <= 9.3265 THEN
+	hems_under_gap := 4;
+ELSE
+	hems_under_gap := 0;
+END_IF
 
-z_target := Control_descent_outputs.fz_target_descent;
-descent_in_progress := Control_descent_outputs.nDescent_in_progress;
+IF hems_under_gap <> 0 THEN
+	Control_vert_parameters.fK_D_tot := GVL_LEVI.thermal_gap_gain_derivative_multiplier * GVL_LEVI.K_D_tot_motor_on;
+	Control_lat_parameters.fK_D_lat := GVL_LEVI.thermal_gap_gain_derivative_multiplier * GVL_LEVI.K_D_lat_motor_on;
+END_IF
 
-//-------------------------------------------------------------------------
-				
 //Setting lateral control parameters	
 IF GVL_LEVI.Lateral_on THEN
 	Control_lat_parameters.bfeed_forward_ems_ON := GVL_LEVI.feed_fwd_ON_ems;
@@ -223,20 +421,8 @@ Control_lat_parameters.byaw_ON := GVL_LEVI.yaw_on;
 Control_lat_parameters.fyaw_target := yaw_target;
 Control_lat_parameters.fy_target := y_target_airgap;
 
-Control_lat_parameters.fK_P_lat := GVL_LEVI.K_P_lat;
-Control_lat_parameters.fK_I_lat := GVL_LEVI.K_I_lat;
-Control_lat_parameters.fK_D_lat := GVL_LEVI.K_D_lat;
-Control_lat_parameters.fK_F_lat := GVL_LEVI.K_F_lat;
-Control_lat_parameters.fK_I_init_lat := GVL_LEVI.K_I_lat_initial;
-
-Control_lat_parameters.fK_P_yaw := GVL_LEVI.K_P_yaw;
-Control_lat_parameters.fK_I_yaw := GVL_LEVI.K_I_yaw;
-Control_lat_parameters.fK_D_yaw := GVL_LEVI.K_D_yaw;
-Control_lat_parameters.fK_F_yaw := GVL_LEVI.K_F_yaw;
-Control_lat_parameters.fK_I_init_yaw := GVL_LEVI.K_I_yaw_initial;
-
 Control_lat_parameters.fmotor_y_gain := GVL_LEVI.motor_y_gain;
-Control_lat_parameters.fmotor_yaw_gain := GVL_LEVI.motor_yaw_gain;			
+Control_lat_parameters.fmotor_yaw_gain := GVL_LEVI.motor_yaw_gain;
 
 Control_lat_parameters.benable_lat_main_notch_1 := GVL_LEVI.enable_lat_main_notch_1;
 Control_lat_parameters.benable_lat_main_notch_2 := GVL_LEVI.enable_lat_main_notch_2;
@@ -259,15 +445,10 @@ Control_lat_parameters.ff_extra_yaw_filter_1 := GVL_LEVI.f_extra_yaw_filter_1;
 Control_lat_parameters.ff_extra_yaw_filter_2 := GVL_LEVI.f_extra_yaw_filter_2;
 Control_lat_parameters.ff_extra_yaw_filter_3 := GVL_LEVI.f_extra_yaw_filter_3;
 
-Control_lat_parameters.fthermal_gap_gain_ems := GVL_LEVI.thermal_gap_gain_ems;
-
-Control_lat_parameters.bfeed_fwd_motor_y_ON := FALSE;
-Control_lat_parameters.bfeed_fwd_motor_yaw_ON := FALSE;
+//Control_lat_parameters.fthermal_gap_gain_ems := thermal_gap_gain_ems;
 
 //Uploading lateral parameters to the control model
 FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-
-//-------------------------------------------------------------------------
 
 //Setting vertical control parameters
 IF GVL_LEVI.Vertical_on THEN
@@ -312,39 +493,9 @@ Control_vert_parameters.ff_extra_pitch_filter_3 := GVL_LEVI.f_extra_pitch_filter
 
 Control_vert_parameters.bmismatch_enabled := GVL_LEVI.Mismatch_enabled;
 
-Control_vert_parameters.fK_P_tot := GVL_LEVI.K_P_tot;
-Control_vert_parameters.fK_I_tot := GVL_LEVI.K_I_tot;
-Control_vert_parameters.fK_D_tot := GVL_LEVI.K_D_tot;
-Control_vert_parameters.fK_F_tot := GVL_LEVI.K_F_tot;
-Control_vert_parameters.fK_I_init_tot := GVL_LEVI.K_I_tot_initial;
-
-Control_vert_parameters.fK_P_pit := GVL_LEVI.K_P_pitch;
-Control_vert_parameters.fK_I_pit := GVL_LEVI.K_I_pitch;
-Control_vert_parameters.fK_D_pit := GVL_LEVI.K_D_pitch;
-Control_vert_parameters.fK_F_pit := GVL_LEVI.K_F_pitch;
-Control_vert_parameters.fK_I_init_pit := GVL_LEVI.K_I_pitch_initial;
-
-Control_vert_parameters.fK_P_roll := GVL_LEVI.K_P_roll;
-Control_vert_parameters.fK_I_roll := GVL_LEVI.K_I_roll;
-Control_vert_parameters.fK_D_roll := GVL_LEVI.K_D_roll;
-Control_vert_parameters.fK_F_roll := GVL_LEVI.K_F_roll;
-Control_vert_parameters.fK_I_init_roll := GVL_LEVI.K_I_roll_initial;
-
-Control_vert_parameters.fmotor_roll_gain := GVL_LEVI.motor_roll_gain;	
+Control_vert_parameters.fmotor_roll_gain := GVL_LEVI.motor_roll_gain;				
 
 Control_vert_parameters.fthermal_gap_gain_hems := GVL_LEVI.thermal_gap_gain_hems;
-			
-IF Position >= 11.2295 AND Position <= 11.3725 THEN
-	hems_under_gap := 1;
-ELSIF Position >= 10.9005 AND Position <= 11.079 THEN
-	hems_under_gap := 2;
-ELSIF Position >= 9.4765 AND Position <= 9.6275 THEN
-	hems_under_gap := 3;
-ELSIF Position >= 9.1415 AND Position <= 9.3265 THEN
-	hems_under_gap := 4;
-ELSE
-	hems_under_gap := 0;
-END_IF
 
 Control_vert_parameters.fhems_under_gap := hems_under_gap;
 
@@ -353,12 +504,8 @@ Control_vert_parameters.fpitch_target := pitch_target;
 Control_vert_parameters.fz_manual_target := z_target;
 Control_vert_parameters.fz_initial_lift_off := z_liftoff;
 
-Control_vert_parameters.bfeed_fwd_motor_roll_ON := FALSE;	
-
 //Uploading vertical parameters to the control model
 FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
-
-//-------------------------------------------------------------------------
 
 Control_lat_inputs.fy := y_filtered;
 Control_lat_inputs.fyaw := yaw_filtered;
@@ -373,8 +520,6 @@ tau_x_ems := Control_lat_outputs.ftau_x_ems;
 
 I_EMS := Control_lat_outputs.aI_ems;
 
-//-------------------------------------------------------------------------
-
 Control_vert_inputs.fz_avg := z_filtered;
 Control_vert_inputs.froll_measured := roll_filtered;
 Control_vert_inputs.fpitch_measured := pitch_filtered;
@@ -388,8 +533,6 @@ I_VFL := Control_vert_outputs.aI_VFL;
 I_VFR := Control_vert_outputs.aI_VFR;
 I_VBL := Control_vert_outputs.aI_VBL;
 I_VBR := Control_vert_outputs.aI_VBR;
-
-//-------------------------------------------------------------------------
 
 Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
 Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
@@ -407,11 +550,7 @@ Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configur
 Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
 
 Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current);	
-
-IF descent_in_progress = 0 THEN
-	Levi_command := E_Levi_States.LEVI_READY;
-END_IF]]></ST>
+Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current);	]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

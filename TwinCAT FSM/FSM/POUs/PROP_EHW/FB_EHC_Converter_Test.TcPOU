@@ -77,11 +77,11 @@ VAR
        (rAbsoluteStart..rAbsoluteEnd). Keep iID equal to the array index.
        Placeholder values below — replace with the real layout.            *)
     aTracks : ARRAY[1..C_SEGMENT_COUNT] OF ST_Track_Segment := [
-        (iID := 1, rStart := 0.0, rEnd := 4.0, rAbsoluteStart := 0.0,  rAbsoluteEnd := 4.0),
-        (iID := 2, rStart := 0.0, rEnd := 4.0, rAbsoluteStart := 4.0,  rAbsoluteEnd := 8.0),
-        (iID := 3, rStart := 0.0, rEnd := 4.0, rAbsoluteStart := 8.0,  rAbsoluteEnd := 12.0),
-        (iID := 4, rStart := 0.0, rEnd := 4.0, rAbsoluteStart := 12.0, rAbsoluteEnd := 16.0),
-        (iID := 5, rStart := 0.0, rEnd := 4.0, rAbsoluteStart := 16.0, rAbsoluteEnd := 20.0)
+        (iID := 1, rStart := 1255160.0, rEnd := 1258560.0, rAbsoluteStart := 0.0,  rAbsoluteEnd := 3.4),
+        (iID := 2, rStart := 0.0, rEnd := 4000.0, rAbsoluteStart := 3.4,  rAbsoluteEnd := 7.4),
+        (iID := 3, rStart := 4000.0, rEnd := 8000.0, rAbsoluteStart := 7.4,  rAbsoluteEnd := 11.4),
+        (iID := 4, rStart := 8000.0, rEnd := 11960.0, rAbsoluteStart := 11.4, rAbsoluteEnd := 15.36),
+        (iID := 5, rStart := 1267000.0, rEnd := 1271000.0, rAbsoluteStart := 15.4, rAbsoluteEnd := 19.6)
     ];
 
     (* --- Persistent localisation state (kept across cycles) --- *)

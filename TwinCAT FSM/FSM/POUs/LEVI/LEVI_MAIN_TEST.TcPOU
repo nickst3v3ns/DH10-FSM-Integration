@@ -141,7 +141,11 @@ VAR
 	FB_Levi_Ready : State_Levi_Ready;
 	FB_Levi_Pullup : State_Levi_Pullup;
 	FB_Levi_Dropdown : State_Levi_Dropdown;
+	//FB_Levi_Liftoff : State_Levi_Liftoff;
+	//FB_Levi_Levitation : State_Levi_Levitation;
+	//FB_Levi_Descent : State_Levi_Descent;
 	FB_Levi_Testing_Individual_Drives : State_Levi_Testing_Individual_Drives;
+	//FB_Levi_Dance : State_Levi_Dance;
 	FB_Levi_Error : State_Levi_Error;
 	FB_Levi_Reset_Drives : State_Levi_Reset_Drives;
 	
@@ -253,6 +257,13 @@ VAR
 	roll_target : LREAL := 0; //rad
 	y_target_airgap : LREAL := 0; //m
 	yaw_target : LREAL := 0; //rad
+		
+	z_target_dance : LREAL;
+	pitch_target_dance : LREAL;
+	roll_target_dance : LREAL;
+	y_target_dance : LREAL;
+	yaw_target_dance : LREAL;
+	
 	liftoff_time : LREAL := 10; //s
 	descent_time : LREAL := 6; //s
 	last_levitating_airgap : LREAL; //m
@@ -459,6 +470,8 @@ VAR
 	
 	f_extra_yaw_filter_3 : LREAL := 235.839;
 	enable_extra_yaw_notch_3 : BOOL := TRUE;
+	
+	dancing : BOOL;
 	
 	tau_x_ems: LREAL;
 	
@@ -680,6 +693,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
 			Levi_state = E_Levi_States.LEVI_DESCENT OR
+			Levi_state = E_Levi_States.LEVI_DANCE OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
@@ -695,11 +709,6 @@ CASE GVL_LEVI.Levi_Command OF
 							Control_word_array => Control_word,
 							Go_error_state => Error,
 							error_resettable => error_resettable);
-		
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
@@ -717,6 +726,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
 			Levi_state = E_Levi_States.LEVI_DESCENT OR
+			Levi_state = E_Levi_States.LEVI_DANCE OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE AND
 			error_resettable = TRUE AND
@@ -739,11 +749,6 @@ CASE GVL_LEVI.Levi_Command OF
 							z_liftoff => z_liftoff,
 							Control_word_array => Control_word,
 							Go_error_state => Error);
-		
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 			
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
@@ -759,7 +764,8 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_TESTING_INDIVIDUAL_DRIVES OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
-			Levi_state = E_Levi_States.LEVI_DESCENT) AND
+			Levi_state = E_Levi_States.LEVI_DESCENT OR
+			Levi_state = E_Levi_States.LEVI_DANCE) AND
 			GVL_LEVI.levitation_enable = TRUE AND
 			All_drives_high_voltage = TRUE THEN
 			
@@ -870,11 +876,6 @@ CASE GVL_LEVI.Levi_Command OF
 							Back_to_ready => GVL_LEVI.Levi_command,
 							Run_z_liftoff_calc => Run_z_liftoff_calc);
 
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
-
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;		
 	
@@ -902,11 +903,7 @@ CASE GVL_LEVI.Levi_Command OF
 								Error => Error,
 								Back_to_ready => GVL_LEVI.Levi_command,
 								Run_z_liftoff_calc => Run_z_liftoff_calc);
-			
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
+
 		
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
@@ -923,6 +920,84 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			Levi_state := E_Levi_states.LEVI_LIFTOFF;
 			
+			(*
+			FB_Levi_Liftoff(Ia_for_levi_left 			:= Ia_for_levi_left,
+							Ib_for_levi_left 			:= Ib_for_levi_left,
+							Ic_for_levi_left 			:= Ic_for_levi_left,
+							currentangle_for_levi_left 	:= currentangle_for_levi_left,
+							Ia_for_levi_right 			:= Ia_for_levi_right,
+							Ib_for_levi_right 			:= Ib_for_levi_right,
+							Ic_for_levi_right 			:= Ic_for_levi_right,
+							currentangle_for_levi_right	:= currentangle_for_levi_right,
+							motor_airgap_left 			:= motor_airgap_left,
+							motor_airgap_right 			:= motor_airgap_right,
+							Position 					:= Position,
+							Velocity 					:= Velocity,
+							PositionOffset 				:= PositionOffset,
+							z_filtered 					:= z_filtered,
+							roll_filtered 				:= roll_filtered,
+							pitch_filtered 				:= pitch_filtered,
+							y_filtered 					:= y_filtered,
+							yaw_filtered 				:= yaw_filtered,
+							Drive_status 				:= Drive_status,
+							Drive_Diagnostic 			:= Drive_Diagnostic,
+							Force_feedback_value 		:= Force_feedback_value,
+							Real_currents 				:= Real_currents,
+							avg_I_squared_HEMS 			:= avg_I_squared_HEMS,
+							Requested_currents 			:= Requested_currents,
+							Requested_force_values 		:= Requested_force_values,
+							Control_word 				:= Control_word,
+							Levi_State 					:= Levi_State,
+							Levi_command 				:= GVL_Levi.Levi_command,
+							FB_auto_DOF_state 			:= FB_auto_DOF_state,
+							n_drive_warnings 			:= n_drive_warnings,
+							n_drive_errors 				:= n_drive_errors,
+							error_specifics 			:= error_specifics,
+							drive_feedback_timeouts 	:= drive_feedback_timeouts,
+							Drive_current_error 		:= Drive_current_error,
+							Error 						:= Error,
+							motor_thrust_l 				:= motor_thrust_l,
+							motor_thrust_r 				:= motor_thrust_r,
+							motor_lift_l 				:= motor_lift_l,
+							motor_lift_r 				:= motor_lift_r,
+							FB_control_liftoff_init 	:= FB_control_liftoff_init,
+							FB_control_liftoff 			:= FB_control_liftoff,
+							Control_liftoff_inputs 		:= Control_liftoff_inputs,
+							Control_liftoff_outputs 	:= Control_liftoff_outputs,
+							Control_liftoff_parameters 	:= Control_liftoff_parameters,
+							auto_z_target_trigger 		:= auto_z_target_trigger,
+							auto_y_target_trigger 		:= auto_y_target_trigger,
+							auto_yaw_target_trigger 	:= auto_yaw_target_trigger,
+							auto_y_target_error 		:= auto_y_target_error,
+							auto_yaw_target_error 		:= auto_yaw_target_error,
+							auto_DOF_states 			:= auto_DOF_states,
+							FB_control_vert_init 		:= FB_control_vert_init,
+							FB_control_vert 			:= FB_control_vert,
+							Control_vert_inputs 		:= Control_vert_inputs,
+							Control_vert_outputs 		:= Control_vert_outputs,
+							Control_vert_parameters 	:= Control_vert_parameters,
+							FB_control_lat_init 		:= FB_control_lat_init,
+							FB_control_lat 				:= FB_control_lat,
+							Control_lat_inputs 			:= Control_lat_inputs,
+							Control_lat_outputs 		:= Control_lat_outputs,
+							Control_lat_parameters 		:= Control_lat_parameters,
+							z_liftoff 					:= z_liftoff,
+							z_target 					:= z_target,
+							pitch_target 				:= pitch_target,
+							roll_target 				:= roll_target,
+							y_target_airgap 			:= y_target_airgap,
+							yaw_target 					:= yaw_target,
+							last_levitating_airgap 		:= last_levitating_airgap,
+							Liftoff_in_progress 		:= Liftoff_in_progress,
+							descent_in_progress 		:= descent_in_progress,
+							found_auto_z_target 		:= found_auto_z_target,
+							found_auto_y_target 		:= found_auto_y_target,
+							found_auto_yaw_target 		:= found_auto_yaw_target,
+							End_auto_DOF_cycle 			:= End_auto_DOF_cycle,
+							hems_under_gap 				:= hems_under_gap,
+							ems_under_gap 				:= ems_under_gap,
+							Run_z_liftoff_calc 			:= Run_z_liftoff_calc);
+			*)
 			Run_z_liftoff_calc := FALSE;
 			
 			FOR i:=0 TO 23 DO
@@ -1283,35 +1358,95 @@ CASE GVL_LEVI.Levi_Command OF
 	E_Levi_States.LEVI_LEVITATION:
 		IF 	(Levi_state = E_Levi_States.LEVI_READY OR
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
-			Levi_state = E_Levi_States.LEVI_LEVITATION) AND 
+			Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DANCE) AND 
 			Levi_ready AND
 			reset_busy = FALSE AND
 			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
 			
 			Levi_state := E_Levi_states.LEVI_LEVITATION;
-			(*FB_Levi_Control(	configured_peak_current := configured_peak_current,
-								drive_status := Drive_status,
-								drive_diagnostics := Drive_Diagnostic,
-								State := Levi_State,
-								Force_feedback_value := Force_feedback_value,
-								z_liftoff := z_liftoff,
-								z := z,
-								roll := roll,
-								pitch := pitch,
-								y := y,
-								yaw := yaw,
-								motor_thrust_l := motor_thrust_l,
-								motor_thrust_r := motor_thrust_r,
-								motor_lift_l := motor_lift_l,
-								motor_lift_r := motor_lift_r,
-								Control_word_array := Control_word,
-								drive_feedback_timeouts := drive_feedback_timeouts,
-								force_values := Requested_force_values,
-								Drive_current_error := Drive_current_error,
-								Error => Error,
-								Run_z_liftoff_calc => Run_z_liftoff_calc);*)
-		
-						Run_z_liftoff_calc := FALSE;
+			
+			(*
+			FB_Levi_Levitation(	Ia_for_levi_left 			:= Ia_for_levi_left,
+								Ib_for_levi_left 			:= Ib_for_levi_left,
+								Ic_for_levi_left 			:= Ic_for_levi_left,
+								currentangle_for_levi_left 	:= currentangle_for_levi_left,
+								Ia_for_levi_right 			:= Ia_for_levi_right,
+								Ib_for_levi_right 			:= Ib_for_levi_right,
+								Ic_for_levi_right 			:= Ic_for_levi_right,
+								currentangle_for_levi_right	:= currentangle_for_levi_right,
+								motor_airgap_left 			:= motor_airgap_left,
+								motor_airgap_right 			:= motor_airgap_right,
+								Position 					:= Position,
+								Velocity 					:= Velocity,
+								PositionOffset 				:= PositionOffset,
+								z 							:= z,
+								z_filtered 					:= z_filtered,
+								roll_filtered 				:= roll_filtered,
+								pitch_filtered 				:= pitch_filtered,
+								y_filtered 					:= y_filtered,
+								yaw_filtered 				:= yaw_filtered,
+								Drive_status 				:= Drive_status,
+								Drive_Diagnostic 			:= Drive_Diagnostic,
+								Force_feedback_value 		:= Force_feedback_value,
+								Real_currents 				:= Real_currents,
+								avg_I_squared_HEMS 			:= avg_I_squared_HEMS,
+								Requested_currents 			:= Requested_currents,
+								Requested_force_values 		:= Requested_force_values,
+								Control_word 				:= Control_word,
+								Levi_State 					:= Levi_State,
+								Levi_command 				:= GVL_Levi.Levi_command,
+								FB_auto_DOF_state 			:= FB_auto_DOF_state,
+								n_drive_warnings 			:= n_drive_warnings,
+								n_drive_errors 				:= n_drive_errors,
+								error_specifics 			:= error_specifics,
+								drive_feedback_timeouts 	:= drive_feedback_timeouts,
+								Drive_current_error 		:= Drive_current_error,
+								Error 						:= Error,
+								motor_thrust_l 				:= motor_thrust_l,
+								motor_thrust_r 				:= motor_thrust_r,
+								motor_lift_l 				:= motor_lift_l,
+								motor_lift_r 				:= motor_lift_r,
+								FB_control_liftoff_init 	:= FB_control_liftoff_init,
+								FB_control_liftoff 			:= FB_control_liftoff,
+								Control_liftoff_inputs 		:= Control_liftoff_inputs,
+								Control_liftoff_outputs 	:= Control_liftoff_outputs,
+								Control_liftoff_parameters 	:= Control_liftoff_parameters,
+								auto_z_target_trigger 		:= auto_z_target_trigger,
+								auto_y_target_trigger 		:= auto_y_target_trigger,
+								auto_yaw_target_trigger 	:= auto_yaw_target_trigger,
+								auto_y_target_error 		:= auto_y_target_error,
+								auto_yaw_target_error 		:= auto_yaw_target_error,
+								auto_DOF_states 			:= auto_DOF_states,
+								FB_control_vert_init 		:= FB_control_vert_init,
+								FB_control_vert 			:= FB_control_vert,
+								Control_vert_inputs 		:= Control_vert_inputs,
+								Control_vert_outputs 		:= Control_vert_outputs,
+								Control_vert_parameters 	:= Control_vert_parameters,
+								FB_control_lat_init 		:= FB_control_lat_init,
+								FB_control_lat 				:= FB_control_lat,
+								Control_lat_inputs 			:= Control_lat_inputs,
+								Control_lat_outputs 		:= Control_lat_outputs,
+								Control_lat_parameters 		:= Control_lat_parameters,
+								z_liftoff 					:= z_liftoff,
+								z_target 					:= z_target,
+								pitch_target 				:= pitch_target,
+								roll_target 				:= roll_target,
+								y_target_airgap 			:= y_target_airgap,
+								yaw_target 					:= yaw_target,
+								last_levitating_airgap 		:= last_levitating_airgap,
+								Liftoff_in_progress 		:= Liftoff_in_progress,
+								descent_in_progress 		:= descent_in_progress,
+								found_auto_z_target 		:= found_auto_z_target,
+								found_auto_y_target 		:= found_auto_y_target,
+								found_auto_yaw_target 		:= found_auto_yaw_target,
+								End_auto_DOF_cycle 			:= End_auto_DOF_cycle,
+								dancing						:= dancing,
+								hems_under_gap 				:= hems_under_gap,
+								ems_under_gap 				:= ems_under_gap,
+								Run_z_liftoff_calc 			:= Run_z_liftoff_calc);
+			*)
+			Run_z_liftoff_calc := FALSE;
 			
 			FOR i:=0 TO 23 DO
 				Control_word[i] := 16#E000;
@@ -1736,7 +1871,69 @@ CASE GVL_LEVI.Levi_Command OF
 			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
 			
 			Levi_state := E_Levi_states.LEVI_DESCENT;
-			
+			(*
+			FB_Levi_Descent(Ia_for_levi_left 			:= Ia_for_levi_left,
+							Ib_for_levi_left 			:= Ib_for_levi_left,
+							Ic_for_levi_left 			:= Ic_for_levi_left,
+							currentangle_for_levi_left 	:= currentangle_for_levi_left,
+							Ia_for_levi_right 			:= Ia_for_levi_right,
+							Ib_for_levi_right 			:= Ib_for_levi_right,
+							Ic_for_levi_right 			:= Ic_for_levi_right,
+							currentangle_for_levi_right	:= currentangle_for_levi_right,
+							motor_airgap_left 			:= motor_airgap_left,
+							motor_airgap_right 			:= motor_airgap_right,
+							Position 					:= Position,
+							Velocity 					:= Velocity,
+							PositionOffset 				:= PositionOffset,
+							z_filtered 					:= z_filtered,
+							roll_filtered 				:= roll_filtered,
+							pitch_filtered 				:= pitch_filtered,
+							y_filtered 					:= y_filtered,
+							yaw_filtered 				:= yaw_filtered,
+							Drive_status 				:= Drive_status,
+							Drive_Diagnostic 			:= Drive_Diagnostic,
+							Force_feedback_value 		:= Force_feedback_value,
+							Requested_currents 			:= Requested_currents,
+							Requested_force_values 		:= Requested_force_values,
+							Control_word 				:= Control_word,
+							Levi_State 					:= Levi_State,
+							Levi_command 				:= GVL_Levi.Levi_command,
+							n_drive_warnings 			:= n_drive_warnings,
+							n_drive_errors 				:= n_drive_errors,
+							error_specifics 			:= error_specifics,
+							drive_feedback_timeouts 	:= drive_feedback_timeouts,
+							Drive_current_error 		:= Drive_current_error,
+							Error 						:= Error,
+							motor_thrust_l 				:= motor_thrust_l,
+							motor_thrust_r 				:= motor_thrust_r,
+							motor_lift_l 				:= motor_lift_l,
+							motor_lift_r 				:= motor_lift_r,
+							FB_control_descent_init 	:= FB_control_descent_init,
+							FB_control_descent 			:= FB_control_descent,
+							Control_descent_outputs 	:= Control_descent_outputs,
+							Control_descent_parameters 	:= Control_descent_parameters,
+							FB_control_vert_init 		:= FB_control_vert_init,
+							FB_control_vert 			:= FB_control_vert,
+							Control_vert_inputs 		:= Control_vert_inputs,
+							Control_vert_outputs 		:= Control_vert_outputs,
+							Control_vert_parameters 	:= Control_vert_parameters,
+							FB_control_lat_init 		:= FB_control_lat_init,
+							FB_control_lat 				:= FB_control_lat,
+							Control_lat_inputs 			:= Control_lat_inputs,
+							Control_lat_outputs 		:= Control_lat_outputs,
+							Control_lat_parameters 		:= Control_lat_parameters,
+							z_liftoff 					:= z_liftoff,
+							z_target 					:= z_target,
+							pitch_target 				:= pitch_target,
+							roll_target 				:= roll_target,
+							y_target_airgap 			:= y_target_airgap,
+							yaw_target 					:= yaw_target,
+							last_levitating_airgap 		:= last_levitating_airgap,
+							descent_in_progress 		:= descent_in_progress,
+							hems_under_gap 				:= hems_under_gap,
+							ems_under_gap 				:= ems_under_gap,
+							Run_z_liftoff_calc 			:= Run_z_liftoff_calc);
+			*)
 			Run_z_liftoff_calc := FALSE;
 			
 			FOR i:=0 TO 23 DO
@@ -2006,16 +2203,92 @@ CASE GVL_LEVI.Levi_Command OF
 												error_specifics := error_specifics,
 												Error => Error,
 												Run_z_liftoff_calc => Run_z_liftoff_calc);	
-
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
 										
 		END_IF
+	//------------------------------------------------------------------------------------------------
+	
+	E_Levi_States.LEVI_DANCE:
+		IF 	(Levi_state = E_Levi_States.LEVI_LEVITATION OR
+			Levi_state = E_Levi_States.LEVI_DANCE) AND 
+			Levi_ready AND 
+			reset_busy = FALSE AND
+			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
+		
+			Levi_state := E_Levi_states.LEVI_DANCE;
+			(*
+			FB_Levi_Dance(	Ia_for_levi_left 			:= Ia_for_levi_left,
+							Ib_for_levi_left 			:= Ib_for_levi_left,
+							Ic_for_levi_left 			:= Ic_for_levi_left,
+							currentangle_for_levi_left 	:= currentangle_for_levi_left,
+							Ia_for_levi_right 			:= Ia_for_levi_right,
+							Ib_for_levi_right 			:= Ib_for_levi_right,
+							Ic_for_levi_right 			:= Ic_for_levi_right,
+							currentangle_for_levi_right	:= currentangle_for_levi_right,
+							motor_airgap_left 			:= motor_airgap_left,
+							motor_airgap_right 			:= motor_airgap_right,
+							Position 					:= Position,
+							Velocity 					:= Velocity,
+							PositionOffset 				:= PositionOffset,
+							z_filtered 					:= z_filtered,
+							roll_filtered 				:= roll_filtered,
+							pitch_filtered 				:= pitch_filtered,
+							y_filtered 					:= y_filtered,
+							yaw_filtered 				:= yaw_filtered,
+							Drive_status 				:= Drive_status,
+							Drive_Diagnostic 			:= Drive_Diagnostic,
+							Force_feedback_value 		:= Force_feedback_value,
+							Requested_currents 			:= Requested_currents,
+							Requested_force_values 		:= Requested_force_values,
+							Control_word 				:= Control_word,
+							Levi_State 					:= Levi_State,
+							Levi_command 				:= GVL_Levi.Levi_command,
+							n_drive_warnings 			:= n_drive_warnings,
+							n_drive_errors 				:= n_drive_errors,
+							error_specifics 			:= error_specifics,
+							drive_feedback_timeouts 	:= drive_feedback_timeouts,
+							Drive_current_error 		:= Drive_current_error,
+							Error 						:= Error,
+							motor_thrust_l 				:= motor_thrust_l,
+							motor_thrust_r 				:= motor_thrust_r,
+							motor_lift_l 				:= motor_lift_l,
+							motor_lift_r 				:= motor_lift_r,
+							FB_control_vert_init 		:= FB_control_vert_init,
+							FB_control_vert 			:= FB_control_vert,
+							Control_vert_inputs 		:= Control_vert_inputs,
+							Control_vert_outputs 		:= Control_vert_outputs,
+							Control_vert_parameters 	:= Control_vert_parameters,
+							FB_control_lat_init 		:= FB_control_lat_init,
+							FB_control_lat 				:= FB_control_lat,
+							Control_lat_inputs 			:= Control_lat_inputs,
+							Control_lat_outputs 		:= Control_lat_outputs,
+							Control_lat_parameters 		:= Control_lat_parameters,
+							auto_DOF_states 			:= auto_DOF_states,
+							z_liftoff 					:= z_liftoff,
+							z_target 					:= z_target,
+							pitch_target 				:= pitch_target,
+							roll_target 				:= roll_target,
+							y_target_airgap 			:= y_target_airgap,
+							yaw_target 					:= yaw_target,
+							z_target_dance 				:= z_target_dance,
+							pitch_target_dance 			:= pitch_target_dance,
+							roll_target_dance 			:= roll_target_dance,
+							y_target_dance 				:= y_target_dance,
+							yaw_target_dance 			:= yaw_target_dance,
+							dancing						:= dancing,
+							hems_under_gap 				:= hems_under_gap,
+							ems_under_gap 				:= ems_under_gap,
+							cycle_time_levi 			:= cycle_time_levi,
+							clock 						:= clock,
+							Run_z_liftoff_calc 			:= Run_z_liftoff_calc);
+		*)	
+		ELSE
+			GVL_LEVI.Levi_command := Levi_state;
+			
+		END_IF
+	
 	//------------------------------------------------------------------------------------------------
 	
 	E_Levi_States.LEVI_ERROR:
@@ -2028,6 +2301,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Levi_state = E_Levi_States.LEVI_LIFTOFF OR
 			Levi_state = E_Levi_States.LEVI_LEVITATION OR
 			Levi_state = E_Levi_States.LEVI_DESCENT OR
+			Levi_state = E_Levi_States.LEVI_DANCE OR
 			Levi_state = E_Levi_States.LEVI_ERROR OR
 			Levi_state = E_Levi_States.LEVI_RESET_DRIVES) AND
 			reset_busy = FALSE THEN
@@ -2045,11 +2319,6 @@ CASE GVL_LEVI.Levi_Command OF
 							Error => Error,
 							error_resettable => error_resettable,
 							First_reset_run => First_reset_run);
-
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 		
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
@@ -2078,11 +2347,6 @@ CASE GVL_LEVI.Levi_Command OF
 									reset_busy => reset_busy,
 									reset_error => reset_error,
 									Go_next_state => GVL_LEVI.Levi_command);
-
-			Control_lat_parameters.blevi_operational := FALSE;
-			Control_vert_parameters.blevi_operational := FALSE;
-			FB_Control_lat.stlateral_levitation_control_new_P := Control_lat_parameters;
-			FB_Control_vert.stvertical_levitation_control_new_P := Control_vert_parameters;
 
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;		
