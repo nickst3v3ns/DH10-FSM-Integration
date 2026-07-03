@@ -456,7 +456,9 @@ CASE barcodeState OF
 	
 		//ties wat doe je hier???????????
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
-		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		//positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		
+		positionDelft := (rPositionBackDelftTest + rPositionFrontDelftTest)/2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
 		
 		//thomas' addition

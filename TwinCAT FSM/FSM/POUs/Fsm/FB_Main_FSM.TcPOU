@@ -23,6 +23,7 @@ VAR
 	bCriticalFaultActive		:BOOL;
 	criticalFault				:BOOL; 
 	
+	//command blockers during transition
 	bCommandSet					:BOOL;
 	bCommandSetDupe				:BOOL;
 	
@@ -31,6 +32,12 @@ VAR
 	
 	//LEVI tracker for descend --allows bidriectional transitioning
 	bDescend 		:BOOL;
+	
+	//PROP movement state param setter
+	bPropParamSet 	:BOOL;
+	//PROP movement state soft stop buffer
+	fbPropDelay : TON;
+	bPropSoftStop : BOOL;
 	
 	//Function blocks for arming and dearming brakes
 	fbArm 			:FB_BrakesArm;
@@ -86,7 +93,7 @@ bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState >= 3) OR GVL_PT.ERROR_STATUS <> 0) THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk OR NOT GVL_FSM.bEstopOutGlobal) AND currentState >= 3) OR GVL_PT.ERROR_STATUS <> 0) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
@@ -365,130 +372,148 @@ CASE currentState OF
 
 //MOVEMENT		
 	E_PodState.STATE_MOVEMENT: //bit empty innit
+		GVL_PROP.propulsion_enable := TRUE;
+		GVL_LEVI.levitation_enable := TRUE;
+		
 	
 		GVL_FSM.b_AlivePLCGlobal := TRUE;
-		//GVL_PROP.PropFlag := 1;
 		
-		IF GVL_prop.Position < 4.689 THEN
-			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
-			GVL_FSM.Max_velocity_right := -50;
-		ELSIF GVL_prop.Position > 15.811 THEN
-			GVL_FSM.Max_velocity_left := 50;
-			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
-		ELSE
-			GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
-			GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
+		fbPropDelay(IN := TRUE, PT := T#5S);
+		
+		IF NOT bPropParamSet THEN
+			GVL_PROP.PropFlag 		:= 1;
+			GVL_PROP.TargetVelocity := 0;
+			bPropParamSet := TRUE;
 		END_IF
 		
-		
-		
-		(*
-		IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		*)
-		
-		IF ABS(GVL_PROP.Ia_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ib_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ic_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ia_right)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ib_right)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ic_right)>UpperBoundPropOutputCurrent THEN
-			//Current too much	
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			fbFormat(sFormat := 'Currents motor: (Ial: %.4f, Ibl: %.4f, Icl: %.4f, Iar: %.4f, Ibr: %.4f, Icr: %.4f)', 
-										 arg1 := F_LREAL(GVL_PROP.Ia_left),
-										 arg2 := F_LREAL(GVL_PROP.Ib_left),
-										 arg3 := F_LREAL(GVL_PROP.Ic_left),
-										 arg4 := F_LREAL(GVL_PROP.Ia_right),
-										 arg5 := F_LREAL(GVL_PROP.Ib_right),
-										 arg6 := F_LREAL(GVL_PROP.Ic_right),
-										sOut => errorMessageFSM);
-			
-			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
-			currentCmd := E_Command.CMD_EMERGENCY;//this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		ELSIF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
-			//Too speedy in track
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			fbFormat(sFormat := 'Speed is too high to the left : %.4f with a max of : %.4f', 
-										 arg1 := F_LREAL(GVL_PROP.velocity),
-										 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
-								sOut => errorMessageFSM);
-								
-			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge			 
-			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
-			//Too speedy in track
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			fbFormat(sFormat := 'Speed is too high to the right : %.4f with a max of : %.4f', 
-										 arg1 := F_LREAL(GVL_PROP.velocity),
-										 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
-								sOut => errorMessageFSM);
-								
-			GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
-			currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		
-		
-
-		(* ELSIF ABS(GVL_PROP.Velocity)>speedLimit THEN
-			//Too speedy in middle track
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			fbFormat(sFormat := 'Speed is too high : %.4f', 
-										 arg1 := F_LREAL(GVL_PROP.velocity),
-								sOut => errorMessageFSM);
-										 
-			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		
-		ELSIF (GVL_PROP.position < rLowerBoundSoftStopSlow AND GVL_PROP.velocity<-speedLimitSlow) OR (GVL_PROP.position > rUpperBoundSoftStopSlow AND GVL_PROP.velocity>speedLimitSlow) THEN
-			//Too speedy in slow zone
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			(*fbFormat(sFormat := 'Speed is too high in this area of the track (supposed to be slow area): Speed: %.4f, Position : %.4f', 
-										 arg1 := F_REAL(GVL_PROP.speed),
-										 arg2 := F_REAL(GVL_PROP.position),
-										sOut => errorMessageFSM);*)
-			fbFormat(sFormat := 'Speed is too high slow: v: %.4f, pos : %.4f', 
-										 arg1 := F_LREAL(GVL_PROP.Velocity),
-										 arg2 := F_LREAL(GVL_PROP.position),
-										sOut => errorMessageFSM);
-										
-			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		
-		ELSIF (GVL_PROP.position < rLowerBoundSoftStopVerySlow AND GVL_PROP.velocity<-speedLimitVerySlow) OR (GVL_PROP.position > rUpperBoundSoftStopVerySlow AND GVL_PROP.velocity>speedLimitVerySlow) THEN
-			//Too speedy in superslow zone
-			GVL_LEVI.levitation_enable := FALSE;
-			GVL_PROP.propulsion_enable := FALSE;
-			
-			(*fbFormat(sFormat := 'Speed is too high in this area of the track (supposed to be very slow area): Speed: %.4f, Position : %.4f', 
-							 arg1 := F_REAL(GVL_PROP.speed),
-							 arg2 := F_REAL(GVL_PROP.position),
-								sOut => errorMessageFSM);*)
-			fbFormat(sFormat := 'SpeeD too high in very slow: v: %.4f, pos : %.4f', 
-							 arg1 := F_LREAL(GVL_PROP.velocity),
-							 arg2 := F_LREAL(GVL_PROP.position),
-								sOut => errorMessageFSM);
-			
-			currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-		*)
-		ELSE
-			IF currentCmd = E_Command.CMD_TO_LEVITATION THEN
-				GVL_PROP.AutoPilotFlag := 0;
-				GVL_PROP.TargetVelocity := 0;
-				IF GVL_PROP.Velocity < 75 THEN //velocity in mm/s. might need to increase due to track being crooked?
-					GVL_PROP.propulsion_enable := FALSE;
-					currentState := E_PodState.STATE_LEVITATION;
-					currentCmd := E_Command.CMD_NONE;
-				END_IF
+		IF fbPropDelay.Q THEN
+			bPropSoftStop := TRUE;
+		END_IF
+	
+		IF bPropSoftStop THEN
+			IF GVL_prop.Position < 4.689 THEN
+				GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
+				GVL_FSM.Max_velocity_right := -50;
+			ELSIF GVL_prop.Position > 15.811 THEN
+				GVL_FSM.Max_velocity_left := 50;
+				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
+			ELSE
+				GVL_FSM.Max_velocity_left := -15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225);
+				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225));
 			END_IF
-			GVL_LEVI.levitation_enable := TRUE;
-			GVL_Prop.propulsion_enable := TRUE;
+			
+			
+			
+			(*
+			IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			*)
+			
+			IF ABS(GVL_PROP.Ia_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ib_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ic_left)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ia_right)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ib_right)>UpperBoundPropOutputCurrent OR ABS(GVL_PROP.Ic_right)>UpperBoundPropOutputCurrent THEN
+				//Current too much	
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Currents motor: (Ial: %.4f, Ibl: %.4f, Icl: %.4f, Iar: %.4f, Ibr: %.4f, Icr: %.4f)', 
+											 arg1 := F_LREAL(GVL_PROP.Ia_left),
+											 arg2 := F_LREAL(GVL_PROP.Ib_left),
+											 arg3 := F_LREAL(GVL_PROP.Ic_left),
+											 arg4 := F_LREAL(GVL_PROP.Ia_right),
+											 arg5 := F_LREAL(GVL_PROP.Ib_right),
+											 arg6 := F_LREAL(GVL_PROP.Ic_right),
+											sOut => errorMessageFSM);
+				
+				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
+				currentCmd := E_Command.CMD_EMERGENCY;//this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			ELSIF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
+				//Too speedy in track
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Speed is too high to the left : %.4f with a max of : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.velocity),
+											 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
+									sOut => errorMessageFSM);
+									
+				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge			 
+				currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
+				//Too speedy in track
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Speed is too high to the right : %.4f with a max of : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.velocity),
+											 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
+									sOut => errorMessageFSM);
+									
+				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
+				currentState := E_PodState.STATE_EMERGENCY; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			
+			
+	
+			(* ELSIF ABS(GVL_PROP.Velocity)>speedLimit THEN
+				//Too speedy in middle track
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Speed is too high : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.velocity),
+									sOut => errorMessageFSM);
+											 
+				currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			
+			ELSIF (GVL_PROP.position < rLowerBoundSoftStopSlow AND GVL_PROP.velocity<-speedLimitSlow) OR (GVL_PROP.position > rUpperBoundSoftStopSlow AND GVL_PROP.velocity>speedLimitSlow) THEN
+				//Too speedy in slow zone
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				(*fbFormat(sFormat := 'Speed is too high in this area of the track (supposed to be slow area): Speed: %.4f, Position : %.4f', 
+											 arg1 := F_REAL(GVL_PROP.speed),
+											 arg2 := F_REAL(GVL_PROP.position),
+											sOut => errorMessageFSM);*)
+				fbFormat(sFormat := 'Speed is too high slow: v: %.4f, pos : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.Velocity),
+											 arg2 := F_LREAL(GVL_PROP.position),
+											sOut => errorMessageFSM);
+											
+				currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			
+			ELSIF (GVL_PROP.position < rLowerBoundSoftStopVerySlow AND GVL_PROP.velocity<-speedLimitVerySlow) OR (GVL_PROP.position > rUpperBoundSoftStopVerySlow AND GVL_PROP.velocity>speedLimitVerySlow) THEN
+				//Too speedy in superslow zone
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				(*fbFormat(sFormat := 'Speed is too high in this area of the track (supposed to be very slow area): Speed: %.4f, Position : %.4f', 
+								 arg1 := F_REAL(GVL_PROP.speed),
+								 arg2 := F_REAL(GVL_PROP.position),
+									sOut => errorMessageFSM);*)
+				fbFormat(sFormat := 'SpeeD too high in very slow: v: %.4f, pos : %.4f', 
+								 arg1 := F_LREAL(GVL_PROP.velocity),
+								 arg2 := F_LREAL(GVL_PROP.position),
+									sOut => errorMessageFSM);
+				
+				currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
+			*)
+			ELSE
+				IF currentCmd = E_Command.CMD_TO_LEVITATION THEN
+					GVL_PROP.PropFlag := 1;
+					GVL_PROP.AutoPilotFlag := 0;
+					GVL_PROP.TargetVelocity := 0;
+					IF GVL_PROP.Velocity < 75 THEN //velocity in mm/s. might need to increase due to track being crooked?
+						GVL_PROP.PropFlag := 0;
+						GVL_PROP.propulsion_enable := FALSE;
+						currentState := E_PodState.STATE_LEVITATION;
+						currentCmd := E_Command.CMD_NONE;
+					END_IF
+				END_IF
+				
+			END_IF
 		END_IF
+
 		
 
 //MOVEMENT		
@@ -552,14 +577,14 @@ END_CASE
 
 //Forced Reset to Emergency if the Heartbeat fails
 
-fbHeartBeatFailReset(IN := (NOT GVL_FSM.bheartbeat_OK) AND currentState >= 3, PT := T#1S);
+//fbHeartBeatFailReset(IN := (NOT GVL_FSM.bheartbeat_OK) AND currentState >= 3, PT := T#1S);
 
-IF fbHeartBeatFailReset.Q THEN
+//IF fbHeartBeatFailReset.Q THEN
 	
 	
-	currentState := E_PodState.STATE_EMERGENCY;
+	//currentState := E_PodState.STATE_EMERGENCY;
 	
-END_IF
+//END_IF
 
 
 GVL_FSM.E_PodStateGlobal := currentState;

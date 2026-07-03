@@ -10,7 +10,7 @@
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -153,12 +153,6 @@
             </Node>
             <Node>
               <Title>DC_link_voltage_HEMS[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>faverage_current_hems</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -958,24 +952,11 @@
                 </Node>
               </Children>
             </Node>
-            <Node>
-              <Title>Average current HEMS</Title>
-              <Expanded>True</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>faverage_current_hems</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
           </Children>
         </Node>
         <Node>
           <Title>EMS currents</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1068,7 +1049,7 @@
         </Node>
         <Node>
           <Title>Vertical airgaps</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1174,7 +1155,7 @@
         </Node>
         <Node>
           <Title>Lateral airgaps</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1280,7 +1261,7 @@
         </Node>
         <Node>
           <Title>Degrees of freedom</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1391,7 +1372,7 @@
         </Node>
         <Node>
           <Title>Integrals levi</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1442,7 +1423,7 @@
         </Node>
         <Node>
           <Title>Thermal</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1559,7 +1540,7 @@
         </Node>
         <Node>
           <Title>Voltages</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1717,7 +1698,7 @@
         </Node>
         <Node>
           <Title>Power</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2238,7 +2219,7 @@
         </Node>
         <Node>
           <Title>Currents prop</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2295,7 +2276,7 @@
         </Node>
         <Node>
           <Title>Id/Iq</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2364,7 +2345,7 @@
         </Node>
         <Node>
           <Title>Position</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2422,7 +2403,7 @@
         </Node>
         <Node>
           <Title>Temperature prop drive</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2472,7 +2453,7 @@
         </Node>
         <Node>
           <Title>Motor coil temperatures</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2729,7 +2710,7 @@
         </Node>
         <Node>
           <Title>Velocity Integral</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2755,7 +2736,7 @@
         </Node>
         <Node>
           <Title>Thrust &amp; lift</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2800,7 +2781,7 @@
         </Node>
         <Node>
           <Title>Output voltages</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2838,7 +2819,7 @@
         </Node>
         <Node>
           <Title>DC bus voltage</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2871,7 +2852,7 @@
         </Node>
         <Node>
           <Title>Current angle</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -2897,7 +2878,7 @@
         </Node>
         <Node>
           <Title>YT Chart</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>

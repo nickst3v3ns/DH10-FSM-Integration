@@ -3704,303 +3704,6 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{7E00D8CE-E6BA-CD2C-441B-F38EB5A26A32}">ITcSensor_model_new</Name>
-			<BitSize X64="64">32</BitSize>
-			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
-			<Method>
-				<Name VTableIndex="0">Sensor_model_new_step</Name>
-				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
-				<ReturnBitSize>32</ReturnBitSize>
-			</Method>
-			<Properties>
-				<Property>
-					<Name>TcComWrapper_GenerateGetter</Name>
-					<Value>FALSE</Value>
-				</Property>
-				<Property>
-					<Name>TcComWrapper_GenerateMethods</Name>
-					<Value>TRUE</Value>
-				</Property>
-			</Properties>
-		</DataType>
-		<DataType>
-			<Name GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Name>
-			<BitSize>384</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>6</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Name>
-			<BitSize>768</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>12</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Name>
-			<BitSize>1152</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>18</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{C8F72152-C599-8F4C-BB3C-C7FBB917C837}">P_Sensor_model_new_T</Name>
-			<BitSize>3456</BitSize>
-			<SubItem>
-				<Name>Laser_magnet_offset_EMS</Name>
-				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
-				<BitSize>384</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Laser_magnet_offset_HEMS</Name>
-				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
-				<BitSize>384</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>airgap_nominal_ems</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>768</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>coords_lat_sensors</Name>
-				<Type GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Type>
-				<BitSize>768</BitSize>
-				<BitOffs>832</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>coords_vert_sensors</Name>
-				<Type GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Type>
-				<BitSize>1152</BitSize>
-				<BitOffs>1600</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>cycle_time</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2752</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>lateral_filter_window_cycles</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2816</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>n_sensors_v</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2880</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>vertical_filter_window_cycles</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>2944</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>z_com</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3008</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UnitDelay_InitialCondition</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3072</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UnitDelay1_InitialCondition</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3136</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Convert_to_meters_Gain</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3200</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Integrator_IC</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3264</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Integrator1_IC</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3328</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>Constant_Value</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>3392</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</Name>
-			<BitSize>64</BitSize>
-			<SubItem>
-				<Name>MovingAveragepitch</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</Name>
-			<BitSize>64</BitSize>
-			<SubItem>
-				<Name>MovingAveragey</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Name>
-			<BitSize>256</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{CEF77AAA-3317-24CD-AAE3-08276892C9C0}">cell_wrap_Sensor_model_new_T</Name>
-			<BitSize>256</BitSize>
-			<SubItem>
-				<Name>f1</Name>
-				<Type GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Name>
-			<BitSize>576</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>9</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Name>
-			<BitSize>1216</BitSize>
-			<SubItem>
-				<Name>matlabCodegenIsDeleted</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>isInitialized</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>isSetupComplete</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TunablePropsChanged</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>72</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>inputVarSize</Name>
-				<Type GUID="{CEF77AAA-3317-24CD-AAE3-08276892C9C0}">cell_wrap_Sensor_model_new_T</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>96</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>NumChannels</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>352</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>FrameLength</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumSum</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>448</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumSumRev</Name>
-				<Type GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Type>
-				<BitSize>576</BitSize>
-				<BitOffs>512</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pCumRevIndex</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>1088</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>pModValueRev</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
-				<BitSize>64</BitSize>
-				<BitOffs>1152</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</Name>
-			<BitSize>1280</BitSize>
-			<SubItem>
-				<Name>obj</Name>
-				<Type GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Type>
-				<BitSize>1216</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>objisempty</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1216</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</Name>
-			<BitSize>1280</BitSize>
-			<SubItem>
-				<Name>obj</Name>
-				<Type GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Type>
-				<BitSize>1216</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>objisempty</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1216</BitOffs>
-			</SubItem>
-		</DataType>
-		<DataType>
 			<Name GUID="{22276226-8561-82D3-24FD-532348FCDDE2}">ITcETML_DH10</Name>
 			<BitSize X64="64">32</BitSize>
 			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
@@ -4350,6 +4053,15 @@
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{B7948BC6-CC64-ADB1-F2CA-8318D3D8E62B}">cell_wrap_Liftoff_model_T</Name>
 			<BitSize>256</BitSize>
 			<SubItem>
@@ -4452,6 +4164,294 @@
 				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>6976</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{7E00D8CE-E6BA-CD2C-441B-F38EB5A26A32}">ITcSensor_model_new</Name>
+			<BitSize X64="64">32</BitSize>
+			<BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+			<Method>
+				<Name VTableIndex="0">Sensor_model_new_step</Name>
+				<ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+				<ReturnBitSize>32</ReturnBitSize>
+			</Method>
+			<Properties>
+				<Property>
+					<Name>TcComWrapper_GenerateGetter</Name>
+					<Value>FALSE</Value>
+				</Property>
+				<Property>
+					<Name>TcComWrapper_GenerateMethods</Name>
+					<Value>TRUE</Value>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Name>
+			<BitSize>384</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Name>
+			<BitSize>768</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>12</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Name>
+			<BitSize>1152</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>18</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{C8F72152-C599-8F4C-BB3C-C7FBB917C837}">P_Sensor_model_new_T</Name>
+			<BitSize>3456</BitSize>
+			<SubItem>
+				<Name>Laser_magnet_offset_EMS</Name>
+				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Laser_magnet_offset_HEMS</Name>
+				<Type GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</Type>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>airgap_nominal_ems</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>coords_lat_sensors</Name>
+				<Type GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>832</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>coords_vert_sensors</Name>
+				<Type GUID="{3D37FA86-5B29-7800-04D4-5C9B7A1B1E17}">matrix18xdouble</Type>
+				<BitSize>1152</BitSize>
+				<BitOffs>1600</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>cycle_time</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2752</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>lateral_filter_window_cycles</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2816</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>n_sensors_v</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2880</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>vertical_filter_window_cycles</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>2944</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>z_com</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3008</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>UnitDelay_InitialCondition</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3072</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>UnitDelay1_InitialCondition</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3136</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Convert_to_meters_Gain</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3200</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Integrator_IC</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3264</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Integrator1_IC</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3328</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Constant_Value</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>3392</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</Name>
+			<BitSize>64</BitSize>
+			<SubItem>
+				<Name>MovingAveragepitch</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</Name>
+			<BitSize>64</BitSize>
+			<SubItem>
+				<Name>MovingAveragey</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{CEF77AAA-3317-24CD-AAE3-08276892C9C0}">cell_wrap_Sensor_model_new_T</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name>f1</Name>
+				<Type GUID="{9648779D-997E-EC0C-975C-FA635E477DC2}">matrix8xuint32</Type>
+				<BitSize>256</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Name>
+			<BitSize>576</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>9</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Name>
+			<BitSize>1216</BitSize>
+			<SubItem>
+				<Name>matlabCodegenIsDeleted</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>isInitialized</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>isSetupComplete</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TunablePropsChanged</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>72</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>inputVarSize</Name>
+				<Type GUID="{CEF77AAA-3317-24CD-AAE3-08276892C9C0}">cell_wrap_Sensor_model_new_T</Type>
+				<BitSize>256</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NumChannels</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>352</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FrameLength</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>pCumSum</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>pCumSumRev</Name>
+				<Type GUID="{92D5CC9E-3008-0160-F872-C24C67108288}">matrix9xdouble</Type>
+				<BitSize>576</BitSize>
+				<BitOffs>512</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>pCumRevIndex</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>1088</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>pModValueRev</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>1152</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</Name>
+			<BitSize>1280</BitSize>
+			<SubItem>
+				<Name>obj</Name>
+				<Type GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Type>
+				<BitSize>1216</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>objisempty</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>1216</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</Name>
+			<BitSize>1280</BitSize>
+			<SubItem>
+				<Name>obj</Name>
+				<Type GUID="{6440FB1B-98CE-6C6F-A9B7-CA68C36CA93A}">dsp_simulink_MovingAverage_Sensor_model_new_T</Type>
+				<BitSize>1216</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>objisempty</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>1216</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -17180,993 +17180,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
-				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model_new|0.0.0.18">
-					<Name>Object6 (Sensor_model_new)</Name>
-					<ImageId>1001</ImageId>
-					<TmcDesc GUID="{9F51E811-3541-BFF1-A831-2C37C046DD3A}" ClassFactoryId="TE140x Module Vendor|Sensor_model_new|0.0.0.18">
-						<Name>Sensor_model_new</Name>
-						<CLSID ClassFactory="Sensor_model_new" RealTimeInstantiable="true">{9F51E811-3541-BFF1-A831-2C37C046DD3A}</CLSID>
-						<Info>
-							<ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
-							<TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}"/>
-						</Info>
-						<Licenses>
-							<License>
-								<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
-							</License>
-						</Licenses>
-						<InitSequence>PSO</InitSequence>
-						<Contexts>
-							<Context>
-								<Id>0</Id>
-								<Name>Context0 (1.5 ms)</Name>
-								<ManualConfig>
-									<OTCID>#x020100a0</OTCID>
-								</ManualConfig>
-								<Priority>4</Priority>
-								<CycleTime>1500000</CycleTime>
-							</Context>
-						</Contexts>
-						<Interfaces>
-							<Interface>
-								<Type GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000002-0000-0000-E000-000000000064}">ITcPersist</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000025-0000-0000-E000-000000000064}">ITcPostCyclic</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
-							</Interface>
-							<Interface>
-								<Type GUID="{7E00D8CE-E6BA-CD2C-441B-F38EB5A26A32}">ITcSensor_model_new</Type>
-								<ContextId>0</ContextId>
-							</Interface>
-						</Interfaces>
-						<Parameters>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskOid</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
-								<PTCID>#x03002060</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskPriority</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x03002070</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskCycleTimeNs</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x03002080</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskPort</Name>
-								<BitSize>16</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
-								<PTCID>#x03002090</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true" CreateSymbol="true">
-								<Name>TaskSortOrder</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<PTCID>#x030020b0</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>TraceLevelMax</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
-								<Default>
-									<EnumText>tlInfo</EnumText>
-								</Default>
-								<PTCID>#x00000001</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>ModuleCaller</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk">ModuleCaller</BaseType>
-								<Default>
-									<EnumText>CyclicTask</EnumText>
-								</Default>
-								<PTCID>#x00000002</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>CallerVerification</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk">CallerVerification</BaseType>
-								<Default>
-									<EnumText>Default</EnumText>
-								</Default>
-								<PTCID>#x00000003</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>StepSizeAdaptation</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk">StepSizeAdaptation</BaseType>
-								<Default>
-									<EnumText>RequireMatchingTaskCycleTime</EnumText>
-								</Default>
-								<PTCID>#x00000004</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>ExecutionSequence</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk">ExecutionSequence1</BaseType>
-								<Default>
-									<EnumText>UpdateBeforeOutputMapping</EnumText>
-								</Default>
-								<PTCID>#x00000005</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>Execute</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-								<Default>
-									<EnumText>TRUE</EnumText>
-								</Default>
-								<PTCID>#x00000006</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>AccessLockState</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000061}">TCOM_STATE</BaseType>
-								<Default>
-									<EnumText>TCOM_STATE_OP</EnumText>
-								</Default>
-								<PTCID>#x00000007</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>InitExceptionHandling</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk">FpExcptCtrlSet</BaseType>
-								<Default>
-									<EnumText>CallerExceptions</EnumText>
-								</Default>
-								<PTCID>#x00000008</PTCID>
-							</Parameter>
-							<Parameter HideParameter="true">
-								<Name>UpdateExceptionHandling</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk">FpExcptCtrlSetEx</BaseType>
-								<Default>
-									<EnumText>CallerExceptions</EnumText>
-								</Default>
-								<PTCID>#x00000009</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ModuleBuildInfo</Name>
-								<Comment><![CDATA[Legacy! Please use 'LibraryInfo' to read build information.]]></Comment>
-								<BitSize>96</BitSize>
-								<BaseType GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk">ModuleBuildInfo</BaseType>
-								<PTCID>#x0000000a</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>Initialized</Name>
-								<BitSize>8</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-								<Default>
-									<EnumText>FALSE</EnumText>
-								</Default>
-								<PTCID>#x0000000b</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>SkippedExecutionCount</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
-								<Default>
-									<Value>0</Value>
-								</Default>
-								<PTCID>#x0000000c</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>LibraryInfo</Name>
-								<BitSize>4800</BitSize>
-								<BaseType GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk">LibraryInfo</BaseType>
-								<PTCID>#x0000000d</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ModuleInfo</Name>
-								<BitSize>1280</BitSize>
-								<BaseType GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk">ModuleInfo</BaseType>
-								<PTCID>#x0000000e</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
-								<Name>ModuleGeneratorInfo</Name>
-								<BitSize>256</BitSize>
-								<BaseType GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</BaseType>
-								<PTCID>#x0000000f</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
-								<Name>SimulinkModelInfo</Name>
-								<BitSize>1408</BitSize>
-								<BaseType GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</BaseType>
-								<PTCID>#x00000010</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>Sensor_model_new_P_Sharing</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
-								<Default>
-									<EnumText>Define</EnumText>
-								</Default>
-								<PTCID>#x00000011</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>Sensor_model_new_P_Definer</Name>
-								<BitSize>32</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
-								<PTCID>#x00000012</PTCID>
-							</Parameter>
-							<Parameter CreateSymbol="true">
-								<Name>Sensor_model_new_P</Name>
-								<BitSize>3456</BitSize>
-								<BaseType GUID="{C8F72152-C599-8F4C-BB3C-C7FBB917C837}">P_Sensor_model_new_T</BaseType>
-								<Default>
-									<SubItem>
-										<Name>.Laser_magnet_offset_EMS</Name>
-										<Data>30EA20D0157C9D3F634D1BC4BDE89D3F1804DA46D13D9E3FCB93D6A567F69C3F5677F20AC0169E3F14C08355AB659D3F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.Laser_magnet_offset_HEMS</Name>
-										<Data>B7990AF148BC903F28BB78C3A663943F7BED04C104EA943FB2E1C01681D2943F52B92630DFF2933F8EF3503EB10C953F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.airgap_nominal_ems</Name>
-										<Value>0.008</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.coords_lat_sensors</Name>
-										<Data>75DBCF73556AEC3FFD5305FE4BAD723F75DBCF73556AEC3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723F</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.coords_vert_sensors</Name>
-										<Data>75DBCF73556AEC3FB0FAC8529044D73F000000000000000075DBCF73556AEC3F10D0D8F225AFD6BF00000000000000005503835AC290C93FA62325E2523AD83F0000000000000000078C3F9B66CBC5BF06F93482E8A4D7BF0000000000000000A1FDFE83FE78EBBFB0FAC8529044D73F0000000000000000A1FDFE83FE78EBBF10D0D8F225AFD6BF0000000000000000</Data>
-									</SubItem>
-									<SubItem>
-										<Name>.cycle_time</Name>
-										<Value>0.0015</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.lateral_filter_window_cycles</Name>
-										<Value>10</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.n_sensors_v</Name>
-										<Value>6</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.vertical_filter_window_cycles</Name>
-										<Value>10</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.z_com</Name>
-										<Value>0.5706599999999999</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.UnitDelay_InitialCondition</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.UnitDelay1_InitialCondition</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Convert_to_meters_Gain</Name>
-										<Value>0.001</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Integrator_IC</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Integrator1_IC</Name>
-										<Value>0</Value>
-									</SubItem>
-									<SubItem>
-										<Name>.Constant_Value</Name>
-										<Value>1</Value>
-									</SubItem>
-								</Default>
-								<PTCID>#x00000013</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>SimulationTime</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-								<PTCID>#x00000014</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>CycleCount</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
-								<PTCID>#x00000015</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ExceptionCount</Name>
-								<BitSize>64</BitSize>
-								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
-								<PTCID>#x00000016</PTCID>
-							</Parameter>
-							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
-								<Name>ExceptionInfo</Name>
-								<BitSize>1376</BitSize>
-								<BaseType GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk">ExceptionInfo</BaseType>
-								<PTCID>#x00000017</PTCID>
-							</Parameter>
-						</Parameters>
-						<DataAreas>
-							<DataArea>
-								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
-								<Name>Sensor_model_new_U</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>96</ByteSize>
-								<Symbol>
-									<Name>Newsensorairgaps</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x80000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
-								<Name>Sensor_model_new_Y</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>192</ByteSize>
-								<Symbol>
-									<Name>z_filtered</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>roll_filtered</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>pitch_filtered</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>y_filtered</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000018</PTCID>
-									<BitOffs>192</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>yaw_filtered</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000020</PTCID>
-									<BitOffs>256</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000028</PTCID>
-									<BitOffs>320</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps_ems</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x81000058</PTCID>
-									<BitOffs>704</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_vertical_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000088</PTCID>
-									<BitOffs>1088</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_lateral_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000090</PTCID>
-									<BitOffs>1152</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>z</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x81000098</PTCID>
-									<BitOffs>1216</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>roll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x810000a0</PTCID>
-									<BitOffs>1280</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>pitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x810000a8</PTCID>
-									<BitOffs>1344</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>y</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x810000b0</PTCID>
-									<BitOffs>1408</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>yaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x810000b8</PTCID>
-									<BitOffs>1472</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
-								<Name>Sensor_model_new_B</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>472</ByteSize>
-								<Symbol>
-									<Name>UnitDelay</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>UnitDelay1</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Convert_to_meters</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x82000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>z</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000070</PTCID>
-									<BitOffs>896</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>roll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000078</PTCID>
-									<BitOffs>960</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>pitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000080</PTCID>
-									<BitOffs>1024</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x82000088</PTCID>
-									<BitOffs>1088</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>corrected_airgaps</Name>
-									<BitSize>768</BitSize>
-									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
-									<PTCID>#x820000b8</PTCID>
-									<BitOffs>1472</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_vertical_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000118</PTCID>
-									<BitOffs>2240</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>n_lateral_sensors_rejected</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000120</PTCID>
-									<BitOffs>2304</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>trigger_vertical_filter</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000128</PTCID>
-									<BitOffs>2368</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>trigger_lateral_filter</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000130</PTCID>
-									<BitOffs>2432</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>y</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000138</PTCID>
-									<BitOffs>2496</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>yaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x82000140</PTCID>
-									<BitOffs>2560</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>offset_airgaps_c</Name>
-									<BitSize>384</BitSize>
-									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
-									<PTCID>#x82000148</PTCID>
-									<BitOffs>2624</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Switch</Name>
-									<BitSize>192</BitSize>
-									<BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
-									<PTCID>#x82000178</PTCID>
-									<BitOffs>3008</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Switch1</Name>
-									<BitSize>128</BitSize>
-									<BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
-									<PTCID>#x82000190</PTCID>
-									<BitOffs>3200</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Integrator1</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x820001a0</PTCID>
-									<BitOffs>3328</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>RelationalOperator1</Name>
-									<BitSize>8</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<PTCID>#x820001a8</PTCID>
-									<BitOffs>3392</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragez</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x820001b0</PTCID>
-									<BitOffs>3456</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageyaw</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</BaseType>
-									<PTCID>#x820001b8</PTCID>
-									<BitOffs>3520</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragey</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</BaseType>
-									<PTCID>#x820001c0</PTCID>
-									<BitOffs>3584</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageroll</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x820001c8</PTCID>
-									<BitOffs>3648</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragepitch</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x820001d0</PTCID>
-									<BitOffs>3712</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
-								<Name>Sensor_model_new_X</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>16</ByteSize>
-								<Symbol>
-									<Name>Integrator_CSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x83000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>Integrator1_CSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x83000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-							</DataArea>
-							<DataArea>
-								<AreaNo AreaType="Internal" CreateSymbols="true">4</AreaNo>
-								<Name>Sensor_model_new_DW</Name>
-								<ContextId>0</ContextId>
-								<ByteSize>816</ByteSize>
-								<Symbol>
-									<Name>UnitDelay_DSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x84000000</PTCID>
-									<BitOffs>0</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>UnitDelay1_DSTATE</Name>
-									<BitSize>64</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
-									<PTCID>#x84000008</PTCID>
-									<BitOffs>64</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragez</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x84000010</PTCID>
-									<BitOffs>128</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageyaw</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</BaseType>
-									<PTCID>#x840000b0</PTCID>
-									<BitOffs>1408</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragey</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</BaseType>
-									<PTCID>#x84000150</PTCID>
-									<BitOffs>2688</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAverageroll</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x840001f0</PTCID>
-									<BitOffs>3968</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>MovingAveragepitch</Name>
-									<BitSize>1280</BitSize>
-									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
-									<PTCID>#x84000290</PTCID>
-									<BitOffs>5248</BitOffs>
-								</Symbol>
-							</DataArea>
-						</DataAreas>
-						<Properties>
-							<Property>
-								<Name>CoderLicense</Name>
-								<Value>{73C71EBD-104A-4EE6-955D-ADE86A37EFC3}</Value>
-							</Property>
-						</Properties>
-						<Xml>
-							<GeneratedModuleInfoFile>Sensor_model_new_ModuleInfo.xml</GeneratedModuleInfoFile>
-						</Xml>
-						<ParameterValues>
-							<Value>
-								<Name>TaskOid</Name>
-								<Value>33620128</Value>
-							</Value>
-							<Value>
-								<Name>TaskPriority</Name>
-								<Value>4</Value>
-							</Value>
-							<Value>
-								<Name>TaskCycleTimeNs</Name>
-								<Value>1500000</Value>
-							</Value>
-							<Value>
-								<Name>TaskPort</Name>
-								<Value>357</Value>
-							</Value>
-							<Value>
-								<Name>TaskSortOrder</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>TraceLevelMax</Name>
-								<EnumText>tlInfo</EnumText>
-							</Value>
-							<Value>
-								<Name>ModuleCaller</Name>
-								<EnumText>Module</EnumText>
-							</Value>
-							<Value>
-								<Name>CallerVerification</Name>
-								<EnumText>Default</EnumText>
-							</Value>
-							<Value>
-								<Name>StepSizeAdaptation</Name>
-								<EnumText>RequireMatchingTaskCycleTime</EnumText>
-							</Value>
-							<Value>
-								<Name>ExecutionSequence</Name>
-								<EnumText>UpdateBeforeOutputMapping</EnumText>
-							</Value>
-							<Value>
-								<Name>Execute</Name>
-								<EnumText>TRUE</EnumText>
-							</Value>
-							<Value>
-								<Name>AccessLockState</Name>
-								<EnumText>TCOM_STATE_OP</EnumText>
-							</Value>
-							<Value>
-								<Name>InitExceptionHandling</Name>
-								<EnumText>CallerExceptions</EnumText>
-							</Value>
-							<Value>
-								<Name>UpdateExceptionHandling</Name>
-								<EnumText>CallerExceptions</EnumText>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P_Sharing</Name>
-								<EnumText>Define</EnumText>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[0]</Name>
-								<Value>0.02879366</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[1]</Name>
-								<Value>0.02920815</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[2]</Name>
-								<Value>0.02953269</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[3]</Name>
-								<Value>0.02828371</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[4]</Name>
-								<Value>0.02938366</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[5]</Name>
-								<Value>0.02870815</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[0]</Name>
-								<Value>0.01634325</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[1]</Name>
-								<Value>0.01991139</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[2]</Name>
-								<Value>0.02042396</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[3]</Name>
-								<Value>0.02033426</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[4]</Name>
-								<Value>0.01948117</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[5]</Name>
-								<Value>0.02055623</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.airgap_nominal_ems</Name>
-								<Value>0.008</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[0]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[1]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[2]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[3]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[4]</Name>
-								<Value>0.0147302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[5]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[6]</Name>
-								<Value>0.0147302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[7]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[8]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[9]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[10]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_lat_sensors[11]</Name>
-								<Value>0.0045598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[0]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[1]</Name>
-								<Value>0.3635598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[2]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[3]</Name>
-								<Value>0.8879802</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[4]</Name>
-								<Value>-0.3544402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[5]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[6]</Name>
-								<Value>0.1997302</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[7]</Name>
-								<Value>0.3785598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[8]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[9]</Name>
-								<Value>-0.1702698</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[10]</Name>
-								<Value>-0.3694402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[11]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[12]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[13]</Name>
-								<Value>0.3635598</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[14]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[15]</Name>
-								<Value>-0.8585198</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[16]</Name>
-								<Value>-0.3544402</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.coords_vert_sensors[17]</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.cycle_time</Name>
-								<Value>0.0015</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.lateral_filter_window_cycles</Name>
-								<Value>10</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.n_sensors_v</Name>
-								<Value>6</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.vertical_filter_window_cycles</Name>
-								<Value>10</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.z_com</Name>
-								<Value>0.57066</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.UnitDelay_InitialCondition</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.UnitDelay1_InitialCondition</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Convert_to_meters_Gain</Name>
-								<Value>0.001</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Integrator_IC</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Integrator1_IC</Name>
-								<Value>0</Value>
-							</Value>
-							<Value>
-								<Name>Sensor_model_new_P.Constant_Value</Name>
-								<Value>1</Value>
-							</Value>
-						</ParameterValues>
-					</TmcDesc>
-				</Module>
 				<Module Id="#x01010070" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|ETML_DH10|0.0.0.6">
 					<Name>Object6 (ETML_DH10)</Name>
 					<ImageId>1001</ImageId>
@@ -19876,11 +18889,998 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</ParameterValues>
 					</TmcDesc>
 				</Module>
+				<Module Id="#x01010020" KeepUnrestoredLinks="2" ClassFactoryId="TE140x Module Vendor|Sensor_model_new|0.0.0.19">
+					<Name>Object6 (Sensor_model_new)</Name>
+					<ImageId>1001</ImageId>
+					<TmcDesc GUID="{9F51E811-3541-BFF1-A831-2C37C046DD3A}" ClassFactoryId="TE140x Module Vendor|Sensor_model_new|0.0.0.19">
+						<Name>Sensor_model_new</Name>
+						<CLSID ClassFactory="Sensor_model_new" RealTimeInstantiable="true">{9F51E811-3541-BFF1-A831-2C37C046DD3A}</CLSID>
+						<Info>
+							<ImageData>424d3603000000000000360000002800000010000000100000000100180000000000000300000000000000000000000000000000000023542c32784c31784b3077493076482f75462e74442d72422c71402b703e2a6e3c296c3a286b372769352667331d4a1e337b4f3d94833c93803a917d398f7a378d76358a7233886f31856a2f81662d7e612b7b5d29775827735424704f266733357d5340998a3f98873d97843c95813a927d389079368d75348a7032876c3083672d7f622b7c5d297859277454276935378056439e913c8f712e66232e66232e66232e66232e66232e66232e66232e66232e66232e66233d7c50297759286b3838835946a5982e6623419d8d409b893e98863c96823a927d388f78358c7333876f31836a2e7c622e6623468b6f296c3a3a855b4caa9e2e66234ba99b397e4f57ad9c42a08d409d883c99833a957d389178368d7333886d2e6623478c702a6e3c4289605eb5aa2e662360b7ac2b6421326a29519d7f43a390409e893d9a833b967e389078358c732e6623488f732b703f4a8f6670bfb52e662373c3b82c65225ea997326c36407e4953a996409e893d99833a947e378f782e66234a91782c724153936b81c9c02e662385ccc42d65237cc8be70c1b5488a6e31682a539b7c409d893d98833a937d2e66234b947b2d73435b987092d2c92e662397d6ce2e66238cd1c980cbc172c2b659a79a3473453977404fa28e3c96812e66234d967f2e7445629b74a2d9d22e6623a8ded72e65229ad9d18dd1c97ec9bf6dbeb25ab2a43d8d702a612a4d92712e66234e98822f7647699e77b1dfd92e6623bce6e02d6520abdfd89bd7d08acfc67bc5bc68baae55ad9f49a2923977532e66234b98833077496ea079bde4df87aa942e66232e66232e66232e66232e66232e66232e66232e66232e66232e662332794f3c928031784b6fa07ac2e6e1d3edead2ede9c2e7e2b1e0d9a0d8d08dcfc77bc5bb69bab056afa446a497439f91409a8a3d948332784c6d9f79bde3dec9e8e4c8e8e4bde3deadddd79dd5ce8bcdc57ac3ba67b9ae54aea247a59945a093419b8c3e958633794e3e66416f9f7973a27c73a27c6fa07a689d76609a7258956e4f9169468b633d865d388259378157367e54347b5123542d</ImageData>
+							<TabExtension GUID="{BB6DDFDC-900F-473F-83FC-D83513217B55}"/>
+						</Info>
+						<Licenses>
+							<License>
+								<LicenseId>{2D6F11C0-6F75-4E5D-A07D-D83A5E0C9F10}</LicenseId>
+							</License>
+						</Licenses>
+						<InitSequence>PSO</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>0</Id>
+								<Name>Context0 (1.5 ms)</Name>
+								<ManualConfig>
+									<OTCID>#x020100a0</OTCID>
+								</ManualConfig>
+								<Priority>4</Priority>
+								<CycleTime>1500000</CycleTime>
+							</Context>
+						</Contexts>
+						<Interfaces>
+							<Interface>
+								<Type GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000002-0000-0000-E000-000000000064}">ITcPersist</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000025-0000-0000-E000-000000000064}">ITcPostCyclic</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{00000041-0000-0000-E000-000000000064}">ITcObjParaAsync</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{7E00D8CE-E6BA-CD2C-441B-F38EB5A26A32}">ITcSensor_model_new</Type>
+								<ContextId>0</ContextId>
+							</Interface>
+						</Interfaces>
+						<Parameters>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskOid</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+								<PTCID>#x03002060</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskPriority</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x03002070</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskCycleTimeNs</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x03002080</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskPort</Name>
+								<BitSize>16</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+								<PTCID>#x03002090</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true" CreateSymbol="true">
+								<Name>TaskSortOrder</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<PTCID>#x030020b0</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>TraceLevelMax</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
+								<Default>
+									<EnumText>tlInfo</EnumText>
+								</Default>
+								<PTCID>#x00000001</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>ModuleCaller</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{D94EAD20-451D-4AE0-87CC-9A9884043E25}" Namespace="TcMgSdk">ModuleCaller</BaseType>
+								<Default>
+									<EnumText>CyclicTask</EnumText>
+								</Default>
+								<PTCID>#x00000002</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>CallerVerification</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{1F89595E-59E5-47C7-9A58-A611A4C98DEC}" Namespace="TcMgSdk">CallerVerification</BaseType>
+								<Default>
+									<EnumText>Default</EnumText>
+								</Default>
+								<PTCID>#x00000003</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>StepSizeAdaptation</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{65804E5D-07CA-41C0-AEDC-C5051585B216}" Namespace="TcMgSdk">StepSizeAdaptation</BaseType>
+								<Default>
+									<EnumText>RequireMatchingTaskCycleTime</EnumText>
+								</Default>
+								<PTCID>#x00000004</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>ExecutionSequence</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{3856C4C8-CCAF-403F-A7C8-4E1502F2FFFC}" Namespace="TcMgSdk">ExecutionSequence1</BaseType>
+								<Default>
+									<EnumText>UpdateBeforeOutputMapping</EnumText>
+								</Default>
+								<PTCID>#x00000005</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Execute</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<Default>
+									<EnumText>TRUE</EnumText>
+								</Default>
+								<PTCID>#x00000006</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>AccessLockState</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000061}">TCOM_STATE</BaseType>
+								<Default>
+									<EnumText>TCOM_STATE_OP</EnumText>
+								</Default>
+								<PTCID>#x00000007</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>InitExceptionHandling</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{DAC090EE-CC7B-4AD4-8FB6-95BC035207E1}" Namespace="TcMgSdk">FpExcptCtrlSet</BaseType>
+								<Default>
+									<EnumText>CallerExceptions</EnumText>
+								</Default>
+								<PTCID>#x00000008</PTCID>
+							</Parameter>
+							<Parameter HideParameter="true">
+								<Name>UpdateExceptionHandling</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{F26DC700-AACE-4548-857F-B87D9CC2BED8}" Namespace="TcMgSdk">FpExcptCtrlSetEx</BaseType>
+								<Default>
+									<EnumText>CallerExceptions</EnumText>
+								</Default>
+								<PTCID>#x00000009</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ModuleBuildInfo</Name>
+								<Comment><![CDATA[Legacy! Please use 'LibraryInfo' to read build information.]]></Comment>
+								<BitSize>96</BitSize>
+								<BaseType GUID="{0564A6B7-D0A7-47F6-9375-C2F05C960A28}" Namespace="TcMgSdk">ModuleBuildInfo</BaseType>
+								<PTCID>#x0000000a</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>Initialized</Name>
+								<BitSize>8</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+								<Default>
+									<EnumText>FALSE</EnumText>
+								</Default>
+								<PTCID>#x0000000b</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>SkippedExecutionCount</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+								<Default>
+									<Value>0</Value>
+								</Default>
+								<PTCID>#x0000000c</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>LibraryInfo</Name>
+								<BitSize>4800</BitSize>
+								<BaseType GUID="{4D64EEAF-7506-47D8-B2A9-577AA0A0C3D9}" Namespace="TcMgSdk">LibraryInfo</BaseType>
+								<PTCID>#x0000000d</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ModuleInfo</Name>
+								<BitSize>1280</BitSize>
+								<BaseType GUID="{7019D80E-1AD0-4B74-BBC6-9C50FCA14FE8}" Namespace="TcMgSdk">ModuleInfo</BaseType>
+								<PTCID>#x0000000e</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+								<Name>ModuleGeneratorInfo</Name>
+								<BitSize>256</BitSize>
+								<BaseType GUID="{BB79F3C5-FCA6-44F0-A017-6CA6C8C2A9DA}" Namespace="TcMatSim">ModuleGeneratorInfo</BaseType>
+								<PTCID>#x0000000f</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true">
+								<Name>SimulinkModelInfo</Name>
+								<BitSize>1408</BitSize>
+								<BaseType GUID="{24B309D5-81B5-4BC2-A814-E85159BFD98A}" Namespace="TcMatSim">SimulinkModelInfo</BaseType>
+								<PTCID>#x00000010</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Sensor_model_new_P_Sharing</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{7831F806-0191-4166-9213-A229779C1CAA}">ParameterSharingType</BaseType>
+								<Default>
+									<EnumText>Define</EnumText>
+								</Default>
+								<PTCID>#x00000011</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>Sensor_model_new_P_Definer</Name>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000F}">OTCID</BaseType>
+								<PTCID>#x00000012</PTCID>
+							</Parameter>
+							<Parameter CreateSymbol="true">
+								<Name>Sensor_model_new_P</Name>
+								<BitSize>3456</BitSize>
+								<BaseType GUID="{C8F72152-C599-8F4C-BB3C-C7FBB917C837}">P_Sensor_model_new_T</BaseType>
+								<Default>
+									<SubItem>
+										<Name>.Laser_magnet_offset_EMS</Name>
+										<Data>30EA20D0157C9D3F0F4A143157CC9F3F1804DA46D13D9E3FA7F5E485674E9C3F5677F20AC0169E3FDAAE6DDD0F709D3F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.Laser_magnet_offset_HEMS</Name>
+										<Data>B7990AF148BC903F28BB78C3A663943F7BED04C104EA943FB2E1C01681D2943F52B92630DFF2933F8EF3503EB10C953F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.airgap_nominal_ems</Name>
+										<Value>0.008</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.coords_lat_sensors</Name>
+										<Data>75DBCF73556AEC3FFD5305FE4BAD723F75DBCF73556AEC3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723F71BA1BFADD2A8E3FFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723FA1FDFE83FE78EBBFFD5305FE4BAD723F</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.coords_vert_sensors</Name>
+										<Data>75DBCF73556AEC3FB0FAC8529044D73F000000000000000075DBCF73556AEC3F10D0D8F225AFD6BF00000000000000005503835AC290C93FA62325E2523AD83F0000000000000000078C3F9B66CBC5BF06F93482E8A4D7BF0000000000000000A1FDFE83FE78EBBFB0FAC8529044D73F0000000000000000A1FDFE83FE78EBBF10D0D8F225AFD6BF0000000000000000</Data>
+									</SubItem>
+									<SubItem>
+										<Name>.cycle_time</Name>
+										<Value>0.0015</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.lateral_filter_window_cycles</Name>
+										<Value>10</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.n_sensors_v</Name>
+										<Value>6</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.vertical_filter_window_cycles</Name>
+										<Value>10</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.z_com</Name>
+										<Value>0.5706599999999999</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.UnitDelay_InitialCondition</Name>
+										<Value>0</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.UnitDelay1_InitialCondition</Name>
+										<Value>0</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.Convert_to_meters_Gain</Name>
+										<Value>0.001</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.Integrator_IC</Name>
+										<Value>0</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.Integrator1_IC</Name>
+										<Value>0</Value>
+									</SubItem>
+									<SubItem>
+										<Name>.Constant_Value</Name>
+										<Value>1</Value>
+									</SubItem>
+								</Default>
+								<PTCID>#x00000013</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>SimulationTime</Name>
+								<BitSize>64</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+								<PTCID>#x00000014</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>CycleCount</Name>
+								<BitSize>64</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+								<PTCID>#x00000015</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ExceptionCount</Name>
+								<BitSize>64</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00000000000B}">ULINT</BaseType>
+								<PTCID>#x00000016</PTCID>
+							</Parameter>
+							<Parameter OnlineParameter="true" HideParameter="true" CreateSymbol="true" ReadOnly="true">
+								<Name>ExceptionInfo</Name>
+								<BitSize>1376</BitSize>
+								<BaseType GUID="{241597CD-DFF8-4569-90EE-6B470D7A1D92}" Namespace="TcMgSdk">ExceptionInfo</BaseType>
+								<PTCID>#x00000017</PTCID>
+							</Parameter>
+						</Parameters>
+						<DataAreas>
+							<DataArea>
+								<AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
+								<Name>Sensor_model_new_U</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>96</ByteSize>
+								<Symbol>
+									<Name>Newsensorairgaps</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x80000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
+								<Name>Sensor_model_new_Y</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>192</ByteSize>
+								<Symbol>
+									<Name>z_filtered</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>roll_filtered</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000008</PTCID>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>pitch_filtered</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000010</PTCID>
+									<BitOffs>128</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>y_filtered</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000018</PTCID>
+									<BitOffs>192</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>yaw_filtered</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000020</PTCID>
+									<BitOffs>256</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x81000028</PTCID>
+									<BitOffs>320</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps_ems</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x81000058</PTCID>
+									<BitOffs>704</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_vertical_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_lateral_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000090</PTCID>
+									<BitOffs>1152</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>z</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x81000098</PTCID>
+									<BitOffs>1216</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>roll</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x810000a0</PTCID>
+									<BitOffs>1280</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>pitch</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x810000a8</PTCID>
+									<BitOffs>1344</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>y</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x810000b0</PTCID>
+									<BitOffs>1408</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>yaw</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x810000b8</PTCID>
+									<BitOffs>1472</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="Internal" CreateSymbols="true">2</AreaNo>
+								<Name>Sensor_model_new_B</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>472</ByteSize>
+								<Symbol>
+									<Name>UnitDelay</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>UnitDelay1</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000008</PTCID>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Convert_to_meters</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x82000010</PTCID>
+									<BitOffs>128</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>z</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000070</PTCID>
+									<BitOffs>896</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>roll</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000078</PTCID>
+									<BitOffs>960</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>pitch</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000080</PTCID>
+									<BitOffs>1024</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x82000088</PTCID>
+									<BitOffs>1088</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>corrected_airgaps</Name>
+									<BitSize>768</BitSize>
+									<BaseType GUID="{FCCFD5F1-6C6D-F330-2DDC-BAF5C2A3FFC9}">matrix12xdouble</BaseType>
+									<PTCID>#x820000b8</PTCID>
+									<BitOffs>1472</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_vertical_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000118</PTCID>
+									<BitOffs>2240</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>n_lateral_sensors_rejected</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000120</PTCID>
+									<BitOffs>2304</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>trigger_vertical_filter</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000128</PTCID>
+									<BitOffs>2368</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>trigger_lateral_filter</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000130</PTCID>
+									<BitOffs>2432</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>y</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000138</PTCID>
+									<BitOffs>2496</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>yaw</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x82000140</PTCID>
+									<BitOffs>2560</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>offset_airgaps_c</Name>
+									<BitSize>384</BitSize>
+									<BaseType GUID="{A4A16BC7-86CC-4775-9553-0441FE2C4AAC}">matrix6xdouble</BaseType>
+									<PTCID>#x82000148</PTCID>
+									<BitOffs>2624</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Switch</Name>
+									<BitSize>192</BitSize>
+									<BaseType GUID="{2F31917B-DEC7-2D9A-51A7-8FA4D1846CFD}">matrix3xdouble</BaseType>
+									<PTCID>#x82000178</PTCID>
+									<BitOffs>3008</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Switch1</Name>
+									<BitSize>128</BitSize>
+									<BaseType GUID="{24C2F409-5B87-7E52-2D7A-D94F026882AF}">matrix2xdouble</BaseType>
+									<PTCID>#x82000190</PTCID>
+									<BitOffs>3200</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Integrator1</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x820001a0</PTCID>
+									<BitOffs>3328</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>RelationalOperator1</Name>
+									<BitSize>8</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+									<PTCID>#x820001a8</PTCID>
+									<BitOffs>3392</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragez</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x820001b0</PTCID>
+									<BitOffs>3456</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAverageyaw</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</BaseType>
+									<PTCID>#x820001b8</PTCID>
+									<BitOffs>3520</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragey</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{1B29ED41-8137-83A0-7A58-BB72ADB75F7A}">B_MovingAveragey_Sensor_model_new_T</BaseType>
+									<PTCID>#x820001c0</PTCID>
+									<BitOffs>3584</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAverageroll</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x820001c8</PTCID>
+									<BitOffs>3648</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragepitch</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{576E962C-3D2A-3050-3D7D-1876CD765C6D}">B_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x820001d0</PTCID>
+									<BitOffs>3712</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
+								<Name>Sensor_model_new_X</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>16</ByteSize>
+								<Symbol>
+									<Name>Integrator_CSTATE</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x83000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Integrator1_CSTATE</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x83000008</PTCID>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="Internal" CreateSymbols="true">4</AreaNo>
+								<Name>Sensor_model_new_DW</Name>
+								<ContextId>0</ContextId>
+								<ByteSize>816</ByteSize>
+								<Symbol>
+									<Name>UnitDelay_DSTATE</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x84000000</PTCID>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>UnitDelay1_DSTATE</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<PTCID>#x84000008</PTCID>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragez</Name>
+									<BitSize>1280</BitSize>
+									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x84000010</PTCID>
+									<BitOffs>128</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAverageyaw</Name>
+									<BitSize>1280</BitSize>
+									<BaseType GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</BaseType>
+									<PTCID>#x840000b0</PTCID>
+									<BitOffs>1408</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragey</Name>
+									<BitSize>1280</BitSize>
+									<BaseType GUID="{7B6F5A4E-194F-5222-ABCF-F34B7D15F087}">DW_MovingAveragey_Sensor_model_new_T</BaseType>
+									<PTCID>#x84000150</PTCID>
+									<BitOffs>2688</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAverageroll</Name>
+									<BitSize>1280</BitSize>
+									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x840001f0</PTCID>
+									<BitOffs>3968</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>MovingAveragepitch</Name>
+									<BitSize>1280</BitSize>
+									<BaseType GUID="{59976C6B-2B99-DA83-D5F5-D696030B6C90}">DW_MovingAveragepitch_Sensor_model_new_T</BaseType>
+									<PTCID>#x84000290</PTCID>
+									<BitOffs>5248</BitOffs>
+								</Symbol>
+							</DataArea>
+						</DataAreas>
+						<Properties>
+							<Property>
+								<Name>CoderLicense</Name>
+								<Value>{73C71EBD-104A-4EE6-955D-ADE86A37EFC3}</Value>
+							</Property>
+						</Properties>
+						<Xml>
+							<GeneratedModuleInfoFile>Sensor_model_new_ModuleInfo.xml</GeneratedModuleInfoFile>
+						</Xml>
+						<ParameterValues>
+							<Value>
+								<Name>TaskOid</Name>
+								<Value>33620128</Value>
+							</Value>
+							<Value>
+								<Name>TaskPriority</Name>
+								<Value>4</Value>
+							</Value>
+							<Value>
+								<Name>TaskCycleTimeNs</Name>
+								<Value>1500000</Value>
+							</Value>
+							<Value>
+								<Name>TaskPort</Name>
+								<Value>357</Value>
+							</Value>
+							<Value>
+								<Name>TaskSortOrder</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>TraceLevelMax</Name>
+								<EnumText>tlInfo</EnumText>
+							</Value>
+							<Value>
+								<Name>ModuleCaller</Name>
+								<EnumText>Module</EnumText>
+							</Value>
+							<Value>
+								<Name>CallerVerification</Name>
+								<EnumText>Default</EnumText>
+							</Value>
+							<Value>
+								<Name>StepSizeAdaptation</Name>
+								<EnumText>RequireMatchingTaskCycleTime</EnumText>
+							</Value>
+							<Value>
+								<Name>ExecutionSequence</Name>
+								<EnumText>UpdateBeforeOutputMapping</EnumText>
+							</Value>
+							<Value>
+								<Name>Execute</Name>
+								<EnumText>TRUE</EnumText>
+							</Value>
+							<Value>
+								<Name>AccessLockState</Name>
+								<EnumText>TCOM_STATE_OP</EnumText>
+							</Value>
+							<Value>
+								<Name>InitExceptionHandling</Name>
+								<EnumText>CallerExceptions</EnumText>
+							</Value>
+							<Value>
+								<Name>UpdateExceptionHandling</Name>
+								<EnumText>CallerExceptions</EnumText>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P_Sharing</Name>
+								<EnumText>Define</EnumText>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[0]</Name>
+								<Value>0.02879366</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[1]</Name>
+								<Value>0.031052935</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[2]</Name>
+								<Value>0.02953269</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[3]</Name>
+								<Value>0.027642839</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[4]</Name>
+								<Value>0.02938366</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_EMS[5]</Name>
+								<Value>0.028747795</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[0]</Name>
+								<Value>0.01634325</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[1]</Name>
+								<Value>0.01991139</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[2]</Name>
+								<Value>0.02042396</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[3]</Name>
+								<Value>0.02033426</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[4]</Name>
+								<Value>0.01948117</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Laser_magnet_offset_HEMS[5]</Name>
+								<Value>0.02055623</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.airgap_nominal_ems</Name>
+								<Value>0.008</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[0]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[1]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[2]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[3]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[4]</Name>
+								<Value>0.0147302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[5]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[6]</Name>
+								<Value>0.0147302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[7]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[8]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[9]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[10]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_lat_sensors[11]</Name>
+								<Value>0.0045598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[0]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[1]</Name>
+								<Value>0.3635598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[2]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[3]</Name>
+								<Value>0.8879802</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[4]</Name>
+								<Value>-0.3544402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[5]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[6]</Name>
+								<Value>0.1997302</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[7]</Name>
+								<Value>0.3785598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[8]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[9]</Name>
+								<Value>-0.1702698</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[10]</Name>
+								<Value>-0.3694402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[11]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[12]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[13]</Name>
+								<Value>0.3635598</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[14]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[15]</Name>
+								<Value>-0.8585198</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[16]</Name>
+								<Value>-0.3544402</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.coords_vert_sensors[17]</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.cycle_time</Name>
+								<Value>0.0015</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.lateral_filter_window_cycles</Name>
+								<Value>10</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.n_sensors_v</Name>
+								<Value>6</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.vertical_filter_window_cycles</Name>
+								<Value>10</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.z_com</Name>
+								<Value>0.57066</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.UnitDelay_InitialCondition</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.UnitDelay1_InitialCondition</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Convert_to_meters_Gain</Name>
+								<Value>0.001</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Integrator_IC</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Integrator1_IC</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Sensor_model_new_P.Constant_Value</Name>
+								<Value>1</Value>
+							</Value>
+						</ParameterValues>
+					</TmcDesc>
+				</Module>
 			</Modules>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A5D42066-11E9-C351-8B2F-44536BB7E7ED}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6F860593-EF00-0C06-AE8D-565E19E74308}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
@@ -20222,6 +20222,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -20231,14 +20239,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						</Var>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>

@@ -117,9 +117,9 @@ END_IF
 
 //CAN watchdogs
 IF GVL_FSM.E_PodStateGlobal > 3 THEN
-fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogReset, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
-fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogReset, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
-fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
+fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
+fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
 END_IF
 
 
