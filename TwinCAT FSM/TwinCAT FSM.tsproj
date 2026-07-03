@@ -19880,7 +19880,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{747DBA6D-A8A9-E1D4-D6A5-0A08EBDCAC5F}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A5D42066-11E9-C351-8B2F-44536BB7E7ED}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
@@ -20218,12 +20218,8 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+							<Name>GVL_PROP_BARCODE_EHW.state</Name>
+							<Type>UINT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
@@ -20238,8 +20234,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.state</Name>
-							<Type>UINT</Type>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
