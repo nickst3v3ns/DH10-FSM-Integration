@@ -33,6 +33,7 @@ VAR
 	bTwinSAFEstart:					BOOL := FALSE;
 	bJorianSpecial AT %Q*:			BOOL := TRUE;
 	bsafety_inputs_valid AT %I*:	BOOL := FALSE;
+	bSDCFeedback AT %I*:			BOOL := FALSE;
 	
 	
 	fbdclink						:FB_DCLINK;
@@ -154,6 +155,8 @@ GVL_FSM.TXwatchdogPTHVGlobal := TXwatchdogPTHV;
 GVL_FSM.bwatchdogResetGlobal := watchdogReset;
 
 GVL_FSM.bEstopOutGlobal := bEstopOut;
+
+GVL_FSM.bSDCFeedbackGlobal := bSDCFeedback;
 
 //------------]]></ST>
     </Implementation>

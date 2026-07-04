@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_TwinSAFEArm" Id="{fea34919-40af-4ef0-81ea-c4ec8124354e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TwinSAFEArm
+VAR_INPUT
+	bFeedBackEstopOut     	:BOOL;
+	bFeedBackSDCIn			:BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	bRestartToggle			:BOOL;
+	bSDCPrimed 				:BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bFeedBackEstopOut AND bFeedBackSDCIn THEN
+	bRestartToggle := NOT bRestartToggle;
+ELSIF bFeedBackEstopOut THEN
+	bSDCPrimed := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

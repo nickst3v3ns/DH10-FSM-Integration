@@ -19880,7 +19880,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6F860593-EF00-0C06-AE8D-565E19E74308}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{BFDCA660-D764-649D-0232-15AFB770266E}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
@@ -20153,6 +20153,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
 							<Type>BOOL</Type>
@@ -20218,18 +20226,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.state</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
@@ -20240,6 +20236,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.state</Name>
+							<Type>UINT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
@@ -20318,6 +20318,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_FSM.nMasterDevStatePLC</Name>
 							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bSDCFeedback</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
@@ -60023,8 +60027,11 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="TwinSafeGroup1.PLCBrakesEngaged(OUT)_14" Index="#x7000" Sub="#x04">
 									<Type>BIT</Type>
 								</Entry>
+								<Entry Name="TwinSafeGroup1.SDCIN(OUT)_16" Index="#x7000" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
 								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">
@@ -61206,6 +61213,7 @@ Slave-Mode:
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyController">
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bEstopError" VarB="StandardInputs^TwinSafeGroup1.ErrorEstopOutPLC(OUT)_9"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bEstopOut" VarB="StandardInputs^TwinSafeGroup1.ESTOP(OUT)_7"/>
+				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bSDCFeedback" VarB="StandardInputs^TwinSafeGroup1.SDCIN(OUT)_16"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bbrakes_engaged" VarB="StandardInputs^TwinSafeGroup1.PLCBrakesEngaged(OUT)_14"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bsafety_inputs_valid" VarB="StandardInputs^TwinSafeGroup1.VALIDTWINSAFE(OUT)_10"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyErrorAcknowledge" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>

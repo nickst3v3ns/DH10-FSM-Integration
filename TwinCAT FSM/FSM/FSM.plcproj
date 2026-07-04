@@ -240,6 +240,9 @@
     <Compile Include="POUs\FSM\FB_Main_FSM.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FSM\FB_TwinSAFEArm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FSM\PTSendMessage\FB_Charge.TcPOU">
       <SubType>Code</SubType>
     </Compile>

@@ -456,9 +456,9 @@ CASE barcodeState OF
 	
 		//ties wat doe je hier???????????
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
-		//positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		
-		positionDelft := (rPositionBackDelftTest + rPositionFrontDelftTest)/2;
+		//positionDelft := (rPositionBackDelftTest + rPositionFrontDelftTest)/2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
 		
 		//thomas' addition
@@ -535,9 +535,9 @@ CASE AutoPilotFlag OF
         END_IF
 		
 		IF Direction = -1 THEN
-			TargetVelocity := (-15 + SQRT(384615.38*(15.811-positionDelft)+225))*0.8;
+			TargetVelocity := (-15 + SQRT(384615.38*(15.811-positionDelft)+225))*0.75;
 		ELSIF Direction = 1 THEN
-			TargetVelocity := -1*(-15 + SQRT(384615.38*(positionDelft-4.689)+225))*0.8;
+			TargetVelocity := -1*(-15 + SQRT(384615.38*(positionDelft-4.689)+225))*0.75;
 		END_IF
 	ELSE
     	TargetVelocity := 0.0;

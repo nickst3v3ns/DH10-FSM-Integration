@@ -34,7 +34,7 @@ VAR_GLOBAL
 	bEstopErrorGlobal:						BOOL := FALSE; 
 	bEstopRestartGlobal:					BOOL := FALSE; //Used to restart the Estop from the PLC side
 	bFalseForEstopRestartGlobal:			BOOL := TRUE; //
-	
+	bSDCFeedbackGlobal:							BOOL; //feedback from twinSAFE for SDC state
 	bJorianSpecialGlobal:					BOOL := TRUE; //not used
 //TWINSAFE + BRAKES 
 
