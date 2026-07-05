@@ -29,10 +29,10 @@
   <KeepPreviousImageExports>true</KeepPreviousImageExports>
   <Layout>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Layout&gt;
-  &lt;Window Guid="1f7c055b-4a1f-442a-ba90-ac435bd9c247" LastFocused="134273301633643956" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="0" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
-  &lt;Window Guid="bc9b9ecb-2ccb-4e59-8f26-087015ff74b9" LastFocused="134276513329537720" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="3" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="1f7c055b-4a1f-442a-ba90-ac435bd9c247" LastFocused="134277571427329102" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="0" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="bc9b9ecb-2ccb-4e59-8f26-087015ff74b9" LastFocused="134277570282873543" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="3" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="5677b076-837e-40ea-a0af-d1bcebe3bfbc" LastFocused="134257344244101873" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="6" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
-  &lt;Window Guid="112f42d3-da9c-4aaa-8773-0c654cbd5f81" LastFocused="134273298773033116" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="254.452927, 400" DocumentWindowGroupGuid="770bd42e-cd6e-4954-988f-71bdbd1ec1fc" DocumentIndexInWindowGroup="0" DocumentSplitPath="0|1" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="112f42d3-da9c-4aaa-8773-0c654cbd5f81" LastFocused="134277569257379073" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="254.452927, 400" DocumentWindowGroupGuid="770bd42e-cd6e-4954-988f-71bdbd1ec1fc" DocumentIndexInWindowGroup="0" DocumentSplitPath="0|1" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="3fa76850-1992-488e-80bf-9c9e13df6f2c" LastFocused="134270435468119223" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="4" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="4bdfaf6c-09cc-404c-b31b-f6322a254634" LastFocused="134273281135447824" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="7" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="89da3358-1f93-46aa-aead-a4523764a013" LastFocused="134273281547644110" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="245.547073, 400" DocumentWindowGroupGuid="b781b70f-93b2-4d59-be70-4462a9c4c517" DocumentIndexInWindowGroup="1" DocumentSplitPath="0|0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
@@ -41,7 +41,7 @@
   &lt;DocumentContainer Dock="5"&gt;
     &lt;SplitLayoutSystem WorkingSize="250, 400" SplitMode="0"&gt;
       &lt;SplitLayoutSystem WorkingSize="250, 400" SplitMode="1"&gt;
-        &lt;ControlLayoutSystem WorkingSize="245.547073, 400" Guid="b781b70f-93b2-4d59-be70-4462a9c4c517" Collapsed="0" SelectedControl="bc9b9ecb-2ccb-4e59-8f26-087015ff74b9"&gt;
+        &lt;ControlLayoutSystem WorkingSize="245.547073, 400" Guid="b781b70f-93b2-4d59-be70-4462a9c4c517" Collapsed="0" SelectedControl="1f7c055b-4a1f-442a-ba90-ac435bd9c247"&gt;
           &lt;Controls&gt;
             &lt;Control Guid="1f7c055b-4a1f-442a-ba90-ac435bd9c247" /&gt;
             &lt;Control Guid="89da3358-1f93-46aa-aead-a4523764a013" /&gt;
@@ -112,7 +112,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>2a0de96c-cb2d-4b5f-84c6-c0421bfc42ed</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649984</IndexOffset>
+          <IndexOffset>650576</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -216,7 +216,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>26977e13-e8b4-4515-b6c3-287a4a78adfc</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649992</IndexOffset>
+          <IndexOffset>650584</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -320,7 +320,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>45fa885f-3c6e-441d-bc55-4ad788bef545</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650000</IndexOffset>
+          <IndexOffset>650592</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -424,7 +424,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>05f0a937-ec65-427b-9563-7b11ca2dce05</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650008</IndexOffset>
+          <IndexOffset>650600</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -528,7 +528,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>2fb8cabf-a328-45e6-86ed-9f9ff3782398</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650016</IndexOffset>
+          <IndexOffset>650608</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -632,7 +632,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>4f1fb66d-34da-4427-8f67-7619be497c80</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650024</IndexOffset>
+          <IndexOffset>650616</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -736,7 +736,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>e6f3267c-d9a0-440c-b1c1-b8d85403696e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650032</IndexOffset>
+          <IndexOffset>650624</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -835,7 +835,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>3089f4cf-0c40-4ee5-a4b0-9403b195e5a9</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649272</IndexOffset>
+          <IndexOffset>649824</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -934,7 +934,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>d55997ae-ca24-4a30-90a2-1b55f8fb45c8</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649280</IndexOffset>
+          <IndexOffset>649832</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1033,7 +1033,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>0b4a2546-e8a9-455e-b904-f5e56494c791</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649288</IndexOffset>
+          <IndexOffset>649840</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1132,7 +1132,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>0bf22810-b8e4-4f84-a746-a8d1c3427ee7</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649296</IndexOffset>
+          <IndexOffset>649848</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1231,7 +1231,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>de91da9e-6549-47f5-af4e-c05da5f8ddb8</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649304</IndexOffset>
+          <IndexOffset>649856</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1330,7 +1330,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>2dfecbf9-bf99-40fb-afc5-3aada4593c9e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649312</IndexOffset>
+          <IndexOffset>649864</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1429,7 +1429,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>c7fe77fa-4ab4-4bdd-9eb9-fd087adf2c63</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649320</IndexOffset>
+          <IndexOffset>649872</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1528,7 +1528,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>2e2b41e3-91e6-4d1a-9392-b07fc7532d2c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649328</IndexOffset>
+          <IndexOffset>649880</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1627,7 +1627,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>88a14778-c9a0-4f4c-863b-34f61bc1833c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649336</IndexOffset>
+          <IndexOffset>649888</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1726,7 +1726,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>390612a5-32b5-485a-9fda-c4d17f58843e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649344</IndexOffset>
+          <IndexOffset>649896</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1825,7 +1825,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>b7aa3332-b9c1-4bd3-a369-5c96c66ff4ff</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649352</IndexOffset>
+          <IndexOffset>649904</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -1924,7 +1924,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>771eff80-d096-44ad-825d-ff693a969c3d</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649360</IndexOffset>
+          <IndexOffset>649912</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2023,7 +2023,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>2244149d-9329-4ae1-9b2f-6626fea72869</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649368</IndexOffset>
+          <IndexOffset>649920</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2122,7 +2122,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>24296da2-ce85-46ec-9a5b-13e95b497ae5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649376</IndexOffset>
+          <IndexOffset>649928</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2221,7 +2221,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>a513aa7c-7f50-4309-b95c-09a0b306b848</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649384</IndexOffset>
+          <IndexOffset>649936</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2320,7 +2320,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>f99d0d3b-3daa-4b48-bbf3-af15a6639f13</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649392</IndexOffset>
+          <IndexOffset>649944</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2424,7 +2424,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>150d1ceb-66bd-4b8b-8a1a-ef6d032aa019</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649976</IndexOffset>
+          <IndexOffset>650568</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2528,7 +2528,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>7a040674-5810-4917-8223-1dc2b6285b05</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650040</IndexOffset>
+          <IndexOffset>650632</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2632,7 +2632,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>05fb64e9-ba2e-4ffe-9bfe-918bbbaed9ca</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650048</IndexOffset>
+          <IndexOffset>650640</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2736,7 +2736,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>01edd6fa-65bc-460a-9944-2c13c0a3ed28</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650056</IndexOffset>
+          <IndexOffset>650648</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2840,7 +2840,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>707290e0-204b-4380-a12d-0f63e929b565</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>650064</IndexOffset>
+          <IndexOffset>650656</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -2939,7 +2939,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>a4f4f849-f4fd-47fe-88ed-a4ddef968b56</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649400</IndexOffset>
+          <IndexOffset>649952</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3038,7 +3038,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>08dba886-da51-48db-9af6-4c6da5fa6002</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649408</IndexOffset>
+          <IndexOffset>649960</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3137,7 +3137,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>0cb8bf91-8df2-43b1-b66f-bb4bc1db7ef7</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649416</IndexOffset>
+          <IndexOffset>649968</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3236,7 +3236,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>4e2fc0fb-d471-4f0e-afe8-da4a3fff6003</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649424</IndexOffset>
+          <IndexOffset>649976</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3335,7 +3335,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>203273cd-88cf-4408-bd1b-6f4d5fa93f99</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649432</IndexOffset>
+          <IndexOffset>649984</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3434,7 +3434,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>3df67b8d-5e03-4f7a-8dfd-21ea1e9e9b63</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649440</IndexOffset>
+          <IndexOffset>649992</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3533,7 +3533,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>fbca3b1f-4046-43b7-ad7a-60f4578ee8f1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649448</IndexOffset>
+          <IndexOffset>650000</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3632,7 +3632,7 @@ Where _1 indicates channel 1 (North) and _2 indicates channel 2 (South) </Commen
           <ForceOversampling>false</ForceOversampling>
           <Guid>9fa67bcb-082b-429b-962d-1f355407f799</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649456</IndexOffset>
+          <IndexOffset>650008</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3732,7 +3732,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>94b57d55-cd27-4d2d-8d3c-3ca41f78dc61</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645864</IndexOffset>
+          <IndexOffset>646416</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3832,7 +3832,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>2f8666ac-0103-4220-b6e2-16b3d84a9579</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645868</IndexOffset>
+          <IndexOffset>646420</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -3932,7 +3932,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ee9571f2-89dd-46e8-9b15-61c8bd99492f</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645872</IndexOffset>
+          <IndexOffset>646424</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4032,7 +4032,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>3d20e82e-ee1c-499f-9293-d98233f5db1d</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645876</IndexOffset>
+          <IndexOffset>646428</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4132,7 +4132,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>e5d337c0-4185-4350-8939-1a52a7a36922</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645880</IndexOffset>
+          <IndexOffset>646432</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4232,7 +4232,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ed58ba5b-06d4-40ff-9595-4b6c160b66e7</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645884</IndexOffset>
+          <IndexOffset>646436</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4331,7 +4331,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>c86e4b00-845c-4fa0-b719-6b29ed734c80</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648368</IndexOffset>
+          <IndexOffset>648920</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4430,7 +4430,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>66637700-0967-45ea-9abe-a21bfe202d6e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648376</IndexOffset>
+          <IndexOffset>648928</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4529,7 +4529,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>3dbd0b26-b42a-4aa6-acc5-7db7bb8cd29b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648384</IndexOffset>
+          <IndexOffset>648936</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4628,7 +4628,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>03410129-d138-46b7-9259-32a01ecdc187</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648392</IndexOffset>
+          <IndexOffset>648944</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4727,7 +4727,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>2e34d721-5c7e-4420-8384-bbb3954e42a5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648400</IndexOffset>
+          <IndexOffset>648952</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4826,7 +4826,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>83b15a99-483e-4389-a54f-a3c75fea8403</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648408</IndexOffset>
+          <IndexOffset>648960</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -4926,7 +4926,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>e43e21f3-96f6-43f2-ba3e-f0649e072777</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645888</IndexOffset>
+          <IndexOffset>646440</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5026,7 +5026,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>bd5f8f2a-c61d-4ff5-8684-2a23bf962779</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645892</IndexOffset>
+          <IndexOffset>646444</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5126,7 +5126,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>be97f7e2-2c70-4612-b700-38d84311dea4</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645896</IndexOffset>
+          <IndexOffset>646448</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5226,7 +5226,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>09fbbf7f-30f5-4cda-beb6-ea660d535736</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645900</IndexOffset>
+          <IndexOffset>646452</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5326,7 +5326,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a7e7afbd-de93-4e7c-9f35-1a4fd306e1d0</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645904</IndexOffset>
+          <IndexOffset>646456</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5426,7 +5426,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>018fc289-d693-4a43-9ce7-37b24586fd67</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>645908</IndexOffset>
+          <IndexOffset>646460</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5525,7 +5525,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>8219dd46-d147-43e0-92cb-60119f1aced1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648416</IndexOffset>
+          <IndexOffset>648968</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5624,7 +5624,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>7f26dd26-71e9-4bd3-88df-7dfe56fef82f</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648424</IndexOffset>
+          <IndexOffset>648976</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5723,7 +5723,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>69188823-f06e-4be3-b3f2-a7a2c42c9b4e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648432</IndexOffset>
+          <IndexOffset>648984</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5822,7 +5822,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>cf4c0645-d2ce-4b82-9bf7-316df7e185a5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648440</IndexOffset>
+          <IndexOffset>648992</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -5921,7 +5921,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>95c5e666-d805-47d4-879e-0f54dbf2442b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648448</IndexOffset>
+          <IndexOffset>649000</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6020,7 +6020,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>e4479e81-a977-42f8-9bdb-e1df761f038b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648456</IndexOffset>
+          <IndexOffset>649008</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6119,7 +6119,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>36f4aad8-912f-4fcb-9529-11b6c28f650b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648952</IndexOffset>
+          <IndexOffset>649504</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6218,7 +6218,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>48db6c49-0094-4b03-b6ad-5d4dd56f93bc</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648976</IndexOffset>
+          <IndexOffset>649528</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6317,7 +6317,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>1615b7cc-34e6-48d2-804a-1cfa2f7db908</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648968</IndexOffset>
+          <IndexOffset>649520</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6416,7 +6416,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>70cef05c-49b5-475b-85b6-3e61cc00d3b5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648960</IndexOffset>
+          <IndexOffset>649512</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6515,7 +6515,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>477e8b85-6627-4019-b62a-b20f7cd03b67</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648984</IndexOffset>
+          <IndexOffset>649536</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6594,7 +6594,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -6614,7 +6614,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>38c85df3-c35f-477b-8641-b8aaa8daf4e7</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797812</IndexOffset>
+          <IndexOffset>799528</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6693,7 +6693,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -6713,7 +6713,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>9a9933c2-f08a-4f49-b0aa-947a3a01ec1c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797816</IndexOffset>
+          <IndexOffset>799532</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6792,7 +6792,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -6812,7 +6812,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>1a0c6777-274b-40b7-921e-8db198f96a66</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797820</IndexOffset>
+          <IndexOffset>799536</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6891,7 +6891,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -6911,7 +6911,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>4ca637dd-892e-4ff8-8fc8-20ddbbed2f2d</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797824</IndexOffset>
+          <IndexOffset>799540</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -6990,7 +6990,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7010,7 +7010,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>aebdad0e-703a-4b36-9dcf-31817124fa09</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797828</IndexOffset>
+          <IndexOffset>799544</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7089,7 +7089,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7109,7 +7109,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>b2d5f73c-9904-456f-a078-43bb201b767f</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797832</IndexOffset>
+          <IndexOffset>799548</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7188,7 +7188,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7208,7 +7208,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>c3b5fc39-1f5c-47c7-8e62-187ff01931e9</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797836</IndexOffset>
+          <IndexOffset>799552</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7287,7 +7287,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7307,7 +7307,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>683824b2-1427-49fa-a53a-4c2ec2c6d8a6</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797840</IndexOffset>
+          <IndexOffset>799556</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7386,7 +7386,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7406,7 +7406,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>68e2cf74-8abe-4ac9-bf5c-943b7f976dd1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797780</IndexOffset>
+          <IndexOffset>799496</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7485,7 +7485,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7505,7 +7505,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>9876a4be-65ef-4550-bbc9-e92275046ae4</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797784</IndexOffset>
+          <IndexOffset>799500</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7584,7 +7584,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7604,7 +7604,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a7a8cd84-24b8-4f86-8cc6-0c3a400ed526</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797788</IndexOffset>
+          <IndexOffset>799504</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7683,7 +7683,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7703,7 +7703,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>68547edc-972e-46ff-9df6-674c05c55a3b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797792</IndexOffset>
+          <IndexOffset>799508</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7782,7 +7782,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7802,7 +7802,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>8874cc3e-0b20-4d90-8201-c02ac36a5168</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797796</IndexOffset>
+          <IndexOffset>799512</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7881,7 +7881,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -7901,7 +7901,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>374c1f38-7e73-40a6-ba79-9a6afea93f35</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797800</IndexOffset>
+          <IndexOffset>799516</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -7980,7 +7980,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -8000,7 +8000,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>d3f8e323-8ec1-4fb0-9487-59b0de96dbcf</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797804</IndexOffset>
+          <IndexOffset>799520</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8079,7 +8079,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>6</ContextMask>
+          <ContextMask>7</ContextMask>
           <DataAccess>
             <DataAccessMode>
               <Source>TwinCAT</Source>
@@ -8099,7 +8099,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ae4d68a7-fc94-4a02-88b8-1610e91a1fd2</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>797808</IndexOffset>
+          <IndexOffset>799524</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8198,7 +8198,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a7bab59b-e687-47d9-8b42-e2cf2768ec62</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>747320</IndexOffset>
+          <IndexOffset>747352</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8297,7 +8297,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a0b45a44-9125-4b83-ade6-67f95bd2a24c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>744712</IndexOffset>
+          <IndexOffset>744744</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8396,7 +8396,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f7c4b5e2-480b-403b-97aa-13e120a9ec69</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>744720</IndexOffset>
+          <IndexOffset>744752</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8495,7 +8495,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>79e45cb6-3f54-4feb-a5b1-855c9bed1bbe</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>720328</IndexOffset>
+          <IndexOffset>720360</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8594,7 +8594,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>da815a71-ee0d-4e43-9a56-dcdb1e723b8f</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>720336</IndexOffset>
+          <IndexOffset>720368</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8693,7 +8693,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>364bb780-3f55-486e-b497-aad5674e7fb9</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>720344</IndexOffset>
+          <IndexOffset>720376</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8770,105 +8770,6 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ArrayStartIndex>0</ArrayStartIndex>
           <BaseSampleTime>15000</BaseSampleTime>
           <ChannelStyleInformation />
-          <Comment> Generated from item 'average_current_hems' </Comment>
-          <CompressionMode>Uncompressed</CompressionMode>
-          <ContextMask>0</ContextMask>
-          <DataAccess>
-            <DataAccessMode>
-              <Source>TwinCAT</Source>
-              <Protocoll>ADS</Protocoll>
-              <Format>TcBinary</Format>
-              <TimeContext>Present</TimeContext>
-              <TimeTangeInfo>
-                <StartTimeStamp>0</StartTimeStamp>
-                <EndTimeStamp>0</EndTimeStamp>
-              </TimeTangeInfo>
-            </DataAccessMode>
-          </DataAccess>
-          <DataType>REAL64</DataType>
-          <DisplayColor>Black</DisplayColor>
-          <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
-          <ForceOversampling>false</ForceOversampling>
-          <Guid>be579c0c-c67e-439f-849b-06e5815d61f7</Guid>
-          <IndexGroup>16448</IndexGroup>
-          <IndexOffset>673784</IndexOffset>
-          <IsEvent>false</IsEvent>
-          <IsHistorical>false</IsHistorical>
-          <IsTimeline>false</IsTimeline>
-          <Name>faverage_current_hems</Name>
-          <Oversample>0</Oversample>
-          <RawUnit>
-            <Transformation>
-              <BaseUnitValue>0</BaseUnitValue>
-              <Name>None</Name>
-              <ScaleFactor>1</ScaleFactor>
-              <SourceUnitPrefix>none</SourceUnitPrefix>
-              <SourceUnitString></SourceUnitString>
-              <Symbol>1</Symbol>
-              <TargetUnitString></TargetUnitString>
-              <TargetUnitValue>0</TargetUnitValue>
-            </Transformation>
-            <Unit>
-              <BaseUnitString></BaseUnitString>
-              <BaseUnitValue>0</BaseUnitValue>
-              <NameExtension></NameExtension>
-              <Offset>0</Offset>
-              <Prefix>none</Prefix>
-              <ReturnText> (None) </ReturnText>
-              <ScaleFactor>1</ScaleFactor>
-              <Symbol></Symbol>
-            </Unit>
-            <UnitOffsetResult>0</UnitOffsetResult>
-            <UnitScaleResult>1</UnitScaleResult>
-            <UserUnit>
-              <BaseName>UnitOfOne</BaseName>
-              <BaseUnitString></BaseUnitString>
-              <BaseUnitValue>0</BaseUnitValue>
-              <Name>None</Name>
-              <NameExtension></NameExtension>
-              <Offset>0</Offset>
-              <Prefix>none</Prefix>
-              <ScaleFactor>1</ScaleFactor>
-              <Symbol></Symbol>
-              <UserPrefix>none</UserPrefix>
-            </UserUnit>
-          </RawUnit>
-          <SaveOption>IncludeDataInSVDX</SaveOption>
-          <ServerHandle>0</ServerHandle>
-          <SortPriority>10</SortPriority>
-          <SubAdsAcquisition />
-          <SubMember>
-            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-              <Comment />
-              <DetailLevel>
-                <Int32>0</Int32>
-              </DetailLevel>
-              <DisplayColor>Black</DisplayColor>
-              <Guid>771e2165-bb36-4581-889e-ceea79a8745e</Guid>
-              <Name>MeasurementMemberBase</Name>
-              <SortPriority>100</SortPriority>
-              <Title>MeasurementMemberBase</Title>
-              <UsedNameType>DetailLevel</UsedNameType>
-            </NameRelationInfo>
-          </SubMember>
-          <SymbolBased>true</SymbolBased>
-          <SymbolName>LEVI_MAIN_TEST.Control_liftoff_outputs.faverage_current_hems</SymbolName>
-          <TargetPort>851</TargetPort>
-          <TimeOffset>0</TimeOffset>
-          <Title>MeasurementMemberBase</Title>
-          <UseLocalServer>true</UseLocalServer>
-          <UseTaskSampleTime>true</UseTaskSampleTime>
-          <UTF8Encoding>false</UTF8Encoding>
-          <VariableSize>8</VariableSize>
-        </AdsAcquisition>
-        <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-          <AmsNetId>5.161.227.10.1.1</AmsNetId>
-          <Area>Local</Area>
-          <ArrayLength>0</ArrayLength>
-          <ArrayStartIndex>0</ArrayStartIndex>
-          <BaseSampleTime>15000</BaseSampleTime>
-          <ChannelStyleInformation />
           <Comment></Comment>
           <CompressionMode>Uncompressed</CompressionMode>
           <ContextMask>0</ContextMask>
@@ -8891,7 +8792,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>53effd69-32d2-4659-8f4d-f2f58e93877a</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780116</IndexOffset>
+          <IndexOffset>775230</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -8990,7 +8891,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f878d371-9d4c-4e86-bb19-6297763a8f52</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780118</IndexOffset>
+          <IndexOffset>775232</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9089,7 +8990,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>d17c93f7-9b99-4c7b-afca-9057e58d7821</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780120</IndexOffset>
+          <IndexOffset>775234</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9188,7 +9089,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>d546de2d-e599-44ab-850c-d85dbe1bc74c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780122</IndexOffset>
+          <IndexOffset>775236</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9287,7 +9188,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>bd132f8b-9dd8-4e9d-a9a3-3022ecacf508</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780124</IndexOffset>
+          <IndexOffset>775238</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9386,7 +9287,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f3250f44-4a90-4a44-bf42-df9413ff1f09</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780126</IndexOffset>
+          <IndexOffset>775240</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9485,7 +9386,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>8c3a0195-5606-4501-ac1e-f27197bae711</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780128</IndexOffset>
+          <IndexOffset>775242</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9584,7 +9485,7 @@ Order is VFL, VFR, VML, VMR, VBL, VBR, LFL, LFR, LML, LMR, LBL, LBR</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a1ad38f6-6c5c-4e6d-ba3c-6335d3061151</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780130</IndexOffset>
+          <IndexOffset>775244</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9686,7 +9587,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f991d719-28f2-4684-bf9f-3a7f416660c1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780084</IndexOffset>
+          <IndexOffset>775198</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9788,7 +9689,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>8288ea69-f1fe-4e2b-bac5-f1d05352ee45</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780086</IndexOffset>
+          <IndexOffset>775200</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9890,7 +9791,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>b182d4b8-bf1a-4d1e-bb6b-5d6914e83028</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780088</IndexOffset>
+          <IndexOffset>775202</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -9992,7 +9893,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>5453ef70-da4a-49ef-99ed-9f5d7296fce6</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780090</IndexOffset>
+          <IndexOffset>775204</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10094,7 +9995,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>d634040c-b098-4625-b332-c3051e71fdae</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780092</IndexOffset>
+          <IndexOffset>775206</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10196,7 +10097,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>2b7f77ab-1271-4ff3-8ad6-36b10d973fc4</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780094</IndexOffset>
+          <IndexOffset>775208</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10298,7 +10199,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>876e428e-c455-4dba-bf94-8dfa609ee636</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780096</IndexOffset>
+          <IndexOffset>775210</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10400,7 +10301,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f3ba1b59-6a1d-4430-ae06-ca04495e3a29</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780098</IndexOffset>
+          <IndexOffset>775212</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10502,7 +10403,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>7851f299-e95f-44df-a2e9-425a28ed80d3</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780100</IndexOffset>
+          <IndexOffset>775214</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10604,7 +10505,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>652c4df2-d401-4b08-b3e5-16532eebd040</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780102</IndexOffset>
+          <IndexOffset>775216</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10706,7 +10607,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>17587f3e-b23a-4fc1-ac3a-3e813c6e706f</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780104</IndexOffset>
+          <IndexOffset>775218</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10808,7 +10709,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>03af6ced-dab7-408a-94a8-d7ee03529495</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780106</IndexOffset>
+          <IndexOffset>775220</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -10910,7 +10811,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ea5d9fa6-5b21-4e15-9d5d-079d3aa2ca16</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780108</IndexOffset>
+          <IndexOffset>775222</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11012,7 +10913,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a5c36b54-e385-4f56-a609-23fbe9972034</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780110</IndexOffset>
+          <IndexOffset>775224</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11114,7 +11015,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>68790a7f-3f08-4d6e-bfc2-79568d8fd8e1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780112</IndexOffset>
+          <IndexOffset>775226</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11216,7 +11117,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ad82c698-dd3a-4acc-8f48-50ae6f0ea0a0</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780114</IndexOffset>
+          <IndexOffset>775228</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11315,7 +11216,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>cb3d98b0-08a9-4222-95ad-d60421ca9de6</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648472</IndexOffset>
+          <IndexOffset>649024</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11414,7 +11315,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>162528a7-f2d3-42e3-ac04-168ea834da50</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648464</IndexOffset>
+          <IndexOffset>649016</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11513,7 +11414,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>27791e30-07e3-4a76-a401-4c5ecb34289c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>671600</IndexOffset>
+          <IndexOffset>671576</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11612,7 +11513,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>9b22e850-5b72-4de3-85be-74657e0d69b3</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>671608</IndexOffset>
+          <IndexOffset>671584</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11713,7 +11614,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>fe8b585a-917b-484a-bb92-d831ba17d8a7</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>671584</IndexOffset>
+          <IndexOffset>671560</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11812,7 +11713,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f01a5417-1ffc-4489-89ec-3c72ecbb601d</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>671592</IndexOffset>
+          <IndexOffset>671568</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -11911,7 +11812,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>88a78807-daa6-4cd1-9c29-d07592708101</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649008</IndexOffset>
+          <IndexOffset>649560</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12010,7 +11911,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>4a3f13f3-690f-4def-ad34-962262477af4</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649000</IndexOffset>
+          <IndexOffset>649552</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12109,7 +12010,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>3667ee69-00d5-42c0-b879-1ef0d2db5c1e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649016</IndexOffset>
+          <IndexOffset>649568</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12208,7 +12109,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>58304603-18b7-4b0b-8bc9-64785710627e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649024</IndexOffset>
+          <IndexOffset>649576</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12307,7 +12208,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>6b1cc114-6652-4db4-9ec0-6b9481c64604</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>648992</IndexOffset>
+          <IndexOffset>649544</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12406,7 +12307,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>d3ae136f-c4b9-4842-a3b4-ddcfb70f4d56</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>649680</IndexOffset>
+          <IndexOffset>650272</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12505,7 +12406,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>af8f2a69-9ad5-42ab-8f17-c83fcb1c2e14</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780432</IndexOffset>
+          <IndexOffset>775544</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12604,7 +12505,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>a7e055ee-5eb7-4b93-b436-9f1c3adc077a</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780424</IndexOffset>
+          <IndexOffset>775536</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12703,7 +12604,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>9913ce54-c55f-4f59-9e35-869b9d534d71</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780832</IndexOffset>
+          <IndexOffset>775944</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12802,7 +12703,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>e0c5fa49-32cb-40e6-b744-4258e250085b</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780840</IndexOffset>
+          <IndexOffset>775952</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -12901,7 +12802,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>e50878c6-9ebd-400c-84f2-8fa48e3cebf5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780848</IndexOffset>
+          <IndexOffset>775960</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -13000,7 +12901,7 @@ DC link voltages</Comment>
           <ForceOversampling>false</ForceOversampling>
           <Guid>55e4abf7-dcfc-4669-af0c-6aade458305c</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>780856</IndexOffset>
+          <IndexOffset>775968</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -13062,6 +12963,303 @@ DC link voltages</Comment>
           </SubMember>
           <SymbolBased>true</SymbolBased>
           <SymbolName>GVL_LEVI.yaw_target</SymbolName>
+          <TargetPort>851</TargetPort>
+          <TimeOffset>0</TimeOffset>
+          <Title>MeasurementMemberBase</Title>
+          <UseLocalServer>true</UseLocalServer>
+          <UseTaskSampleTime>true</UseTaskSampleTime>
+          <UTF8Encoding>false</UTF8Encoding>
+          <VariableSize>8</VariableSize>
+        </AdsAcquisition>
+        <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+          <AmsNetId>5.161.227.10.1.1</AmsNetId>
+          <Area>Local</Area>
+          <ArrayLength>0</ArrayLength>
+          <ArrayStartIndex>0</ArrayStartIndex>
+          <BaseSampleTime>15000</BaseSampleTime>
+          <ChannelStyleInformation />
+          <Comment></Comment>
+          <CompressionMode>Uncompressed</CompressionMode>
+          <ContextMask>0</ContextMask>
+          <DataAccess>
+            <DataAccessMode>
+              <Source>TwinCAT</Source>
+              <Protocoll>ADS</Protocoll>
+              <Format>TcBinary</Format>
+              <TimeContext>Present</TimeContext>
+              <TimeTangeInfo>
+                <StartTimeStamp>0</StartTimeStamp>
+                <EndTimeStamp>0</EndTimeStamp>
+              </TimeTangeInfo>
+            </DataAccessMode>
+          </DataAccess>
+          <DataType>REAL64</DataType>
+          <DisplayColor>Black</DisplayColor>
+          <Enabled>true</Enabled>
+          <FileHandle>0</FileHandle>
+          <ForceOversampling>false</ForceOversampling>
+          <Guid>5e91d73c-6436-438e-afa4-4065a7727ae1</Guid>
+          <IndexGroup>16448</IndexGroup>
+          <IndexOffset>650032</IndexOffset>
+          <IsEvent>false</IsEvent>
+          <IsHistorical>false</IsHistorical>
+          <IsTimeline>false</IsTimeline>
+          <Name>avg_I_squared_EMS_LB</Name>
+          <Oversample>0</Oversample>
+          <RawUnit>
+            <Transformation>
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <ScaleFactor>1</ScaleFactor>
+              <SourceUnitPrefix>none</SourceUnitPrefix>
+              <SourceUnitString />
+              <Symbol>1</Symbol>
+              <TargetUnitString />
+              <TargetUnitValue>0</TargetUnitValue>
+            </Transformation>
+            <Unit>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ReturnText> (None) </ReturnText>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+            </Unit>
+            <UnitOffsetResult>0</UnitOffsetResult>
+            <UnitScaleResult>1</UnitScaleResult>
+            <UserUnit>
+              <BaseName>UnitOfOne</BaseName>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+              <UserPrefix>none</UserPrefix>
+            </UserUnit>
+          </RawUnit>
+          <SaveOption>IncludeDataInSVDX</SaveOption>
+          <ServerHandle>0</ServerHandle>
+          <SortPriority>10</SortPriority>
+          <SubAdsAcquisition />
+          <SubMember>
+            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DetailLevel>
+                <Int32>0</Int32>
+              </DetailLevel>
+              <DisplayColor>Black</DisplayColor>
+              <Guid>bffb0e9e-de6c-45df-8a87-706c7ecab90c</Guid>
+              <Name>MeasurementMemberBase</Name>
+              <SortPriority>100</SortPriority>
+              <Title>MeasurementMemberBase</Title>
+              <UsedNameType>DetailLevel</UsedNameType>
+            </NameRelationInfo>
+          </SubMember>
+          <SymbolBased>true</SymbolBased>
+          <SymbolName>LEVI_MAIN_TEST.avg_I_squared_EMS_LB</SymbolName>
+          <TargetPort>851</TargetPort>
+          <TimeOffset>0</TimeOffset>
+          <Title>MeasurementMemberBase</Title>
+          <UseLocalServer>true</UseLocalServer>
+          <UseTaskSampleTime>true</UseTaskSampleTime>
+          <UTF8Encoding>false</UTF8Encoding>
+          <VariableSize>8</VariableSize>
+        </AdsAcquisition>
+        <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+          <AmsNetId>5.161.227.10.1.1</AmsNetId>
+          <Area>Local</Area>
+          <ArrayLength>0</ArrayLength>
+          <ArrayStartIndex>0</ArrayStartIndex>
+          <BaseSampleTime>15000</BaseSampleTime>
+          <ChannelStyleInformation />
+          <Comment></Comment>
+          <CompressionMode>Uncompressed</CompressionMode>
+          <ContextMask>0</ContextMask>
+          <DataAccess>
+            <DataAccessMode>
+              <Source>TwinCAT</Source>
+              <Protocoll>ADS</Protocoll>
+              <Format>TcBinary</Format>
+              <TimeContext>Present</TimeContext>
+              <TimeTangeInfo>
+                <StartTimeStamp>0</StartTimeStamp>
+                <EndTimeStamp>0</EndTimeStamp>
+              </TimeTangeInfo>
+            </DataAccessMode>
+          </DataAccess>
+          <DataType>REAL64</DataType>
+          <DisplayColor>Black</DisplayColor>
+          <Enabled>true</Enabled>
+          <FileHandle>0</FileHandle>
+          <ForceOversampling>false</ForceOversampling>
+          <Guid>a87c9816-2bb7-40f4-91a7-c775d92e17cb</Guid>
+          <IndexGroup>16448</IndexGroup>
+          <IndexOffset>650024</IndexOffset>
+          <IsEvent>false</IsEvent>
+          <IsHistorical>false</IsHistorical>
+          <IsTimeline>false</IsTimeline>
+          <Name>avg_I_squared_EMS_LF</Name>
+          <Oversample>0</Oversample>
+          <RawUnit>
+            <Transformation>
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <ScaleFactor>1</ScaleFactor>
+              <SourceUnitPrefix>none</SourceUnitPrefix>
+              <SourceUnitString />
+              <Symbol>1</Symbol>
+              <TargetUnitString />
+              <TargetUnitValue>0</TargetUnitValue>
+            </Transformation>
+            <Unit>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ReturnText> (None) </ReturnText>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+            </Unit>
+            <UnitOffsetResult>0</UnitOffsetResult>
+            <UnitScaleResult>1</UnitScaleResult>
+            <UserUnit>
+              <BaseName>UnitOfOne</BaseName>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+              <UserPrefix>none</UserPrefix>
+            </UserUnit>
+          </RawUnit>
+          <SaveOption>IncludeDataInSVDX</SaveOption>
+          <ServerHandle>0</ServerHandle>
+          <SortPriority>10</SortPriority>
+          <SubAdsAcquisition />
+          <SubMember>
+            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DetailLevel>
+                <Int32>0</Int32>
+              </DetailLevel>
+              <DisplayColor>Black</DisplayColor>
+              <Guid>139635b1-8997-4353-9731-39fed3d86fb9</Guid>
+              <Name>MeasurementMemberBase</Name>
+              <SortPriority>100</SortPriority>
+              <Title>MeasurementMemberBase</Title>
+              <UsedNameType>DetailLevel</UsedNameType>
+            </NameRelationInfo>
+          </SubMember>
+          <SymbolBased>true</SymbolBased>
+          <SymbolName>LEVI_MAIN_TEST.avg_I_squared_EMS_LF</SymbolName>
+          <TargetPort>851</TargetPort>
+          <TimeOffset>0</TimeOffset>
+          <Title>MeasurementMemberBase</Title>
+          <UseLocalServer>true</UseLocalServer>
+          <UseTaskSampleTime>true</UseTaskSampleTime>
+          <UTF8Encoding>false</UTF8Encoding>
+          <VariableSize>8</VariableSize>
+        </AdsAcquisition>
+        <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+          <AmsNetId>5.161.227.10.1.1</AmsNetId>
+          <Area>Local</Area>
+          <ArrayLength>0</ArrayLength>
+          <ArrayStartIndex>0</ArrayStartIndex>
+          <BaseSampleTime>15000</BaseSampleTime>
+          <ChannelStyleInformation />
+          <Comment></Comment>
+          <CompressionMode>Uncompressed</CompressionMode>
+          <ContextMask>0</ContextMask>
+          <DataAccess>
+            <DataAccessMode>
+              <Source>TwinCAT</Source>
+              <Protocoll>ADS</Protocoll>
+              <Format>TcBinary</Format>
+              <TimeContext>Present</TimeContext>
+              <TimeTangeInfo>
+                <StartTimeStamp>0</StartTimeStamp>
+                <EndTimeStamp>0</EndTimeStamp>
+              </TimeTangeInfo>
+            </DataAccessMode>
+          </DataAccess>
+          <DataType>REAL64</DataType>
+          <DisplayColor>Black</DisplayColor>
+          <Enabled>true</Enabled>
+          <FileHandle>0</FileHandle>
+          <ForceOversampling>false</ForceOversampling>
+          <Guid>a8b112ab-6518-4dd9-90d9-fa0a89fea97c</Guid>
+          <IndexGroup>16448</IndexGroup>
+          <IndexOffset>650016</IndexOffset>
+          <IsEvent>false</IsEvent>
+          <IsHistorical>false</IsHistorical>
+          <IsTimeline>false</IsTimeline>
+          <Name>avg_I_squared_HEMS</Name>
+          <Oversample>0</Oversample>
+          <RawUnit>
+            <Transformation>
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <ScaleFactor>1</ScaleFactor>
+              <SourceUnitPrefix>none</SourceUnitPrefix>
+              <SourceUnitString />
+              <Symbol>1</Symbol>
+              <TargetUnitString />
+              <TargetUnitValue>0</TargetUnitValue>
+            </Transformation>
+            <Unit>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ReturnText> (None) </ReturnText>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+            </Unit>
+            <UnitOffsetResult>0</UnitOffsetResult>
+            <UnitScaleResult>1</UnitScaleResult>
+            <UserUnit>
+              <BaseName>UnitOfOne</BaseName>
+              <BaseUnitString />
+              <BaseUnitValue>0</BaseUnitValue>
+              <Name>None</Name>
+              <NameExtension />
+              <Offset>0</Offset>
+              <Prefix>none</Prefix>
+              <ScaleFactor>1</ScaleFactor>
+              <Symbol></Symbol>
+              <UserPrefix>none</UserPrefix>
+            </UserUnit>
+          </RawUnit>
+          <SaveOption>IncludeDataInSVDX</SaveOption>
+          <ServerHandle>0</ServerHandle>
+          <SortPriority>10</SortPriority>
+          <SubAdsAcquisition />
+          <SubMember>
+            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DetailLevel>
+                <Int32>0</Int32>
+              </DetailLevel>
+              <DisplayColor>Black</DisplayColor>
+              <Guid>30318287-f007-4b81-91c9-3382056c6dd8</Guid>
+              <Name>MeasurementMemberBase</Name>
+              <SortPriority>100</SortPriority>
+              <Title>MeasurementMemberBase</Title>
+              <UsedNameType>DetailLevel</UsedNameType>
+            </NameRelationInfo>
+          </SubMember>
+          <SymbolBased>true</SymbolBased>
+          <SymbolName>LEVI_MAIN_TEST.avg_I_squared_HEMS</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>MeasurementMemberBase</Title>
@@ -16705,20 +16903,20 @@ DC link voltages</Comment>
             </MarkerContainer>
             <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
               <Comment />
-              <DisplayColor>-11528704</DisplayColor>
+              <DisplayColor>-814826</DisplayColor>
               <Enabled>true</Enabled>
-              <Guid>1e9f77d5-13a8-409a-8bfa-f88612336f44</Guid>
-              <Name>faverage_current_hems</Name>
+              <Guid>51fd4fbe-ee39-4ae9-b188-f700c30dbb24</Guid>
+              <Name>avg_I_squared_HEMS</Name>
               <SortPriority>12</SortPriority>
               <SubMember>
                 <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <AcquisitionGUID>be579c0c-c67e-439f-849b-06e5815d61f7</AcquisitionGUID>
+                  <AcquisitionGUID>a8b112ab-6518-4dd9-90d9-fa0a89fea97c</AcquisitionGUID>
                   <ArrayIndex>2147483647</ArrayIndex>
                   <BitMask>18446744073709551615</BitMask>
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>8b217163-ea68-4bf8-9596-a5f0b6f4c47a</Guid>
-                  <Name>Y: faverage_current_hems</Name>
+                  <Guid>72859852-51c2-4625-bc3e-5ab8de97016f</Guid>
+                  <Name>Y: avg_I_squared_HEMS</Name>
                   <Offset>0</Offset>
                   <ResultingUnit>
                     <Transformation>
@@ -16726,15 +16924,15 @@ DC link voltages</Comment>
                       <Name>None</Name>
                       <ScaleFactor>1</ScaleFactor>
                       <SourceUnitPrefix>none</SourceUnitPrefix>
-                      <SourceUnitString></SourceUnitString>
+                      <SourceUnitString />
                       <Symbol>1</Symbol>
-                      <TargetUnitString></TargetUnitString>
+                      <TargetUnitString />
                       <TargetUnitValue>0</TargetUnitValue>
                     </Transformation>
                     <Unit>
-                      <BaseUnitString></BaseUnitString>
+                      <BaseUnitString />
                       <BaseUnitValue>0</BaseUnitValue>
-                      <NameExtension></NameExtension>
+                      <NameExtension />
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ReturnText> (None) </ReturnText>
@@ -16745,10 +16943,10 @@ DC link voltages</Comment>
                     <UnitScaleResult>1</UnitScaleResult>
                     <UserUnit>
                       <BaseName>UnitOfOne</BaseName>
-                      <BaseUnitString></BaseUnitString>
+                      <BaseUnitString />
                       <BaseUnitValue>0</BaseUnitValue>
                       <Name>None</Name>
-                      <NameExtension></NameExtension>
+                      <NameExtension />
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ScaleFactor>1</ScaleFactor>
@@ -16766,7 +16964,7 @@ DC link voltages</Comment>
                         <Int32>0</Int32>
                       </DetailLevel>
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>4f7bcda5-31d7-46ba-9df6-9b67a7f6bd02</Guid>
+                      <Guid>79937105-4417-4ff5-b0e5-e48ff86fb38e</Guid>
                       <Name>MeasurementMemberBase</Name>
                       <SortPriority>100</SortPriority>
                       <Title>MeasurementMemberBase</Title>
@@ -16779,23 +16977,23 @@ DC link voltages</Comment>
                 <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>c8d4ad59-d745-43d3-b7cd-8c68a30d241a</Guid>
-                  <Name>Channel Style (95)</Name>
+                  <Guid>b7e65848-9537-480d-9d4d-0403af95dad6</Guid>
+                  <Name>Channel Style (127)</Name>
                   <SortPriority>100</SortPriority>
                   <SubMember>
                     <SeriesStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                       <Antialias>true</Antialias>
                       <Comment />
-                      <DisplayColor>-11528704</DisplayColor>
-                      <FillColor>844109312</FillColor>
+                      <DisplayColor>-814826</DisplayColor>
+                      <FillColor>854823190</FillColor>
                       <FillMode>None</FillMode>
                       <GradientConfig>Colors:-7077677,-16776961,-16711681,-16711936,-65536;Thresholds:0.25,0.5,0.75,1</GradientConfig>
-                      <Guid>491e06e1-c210-4f46-af14-cdc2c4894f6d</Guid>
+                      <Guid>db55b2d1-311b-4f3f-bff3-e03e99d4c841</Guid>
                       <LineWidth>2</LineWidth>
-                      <MarkColor>-11528704</MarkColor>
+                      <MarkColor>-814826</MarkColor>
                       <MarkSize>2</MarkSize>
                       <MarkState>Auto</MarkState>
-                      <Name>Series Style (95)</Name>
+                      <Name>Series Style (127)</Name>
                       <SeriesType>Line</SeriesType>
                       <ShowBars>false</ShowBars>
                       <ShowMesh>true</ShowMesh>
@@ -16806,8 +17004,8 @@ DC link voltages</Comment>
                     <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                       <Comment />
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>d8e4a66c-f4a9-4d48-95aa-45f54d2a2353</Guid>
-                      <Name>Min/Max Style (95)</Name>
+                      <Guid>106bb2fa-acfe-46cb-b601-eaf0a3a56031</Guid>
+                      <Name>Min/Max Style (127)</Name>
                       <ShowMax>false</ShowMax>
                       <ShowMin>false</ShowMin>
                       <SortPriority>100</SortPriority>
@@ -16816,8 +17014,8 @@ DC link voltages</Comment>
                     <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                       <Comment />
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>996313ec-2eba-499f-b740-30dcae657f7f</Guid>
-                      <Name>MeasurementMemberBase (95)</Name>
+                      <Guid>24763605-7d22-43f7-a39b-82c1db50cd23</Guid>
+                      <Name>MeasurementMemberBase (127)</Name>
                       <SortPriority>100</SortPriority>
                       <TimeShift>0</TimeShift>
                       <Title>MeasurementMemberBase</Title>
@@ -16832,7 +17030,7 @@ DC link voltages</Comment>
                     <Int32>0</Int32>
                   </DetailLevel>
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>502a9f89-ec84-42d6-9836-be0d933961e4</Guid>
+                  <Guid>21e5afd2-ead6-4851-9e76-579eb6b62eac</Guid>
                   <Name>MeasurementMemberBase</Name>
                   <SortPriority>100</SortPriority>
                   <Title>MeasurementMemberBase</Title>
@@ -18745,6 +18943,344 @@ DC link voltages</Comment>
                   </DetailLevel>
                   <DisplayColor>Black</DisplayColor>
                   <Guid>84bb7434-999c-44c6-84f0-e065100a9d22</Guid>
+                  <Name>MeasurementMemberBase</Name>
+                  <SortPriority>100</SortPriority>
+                  <Title>MeasurementMemberBase</Title>
+                  <UsedNameType>Acquisition</UsedNameType>
+                </NameRelationInfo>
+              </SubMember>
+              <Title>MeasurementMemberBase</Title>
+            </Channel>
+          </SubMember>
+          <Title>Axis Group</Title>
+        </AxisGroup>
+        <AxisGroup AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+          <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
+          <Comment />
+          <DisplayColor>-1</DisplayColor>
+          <Enabled>true</Enabled>
+          <Guid>0112a6ab-40fa-4268-8060-f0e8038cc239</Guid>
+          <Name>Average current EMS</Name>
+          <ShowTitle>False</ShowTitle>
+          <SortPriority>12</SortPriority>
+          <SubMember>
+            <RefGuid-TimeAxis>bb991f8c-721f-4d77-80b4-86fe7400c5df</RefGuid-TimeAxis>
+            <ValueAxis AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DisplayColor>Black</DisplayColor>
+              <Guid>954b2272-50cd-43c2-8241-c6c0241f5d8c</Guid>
+              <Inverted>false</Inverted>
+              <Logarithmic>false</Logarithmic>
+              <ManualMax>0.5</ManualMax>
+              <ManualMin>-0.5</ManualMin>
+              <Name>Value Axis (20)</Name>
+              <Orientation>Y</Orientation>
+              <ScalingMode>AutoGrowOnly</ScalingMode>
+              <SortPriority>100</SortPriority>
+              <SubMember>
+                <AxisStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
+                  <ColorMode>CustomColor</ColorMode>
+                  <Comment />
+                  <DisplayColor>-16777216</DisplayColor>
+                  <Grid>true</Grid>
+                  <GridColor>-16777216</GridColor>
+                  <GridDivisions>10</GridDivisions>
+                  <GridLineWidth>1</GridLineWidth>
+                  <Guid>66d18a71-233c-4e21-82e4-50b3cb553210</Guid>
+                  <LineWidth>1</LineWidth>
+                  <Name>Axis Style (23)</Name>
+                  <Precision>6</Precision>
+                  <ShowName>False</ShowName>
+                  <ShowUnit>AllChannels</ShowUnit>
+                  <SortPriority>100</SortPriority>
+                  <StretchFactor>1</StretchFactor>
+                  <SubGrid>false</SubGrid>
+                  <SubGridDivisions>5</SubGridDivisions>
+                  <Title>MeasurementMemberBase</Title>
+                  <UseScientificNotation>true</UseScientificNotation>
+                  <Visible>true</Visible>
+                </AxisStyle>
+              </SubMember>
+              <Title>Value Axis</Title>
+            </ValueAxis>
+            <MarkerContainer AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DisplayColor>Black</DisplayColor>
+              <Guid>c29c40ec-e895-430e-bb5d-8bfd2f0574a9</Guid>
+              <Name>Marker Container (23)</Name>
+              <SortPriority>100</SortPriority>
+              <SubMember />
+              <Title>MeasurementMemberBase</Title>
+            </MarkerContainer>
+            <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DisplayColor>-11528704</DisplayColor>
+              <Enabled>true</Enabled>
+              <Guid>2b432d60-c600-4260-98f3-805f9e9c140f</Guid>
+              <Name>avg_I_squared_EMS_LB</Name>
+              <SortPriority>10</SortPriority>
+              <SubMember>
+                <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <AcquisitionGUID>5e91d73c-6436-438e-afa4-4065a7727ae1</AcquisitionGUID>
+                  <ArrayIndex>2147483647</ArrayIndex>
+                  <BitMask>18446744073709551615</BitMask>
+                  <Comment />
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>dbb95b52-7d15-452c-9d64-0741e4167cc4</Guid>
+                  <Name>Y: avg_I_squared_EMS_LB</Name>
+                  <Offset>0</Offset>
+                  <ResultingUnit>
+                    <Transformation>
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <ScaleFactor>1</ScaleFactor>
+                      <SourceUnitPrefix>none</SourceUnitPrefix>
+                      <SourceUnitString />
+                      <Symbol>1</Symbol>
+                      <TargetUnitString />
+                      <TargetUnitValue>0</TargetUnitValue>
+                    </Transformation>
+                    <Unit>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ReturnText> (None) </ReturnText>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                    </Unit>
+                    <UnitOffsetResult>0</UnitOffsetResult>
+                    <UnitScaleResult>1</UnitScaleResult>
+                    <UserUnit>
+                      <BaseName>UnitOfOne</BaseName>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                      <UserPrefix>none</UserPrefix>
+                    </UserUnit>
+                  </ResultingUnit>
+                  <ScaleFactor>1</ScaleFactor>
+                  <ShortInfo />
+                  <SortPriority>2</SortPriority>
+                  <SubMember>
+                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DetailLevel>
+                        <Int32>0</Int32>
+                      </DetailLevel>
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>e959340a-66f8-4157-9529-5a4abd04b5bc</Guid>
+                      <Name>MeasurementMemberBase</Name>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                      <UsedNameType>Acquisition</UsedNameType>
+                    </NameRelationInfo>
+                  </SubMember>
+                  <Title>MeasurementMemberBase</Title>
+                  <Usage>Y</Usage>
+                </AcquisitionInterpreter>
+                <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>c7f2e92c-5e98-4567-b576-2786032d3872</Guid>
+                  <Name>Channel Style (95)</Name>
+                  <SortPriority>100</SortPriority>
+                  <SubMember>
+                    <SeriesStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Antialias>true</Antialias>
+                      <Comment />
+                      <DisplayColor>-11528704</DisplayColor>
+                      <FillColor>844109312</FillColor>
+                      <FillMode>None</FillMode>
+                      <GradientConfig>Colors:-7077677,-16776961,-16711681,-16711936,-65536;Thresholds:0.25,0.5,0.75,1</GradientConfig>
+                      <Guid>bad6fb79-d744-4709-8f88-f6f16d90e6ca</Guid>
+                      <LineWidth>2</LineWidth>
+                      <MarkColor>-11528704</MarkColor>
+                      <MarkSize>2</MarkSize>
+                      <MarkState>Auto</MarkState>
+                      <Name>Series Style (95)</Name>
+                      <SeriesType>Line</SeriesType>
+                      <ShowBars>false</ShowBars>
+                      <ShowMesh>true</ShowMesh>
+                      <ShowMeshGrid>false</ShowMeshGrid>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </SeriesStyle>
+                    <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>a45fa946-3e27-41f2-98d6-29fa6bfd2236</Guid>
+                      <Name>Min/Max Style (95)</Name>
+                      <ShowMax>false</ShowMax>
+                      <ShowMin>false</ShowMin>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </MinMaxStyle>
+                    <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>e08d14db-75b8-4e6b-9207-948026e0dd6a</Guid>
+                      <Name>MeasurementMemberBase (95)</Name>
+                      <SortPriority>100</SortPriority>
+                      <TimeShift>0</TimeShift>
+                      <Title>MeasurementMemberBase</Title>
+                    </TimeShiftStyle>
+                  </SubMember>
+                  <Title>MeasurementMemberBase</Title>
+                  <Visible>true</Visible>
+                </ChannelStyle>
+                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DetailLevel>
+                    <Int32>0</Int32>
+                  </DetailLevel>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>aa1835f4-8fc8-4775-ba0c-24c14db1a4ea</Guid>
+                  <Name>MeasurementMemberBase</Name>
+                  <SortPriority>100</SortPriority>
+                  <Title>MeasurementMemberBase</Title>
+                  <UsedNameType>Acquisition</UsedNameType>
+                </NameRelationInfo>
+              </SubMember>
+              <Title>MeasurementMemberBase</Title>
+            </Channel>
+            <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DisplayColor>-16771584</DisplayColor>
+              <Enabled>true</Enabled>
+              <Guid>bca22e5f-ddae-4ad1-86ba-eda2a00096df</Guid>
+              <Name>avg_I_squared_EMS_LF</Name>
+              <SortPriority>11</SortPriority>
+              <SubMember>
+                <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <AcquisitionGUID>a87c9816-2bb7-40f4-91a7-c775d92e17cb</AcquisitionGUID>
+                  <ArrayIndex>2147483647</ArrayIndex>
+                  <BitMask>18446744073709551615</BitMask>
+                  <Comment />
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>ee1d0394-db82-41da-8a06-8b60d5c21a73</Guid>
+                  <Name>Y: avg_I_squared_EMS_LF</Name>
+                  <Offset>0</Offset>
+                  <ResultingUnit>
+                    <Transformation>
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <ScaleFactor>1</ScaleFactor>
+                      <SourceUnitPrefix>none</SourceUnitPrefix>
+                      <SourceUnitString />
+                      <Symbol>1</Symbol>
+                      <TargetUnitString />
+                      <TargetUnitValue>0</TargetUnitValue>
+                    </Transformation>
+                    <Unit>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ReturnText> (None) </ReturnText>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                    </Unit>
+                    <UnitOffsetResult>0</UnitOffsetResult>
+                    <UnitScaleResult>1</UnitScaleResult>
+                    <UserUnit>
+                      <BaseName>UnitOfOne</BaseName>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                      <UserPrefix>none</UserPrefix>
+                    </UserUnit>
+                  </ResultingUnit>
+                  <ScaleFactor>1</ScaleFactor>
+                  <ShortInfo />
+                  <SortPriority>2</SortPriority>
+                  <SubMember>
+                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DetailLevel>
+                        <Int32>0</Int32>
+                      </DetailLevel>
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>20488d02-275d-4035-b6e5-0b0e8877d99a</Guid>
+                      <Name>MeasurementMemberBase</Name>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                      <UsedNameType>Acquisition</UsedNameType>
+                    </NameRelationInfo>
+                  </SubMember>
+                  <Title>MeasurementMemberBase</Title>
+                  <Usage>Y</Usage>
+                </AcquisitionInterpreter>
+                <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>997a2882-8045-40c4-9381-762884dc6334</Guid>
+                  <Name>Channel Style (126)</Name>
+                  <SortPriority>100</SortPriority>
+                  <SubMember>
+                    <SeriesStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Antialias>true</Antialias>
+                      <Comment />
+                      <DisplayColor>-16771584</DisplayColor>
+                      <FillColor>838866432</FillColor>
+                      <FillMode>None</FillMode>
+                      <GradientConfig>Colors:-7077677,-16776961,-16711681,-16711936,-65536;Thresholds:0.25,0.5,0.75,1</GradientConfig>
+                      <Guid>bf36841c-59bb-4dbc-b107-d5fbb83ce468</Guid>
+                      <LineWidth>2</LineWidth>
+                      <MarkColor>-16771584</MarkColor>
+                      <MarkSize>2</MarkSize>
+                      <MarkState>Auto</MarkState>
+                      <Name>Series Style (126)</Name>
+                      <SeriesType>Line</SeriesType>
+                      <ShowBars>false</ShowBars>
+                      <ShowMesh>true</ShowMesh>
+                      <ShowMeshGrid>false</ShowMeshGrid>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </SeriesStyle>
+                    <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>fbd044c0-d862-4d45-9eef-cc6b0f3839fd</Guid>
+                      <Name>Min/Max Style (126)</Name>
+                      <ShowMax>false</ShowMax>
+                      <ShowMin>false</ShowMin>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </MinMaxStyle>
+                    <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>ca3d1844-7c37-465a-9dd0-bd8b9a1e5a3d</Guid>
+                      <Name>MeasurementMemberBase (126)</Name>
+                      <SortPriority>100</SortPriority>
+                      <TimeShift>0</TimeShift>
+                      <Title>MeasurementMemberBase</Title>
+                    </TimeShiftStyle>
+                  </SubMember>
+                  <Title>MeasurementMemberBase</Title>
+                  <Visible>true</Visible>
+                </ChannelStyle>
+                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DetailLevel>
+                    <Int32>0</Int32>
+                  </DetailLevel>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>17aed727-acac-4b86-8e30-425d96e4ac22</Guid>
                   <Name>MeasurementMemberBase</Name>
                   <SortPriority>100</SortPriority>
                   <Title>MeasurementMemberBase</Title>

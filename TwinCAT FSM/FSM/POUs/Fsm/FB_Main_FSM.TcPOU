@@ -102,7 +102,7 @@ bSOCBlock := F_LVSOCBlocker(SOC := GVL_PT.LVBATDATAGlobal.SOC_pct, SOCLimit := 5
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE) OR (GVL_PT.HVAL_STATUS <> 1 AND (currentState <= 3 OR currentState = E_PodState.STATE_MAINTENANCE ))) THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE) OR (GVL_PT.HVAL_STATUS <> 1 AND (currentState < 3 OR currentState = E_PodState.STATE_MAINTENANCE ))) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
@@ -186,7 +186,7 @@ CASE currentState OF
 	E_PodState.STATE_SYNC:
 	
 		//State for which the SDC is open
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
@@ -209,7 +209,7 @@ CASE currentState OF
 		END_IF
 		
 		//state for which the SDC is open
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
+		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		
 		GVL_FSM.benable_telemetryGlobal := TRUE;
 		GVL_FSM.benable_heartbeat := TRUE;
@@ -218,7 +218,8 @@ CASE currentState OF
 		GVL_Prop.propulsion_enable := FALSE;	
 		
 		//explicit command
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe AND NOT bSOCBlock THEN
+		//IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe AND NOT bSOCBlock THEN
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe THEN
 		
 			bCommandSet := TRUE;
 			bStartPrechargeBuffer := TRUE;
@@ -562,7 +563,8 @@ CASE currentState OF
 				
 		END_IF
 		//explicit command
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bSOCBlock THEN
+		//IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bSOCBlock THEN
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk THEN
 		
 			bCommandSet := TRUE;
 			

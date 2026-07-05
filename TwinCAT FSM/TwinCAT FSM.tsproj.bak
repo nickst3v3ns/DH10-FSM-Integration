@@ -19880,7 +19880,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0BA78CA1-A663-8D4F-5D89-526714E662D7}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{EA891E2A-B3C4-581D-FF16-D8ED0BEA8931}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -60267,7 +60267,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="UNUSED" Index="#x7030" Sub="#x01">
+								<Entry Name="SAFETY_MAIN.bAlivePLC" Index="#x7030" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -61228,6 +61228,7 @@ Slave-Mode:
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bPLCToggle" VarB="StandardOutputs^TwinSafeGroup1.PLCtoggle(IN)_15"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^Term 53 (EL2008)">
+				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bAlivePLC" VarB="Channel 4^SAFETY_MAIN.bAlivePLC"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bArmSignal" VarB="Channel 1^SAFETY_MAIN.bRearm"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bCLK" VarB="Channel 2^SAFETY_MAIN.bCLK"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bJorianSpecial" VarB="Channel 8^SAFETY_MAIN.bJorianSpecial"/>

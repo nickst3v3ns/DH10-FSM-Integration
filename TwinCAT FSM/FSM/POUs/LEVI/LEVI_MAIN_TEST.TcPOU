@@ -100,6 +100,11 @@ VAR
 	Force_feedback_value AT %I*: ARRAY[0..23] OF INT;
 	Real_currents : ARRAY[0..23] OF LREAL;
 	avg_I_squared_HEMS : LREAL;
+	avg_I_squared_EMS_LF : LREAL;
+	avg_I_squared_EMS_LB : LREAL;
+	avg_I_HEMS : LREAL;
+	avg_I_EMS_LF : LREAL;
+	avg_I_EMS_LB : LREAL;
 	Power_HEMS : ARRAY[0..15] OF LREAL;
 	Power_total_HEMS : LREAL;
 	Power_EMS : ARRAY[0..7] OF LREAL;
@@ -671,6 +676,16 @@ FOR i:=0 TO 23 DO
 	drive_refs[i].nDriveNo := PLC_drive_refs[i].nDriveNo;
 END_FOR*)
 
+IF GVL_LEVI.reset_targets = TRUE THEN
+	pitch_target := 0;
+	roll_target := 0;
+	y_target_airgap := 0;
+	yaw_target := 0;
+	GVL_LEVI.enable_auto_y_target := FALSE;
+	GVL_LEVI.enable_auto_yaw_target := FALSE;
+	GVL_LEVI.reset_targets := FALSE;
+END_IF
+
 //----------------------------------------------------------------------------------------------------
 
 //	FSM
@@ -1053,6 +1068,8 @@ CASE GVL_LEVI.Levi_Command OF
 			auto_yaw_target_trigger := Control_liftoff_outputs.bauto_yaw_target_trigger;
 			auto_y_target_error := Control_liftoff_outputs.fauto_y_target_error;
 			auto_yaw_target_error := Control_liftoff_outputs.fauto_yaw_target_error;
+			avg_I_squared_EMS_LF := Control_liftoff_outputs.favg_I_squared_LF;
+			avg_I_squared_EMS_LB := Control_liftoff_outputs.favg_I_squared_LB;
 			
 			IF liftoff_in_progress = 0 THEN
 				FB_auto_DOF_state(	auto_DOF_states				:= auto_DOF_states,
@@ -1466,8 +1483,8 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//This if statement allows for different control parameters depending for if the motor is on or not.
 			//If the motor is on but the pod is standing still it is treated as motor off.
-			IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR 
-				(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag < 2 AND (ABS(GVL_PROP.TargetVelocity) <> 0 OR (GVL_PROP.TargetVelocity = 0 AND ABS(Velocity) > 50))) THEN
+			IF 	(GVL_PROP.PropFlag = TRUE AND GVL_PROP.AutoPilotFlag = 2) OR 
+				(GVL_PROP.PropFlag = TRUE AND GVL_PROP.AutoPilotFlag < 2 AND (ABS(GVL_PROP.TargetVelocity) <> 0 OR (GVL_PROP.TargetVelocity = 0 AND ABS(Velocity) > 50))) THEN
 				
 				//reset auto_DOF to INIT in case motor was turned on whilst still finding the optimal target
 				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
@@ -1634,6 +1651,8 @@ CASE GVL_LEVI.Levi_Command OF
 				auto_yaw_target_trigger := Control_liftoff_outputs.bauto_yaw_target_trigger;
 				auto_y_target_error := Control_liftoff_outputs.fauto_y_target_error;
 				auto_yaw_target_error := Control_liftoff_outputs.fauto_yaw_target_error;
+				avg_I_squared_EMS_LF := Control_liftoff_outputs.favg_I_squared_LF;
+				avg_I_squared_EMS_LB := Control_liftoff_outputs.favg_I_squared_LB;
 				
 				IF liftoff_in_progress = 0 THEN
 					FB_auto_DOF_state(	auto_DOF_states				:= auto_DOF_states,
@@ -2387,6 +2406,10 @@ FOR i:=0 TO 7 DO
 END_FOR
 
 Power_total_levi := Power_total_HEMS + Power_total_EMS;
+
+//avg_I_HEMS := avg_I_squared_HEMS / SQRT(ABS(avg_I_squared_HEMS));
+//avg_I_EMS_LF := avg_I_squared_HEMS / SQRT(ABS(avg_I_squared_HEMS));
+//avg_I_EMS_LB := avg_I_squared_HEMS / SQRT(ABS(avg_I_squared_HEMS));
 //----------------------------------------------------------------------------------------------------
 
 //	Making copies for global variables

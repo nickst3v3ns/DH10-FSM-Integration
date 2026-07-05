@@ -39,12 +39,11 @@ CASE state OF
         GVL_LEVI.levitation_enable := FALSE; //disabling Levitation
 		
 		fbdischarge(); //calling for discharge as double safety, normally the pod should directly trip the SDC
-		//because braking pcb is broken
+		
 		GVL_FSM.bareBrakesEngaged := FALSE;
 		
-		IF NOT GVL_FSM.bareBrakesEngaged THEN
-        	state := 1;
-        END_IF
+		
+        state := 1;
 		
     1:	allActionsCompleteShutdown := 
 	GVL_PT.HVAL_STATUS = E_HVAL_STATUS.GREEN_HV_OFF;
@@ -52,7 +51,7 @@ CASE state OF
         IF allActionsCompleteShutdown THEN
 			
 			  state := 2;
-			  GVL_FSM.bwatchdogResetGlobal := TRUE;
+			 
 		
         END_IF
 		
@@ -71,6 +70,7 @@ CASE state OF
 		IF RecoveryToMaintenance THEN
 			
 			GVL_FSM.bMovementSoftStopGlobal := FALSE;
+			GVL_FSM.bwatchdogResetGlobal := TRUE;
 			
 			
 			state := 3;

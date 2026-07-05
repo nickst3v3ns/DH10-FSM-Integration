@@ -14,6 +14,24 @@
           <FileName></FileName>
           <Children>
             <Node>
+              <Title>avg_I_squared_EMS_LB</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>avg_I_squared_EMS_LF</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>avg_I_squared_HEMS</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>DC_link_voltage_EMS[0]</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -153,12 +171,6 @@
             </Node>
             <Node>
               <Title>DC_link_voltage_HEMS[15]</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>faverage_current_hems</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -960,11 +972,11 @@
             </Node>
             <Node>
               <Title>Average current HEMS</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>faverage_current_hems</Title>
+                  <Title>avg_I_squared_HEMS</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -975,7 +987,7 @@
         </Node>
         <Node>
           <Title>EMS currents</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1058,6 +1070,25 @@
                 </Node>
                 <Node>
                   <Title>Real_currents[23]</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+              </Children>
+            </Node>
+            <Node>
+              <Title>Average current EMS</Title>
+              <Expanded>True</Expanded>
+              <FileName></FileName>
+              <Children>
+                <Node>
+                  <Title>avg_I_squared_EMS_LB</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>avg_I_squared_EMS_LF</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -1280,7 +1311,7 @@
         </Node>
         <Node>
           <Title>Degrees of freedom</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1764,7 +1795,7 @@
     </Node>
     <Node>
       <Title>Prop</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>C:\Users\LeviL\Source\Repos\DH10-FSM-Integration\TwinCAT Measurement FSM project\Prop.tcscopex</FileName>
       <Children>
         <Node>
@@ -2670,7 +2701,7 @@
                   <Children />
                 </Node>
                 <Node>
-                  <Title>T_MOTOR_RIGHTFRONT[0] (1)</Title>
+                  <Title>T_MOTOR_RIGHTFRONT[0]</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

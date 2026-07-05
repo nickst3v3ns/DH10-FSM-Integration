@@ -50,10 +50,10 @@ END_VAR
 		
 		found_auto_z_target := FALSE;
 		
-		IF (auto_z_target_trigger = FALSE AND (ABS(avg_I_squared_HEMS) <0.002)) THEN
+		IF (auto_z_target_trigger = FALSE AND (ABS(avg_I_squared_HEMS) < GVL_LEVI.auto_z_target_margin)) THEN
 			auto_DOF_states := E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS;
 			
-			Control_liftoff_parameters.benable_auto_z_target := FALSE;
+			Control_liftoff_parameters.benable_auto_z_target := GVL_LEVI.enable_auto_z_target;
 			Control_liftoff_parameters.benable_auto_y_target := GVL_LEVI.enable_auto_y_target;
 			Control_liftoff_parameters.benable_auto_yaw_target := GVL_LEVI.enable_auto_yaw_target;
 			
@@ -63,7 +63,7 @@ END_VAR
 			
 			auto_DOF_states := E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS;
 			
-			Control_liftoff_parameters.benable_auto_z_target := FALSE;
+			Control_liftoff_parameters.benable_auto_z_target := GVL_LEVI.enable_auto_z_target;
 			Control_liftoff_parameters.benable_auto_y_target := GVL_LEVI.enable_auto_y_target;
 			Control_liftoff_parameters.benable_auto_yaw_target := GVL_LEVI.enable_auto_yaw_target;
 			
@@ -71,7 +71,7 @@ END_VAR
 	
 	E_auto_DOF_States.FINDING_Y_AND_YAW_TARGETS:
 	
-		Control_liftoff_parameters.benable_auto_z_target := FALSE;
+		Control_liftoff_parameters.benable_auto_z_target := GVL_LEVI.enable_auto_z_target;
 		Control_liftoff_parameters.benable_auto_y_target := GVL_LEVI.enable_auto_y_target;
 		Control_liftoff_parameters.benable_auto_yaw_target := GVL_LEVI.enable_auto_yaw_target;
 		
@@ -80,7 +80,7 @@ END_VAR
 		
 		IF GVL_LEVI.enable_auto_y_target AND GVL_LEVI.enable_auto_yaw_target THEN
 			
-			IF (auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < 0.02)) AND (auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < 0.02)) THEN
+			IF (auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < GVL_LEVI.auto_y_target_margin)) AND (auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < GVL_LEVI.auto_yaw_target_margin)) THEN
 				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
 				found_auto_y_target := TRUE;
 				found_auto_yaw_target := TRUE;
@@ -89,18 +89,16 @@ END_VAR
 			
 		ELSIF GVL_LEVI.enable_auto_y_target AND GVL_LEVI.enable_auto_yaw_target = FALSE THEN
 			
-			IF auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < 0.02) THEN
+			IF auto_y_target_trigger = FALSE AND ABS(auto_y_target_error/auto_y_target_gain < GVL_LEVI.auto_y_target_margin) THEN
 				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
 				found_auto_y_target := TRUE;
-				found_auto_yaw_target := TRUE;
 				End_auto_DOF_cycle := TRUE;
 			END_IF
 			
 		ELSIF GVL_LEVI.enable_auto_y_target = FALSE AND GVL_LEVI.enable_auto_yaw_target THEN
 			
-			IF auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < 0.02) THEN
+			IF auto_yaw_target_trigger = FALSE AND ABS(auto_yaw_target_error/auto_yaw_target_gain < GVL_LEVI.auto_yaw_target_margin) THEN
 				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
-				found_auto_y_target := TRUE;
 				found_auto_yaw_target := TRUE;
 				End_auto_DOF_cycle := TRUE;
 			END_IF
