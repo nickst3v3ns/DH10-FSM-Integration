@@ -510,6 +510,9 @@
     <Compile Include="POUs\SOC\FB_SOC_CoulombCount.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\SOC\FB_StopWatch.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\SOC\F_SOCFromOCV.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -544,6 +547,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Propulsion_Task.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SOC_TASK.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Thermal_Task.TcTTO">

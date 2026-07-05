@@ -100,7 +100,7 @@ bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3)) THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE) OR (GVL_PT.HVAL_STATUS <> 1 AND (currentState <= 3 OR currentState = E_PodState.STATE_MAINTENANCE ))) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
@@ -564,21 +564,30 @@ CASE currentState OF
 		
 			bCommandSet := TRUE;
 			
+			bStartPrechargeBuffer := TRUE;
+			
 			GVL_FSM.b_AlivePLCGlobal := TRUE;
 			
-			//maybe add a timer but this depends on the interpretation of SDC off
-			IF NOT charging_in_progress THEN
-				
-				fbPrecharge();
-				charging_in_progress := TRUE;
-	
-			ELSIF GVL_PT.PTC_STATE = 2 THEN 
-				
-				charging_in_progress := FALSE;
-				currentState := E_PodState.STATE_HV_ACTIVE;
-				currentCmd := E_Command.CMD_NONE;
-				bCommandSet := FALSE;
-				
+			fbSAFEprime(bFeedbackEstopOut := GVL_FSM.bEstopOutGlobal, bFeedBackSDCIn := GVL_FSM.bSDCFeedbackGlobal, bRestartToggle => GVL_FSM.bEstopRestartGlobal, bSDCPrimed => bSDCprimed);
+			//to allow for some time for the PTC to see the closed SDC
+			fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
+			
+			IF fbPrechargeBuffer.Q THEN
+				IF NOT charging_in_progress THEN
+					
+					fbPrecharge();
+					charging_in_progress := TRUE;
+		
+				ELSIF GVL_PT.PTC_STATE = 2 THEN 
+					
+					charging_in_progress := FALSE;
+					currentState := E_PodState.STATE_HV_ACTIVE;
+					currentCmd := E_Command.CMD_NONE;
+					
+					bCommandSet := FALSE;
+					bStartPrechargeBuffer := FALSE;
+					
+				END_IF
 			END_IF
 		END_IF
 		

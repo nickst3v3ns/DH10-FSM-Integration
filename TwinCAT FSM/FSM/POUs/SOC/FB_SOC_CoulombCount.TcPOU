@@ -3,46 +3,62 @@
   <POU Name="FB_SOC_CoulombCount" Id="{4442ab3e-60b0-4a6b-80b0-a40673133870}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SOC_CoulombCount
 VAR_INPUT
-    fPackCurrent_Amps          : LREAL;
- 
-    bSeedFromStartupOCV         : BOOL;
-    fSeedSOC_Percent            : LREAL;  // = FB_InitialSoCEstimation.fInitialSOC_Percent
+    fPackCurrent_Amps        : LREAL;         // SIGN: + = discharge, - = charge (match your sensor!)
+    bSeedFromStartupOCV      : BOOL;          // rising edge (re)anchors SOC to the seed value
+    fSeedSOC_Percent         : LREAL;         // seed SOC, applied on the rising edge above
+    fUsableCapacity_AmpHours : LREAL := 2.5;  // full usable pack capacity
+    fCurrentDeadband_Amps    : LREAL := 0.050;  // |I| below this is treated as 0 (offset rejection)
 END_VAR
 VAR_OUTPUT
-    fStateOfCharge_Percent      : LREAL;  
-    fRemainingCapacity_AmpHours : LREAL;  
+    fStateOfCharge_Percent      : LREAL;
+    fRemainingCapacity_AmpHours : LREAL;
+    bSeeded                     : BOOL;       // FALSE until first seed -> outputs not yet valid
 END_VAR
 VAR
-    bFirstCycleSinceBoot            : BOOL := TRUE;
-    fElapsedTime_Seconds            : LREAL;
- 
-    bSeedFromStartupOCV_Previous    : BOOL;
-    fAnchorSOC_Percent              : LREAL;
-    fAmpHoursDischarged_SinceAnchor : LREAL;
-END_VAR
-
-]]></Declaration>
+    rtSeed           : R_TRIG;
+    fCharge_AmpHours : LREAL;                 // the actual integrator: charge remaining in the pack
+    fDeltaTime_s     : LREAL;
+    fCurrent_Amps    : LREAL;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bFirstCycleSinceBoot THEN
-	fElapsedTime_Seconds := 0.0;
-	bFirstCycleSinceBoot := FALSE;
+      <ST><![CDATA[// ---------------------------------------------------------------
+// Real cycle time in seconds, read from the task itself.
+// CycleTime is in 100 ns ticks -> divide by 1e7 to get seconds.
+// A 100 ms task gives 1_000_000 ticks -> 0.1 s, but this now
+// tracks automatically if the task period is ever changed.
+// ---------------------------------------------------------------
+fDeltaTime_s := UDINT_TO_LREAL(_TaskInfo[GETCURTASKINDEXEX()].CycleTime) / 1.0E7;
+
+// --- (Re)seed / anchor on rising edge ---------------------------
+rtSeed(CLK := bSeedFromStartupOCV);
+IF rtSeed.Q THEN
+    fCharge_AmpHours := fUsableCapacity_AmpHours * (LIMIT(0.0, fSeedSOC_Percent, 100.0) / 100.0);
+    bSeeded := TRUE;
+
+// --- Integrate only after anchoring; skip integration on the seed cycle itself ---
+ELSIF bSeeded THEN
+    fCurrent_Amps := fPackCurrent_Amps;
+
+    // Reject small sensor offset around zero
+    IF ABS(fCurrent_Amps) < fCurrentDeadband_Amps THEN
+        fCurrent_Amps := 0.0;
+    END_IF
+
+    // + current = discharge -> remove charge from the pack
+    fCharge_AmpHours := fCharge_AmpHours - (fCurrent_Amps * fDeltaTime_s / 3600.0);
+
+    // Clamp the STATE (anti-windup), not just the reported percentage
+    fCharge_AmpHours := LIMIT(0.0, fCharge_AmpHours, fUsableCapacity_AmpHours);
+END_IF
+
+// --- Outputs ----------------------------------------------------
+fRemainingCapacity_AmpHours := fCharge_AmpHours;
+
+IF fUsableCapacity_AmpHours > 0.0 THEN
+    fStateOfCharge_Percent := (fCharge_AmpHours / fUsableCapacity_AmpHours) * 100.0;
 ELSE
-	fElapsedTime_Seconds := F_GetTaskTotalTime(0);
-END_IF
-
-IF bSeedFromStartupOCV AND NOT bSeedFromStartupOCV_Previous THEN 
-	fAnchorSOC_Percent := LIMIT(0.0, fSeedSOC_Percent, 100.0);
-    fStateOfCharge_Percent := fAnchorSOC_Percent;
-    fAmpHoursDischarged_SinceAnchor := 0.0;
-END_IF
-bSeedFromStartupOCV_Previous := bSeedFromStartupOCV;
-
-IF fElapsedTime_Seconds > 0.0 THEN 
-	fAmpHoursDischarged_SinceAnchor := fAmpHoursDischarged_SinceAnchor + (fPackCurrent_Amps * fElapsedTime_Seconds / 3600.0);
-	fStateOfCharge_Percent := fAnchorSOC_Percent - (fAmpHoursDischarged_SinceAnchor / 2.5) * 100.0;
-	fStateOfCharge_Percent := LIMIT(0.0, fStateOfCharge_Percent, 100.0);
-END_IF
-fRemainingCapacity_AmpHours := 2.5 * (fStateOfCharge_Percent / 100.0);]]></ST>
+    fStateOfCharge_Percent := 0.0;
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

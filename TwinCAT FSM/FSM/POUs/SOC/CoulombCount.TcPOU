@@ -3,25 +3,42 @@
   <POU Name="CoulombCount" Id="{00e5a03e-ce15-4529-b8c1-0d6ff1e2f696}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CoulombCount
 VAR
-	fbCoulombCount : FB_SOC_CoulombCount;
-	bStartup : BOOL;
-	OCVest : LREAL;
-	SOC : LREAL;
-	RemainingAh : LREAL;
+	fbSOC : FB_SOC_CoulombCount;
+	
+	bSeedSOC : BOOL := TRUE;
+	fSeedValue : LREAL;
+	
+	fCurrentSOC : LREAL;
+	fRemainingAh : LREAL;
+	bSOCValid : BOOL;
+	
+
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT bStartup THEN
-	OCVest := F_SOCFromOCV(fCellVoltage_Volts := GVL_PT.MIN_VOLTAGE);
-	fbCoulombcount(bSeedFromStartupOCV := TRUE, fStateOfCharge_Percent => SOC, fRemainingCapacity_AmpHours => RemainingAh);
-	bStartup := TRUE;
+      <ST><![CDATA[
+
+IF bSeedSOC THEN
+	fSeedValue := F_SOCFromOCV(fCellVoltage_Volts := GVL_PT.MIN_VOLTAGE);
+	fbSOC(fPackCurrent_Amps := DINT_TO_REAL(GVL_PT.IVT_CURRENT)/1000.0, bSeedFromStartupOCV := bSeedSOC, fSeedSOC_Percent := fSeedValue);
+	bSeedSOC := FALSE;
 END_IF
 
-fbCoulombcount(fPackCurrent_Amps := GVL_PT.IVT_CURRENT,fSeedSOC_Percent := SOC, fStateOfCharge_Percent => SOC, fRemainingCapacity_AmpHours => RemainingAh);
+fbSOC(
+    fPackCurrent_Amps   := DINT_TO_REAL(GVL_PT.IVT_CURRENT)/1000.0,
+    bSeedFromStartupOCV := bSeedSOC,
+    fSeedSOC_Percent    := fSeedValue
+);
+
+fCUrrentSOC := fbSOC.fStateOfCharge_Percent;
+fRemainingAh := fbSOC.fRemainingCapacity_AmpHours;
+bSOCValid := fbSOC.bSeeded;
+
 
 
 //call FB_CoulombCount with the inputs from GVL_PT
-//at startup in the fsm call an instance of FB_SOC_OCV]]></ST>
+//at startup in the fsm call an instance of FB_SOC_OCV
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

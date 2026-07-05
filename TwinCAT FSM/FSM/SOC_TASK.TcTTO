@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="SOC_TASK" Id="{8bd87615-8dd8-40e4-8f1c-7f12fe1b041c}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>100000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>CoulombCount</Name>
+    </PouCall>
+    <TaskFBGuid>{64afffce-a792-41f3-821d-c1c303bc3224}</TaskFBGuid>
+    <Fb_init>{1c062aa9-6ef4-40ae-92b9-738d11a5fcec}</Fb_init>
+    <Fb_exit>{052f8dd0-e635-4c8f-93f1-eee28f037c99}</Fb_exit>
+    <CycleUpdate>{a49935b9-6b5b-4964-bdda-a31842bef3c1}</CycleUpdate>
+    <PostCycleUpdate>{d8117292-7a78-45d7-b82a-ba79e1e883f8}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

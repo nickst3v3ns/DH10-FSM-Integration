@@ -18,7 +18,7 @@ VAR_GLOBAL
 	
 	//HV_STATUS
 	ISO_RES : UINT; //in kOhms
-	IVT_CURRENT : UDINT; //
+	IVT_CURRENT : DINT; //in mA
 	
 	//BMS_LOG_A
 	MAX_VOLTAGE : REAL; //V
@@ -27,9 +27,9 @@ VAR_GLOBAL
 	MIN_TEMP : LREAL; //given as ohms probably, needs conversion Martin may fix this
 	
 	//BMS_LOG_B
-	TOTAL_VOLTAGE : UINT;
+	TOTAL_VOLTAGE : UINT; //in 10mV
 	PACK_CURRENT : INT;
-	DC_LINK_VOLTAGE : DINT;
+	DC_LINK_VOLTAGE : DINT; //in mV
 	
 	
 //LVBAT
