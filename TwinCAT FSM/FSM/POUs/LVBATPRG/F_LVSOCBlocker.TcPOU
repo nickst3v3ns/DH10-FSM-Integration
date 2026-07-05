@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_LVSOCBlocker" Id="{03ddf4ea-8164-4955-8ac2-eb7398c5900b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_LVSOCBlocker : BOOL
+VAR_INPUT
+	SOC : LREAL;
+	SOCLimit : LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF SOC < SOCLimit THEN
+	F_LVSOCBlocker := TRUE;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

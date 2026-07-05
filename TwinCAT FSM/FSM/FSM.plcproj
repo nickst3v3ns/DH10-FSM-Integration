@@ -222,6 +222,21 @@
     <Compile Include="POUs\CAN\PTC_Send_Message.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\CAN\PTSendMessage\FB_Charge.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CAN\PTSendMessage\FB_ClearPrechargeFailure.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CAN\PTSendMessage\FB_Discharge.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CAN\PTSendMessage\FB_PrechargeReset.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\CAN\PTSendMessage\FB_PTC_RESET.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FSM\BasicChecks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -241,21 +256,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\FB_TwinSAFEArm.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\PTSendMessage\FB_Charge.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\PTSendMessage\FB_ClearPrechargeFailure.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\PTSendMessage\FB_Discharge.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\PTSendMessage\FB_PrechargeReset.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FSM\PTSendMessage\FB_PTC_RESET.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FSM\SC_MAIN_FSM.TcPOU">
@@ -322,6 +322,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LEVI\State_Levi_Testing_Individual_Drives.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LVBATPRG\F_LVSOCBlocker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\LVBATPRG\P_ParseBattery.TcPOU">
@@ -567,8 +570,8 @@
     <Folder Include="DUTs\PT-DUTS\PTC_ErrorCode" />
     <Folder Include="GVLs" />
     <Folder Include="GVLs\GS" />
+    <Folder Include="POUs\CAN\PTSendMessage" />
     <Folder Include="POUs\FSM" />
-    <Folder Include="POUs\FSM\PTSendMessage" />
     <Folder Include="POUs\LEVI" />
     <Folder Include="POUs\CAN" />
     <Folder Include="POUs\GS" />

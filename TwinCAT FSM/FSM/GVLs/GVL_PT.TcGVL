@@ -31,9 +31,16 @@ VAR_GLOBAL
 	PACK_CURRENT : INT;
 	DC_LINK_VOLTAGE : DINT; //in mV
 	
-	
+	SOCGlobal : LREAL;
+	RemainingAh : LREAL;
 //LVBAT
-	CAN_NODE_STATE_LV AT %I*:		USINT;
+	LVBATDATAGlobal : ST_IndividualData1;
+	
+//bitmaps
+	
+	uPTCErrorGlobal : U_PTC_ErrorCode;
+	uIMDWarningsGlobal : U_IMD_Warnings;
+	uBMSFailReasonGlobal : U_BMS_Fail_Reason;
 END_VAR
 
 //typedef enum {

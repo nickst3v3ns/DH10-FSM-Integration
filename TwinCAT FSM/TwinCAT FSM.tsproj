@@ -4972,7 +4972,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 				<Task Id="11" Priority="7" CycleTime="60000" AmsPort="358" Affinity="#x00000008" AdtTasks="true">
 					<Name>Propulsion_Task</Name>
 				</Task>
-				<Task Id="9" Priority="1" CycleTime="1000000" AmsPort="356" AdtTasks="true">
+				<Task Id="9" Priority="19" CycleTime="1000000" AmsPort="356" AdtTasks="true">
 					<Name>SOC_TASK</Name>
 				</Task>
 			</Tasks>
@@ -19880,7 +19880,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{F2087F40-BB72-513D-1611-3BF71EBCD41F}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0B4B07FF-2B55-34D8-4413-63DBA318FA63}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -20153,19 +20153,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PT.CAN_NODE_STATE_LV</Name>
-							<Comment><![CDATA[LVBAT]]></Comment>
-							<Type>USINT</Type>
-						</Var>
-						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
 							<Type>BOOL</Type>
@@ -20231,8 +20218,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.state</Name>
-							<Type>UINT</Type>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
@@ -20245,6 +20236,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
 							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.state</Name>
+							<Type>UINT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
@@ -20262,21 +20257,21 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
-							<Comment><![CDATA[OUTPUTS]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>SAFETY_MAIN.bbrakes_engage</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>SAFETY_MAIN.bPLCToggle</Name>
 							<Comment><![CDATA[cycle time watchdog]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -20324,7 +20319,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="6" AreaNo="96">
+					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
 						<Name>LVBAT Inputs</Name>
 						<Var>
 							<Name>P_ParseBattery.rPack1</Name>
@@ -20343,7 +20338,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}">ST_CanFrame8</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
+					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
 						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Outputs</Name>
 						<Var>
 							<Name>GVL_PT.CAN_OUTPUTS</Name>
@@ -20351,14 +20346,14 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
+					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
 						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs</Name>
 						<Var>
 							<Name>GVL_PT.CAN_INPUTS</Name>
 							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
+					<Vars VarGrpType="2" ContextId="3" AreaNo="49">
 						<Name>Levi_Fast_Task_Horizontal Outputs</Name>
 						<Var>
 							<Name>GVL_LEVI.stOut_EL6021_LFL</Name>
@@ -20391,7 +20386,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
+					<Vars VarGrpType="1" ContextId="3" AreaNo="48">
 						<Name>Levi_Fast_Task_Horizontal Inputs</Name>
 						<Var>
 							<Name>GVL_LEVI.stIn_EL6021_LFL</Name>
@@ -20424,7 +20419,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="3" AreaNo="49">
+					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 						<Name>Propulsion_Task Outputs</Name>
 						<Var>
 							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
@@ -20493,7 +20488,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="3" AreaNo="48">
+					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 						<Name>Propulsion_Task Inputs</Name>
 						<Var>
 							<Name>PROP_MAIN_Delft.Offset_Left</Name>
@@ -20528,7 +20523,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
+					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
 						<Name>Levi_Fast_Task_Vertical Outputs</Name>
 						<Var>
 							<Name>GVL_LEVI.stOut_EL6021_VFR</Name>
@@ -20561,7 +20556,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{D6B0A42D-897A-4B90-95E8-3C741C3CE3EE}" Namespace="Tc2_SerialCom">EL6outData22B</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="2" AreaNo="32">
+					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>Levi_Fast_Task_Vertical Inputs</Name>
 						<Var>
 							<Name>GVL_LEVI.stIn_EL6021_VFR</Name>
@@ -20594,7 +20589,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{0146173C-D895-D219-E209-CC005AC77636}" Namespace="Tc2_SerialCom">EL6inData22B</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
+					<Vars VarGrpType="2" AreaNo="1">
 						<Name>LEVI_TEST_TASK Outputs</Name>
 						<Var>
 							<Name>LEVI_MAIN_TEST.motor_airgap_left</Name>
@@ -20613,7 +20608,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type GUID="{76788CDC-AE14-A572-2540-F8E13F43FEAE}">ARRAY [0..23] OF UINT</Type>
 						</Var>
 					</Vars>
-					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
+					<Vars VarGrpType="1">
 						<Name>LEVI_TEST_TASK Inputs</Name>
 						<Var>
 							<Name>LEVI_MAIN_TEST.Ia_for_levi_left</Name>
@@ -21133,15 +21128,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
-							<Name>SOC_TASK</Name>
-							<ManualConfig>
-								<OTCID>#x02010090</OTCID>
-							</ManualConfig>
-							<Priority>1</Priority>
-							<CycleTime>100000000</CycleTime>
-						</Context>
-						<Context>
-							<Id>1</Id>
 							<Name>LEVI_TEST_TASK</Name>
 							<ManualConfig>
 								<OTCID>#x020100a0</OTCID>
@@ -21150,7 +21136,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<CycleTime>1500000</CycleTime>
 						</Context>
 						<Context>
-							<Id>2</Id>
+							<Id>1</Id>
 							<Name>Levi_Fast_Task_Vertical</Name>
 							<ManualConfig>
 								<OTCID>#x02010060</OTCID>
@@ -21159,7 +21145,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<CycleTime>300000</CycleTime>
 						</Context>
 						<Context>
-							<Id>3</Id>
+							<Id>2</Id>
 							<Name>Propulsion_Task</Name>
 							<ManualConfig>
 								<OTCID>#x020100b0</OTCID>
@@ -21168,7 +21154,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<CycleTime>6000000</CycleTime>
 						</Context>
 						<Context>
-							<Id>4</Id>
+							<Id>3</Id>
 							<Name>Levi_Fast_Task_Horizontal</Name>
 							<ManualConfig>
 								<OTCID>#x02010070</OTCID>
@@ -21177,7 +21163,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<CycleTime>300000</CycleTime>
 						</Context>
 						<Context>
-							<Id>5</Id>
+							<Id>4</Id>
 							<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_</Name>
 							<ManualConfig>
 								<OTCID>#x02010080</OTCID>
@@ -21186,13 +21172,22 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<CycleTime>1000000</CycleTime>
 						</Context>
 						<Context>
-							<Id>6</Id>
+							<Id>5</Id>
 							<Name>LVBAT</Name>
 							<ManualConfig>
 								<OTCID>#x02010040</OTCID>
 							</ManualConfig>
 							<Priority>18</Priority>
 							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id>6</Id>
+							<Name>SOC_TASK</Name>
+							<ManualConfig>
+								<OTCID>#x02010090</OTCID>
+							</ManualConfig>
+							<Priority>19</Priority>
+							<CycleTime>100000000</CycleTime>
 						</Context>
 						<Context>
 							<Id>7</Id>
@@ -21217,48 +21212,48 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<InitSymbol>
 							<Name>LEVI_MAIN_TEST.FB_sensor.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000013</AreaNo>
+							<AreaNo>#x00000003</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>LEVI_MAIN_TEST.FB_control_liftoff.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000013</AreaNo>
+							<AreaNo>#x00000003</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>LEVI_MAIN_TEST.FB_control_descent.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000013</AreaNo>
+							<AreaNo>#x00000003</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>LEVI_MAIN_TEST.FB_control_vert.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000013</AreaNo>
+							<AreaNo>#x00000003</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>LEVI_MAIN_TEST.FB_control_lat.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000013</AreaNo>
+							<AreaNo>#x00000003</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 						<InitSymbol>
 							<Name>PROP_MAIN_Delft.FB_ETML.eTraceLevelMaxFB</Name>
 							<Type GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</Type>
-							<AreaNo>#x00000033</AreaNo>
+							<AreaNo>#x00000023</AreaNo>
 							<Data>03000000</Data>
 						</InitSymbol>
 					</InitSymbols>
 					<TaskPouOids>
-						<TaskPouOid Prio="1" OTCID="#x08502007"/>
 						<TaskPouOid Prio="4" OTCID="#x0850200a"/>
 						<TaskPouOid Prio="6" OTCID="#x0850200b"/>
 						<TaskPouOid Prio="7" OTCID="#x08502003"/>
 						<TaskPouOid Prio="8" OTCID="#x08502001"/>
 						<TaskPouOid Prio="11" OTCID="#x08502005"/>
 						<TaskPouOid Prio="18" OTCID="#x08502006"/>
+						<TaskPouOid Prio="19" OTCID="#x08502007"/>
 						<TaskPouOid Prio="20" OTCID="#x08502004"/>
 						<TaskPouOid Prio="22" OTCID="#x08502002"/>
 					</TaskPouOids>
@@ -61185,22 +61180,22 @@ Slave-Mode:
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0420-5008B3000403}" Id="#x02030040"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0320-500810000403}" Id="#x020300d0"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0320-500860000403}" Id="#x020300e0"/>
-		<MappingInfo Identifier="{00000000-2003-0850-0320-5008A2000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0320-5008B3000403}" Id="#x02030040"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0220-500810000403}" Id="#x020300d0"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0220-500860000403}" Id="#x020300e0"/>
+		<MappingInfo Identifier="{00000000-2003-0850-0220-5008A2000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{00000000-2004-0850-0720-5008E3000403}" Id="#x02030090"/>
-		<MappingInfo Identifier="{00000000-2005-0850-0520-500870000403}" Id="#x020300a0"/>
-		<MappingInfo Identifier="{00000000-2006-0850-0620-500880000403}" Id="#x020300c0"/>
-		<MappingInfo Identifier="{00000000-200A-0850-0120-500820000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-200A-0850-0120-500834000403}" Id="#x02030080"/>
-		<MappingInfo Identifier="{00000000-200B-0850-0220-500891000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-2005-0850-0420-500870000403}" Id="#x020300a0"/>
+		<MappingInfo Identifier="{00000000-2006-0850-0520-500880000403}" Id="#x020300c0"/>
+		<MappingInfo Identifier="{00000000-200A-0850-0020-500820000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-200A-0850-0020-500834000403}" Id="#x02030080"/>
+		<MappingInfo Identifier="{00000000-200B-0850-0120-500891000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{08502002-0020-0304-0020-500820000403}" Id="#x02030070" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00A0-0304-0020-5008A0000403}" Id="#x02030050" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00B0-0304-0020-5008B0000403}" Id="#x020300b0" Watchdog="00000000000000000000000000000000"/>
-		<MappingInfo Identifier="{08502003-2002-0850-0320-500808205008}" Id="#x02030100" Watchdog="42000000040000000400000004000000"/>
+		<MappingInfo Identifier="{08502003-2002-0850-0220-500808205008}" Id="#x02030100" Watchdog="42000000040000000400000004000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
-		<MappingInfo Identifier="{0850200A-2003-0850-0120-500803205008}" Id="#x020300f0" Watchdog="10000000040000000400000004000000"/>
+		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="10000000040000000400000004000000"/>
 		<MappingInfo Identifier="{030400E0-00E0-0304-E000-0403E0000403}" Id="#x02030120" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">

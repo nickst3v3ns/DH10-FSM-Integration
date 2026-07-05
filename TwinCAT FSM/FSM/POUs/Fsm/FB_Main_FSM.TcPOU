@@ -23,6 +23,8 @@ VAR
 	bCriticalFaultActive		:BOOL;
 	criticalFault				:BOOL; 
 	
+	//lvbat transition blocker
+	bSOCBlock : BOOL;
 	//TwinSAFE helper 
 	fbSAFEprime					:FB_TwinSAFEArm;
 	bSDCprimed					:BOOL;
@@ -96,7 +98,7 @@ END_VAR
 GVL_FSM.fbLink(bGsLinkAlive => GVL_FSM.bheartbeat_OK);
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
-
+bSOCBlock := F_LVSOCBlocker(SOC := GVL_PT.LVBATDATAGlobal.SOC_pct, SOCLimit := 5);
 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
@@ -216,7 +218,7 @@ CASE currentState OF
 		GVL_Prop.propulsion_enable := FALSE;	
 		
 		//explicit command
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe THEN
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe AND NOT bSOCBlock THEN
 		
 			bCommandSet := TRUE;
 			bStartPrechargeBuffer := TRUE;
@@ -560,7 +562,7 @@ CASE currentState OF
 				
 		END_IF
 		//explicit command
-		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT BcriticalFaultActive THEN
+		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bSOCBlock THEN
 		
 			bCommandSet := TRUE;
 			

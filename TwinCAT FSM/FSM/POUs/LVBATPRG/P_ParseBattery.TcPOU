@@ -47,7 +47,9 @@ Ind1.CellsInSeries    := rInd1.data[3];
 Ind1.SOC_pct          := rInd1.data[4];
 Ind1.BatteryState     := rInd1.data[5];
 Ind1.Current_A        := BYTE_TO_INT(rInd1.data[6]);
-Ind1.Temp_C           := BYTE_TO_INT(rInd1.data[7]) - 55;]]></ST>
+Ind1.Temp_C           := BYTE_TO_INT(rInd1.data[7]) - 55;
+
+GVL_PT.LVBATDATAGlobal := Ind1;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

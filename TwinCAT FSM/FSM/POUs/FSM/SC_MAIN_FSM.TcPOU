@@ -7,9 +7,7 @@ VAR
 	
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[main_fsm(currentCmd := GVL_FSM.E_CommandGlobal, EmergencyReason := GVL_FSM.E_EmergencyReasonGlobal);
-
-// GVL_FSM.fbLink();]]></ST>
+      <ST><![CDATA[main_fsm(currentCmd := GVL_FSM.E_CommandGlobal, EmergencyReason := GVL_FSM.E_EmergencyReasonGlobal);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

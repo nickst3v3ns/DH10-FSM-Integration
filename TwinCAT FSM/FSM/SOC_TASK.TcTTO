@@ -3,7 +3,7 @@
   <Task Name="SOC_TASK" Id="{8bd87615-8dd8-40e4-8f1c-7f12fe1b041c}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>100000</CycleTime>
-    <Priority>1</Priority>
+    <Priority>19</Priority>
     <PouCall>
       <Name>CoulombCount</Name>
     </PouCall>

@@ -35,9 +35,8 @@ fRemainingAh := fbSOC.fRemainingCapacity_AmpHours;
 bSOCValid := fbSOC.bSeeded;
 
 
-
-//call FB_CoulombCount with the inputs from GVL_PT
-//at startup in the fsm call an instance of FB_SOC_OCV
+GVL_PT.SOCGlobal := fCurrentSOC;
+GVL_PT.RemainingAh := fRemainingAh;
 ]]></ST>
     </Implementation>
   </POU>

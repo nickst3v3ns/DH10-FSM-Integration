@@ -28,7 +28,12 @@ END_VAR
 	END_FOR
 	CAN_OUTPUTS.RxCounter := CAN_INPUTS.RxCounter;
 	Interpret_Messages();
-END_IF]]></ST>
+END_IF
+
+
+GVL_PT.uBMSFailReasonGlobal := uBMSFailReason;
+GVL_PT.uIMDWarningsGlobal := uIMDWarnings;
+GVL_PT.uPTCErrorGlobal := uPTCError;]]></ST>
     </Implementation>
     <Action Name="Interpret_Messages" Id="{45a06cf5-1016-4451-a7f6-bc81fa828447}">
       <Implementation>
