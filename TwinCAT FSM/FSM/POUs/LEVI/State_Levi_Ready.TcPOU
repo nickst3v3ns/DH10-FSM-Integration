@@ -12,6 +12,8 @@ VAR_INPUT
 	State : E_Levi_States;
 	Run_z_liftoff_calc : BOOL;
 	z: LREAL;
+	
+	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
 END_VAR
 
 VAR_OUTPUT
@@ -100,6 +102,7 @@ Control_lat_inputs.fmotor_Fx_l := 0;
 Control_lat_inputs.fmotor_Fx_r := 0;
 Control_lat_inputs.fmotor_Fy_l := 0;
 Control_lat_inputs.fmotor_Fy_r := 0;
+Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 
 FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 

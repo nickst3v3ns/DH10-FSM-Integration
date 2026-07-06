@@ -123,6 +123,9 @@ fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset :=
 fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
 END_IF
 
+IF watchdogReset THEN
+	watchdogReset := FALSE;
+END_IF
 
 //push to GVL
 

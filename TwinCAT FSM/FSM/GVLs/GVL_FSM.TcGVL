@@ -58,6 +58,8 @@ VAR_GLOBAL
 	RXwatchdogPTHVGlobal:							BOOL;
 	TXwatchdogPTHVGlobal:							BOOL;
 	
+	LaserSensorWatchdogGlobal:						BOOL;
+	
 	bMovementSoftStopGlobal:						BOOL;
 	
 	

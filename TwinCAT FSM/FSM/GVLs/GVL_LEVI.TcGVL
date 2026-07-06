@@ -349,7 +349,7 @@ VAR_GLOBAL
 	enable_extra_yaw_notch_3 : BOOL := TRUE;
 	
 	configured_peak_current_hems : LREAL := 5; //A
-	configured_peak_current_ems : LREAL := 13; //A
+	configured_peak_current_ems : LREAL := 9; //A
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

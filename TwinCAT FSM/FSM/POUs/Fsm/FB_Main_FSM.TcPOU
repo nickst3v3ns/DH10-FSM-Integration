@@ -86,7 +86,7 @@ VAR
 	speedLimitSlow:							REAL := 300;
 	speedLimit:								REAL := 1000;
 	
-	UpperBoundPropOutputCurrent:			REAL := 150;
+	UpperBoundPropOutputCurrent:			REAL := 200;
 	errorMessageFSM : STRING := 'NONE';
 	sOut: INT;
 END_VAR
@@ -99,7 +99,7 @@ GVL_FSM.fbLink(bGsLinkAlive => GVL_FSM.bheartbeat_OK);
 bBasicChecksOk := BasicChecks();
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 bSOCBlock := F_LVSOCBlocker(SOC := GVL_PT.LVBATDATAGlobal.SOC_pct, SOCLimit := 5);
-
+fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
 IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE) OR (GVL_PT.HVAL_STATUS <> 1 AND (currentState < 3 OR currentState = E_PodState.STATE_MAINTENANCE ))) THEN
@@ -118,6 +118,10 @@ CASE currentState OF
 	
 		//State for which SDC is broken
 		GVL_FSM.b_AlivePLCGlobal := FALSE;
+		//GVL_FSM.b_AlivePLCGlobal := TRUE;
+		
+		bStartPrechargeBuffer := FALSE;
+		charging_in_progress := FALSE;
 
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
@@ -136,6 +140,10 @@ CASE currentState OF
 			//fix for emergency halfway through a transition
 			bCommandSet := FALSE;
 			bCommandSetDupe := FALSE;
+			//watchdogreset 
+			GVL_FSM.LaserSensorWatchdogGlobal := FALSE;
+			GVL_FSM.bMovementSoftStopGlobal := FALSE;
+			GVL_FSM.bwatchdogResetGlobal := TRUE;
 			//retract brakes			
 			fbArm(armsignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
@@ -160,7 +168,7 @@ CASE currentState OF
 	E_PodState.STATE_BOOT:  
 		
 		//State for which SDC is broken
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
+		//GVL_FSM.b_AlivePLCGlobal := FALSE;
 		
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
@@ -186,7 +194,7 @@ CASE currentState OF
 	E_PodState.STATE_SYNC:
 	
 		//State for which the SDC is open
-		GVL_FSM.b_AlivePLCGlobal := TRUE;
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
 		
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
@@ -209,7 +217,7 @@ CASE currentState OF
 		END_IF
 		
 		//state for which the SDC is open
-		GVL_FSM.b_AlivePLCGlobal := TRUE;
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
 		
 		GVL_FSM.benable_telemetryGlobal := TRUE;
 		GVL_FSM.benable_heartbeat := TRUE;
@@ -228,7 +236,7 @@ CASE currentState OF
 			
 			fbSAFEprime(bFeedbackEstopOut := GVL_FSM.bEstopOutGlobal, bFeedBackSDCIn := GVL_FSM.bSDCFeedbackGlobal, bRestartToggle => GVL_FSM.bEstopRestartGlobal, bSDCPrimed => bSDCprimed);
 			//to allow for some time for the PTC to see the closed SDC
-			fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
+			
 			
 			IF fbPrechargeBuffer.Q THEN
 				IF NOT charging_in_progress THEN
@@ -540,7 +548,7 @@ CASE currentState OF
 
 //MOVEMENT		
 	E_PodState.STATE_MAINTENANCE: //for change to HV Active with Brakes retracted, checks should be equal to whats happening in IDLE, also, standard retracted or toggable from GS? 
-	
+		
 		IF NOT isdrivereset THEN
 			GVL_PROP.DriveReset := TRUE; 
 			isdrivereset := TRUE;
@@ -574,7 +582,6 @@ CASE currentState OF
 			
 			fbSAFEprime(bFeedbackEstopOut := GVL_FSM.bEstopOutGlobal, bFeedBackSDCIn := GVL_FSM.bSDCFeedbackGlobal, bRestartToggle => GVL_FSM.bEstopRestartGlobal, bSDCPrimed => bSDCprimed);
 			//to allow for some time for the PTC to see the closed SDC
-			fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
 			
 			IF fbPrechargeBuffer.Q THEN
 				IF NOT charging_in_progress THEN

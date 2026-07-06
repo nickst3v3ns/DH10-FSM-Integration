@@ -42,6 +42,8 @@ VAR_IN_OUT
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
+	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
+	
 //----------------------------------------------------------------------------------------------------
 
 //	Drive Inputs (Inputs into PLC, drive feedback)
@@ -650,6 +652,7 @@ Control_lat_inputs.fmotor_Fx_l := motor_thrust_l;
 Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
 Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 
 FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 

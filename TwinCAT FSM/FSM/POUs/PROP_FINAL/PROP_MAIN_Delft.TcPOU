@@ -47,6 +47,7 @@ VAR
 	
 	positionDelft : LREAL;
 	PositionInterpolatedDelft : LREAL;
+	positionDelftDifference : LREAL;
 	VelocityDelft : LREAL;
 	
 	VelocityIntegral_Left : LREAL;
@@ -453,13 +454,18 @@ CASE barcodeState OF
 		
 		GVL_PROP.OutputData_Back[0] := newData OR SET_COMMAND;
 		GVL_PROP.OutputData_Back[2] := SEND_POS_VEL;	
-	
-		//ties wat doe je hier???????????
-		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
-		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		
 		//positionDelft := (rPositionBackDelftTest + rPositionFrontDelftTest)/2;
 		VelocityDelft := DINT_TO_LREAL(velocity_Front);
+	
+		//ties wat doe je hier???????????
+		// Filter to discard weird position readings 
+		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
+		positionDelftDifference := ABS(((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2 - positionDelft);
+		IF positionDelftDifference < ABS(3*VelocityDelft*6) OR positionDelft = 0 // Multiply by PropulsionTask cycle time
+			THEN positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		END_IF
+		
 		
 		//thomas' addition
 		fbCenterPos(rPositionFront := PositionDelft_Front, rPositionBack := PositionDelft_Back, rPosition => rPosCenteredThomas, FrontValid => bFrontValid, BackValid => bBackValid);
@@ -491,6 +497,14 @@ END_CASE
 ETML_parameters.fETML_gain_left := ETML_gain_Left;
 ETML_parameters.fETML_gain_right := ETML_gain_Right;
 ETML_parameters.fETML_power_constant := ETML_power_constant;
+ETML_parameters.benable_ETML_main_notch_1 := GVL_PROP.enable_ETML_main_notch_1;
+ETML_parameters.benable_ETML_main_notch_2 := GVL_PROP.enable_ETML_main_notch_2;
+ETML_parameters.benable_ETML_main_notch_3 := GVL_PROP.enable_ETML_main_notch_3;
+ETML_parameters.benable_ETML_main_notch_4 := GVL_PROP.enable_ETML_main_notch_4;
+ETML_parameters.ff_ETML_notch_main_1 := GVL_PROP.f_ETML_notch_main_1;
+ETML_parameters.ff_ETML_notch_main_2 := GVL_PROP.f_ETML_notch_main_2;
+ETML_parameters.ff_ETML_notch_main_3 := GVL_PROP.f_ETML_notch_main_3;
+ETML_parameters.ff_ETML_notch_main_4 := GVL_PROP.f_ETML_notch_main_4;
 
 FB_ETML.stETML_DH10_P := ETML_parameters;
 

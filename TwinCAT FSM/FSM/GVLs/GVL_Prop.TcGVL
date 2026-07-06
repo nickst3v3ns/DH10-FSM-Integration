@@ -34,13 +34,25 @@ VAR_GLOBAL
 	IntegralGainIq : 					LREAL := 5;
 	InitialIntegralGainIq : 			LREAL;
 	
-	PositionOffset : 					LREAL := 2.2;
+	PositionOffset : 					LREAL := 2.4;
 	CANDelay : 							LREAL := 0.04;
 	
 	ETML_ON : 							BOOL;
 	ETML_gain_Left : 					LREAL := 16.91503741;
 	ETML_gain_Right : 					LREAL := 16.91503741;
 	ETML_power_constant :		 		LREAL := 0.46047809;
+	
+	f_ETML_notch_main_1 : LREAL := 0;
+	enable_ETML_main_notch_1 : BOOL := FALSE;
+	
+	f_ETML_notch_main_2 : LREAL := 0;
+	enable_ETML_main_notch_2 : BOOL := FALSE;
+	
+	f_ETML_notch_main_3 : LREAL := 0;
+	enable_ETML_main_notch_3 : BOOL := FALSE;
+	
+	f_ETML_notch_main_4 : LREAL := 0;
+	enable_ETML_main_notch_4 : BOOL := FALSE;
 	
 	
 //

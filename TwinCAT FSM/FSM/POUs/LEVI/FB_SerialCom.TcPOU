@@ -83,6 +83,9 @@ fbPPS_Timer(IN := NOT fbPPS_Timer.Q, PT := T#1S);
 IF fbPPS_Timer.Q THEN
     nPacketsPerSecond   := nReceiveCounter - nLastReceiveCounter;
     nLastReceiveCounter := nReceiveCounter;
+	IF nPacketsPerSecond = 0 THEN
+		GVL_FSM.LaserSensorWatchdogGlobal := TRUE;
+	END_IF
 END_IF
 
 Timer(IN:=TRUE);

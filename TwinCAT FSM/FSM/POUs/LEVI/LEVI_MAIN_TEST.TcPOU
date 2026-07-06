@@ -79,8 +79,10 @@ VAR
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
-	Offset_airgaps_vertical : T_matrix6xdouble;
-	Offset_airgaps_lateral : T_matrix6xdouble;
+	airgap_nominal_ems : Sensor_model_new.matrix3xdouble;
+	
+	Offset_airgaps_vertical : Sensor_model_new.T_matrix6xdouble;
+	Offset_airgaps_lateral : Sensor_model_new.T_matrix6xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -618,6 +620,8 @@ pitch := Sensor_model_output.fpitch;
 y := Sensor_model_output.fy;
 yaw := Sensor_model_output.fyaw;
 
+airgap_nominal_ems := Sensor_model_output.aairgap_nominal_ems;
+
 z_filtered := Sensor_model_output.fz_filtered;
 roll_filtered := Sensor_model_output.froll_filtered;
 pitch_filtered := Sensor_model_output.fpitch_filtered;
@@ -827,6 +831,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_inputs.fmotor_Fx_r := 0;
 			Control_lat_inputs.fmotor_Fy_l := 0;
 			Control_lat_inputs.fmotor_Fy_r := 0;
+			Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 			
 			FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 			
@@ -857,6 +862,7 @@ CASE GVL_LEVI.Levi_Command OF
 							Drive_current_error := Drive_current_error,
 							error_specifics := error_specifics,
 							dancing := dancing,
+							airgap_nominal_ems := airgap_nominal_ems,
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
 							Go_error_state => Error,
@@ -952,6 +958,7 @@ CASE GVL_LEVI.Levi_Command OF
 							pitch_filtered 				:= pitch_filtered,
 							y_filtered 					:= y_filtered,
 							yaw_filtered 				:= yaw_filtered,
+							airgap_nominal_ems			:= airgap_nominal_ems,
 							Drive_status 				:= Drive_status,
 							Drive_Diagnostic 			:= Drive_Diagnostic,
 							Force_feedback_value 		:= Force_feedback_value,
@@ -1321,6 +1328,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+			Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 			
 			FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 			
@@ -1401,6 +1409,7 @@ CASE GVL_LEVI.Levi_Command OF
 								pitch_filtered 				:= pitch_filtered,
 								y_filtered 					:= y_filtered,
 								yaw_filtered 				:= yaw_filtered,
+								airgap_nominal_ems			:= airgap_nominal_ems,
 								Drive_status 				:= Drive_status,
 								Drive_Diagnostic 			:= Drive_Diagnostic,
 								Force_feedback_value 		:= Force_feedback_value,
@@ -1834,6 +1843,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+			Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 			
 			FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 			
@@ -1907,6 +1917,7 @@ CASE GVL_LEVI.Levi_Command OF
 							pitch_filtered 				:= pitch_filtered,
 							y_filtered 					:= y_filtered,
 							yaw_filtered 				:= yaw_filtered,
+							airgap_nominal_ems			:= airgap_nominal_ems,
 							Drive_status 				:= Drive_status,
 							Drive_Diagnostic 			:= Drive_Diagnostic,
 							Force_feedback_value 		:= Force_feedback_value,
@@ -2148,6 +2159,7 @@ CASE GVL_LEVI.Levi_Command OF
 			Control_lat_inputs.fmotor_Fx_r := motor_thrust_r;
 			Control_lat_inputs.fmotor_Fy_l := motor_lift_l;
 			Control_lat_inputs.fmotor_Fy_r := motor_lift_r;
+			Control_lat_inputs.aairgap_nominal_ems := airgap_nominal_ems;
 			
 			FB_Control_lat(stlateral_levitation_control_new_U := Control_lat_inputs, stlateral_levitation_control_new_Y => Control_lat_outputs);
 			
@@ -2234,7 +2246,7 @@ CASE GVL_LEVI.Levi_Command OF
 			(GVL_LEVI.levitation_enable = TRUE OR normal_shutdown = TRUE) THEN
 		
 			Levi_state := E_Levi_states.LEVI_DANCE;
-			(*
+(*			
 			FB_Levi_Dance(	Ia_for_levi_left 			:= Ia_for_levi_left,
 							Ib_for_levi_left 			:= Ib_for_levi_left,
 							Ic_for_levi_left 			:= Ic_for_levi_left,
@@ -2253,6 +2265,7 @@ CASE GVL_LEVI.Levi_Command OF
 							pitch_filtered 				:= pitch_filtered,
 							y_filtered 					:= y_filtered,
 							yaw_filtered 				:= yaw_filtered,
+							airgap_nominal_ems			:= airgap_nominal_ems,
 							Drive_status 				:= Drive_status,
 							Drive_Diagnostic 			:= Drive_Diagnostic,
 							Force_feedback_value 		:= Force_feedback_value,
@@ -2299,7 +2312,7 @@ CASE GVL_LEVI.Levi_Command OF
 							cycle_time_levi 			:= cycle_time_levi,
 							clock 						:= clock,
 							Run_z_liftoff_calc 			:= Run_z_liftoff_calc);
-		*)	
+		*)
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
 			
