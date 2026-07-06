@@ -3,7 +3,6 @@
   <POU Name="State_Levi_Testing_Individual_Drives" Id="{ac532a27-55be-4c53-8776-155af2a2c6e5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Testing_Individual_Drives
 VAR_INPUT
-	configured_peak_current: LREAL;
 	drive_status: ARRAY [0..23] OF UINT;
 	drive_diagnostics: ARRAY [0..23] OF UINT;
 	State : E_Levi_States;
@@ -121,23 +120,23 @@ Error := Check_drives(drive_status := drive_status,
 
 IF Switch_on_individual_test = TRUE THEN
 
-	force_values[0] := LREAL_TO_INT((TestVFL1 * 1000.0)/ configured_peak_current);
-	force_values[1] := LREAL_TO_INT((TestVFL2 * 1000.0)/ configured_peak_current);
+	force_values[0] := LREAL_TO_INT((TestVFL1 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+	force_values[1] := LREAL_TO_INT((TestVFL2 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 	
-	force_values[2] := LREAL_TO_INT((TestVFR1 * 1000.0)/ configured_peak_current);
-	force_values[3] := LREAL_TO_INT((TestVFR2 * 1000.0)/ configured_peak_current);
+	force_values[2] := LREAL_TO_INT((TestVFR1 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+	force_values[3] := LREAL_TO_INT((TestVFR2 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 	
-	force_values[4] := LREAL_TO_INT((TestVBL1 * 1000.0)/ configured_peak_current);
-	force_values[5] := LREAL_TO_INT((TestVBL2 * 1000.0)/ configured_peak_current);
+	force_values[4] := LREAL_TO_INT((TestVBL1 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+	force_values[5] := LREAL_TO_INT((TestVBL2 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 	
-	force_values[6] := LREAL_TO_INT((TestVBR1 * 1000.0)/ configured_peak_current);
-	force_values[7] := LREAL_TO_INT((TestVBR2 * 1000.0)/ configured_peak_current);
+	force_values[6] := LREAL_TO_INT((TestVBR1 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+	force_values[7] := LREAL_TO_INT((TestVBR2 * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 	
-	force_values[8] := LREAL_TO_INT((TestLF1 * 1000.0)/ configured_peak_current);
-	force_values[9] := LREAL_TO_INT((TestLF2 * 1000.0)/ configured_peak_current);
+	force_values[8] := LREAL_TO_INT((TestLF1 * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+	force_values[9] := LREAL_TO_INT((TestLF2 * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 	
-	force_values[10] := LREAL_TO_INT((TestLB1 * 1000.0)/ configured_peak_current);
-	force_values[11] := LREAL_TO_INT((TestLB2 * 1000.0)/ configured_peak_current);
+	force_values[10] := LREAL_TO_INT((TestLB1 * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+	force_values[11] := LREAL_TO_INT((TestLB2 * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 	
 ELSIF Switch_on_individual_test = FALSE THEN
 	

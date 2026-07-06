@@ -496,7 +496,6 @@ VAR
 
 //----------------------------------------------------------------------------------------------------
 	
-	configured_peak_current : LREAL := 13; //A
 	minimum_dc_bus_voltage : UINT := 313; //V	
 	R_hems : LREAL := 18.4; //Ohm
 	R_ems : LREAL := 10.4; //Ohm
@@ -857,6 +856,7 @@ CASE GVL_LEVI.Levi_Command OF
 							Control_word_array := Control_word,
 							Drive_current_error := Drive_current_error,
 							error_specifics := error_specifics,
+							dancing := dancing,
 							reset_busy => reset_busy,
 							Levi_ready => Levi_ready,
 							Go_error_state => Error,
@@ -877,8 +877,7 @@ CASE GVL_LEVI.Levi_Command OF
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := E_Levi_states.LEVI_PULLUP;
-			FB_Levi_Pullup(	configured_peak_current := configured_peak_current,
-							drive_status := Drive_status,
+			FB_Levi_Pullup(	drive_status := Drive_status,
 							drive_diagnostics := Drive_Diagnostic,
 							State := Levi_State,
 							Force_feedback_value := Force_feedback_value,
@@ -905,8 +904,7 @@ CASE GVL_LEVI.Levi_Command OF
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := E_Levi_states.LEVI_DROPDOWN;
-			FB_Levi_Dropdown(	configured_peak_current := configured_peak_current,
-								drive_status := Drive_status,
+			FB_Levi_Dropdown(	drive_status := Drive_status,
 								drive_diagnostics := Drive_Diagnostic,
 								State := Levi_State,
 								Force_feedback_value := Force_feedback_value,
@@ -1348,23 +1346,23 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 			
-			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
-			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);	
 		
 		ELSE
 			GVL_LEVI.Levi_command := Levi_state;
@@ -1857,23 +1855,23 @@ CASE GVL_LEVI.Levi_Command OF
 			I_VBL := Control_vert_outputs.aI_VBL;
 			I_VBR := Control_vert_outputs.aI_VBR;
 			
-			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 			
-			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
-			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);	
 
 			Last_levitating_airgap := z;	
 		
@@ -2175,23 +2173,23 @@ CASE GVL_LEVI.Levi_Command OF
 			
 			//-------------------------------------------------------------------------
 			
-			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+			Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 			
-			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ configured_peak_current);
-			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ configured_peak_current);
+			Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 			
-			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ configured_peak_current);
-			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ configured_peak_current);	
+			Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+			Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);	
 			
 			IF descent_in_progress = 0 THEN
 				GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;
@@ -2210,8 +2208,7 @@ CASE GVL_LEVI.Levi_Command OF
 			GVL_LEVI.levitation_enable = TRUE THEN
 			
 			Levi_state := E_Levi_states.LEVI_TESTING_INDIVIDUAL_DRIVES;
-			FB_Levi_Testing_individual_drives(	configured_peak_current := configured_peak_current,
-												drive_status := Drive_status,
+			FB_Levi_Testing_individual_drives(	drive_status := Drive_status,
 												drive_diagnostics := Drive_Diagnostic,
 												State := Levi_State,
 												Force_feedback_value := Force_feedback_value,
@@ -2385,12 +2382,20 @@ IF (ERROR OR GVL_LEVI.levitation_fault) AND Levi_state <> E_Levi_States.LEVI_IDL
 	END_FOR
 END_IF
 
-FOR i:=0 TO 23 DO
-	Real_currents[i] := (INT_TO_LREAL(Force_feedback_value[i]) * configured_peak_current) / 1000.0;
+FOR i:=0 TO 15 DO
+	Real_currents[i] := (INT_TO_LREAL(Force_feedback_value[i]) * GVL_LEVI.configured_peak_current_hems) / 1000.0;
 END_FOR
 
-FOR i:=0 TO 11 DO
-	Requested_currents[i] := (INT_TO_LREAL(Requested_force_values[i]) * configured_peak_current) / 1000.0;
+FOR i:=0 TO 7 DO
+	Real_currents[i+16] := (INT_TO_LREAL(Force_feedback_value[i+16]) * GVL_LEVI.configured_peak_current_ems) / 1000.0;
+END_FOR
+
+FOR i:=0 TO 7 DO
+	Requested_currents[i] := (INT_TO_LREAL(Requested_force_values[i]) * GVL_LEVI.configured_peak_current_hems) / 1000.0;
+END_FOR
+
+FOR i:=0 TO 3 DO
+	Requested_currents[i+8] := (INT_TO_LREAL(Requested_force_values[i+8]) * GVL_LEVI.configured_peak_current_hems) / 1000.0;
 END_FOR
 
 Power_total_HEMS := 0;

@@ -164,6 +164,7 @@ VAR
 	
 	Dance_time_start : LREAL;
 	dance_clock : LREAL;
+	time_init_dance : LREAL := 10;
 	
 	tau_x_ems: LREAL;
 	
@@ -181,15 +182,54 @@ END_VAR
 	dancing := TRUE;
 END_IF
 
-dance_clock := clock - dance_time_start;
+dance_clock := clock - dance_time_start - time_init_dance;
 
 //----------------------------------------------------------------------------------------------------
 
 //	Dance sequence
 
 //----------------------------------------------------------------------------------------------------
-	
 
+IF dance_clock < 0 THEN	
+	pitch_target_dance := 0;
+	roll_target_dance := 0;
+	y_target_dance := 0;
+	yaw_target_dance := 0;
+
+ELSIF (dance_clock >= 5) AND (dance_clock < 5) THEN
+	z_target_dance := z_target + 0.0005 * dance_clock;
+
+ELSIF (dance_clock >= 5) AND (dance_clock < 15) THEN
+	z_target_dance := z_target + 4E-3*COS(0.628*(dance_clock-5));
+	y_target_dance := 2E-3*SIN(0.628*(dance_clock-5));
+	
+ELSIF (dance_clock >= 15) AND (dance_clock < 20) THEN
+	z_target_dance := z_target;
+	pitch_target_dance := 0;
+	roll_target_dance := 0;
+	y_target_dance := 0;
+	yaw_target_dance := 0;
+
+ELSIF (dance_clock >= 20) AND (dance_clock < 25) THEN
+	pitch_target_dance := 0.0003 * (dance_clock-20);
+
+ELSIF (dance_clock >= 25) AND (dance_clock < 45) THEN
+	pitch_target_dance := 0.0015 * COS(0.628*(dance_clock-25));
+	yaw_target_dance := 0.0015 * SIN(0.628*(dance_clock-25));
+	
+ELSIF (dance_clock >= 45) AND (dance_clock < 50) THEN
+	pitch_target_dance := 0.0015 - 0.0003 * (dance_clock-45);
+	
+ELSIF (dance_clock >= 50) AND (dance_clock <= 55) THEN
+	z_target_dance := z_target;
+	pitch_target_dance := 0;
+	roll_target_dance := 0;
+	y_target_dance := 0;
+	yaw_target_dance := 0;
+
+ELSE 
+	Levi_command := E_Levi_States.LEVI_LEVITATION;
+END_IF
 
 //----------------------------------------------------------------------------------------------------
 
@@ -288,23 +328,23 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 	Control_lat_parameters.fK_I_init_yaw := GVL_LEVI.K_I_yaw_initial_motor_on;
 	
 	//allows for different gains when traversing a thermal gap
-	IF ABS(z_filtered) > z_target + 0.9E-3 THEN
+	IF ABS(z_filtered) > z_target_dance + 0.9E-3 THEN
 		Control_vert_parameters.fK_P_tot := GVL_LEVI.extreme_z_gain_multiplier * GVL_LEVI.K_P_tot_motor_on;
 	END_IF
 	
-	IF ABS(pitch_filtered) > pitch_target + 0.9E-3 THEN
+	IF ABS(pitch_filtered) > pitch_target_dance + 0.9E-3 THEN
 		Control_vert_parameters.fK_P_pit := GVL_LEVI.extreme_pitch_gain_multiplier * GVL_LEVI.K_P_pitch_motor_on;
 	END_IF
 	
-	IF ABS(roll_filtered) > roll_target + 0.9E-3 THEN
+	IF ABS(roll_filtered) > roll_target_dance + 0.9E-3 THEN
 		Control_vert_parameters.fK_P_roll := GVL_LEVI.extreme_roll_gain_multiplier * GVL_LEVI.K_P_roll_motor_on;
 	END_IF
 	
-	IF ABS(y_filtered) > y_target_airgap + 1.0E-3 THEN
+	IF ABS(y_filtered) > y_target_dance + 1.0E-3 THEN
 		Control_lat_parameters.fK_P_lat := GVL_LEVI.extreme_y_gain_multiplier * GVL_LEVI.K_P_lat_motor_on;
 	END_IF
 	
-	IF ABS(yaw_filtered) > yaw_target + 0.9E-3 THEN
+	IF ABS(yaw_filtered) > yaw_target_dance + 0.9E-3 THEN
 		Control_lat_parameters.fK_P_yaw := GVL_LEVI.extreme_yaw_gain_multiplier * GVL_LEVI.K_P_yaw_motor_on;
 	END_IF
 	
@@ -418,8 +458,8 @@ END_IF
 
 Control_lat_parameters.by_ON := GVL_LEVI.y_on;
 Control_lat_parameters.byaw_ON := GVL_LEVI.yaw_on;
-Control_lat_parameters.fyaw_target := yaw_target;
-Control_lat_parameters.fy_target := y_target_airgap;
+Control_lat_parameters.fyaw_target := yaw_target_dance;
+Control_lat_parameters.fy_target := y_target_dance;
 
 Control_lat_parameters.fmotor_y_gain := GVL_LEVI.motor_y_gain;
 Control_lat_parameters.fmotor_yaw_gain := GVL_LEVI.motor_yaw_gain;
@@ -499,9 +539,9 @@ Control_vert_parameters.fthermal_gap_gain_hems := GVL_LEVI.thermal_gap_gain_hems
 
 Control_vert_parameters.fhems_under_gap := hems_under_gap;
 
-Control_vert_parameters.froll_target := roll_target;
-Control_vert_parameters.fpitch_target := pitch_target;
-Control_vert_parameters.fz_manual_target := z_target;
+Control_vert_parameters.froll_target := roll_target_dance;
+Control_vert_parameters.fpitch_target := pitch_target_dance;
+Control_vert_parameters.fz_manual_target := z_target_dance;
 Control_vert_parameters.fz_initial_lift_off := z_liftoff;
 
 //Uploading vertical parameters to the control model
@@ -534,23 +574,23 @@ I_VFR := Control_vert_outputs.aI_VFR;
 I_VBL := Control_vert_outputs.aI_VBL;
 I_VBR := Control_vert_outputs.aI_VBR;
 
-Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
+Requested_force_values[0] := LREAL_TO_INT((I_VFL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+Requested_force_values[1] := LREAL_TO_INT((I_VFL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
+Requested_force_values[2] := LREAL_TO_INT((I_VFR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+Requested_force_values[3] := LREAL_TO_INT((I_VFR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
+Requested_force_values[4] := LREAL_TO_INT((I_VBL[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+Requested_force_values[5] := LREAL_TO_INT((I_VBL[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
+Requested_force_values[6] := LREAL_TO_INT((I_VBR[0] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+Requested_force_values[7] := LREAL_TO_INT((I_VBR[1] * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current);
+Requested_force_values[8] := LREAL_TO_INT((I_EMS[0] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+Requested_force_values[9] := LREAL_TO_INT((I_EMS[1] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
 
-Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current);
-Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current);	]]></ST>
+Requested_force_values[10] := LREAL_TO_INT((I_EMS[2] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);
+Requested_force_values[11] := LREAL_TO_INT((I_EMS[3] * 1000.0)/ GVL_LEVI.configured_peak_current_ems);	]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -27,6 +27,7 @@ VAR_IN_OUT
 	force_values : ARRAY[0..11] OF INT;
 	Drive_current_error : ARRAY[0..23] OF BOOL;
 	error_specifics: ARRAY [0..23] OF Drive_error_mapping;
+	dancing : BOOL;
 	(*
 	//Liftoff model
 	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010050);
@@ -115,7 +116,7 @@ FB_Control_vert(stvertical_levitation_control_new_U := Control_vert_inputs, stve
 
 //-------------------------------------------------------------------------------------------------------------
 *)
-
+dancing := FALSE;
 reset_busy := FALSE;
 Drive_undervoltage := FALSE;
 

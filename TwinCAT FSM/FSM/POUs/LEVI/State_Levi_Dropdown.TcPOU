@@ -3,7 +3,6 @@
   <POU Name="State_Levi_Dropdown" Id="{2ad43b60-0717-4b07-88ee-06a40ca8fdd4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK State_Levi_Dropdown
 VAR_INPUT
-	configured_peak_current: LREAL;
 	drive_status: ARRAY [0..23] OF UINT;
 	drive_diagnostics: ARRAY [0..23] OF UINT;
 	State : E_Levi_States;
@@ -63,17 +62,17 @@ Error := Check_drives(drive_status := drive_status,
 					n_errors => n_drive_errors);
 
 
-force_values[0] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
-force_values[1] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+force_values[0] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+force_values[1] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-force_values[2] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
-force_values[3] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+force_values[2] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+force_values[3] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-force_values[4] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
-force_values[5] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+force_values[4] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+force_values[5] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
-force_values[6] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
-force_values[7] := LREAL_TO_INT((current_dropdown * 1000.0)/ configured_peak_current);
+force_values[6] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
+force_values[7] := LREAL_TO_INT((current_dropdown * 1000.0)/ GVL_LEVI.configured_peak_current_hems);
 
 force_values[8] := 0;
 force_values[9] := 0;
