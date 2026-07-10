@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PropDriveState" Id="{7cb0f8de-977c-4fce-a512-5d3a882554fc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PropDriveState
+VAR_INPUT
+	idrive_state 	: INT;
+	ipod_state 		: E_PodState;
+	bpropFault 		: BOOL;
+	propFlag 		: BOOL;
+	btimerReset		: BOOL;
+END_VAR
+VAR_OUTPUT
+	btimeOut : BOOL;
+END_VAR
+VAR
+	timerToggle : BOOL;
+	fbGracePeriodTimer : TON;
+	btrig : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[timerToggle := FALSE;
+
+IF ((ipod_state <= E_PodState.STATE_IDLE OR ipod_state = E_PodState.STATE_MAINTENANCE) AND idrive_state <> 1 AND NOT bPropFault) THEN
+	timerToggle := TRUE;
+ELSIF ((ipod_state > E_PodState.STATE_IDLE AND ipod_state <> E_PodState.STATE_MAINTENANCE) AND idrive_state <> 2 AND NOT bPropFault) THEN
+	timerToggle := TRUE;
+ELSIF (ipod_state = E_PodState.STATE_MOVEMENT AND propFlag) AND idrive_state <> 3 AND NOT bPropFault THEN
+	timerToggle := TRUE;
+END_IF
+IF NOT btimerReset THEN
+	
+	fbGracePeriodTimer(IN := timerToggle, PT := T#500MS, Q => btrig);
+
+ELSE
+	
+	fbGracePeriodTimer(IN := FALSE, PT := T#500MS, Q => btrig);
+	btimeOut := FALSE;
+	
+END_IF
+
+IF btrig AND NOT btimerReset THEN
+	btimeOut := TRUE;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

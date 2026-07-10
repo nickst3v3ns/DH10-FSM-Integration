@@ -40,7 +40,7 @@ VAR
 	
 	
 	//CAN watchdogs
-	watchdogReset : BOOL;
+	watchdogCANReset : BOOL;
 	
 	fbCANwatchPropLeft : FB_CANWatchdog;
 	RXwatchdogPropLeft : BOOL;
@@ -56,7 +56,14 @@ VAR
 	RXwatchdogPTHV : BOOL;
 	TXwatchdogPTHV : BOOL;
 	
+	//prop drive state watchdog
+	fbpropMonitorLeft : FB_PropDriveState;
+	fbpropMonitorRight : FB_PropDriveState;
 	
+	bpropStateTimerReset : BOOL;
+	
+	bpropStateTimeOutLeft : BOOL;
+	bpropStateTimeoutRight : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -71,17 +78,17 @@ bJorianSpecial := GVL_FSM.bJorianSpecialGlobal;
 bbrakes_engaged := GVL_FSM.bareBrakesEngaged;
 
 
-
 //TwinSAFE Estop Logic
 bFalseForEstopRestart := GVL_FSM.bFalseForEstopRestartGlobal;
 bEstopRestart := GVL_FSM.bEstopRestartGlobal;
 
 
 //watchdog
-watchdogReset := GVL_FSM.bwatchdogResetGlobal;
+watchdogCANReset := GVL_FSM.bwatchdogCANResetGlobal;
+bpropStateTimerReset := GVL_FSM.bPropStateResetGlobal;
 
 
-//-------------
+//--------------------------------------------------
 
 
 //Safety RUN/STOP command, should always be running TRUE.
@@ -111,20 +118,29 @@ END_IF
 //DC-LINK
 fbdclink(fTresholdVoltage := fDCLINKTreshold, DC_LINK_SAFE_LEVI => GVL_LEVI.DC_LINK_SAFE, DC_LINK_SAFE_PROP => GVL_Prop.DC_LINK_SAFE); 
 
+
+//alive proof for TwinSAFE, currently not wired to the SDC so will have no effect. 
 IF NOT bPLCtoggleStop THEN
 	bPLCToggle := NOT bPLCToggle;	
 END_IF
 
+//Prop State Watchdog
+fbpropMonitorLeft(idrive_state := GVL_PROP.PropState_Left, ipod_state := GVL_FSM.E_PodStateGlobal, bpropFault := (GVL_PROP.FAULT_Left <> 0), btimerReset := bpropStateTimerReset, btimeOut => bPropStateTimeOutLeft);
+fbpropMonitorRight(idrive_state := GVL_PROP.PropState_Right, ipod_state := GVL_FSM.E_PodStateGlobal, bpropFault := (GVL_PROP.FAULT_Right <> 0), btimerReset := bpropStateTimerReset, btimeOut => bPropStateTimeOutRight);
+
+IF bpropStateTimerReset THEN
+	bpropStateTimerReset := FALSE;
+END_IF
 
 //CAN watchdogs
 IF GVL_FSM.E_PodStateGlobal > 3 THEN
-fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
-fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
-fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
+fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
+fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
 END_IF
 
-IF watchdogReset THEN
-	watchdogReset := FALSE;
+IF watchdogCANReset THEN
+	watchdogCANReset := FALSE;
 END_IF
 
 //push to GVL
@@ -141,10 +157,7 @@ GVL_FSM.bbrakes_arm_signalGlobal := bArmSignal;
 GVL_FSM.bbrakes_clockGlobal := bCLK;
 GVL_FSM.bareBrakesEngaged := bbrakes_engaged;
 
-//watchdogs
-IF watchdogReset THEN
-	watchdogReset := FALSE;
-END_IF
+//can watchdogs
 
 GVL_FSM.RXwatchdogPropLeftGlobal := RXwatchdogPropLeft;
 GVL_FSM.TXwatchdogPropLeftGlobal := TXwatchdogPropLeft;
@@ -155,11 +168,20 @@ GVL_FSM.TXwatchdogPropRightGlobal := TXwatchdogPropRight;
 GVL_FSM.RXwatchdogPTHVGlobal := RXwatchdogPTHV;
 GVL_FSM.TXwatchdogPTHVGlobal := TXwatchdogPTHV;
 
-GVL_FSM.bwatchdogResetGlobal := watchdogReset;
+GVL_FSM.bwatchdogCANResetGlobal := watchdogCANReset;
+
+//SDC related
 
 GVL_FSM.bEstopOutGlobal := bEstopOut;
 
 GVL_FSM.bSDCFeedbackGlobal := bSDCFeedback;
+
+
+//prop drive timeouts
+GVL_FSM.bPropStateResetGlobal := bpropStateTimerReset;
+
+GVL_FSM.bPropStateTimeOutLeftGlobal := bpropStateTimeOutLeft;
+GVL_FSM.bPropStateTimeOutRightGlobal := bpropStateTimeOutRight;
 
 //------------]]></ST>
     </Implementation>

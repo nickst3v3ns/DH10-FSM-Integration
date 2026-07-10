@@ -5380,13 +5380,13 @@ Initialising drive references for resetting drive errors]]></Comment>
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000008" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000008" Watchdog="2" AdtTasks="true">
 					<Name>FSM_MAIN</Name>
 				</Task>
 				<Task Id="4" Priority="18" CycleTime="100000" AmsPort="351" Affinity="#x00000002" AdtTasks="true">
 					<Name>LVBAT</Name>
 				</Task>
-				<Task Id="5" Priority="22" CycleTime="1000000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Priority="22" CycleTime="1000000" AmsPort="352" Watchdog="2" AdtTasks="true">
 					<Name>Thermal_Task</Name>
 				</Task>
 				<Task Id="6" Priority="6" CycleTime="3000" AmsPort="353" Affinity="#x00000004" AdtTasks="true">
@@ -5398,10 +5398,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 				<Task Id="8" Priority="11" CycleTime="10000" AmsPort="355" Affinity="#x00000001" AdtTasks="true">
 					<Name>1ms (PTC_CAN_RX, FastFlow)</Name>
 				</Task>
-				<Task Id="10" Priority="4" CycleTime="15000" AmsPort="357" Affinity="#x00000004" AdtTasks="true">
+				<Task Id="10" Priority="4" CycleTime="15000" AmsPort="357" Affinity="#x00000004" Watchdog="2" AdtTasks="true">
 					<Name>LEVI_TEST_TASK</Name>
 				</Task>
-				<Task Id="11" Priority="7" CycleTime="60000" AmsPort="358" Affinity="#x00000008" AdtTasks="true">
+				<Task Id="11" Priority="7" CycleTime="60000" AmsPort="358" Affinity="#x00000008" Watchdog="2" AdtTasks="true">
 					<Name>Propulsion_Task</Name>
 				</Task>
 				<Task Id="9" Priority="19" CycleTime="1000000" AmsPort="356" AdtTasks="true">
@@ -21469,7 +21469,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E2252785-C1EE-332F-FF7D-6006617D8CC5}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{44173145-9CA8-5074-A0DC-DDF2C73A588E}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -62092,6 +62092,31 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010f400f410f400</BootStrapData>
+							<MBoxUserCmdData>02000300090000000d0000000000000000000000000000000000000000000000200080060100000001456e61626c652066696c74657200</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000c000000000000000000000000000000000000000000000020008002010000000250726573656e746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001900000000000000000000000000000000000000000000002000800b0100000001456e61626c652076656e646f722063616c6962726174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000f000000000000000000000000000000000000000000000020008015020000000b0046696c7465722073657474696e677300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000b000000000000000000000000000000000000000000000020008019020000006f0052544420656c656d656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000c000000000000000000000000000000000000000000000020108002010000000250726573656e746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000d0000000000000000000000000000000000000000000000201080060100000001456e61626c652066696c74657200</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000f000000000000000000000000000000000000000000000020108015020000000b0046696c7465722073657474696e677300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000b000000000000000000000000000000000000000000000020108019020000006f0052544420656c656d656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001900000000000000000000000000000000000000000000002010800b0100000001456e61626c652076656e646f722063616c6962726174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000c000000000000000000000000000000000000000000000020208002010000000250726573656e746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000d0000000000000000000000000000000000000000000000202080060100000001456e61626c652066696c74657200</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001900000000000000000000000000000000000000000000002020800b0100000001456e61626c652076656e646f722063616c6962726174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000f000000000000000000000000000000000000000000000020208015020000000b0046696c7465722073657474696e677300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000b000000000000000000000000000000000000000000000020208019020000006f0052544420656c656d656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000c000000000000000000000000000000000000000000000020308002010000000250726573656e746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000d0000000000000000000000000000000000000000000000203080060100000001456e61626c652066696c74657200</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001900000000000000000000000000000000000000000000002030800b0100000001456e61626c652076656e646f722063616c6962726174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000f000000000000000000000000000000000000000000000020308015020000000b0046696c7465722073657474696e677300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000b000000000000000000000000000000000000000000000020308019020000006f0052544420656c656d656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000b0000000300000000000000000000000000000000000000200280050400000000907845422d506172616d6574657200</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000e00000003000000000000000000000000000000000000002002800102000000d8ff4d696e54656d706572617475726500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000000f0000000300000000000000000000000000000000000000200280020200000078004d61782054656d706572617475726500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000002000000000000000000000000000000000000000000000020028003020000001027526e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000002000000000000000000000000000000000000000000000020028004020000001900546e00</MBoxUserCmdData>
 							<Pdo Name="RTD Inputs Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="3">
 								<Entry Name="Status__Underrange" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
@@ -62114,7 +62139,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbFLOW_T.temp_raw11" Index="#x6000" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -62140,7 +62165,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbFLOW_T.temp_raw12" Index="#x6010" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -62166,7 +62191,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6020" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6020" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbFLOW_T.temp_raw13" Index="#x6020" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -62192,7 +62217,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6030" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
+								<Entry Name="THERMAL_MAIN.fbFLOW_T.temp_raw14" Index="#x6030" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -63677,6 +63702,12 @@ Slave-Mode:
 				<Link VarA="LEVI_TEST_TASK Outputs^LEVI_MAIN_TEST.Requested_force_values[9]" VarB="MDT 2^Torque/force command value"/>
 				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[18]" VarB="AT 1^External DC link current"/>
 				<Link VarA="Thermal_Task Inputs^LEVI_MAIN_TEST.External_DC_bus_current[19]" VarB="AT 2^External DC link current"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 111 (EK1100)^Temp Flow (EL3204-0200)">
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw11" VarB="RTD Inputs Channel 1^THERMAL_MAIN.fbFLOW_T.temp_raw11"/>
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw12" VarB="RTD Inputs Channel 2^THERMAL_MAIN.fbFLOW_T.temp_raw12"/>
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw13" VarB="RTD Inputs Channel 3^THERMAL_MAIN.fbFLOW_T.temp_raw13"/>
+				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbFLOW_T.temp_raw14" VarB="RTD Inputs Channel 4^THERMAL_MAIN.fbFLOW_T.temp_raw14"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 111 (EK1100)^pumprelay (EL2008)">
 				<Link VarA="Thermal_Task Outputs^THERMAL_MAIN.bPumpLeviEnable" VarB="Channel 1^THERMAL_MAIN.bPumpLeviEnable"/>

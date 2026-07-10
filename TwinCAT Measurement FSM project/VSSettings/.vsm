@@ -992,7 +992,7 @@
           <Children>
             <Node>
               <Title>Requested EMS currents</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1023,7 +1023,7 @@
             </Node>
             <Node>
               <Title>Real EMS currents</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1099,7 +1099,7 @@
         </Node>
         <Node>
           <Title>Vertical airgaps</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1205,7 +1205,7 @@
         </Node>
         <Node>
           <Title>Lateral airgaps</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -1316,7 +1316,7 @@
           <Children>
             <Node>
               <Title>Distances</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -1359,7 +1359,7 @@
             </Node>
             <Node>
               <Title>Angles</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>

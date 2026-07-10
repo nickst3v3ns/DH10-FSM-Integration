@@ -9,7 +9,13 @@ VAR_INPUT
 END_VAR
 
 VAR_OUTPUT
-	bGsLinkAlive : BOOL;
+	bGsLinkAlive 	: BOOL;
+	
+	//has gs connected at least once? activate emergency watchdog
+	bWasConnected	: BOOL;
+	
+	//only true while geniunely connected and heartbeat fresh
+	bGsLinkOk		: BOOL;
 
     eState          : E_LinkState;
     bConnected      : BOOL;
@@ -49,7 +55,9 @@ VAR
 	nTelemeteryIndex: INT := 0;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE eState OF
+      <ST><![CDATA[bGsLinkOk := FALSE;
+
+CASE eState OF
     E_LinkState.eDisconnected:
         bConnected := FALSE;
         IF bEnable THEN
@@ -80,6 +88,7 @@ END_VAR]]></Declaration>
         IF sendTimer.Q AND NOT bSendPending THEN
             sendTimer(IN := FALSE);
             SendTelemetry();
+			bWasConnected := TRUE;
         END_IF
 
         IF bSendPending THEN
@@ -98,6 +107,7 @@ END_VAR]]></Declaration>
         PollReceive();
 		wdGsLink(IN := TRUE, PT := wdGsLinkTimeout);
 		bGsLinkAlive := NOT wdGsLink.Q;
+		bGslinkOk := bGsLinkAlive;
 
         IF fbConnect.eState <> eSOCKET_CONNECTED THEN
             eState := E_LinkState.eError;

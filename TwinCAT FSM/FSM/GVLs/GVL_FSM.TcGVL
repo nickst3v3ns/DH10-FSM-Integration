@@ -12,6 +12,7 @@ VAR_GLOBAL
 
 	benable_heartbeat:				BOOL := FALSE; //for groundstation output
 	bheartbeat_OK: 					BOOL := TRUE; //for groundstation evaluation
+	
 //Heartbeat + GS
 
 //FSM Core variables	
@@ -47,7 +48,7 @@ VAR_GLOBAL
 	nMasterDevStateCouplers AT %I*: UINT; 
 	nMasterDevStatePLC AT %I*: 		UINT; 
 	bethercat_ready:  				BOOL := TRUE; 
-	bwatchdogResetGlobal:			BOOL;	
+	bwatchdogCANResetGlobal:			BOOL;	
 	
 	RXwatchdogPropLeftGlobal:				BOOL;
 	TXwatchdogPropLeftGlobal:				BOOL;
@@ -58,9 +59,13 @@ VAR_GLOBAL
 	RXwatchdogPTHVGlobal:							BOOL;
 	TXwatchdogPTHVGlobal:							BOOL;
 	
-	LaserSensorWatchdogGlobal:						BOOL;
+	bLaserSensorWatchdogGlobal:						BOOL;
 	
 	bMovementSoftStopGlobal:						BOOL;
+	 
+	bPropStateTimeOutLeftGlobal:					BOOL;
+	bPropStateTimeOutRightGlobal:					BOOL;
+	bPropStateResetGlobal: 							BOOL;
 	
 	
 	//Critical Temperatures for Shutdown

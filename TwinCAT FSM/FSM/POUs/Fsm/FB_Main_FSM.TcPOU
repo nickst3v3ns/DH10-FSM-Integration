@@ -23,6 +23,8 @@ VAR
 	bCriticalFaultActive		:BOOL;
 	criticalFault				:BOOL; 
 	
+	bIsDynamicalState 			:BOOL;
+	bIsLVState					:BOOL;
 	//lvbat transition blocker
 	bSOCBlock : BOOL;
 	//TwinSAFE helper 
@@ -69,6 +71,10 @@ VAR
 	charging_in_progress		:BOOL; 
 	discharging_in_progress		:BOOL;
 	
+	//brake timer
+	fbBrakeTimer : TOF;
+	tBrakeTime : TIME := T#1H;
+	
 	fbHeartBeatFailReset:		TON;
 	
 
@@ -96,13 +102,21 @@ END_VAR
 //checks for HVAL in none HV Active states -> To emergency
 //immediate SDC close -> precharge, maybe give some time and PTC state check to confirm PT is ready for precharge
 GVL_FSM.fbLink(bGsLinkAlive => GVL_FSM.bheartbeat_OK);
+
 bBasicChecksOk := BasicChecks();
+
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
+
 bSOCBlock := F_LVSOCBlocker(SOC := GVL_PT.LVBATDATAGlobal.SOC_pct, SOCLimit := 5);
+
+//buffer timer for SDC closed to precharge request
 fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
+
+bIsDynamicalState := currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE;
+ 
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE) OR (GVL_PT.HVAL_STATUS <> 1 AND (currentState < 3 OR currentState = E_PodState.STATE_MAINTENANCE ))) THEN
+IF NOT bTESTSTATE AND (currentCmd = E_Command.CMD_EMERGENCY OR ((bCriticalFaultActive OR NOT bBasicChecksOk) AND bIsDynamicalState) OR (GVL_PT.HVAL_STATUS <> 1 AND NOT bIsDynamicalState)) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
@@ -140,10 +154,13 @@ CASE currentState OF
 			//fix for emergency halfway through a transition
 			bCommandSet := FALSE;
 			bCommandSetDupe := FALSE;
+			
 			//watchdogreset 
-			GVL_FSM.LaserSensorWatchdogGlobal := FALSE;
+			GVL_FSM.bLaserSensorWatchdogGlobal := FALSE;
 			GVL_FSM.bMovementSoftStopGlobal := FALSE;
-			GVL_FSM.bwatchdogResetGlobal := TRUE;
+			GVL_FSM.bwatchdogCANResetGlobal := TRUE;
+			GVL_FSM.bPropStateResetGlobal := TRUE;
+			
 			//retract brakes			
 			fbArm(armsignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 			
@@ -370,7 +387,7 @@ CASE currentState OF
 		IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND NOT bDescend THEN
 			GVL_LEVI.Levi_command := E_Levi_States.LEVI_LIFTOFF;
 			
-		ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_LEVITATION OR (GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND bDescend) THEN
+		ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_LEVITATION OR (GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY AND bDescend) OR GVL_LEVI.levitation_state = E_Levi_States.LEVI_LIFTOFF THEN
 			
 			//command to go back to DEMO is checked for with a stable levitation state requisite
 			
@@ -378,14 +395,18 @@ CASE currentState OF
 				
 				bCommandSet := TRUE;
 				//levi command for descend is toggled
-				IF NOT bDescend THEN
+				IF NOT bDescend AND GVL_LEVI.levitation_state = E_Levi_states.LEVI_LEVITATION THEN
+					
 					GVL_LEVI.Levi_command := E_Levi_States.LEVI_DESCENT;
 					bDescend := TRUE;
-				END_IF
-				
+					
+				ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_LIFTOFF THEN
+					
+					GVL_LEVI.Levi_command := E_Levi_States.LEVI_LEVITATION;
 				
 				//whenever the levi FSM indicated being brought back to IDLE, we ack the state change
-				IF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY THEN
+				ELSIF GVL_LEVI.levitation_state = E_Levi_States.LEVI_READY THEN
+					
 					bDescend := FALSE;
 					currentState := E_PodState.STATE_DEMO;
 					currentCmd := E_Command.CMD_NONE;

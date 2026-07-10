@@ -13,7 +13,11 @@ END_VAR
 CheckCritical := FALSE;
 IF  GVL_PT.ERROR_STATUS <> 0 OR 
 	
-//uncommented out because still not used
+
+	
+	GVL_FSM.bPropStateTimeOutLeftGlobal OR
+	GVL_FSM.bPropStateTimeOutRightGlobal OR
+
 	GVL_FSM.RXwatchdogPropLeftGlobal OR
 	GVL_FSM.TXwatchdogPropLeftGlobal OR
 	
@@ -23,7 +27,7 @@ IF  GVL_PT.ERROR_STATUS <> 0 OR
 	GVL_FSM.RXwatchdogPTHVGlobal OR
 	GVL_FSM.TXwatchdogPTHVGlobal OR
 	
-	GVL_FSM.LaserSensorWatchdogGlobal OR
+	GVL_FSM.bLaserSensorWatchdogGlobal OR
 	
 	GVL_THERMAL.bEMSOVERHEAT OR 
 	GVL_THERMAL.bFLOWOVERHEAT OR 
@@ -35,7 +39,7 @@ IF  GVL_PT.ERROR_STATUS <> 0 OR
 	
 	GVL_FSM.bMovementSoftStopGlobal OR
 	
-	(GVL_FSM.fbLink.bConnected AND NOT GVL_FSM.fbLink.bGsLinkAlive) THEN
+	(GVL_FSM.fbLink.bWasConnected AND NOT GVL_FSM.fbLink.bGsLinkOk) THEN
 	
 	EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
 	CheckCritical := TRUE;

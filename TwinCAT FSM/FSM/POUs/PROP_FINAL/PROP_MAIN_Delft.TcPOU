@@ -308,7 +308,14 @@ END_VAR]]></Declaration>
 PropFlag := GVL_PROP.PropFlag;
 AutoPilotFlag := GVL_PROP.AutoPilotFlag;
 DriveReset := GVL_PROP.DriveReset;
-TargetVelocity := GVL_PROP.TargetVelocity;
+
+//first gen plausibility check
+IF GVL_PROP.TargetVelocity > -2000 AND GVL_PROP.TargetVelocity < 2000 THEN
+	TargetVelocity := GVL_PROP.TargetVelocity;	
+ELSE 
+	TargetVelocity := 0;
+END_IF
+
 Iamp_Temp := GVL_PROP.Iamp_Temp;
 
 PositionLimit_Low := GVL_PROP.PositionLimit_Low;
