@@ -7,6 +7,9 @@
     <PouCall>
       <Name>PTC_RX_COM</Name>
     </PouCall>
+    <PouCall>
+      <Name>FastCounter</Name>
+    </PouCall>
     <TaskFBGuid>{b7f5731c-bf16-4dc8-a3df-32d6bb87b4ee}</TaskFBGuid>
     <Fb_init>{463799f2-cf38-4eff-8b84-ec4e1a7e0acf}</Fb_init>
     <Fb_exit>{aebb237a-b950-423a-9dab-3a6a08840edf}</Fb_exit>

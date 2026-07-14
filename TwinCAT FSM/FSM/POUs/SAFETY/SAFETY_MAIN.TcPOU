@@ -10,7 +10,7 @@ VAR
 	bAlivePLC AT %Q*:					BOOL := TRUE;
 	bArmSignal AT %Q*: 					BOOL := FALSE;
 	bCLK AT %Q*: 						BOOL := FALSE;
-	bbrakes_engaged AT %I*:				BOOL := FALSE;
+	bareBrakesEngaged AT %I*:				BOOL := FALSE;
 	bbrakes_engage AT %Q*:				BOOL;
 	bEstopOut AT %I*:				BOOL;
 	bFalseForEstopRestart:					BOOL := FALSE; //when false, the esotp reset automatically
@@ -23,6 +23,9 @@ VAR
 	StartupTimerFirst:					TON;
 	StartupTimerSecond:					TON;
 	
+	
+	//prop speed overrun 
+	TON_speedoverrun : TON;
 
 	//OUTPUTS
 	SafetyRunCommand AT %Q*:		BOOL := TRUE;
@@ -56,6 +59,9 @@ VAR
 	RXwatchdogPTHV : BOOL;
 	TXwatchdogPTHV : BOOL;
 	
+	fbCANwatchPTLV : FB_CANWatchdog;
+	RXwatchdogPTLV : BOOL;
+	
 	//prop drive state watchdog
 	fbpropMonitorLeft : FB_PropDriveState;
 	fbpropMonitorRight : FB_PropDriveState;
@@ -64,6 +70,8 @@ VAR
 	
 	bpropStateTimeOutLeft : BOOL;
 	bpropStateTimeoutRight : BOOL;
+	
+	HVALDiscrepancy : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -75,7 +83,7 @@ bArmSignal := GVL_FSM.bbrakes_arm_signalGlobal;
 bCLK := GVL_FSM.bbrakes_clockGlobal;
 bAlivePLC := GVL_FSM.b_AlivePLCGlobal;
 bJorianSpecial := GVL_FSM.bJorianSpecialGlobal;
-bbrakes_engaged := GVL_FSM.bareBrakesEngaged;
+bareBrakesEngaged := GVL_FSM.bareBrakesEngagedGlobal;
 
 
 //TwinSAFE Estop Logic
@@ -86,6 +94,9 @@ bEstopRestart := GVL_FSM.bEstopRestartGlobal;
 //watchdog
 watchdogCANReset := GVL_FSM.bwatchdogCANResetGlobal;
 bpropStateTimerReset := GVL_FSM.bPropStateResetGlobal;
+
+//HVALdiscrepancy
+HVALDiscrepancy := GVL_FSM.HVALDiscrepancyGlobal;
 
 
 //--------------------------------------------------
@@ -133,15 +144,25 @@ IF bpropStateTimerReset THEN
 END_IF
 
 //CAN watchdogs
-IF GVL_FSM.E_PodStateGlobal > 3 THEN
+IF GVL_FSM.E_PodStateGlobal > 3 AND GVL_FSM.E_PodStateGlobal <> E_PodState.STATE_MAINTENANCE THEN
 fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
 fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
 fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+
 END_IF
 
 IF watchdogCANReset THEN
 	watchdogCANReset := FALSE;
 END_IF
+
+IF GVL_FSM.E_PodStateGlobal > E_PodState.STATE_IDLE AND GVL_FSM.E_PodStateGlobal <> E_PodState.STATE_MAINTENANCE AND GVL_PT.HVAL_STATUS <> E_HVAL_STATUS.GREEN_HV_OFF THEN
+	
+	HVALDiscrepancy := TRUE;
+END_IF
+
+
+//propulsion speed check backwards EHW
+TON_speedoverrun(IN := GVL_PROP.Velocity < -2000, PT := T#120MS, Q => GVL_FSM.bMovementSoftStopGlobal);
 
 //push to GVL
 
@@ -155,7 +176,7 @@ GVL_FSM.bJorianSpecialGlobal:= bJorianSpecial;
 //brakes
 GVL_FSM.bbrakes_arm_signalGlobal := bArmSignal;
 GVL_FSM.bbrakes_clockGlobal := bCLK;
-GVL_FSM.bareBrakesEngaged := bbrakes_engaged;
+GVL_FSM.bareBrakesEngagedGlobal := bareBrakesEngaged;
 
 //can watchdogs
 
@@ -183,7 +204,9 @@ GVL_FSM.bPropStateResetGlobal := bpropStateTimerReset;
 GVL_FSM.bPropStateTimeOutLeftGlobal := bpropStateTimeOutLeft;
 GVL_FSM.bPropStateTimeOutRightGlobal := bpropStateTimeOutRight;
 
-//------------]]></ST>
+//------------
+
+GVL_FSM.HVALDiscrepancyGlobal := HVALDiscrepancy;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

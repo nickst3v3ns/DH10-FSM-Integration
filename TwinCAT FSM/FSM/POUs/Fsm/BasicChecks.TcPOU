@@ -11,7 +11,7 @@ END_VAR
       <ST><![CDATA[//BasicChecks performs all needed checks for the System to be safe for operation.
 
 
-IF (GVL_FSM.nMasterDevStateCouplers = 0) AND (GVL_FSM.nMasterDevStatePLC = 0) THEN
+IF (GVL_FSM.uSlaveCountMaster1 = GVL_FSM.uSlaveCountCheckMaster1) AND (GVL_FSM.uSlaveCountMaster2 = GVL_FSM.uSlaveCountCheckMaster2) THEN
 	GVL_FSM.bethercat_ready := TRUE;
 ELSE 
 	GVL_FSM.bethercat_ready := FALSE;
@@ -23,7 +23,7 @@ END_IF
 
 BasicChecks := 
     GVL_FSM.bethercat_ready AND
-    GVL_FSM.bsafety_inputs_valid;
+    GVL_FSM.bsafety_inputs_valid AND (GVL_FSM.fbLink.bWasConnected AND GVL_FSM.fbLink.bGsLinkOk);
 	
 // SHOULD ALSO CONTAIN GVL_FSM.fbLink state]]></ST>
     </Implementation>

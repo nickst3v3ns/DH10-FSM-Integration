@@ -24,7 +24,7 @@ IF rPositionFront = 0 AND rPosition = 0 THEN
 	FrontValid 	:= FALSE;
 	BackValid 	:= FALSE;
 	
-	rPosition := 0;
+	rPosition := -1;
 ELSIF rPositionFront = 0 AND rPositionBack <> 0 THEN
 	
 	FrontValid := FALSE;

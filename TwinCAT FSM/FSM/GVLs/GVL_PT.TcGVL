@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <GVL Name="GVL_PT" Id="{f8125425-6348-478c-9fcf-f9fbde1e9712}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
+    <Declaration><![CDATA[ {attribute 'qualified_only'}
 VAR_GLOBAL
 	//CAN INTERFACE
 	CAN_OUTPUTS AT %Q* : CANTXQUEUESTRUCT_E_32;
@@ -11,7 +11,7 @@ VAR_GLOBAL
 	
 	//PTC_STATUS
 	PTC_STATE : E_PTC_State;
-	HVAL_STATUS : E_HVAL_STATUS; //0 led green high comparator below / 1 green led low comp below / 2 green led high comp above, 3 green led low comp above
+	HVAL_STATUS : E_HVAL_STATUS := 1; //0 led green high comparator below / 1 green led low comp below / 2 green led high comp above, 3 green led low comp above
 	IMD_WARNINGS : UINT;
 	ERROR_STATUS : E_PTC_ErrorCode;
 	HV_FAIL_REASON : E_BMS_FAIL_REASON; //bms
@@ -34,7 +34,14 @@ VAR_GLOBAL
 	SOCGlobal : LREAL;
 	RemainingAh : LREAL;
 //LVBAT
-	LVBATDATAGlobal : ST_IndividualData1;
+	LVBATDATAINDGlobal : ST_IndividualData1;
+	LVBATDATAPACK1Global : ST_PackData1;
+	
+	LVBatCommLost : BOOL; 
+	
+//lvbatcanqueue
+CAN_INPUTS_LV AT %I* : CANRXQUEUESTRUCT_N_10;
+CAN_OUTPUTS_LV AT %Q* : CANTXQUEUESTRUCT_N_10;
 	
 //bitmaps
 	

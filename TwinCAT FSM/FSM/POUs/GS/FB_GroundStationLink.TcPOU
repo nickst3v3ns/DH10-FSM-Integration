@@ -55,7 +55,7 @@ VAR
 	nTelemeteryIndex: INT := 0;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[bGsLinkOk := FALSE;
+      <ST><![CDATA[   bGsLinkOk := FALSE;
 
 CASE eState OF
     E_LinkState.eDisconnected:
@@ -187,7 +187,7 @@ AppendDatapoint(id := id, valueBits := bits);
       <Declaration><![CDATA[METHOD AppendDpI16 : BOOL
 VAR_INPUT
 	id : UINT;
-	value : UINT;
+	value : INT;
 END_VAR
 VAR
 	bits : ULINT;
@@ -820,11 +820,21 @@ AppendDpF64(GVL_GS_IDS.DP_ID_PT_MIN_TEMP, GVL_PT.MIN_TEMP);
 AppendDpU32(GVL_GS_IDS.DP_ID_PT_TOTAL_VOLTAGE, UINT_TO_UDINT(GVL_PT.TOTAL_VOLTAGE));
 
 // PTPackCurrent (0xd0c) — u32
-AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT, UINT_TO_UDINT(GVL_PT.PACK_CURRENT));
+AppendDpU32(GVL_GS_IDS.DP_ID_PT_PACK_CURRENT, DINT_TO_UDINT(GVL_PT.IVT_CURRENT));
 
 // PTDCLinkVoltage (0xd0d) — i32 on wire, DWORD in GVL
 AppendDpI32(GVL_GS_IDS.DP_ID_PTDC_LINK_VOLTAGE,
             DWORD_TO_DINT(GVL_PT.DC_LINK_VOLTAGE));
+			
+AppendDpU8(GVL_GS_IDS.DP_ID_PT_LVSOC, GVL_PT.LVBATDATAINDGlobal.SOC_pct);
+
+AppendDpF32(GVL_GS_IDS.DP_ID_PT_LVVOLT, GVL_PT.LVBATDATAPACK1Global.Voltage_V);
+
+AppendDpI16(GVL_GS_IDS.DP_ID_PT_LVCUR, GVL_PT.LVBATDATAINDGlobal.Current_A);
+
+AppendDpi16(GVL_GS_IDS.DP_ID_PT_LVTEMP, GVL_PT.LVBATDATAINDGlobal.Temp_C); 
+
+AppendDpF64(GVL_GS_IDS.DP_ID_PT_HVSOC, GVL_PT.SOCGlobal);
 
 FlushBatch();
 SendPowerTrain := TRUE;]]></ST>

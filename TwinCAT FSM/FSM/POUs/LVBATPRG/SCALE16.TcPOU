@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="SCALE16" Id="{98facbb2-6cc5-4f5f-8380-babe164951c0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION SCALE16 : REAL
+VAR_INPUT
+    lo : USINT;
+    hi : USINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SCALE16 := UINT_TO_REAL(BYTE_TO_UINT(lo) OR SHL(BYTE_TO_UINT(hi), 8)) / 10.0;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

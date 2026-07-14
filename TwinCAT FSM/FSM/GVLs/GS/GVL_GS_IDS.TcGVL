@@ -604,6 +604,14 @@ VAR_GLOBAL CONSTANT
     DP_ID_PT_TOTAL_VOLTAGE                   : UINT := 16#0D0B;   // u32,  pod->gs,  critical
     DP_ID_PT_PACK_CURRENT                    : UINT := 16#0D0C;   // u32,  pod->gs,  critical
     DP_ID_PTDC_LINK_VOLTAGE                  : UINT := 16#0D0D;   // i32,  pod->gs,  critical
+	
+	DP_ID_PT_LVSOC							: UINT := 16#0D0E;
+	DP_ID_PT_LVVOLT							: UINT := 16#0D0F;
+	DP_ID_PT_LVCUR							: UINT := 16#0D10;
+	DP_ID_PT_LVTEMP							: UINT := 16#0D11;
+	
+	DP_ID_PT_HVSOC							: UINT := 16#0D12;
+	
 
     DP_ID_CAN_LOG                            : UINT := 16#0FFD;
 END_VAR]]></Declaration>

@@ -3,53 +3,157 @@
   <POU Name="P_ParseBattery" Id="{e90656e5-c708-4a5c-a423-7c9caf3ff9f0}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM P_ParseBattery
 VAR
-    rPack1 AT %I*: ST_CanFrame8;  rPack2 AT %I* : ST_CanFrame8;
-    rPack3 AT %I*: ST_CanFrame8;  rInd1 AT %I* : ST_CanFrame8;
-    Pack1  : ST_PackData1;  Pack2  : ST_PackData2;
-    Pack3  : ST_PackData3;  Ind1   : ST_IndividualData1;
+    i               : UINT;
+    nMsgs           : UINT;
+
+    Pack1  : ST_PackData1;   Pack2 : ST_PackData2;
+    Pack3  : ST_PackData3;   Ind1  : ST_IndividualData1;
+
+    MessagesReceived : ARRAY [0..9] OF CANQUEUE;
+
+    fps               : TON;
+    messagespersecond : UINT;
+    rxcounter_old     : UINT;
+
+    // watchdog on PACK DATA 1 (0x18F) — survives master re-election
+    tonPackWatchdog : TON;
+    bPack1Seen      : BOOL;
+    bPackCommLost   : BOOL;
+	
+	cobId  : WORD;
+    dlc    : USINT;
+    nodeId : USINT;
+    Data   : ARRAY[0..7] OF USINT;
     u32    : DWORD;
+	
+	
+	// interval measurement on INDIVIDUAL DATA 1, master node
+    tInd1Last     : TIME := T#0S;
+    tInd1Delta    : TIME;          // most recent interval
+    tInd1Min      : TIME := T#1H;  // start high so first real value wins
+    tInd1Max      : TIME := T#0S;
+    nInd1Count    : UDINT;         // total frames seen
+    rInd1AvgMs    : REAL;          // running average in ms
+    bInd1ResetStats : BOOL;        // set TRUE online to restart measurement
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[// ---- CAN interface handshake ----
+IF GVL_PT.CAN_OUTPUTS_LV.RxCounter <> GVL_PT.CAN_INPUTS_LV.RxCounter THEN
 
-// --- PACK DATA 1 ---
-Pack1.SOC_All_pct := rPack1.data[0];
-u32 := BYTE_TO_DWORD(rPack1.data[1])
-    OR SHL(BYTE_TO_DWORD(rPack1.data[2]), 8)
-    OR SHL(BYTE_TO_DWORD(rPack1.data[3]), 16)
-    OR SHL(BYTE_TO_DWORD(rPack1.data[4]), 24);
-Pack1.Voltage_V      := DWORD_TO_REAL(u32) / 1024.0;
-Pack1.SOC_Active_pct := rPack1.data[5];
-Pack1.Num_Active     := rPack1.data[6];
-Pack1.Num_Passive    := rPack1.data[7];
+    nMsgs := GVL_PT.CAN_INPUTS_LV.NoOfRxMessages;
+    IF nMsgs > 10 THEN
+        nMsgs := 10;                      // TODO: enlarge queue if this ever clips
+    END_IF
 
-// --- PACK DATA 2 ---
-Pack2.PackState        := rPack2.data[0];
-Pack2.Current_A        := UINT_TO_INT(BYTE_TO_UINT(rPack2.data[1]) OR SHL(BYTE_TO_UINT(rPack2.data[2]), 8));
-Pack2.SmartChargerConn := (rPack2.data[3] <> 0);
-Pack2.MaxPackSOC_pct   := rPack2.data[4];
-Pack2.MinPackSOC_pct   := rPack2.data[5];
-Pack2.MaxPackTemp_C    := BYTE_TO_INT(rPack2.data[6]) - 55;
-Pack2.MinPackTemp_C    := BYTE_TO_INT(rPack2.data[7]) - 55;
+    IF nMsgs > 0 THEN                     // guards the UINT underflow
+        FOR i := 0 TO nMsgs - 1 DO
+            MessagesReceived[i] := GVL_PT.CAN_INPUTS_LV.RxMessages[i];
+        END_FOR
+        A_parseLV();
+    END_IF
 
-// --- PACK DATA 3 ---
-Pack3.MaxChargeVoltage_V    := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[0]) OR SHL(BYTE_TO_UINT(rPack3.data[1]), 8)) / 10.0;
-Pack3.MaxChargeCurrent_A    := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[2]) OR SHL(BYTE_TO_UINT(rPack3.data[3]), 8)) / 10.0;
-Pack3.MaxDischargeCurrent_A := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[4]) OR SHL(BYTE_TO_UINT(rPack3.data[5]), 8)) / 10.0;
-Pack3.MaxDischargeVoltage_V := UINT_TO_REAL(BYTE_TO_UINT(rPack3.data[6]) OR SHL(BYTE_TO_UINT(rPack3.data[7]), 8)) / 10.0;
+    GVL_PT.CAN_OUTPUTS_LV.RxCounter := GVL_PT.CAN_INPUTS_LV.RxCounter;
+END_IF
 
-// --- INDIVIDUAL DATA 1 ---
-Ind1.PermissionToJoin := rInd1.data[0];
-Ind1.HeatingMode      := rInd1.data[1] AND 16#0F;
-Ind1.HeatingActive    := (rInd1.data[1] AND 16#10) <> 0;
-Ind1.ChemType         := rInd1.data[2];
-Ind1.CellsInSeries    := rInd1.data[3];
-Ind1.SOC_pct          := rInd1.data[4];
-Ind1.BatteryState     := rInd1.data[5];
-Ind1.Current_A        := BYTE_TO_INT(rInd1.data[6]);
-Ind1.Temp_C           := BYTE_TO_INT(rInd1.data[7]) - 55;
+// ---- watchdog: retriggered by A_parseLV when 0x18F arrives ----
+tonPackWatchdog(IN := NOT bPack1Seen, PT := T#2S);
+bPackCommLost := tonPackWatchdog.Q;
+bPack1Seen    := FALSE;                   // consumed; next 0x18F sets it again
 
-GVL_PT.LVBATDATAGlobal := Ind1;]]></ST>
+// ---- messages per second ----
+fps(IN := NOT fps.Q, PT := T#1S);
+IF fps.Q THEN
+    messagespersecond := GVL_PT.CAN_INPUTS_LV.RxCounter - rxcounter_old;
+    rxcounter_old     := GVL_PT.CAN_INPUTS_LV.RxCounter;
+END_IF
+
+GVL_PT.LVBATDATAINDGlobal   := Ind1;
+GVL_PT.LVBATDATAPACK1Global := Pack1;
+GVL_PT.LVBatCommLost        := bPackCommLost;   // add to GVL
+
+IF bInd1ResetStats THEN
+    tInd1Min   := T#1H;
+    tInd1Max   := T#0S;
+    nInd1Count := 0;
+    rInd1AvgMs := 0.0;
+    tInd1Last  := T#0S;
+    bInd1ResetStats := FALSE;
+END_IF
+]]></ST>
     </Implementation>
+    <Action Name="A_parseLV" Id="{805475ee-72e1-4d3e-b15c-2a6f5517f4aa}">
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO nMsgs - 1 DO
+    cobId := SHR(MessagesReceived[i].cobId, 5) AND 16#07FF;   // strip DLC/RTR
+    dlc   := WORD_TO_USINT(MessagesReceived[i].cobId AND 16#000F);
+    Data  := MessagesReceived[i].data;
+
+    CASE cobId OF
+
+        16#18F:  // PACK DATA 1
+            bPack1Seen := TRUE;                                // feeds watchdog
+            Pack1.SOC_All_pct := Data[0];
+            u32 := BYTE_TO_DWORD(Data[1])
+                OR SHL(BYTE_TO_DWORD(Data[2]), 8)
+                OR SHL(BYTE_TO_DWORD(Data[3]), 16)
+                OR SHL(BYTE_TO_DWORD(Data[4]), 24);
+            Pack1.Voltage_V      := DWORD_TO_REAL(u32) / 1024.0;  // verify scale!
+            Pack1.SOC_Active_pct := Data[5];
+            Pack1.Num_Active     := Data[6];
+            Pack1.Num_Passive    := Data[7];
+
+        16#28F:  // PACK DATA 2
+            Pack2.PackState        := Data[0];
+            Pack2.Current_A        := UINT_TO_INT(BYTE_TO_UINT(Data[1])
+                                      OR SHL(BYTE_TO_UINT(Data[2]), 8));
+            Pack2.SmartChargerConn := (Data[3] <> 0);
+            Pack2.MaxPackSOC_pct   := Data[4];
+            Pack2.MinPackSOC_pct   := Data[5];
+            Pack2.MaxPackTemp_C    := BYTE_TO_INT(Data[6]) - 55;
+            Pack2.MinPackTemp_C    := BYTE_TO_INT(Data[7]) - 55;
+
+        16#351:  // Maximum allowed pack values  (was wrongly on 911/0x38F)
+            Pack3.MaxChargeVoltage_V    := SCALE16(Data[0], Data[1]);
+            Pack3.MaxChargeCurrent_A    := SCALE16(Data[2], Data[3]);
+            Pack3.MaxDischargeCurrent_A := SCALE16(Data[4], Data[5]);
+            Pack3.MaxDischargeVoltage_V := SCALE16(Data[6], Data[7]);
+
+        16#480..16#4FF:  // INDIVIDUAL DATA 1, any node — survives re-election
+            nodeId := WORD_TO_USINT(cobId - 16#480);
+			
+            IF nodeId = 15 THEN                    // current master
+                Ind1.PermissionToJoin := Data[0];
+                Ind1.HeatingMode      := Data[1] AND 16#0F;
+                Ind1.HeatingActive    := (Data[1] AND 16#10) <> 0;
+                Ind1.ChemType         := Data[2];
+                Ind1.CellsInSeries    := Data[3];
+                Ind1.SOC_pct          := Data[4];
+                Ind1.BatteryState     := Data[5];
+                Ind1.Current_A        := S8(Data[6]);   // signed!
+                Ind1.Temp_C           := BYTE_TO_INT(Data[7]) - 55;
+				
+				
+				// ---- interval measurement ----
+        		IF tInd1Last > T#0S THEN                     // skip the very first frame
+            		tInd1Delta := TIME() - tInd1Last;
+            		IF tInd1Delta < tInd1Min THEN tInd1Min := tInd1Delta; END_IF
+            		IF tInd1Delta > tInd1Max THEN tInd1Max := tInd1Delta; END_IF
+            		nInd1Count := nInd1Count + 1;
+            		// running average, cheap incremental form
+            		rInd1AvgMs := rInd1AvgMs + (TIME_TO_REAL(tInd1Delta) - rInd1AvgMs) / UDINT_TO_REAL(nInd1Count);
+        		END_IF
+        		tInd1Last := TIME();
+        		// ---- end measurement ----
+
+       
+				
+				
+            END_IF
+            // TODO: store per-node into an array if you want slave telemetry
+
+    END_CASE
+END_FOR]]></ST>
+      </Implementation>
+    </Action>
   </POU>
 </TcPlcObject>

@@ -37,9 +37,9 @@ IF  GVL_PT.ERROR_STATUS <> 0 OR
     GVL_LEVI.levitation_fault OR
     GVL_Prop.propulsion_fault OR
 	
-	GVL_FSM.bMovementSoftStopGlobal OR
 	
-	(GVL_FSM.fbLink.bWasConnected AND NOT GVL_FSM.fbLink.bGsLinkOk) THEN
+	
+	GVL_FSM.bMovementSoftStopGlobal THEN
 	
 	EmergencyReason := E_EmergencyReason.ERR_CHECKCRITICAL;
 	CheckCritical := TRUE;

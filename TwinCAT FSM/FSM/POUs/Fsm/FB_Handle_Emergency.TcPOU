@@ -33,14 +33,14 @@ busy := TRUE;
 
 CASE state OF
 	
-    0:  GVL_FSM.b_AlivePLCGlobal := FALSE; //used for SDC of the pod
+    0: GVL_FSM.b_AlivePLCGlobal := FALSE; //used for SDC of the pod
 		//GVL_FSM.b_AlivePLCGlobal := TRUE; //used for SDC of the pod
 		GVL_FSM.bbrakes_engageGlobal := FALSE;
         GVL_Prop.propulsion_enable := FALSE; //disabling Propulsion
         GVL_LEVI.levitation_enable := FALSE; //disabling Levitation
 		fbdischarge(); //calling for discharge as double safety, normally the pod should directly trip the SDC
 		
-		GVL_FSM.bareBrakesEngaged := FALSE;
+		GVL_FSM.bareBrakesEngagedGlobal := FALSE;
 		
 		
         state := 1;

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="S8" Id="{dc4fd68f-ce8c-4c83-b22f-6531310e1c0d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION S8 : INT
+VAR_INPUT
+    b : USINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF b > 127 THEN
+    S8 := USINT_TO_INT(b) - 256;
+ELSE
+    S8 := USINT_TO_INT(b);
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -5146,17 +5146,83 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}" AutoDeleteType="true">ST_CanFrame8</Name>
-			<BitSize>64</BitSize>
+			<Name GUID="{7F739CFE-0C6E-41C8-A538-49DBEB5A9A25}" Namespace="IO" TcBaseType="true">CANQUEUE</Name>
+			<BitSize>80</BitSize>
+			<SubItem>
+				<Name>cobId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
 			<SubItem>
 				<Name>data</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<Type GUID="{AC4BB20D-5D03-4CE5-96C6-86DFFE816AA7}" Namespace="IO">CANMESSAGE</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{1ED92406-405E-2A7C-FD38-C7BF0026B8FD}" Namespace="IO">CANRXQUEUESTRUCT_N_10</Name>
+			<BitSize>848</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfRxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxMessages</Name>
+				<Type GUID="{7F739CFE-0C6E-41C8-A538-49DBEB5A9A25}" Namespace="IO">CANQUEUE</Type>
 				<ArrayInfo>
 					<LBound>0</LBound>
-					<Elements>8</Elements>
+					<Elements>10</Elements>
 				</ArrayInfo>
-				<BitSize>64</BitSize>
+				<BitSize>800</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{DF5CE5F4-8173-4C0F-0FA7-11F4C21AEB51}" Namespace="IO">CANTXQUEUESTRUCT_N_10</Name>
+			<BitSize>848</BitSize>
+			<SubItem>
+				<Name>TxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
 				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>RxCounter</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NoOfTxMessages</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TxMessages</Name>
+				<Type GUID="{7F739CFE-0C6E-41C8-A538-49DBEB5A9A25}" Namespace="IO">CANQUEUE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>10</Elements>
+				</ArrayInfo>
+				<BitSize>800</BitSize>
+				<BitOffs>48</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -5304,12 +5370,21 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000040}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..7] OF BYTE</Name>
-			<BitSize>64</BitSize>
+			<Name GUID="{18071995-0000-0000-0000-0020000000F0}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..29] OF BYTE</Name>
+			<BitSize>240</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
-				<Elements>8</Elements>
+				<Elements>30</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000080}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..15] OF BYTE</Name>
+			<BitSize>128</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>16</Elements>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
@@ -5322,30 +5397,12 @@ Initialising drive references for resetting drive errors]]></Comment>
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-0020000000F0}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..29] OF BYTE</Name>
-			<BitSize>240</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>30</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000020}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BYTE</Name>
 			<BitSize>32</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
 				<Elements>4</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-000300000008}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BYTE</Name>
-			<BitSize>64</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>8</Elements>
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
@@ -21469,7 +21526,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{8782A61A-A3B4-D585-5229-6F513DA907FB}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{EB916F91-5F18-85F3-CDAC-DAF0D15D664B}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -21742,6 +21799,145 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.nMasterDevStatePLC</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Front</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Prop.InputData3_Back</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.InputData2</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
+							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PROP_BARCODE_EHW.state</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>SAFETY_MAIN.bArmSignal</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bbrakes_engage</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bAlivePLC</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bCLK</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bPLCToggle</Name>
+							<Comment><![CDATA[cycle time watchdog]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
+							<Comment><![CDATA[OUTPUTS]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bEstopRestart</Name>
+							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bJorianSpecial</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="7" AreaNo="112">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>SAFETY_MAIN.SafetyResetButton</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bareBrakesEngaged</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bEstopOut</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bEstopError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bsafety_inputs_valid</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>SAFETY_MAIN.bSDCFeedback</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.uSlaveCountMaster2</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_FSM.uSlaveCountMaster1</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="5" AreaNo="81">
+						<Name>LVBAT Outputs</Name>
+						<Var>
+							<Name>GVL_PT.CAN_OUTPUTS_LV</Name>
+							<Type GUID="{DF5CE5F4-8173-4C0F-0FA7-11F4C21AEB51}" Namespace="IO">CANTXQUEUESTRUCT_N_10</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
+						<Name>LVBAT Inputs</Name>
+						<Var>
+							<Name>GVL_PT.CAN_INPUTS_LV</Name>
+							<Comment><![CDATA[lvbatcanqueue]]></Comment>
+							<Type GUID="{1ED92406-405E-2A7C-FD38-C7BF0026B8FD}" Namespace="IO">CANRXQUEUESTRUCT_N_10</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
+						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Outputs</Name>
+						<Var>
+							<Name>GVL_PT.CAN_OUTPUTS</Name>
+							<Comment><![CDATA[CAN INTERFACE]]></Comment>
+							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
+						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs</Name>
+						<Var>
+							<Name>GVL_PT.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
+						</Var>
+						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
 							<Type>BOOL</Type>
@@ -21805,141 +22001,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_FLOW.bFlowSensor16</Name>
 							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.state</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Front</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Prop.InputData3_Back</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.InputData1</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.InputData2</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>GVL_PROP_BARCODE_EHW.InputData3</Name>
-							<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" ContextId="7" AreaNo="113">
-						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>SAFETY_MAIN.bAlivePLC</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bArmSignal</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bCLK</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bbrakes_engage</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bPLCToggle</Name>
-							<Comment><![CDATA[cycle time watchdog]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.SafetyRunCommand</Name>
-							<Comment><![CDATA[OUTPUTS]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.SafetyErrorAcknowledge</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bEstopRestart</Name>
-							<Comment><![CDATA[Used to restart the Estop from the PLC side]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bJorianSpecial</Name>
-							<Type>BOOL</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="1" ContextId="7" AreaNo="112">
-						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>SAFETY_MAIN.SafetyResetButton</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bEstopOut</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bbrakes_engaged</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bEstopError</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bsafety_inputs_valid</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>SAFETY_MAIN.bSDCFeedback</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.nMasterDevStateCouplers</Name>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_FSM.nMasterDevStatePLC</Name>
-							<Type>UINT</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="1" ContextId="5" AreaNo="80">
-						<Name>LVBAT Inputs</Name>
-						<Var>
-							<Name>P_ParseBattery.rPack1</Name>
-							<Type GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}">ST_CanFrame8</Type>
-						</Var>
-						<Var>
-							<Name>P_ParseBattery.rPack2</Name>
-							<Type GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}">ST_CanFrame8</Type>
-						</Var>
-						<Var>
-							<Name>P_ParseBattery.rPack3</Name>
-							<Type GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}">ST_CanFrame8</Type>
-						</Var>
-						<Var>
-							<Name>P_ParseBattery.rInd1</Name>
-							<Type GUID="{C6483CBB-D82A-07C6-868C-9F8EC86A1D54}">ST_CanFrame8</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" ContextId="4" AreaNo="65">
-						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Outputs</Name>
-						<Var>
-							<Name>GVL_PT.CAN_OUTPUTS</Name>
-							<Comment><![CDATA[CAN INTERFACE]]></Comment>
-							<Type GUID="{BFE10F30-1DF2-6D0D-5ABC-60A51903B81F}" Namespace="IO">CANTXQUEUESTRUCT_E_32</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
-						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs</Name>
-						<Var>
-							<Name>GVL_PT.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="3" AreaNo="49">
@@ -22011,6 +22072,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 						<Name>Propulsion_Task Outputs</Name>
 						<Var>
+							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>PROP_MAIN_Delft.Ia_for_levi_left</Name>
 							<Type>LREAL</Type>
 						</Var>
@@ -22041,10 +22106,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>PROP_MAIN_Delft.currentangle_for_levi_right</Name>
 							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>PROP_MAIN_Delft.motor_on_for_levi</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>PROP_MAIN_Delft.Position_for_levi</Name>
@@ -42612,7 +42673,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="GVL_FLOW.bFlowSensor9" Index="#x6000" Sub="#x01">
+								<Entry Name="SAFETY_MAIN.bbrakes_engaged" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -62657,31 +62718,45 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<EtherCAT SlaveType="5" AdsServerAddress="915e857405010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x01000035">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
-							<SyncMan>001800002600000003000000000000000000001826010000</SyncMan>
-							<SyncMan>002427002200010004000000000000000000002422010000</SyncMan>
-							<Fmmu>0000000000000000000000020000000001000000000000000000000000000000</Fmmu>
+							<SyncMan>00186a002600010003000000000000000000001826010000</SyncMan>
+							<SyncMan>002471002200010004000000000000000000002422010000</SyncMan>
+							<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000002400010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010140200181402</BootStrapData>
 							<SuName>Term 10 (EL6751)</SuName>
 							<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>444353594e430000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000090d00300000000070100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<Pdo Name="Box 3 (CANopen Node)_IN" Index="#x1a00" Flags="#x0011" SyncMan="3">
-								<Entry Name="TxPDO_1" Index="#x6000" Sub="#x01" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+							<Pdo Name="Box 6 (CAN Interface)_IN" Index="#x1a00" Flags="#x0011" SyncMan="3">
+								<Entry Name="RxQueue" Index="#xfc10" Sub="#x01" Flags="#x00000100">
+									<Type GUID="{1ED92406-405E-2A7C-FD38-C7BF0026B8FD}" Namespace="IO">CANRXQUEUESTRUCT_N_10</Type>
 								</Entry>
-								<Entry Name="TxPDO_2" Index="#x6000" Sub="#x02" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-0020000000F0}">ARRAY [0..29] OF BYTE</Type>
 								</Entry>
-								<Entry Name="TxPDO_3" Index="#x6000" Sub="#x03" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-0020000000F0}">ARRAY [0..29] OF BYTE</Type>
 								</Entry>
-								<Entry Name="TxPDO_4" Index="#x6000" Sub="#x04" Flags="#x00000100">
-									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-002000000080}">ARRAY [0..15] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Box 6 (CAN Interface)_OUT" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="TxQueue" Index="#xfc11" Sub="#x01" Flags="#x00000100">
+									<Type GUID="{DF5CE5F4-8173-4C0F-0FA7-11F4C21AEB51}" Namespace="IO">CANTXQUEUESTRUCT_N_10</Type>
+								</Entry>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-0020000000F0}">ARRAY [0..29] OF BYTE</Type>
+								</Entry>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-0020000000F0}">ARRAY [0..29] OF BYTE</Type>
+								</Entry>
+								<Entry Flags="#x00000100">
+									<Type GUID="{18071995-0000-0000-0000-002000000080}">ARRAY [0..15] OF BYTE</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="LV_BAT_gateway" Index="#x1a80" Flags="#x0011" SyncMan="3">
-								<Entry Name="Box 3 (CANopen Node)_NodeState" Index="#xa000" Sub="#x01" Flags="#x00000100">
+								<Entry Name="Box 6 (CAN Interface)_NodeState" Index="#xa000" Sub="#x01" Flags="#x00000100">
 									<DefaultDataMask>1f1f</DefaultDataMask>
 									<Type>USINT</Type>
 								</Entry>
@@ -62700,7 +62775,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 								<Entry Name="LV_BAT_gateway_DiagFlag" Index="#xf100" Sub="#x02" Flags="#x00000100">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Box 3 (CANopen Node)_DiagFlag" Index="#xa000" Sub="#x02" Flags="#x00000100">
+								<Entry Name="Box 6 (CAN Interface)_DiagFlag" Index="#xa000" Sub="#x02" Flags="#x00000100">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry>
@@ -63259,11 +63334,15 @@ Slave-Mode:
 				<Image Id="8" AddrType="4" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Box Id="6" BoxType="5003">
-					<Name>Box 3 (CANopen Node)</Name>
-					<ImageId>41</ImageId>
+				<Box Id="6" BoxType="5051">
+					<Name>Box 6 (CAN Interface)</Name>
+					<ImageId>3</ImageId>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
+						<Var>
+							<Name>RxQueue</Name>
+							<Type GUID="{1ED92406-405E-2A7C-FD38-C7BF0026B8FD}" Namespace="IO">CANRXQUEUESTRUCT_N_10</Type>
+						</Var>
 						<Var BoxStateVariable="true">
 							<Name>NodeState</Name>
 							<Comment><![CDATA[Master- and Slave-Mode:
@@ -63291,81 +63370,27 @@ Slave-Mode:
  130 = Node is Stopped
 ]]></Comment>
 							<Type>USINT</Type>
-							<BitOffs>256</BitOffs>
+							<BitOffs>848</BitOffs>
 						</Var>
 						<Var BoxStateVariable="true">
 							<Name>DiagFlag</Name>
 							<Comment><![CDATA[0 = Diagnosis Data unchanged
 1 = Diagnosis Data changed, use ADS-Read to get the data]]></Comment>
 							<Type>BIT</Type>
-							<BitOffs>305</BitOffs>
+							<BitOffs>897</BitOffs>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>Outputs</Name>
+						<Var>
+							<Name>TxQueue</Name>
+							<Type GUID="{DF5CE5F4-8173-4C0F-0FA7-11F4C21AEB51}" Namespace="IO">CANTXQUEUESTRUCT_N_10</Type>
+						</Var>
 					</Vars>
-					<CanOpen NodeId="15" BaudSupport="511" DvFlag_GeneralCanNode="true" DvFlag_Active="true" CobIDEmcy="143" CobIDGuard="1807" GuardTime="100" LifeTime="3">
-						<TxPdo TX="true" CobId="399" TransType="255" Flags="3">
-							<Name>TxPDO 1</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>Byte Array</Name>
-									<Type GUID="{18071995-0000-0000-0000-000300000008}">ARRAY [0..7] OF BYTE</Type>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<TxPdo TX="true" CobId="655" TransType="255" Flags="3" PdoStartAddress="8">
-							<Name>TxPDO 2</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>Byte Array</Name>
-									<Type GUID="{18071995-0000-0000-0000-000300000008}">ARRAY [0..7] OF BYTE</Type>
-									<BitOffs>64</BitOffs>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<TxPdo TX="true" CobId="911" TransType="255" Flags="3" PdoStartAddress="16">
-							<Name>TxPDO 3</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>Byte Array</Name>
-									<Type GUID="{18071995-0000-0000-0000-000300000008}">ARRAY [0..7] OF BYTE</Type>
-									<BitOffs>128</BitOffs>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<TxPdo TX="true" CobId="1167" TransType="255" Flags="3" PdoStartAddress="24">
-							<Name>TxPDO 4</Name>
-							<ImageId>82</ImageId>
-							<Vars VarGrpType="1" InsertType="2">
-								<Name>Inputs</Name>
-								<Var>
-									<Name>Byte Array</Name>
-									<Type GUID="{18071995-0000-0000-0000-000300000008}">ARRAY [0..7] OF BYTE</Type>
-									<BitOffs>192</BitOffs>
-								</Var>
-							</Vars>
-						</TxPdo>
-						<RxPdo CobId="527" TransType="255" Flags="3">
-							<Name>RxPDO 1</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-							</Vars>
-						</RxPdo>
-						<RxPdo CobId="783" TransType="255" Flags="3">
-							<Name>RxPDO 2</Name>
-							<ImageId>42</ImageId>
-							<Vars VarGrpType="2" InsertType="2">
-								<Name>Outputs</Name>
-							</Vars>
-						</RxPdo>
+					<CanOpen>
+						<CanQueue TxQueue="10" RxQueue="10">
+							<RxFilter EndCobId="2047"/>
+						</CanQueue>
 					</CanOpen>
 				</Box>
 				<CanOpen>
@@ -63542,19 +63567,21 @@ Slave-Mode:
 		<MappingInfo Identifier="{00000000-2003-0850-0220-500810000403}" Id="#x020300d0"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0220-500860000403}" Id="#x020300e0"/>
 		<MappingInfo Identifier="{00000000-2003-0850-0220-5008A2000403}" Id="#x02030030"/>
-		<MappingInfo Identifier="{00000000-2004-0850-0720-5008E3000403}" Id="#x02030090"/>
+		<MappingInfo Identifier="{00000000-2004-0850-0720-5008E3000403}" Id="#x020300c0"/>
 		<MappingInfo Identifier="{00000000-2005-0850-0420-500870000403}" Id="#x020300a0"/>
-		<MappingInfo Identifier="{00000000-2006-0850-0520-500880000403}" Id="#x020300c0"/>
+		<MappingInfo Identifier="{00000000-2006-0850-0520-500880000403}" Id="#x02030130"/>
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500820000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{00000000-200A-0850-0020-500834000403}" Id="#x02030080"/>
 		<MappingInfo Identifier="{00000000-200B-0850-0120-500891000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{08502002-0020-0304-0020-500820000403}" Id="#x02030070" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00A0-0304-0020-5008A0000403}" Id="#x02030050" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502002-00B0-0304-0020-5008B0000403}" Id="#x020300b0" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{08502002-00E0-0304-0020-5008E0000403}" Id="#x02030120" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{08502003-2002-0850-0220-500808205008}" Id="#x02030100" Watchdog="42000000040000000400000004000000"/>
 		<MappingInfo Identifier="{08502004-00B0-0304-0020-5008B0000403}" Id="#x02030060" Watchdog="04000000850000000400000004000000"/>
+		<MappingInfo Identifier="{08502005-00B0-0304-0020-5008B0000403}" Id="#x02030110" Watchdog="00000000000000000000000000000000"/>
 		<MappingInfo Identifier="{0850200A-2003-0850-0020-500802205008}" Id="#x020300f0" Watchdog="10000000040000000400000004000000"/>
-		<MappingInfo Identifier="{030400E0-00E0-0304-E000-0403E0000403}" Id="#x02030120" Watchdog="04000000040000000400000004000000"/>
+		<MappingInfo Identifier="{030400E0-00E0-0304-E000-0403E0000403}" Id="#x02030090" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 1 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyInput">
 				<Link VarA="Term 36 (EK1200)^SafetyController^ConnectionInputs^TwinSafeGroup1.Term 73 (EL1904) - Module 1 (FSOES)_3 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
@@ -63571,13 +63598,13 @@ Slave-Mode:
 				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Outputs^GVL_PT.CAN_OUTPUTS" VarB="Outputs^TxQueue"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)">
-				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStatePLC" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.uSlaveCountMaster1" VarB="Inputs^SlaveCount"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FSM.nMasterDevStatePLC" VarB="Inputs^DevState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 36 (EK1200)^SafetyController">
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bEstopError" VarB="StandardInputs^TwinSafeGroup1.ErrorEstopOutPLC(OUT)_9"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bEstopOut" VarB="StandardInputs^TwinSafeGroup1.ESTOP(OUT)_7"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bSDCFeedback" VarB="StandardInputs^TwinSafeGroup1.SDCIN(OUT)_16"/>
-				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bbrakes_engaged" VarB="StandardInputs^TwinSafeGroup1.PLCBrakesEngaged(OUT)_14"/>
 				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bsafety_inputs_valid" VarB="StandardInputs^TwinSafeGroup1.VALIDTWINSAFE(OUT)_10"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyErrorAcknowledge" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.SafetyRunCommand" VarB="StandardOutputs^TwinSafeGroup1.Run_2"/>
@@ -63593,7 +63620,8 @@ Slave-Mode:
 				<Link VarA="PlcTask Outputs^SAFETY_MAIN.bbrakes_engage" VarB="Channel 3^SAFETY_MAIN.bbrakes_engage"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)">
-				<Link VarA="PlcTask Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_FSM.uSlaveCountMaster2" VarB="Inputs^SlaveCount"/>
+				<Link VarA="Thermal_Task Inputs^GVL_FSM.nMasterDevStateCouplers" VarB="Inputs^DevState"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Barcode scanner Back">
 				<Link VarA="Propulsion_Task Inputs^GVL_Prop.InputData1_Back" VarB="TxPDO^8 Byte In (1)"/>
@@ -63858,14 +63886,14 @@ Slave-Mode:
 				<Link VarA="Levi_Fast_Task_Vertical Outputs^GVL_LEVI.stOut_EL6021_VML^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal BL (EK1100)^Term 83 (EL1008)">
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor10" VarB="Channel 2^GVL_FLOW.bFlowSensor10"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor11" VarB="Channel 3^GVL_FLOW.bFlowSensor11"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor12" VarB="Channel 4^GVL_FLOW.bFlowSensor12"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor13" VarB="Channel 5^GVL_FLOW.bFlowSensor13"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor14" VarB="Channel 6^GVL_FLOW.bFlowSensor14"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor15" VarB="Channel 7^GVL_FLOW.bFlowSensor15"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor16" VarB="Channel 8^GVL_FLOW.bFlowSensor16"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor9" VarB="Channel 1^GVL_FLOW.bFlowSensor9"/>
+				<Link VarA="PlcTask Inputs^SAFETY_MAIN.bareBrakesEngaged" VarB="Channel 1^SAFETY_MAIN.bbrakes_engaged"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor10" VarB="Channel 2^GVL_FLOW.bFlowSensor10"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor11" VarB="Channel 3^GVL_FLOW.bFlowSensor11"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor12" VarB="Channel 4^GVL_FLOW.bFlowSensor12"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor13" VarB="Channel 5^GVL_FLOW.bFlowSensor13"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor14" VarB="Channel 6^GVL_FLOW.bFlowSensor14"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor15" VarB="Channel 7^GVL_FLOW.bFlowSensor15"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor16" VarB="Channel 8^GVL_FLOW.bFlowSensor16"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal BL (EK1100)^Thermal_LBL (EL3204-0200)">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbEMS_T.temp_rawLBL1" VarB="RTD Inputs Channel 1^Value"/>
@@ -64342,14 +64370,14 @@ Slave-Mode:
 				<Link VarA="Levi_Fast_Task_Horizontal Outputs^GVL_LEVI.stOut_EL6021_LMR^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal FR (EK1100)^Term 104 (EL1008)">
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor1" VarB="Channel 1^GVL_FLOW.bFlowSensor1"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor2" VarB="Channel 2^GVL_FLOW.bFlowSensor2"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor3" VarB="Channel 3^GVL_FLOW.bFlowSensor3"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor4" VarB="Channel 4^GVL_FLOW.bFlowSensor4"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor5" VarB="Channel 5^GVL_FLOW.bFlowSensor5"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor6" VarB="Channel 6^GVL_FLOW.bFlowSensor6"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor7" VarB="Channel 7^GVL_FLOW.bFlowSensor7"/>
-				<Link VarA="Thermal_Task Inputs^GVL_FLOW.bFlowSensor8" VarB="Channel 8^GVL_FLOW.bFlowSensor8"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor1" VarB="Channel 1^GVL_FLOW.bFlowSensor1"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor2" VarB="Channel 2^GVL_FLOW.bFlowSensor2"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor3" VarB="Channel 3^GVL_FLOW.bFlowSensor3"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor4" VarB="Channel 4^GVL_FLOW.bFlowSensor4"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor5" VarB="Channel 5^GVL_FLOW.bFlowSensor5"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor6" VarB="Channel 6^GVL_FLOW.bFlowSensor6"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor7" VarB="Channel 7^GVL_FLOW.bFlowSensor7"/>
+				<Link VarA="PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs^GVL_FLOW.bFlowSensor8" VarB="Channel 8^GVL_FLOW.bFlowSensor8"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Terminal FR (EK1100)^Thermal_LFR (EL3204-0200)">
 				<Link VarA="Thermal_Task Inputs^THERMAL_MAIN.fbEMS_T.temp_rawLFR1" VarB="RTD Inputs Channel 1^Value"/>
@@ -64565,11 +64593,9 @@ Slave-Mode:
 				<Link VarA="Propulsion_Task Inputs^GVL_PropCAN.CAN_INPUTS_Right" VarB="Inputs^RxQueue"/>
 				<Link VarA="Propulsion_Task Outputs^GVL_PropCAN.CAN_OUTPUTS_Right" VarB="Outputs^TxQueue"/>
 			</OwnerB>
-			<OwnerB Name="TIID^LV_BAT_gateway^Box 3 (CANopen Node)">
-				<Link VarA="LVBAT Inputs^P_ParseBattery.rInd1^data" VarB="TxPDO 4^Inputs^Byte Array"/>
-				<Link VarA="LVBAT Inputs^P_ParseBattery.rPack1^data" VarB="TxPDO 1^Inputs^Byte Array"/>
-				<Link VarA="LVBAT Inputs^P_ParseBattery.rPack2^data" VarB="TxPDO 2^Inputs^Byte Array"/>
-				<Link VarA="LVBAT Inputs^P_ParseBattery.rPack3^data" VarB="TxPDO 3^Inputs^Byte Array"/>
+			<OwnerB Name="TIID^LV_BAT_gateway^Box 6 (CAN Interface)">
+				<Link VarA="LVBAT Inputs^GVL_PT.CAN_INPUTS_LV" VarB="Inputs^RxQueue"/>
+				<Link VarA="LVBAT Outputs^GVL_PT.CAN_OUTPUTS_LV" VarB="Outputs^TxQueue"/>
 			</OwnerB>
 			<OwnerB Name="TIPC^FSM^FSM Instance">
 				<Link VarA="LEVI_TEST_TASK Inputs^LEVI_MAIN_TEST.Ia_for_levi_left" VarB="Propulsion_Task Outputs^PROP_MAIN_Delft.Ia_for_levi_left"/>

@@ -21,20 +21,21 @@ END_VAR
     <Implementation>
       <ST><![CDATA[timerToggle := FALSE;
 
-IF ((ipod_state <= E_PodState.STATE_IDLE OR ipod_state = E_PodState.STATE_MAINTENANCE) AND idrive_state <> 1 AND NOT bPropFault) THEN
+IF ((ipod_state <= E_PodState.STATE_IDLE OR ipod_state = E_PodState.STATE_MAINTENANCE) AND idrive_state <> 0 AND NOT bPropFault) THEN
 	timerToggle := TRUE;
-ELSIF ((ipod_state > E_PodState.STATE_IDLE AND ipod_state <> E_PodState.STATE_MAINTENANCE) AND idrive_state <> 2 AND NOT bPropFault) THEN
+ELSIF ((ipod_state > E_PodState.STATE_HV_ACTIVE AND ipod_state <> E_PodState.STATE_MAINTENANCE) AND idrive_state <> 1 AND NOT bPropFault) THEN
 	timerToggle := TRUE;
-ELSIF (ipod_state = E_PodState.STATE_MOVEMENT AND propFlag) AND idrive_state <> 3 AND NOT bPropFault THEN
+ELSIF (ipod_state = E_PodState.STATE_MOVEMENT AND propFlag) AND idrive_state <> 2 AND NOT bPropFault THEN
 	timerToggle := TRUE;
 END_IF
 IF NOT btimerReset THEN
 	
-	fbGracePeriodTimer(IN := timerToggle, PT := T#500MS, Q => btrig);
+	fbGracePeriodTimer(IN := timerToggle, PT := T#2S, Q => btrig);
 
 ELSE
 	
-	fbGracePeriodTimer(IN := FALSE, PT := T#500MS, Q => btrig);
+	fbGracePeriodTimer(IN := FALSE, PT := T#2S);
+	btrig := FALSE;
 	btimeOut := FALSE;
 	
 END_IF

@@ -169,6 +169,9 @@ VAR
 	//CAN Message throttler
 	CAN_send_timer : TON;
 	
+	//theoretical max speed grace timer
+	MaxSpeedTON : TON;
+	
 	nSendsPerSecondLeft: INT;
 	nSendCounterLeft : INT;
 	nLastSendCounterLeft : INT;
@@ -315,6 +318,7 @@ IF GVL_PROP.TargetVelocity > -2000 AND GVL_PROP.TargetVelocity < 2000 THEN
 ELSE 
 	TargetVelocity := 0;
 END_IF
+
 
 Iamp_Temp := GVL_PROP.Iamp_Temp;
 
@@ -564,8 +568,6 @@ CASE AutoPilotFlag OF
     	TargetVelocity := 0.0;
     	Direction := 1;
 END_CASE;
-			
-
 
 //
 // Safety logic
@@ -574,10 +576,6 @@ END_CASE;
 IF NOT propulsion_enable THEN
 	PropFlag := FALSE;
 END_IF
-
-//IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
-//	PropFlag := FALSE;
-//END_IF
 
 IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = TRUE) THEN
 	propulsion_active := TRUE;
@@ -591,6 +589,12 @@ ELSE
 	propulsion_fault := FALSE;
 END_IF
 
+MaxSpeedTON(IN := VelocityDelft < -1950 OR VelocityDelft > 1950, PT := T#60MS); // Theoretical max speed equals 25 m/s (25000 mm/s)
+
+IF MaxSpeedTON.Q THEN
+	TargetVelocity := 0;
+	AutoPilotFlag := 0;
+END_IF	
 
 //
 // CAN setup

@@ -24,7 +24,7 @@ VAR_GLOBAL
 //TWINSAFE + BRAKES 
 	bbrakes_arm_signalGlobal:				BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	bbrakes_clockGlobal:					BOOL := FALSE; //used for arming and dearming sequence
-	bareBrakesEngaged:						BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
+	bareBrakesEngagedGlobal:						BOOL := FALSE; //Normally Closed system -> TRUE when retracted False when engaged
 	bbrakes_engageGlobal:					BOOL; //output for the regular relay system , replaced the clk + arm signal
 	
 	bsafety_inputs_valid:					BOOL := TRUE; //done through twinsafe PLC-TWINSAFE Run mode verification
@@ -44,6 +44,12 @@ VAR_GLOBAL
 	benable_telemetryGlobal: 				BOOL; //may be deleted
 	
 //Ethercat + Comm Checks
+	uSlaveCountCheckMaster2:				UINT := 48;
+	uSlaveCountMaster2 AT %I*:				UINT;
+	
+	uSlaveCountCheckMaster1:				UINT := 8;
+	uSlaveCountMaster1 AT %I*:				UINT;
+
 	bcan_bus_ok: 					BOOL := TRUE; 
 	nMasterDevStateCouplers AT %I*: UINT; 
 	nMasterDevStatePLC AT %I*: 		UINT; 
@@ -68,11 +74,14 @@ VAR_GLOBAL
 	bPropStateResetGlobal: 							BOOL;
 	
 	
+	//hval flag to detect flickers
+	HVALDiscrepancyGlobal:								BOOL;
+	
 	//Critical Temperatures for Shutdown
 	rcritical_temp_prop: 	REAL := 100.0; //maximum allowable temperature for propulsion. STILL A GUESS!!!!!
 	rcritical_temp_HEMS: 	REAL := 40.0; //maximum allowable temperature for levitation HEMS
 	rcritical_temp_EMS:		REAL := 60.0; //maximum allowable temperature for levitation EMS
-	rcritical_temp_watercooling:	REAL;
+	rcritical_temp_watercooling:	REAL := 80.0;
 	//rcritical_temp_PT:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
 	
 	
@@ -80,7 +89,7 @@ VAR_GLOBAL
 	rcritical_temp_prop_coolDown: 	REAL := 95.0; //maximum allowable temperature for propulsion. STILL A GUESS!!!!!
 	rcritical_temp_HEMS_coolDown: 	REAL := 35.0; //maximum allowable temperature for levitation HEMS
 	rcritical_temp_EMS_coolDown:		REAL := 55.0; //maximum allowable temperature for levitation EMS
-	rcritical_temp_watercooling_coolDown:	REAL;
+	rcritical_temp_watercooling_coolDown:	REAL := 60;
 	rcritical_temp_PT_coolDown:		REAL; //maximum allowable temperature for powertrain. commented out for now because PT should do this themselves
 	
 	Max_velocity_left : LREAL;
