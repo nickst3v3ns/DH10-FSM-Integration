@@ -3,12 +3,9 @@
   <POU Name="FB_Main_FSM" Id="{db5af827-1362-457f-b641-eef356196825}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Main_FSM
 
-VAR_INPUT
-	currentCmd:					E_Command 	:= E_Command.CMD_NONE; 
-END_VAR
-
 VAR_IN_OUT
 	EmergencyReason:			E_EmergencyReason := E_EmergencyReason.ERR_NONE;
+	currentCmd:					E_Command 	:= E_Command.CMD_NONE;
 END_VAR
 
 VAR_OUTPUT
@@ -26,7 +23,7 @@ VAR
 	bIsDynamicalState 			:BOOL;
 	bIsLVState					:BOOL;
 	bSDCtrig 					:BOOL;
-	
+	bHVALemergency				:BOOL;
 	bBrakeTimerElapsed 			:BOOL;
 	//lvbat transition blocker
 	bSOCBlock : BOOL;
@@ -48,7 +45,7 @@ VAR
 	bPropParamSet 	:BOOL;
 	//PROP movement state soft stop buffer
 	fbPropDelay : TON;
-	bPropSoftStop : BOOL;
+	bPropSoftStopTimer : BOOL;
 	rSoftStopGain : REAL := 1;
 	
 	//Function blocks for arming and dearming brakes
@@ -59,7 +56,11 @@ VAR
 	isdrivereset	:BOOL;
 	
 	
-
+	//timer for unresponsive CMD_TO_HV_ACTIVE or discharge
+	fbHVOFFunresponsive : TON;
+	fbHVONunresponsive : TON;
+	tHVunresponsiveTime : TIME  := T#10S;
+	bStartHVunresponsiveTimer : BOOL := FALSE;
 	
 	//Emergency handler
 	fb_handle_emergency			:FB_Handle_Emergency;
@@ -76,7 +77,7 @@ VAR
 	
 	//brake timer
 	fbBrakeTimer : TON;
-	tBrakeTime : TIME := T#4H;
+	tBrakeTime : TIME := T#5M;
 	
 	fbHeartBeatFailReset:		TON;
 	
@@ -105,26 +106,37 @@ GVL_FSM.fbLink(bGsLinkAlive => GVL_FSM.bheartbeat_OK);
 
 bBasicChecksOk := BasicChecks();
 
+
+
 bCriticalFaultActive := CheckCritical(EmergencyReason := EmergencyReason);
 
 bSOCBlock := F_LVSOCBlocker(SOC := GVL_PT.LVBATDATAINDGlobal.SOC_pct, SOCLimit := 5);
 
-fbBrakeTimer(IN := TRUE, PT := tbrakeTime); 
+//timer for braking
+fbBrakeTimer(IN := currentState >= E_PodState.STATE_HV_ACTIVE AND currentState <> E_PodState.STATE_MAINTENANCE, PT := tbrakeTime); 
 
 //buffer timer for SDC closed to precharge request
 fbPrechargeBuffer(IN := bStartPrechargeBuffer, PT := T#1S);
 
+//timer for unresponsive CMD_TO_HV_ACTIVE
+fbHVONunresponsive(IN := charging_in_progress, PT := tHVunresponsiveTime);
+
+fbHVOFFunresponsive(IN := discharging_in_progress, PT := tHVunresponsiveTime);
+
 bIsDynamicalState := currentState > 3 AND currentState <> E_PodState.STATE_MAINTENANCE;
 
-bSDCtrig := currentState > E_PodState.STATE_HV_ACTIVE AND NOT GVL_FSM.bareBrakesEngagedGlobal;
+bSDCtrig := currentState > E_PodState.STATE_HV_ACTIVE AND NOT GVL_FSM.bareBrakesEngagedGlobal AND NOT discharging_in_progress AND currentState <> E_PodState.STATE_MAINTENANCE;
  
 bBrakeTimerElapsed := fbBrakeTimer.Q;
+
+bHVALemergency := FALSE;
 //Emergency Handling : outside FSM
 //Added BasicChecks fails + current state >= HV ON as emergency trigger and added basicchecks and criticalChecks as input for Handle Emergency Fnction block
-IF NOT bTESTSTATE AND ((NOT bbasicChecksOk AND currentState >= E_PodState.STATE_IDLE) OR currentCmd = E_Command.CMD_EMERGENCY OR (((bCriticalFaultActive OR NOT bBasicChecksOk) AND bIsDynamicalState)) OR bBrakeTimerElapsed) THEN
+IF NOT bTESTSTATE AND ((NOT bbasicChecksOk AND currentState >= E_PodState.STATE_IDLE) OR currentCmd = E_Command.CMD_EMERGENCY OR (((bCriticalFaultActive OR NOT bBasicChecksOk) AND bIsDynamicalState)) OR bBrakeTimerElapsed OR bSDCtrig OR bHVALemergency OR GVL_FSM.bMovementSoftStopGlobal) THEN
 	
 	currentState := E_PodState.STATE_EMERGENCY;
 	criticalFault := TRUE;
+	currentCmd := E_Command.CMD_NONE;
 //if statement adapetd for testing purposes	
 END_IF
 
@@ -136,21 +148,29 @@ CASE currentState OF
 	E_PodState.STATE_EMERGENCY:
 	
 		//State for which SDC is broken
-		GVL_FSM.b_AlivePLCGlobal := FALSE;
-		//GVL_FSM.b_AlivePLCGlobal := TRUE;
-		
+	
 		bStartPrechargeBuffer := FALSE;
 		charging_in_progress := FALSE;
+		discharging_in_progress := FALSE;
 
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
+		bCommandSet := FALSE;
+		bCommandSetDupe := FALSE;
+		
 		//tracker reset for the propulsion drive reset set to FALSE for reset after emergency
 		isDriveReset := FALSE;
 		
+		bPropParamset := FALSE;
+		
 		//the main emergency handler, its output busy defines whether a transition to MAINTENANCE is allowed
 		fb_handle_emergency(execute := criticalFault, busy => criticalFault);	
+		
+		GVL_PROP.PropFlag := 0;
+		GVL_PROP.AutoPilotFlag := 0;
+		GVL_PROP.TargetVelocity := 0;
 		
 
 		
@@ -211,7 +231,7 @@ CASE currentState OF
 	E_PodState.STATE_BOOT:  
 		
 		//State for which SDC is broken
-		//GVL_FSM.b_AlivePLCGlobal := FALSE;
+		GVL_FSM.b_AlivePLCGlobal := FALSE;
 		
 		//Disabling both levitation and propulsion
 		GVL_LEVI.levitation_enable := FALSE;
@@ -271,7 +291,7 @@ CASE currentState OF
 		//explicit command
 		//IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe AND NOT bSOCBlock THEN
 		IF currentCmd = E_Command.CMD_TO_HV_ACTIVE AND bBasicChecksOk AND NOT bCommandSetDupe THEN
-		
+			
 			bCommandSet := TRUE;
 			bStartPrechargeBuffer := TRUE;
 			
@@ -279,7 +299,12 @@ CASE currentState OF
 			
 			fbSAFEprime(bFeedbackEstopOut := GVL_FSM.bEstopOutGlobal, bFeedBackSDCIn := GVL_FSM.bSDCFeedbackGlobal, bRestartToggle => GVL_FSM.bEstopRestartGlobal, bSDCPrimed => bSDCprimed);
 			//to allow for some time for the PTC to see the closed SDC
-			
+			IF fbHVONunresponsive.Q THEN
+				charging_in_progress := FALSE;
+				currentCmd := E_Command.CMD_NONE;
+				bCommandSet := FALSE;
+				bStartPrechargeBuffer := FALSE;;
+			END_IF
 			
 			IF fbPrechargeBuffer.Q THEN
 				IF NOT charging_in_progress THEN
@@ -295,12 +320,15 @@ CASE currentState OF
 					
 					bCommandSet := FALSE;
 					bStartPrechargeBuffer := FALSE;
+					bStartHVunresponsiveTimer := FALSE;
 					
 				END_IF
 			END_IF
 		END_IF
 		
 		IF currentCmd = E_Command.CMD_TO_MAINTENANCE AND NOT bCommandSet THEN
+			
+			GVL_FSM.b_AlivePLCGlobal := TRUE;
 			
 			bCommandSetDupe := TRUE;
 			
@@ -309,9 +337,9 @@ CASE currentState OF
 			IF GVL_FSM.bareBrakesEngagedGlobal THEN
 				currentState := E_PodState.STATE_MAINTENANCE;
 				currentCmd := E_Command.CMD_NONE;
-				bCommandSetDupe := FALSE;
-				
+				bcommandSetDupe := FALSE;
 			END_IF
+			
 		END_IF
 		
 //HV_ACTIVE		
@@ -321,6 +349,15 @@ CASE currentState OF
 		
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
+		
+		IF discharging_in_progress AND currentCmd <> E_Command.CMD_TO_IDLE THEN
+			currentCmd := E_Command.CMD_NONE;
+		END_IF
+		
+		IF fbHVOFFunresponsive.Q THEN
+			currentState := E_PodState.STATE_EMERGENCY;
+			criticalFault := TRUE;
+		END_IF
 		
 				
 		IF currentCmd = E_Command.CMD_TO_DEMO AND NOT bCommandSetDupe THEN
@@ -342,14 +379,19 @@ CASE currentState OF
 		ELSIF currentCmd = E_Command.CMD_TO_IDLE AND NOT bCommandSet THEN
 			
 			bCommandSetDupe := TRUE;
-			fbdischarge();
+			IF NOT discharging_in_progress THEN
+				fbdischarge();
+				discharging_in_progress := TRUE;
+			END_IF
+			
 			
 			//doordat DC link levi intern wordt gemeten kan dit erg lang duren
-			IF GVL_PT.PTC_STATE = 0 AND GVL_LEVI.DC_LINK_SAFE AND GVL_Prop.DC_LINK_SAFE THEN
+			IF GVL_PT.PTC_STATE = 0 THEN
 				
 				currentState := E_PodState.STATE_IDLE;
 				currentCmd := E_Command.CMD_NONE;
 				bCommandSetDupe := FALSE;
+				discharging_in_progress := FALSE;
 				
 			END_IF
 		END_IF
@@ -364,6 +406,12 @@ CASE currentState OF
 		ELSIF GVL_LEVI.levitation_state = E_Levi_states.LEVI_INIT THEN
 			GVL_LEVI.Levi_command := E_Levi_states.LEVI_READY;
 		END_IF
+		
+		
+		//preve
+		IF discharging_in_progress AND currentCmd <> E_Command.CMD_TO_IDLE THEN
+			currentCmd := E_Command.CMD_NONE;
+		END_IF
 		//because braking pcb is broken and tests without automation - START
 		//GVL_LEVI.Levi_command := E_Levi_States.LEVI_READY;		
 		//GVL_LEVI.levitation_enable := FALSE;
@@ -374,6 +422,12 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := TRUE;
 		GVL_Prop.propulsion_enable := TRUE;
 		//because braking pcb is broken and tests without automation - END
+		
+		IF fbHVOFFunresponsive.Q THEN
+			currentState := E_podState.STATE_EMERGENCY;
+			criticalFault := TRUE;
+		END_IF
+		
 		IF currentCmd = E_Command.CMD_TO_IDLE THEN //can we go from demo to idle?
 			
 			bCommandSet := TRUE;
@@ -456,77 +510,31 @@ CASE currentState OF
 	
 		GVL_FSM.b_AlivePLCGlobal := TRUE;
 		
-		fbPropDelay(IN := TRUE, PT := T#5S);
+		//fbPropDelay(IN := TRUE, PT := T#5S);
 		
 		IF NOT bPropParamSet THEN
 			GVL_PROP.PropFlag 		:= 1;
 			GVL_PROP.TargetVelocity := 0;
+			GVL_PROP.AutoPilotFlag := 0;
 			bPropParamSet := TRUE;
+			
 		END_IF
 		
-		IF fbPropDelay.Q THEN
-			bPropSoftStop := TRUE;
-		END_IF
-	
-		IF bPropSoftStop THEN
-			IF GVL_prop.Position < 4.689 THEN
-				GVL_FSM.Max_velocity_left := (-15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225))*rSoftStopGain;
-				GVL_FSM.Max_velocity_right := -50;
-			ELSIF GVL_prop.Position > 15.811 THEN
-				GVL_FSM.Max_velocity_left := 50;
-				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225))*rSoftStopGain;
-			ELSE
-				GVL_FSM.Max_velocity_left := (-15 + SQRT(384615.38*(15.811-GVL_PROP.Position)+225))*rSoftStopGain;
-				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-4.689)+225))*rSoftStopGain;
-			END_IF
-			
-			
-			
-			(*
-			IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
-				GVL_LEVI.levitation_enable := FALSE;
+		IF currentCmd = E_Command.CMD_TO_LEVITATION THEN
+			GVL_PROP.PropFlag := 1;
+			GVL_PROP.AutoPilotFlag := 0;
+			GVL_PROP.TargetVelocity := 0;
+			IF GVL_PROP.Velocity < 75 THEN //velocity in mm/s. might need to increase due to track being crooked?
+				GVL_PROP.PropFlag := 0;
 				GVL_PROP.propulsion_enable := FALSE;
-				
-				currentState := E_PodState.STATE_BOOT; //this is temporary, as soon as the ground station and full functionality ia hit then we delete this and use proper emergency.
-			*)
-			IF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
-				//Too speedy in track
-				GVL_LEVI.levitation_enable := FALSE;
-				GVL_PROP.propulsion_enable := FALSE;
-				
-				fbFormat(sFormat := 'Speed is too high to the left : %.4f with a max of : %.4f', 
-											 arg1 := F_LREAL(GVL_PROP.velocity),
-											 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
-									sOut => errorMessageFSM);
-									
-				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge			 
-	
-			ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
-				//Too speedy in track
-				GVL_LEVI.levitation_enable := FALSE;
-				GVL_PROP.propulsion_enable := FALSE;
-				
-				fbFormat(sFormat := 'Speed is too high to the right : %.4f with a max of : %.4f', 
-											 arg1 := F_LREAL(GVL_PROP.velocity),
-											 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
-									sOut => errorMessageFSM);
-									
-				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
-			ELSE
-				IF currentCmd = E_Command.CMD_TO_LEVITATION THEN
-					GVL_PROP.PropFlag := 1;
-					GVL_PROP.AutoPilotFlag := 0;
-					GVL_PROP.TargetVelocity := 0;
-					IF GVL_PROP.Velocity < 75 THEN //velocity in mm/s. might need to increase due to track being crooked?
-						GVL_PROP.PropFlag := 0;
-						GVL_PROP.propulsion_enable := FALSE;
-						currentState := E_PodState.STATE_LEVITATION;
-						currentCmd := E_Command.CMD_NONE;
-					END_IF
-				END_IF
-				
+				bPropParamSet := FALSE;
+				currentState := E_PodState.STATE_LEVITATION;
+				currentCmd := E_Command.CMD_NONE;
 			END_IF
 		END_IF
+				
+
+	
 
 		
 
@@ -544,7 +552,7 @@ CASE currentState OF
 		GVL_LEVI.levitation_enable := FALSE;
 		GVL_Prop.propulsion_enable := FALSE;
 		
-		IF currentCmd = E_Command.CMD_TO_IDLE AND bBasicChecksOK AND NOT bCommandSet THEN
+		IF currentCmd = E_Command.CMD_TO_IDLE AND NOT bCommandSet THEN
 			
 				fbDearm(armSignal := GVL_FSM.bbrakes_arm_signalGlobal, clkSignal := GVL_FSM.bbrakes_clockGlobal);
 				
@@ -581,7 +589,6 @@ CASE currentState OF
 					
 					bCommandSet := FALSE;
 					bStartPrechargeBuffer := FALSE;
-					
 				END_IF
 			END_IF
 		END_IF

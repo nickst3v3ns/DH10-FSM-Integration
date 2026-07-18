@@ -42,7 +42,7 @@ VAR_IN_OUT
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
-	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
+	airgap_nominal_ems : Copy_of_Sensor_model_new.T_matrix3xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -308,6 +308,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 	auto_DOF_states := E_auto_DOF_States.DOF_INIT;
 	
 	//calculating the thrust and lift of the motor for feedforward
+	(*
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 							Ib 				:= Ib_for_levi_left, 
 							Ic 				:= Ic_for_levi_left,
@@ -320,7 +321,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 							position_tune 	:= GVL_LEVI.position_tune,
 							thrust 			=> motor_thrust_l,
 							lift 			=> motor_lift_l, );
-	
+	*)
 					
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 							Ib 				:= Ib_for_levi_right, 
@@ -399,6 +400,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 ELSE
 	//
 	//calculating the thrust and lift of the motor
+	(*
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 							Ib 				:= Ib_for_levi_left, 
 							Ic 				:= Ic_for_levi_left,
@@ -411,7 +413,7 @@ ELSE
 							position_tune 	:= GVL_LEVI.position_tune,
 							thrust 			=> motor_thrust_l,
 							lift 			=> motor_lift_l, );
-	
+	*)
 					
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 							Ib 				:= Ib_for_levi_right, 

@@ -39,7 +39,7 @@ VAR_IN_OUT
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
-	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
+	airgap_nominal_ems : Copy_of_Sensor_model_new.T_matrix3xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 

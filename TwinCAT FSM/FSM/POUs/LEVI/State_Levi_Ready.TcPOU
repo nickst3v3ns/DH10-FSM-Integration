@@ -13,7 +13,7 @@ VAR_INPUT
 	Run_z_liftoff_calc : BOOL;
 	z: LREAL;
 	
-	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
+	airgap_nominal_ems : Copy_of_Sensor_model_new.T_matrix3xdouble;
 END_VAR
 
 VAR_OUTPUT

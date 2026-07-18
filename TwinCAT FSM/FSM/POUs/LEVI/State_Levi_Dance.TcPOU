@@ -39,7 +39,7 @@ VAR_IN_OUT
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
-	airgap_nominal_ems : Sensor_model_new.T_matrix3xdouble;
+	airgap_nominal_ems : Copy_of_Sensor_model_new.T_matrix3xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -267,6 +267,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag < 2 AND (ABS(GVL_PROP.TargetVelocity) <> 0 OR (GVL_PROP.TargetVelocity = 0 AND ABS(Velocity) > 50))) THEN
 	
 	//calculating the thrust and lift of the motor for feedforward
+	(*
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 							Ib 				:= Ib_for_levi_left, 
 							Ic 				:= Ic_for_levi_left,
@@ -279,7 +280,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 							position_tune 	:= GVL_LEVI.position_tune,
 							thrust 			=> motor_thrust_l,
 							lift 			=> motor_lift_l, );
-	
+	*)
 					
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 							Ib 				:= Ib_for_levi_right, 
@@ -293,7 +294,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 							position_tune 	:= GVL_LEVI.position_tune,
 							thrust 			=> motor_thrust_r,
 							lift 			=> motor_lift_r);
-
+	
 	//Setting all the control parameters for when the motor is on
 	Control_lat_parameters.bfeed_fwd_motor_y_ON := GVL_LEVI.feed_fwd_motor_y_on;
 	Control_lat_parameters.bfeed_fwd_motor_yaw_ON := GVL_LEVI.feed_fwd_motor_yaw_on;
@@ -358,6 +359,7 @@ IF 	(GVL_PROP.PropFlag = 1 AND GVL_PROP.AutoPilotFlag = 2) OR
 ELSE
 	//
 	//calculating the thrust and lift of the motor
+	(*
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 							Ib 				:= Ib_for_levi_left, 
 							Ic 				:= Ic_for_levi_left,
@@ -370,7 +372,7 @@ ELSE
 							position_tune 	:= GVL_LEVI.position_tune,
 							thrust 			=> motor_thrust_l,
 							lift 			=> motor_lift_l, );
-	
+	*)
 					
 	Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 							Ib 				:= Ib_for_levi_right, 

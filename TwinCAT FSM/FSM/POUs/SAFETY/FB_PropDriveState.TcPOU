@@ -21,7 +21,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[timerToggle := FALSE;
 
-IF ((ipod_state <= E_PodState.STATE_IDLE OR ipod_state = E_PodState.STATE_MAINTENANCE) AND idrive_state <> 0 AND NOT bPropFault) THEN
+IF ((ipod_state <= E_PodState.STATE_HV_ACTIVE OR ipod_state = E_PodState.STATE_MAINTENANCE) AND idrive_state <> 0 AND NOT bPropFault) THEN
 	timerToggle := TRUE;
 ELSIF ((ipod_state > E_PodState.STATE_HV_ACTIVE AND ipod_state <> E_PodState.STATE_MAINTENANCE) AND idrive_state <> 1 AND NOT bPropFault) THEN
 	timerToggle := TRUE;

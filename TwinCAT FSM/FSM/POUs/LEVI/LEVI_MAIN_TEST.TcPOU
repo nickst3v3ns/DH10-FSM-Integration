@@ -57,12 +57,12 @@ VAR
 
 	//Simulink Sensor Setup
 	//Initialising the tccom object
-	FB_sensor_init: ST_FB_Sensor_model_new_TcCom_InitStruct :=  (noid:=16#01010020);
-	FB_sensor: FB_Sensor_model_new_TcCom_InitStruct(FB_sensor_init);
+	FB_sensor_init: ST_FB_Copy_of_Sensor_model_new_TcCom_InitStruct :=  (noid:=16#01010020);
+	FB_sensor: FB_Copy_of_Sensor_model_new_TcCom_InitStruct(FB_sensor_init);
 	
-	Sensor_model_input: ST_Sensor_model_new_U_T;
-	Sensor_model_output: ST_Sensor_model_new_Y_T;
-	Sensor_parameters: ST_P_Sensor_model_new_T := FB_sensor.stSensor_model_new_P;
+	Sensor_model_input: ST_Copy_of_Sensor_model_new_U_T;
+	Sensor_model_output: ST_Copy_of_Sensor_model_new_Y_T;
+	Sensor_parameters: ST_P_Copy_of_Sensor_model_new_T := FB_sensor.stCopy_of_Sensor_model_new_P;
 	
 	//outputs
 	z: LREAL; //m
@@ -79,10 +79,10 @@ VAR
 	y_filtered: LREAL; //m
 	yaw_filtered: LREAL;	//rad
 	
-	airgap_nominal_ems : Sensor_model_new.matrix3xdouble;
+	airgap_nominal_ems : Copy_of_Sensor_model_new.matrix3xdouble;
 	
-	Offset_airgaps_vertical : Sensor_model_new.T_matrix6xdouble;
-	Offset_airgaps_lateral : Sensor_model_new.T_matrix6xdouble;
+	Offset_airgaps_vertical : Copy_of_Sensor_model_new.T_matrix6xdouble;
+	Offset_airgaps_lateral : Copy_of_Sensor_model_new.T_matrix6xdouble;
 	
 //----------------------------------------------------------------------------------------------------
 
@@ -611,7 +611,7 @@ FOR i:=0 TO 11 DO
 	sensor_model_input.aNewsensorairgaps[i] := SensorDataArray[i];
 END_FOR
 
-FB_sensor(stSensor_model_new_u := Sensor_model_input, stSensor_model_new_y => Sensor_model_output);
+FB_sensor(stCopy_of_Sensor_model_new_u := Sensor_model_input, stCopy_of_Sensor_model_new_y => Sensor_model_output);
 
 z := Sensor_model_output.fz;
 roll := Sensor_model_output.froll;
@@ -1497,6 +1497,7 @@ CASE GVL_LEVI.Levi_Command OF
 				auto_DOF_states := E_auto_DOF_States.DOF_INIT;
 				
 				//calculating the thrust and lift of the motor for feedforward
+				(*
 				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 										Ib 				:= Ib_for_levi_left, 
 										Ic 				:= Ic_for_levi_left,
@@ -1509,7 +1510,7 @@ CASE GVL_LEVI.Levi_Command OF
 										position_tune 	:= position_tune,
 										thrust 			=> motor_thrust_l,
 										lift 			=> motor_lift_l, );
-				
+				*)
 								
 				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 										Ib 				:= Ib_for_levi_right, 
@@ -1523,7 +1524,7 @@ CASE GVL_LEVI.Levi_Command OF
 										position_tune 	:= position_tune,
 										thrust 			=> motor_thrust_r,
 										lift 			=> motor_lift_r);
- 
+ 				
 				//Setting all the control parameters for when the motor is on
 				Control_lat_parameters.bfeed_fwd_motor_y_ON := feed_fwd_motor_y_on;
 				Control_lat_parameters.bfeed_fwd_motor_yaw_ON := feed_fwd_motor_yaw_on;
@@ -1588,6 +1589,7 @@ CASE GVL_LEVI.Levi_Command OF
 			ELSE
 				//
 				//calculating the thrust and lift of the motor
+				(*
 				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_left, 
 										Ib 				:= Ib_for_levi_left, 
 										Ic 				:= Ic_for_levi_left,
@@ -1600,7 +1602,7 @@ CASE GVL_LEVI.Levi_Command OF
 										position_tune 	:= position_tune,
 										thrust 			=> motor_thrust_l,
 										lift 			=> motor_lift_l, );
-				
+				*)
 								
 				Calculate_Thrust_Lift(	Ia 				:= Ia_for_levi_right, 
 										Ib 				:= Ib_for_levi_right, 
@@ -2527,7 +2529,8 @@ GVL_LEVI.normal_shutdown := normal_shutdown;
 //	motor_airgap_right := motor_airgap_right,
 //	CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
 //	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
-]]></ST>
+
+Control_word[16] := 0;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

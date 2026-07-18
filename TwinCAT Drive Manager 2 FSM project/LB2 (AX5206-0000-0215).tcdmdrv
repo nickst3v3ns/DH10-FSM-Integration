@@ -2547,7 +2547,7 @@
               <IDN>32860</IDN>
               <Elements>64</Elements>
               <Attribute>0</Attribute>
-              <Data>c8320000</Data>
+              <Data>28230000</Data>
             </InitCmd>
             <InitCmd>
               <Transition>PS</Transition>
@@ -2888,7 +2888,7 @@
               <IDN>32860</IDN>
               <Elements>64</Elements>
               <Attribute>0</Attribute>
-              <Data>c8320000</Data>
+              <Data>28230000</Data>
             </InitCmd>
             <InitCmd>
               <Transition>PS</Transition>

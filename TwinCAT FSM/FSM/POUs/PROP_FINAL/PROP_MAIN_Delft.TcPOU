@@ -341,12 +341,12 @@ InitialIntegralValueIq := GVL_PROP.InitialIntegralGainIq;
 PositionOffset := GVL_PROP.PositionOffset;
 CANDelay := GVL_PROP.CANDelay;
 
-ETML_ON := GVL_PROP.ETML_ON;
-ETML_gain_Left := GVL_PROP.ETML_gain_Left;
-ETML_gain_Right := GVL_PROP.ETML_gain_Right;
-ETML_power_constant := GVL_PROP.ETML_power_constant;
+//ETML_ON := GVL_PROP.ETML_ON;
+//ETML_gain_Left := GVL_PROP.ETML_gain_Left;
+//ETML_gain_Right := GVL_PROP.ETML_gain_Right;
+//ETML_power_constant := GVL_PROP.ETML_power_constant;
 
-CurrentAngle_Left := GVL_PROP.CurrentAngle_Left;
+//CurrentAngle_Left := GVL_PROP.CurrentAngle_Left;
 CurrentAngle_Right := GVL_PROP.CurrentAngle_Right;
 
 // Main FSM
@@ -472,11 +472,12 @@ CASE barcodeState OF
 		//ties wat doe je hier???????????
 		// Filter to discard weird position readings 
 		Center_OFFSET := (positionDelft_Back - positionDelft_Front) / 2;
-		positionDelftDifference := ABS(((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2 - positionDelft);
-		IF positionDelftDifference < ABS(3*VelocityDelft*6) OR positionDelft = 0 // Multiply by PropulsionTask cycle time
-			THEN positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
-		END_IF
+		//positionDelftDifference := ABS(((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2 - positionDelft);
+		//IF positionDelftDifference < ABS(3*VelocityDelft*6) OR positionDelft = 0 // Multiply by PropulsionTask cycle time
+			//THEN positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
+		//END_IF
 		
+		positionDelft := ((positionDelft_Front+Center_OFFSET) + (positionDelft_Back-Center_OFFSET)) / 2;
 		
 		//thomas' addition
 		fbCenterPos(rPositionFront := PositionDelft_Front, rPositionBack := PositionDelft_Back, rPosition => rPosCenteredThomas, FrontValid => bFrontValid, BackValid => bBackValid);
@@ -505,36 +506,36 @@ END_CASE
 //ETML setup
 //
 
-ETML_parameters.fETML_gain_left := ETML_gain_Left;
-ETML_parameters.fETML_gain_right := ETML_gain_Right;
-ETML_parameters.fETML_power_constant := ETML_power_constant;
-ETML_parameters.benable_ETML_main_notch_1 := GVL_PROP.enable_ETML_main_notch_1;
-ETML_parameters.benable_ETML_main_notch_2 := GVL_PROP.enable_ETML_main_notch_2;
-ETML_parameters.benable_ETML_main_notch_3 := GVL_PROP.enable_ETML_main_notch_3;
-ETML_parameters.benable_ETML_main_notch_4 := GVL_PROP.enable_ETML_main_notch_4;
-ETML_parameters.ff_ETML_notch_main_1 := GVL_PROP.f_ETML_notch_main_1;
-ETML_parameters.ff_ETML_notch_main_2 := GVL_PROP.f_ETML_notch_main_2;
-ETML_parameters.ff_ETML_notch_main_3 := GVL_PROP.f_ETML_notch_main_3;
-ETML_parameters.ff_ETML_notch_main_4 := GVL_PROP.f_ETML_notch_main_4;
+//ETML_parameters.fETML_gain_left := ETML_gain_Left;
+//ETML_parameters.fETML_gain_right := ETML_gain_Right;
+//ETML_parameters.fETML_power_constant := ETML_power_constant;
+//ETML_parameters.benable_ETML_main_notch_1 := GVL_PROP.enable_ETML_main_notch_1;
+//ETML_parameters.benable_ETML_main_notch_2 := GVL_PROP.enable_ETML_main_notch_2;
+//ETML_parameters.benable_ETML_main_notch_3 := GVL_PROP.enable_ETML_main_notch_3;
+//ETML_parameters.benable_ETML_main_notch_4 := GVL_PROP.enable_ETML_main_notch_4;
+//ETML_parameters.ff_ETML_notch_main_1 := GVL_PROP.f_ETML_notch_main_1;
+//ETML_parameters.ff_ETML_notch_main_2 := GVL_PROP.f_ETML_notch_main_2;
+//ETML_parameters.ff_ETML_notch_main_3 := GVL_PROP.f_ETML_notch_main_3;
+//ETML_parameters.ff_ETML_notch_main_4 := GVL_PROP.f_ETML_notch_main_4;
 
-FB_ETML.stETML_DH10_P := ETML_parameters;
+//FB_ETML.stETML_DH10_P := ETML_parameters;
 
-ETML_inputs.fOffsetLeft := Offset_Left * 1000; // Convert from m to mm
-ETML_inputs.fOffsetRight := Offset_Right * 1000; // Convert from m to mm
+//ETML_inputs.fOffsetLeft := Offset_Left * 1000; // Convert from m to mm
+//ETML_inputs.fOffsetRight := Offset_Right * 1000; // Convert from m to mm
 
-FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
+//FB_ETML(stETML_DH10_U := ETML_inputs, stETML_DH10_Y => ETML_outputs);
 
-IF ETML_ON THEN
-	CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
-	CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
-	CurrentAngleReset := FALSE;
-ELSE
-	IF NOT CurrentAngleReset THEN
-		CurrentAngle_Left := 45;
-		CurrentAngle_Right := 45;
-		CurrentAngleReset := TRUE;
-	END_IF
-END_IF
+//IF ETML_ON THEN
+//	CurrentAngle_Left := ETML_outputs.fCurrentAngleLeft;
+//	CurrentAngle_Right := ETML_outputs.fCurrentAngleRight;
+//	CurrentAngleReset := FALSE;
+//ELSE
+//	IF NOT CurrentAngleReset THEN
+//		CurrentAngle_Left := 45;
+//		CurrentAngle_Right := 45;
+//		CurrentAngleReset := TRUE;
+//	END_IF
+//END_IF
 
 
 
@@ -577,13 +578,25 @@ IF NOT propulsion_enable THEN
 	PropFlag := FALSE;
 END_IF
 
-IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = TRUE) THEN
+//IF (PropState_Left = 2) AND (PropState_Right = 2) AND (PropFlag = TRUE) THEN
+//	propulsion_active := TRUE;
+//ELSE
+//	propulsion_active := FALSE;
+//END_IF
+
+//IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
+//	propulsion_fault := TRUE;
+//ELSE
+//	propulsion_fault := FALSE;
+//END_IF
+
+IF (PropState_Right = 2) AND (PropFlag = TRUE) THEN
 	propulsion_active := TRUE;
 ELSE
 	propulsion_active := FALSE;
 END_IF
 
-IF (PropState_Left = 3) OR (FAULT_Left <> 0) OR (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
+IF (PropState_Right = 3) OR (FAULT_Right <> 0) THEN
 	propulsion_fault := TRUE;
 ELSE
 	propulsion_fault := FALSE;
@@ -696,7 +709,7 @@ IF GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter = GVL_PropCAN.CAN_INPUTS_Right.TxCoun
 	GVL_PropCAN.CAN_OUTPUTS_Right.TxCounter := GVL_PropCAN.CAN_INPUTS_Right.TxCounter + 1;
 END_IF
 		
-
+(*
 // Sending messages to left driver	
 IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounter THEN	
 	GVL_PropCAN.CAN_OUTPUTS_Left.NoOfTxMessages := 0;
@@ -790,6 +803,8 @@ IF GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter = GVL_PropCAN.CAN_INPUTS_Left.TxCounte
 	GVL_PropCAN.CAN_OUTPUTS_Left.TxCounter := GVL_PropCAN.CAN_INPUTS_Left.TxCounter + 1;
 END_IF
 
+*)
+
 // Receiving messages from right driver
 Receive_CAN_dqCurrent_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right, 
 	Outputs_Right := GVL_PropCAN.CAN_OUTPUTS_Right);
@@ -853,6 +868,7 @@ Receive_CAN_Power_Right(Inputs_Right := GVL_PropCAN.CAN_INPUTS_Right,
 PowerConsumption := Receive_CAN_Power_Right.Power_Right;
 JouleperMeter := Receive_CAN_Power_Right.JpM_Right;
 
+(*
 // Receiving messages from left driver
 Receive_CAN_dqCurrent_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left, 
 	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
@@ -904,7 +920,7 @@ Receive_CAN_VelocityIntegral_Left(Inputs_Left := GVL_PropCAN.CAN_INPUTS_Left,
 	Outputs_Left := GVL_PropCAN.CAN_OUTPUTS_Left);
 
 VelocityIntegral_Left := Receive_CAN_VelocityIntegral_Left.VelocityIntegral_Left;
-
+*)
 
 //
 //Calculate distance traveled

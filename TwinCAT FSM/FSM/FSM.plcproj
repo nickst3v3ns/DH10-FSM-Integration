@@ -594,6 +594,10 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Copy_of_Sensor_model_new">
+      <DefaultResolution>Copy_of_Sensor_model_new, * (TE140x Module Vendor)</DefaultResolution>
+      <Namespace>Copy_of_Sensor_model_new</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Descent_model">
       <DefaultResolution>Descent_model, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>Descent_model</Namespace>
@@ -609,10 +613,6 @@
     <PlaceholderReference Include="Liftoff_model">
       <DefaultResolution>Liftoff_model, * (TE140x Module Vendor)</DefaultResolution>
       <Namespace>Liftoff_model</Namespace>
-    </PlaceholderReference>
-    <PlaceholderReference Include="Sensor_model_new">
-      <DefaultResolution>Sensor_model_new, * (TE140x Module Vendor)</DefaultResolution>
-      <Namespace>Sensor_model_new</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Drive">
       <DefaultResolution>Tc2_Drive, * (Beckhoff Automation GmbH)</DefaultResolution>

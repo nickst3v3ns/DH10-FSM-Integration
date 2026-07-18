@@ -43,6 +43,8 @@ IF TXtimer <> T#0MS THEN
 END_IF
 
 
+
+
 RXtrig(CLK := watchdogRX.Q);
 TXtrig(CLK := watchdogTX.Q);
 

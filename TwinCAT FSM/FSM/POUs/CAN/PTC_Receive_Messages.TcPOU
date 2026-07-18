@@ -66,7 +66,7 @@ GVL_PT.uPTCErrorGlobal := uPTCError;]]></ST>
 			converter(code := SHL(TO_UINT(Data[6]), 8) OR TO_UINT(Data[7]), T_cel => GVL_PT.MIN_TEMP);
 		E_PTC_RX_ID.BMS_Log_B:
 			GVL_PT.TOTAL_VOLTAGE := TO_UINT((SHL(TO_UINT(Data[0]), 8) OR TO_UINT(Data[1]))*1.28);
-			GVL_PT.PACK_CURRENT := SHL(TO_INT(Data[2]), 8) OR TO_INT(Data[3]);
+			GVL_PT.PACK_CURRENT := SHL(TO_INT(data[2]), 8) OR TO_INT(data[3]);
 			GVL_PT.DC_LINK_VOLTAGE := SHL(TO_DWORD(Data[4]), 24) OR 
 							SHL(TO_DWORD(Data[5]), 16) OR 
 							SHL(TO_DWORD(Data[6]), 8) OR 

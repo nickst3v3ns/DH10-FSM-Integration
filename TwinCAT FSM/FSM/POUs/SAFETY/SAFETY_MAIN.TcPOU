@@ -6,6 +6,7 @@ VAR
 	fDCLINKTreshold:				REAL := 40.0;
 
 	SafetyResetButton AT %I*:			BOOL := FALSE;
+	btest : BOOL;
 	
 	bAlivePLC AT %Q*:					BOOL := TRUE;
 	bArmSignal AT %Q*: 					BOOL := FALSE;
@@ -26,6 +27,7 @@ VAR
 	
 	//prop speed overrun 
 	TON_speedoverrun : TON;
+	trig : R_TRIG;
 
 	//OUTPUTS
 	SafetyRunCommand AT %Q*:		BOOL := TRUE;
@@ -72,6 +74,26 @@ VAR
 	bpropStateTimeoutRight : BOOL;
 	
 	HVALDiscrepancy : BOOL;
+	
+	//stop ranges
+	fbFormat		:FB_FormatString;
+	
+	rLowerBoundSoftStopVerySlow:			REAL := 4.4;
+	rUpperBoundSoftStopVerySlow:			REAL := 16;
+	
+	rLowerBoundSoftStopSlow:				REAL := 6;
+	rUpperBoundSoftStopSlow:				REAL := 14.5;
+	
+	speedLimitVerySlow:						REAL := 50;
+	speedLimitSlow:							REAL := 300;
+	speedLimit:								REAL := 1000;
+	
+	UpperBoundPropOutputCurrent:			REAL := 200;
+	errorMessageFSM : STRING := 'NONE';
+	sOut: INT;
+	
+	rLowerBoundSoftStop : REAL := 5;
+	rUpperBoundSoftStop : REAL := 15;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -83,7 +105,6 @@ bArmSignal := GVL_FSM.bbrakes_arm_signalGlobal;
 bCLK := GVL_FSM.bbrakes_clockGlobal;
 bAlivePLC := GVL_FSM.b_AlivePLCGlobal;
 bJorianSpecial := GVL_FSM.bJorianSpecialGlobal;
-bareBrakesEngaged := GVL_FSM.bareBrakesEngagedGlobal;
 
 
 //TwinSAFE Estop Logic
@@ -136,7 +157,7 @@ IF NOT bPLCtoggleStop THEN
 END_IF
 
 //Prop State Watchdog
-fbpropMonitorLeft(idrive_state := GVL_PROP.PropState_Left, ipod_state := GVL_FSM.E_PodStateGlobal, bpropFault := (GVL_PROP.FAULT_Left <> 0), btimerReset := bpropStateTimerReset, btimeOut => bPropStateTimeOutLeft);
+//fbpropMonitorLeft(idrive_state := GVL_PROP.PropState_Left, ipod_state := GVL_FSM.E_PodStateGlobal, bpropFault := (GVL_PROP.FAULT_Left <> 0), btimerReset := bpropStateTimerReset, btimeOut => bPropStateTimeOutLeft);
 fbpropMonitorRight(idrive_state := GVL_PROP.PropState_Right, ipod_state := GVL_FSM.E_PodStateGlobal, bpropFault := (GVL_PROP.FAULT_Right <> 0), btimerReset := bpropStateTimerReset, btimeOut => bPropStateTimeOutRight);
 
 IF bpropStateTimerReset THEN
@@ -144,11 +165,16 @@ IF bpropStateTimerReset THEN
 END_IF
 
 //CAN watchdogs
-IF GVL_FSM.E_PodStateGlobal > 3 AND GVL_FSM.E_PodStateGlobal <> E_PodState.STATE_MAINTENANCE THEN
-fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
-fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
-fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#100MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+IF GVL_FSM.E_PodStateGlobal > E_PodState.STATE_HV_ACTIVE AND GVL_FSM.E_PodStateGlobal <> E_PodState.STATE_MAINTENANCE THEN
+fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogCANReset, TXtimer := T#2S, RXtimer := T#2S, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
+//fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogCANReset, TXtimer := T#100MS, RXtimer := T#200MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
+fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#2S, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
+END_IF
 
+IF watchdogCANReset THEN
+//fbCANwatchPropLeft(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Left, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropLeft, TXwatchdog => TXwatchdogPropLeft);
+fbCANwatchPropRight(CAN_Inputs := GVL_PROPCAN.CAN_INPUTS_Right, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPropRight, TXwatchdog => TXwatchdogPropRight);
+fbCANwatchPTHV(CAN_Inputs := GVL_PT.CAN_INPUTS, watchdogReset := watchdogCANReset, TXtimer := T#0MS, RXtimer := T#0MS, RXwatchdog => RXwatchdogPTHV, TXwatchdog => TXwatchdogPTHV);
 END_IF
 
 IF watchdogCANReset THEN
@@ -160,9 +186,60 @@ IF GVL_FSM.E_PodStateGlobal > E_PodState.STATE_IDLE AND GVL_FSM.E_PodStateGlobal
 	HVALDiscrepancy := TRUE;
 END_IF
 
-
 //propulsion speed check backwards EHW
-TON_speedoverrun(IN := GVL_PROP.Velocity < -2000, PT := T#120MS, Q => GVL_FSM.bMovementSoftStopGlobal);
+TON_speedoverrun(IN := GVL_PROP.Velocity < -2000 OR GVL_PROP.Velocity > 2000, PT := T#120MS);
+
+trig(CLK := TON_speedoverrun.Q, Q => GVL_FSM.bMovementSoftStopGlobal);
+
+IF (GVL_FSM.E_PodStateGlobal >= E_PodState.STATE_IDLE AND GVL_FSM.E_PodStateGlobal <> E_PodState.STATE_MAINTENANCE) OR GVL_FSM.E_PodStateGlobal = E_PodState.STATE_EMERGENCY THEN
+	
+			IF GVL_prop.Position < 6.5 THEN
+				GVL_FSM.Max_velocity_left := (-15 + SQRT(384615.38*(13.5-GVL_PROP.Position)+225));
+				GVL_FSM.Max_velocity_right := -50;
+			ELSIF GVL_prop.Position > 13.5 THEN
+				GVL_FSM.Max_velocity_left := 50;
+				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-6.5)+225));
+			ELSE
+				GVL_FSM.Max_velocity_left := (-15 + SQRT(384615.38*(13.5-GVL_PROP.Position)+225));
+				GVL_FSM.Max_velocity_right := -1*(-15 + SQRT(384615.38*(GVL_PROP.Position-6.5)+225));
+			END_IF
+			
+			
+			IF GVL_PROP.position < rLowerBoundSoftStop OR GVL_PROP.position > rUpperBoundSoftStop THEN
+				
+				GVL_FSM.bMovementSoftStopGlobal := TRUE;
+			END_IF
+			
+			IF GVL_PROP.Velocity > GVL_FSM.Max_velocity_left THEN
+				//Too speedy in track
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Speed is too high to the left : %.4f with a max of : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.velocity),
+											 arg2 := F_LREAL(GVL_FSM.Max_velocity_left),
+									sOut => errorMessageFSM);
+									
+				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge			 
+	
+			ELSIF GVL_PROP.Velocity < GVL_FSM.Max_velocity_right THEN
+				//Too speedy in track
+				GVL_LEVI.levitation_enable := FALSE;
+				GVL_PROP.propulsion_enable := FALSE;
+				
+				fbFormat(sFormat := 'Speed is too high to the right : %.4f with a max of : %.4f', 
+											 arg1 := F_LREAL(GVL_PROP.velocity),
+											 arg2 := F_LREAL(GVL_FSM.Max_velocity_right),
+									sOut => errorMessageFSM);
+									
+				GVL_FSM.bMovementSoftStopGlobal := TRUE; //setting softstop flag to true, gets picked up by checkritical to activate handle emergency routinge
+	END_IF
+END_IF
+
+
+
+
+
 
 //push to GVL
 

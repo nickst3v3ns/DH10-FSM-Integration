@@ -28,13 +28,13 @@ END_VAR
 
 VAR
 	wdGsLink : TON;
-	wdGsLinkTimeout : TIME := T#100MS;
+	wdGsLinkTimeout : TIME := T#50MS;
 
 	nUnknownMsgIds : UDINT;
 	nHeartbeatsRx : UDINT;
 	nLastMsgIdRx : UINT;	
 
-	txBatch : ARRAY[0..2047] OF BYTE;
+	txBatch : ARRAY[0..8191] OF BYTE;
 	txBatchLen : UDINT;
 	dp1 : ST_DatapointFrame;
     fbConnect       : Tc2_TcpIp.FB_ClientServerConnection;
@@ -70,7 +70,7 @@ CASE eState OF
         END_IF
 
     E_LinkState.eConnecting:
-        fbConnect(bEnable := TRUE, tReconnect := T#30S);
+        fbConnect(bEnable := TRUE, tReconnect := T#0S);
         IF fbConnect.bError THEN
             eState := E_LinkState.eReconnectWait;
             reconnectTimer(IN := FALSE);
@@ -294,7 +294,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[MEMCPY(ADR(DecodeF64), ADR(bits), 2);]]></ST>
+        <ST><![CDATA[MEMCPY(ADR(DecodeI16), ADR(bits), 2);]]></ST>
       </Implementation>
     </Method>
     <Method Name="DecodeI32" Id="{f0fffbfa-15fa-400d-bb74-de1cc2e5c43b}">
