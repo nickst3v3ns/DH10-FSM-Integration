@@ -110,7 +110,7 @@ VAR_IN_OUT
 //	Control parameters
 
 //----------------------------------------------------------------------------------------------------
-	
+	(*
 	//Vertical control setup
 	FB_control_vert_init: ST_FB_vertical_levitation_control_new_TcCom_InitStruct := (noid:=16#01010030);
 	FB_control_vert: FB_vertical_levitation_control_new_TcCom_InitStruct(FB_control_vert_init);
@@ -126,7 +126,7 @@ VAR_IN_OUT
 	Control_lat_inputs: ST_lateral_levitation_control_new_U_T;
 	Control_lat_outputs: ST_lateral_levitation_control_new_Y_T;
 	Control_lat_parameters: ST_P_lateral_levitation_control_new_T;
-	
+	*)
 	auto_DOF_states : E_auto_DOF_states;
 
 	z_liftoff : LREAL; //m

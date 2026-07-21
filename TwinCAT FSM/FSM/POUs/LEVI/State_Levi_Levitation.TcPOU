@@ -119,7 +119,7 @@ VAR_IN_OUT
 //	Control parameters
 
 //----------------------------------------------------------------------------------------------------
-	
+	(*
 	//Liftoff model
 	FB_control_liftoff_init: ST_FB_Liftoff_model_TcCom_InitStruct := (noid:=16#01010050);
 	FB_control_liftoff: FB_Liftoff_model_TcCom_InitStruct(FB_control_liftoff_init);
@@ -151,7 +151,7 @@ VAR_IN_OUT
 	Control_lat_inputs: ST_lateral_levitation_control_new_U_T;
 	Control_lat_outputs: ST_lateral_levitation_control_new_Y_T;
 	Control_lat_parameters: ST_P_lateral_levitation_control_new_T;
-
+	*)
 	z_liftoff : LREAL; //m
 	
 	z_target : LREAL := -0.0165; //m

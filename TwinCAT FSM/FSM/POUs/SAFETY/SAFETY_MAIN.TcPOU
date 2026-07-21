@@ -92,8 +92,8 @@ VAR
 	errorMessageFSM : STRING := 'NONE';
 	sOut: INT;
 	
-	rLowerBoundSoftStop : REAL := 5;
-	rUpperBoundSoftStop : REAL := 15;
+	rLowerBoundSoftStop : REAL := 4;
+	rUpperBoundSoftStop : REAL := 16;
 END_VAR
 ]]></Declaration>
     <Implementation>

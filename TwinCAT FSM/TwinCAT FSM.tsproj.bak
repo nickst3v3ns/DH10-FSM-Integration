@@ -21526,7 +21526,7 @@ Initialising drive references for resetting drive errors]]></Comment>
 		</System>
 		<Plc>
 			<Project GUID="{C3F14C60-0CA3-4582-8E52-6407BB56A56A}" Name="FSM" PrjFilePath="FSM\FSM.plcproj" TmcFilePath="FSM\FSM.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{D855ECC0-0C37-F116-2E0D-0F6279FDC3AA}" TmcPath="FSM\FSM.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B9C92303-856F-36D7-607F-E6CBEF3B0506}" TmcPath="FSM\FSM.tmc">
 					<Name>FSM Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" ContextId="8" AreaNo="129">
@@ -21962,10 +21962,6 @@ Initialising drive references for resetting drive errors]]></Comment>
 					<Vars VarGrpType="1" ContextId="4" AreaNo="64">
 						<Name>PlcTask_1ms_PTC_CAN_RX_FastFlow_ Inputs</Name>
 						<Var>
-							<Name>GVL_PT.CAN_INPUTS</Name>
-							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
-						</Var>
-						<Var>
 							<Name>GVL_FLOW.bFlowSensor1</Name>
 							<Comment><![CDATA[ Hardware Input (Link this to EL1008 Channel 1)]]></Comment>
 							<Type>BOOL</Type>
@@ -22029,6 +22025,10 @@ Initialising drive references for resetting drive errors]]></Comment>
 						<Var>
 							<Name>GVL_FLOW.bFlowSensor16</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_PT.CAN_INPUTS</Name>
+							<Type GUID="{F774303F-2E28-FFEB-163B-E51E41170679}" Namespace="IO">CANRXQUEUESTRUCT_E_32</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="3" AreaNo="49">

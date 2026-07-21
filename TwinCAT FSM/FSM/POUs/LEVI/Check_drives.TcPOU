@@ -88,7 +88,7 @@ IF State = E_Levi_States.LEVI_PULLUP OR State = E_Levi_States.LEVI_DROPDOWN OR S
 		END_IF
 		
 		//Shut off if we get a bunch of disconnection errors
-		IF drive_feedback_timeouts[2*i] > 1000 AND NOT(i = 8) THEN
+		IF drive_feedback_timeouts[2*i] > 1000 THEN
 			Check_drives := TRUE;
 			Drive_current_error[i] := TRUE;
 		END_IF

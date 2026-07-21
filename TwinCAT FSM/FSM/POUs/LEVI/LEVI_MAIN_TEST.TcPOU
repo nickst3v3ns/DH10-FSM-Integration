@@ -2528,9 +2528,7 @@ GVL_LEVI.normal_shutdown := normal_shutdown;
 //	motor_airgap_left := motor_airgap_left,
 //	motor_airgap_right := motor_airgap_right,
 //	CAN_OUTPUTS_Right := GVL_PropCAN.CAN_OUTPUTS_Right, 
-//	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);
-
-Control_word[16] := 0;]]></ST>
+//	CAN_INPUTS_Right := GVL_PropCAN.CAN_INPUTS_Right);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

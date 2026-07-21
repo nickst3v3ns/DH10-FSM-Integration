@@ -16,7 +16,6 @@ IF  GVL_PT.ERROR_STATUS <> 0 OR
 
 	GVL_FSM.bMovementSoftStopGlobal OR
 	//GVL_FSM.bPropStateTimeOutLeftGlobal OR
-	GVL_FSM.bPropStateTimeOutRightGlobal OR
 
 	//GVL_FSM.RXwatchdogPropLeftGlobal OR
 	//GVL_FSM.TXwatchdogPropLeftGlobal OR
